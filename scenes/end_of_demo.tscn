@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxhvxg3qesg0v"]
+
+[ext_resource type="FontFile" uid="uid://dtvo1xq2q3700" path="res://font/terminus/TerminusTTF-Bold-4.49.2.ttf" id="1_papks"]
+[ext_resource type="Script" path="res://src/end_of_demo.gd" id="2_y5y86"]
+
+[node name="Label" type="Label"]
+offset_left = 64.0
+offset_top = 24.0
+offset_right = 256.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("1_papks")
+text = "THANKS FOR PLAYING!"
+horizontal_alignment = 1
+script = ExtResource("2_y5y86")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 48.0
+offset_right = 192.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("1_papks")
+theme_override_font_sizes/font_size = 12
+text = "you killed all enemies!
+
+more is comming soon."
+horizontal_alignment = 1

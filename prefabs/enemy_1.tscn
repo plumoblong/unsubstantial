@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://brofheaka55uu"]
+
+[ext_resource type="Script" path="res://src/class/enemy.gd" id="1_qofx1"]
+[ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/player.png" id="2_cwrdj"]
+[ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="3_mx56f"]
+[ext_resource type="AudioStream" uid="uid://cqiu2t3agmr8i" path="res://sfx/death.wav" id="4_ybgt2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uo3mh"]
+
+[node name="EnemyBlue" type="CharacterBody3D"]
+script = ExtResource("1_qofx1")
+color = Color(0.27451, 0.462745, 0.784314, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(0.27451, 0.462745, 0.784314, 1)
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_cwrdj")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uo3mh")
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_mx56f")
+panning_strength = 3.0
+bus = &"Sound"
+attenuation_filter_cutoff_hz = 20500.0
+doppler_tracking = 2
+
+[node name="DeathSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ybgt2")
+volume_db = 3.0
+panning_strength = 2.0
+bus = &"Sound"
+attenuation_filter_cutoff_hz = 20500.0
+doppler_tracking = 2
+
+[node name="Light" type="OmniLight3D" parent="."]
+light_color = Color(0.27451, 0.462745, 0.784314, 1)
+light_energy = 0.5
+light_volumetric_fog_energy = 1.5
+omni_attenuation = 0.420448
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

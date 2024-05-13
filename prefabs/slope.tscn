@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://du48kjxfoual0"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_bhys5"]
+left_to_right = 0.0
+
+[node name="Slope" type="CSGMesh3D"]
+mesh = SubResource("PrismMesh_bhys5")

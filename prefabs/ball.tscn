@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7gkqjyy6xoll"]
+
+[ext_resource type="Script" path="res://src/ball.gd" id="1_httl8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kaui4"]
+metallic = 1.0
+metallic_specular = 0.1
+roughness = 0.25
+
+[node name="Ball" type="CSGSphere3D"]
+rings = 4
+material = SubResource("StandardMaterial3D_kaui4")
+script = ExtResource("1_httl8")

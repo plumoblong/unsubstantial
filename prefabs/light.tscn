@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlgqehmfwh6eh"]
+
+[ext_resource type="Texture2D" uid="uid://ceo3wsc7q7jwe" path="res://images/crosshair.png" id="1_rc8k3"]
+[ext_resource type="Script" path="res://src/light.gd" id="1_vgcgt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qkqea"]
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h41g6"]
+blend_mode = 1
+shading_mode = 2
+roughness = 0.0
+emission = Color(0.955791, 0.955791, 0.955791, 1)
+refraction_scale = 1.0
+refraction_texture = ExtResource("1_rc8k3")
+disable_receive_shadows = true
+
+[node name="Light" type="CSGMesh3D"]
+mesh = SubResource("SphereMesh_qkqea")
+material = SubResource("StandardMaterial3D_h41g6")
+script = ExtResource("1_vgcgt")
+
+[node name="Light" type="OmniLight3D" parent="."]
+light_energy = 1.5
+light_volumetric_fog_energy = 0.1
+light_bake_mode = 1
+omni_range = 15.0
+omni_attenuation = 0.25

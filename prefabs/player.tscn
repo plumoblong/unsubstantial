@@ -1,0 +1,214 @@
+[gd_scene load_steps=25 format=3 uid="uid://c7o4lofq3vm7i"]
+
+[ext_resource type="Script" path="res://src/player.gd" id="1_5qkk2"]
+[ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/player.png" id="1_o6dyj"]
+[ext_resource type="Texture2D" uid="uid://0fufexakp4jh" path="res://images/hand.png" id="3_bji2s"]
+[ext_resource type="PackedScene" uid="uid://bbem285rq83sq" path="res://prefabs/menu.tscn" id="4_3kwu7"]
+[ext_resource type="Shader" path="res://src/shader/invert.gdshader" id="4_cb3xa"]
+[ext_resource type="Texture2D" uid="uid://bl6ej2u7pm50f" path="res://images/hit_marker.png" id="5_li73o"]
+[ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="5_mx4af"]
+[ext_resource type="Texture2D" uid="uid://ceo3wsc7q7jwe" path="res://images/crosshair.png" id="6_obnxy"]
+[ext_resource type="FontFile" uid="uid://dtvo1xq2q3700" path="res://font/terminus/TerminusTTF-Bold-4.49.2.ttf" id="7_s8r4x"]
+[ext_resource type="AudioStream" uid="uid://cn7wx3s2dhvjm" path="res://sfx/hit_marker.wav" id="9_6fwvm"]
+[ext_resource type="AudioStream" uid="uid://cqiu2t3agmr8i" path="res://sfx/death.wav" id="9_v6g3l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o4op0"]
+
+[sub_resource type="Animation" id="Animation_60yn4"]
+resource_name = "running"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:camera_h_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.5, -0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:camera_v_offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [0.0, -0.5, 0.0, -0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjbwq"]
+_data = {
+"running": SubResource("Animation_60yn4")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_noy8v"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhyf4"]
+atlas = ExtResource("3_bji2s")
+region = Rect2(0, 0, 88, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipuy1"]
+atlas = ExtResource("3_bji2s")
+region = Rect2(88, 0, 88, 74)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_esntp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhyf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipuy1")
+}],
+"loop": true,
+"name": &"true",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6diq"]
+shader = ExtResource("4_cb3xa")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aik30"]
+shader = ExtResource("4_cb3xa")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lj208"]
+shader = ExtResource("4_cb3xa")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6dp0"]
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 24.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 6.8
+initial_velocity_max = 9.0
+gravity = Vector3(0, -0.25, 0)
+damping_min = 6.803
+damping_max = 10.204
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vx7p"]
+shading_mode = 0
+heightmap_scale = -16.0
+disable_receive_shadows = true
+billboard_mode = 1
+grow_amount = 0.478
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xvc87"]
+material = SubResource("StandardMaterial3D_3vx7p")
+size = Vector2(0.05, 0.05)
+orientation = 2
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_5qkk2")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_o6dyj")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_o4op0")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+h_offset = -0.25
+v_offset = -0.25
+
+[node name="Light" type="OmniLight3D" parent="."]
+light_energy = 0.5
+light_volumetric_fog_energy = 1.5
+omni_attenuation = 0.420448
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bjbwq")
+}
+speed_scale = 0.75
+
+[node name="Gui" type="Node2D" parent="."]
+
+[node name="Hand" type="AnimatedSprite2D" parent="Gui"]
+material = SubResource("CanvasItemMaterial_noy8v")
+position = Vector2(253, 196)
+sprite_frames = SubResource("SpriteFrames_esntp")
+animation = &"true"
+autoplay = "true"
+centered = false
+offset = Vector2(-44, -74)
+
+[node name="HitMarker" type="Sprite2D" parent="Gui"]
+material = SubResource("ShaderMaterial_f6diq")
+position = Vector2(160, 90)
+texture = ExtResource("5_li73o")
+centered = false
+offset = Vector2(-3, -3)
+
+[node name="Crosshair" type="Sprite2D" parent="Gui"]
+material = SubResource("ShaderMaterial_aik30")
+position = Vector2(160, 90)
+texture = ExtResource("6_obnxy")
+centered = false
+offset = Vector2(-3, -3)
+
+[node name="Score" type="RichTextLabel" parent="Gui"]
+material = SubResource("ShaderMaterial_lj208")
+clip_contents = false
+offset_left = 21.0
+offset_top = 151.0
+offset_right = 168.0
+offset_bottom = 180.0
+theme_override_fonts/normal_font = ExtResource("7_s8r4x")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[wave amp=16.0 freq=2.5]0000[/wave]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Speed" type="Label" parent="Gui"]
+visible = false
+offset_left = 4.0
+offset_top = 167.0
+offset_right = 44.0
+offset_bottom = 178.0
+text = "SPD 0.0"
+
+[node name="Menu" parent="." instance=ExtResource("4_3kwu7")]
+visible = false
+in_game = true
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mx4af")
+pitch_scale = 1.29
+bus = &"Sound"
+
+[node name="HitMarkerSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_6fwvm")
+pitch_scale = 0.61
+bus = &"Sound"
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_v6g3l")
+bus = &"Sound"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 64
+lifetime = 2.5
+process_material = SubResource("ParticleProcessMaterial_o6dp0")
+draw_pass_1 = SubResource("PlaneMesh_xvc87")
+
+[node name="Flare" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(1, 1, 1, 0)

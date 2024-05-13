@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0mlx4jyhetyx"]
+
+[ext_resource type="Script" path="res://src/bullet.gd" id="1_m5xol"]
+[ext_resource type="Texture2D" uid="uid://cf5c1ljmst3lm" path="res://images/bullet.png" id="2_ijy67"]
+[ext_resource type="AudioStream" uid="uid://njrmv138vj1j" path="res://sfx/bullet_sound.wav" id="3_wigj7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xit4y"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 0.05
+initial_velocity_max = 0.05
+gravity = Vector3(0, 0.05, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnp78"]
+shading_mode = 0
+heightmap_scale = -16.0
+disable_receive_shadows = true
+billboard_mode = 1
+grow_amount = 0.478
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_17sle"]
+material = SubResource("StandardMaterial3D_mnp78")
+size = Vector2(0.05, 0.05)
+orientation = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t82xl"]
+radius = 0.2
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_m5xol")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_ijy67")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 3.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 256
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_xit4y")
+draw_pass_1 = SubResource("PlaneMesh_17sle")
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_wigj7")
+unit_size = 5.0
+autoplay = true
+panning_strength = 3.0
+bus = &"Sound"
+doppler_tracking = 2
+
+[node name="Query" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Query"]
+shape = SubResource("SphereShape3D_t82xl")
+
+[connection signal="body_entered" from="Query" to="." method="query_body_entered"]

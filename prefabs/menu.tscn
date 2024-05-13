@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbem285rq83sq"]
+
+[ext_resource type="Script" path="res://src/menu.gd" id="1_ma8wv"]
+[ext_resource type="Texture2D" uid="uid://d6e4fke7if23" path="res://logo.png" id="3_d6kog"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u04a0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l5u0h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_espvc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_01afn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_edyvf"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_ma8wv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 0.498039)
+
+[node name="Menu" type="Node2D" parent="."]
+
+[node name="Logo" type="Sprite2D" parent="Menu"]
+position = Vector2(160, 24)
+texture = ExtResource("3_d6kog")
+
+[node name="Singleplayer" type="Button" parent="Menu"]
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 192.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.478431, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u04a0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l5u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_espvc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_01afn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_edyvf")
+text = "PLAY DEMO"
+
+[node name="Multiplayer" type="Button" parent="Menu"]
+offset_left = 128.0
+offset_top = 67.0
+offset_right = 192.0
+offset_bottom = 81.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.478431, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u04a0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l5u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_espvc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_01afn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_edyvf")
+disabled = true
+text = "MULTIPLAYER"
+
+[node name="Settings" type="Button" parent="Menu"]
+offset_left = 128.0
+offset_top = 79.0
+offset_right = 192.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.478431, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u04a0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l5u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_espvc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_01afn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_edyvf")
+disabled = true
+text = "OPTIONS"
+
+[node name="Quit" type="Button" parent="Menu"]
+offset_left = 128.0
+offset_top = 91.0
+offset_right = 192.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.478431, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.568627, 0.439216, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u04a0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l5u0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_espvc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_01afn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_edyvf")
+text = "QUIT GAME"
+
+[connection signal="pressed" from="Menu/Singleplayer" to="." method="singleplayer_pressed"]
+[connection signal="pressed" from="Menu/Quit" to="." method="quit_pressed"]

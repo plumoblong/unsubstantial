@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0iyy04pclg5y"]
+
+[ext_resource type="Script" path="res://src/checkpoint.gd" id="1_21rua"]
+[ext_resource type="Texture2D" uid="uid://dyfbcii11be4g" path="res://images/checkpoint.png" id="2_k1sy2"]
+[ext_resource type="AudioStream" uid="uid://cqiu2t3agmr8i" path="res://sfx/death.wav" id="3_ssfuh"]
+[ext_resource type="AudioStream" uid="uid://d1fxgjcqj0u06" path="res://sfx/checkpoint_ambience.wav" id="4_4ebhp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vcun"]
+radius = 0.75
+height = 2.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rssv4"]
+atlas = ExtResource("2_k1sy2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iocqe"]
+atlas = ExtResource("2_k1sy2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdk3k"]
+atlas = ExtResource("2_k1sy2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4uw2e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rssv4")
+}],
+"loop": true,
+"name": &"false",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iocqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdk3k")
+}],
+"loop": true,
+"name": &"true",
+"speed": 2.0
+}]
+
+[node name="Checkpoint" type="Area3D"]
+script = ExtResource("1_21rua")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3vcun")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_4uw2e")
+animation = &"true"
+frame_progress = 0.672847
+
+[node name="ActivateSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ssfuh")
+volume_db = 3.0
+pitch_scale = 0.71
+bus = &"Sound"
+
+[node name="AmbienceSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_4ebhp")
+volume_db = -8.0
+pitch_scale = 0.87
+bus = &"Sound"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 1.1
+omni_range = 10.0
+omni_attenuation = 0.615572
+
+[connection signal="body_entered" from="." to="." method="body_entered"]

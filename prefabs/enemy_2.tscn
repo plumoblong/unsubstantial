@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb8i26vnohgxs"]
+
+[ext_resource type="PackedScene" uid="uid://brofheaka55uu" path="res://prefabs/enemy_1.tscn" id="1_o4ec2"]
+
+[node name="EnemyGreen" instance=ExtResource("1_o4ec2")]
+default_speed = 9.0
+max_speed = 19.0
+distance_to_shoot = 40.0
+shoot_cooldown = 3.0
+color = Color(0.189182, 0.823529, 0.375037, 1)
+bullet_speed = 48.0
+bounty = 500.0

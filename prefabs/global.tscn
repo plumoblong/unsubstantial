@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://fa0y57jqkp1d"]
+
+[ext_resource type="Script" path="res://src/global.gd" id="1_4xft8"]
+[ext_resource type="Shader" path="res://src/shader/dither.gdshader" id="2_agsnd"]
+[ext_resource type="Shader" path="res://src/shader/invert.gdshader" id="3_af0nj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2y58w"]
+shader = ExtResource("2_agsnd")
+shader_parameter/colors = 16.0
+shader_parameter/dither = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3i7dn"]
+shader = ExtResource("3_af0nj")
+shader_parameter/modulate = Color(0, 1, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jpn12"]
+shader = ExtResource("3_af0nj")
+shader_parameter/modulate = Color(1, 1, 1, 0.247059)
+
+[node name="Global" type="CanvasLayer"]
+script = ExtResource("1_4xft8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_2y58w")
+offset_right = 320.0
+offset_bottom = 180.0
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="FPS" type="Label" parent="Debug"]
+material = SubResource("ShaderMaterial_3i7dn")
+offset_left = 1.0
+offset_top = 168.0
+offset_right = 41.0
+offset_bottom = 185.0
+text = "60"
+
+[node name="BuildInfo" type="Label" parent="."]
+material = SubResource("ShaderMaterial_jpn12")
+offset_left = 1.0
+offset_top = -5.0
+offset_right = 73.0
+offset_bottom = 6.0
+text = "PRE-ALPHA 1 (DEMO)"
