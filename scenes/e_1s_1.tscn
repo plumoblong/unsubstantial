@@ -581,7 +581,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 222, 23, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 226, 23, -20.5)
 
 [node name="EnemyYellow" parent="cp_c1e1/Enemies" instance=ExtResource("10_krxbe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 220.5, 22.5, -44)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 198.5, 22.5, 40)
 
 [node name="EnemyYellow2" parent="cp_c1e1/Enemies" instance=ExtResource("10_krxbe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 162, 1, -44)
