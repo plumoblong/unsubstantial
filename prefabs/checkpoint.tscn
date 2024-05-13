@@ -74,4 +74,5 @@ light_energy = 1.1
 omni_range = 10.0
 omni_attenuation = 0.615572
 
+[connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="body_entered" from="." to="." method="body_entered"]
