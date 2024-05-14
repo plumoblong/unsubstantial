@@ -1,0 +1,46 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://c42y74fwvq7fm"]
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_xmvog"]
+resource_name = "Limiter"
+ceiling_db = -2.0
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_vtl3p"]
+resource_name = "Delay"
+tap1_delay_ms = 100.0
+tap2_delay_ms = 200.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_1s16o"]
+resource_name = "Reverb"
+room_size = 0.15
+damping = 0.65
+spread = 0.53
+hipass = 0.11
+wet = 0.16
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_y62mc"]
+resource_name = "Reverb"
+room_size = 0.3
+wet = 0.1
+
+[resource]
+bus/0/volume_db = -7.027
+bus/0/effect/0/effect = SubResource("AudioEffectLimiter_xmvog")
+bus/0/effect/0/enabled = true
+bus/1/name = &"Sound"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDelay_vtl3p")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_1s16o")
+bus/1/effect/1/enabled = true
+bus/2/name = &"Music"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_y62mc")
+bus/2/effect/0/enabled = true
