@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bhxd3sfg8q482"]
+
+[ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/tile_floor.png" id="1_7oe1u"]
+[ext_resource type="Texture2D" uid="uid://btdlr1w8tf8va" path="res://textures/normal/tile_floor.png" id="2_0x43x"]
+
+[resource]
+albedo_texture = ExtResource("1_7oe1u")
+normal_enabled = true
+normal_scale = 4.0
+normal_texture = ExtResource("2_0x43x")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 0
