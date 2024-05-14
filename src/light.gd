@@ -16,12 +16,12 @@ func _ready():
 	final_color.g = randf_range(color.g - 0.1, color.g + 0.1)
 	final_color.b = randf_range(color.b - 0.1, color.b + 0.1)
 	
-	$Light.shadow_enabled = global.config.graphics.shadows
+	
 	$Light.light_color = final_color
 	material.albedo_color = final_color
 
 func _process(delta):
-	
+	$Light.shadow_enabled = global.config.graphics.shadows
 	rotation_degrees.x += delta * speed.x
 	rotation_degrees.y += delta * speed.y
 	rotation_degrees.z += delta * speed.z

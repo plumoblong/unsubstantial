@@ -8,10 +8,10 @@ var total_kills : int = 0
 
 
 var config = {
-	sensivity = 0.5,
+	sensitivity = 0.5,
 	fov = 90.0,
-	view_bobbing_amount = 1.0,
-	crosshair_enabled = true,
+	view_bobbing = 1.0,
+	crosshair = true,
 	graphics = {
 		shadows = false,
 		post_process = true
@@ -24,12 +24,14 @@ var game_mode : int = -1
 func _process(delta):
 		
 	time += delta
-	$BuildInfo 
+	$BuildInfo.text = GAME_VERSION
 	if Input.is_action_just_pressed("fullscreen"):
 		change_fullscreen()
 	$BuildInfo.text = GAME_VERSION
 	if Input.is_action_just_pressed("debug"):
 		debug = not debug
+	
+	$ColorRect.visible = config.graphics.post_process
 	$Debug.visible = debug
 	$Debug/FPS.text = str(Engine.get_frames_per_second())
 	

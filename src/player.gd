@@ -33,11 +33,12 @@ func _ready():
 	invincibility(2.5)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	speed = default_speed
+	
 
 func _input(event):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			rotate_y(-event.relative.x * global.config.sensivity / 100)
+			rotate_y(-event.relative.x * global.config.sensitivity / 100)
 			#camera.rotate_x(-event.relative.y  * global.config.sensivity / 100)
 			
 func _physics_process(delta):
@@ -47,6 +48,7 @@ func _physics_process(delta):
 	$Gui/Speed.text = str(round(speed))
 	score = clamp(score, 0, 999999)
 	speed = clamp(speed, default_speed, max_speed)
+	$Gui/Crosshair.visible = global.config.crosshair
 	
 	if invincible:
 		$Sprite.visible = not $Sprite.visible
@@ -70,7 +72,8 @@ func _physics_process(delta):
 	$Gui/HitMarker.material.set_shader_parameter("modulate", Color(1, 1, 1, hit_marker_transparency))
 	
 	if Input.is_action_just_pressed("return"):
-		$Menu.visible = not $Menu.visible
+		if $Menu.current_screen == 0:
+			$Menu.visible = not $Menu.visible
 	if $Menu.visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		input_dir = Vector2.ZERO
@@ -92,7 +95,7 @@ func _physics_process(delta):
 	
 	if direction:
 		if is_on_floor():
-			global.tween(self, "moving_speed", global.config.view_bobbing_amount, 0.5, Tween.TRANS_LINEAR)
+			global.tween(self, "moving_speed", global.config.view_bobbing, 0.5, Tween.TRANS_LINEAR)
 			if speed < max_speed - (max_speed / 5):
 				speed += delta * 4
 			else:
