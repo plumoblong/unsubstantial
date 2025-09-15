@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://578i6furtqnt"]
+
+[ext_resource type="Texture2D" uid="uid://b5u12fvwioy5r" path="res://images/item/passive/diplopia.png" id="1_g6ms0"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_n6dk3"]
+
+[sub_resource type="GDScript" id="GDScript_xh2p5"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.shots += 1
+	if _G.player.stats.bullet.spread > 45.0 and _G.player.stats.bullet.spread < 22.5:
+		_G.player.stats.bullet.spread = 45.0
+"
+
+[resource]
+script = ExtResource("1_n6dk3")
+item_name = "Diplopia"
+item_script = SubResource("GDScript_xh2p5")
+type = 1
+image = ExtResource("1_g6ms0")
+item_description = "This item shouldn't be here!"
+remove_from_pool = true
+tags = Array[String](["eye", "multishot"])
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

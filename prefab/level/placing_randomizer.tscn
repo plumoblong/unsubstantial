@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8dn6mkt21paf"]
+
+[ext_resource type="Script" uid="uid://cmanwllrhe2pf" path="res://src/level/placing_randomizer.gd" id="1_u116q"]
+
+[node name="PlacingRandomizer" type="Node3D"]
+script = ExtResource("1_u116q")

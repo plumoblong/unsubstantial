@@ -1,0 +1,31 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://c8optm2mmmovn"]
+
+[ext_resource type="Texture2D" uid="uid://b0x2l60hu6wg3" path="res://textures/special/origin.png" id="1_3uqu0"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ojx2"]
+load_path = "res://.godot/imported/ac_tile_floor.png-ffe9f7b69417419dd8092d7c6f29572a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
+load_path = "res://.godot/imported/displacement_tile_floor.png-af7e24a03bbe7d38cc7b07ee0a3f7265.ctex"
+
+[resource]
+albedo_texture = ExtResource("1_3uqu0")
+metallic_specular = 0.0
+roughness = 0.7
+emission = Color(0, 0, 0.329412, 1)
+normal_scale = 2.0
+rim = 0.12
+rim_tint = 1.0
+clearcoat = 0.14
+clearcoat_roughness = 1.0
+anisotropy = 0.23
+ao_light_affect = 0.44
+ao_texture = SubResource("CompressedTexture2D_0ojx2")
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_axlsg")
+subsurf_scatter_strength = 0.5
+backlight = Color(0.714171, 0.714171, 0.714171, 1)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+uv2_world_triplanar = true
+texture_filter = 0

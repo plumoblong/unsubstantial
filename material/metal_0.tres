@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://drx7vffoqgai1"]
+
+[resource]
+clearcoat_enabled = true
+texture_filter = 0

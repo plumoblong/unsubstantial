@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cw6710jj3shy"]
+
+[ext_resource type="Texture2D" uid="uid://djkufl2rhep6u" path="res://images/item/passive/item_p35.png" id="1_utfo1"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_wwcfm"]
+
+[sub_resource type="GDScript" id="GDScript_a2wsy"]
+script/source = "#var a : int = 0
+
+func pickup() -> void:
+	_G.player.stats.crit_chance += 25.0
+	#d = _G.player.stat.damage[1]
+	#_G.player.shoot_component.shooted.connect(decimate_counter)
+	#_G.player.stat.crit_chance[1] += 10.0
+	
+#func decimate_counter() -> void:
+	#if a != 10:
+		#a += 1
+	#else:
+		#a = 0
+#func update(_delta : float) -> void:
+	#
+	#if a == 10:
+		#_G.player.stat.damage[1] = 10.0
+	#else:
+		#_G.player.stat.damage[1] = d
+"
+
+[resource]
+script = ExtResource("2_wwcfm")
+item_name = "Decimation"
+item_script = SubResource("GDScript_a2wsy")
+type = 3
+weight = 0.5
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_utfo1")
+item_description = "Massively increases Critical Chance"

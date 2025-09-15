@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="FuncGodotMapSettings" load_steps=7 format=3 uid="uid://c07h8g5oxasgv"]
+
+[ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/world/tile_floor.png" id="1_xc068"]
+[ext_resource type="Resource" uid="uid://dxtt0gn2y6y4m" path="res://trenchbroom/unsubstantial_fgd.tres" id="2_sveto"]
+[ext_resource type="Script" uid="uid://chl2l3kspmxpb" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="3_k6if4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ojx2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rucwu"]
+albedo_texture = ExtResource("1_xc068")
+metallic_specular = 0.0
+roughness = 0.7
+emission = Color(0, 0, 0.329412, 1)
+normal_scale = 2.0
+rim = 0.12
+rim_tint = 1.0
+clearcoat = 0.14
+clearcoat_roughness = 1.0
+anisotropy = 0.23
+ao_light_affect = 0.44
+ao_texture = SubResource("CompressedTexture2D_0ojx2")
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_axlsg")
+subsurf_scatter_strength = 0.5
+backlight = Color(0.714171, 0.714171, 0.714171, 1)
+uv1_triplanar_sharpness = 150.0
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 0
+
+[resource]
+script = ExtResource("3_k6if4")
+inverse_scale_factor = 16.0
+entity_fgd = ExtResource("2_sveto")
+entity_name_property = ""
+base_texture_dir = "res://textures"
+texture_file_extensions = Array[String](["png"])
+clip_texture = "special/clip"
+skip_texture = "special/skip"
+origin_texture = "special/origin"
+texture_wads = Array[Resource]([])
+material_file_extension = "tres"
+default_material = SubResource("StandardMaterial3D_rucwu")
+default_material_albedo_uniform = ""
+albedo_map_pattern = "%s_albedo.%s"
+normal_map_pattern = "%s_normal.%s"
+metallic_map_pattern = "%s_metallic.%s"
+roughness_map_pattern = "%s_roughness.%s"
+emission_map_pattern = "%s_emission.%s"
+ao_map_pattern = "%s_ao.%s"
+height_map_pattern = "%s_height.%s"
+orm_map_pattern = "%s_orm.%s"
+save_generated_materials = true
+uv_unwrap_texel_size = 2.0
+use_trenchbroom_groups_hierarchy = false

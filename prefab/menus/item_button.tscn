@@ -1,0 +1,129 @@
+[gd_scene load_steps=11 format=3 uid="uid://pxhkajoha3yf"]
+
+[ext_resource type="Texture2D" uid="uid://c26rbfxhl31iv" path="res://images/ui/diamond_select1.png" id="1_rpds1"]
+[ext_resource type="Script" uid="uid://cfls3arxjj4yr" path="res://src/menus/item_button.gd" id="2_bjs5a"]
+[ext_resource type="Texture2D" uid="uid://blgn3y70to4gj" path="res://placeholder.png" id="2_lhgn6"]
+[ext_resource type="Texture2D" uid="uid://cch7emkq55n6k" path="res://images/glow.png" id="3_hwv6i"]
+[ext_resource type="Texture2D" uid="uid://dpaswlf4uqc7r" path="res://images/item/passive/item_p18.png" id="3_ko3a4"]
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="5_8v48j"]
+[ext_resource type="Texture2D" uid="uid://bhch13yr3lji7" path="res://images/entity/elementals.png" id="6_7ksqr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_agbfq"]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x00kb"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhnkd"]
+shader = ExtResource("5_8v48j")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+
+[node name="ItemButton" type="Node2D"]
+script = ExtResource("2_bjs5a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+show_behind_parent = true
+offset_left = -53.0
+offset_top = -74.0
+offset_right = 64.0
+offset_bottom = 95.0
+
+[node name="Crystal" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_agbfq")
+position = Vector2(-1, 11)
+scale = Vector2(0.828125, 0.826531)
+texture = ExtResource("1_rpds1")
+
+[node name="Query" type="TextureButton" parent="."]
+modulate = Color(0.966667, 0, 1, 0.184314)
+top_level = true
+offset_left = -34.0
+offset_top = -49.0
+offset_right = 38.0
+offset_bottom = 75.0
+texture_normal = ExtResource("2_lhgn6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item" type="Node2D" parent="."]
+
+[node name="ItemImage" type="TextureRect" parent="Item"]
+material = SubResource("CanvasItemMaterial_x00kb")
+offset_left = -38.0
+offset_top = -33.0
+offset_right = 39.0
+offset_bottom = -0.999969
+texture = ExtResource("3_ko3a4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Item/ItemImage"]
+modulate = Color(0.212305, 0.212305, 0.212305, 1)
+self_modulate = Color(0.513233, 0.513233, 0.513233, 1)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_x00kb")
+use_parent_material = true
+position = Vector2(38, 12)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_hwv6i")
+
+[node name="Itemname" type="Label" parent="Item"]
+offset_left = -34.0
+offset_top = -0.999969
+offset_right = 39.0
+offset_bottom = 15.0
+theme_override_font_sizes/font_size = 8
+text = "GRAPPA ICE"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Item/Itemname"]
+modulate = Color(0.455817, 0.455817, 0.455817, 1)
+self_modulate = Color(0.502719, 0.502719, 0.502719, 1)
+material = SubResource("CanvasItemMaterial_x00kb")
+position = Vector2(37, 7)
+scale = Vector2(1.14063, 0.21875)
+texture = ExtResource("3_hwv6i")
+
+[node name="ItemDesc" type="Label" parent="Item"]
+offset_left = -34.0
+offset_top = 10.0
+offset_right = 39.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 8
+text = "\"its very nice\"
+all stats up"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Item/ItemDesc"]
+modulate = Color(0.455817, 0.455817, 0.455817, 1)
+material = SubResource("CanvasItemMaterial_x00kb")
+position = Vector2(37, 24.5)
+scale = Vector2(1.14063, 0.859375)
+texture = ExtResource("3_hwv6i")
+
+[node name="Elemental" type="Sprite2D" parent="Item"]
+material = SubResource("ShaderMaterial_lhnkd")
+position = Vector2(-28, -28)
+texture = ExtResource("6_7ksqr")
+hframes = 16
+frame = 3
+
+[node name="Glow" type="Sprite2D" parent="Item/Elemental"]
+modulate = Color(0.419813, 0.419813, 0.419813, 1)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_x00kb")
+position = Vector2(-0.5, -1)
+scale = Vector2(0.265625, 0.25)
+texture = ExtResource("3_hwv6i")
+
+[connection signal="mouse_entered" from="Query" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="Query" to="." method="mouse_exited"]
+[connection signal="pressed" from="Query" to="." method="pressed"]

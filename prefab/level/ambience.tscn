@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d32arfqyewe7f"]
+
+[ext_resource type="Script" uid="uid://ddrkgpm4uij3l" path="res://src/level/ambience.gd" id="1_d1tgr"]
+
+[node name="Ambience" type="AudioStreamPlayer3D"]
+script = ExtResource("1_d1tgr")

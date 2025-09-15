@@ -1,0 +1,162 @@
+[gd_scene load_steps=18 format=3 uid="uid://cuhflxnivbv2b"]
+
+[ext_resource type="Script" uid="uid://ct8drvl8xm65b" path="res://src/start.gd" id="1_qm06k"]
+[ext_resource type="Texture2D" uid="uid://ccfsssvwowu35" path="res://images/plumoblong_3d.png" id="2_xmel7"]
+[ext_resource type="AudioStream" uid="uid://dxy2fiq02be1y" path="res://sfx/plumoblong.wav" id="3_bhewb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnuxd"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srnb1"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xr4q"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w484r"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb375"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pum5v"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik5t3"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrosg"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mxyr"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vil18"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1picq"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(960, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qymjl"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(1056, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h10yh"]
+atlas = ExtResource("2_xmel7")
+region = Rect2(1152, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hf7vm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnuxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srnb1")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_7xr4q")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_w484r")
+}, {
+"duration": 1.1,
+"texture": SubResource("AtlasTexture_pb375")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_pum5v")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_ik5t3")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_lrosg")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_3mxyr")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_vil18")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_1picq")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_qymjl")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_h10yh")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_srnb1")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_7xr4q")
+}, {
+"duration": 1.7,
+"texture": SubResource("AtlasTexture_w484r")
+}, {
+"duration": 1.7,
+"texture": SubResource("AtlasTexture_pb375")
+}, {
+"duration": 1.8,
+"texture": SubResource("AtlasTexture_pum5v")
+}, {
+"duration": 1.9,
+"texture": SubResource("AtlasTexture_ik5t3")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lrosg")
+}, {
+"duration": 2.1,
+"texture": SubResource("AtlasTexture_3mxyr")
+}, {
+"duration": 2.2,
+"texture": SubResource("AtlasTexture_vil18")
+}, {
+"duration": 2.5,
+"texture": SubResource("AtlasTexture_1picq")
+}, {
+"duration": 2.9,
+"texture": SubResource("AtlasTexture_qymjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h10yh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 13.0
+}]
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_qm06k")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.34375, 0.34375, 0.34375, 1)
+offset_right = 432.0
+offset_bottom = 244.0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(240, 135)
+sprite_frames = SubResource("SpriteFrames_hf7vm")
+frame = 24
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bhewb")
+volume_db = -10.0
+bus = &"SFX1"

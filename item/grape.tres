@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dtcegc3cilhht"]
+
+[ext_resource type="Texture2D" uid="uid://d3kcel2o3ctkw" path="res://images/item/passive/item_p14.png" id="1_b01a4"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_c785f"]
+
+[sub_resource type="GDScript" id="GDScript_vyu30"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.life_time *= 1.1
+"
+
+[resource]
+script = ExtResource("1_c785f")
+item_name = "Grape"
+item_script = SubResource("GDScript_vyu30")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_b01a4")
+item_description = "Increases Bullet Range"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

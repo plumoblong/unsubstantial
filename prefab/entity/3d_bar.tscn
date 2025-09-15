@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbeov66ersklw"]
+
+[ext_resource type="Texture2D" uid="uid://disi2pq8kabfc" path="res://images/ui/bar_sheet.png" id="1_1quof"]
+[ext_resource type="Script" uid="uid://b7b5j6bracfv6" path="res://src/component/3dui_bar.gd" id="2_rve22"]
+
+[node name="3DBar" type="Sprite3D"]
+visibility_range_end = 15.0
+visibility_range_end_margin = 2.0
+visibility_range_fade_mode = 1
+pixel_size = 0.006
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+render_priority = 10
+texture = ExtResource("1_1quof")
+vframes = 32
+script = ExtResource("2_rve22")

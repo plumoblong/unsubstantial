@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j7bjpkt5u21l"]
+
+[ext_resource type="Script" uid="uid://d38ps355comcd" path="res://src/level/unused_door_remover.gd" id="1_d43ul"]
+
+[node name="UnusedDoorRemover" type="Node"]
+script = ExtResource("1_d43ul")

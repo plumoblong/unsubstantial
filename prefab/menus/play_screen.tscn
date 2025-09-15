@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://hoytjo5kmn25"]
+
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="1_7bkgw"]
+
+[node name="PlayScreen" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 432.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("1_7bkgw")
+theme_override_font_sizes/font_size = 8
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1

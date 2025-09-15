@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://bk2n3cyyf3a2v"]
+
+[ext_resource type="Texture2D" uid="uid://bp6wui71hm0cn" path="res://images/xp.png" id="1_4dgqx"]
+[ext_resource type="Script" uid="uid://bjnwvssbilb2h" path="res://src/entity/xp_orb.gd" id="1_fjw31"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqqwa"]
+atlas = ExtResource("1_4dgqx")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldcxw"]
+atlas = ExtResource("1_4dgqx")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrlgw"]
+atlas = ExtResource("1_4dgqx")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myclq"]
+atlas = ExtResource("1_4dgqx")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5l1h8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqqwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldcxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrlgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myclq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrlgw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ifqro"]
+radius = 0.2
+
+[node name="XPOrb" type="Area3D"]
+script = ExtResource("1_fjw31")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.06
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_5l1h8")
+autoplay = "default"
+frame_progress = 0.900141
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ifqro")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 0.5
+omni_range = 0.735905
+
+[connection signal="body_entered" from="." to="." method="body_entered"]

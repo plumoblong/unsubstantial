@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://wiwiprlsejji"]
+
+[ext_resource type="Shader" path="res://src/shader/acid.gdshader" id="1_7ws70"]
+[ext_resource type="Texture2D" uid="uid://dmllxu5e0ctan" path="res://textures/poison_g.png" id="2_f8x33"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7ws70")
+shader_parameter/scroll_speed = Vector2(1, 1)
+shader_parameter/color = Color(1.5, 1.5, 1.5, 1)
+shader_parameter/tex_scale = 10.0
+shader_parameter/use_depth = true
+shader_parameter/emission_energy = 1.5
+shader_parameter/emission_color = Color(0.338739, 0.261313, 0.374123, 1)
+shader_parameter/albedo_tex = ExtResource("2_f8x33")

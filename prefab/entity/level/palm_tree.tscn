@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1kco3e5xtrfq"]
+
+[ext_resource type="Texture2D" uid="uid://dg2bfk6vnyowj" path="res://images/palm_tree.png" id="1_emndo"]
+[ext_resource type="Script" uid="uid://clbyw20x8am7l" path="res://src/entity/palm_tree.gd" id="2_5wcbj"]
+[ext_resource type="Texture2D" uid="uid://bq8ewftw414ai" path="res://images/palm_top.png" id="3_j7rw6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j7rw6"]
+height = 3.36768
+
+[node name="StaticBody3D" type="StaticBody3D"]
+collision_layer = 4095
+collision_mask = 4095
+script = ExtResource("2_5wcbj")
+
+[node name="Top" type="Sprite3D" parent="."]
+transform = Transform3D(0.847023, 0.0747281, 0.0314634, -0.0810816, 0.78065, 0.328684, 0, -0.330186, 0.784219, -4.93825e-10, 2.03069, -0.0868761)
+visibility_range_begin = 2.5
+visibility_range_begin_margin = 2.0
+visibility_range_fade_mode = 1
+pixel_size = 0.04
+axis = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_j7rw6")
+hframes = 6
+frame = 1
+
+[node name="Top4" type="Sprite3D" parent="."]
+transform = Transform3D(0.671579, -0.168306, 0.494648, -0.0753175, 0.765945, 0.362874, -0.517041, -0.330186, 0.589634, -4.93825e-10, 1.85214, -0.011697)
+visibility_range_begin = 2.5
+visibility_range_begin_margin = 2.0
+visibility_range_fade_mode = 1
+pixel_size = 0.045
+axis = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_j7rw6")
+hframes = 6
+frame = 1
+
+[node name="Top2" type="Sprite3D" parent="."]
+transform = Transform3D(0.795476, 0.130416, -0.272458, 0.00799119, 0.758146, 0.386229, 0.301957, -0.363633, 0.707543, -1.01152e-08, 2.12017, -0.124759)
+visibility_range_begin = 2.5
+visibility_range_begin_margin = 2.0
+visibility_range_fade_mode = 1
+pixel_size = 0.035
+axis = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_j7rw6")
+hframes = 6
+frame = 3
+
+[node name="Top3" type="Sprite3D" parent="."]
+transform = Transform3D(0.481585, -0.0750687, 0.697469, -0.23349, 0.780618, 0.245237, -0.6615, -0.330187, 0.42121, -2.14483e-09, 2.20226, -0.174595)
+visibility_range_begin = 2.5
+visibility_range_begin_margin = 2.0
+visibility_range_fade_mode = 1
+pixel_size = 0.025
+axis = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_j7rw6")
+hframes = 6
+frame = 2
+
+[node name="PalmTree" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50326, 0)
+sorting_offset = -1.0
+offset = Vector2(0, 66)
+pixel_size = 0.04
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_emndo")
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93332, 0)
+light_energy = 0.8
+light_volumetric_fog_energy = 1.5
+light_size = 1.0
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+omni_range = 20.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15923, 0)
+shape = SubResource("CylinderShape3D_j7rw6")
+disabled = true

@@ -1,0 +1,286 @@
+[gd_scene load_steps=16 format=3 uid="uid://du62gvfekrgth"]
+
+[ext_resource type="Script" uid="uid://rm7uqe1b5i56" path="res://src/animations/player_death_anim.gd" id="1_aqf1p"]
+[ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/entity/player.png" id="2_oxswj"]
+[ext_resource type="Texture2D" uid="uid://cgxfsg2rwn2kb" path="res://images/effects/glow_circle.png" id="3_i2tay"]
+[ext_resource type="Texture2D" uid="uid://75bfio0kx2i" path="res://images/sparkle_small.png" id="3_oxswj"]
+[ext_resource type="AudioStream" uid="uid://b3k2ovexi0nfp" path="res://sfx/death_big.wav" id="5_yyxaj"]
+
+[sub_resource type="Curve" id="Curve_yyxaj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nfldv"]
+curve = SubResource("Curve_yyxaj")
+
+[sub_resource type="Curve" id="Curve_770x7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ablw6"]
+curve = SubResource("Curve_770x7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i2tay"]
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(0.4, 1, 0.4)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0.1, 0)
+linear_accel_min = -2.0
+linear_accel_max = -1.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_ablw6")
+alpha_curve = SubResource("CurveTexture_nfldv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3w1kk"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_oxswj")
+heightmap_scale = -16.0
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 0.478
+point_size = 8.0
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yyxaj"]
+material = SubResource("StandardMaterial3D_3w1kk")
+size = Vector2(0.15, 0.15)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_codl6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ripple:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0001]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Ripple:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:cam_offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SFX:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_idnxk"]
+resource_name = "main"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Ripple:pixel_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 1.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0001, 0.06]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Ripple:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 1.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ripple2:pixel_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 1.06667),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0001, 0.11]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Ripple2:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0666667, 0.933333),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.101961), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:cam_offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0333333, 1.96667),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [50.0, -30.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SFX:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ktv1i"]
+_data = {
+&"RESET": SubResource("Animation_codl6"),
+&"main": SubResource("Animation_idnxk")
+}
+
+[node name="PlayerDeathAnim" type="Node3D"]
+script = ExtResource("1_aqf1p")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_oxswj")
+
+[node name="Ripple" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pixel_size = 0.0001
+axis = 1
+texture_filter = 0
+texture = ExtResource("3_i2tay")
+
+[node name="Ripple2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+modulate = Color(1, 1, 1, 0)
+pixel_size = 0.11
+axis = 1
+texture_filter = 0
+texture = ExtResource("3_i2tay")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.91
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_i2tay")
+draw_pass_1 = SubResource("PlaneMesh_yyxaj")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ktv1i")
+}
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_yyxaj")
+unit_size = 7.0
+pitch_scale = 1.1
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 13667.0

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b3cigef0gjfdh"]
+
+[ext_resource type="Texture2D" uid="uid://bsc5osyern66j" path="res://images/item/passive/item_p6.png" id="1_aoctm"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_3w1vc"]
+
+[sub_resource type="GDScript" id="GDScript_hano2"]
+script/source = "func pickup() -> void:
+	_G.player.stats.speed += 2.0
+	_G.player.stats.bullet.fire_rate_mult *= 1.5
+	
+	_G.player.stats.bullet.shots += 2
+	_G.player.stats.bullet.spread_angle += 12.0
+	_G.player.stats.bullet.homing -= 0.1 
+"
+
+[resource]
+script = ExtResource("2_3w1vc")
+item_name = "Archetype"
+item_script = SubResource("GDScript_hano2")
+type = 3
+weight = 0.05
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_aoctm")
+item_description = "Fire 2 aditional shots
+Increases movement speed
+Reduces attack speed"

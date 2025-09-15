@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://h8r4bw7vj86b"]
+
+[ext_resource type="Texture2D" uid="uid://bsk48vypokcnx" path="res://res/texture/glitch.tres" id="1_me2mw"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_k0r2p"]
+
+[sub_resource type="GDScript" id="GDScript_xnuq4"]
+script/source = "func pickup() -> void:
+	_G.change_scene(\"res://scene/thank.tscn\")
+"
+
+[resource]
+script = ExtResource("2_k0r2p")
+item_name = "???"
+item_script = SubResource("GDScript_xnuq4")
+type = 0
+weight = 1.0
+remove_from_pool = false
+shop_cost = 1000
+image = ExtResource("1_me2mw")
+item_description = "???"

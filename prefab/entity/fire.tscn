@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://5qa3gkkmkm37"]
+
+[ext_resource type="Script" uid="uid://cwr53u2s61v3p" path="res://src/entity/fire.gd" id="1_nqpfa"]
+[ext_resource type="Texture2D" uid="uid://cf5c1ljmst3lm" path="res://images/bullet.png" id="2_gf758"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1qtbf"]
+radius = 0.4
+
+[sub_resource type="Gradient" id="Gradient_34d2j"]
+offsets = PackedFloat32Array(0, 0.184783, 0.849112)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0juvq"]
+gradient = SubResource("Gradient_34d2j")
+
+[sub_resource type="Curve" id="Curve_l0j8q"]
+_data = [Vector2(0.438338, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qkbrv"]
+curve = SubResource("Curve_l0j8q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gh1ns"]
+emission_shape = 2
+emission_sphere_radius = 0.25
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_max = 1.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 0.0499776
+gravity = Vector3(0, 1, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_qkbrv")
+color_ramp = SubResource("GradientTexture1D_0juvq")
+hue_variation_min = -1.0
+hue_variation_max = -0.9
+turbulence_enabled = true
+turbulence_noise_strength = 10.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed = Vector3(0, 1, 0)
+turbulence_influence_min = 0.047
+turbulence_influence_max = 0.107
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uioce"]
+load_path = "res://.godot/imported/sparkle_small.png-f673ad4b6aa8c938b69f661f51d9c8be.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hluo1"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_uioce")
+heightmap_scale = -16.0
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 0.478
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_126v3"]
+material = SubResource("StandardMaterial3D_hluo1")
+size = Vector2(0.15, 0.15)
+orientation = 2
+
+[node name="Fire" type="Area3D"]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("1_nqpfa")
+damage = 300
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("SphereShape3D_1qtbf")
+
+[node name="Outer" type="GPUParticles3D" parent="."]
+amount = 96
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_gh1ns")
+draw_pass_1 = SubResource("PlaneMesh_126v3")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(0.943969, 0.640289, 0.948052, 1)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_gf758")

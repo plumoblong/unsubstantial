@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://c2oxg6juy2nnq"]
+
+[ext_resource type="Texture2D" uid="uid://dpaswlf4uqc7r" path="res://images/item/passive/item_p18.png" id="1_650ag"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_qn44w"]
+
+[sub_resource type="GDScript" id="GDScript_bfcvv"]
+script/source = "func pickup() -> void:
+	_G.player.stats.damage_mult = 1.5
+	_G.player.stats.speed += 1.5
+	_G.player.stats.bullet.homing += 0.1
+	_G.player.stats.bullet.fire_rate_mult -= 0.2
+	_G.player.stats.dash_cooldown_mult -= 0.2
+	
+"
+
+[resource]
+script = ExtResource("2_qn44w")
+item_name = "Disgusting Drink"
+item_script = SubResource("GDScript_bfcvv")
+type = 3
+weight = 0.25
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_650ag")
+item_description = "Gain a 50% Damage Bonus
+Decreases Fire Rate and Dashing Cooldown"

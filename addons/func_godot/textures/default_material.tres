@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cvex6toty8yn7"]
+
+[ext_resource type="Texture2D" uid="uid://dwl57vr3vw43y" path="res://textures/world/missing.png" id="1_wne2l"]
+
+[resource]
+albedo_texture = ExtResource("1_wne2l")
+metallic_specular = 0.0
+uv2_triplanar_sharpness = 150.0
+uv2_world_triplanar = true

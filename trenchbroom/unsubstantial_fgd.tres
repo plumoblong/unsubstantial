@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=17 format=3 uid="uid://dxtt0gn2y6y4m"]
+
+[ext_resource type="Script" uid="uid://dh8wtmlyp7ac4" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_o81sr"]
+[ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_xpdw1"]
+[ext_resource type="Script" uid="uid://dpx026islnxad" path="res://addons/func_godot/src/fgd/func_godot_fgd_entity_class.gd" id="2_1wc58"]
+[ext_resource type="Resource" uid="uid://djcrmgap53ew0" path="res://trenchbroom/entities/item_stall.tres" id="2_gpy3j"]
+[ext_resource type="Resource" uid="uid://cxy7jnh6d7msn" path="res://addons/func_godot/fgd/func_detail.tres" id="2_jgobn"]
+[ext_resource type="Resource" uid="uid://ch3e0dix85uhb" path="res://addons/func_godot/fgd/func_detail_illusionary.tres" id="3_apqds"]
+[ext_resource type="Resource" uid="uid://cmegcdro37a3a" path="res://trenchbroom/entities/jump_pad.tres" id="3_xoddu"]
+[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="4_r88dl"]
+[ext_resource type="Resource" uid="uid://dg5x44cc7flew" path="res://addons/func_godot/fgd/func_illusionary.tres" id="5_jbgg2"]
+[ext_resource type="Resource" uid="uid://nayxb8n7see2" path="res://addons/func_godot/fgd/phong_base.tres" id="6_1wc58"]
+[ext_resource type="Resource" uid="uid://bdji3873bg32h" path="res://addons/func_godot/fgd/worldspawn.tres" id="7_6ld5u"]
+[ext_resource type="Resource" uid="uid://djhhounr3qago" path="res://trenchbroom/entities/ent_spawn.tres" id="10_apqds"]
+[ext_resource type="Resource" uid="uid://domsr8e47ekgi" path="res://trenchbroom/entities/light.tres" id="11_r88dl"]
+[ext_resource type="Resource" uid="uid://ikigflbn67te" path="res://trenchbroom/entities/palm_tree.tres" id="12_jbgg2"]
+[ext_resource type="Resource" uid="uid://olct1rd7bt5m" path="res://trenchbroom/entities/shrine_essence.tres" id="14_6ld5u"]
+[ext_resource type="Resource" uid="uid://ceyb1p7d7m7xm" path="res://trenchbroom/entities/gateway.tres" id="15_opjd3"]
+
+[resource]
+script = ExtResource("1_o81sr")
+export_file = false
+target_map_editor = 1
+fgd_name = "unsubstantial"
+base_fgd_files = Array[Resource]([ExtResource("1_xpdw1")])
+entity_definitions = Array[ExtResource("2_1wc58")]([ExtResource("2_jgobn"), ExtResource("3_apqds"), ExtResource("4_r88dl"), ExtResource("5_jbgg2"), ExtResource("6_1wc58"), ExtResource("7_6ld5u"), ExtResource("2_gpy3j"), ExtResource("3_xoddu"), ExtResource("10_apqds"), ExtResource("11_r88dl"), ExtResource("12_jbgg2"), ExtResource("14_6ld5u"), ExtResource("15_opjd3")])
+metadata/_custom_type_script = "uid://dh8wtmlyp7ac4"

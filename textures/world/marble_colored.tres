@@ -1,0 +1,46 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://f0s1pbvhimks"]
+
+[ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="1_cl5m8"]
+[ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="2_ts1ek"]
+[ext_resource type="Texture2D" uid="uid://38dfeuetui5x" path="res://textures/pbr/pillar.png" id="3_hd50t"]
+
+[sub_resource type="Gradient" id="Gradient_lw7qi"]
+offsets = PackedFloat32Array(0, 0.923469)
+colors = PackedColorArray(1, 1, 1, 1, 0.33237, 0.33237, 0.33237, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwtd1"]
+gradient = SubResource("Gradient_lw7qi")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[resource]
+albedo_color = Color(0.59668, 0.534373, 0.752727, 1)
+albedo_texture = ExtResource("1_cl5m8")
+metallic = 0.27
+metallic_specular = 1.0
+roughness = 0.63
+roughness_texture = SubResource("GradientTexture2D_dwtd1")
+emission = Color(0.0164378, 0, 0.431108, 1)
+emission_energy_multiplier = 0.23
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("3_hd50t")
+rim = 0.12
+rim_tint = 1.0
+clearcoat_roughness = 1.0
+anisotropy = -0.58
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_transmittance_enabled = true
+subsurf_scatter_transmittance_depth = 8.0
+subsurf_scatter_transmittance_boost = 1.0
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("2_ts1ek")
+refraction_scale = 0.08
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_offset = Vector3(0, 1.655, 0)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0

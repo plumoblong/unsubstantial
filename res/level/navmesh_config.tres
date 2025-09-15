@@ -1,0 +1,9 @@
+[gd_resource type="NavigationMesh" format=3 uid="uid://bg85tigodtlqr"]
+
+[resource]
+vertices = PackedVector3Array(-14.25, 0.5, -234.103, -14.25, 0.5, 14.397, 14.25, 0.5, 14.397, 14.25, 0.5, -234.103)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+sample_partition_type = 1
+geometry_parsed_geometry_type = 1
+filter_ledge_spans = true
+filter_baking_aabb = AABB(0, 0, 0, 0, 5, 0)

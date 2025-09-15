@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://bybynv0w77eib"]
+
+[ext_resource type="Script" uid="uid://dmonf6eklpxus" path="res://src/debug_console.gd" id="1_7bfnr"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_csl18"]
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="2_ldr6d"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="4_jg76u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jg76u"]
+shader = ExtResource("2_ldr6d")
+shader_parameter/modulate = Color(0.0994685, 0.0994685, 0.0994685, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg76u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgo7y"]
+shader = ExtResource("4_jg76u")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="DebugConsole" type="CanvasLayer"]
+layer = 11
+script = ExtResource("1_7bfnr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jg76u")
+offset_right = 480.0
+offset_bottom = 102.0
+
+[node name="Shadow" type="RichTextLabel" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 480.0
+offset_bottom = 93.0
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("2_csl18")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[color=00ff00]TUX Loaded![/color]"
+scroll_active = false
+scroll_following = true
+vertical_alignment = 2
+
+[node name="Output" type="RichTextLabel" parent="."]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 479.0
+offset_bottom = 92.0
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("2_csl18")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "[color=00ff00]TUX Loaded![/color]"
+scroll_following = true
+vertical_alignment = 2
+
+[node name="Input" type="LineEdit" parent="."]
+clip_contents = true
+offset_left = 11.0
+offset_top = 93.0
+offset_right = 479.0
+offset_bottom = 101.0
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+mouse_filter = 2
+theme_override_colors/font_placeholder_color = Color(1, 1, 1, 0.345098)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_csl18")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ldr6d")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_jg76u")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kgo7y")
+placeholder_text = "help(page : int)"
+max_length = 101
+keep_editing_on_text_submit = true
+emoji_menu_enabled = false
+deselect_on_focus_loss_enabled = false
+caret_blink = true
+caret_force_displayed = true
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_kgo7y")
+offset_left = 1.0
+offset_top = 93.0
+offset_right = 10.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("2_csl18")
+theme_override_font_sizes/font_size = 6
+text = ">> "
+clip_text = true
+
+[connection signal="text_submitted" from="Input" to="." method="input_text_submitted"]

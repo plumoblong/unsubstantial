@@ -1,0 +1,134 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://b8f7djmixw0da"]
+
+[ext_resource type="Texture2D" uid="uid://co03ou6m5vcpq" path="res://textures/world/essence.png" id="1_3m5yq"]
+
+[sub_resource type="Shader" id="Shader_mr311"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_nearest_mipmap,repeat_enable;
+uniform sampler2D normal_map : hint_normal, filter_nearest_mipmap, repeat_enable;
+uniform float normal_scale : hint_range(-10.0, 10.0);
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_nearest_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_nearest_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform sampler2D texture_emission : source_color, hint_default_black,filter_nearest_mipmap,repeat_enable;
+uniform vec4 emission : source_color;
+uniform float emission_energy;
+uniform float rim : hint_range(0,1);
+uniform float rim_tint : hint_range(0,1);
+uniform sampler2D texture_rim : hint_default_white,filter_nearest_mipmap,repeat_enable;
+uniform vec4 transmittance_color : source_color;
+uniform float transmittance_depth;
+uniform sampler2D texture_subsurface_transmittance : hint_default_white,filter_nearest_mipmap,repeat_enable;
+uniform float transmittance_boost;
+varying vec3 uv1_triplanar_pos;
+varying vec3 uv2_triplanar_pos;
+uniform float uv1_blend_sharpness;
+varying vec3 uv1_power_normal;
+varying vec3 uv2_power_normal;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+uniform float offset_speed;
+
+void vertex() {
+	vec3 normal = NORMAL;
+	float offset;
+	offset = TIME * offset_speed;
+	TANGENT = vec3(0.0,0.0,-1.0) * abs(normal.x);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.y);
+	TANGENT+= vec3(1.0,0.0,0.0) * abs(normal.z);
+	TANGENT = normalize(TANGENT);
+	BINORMAL = vec3(0.0,1.0,0.0) * abs(normal.x);
+	BINORMAL+= vec3(0.0,0.0,-1.0) * abs(normal.y);
+	BINORMAL+= vec3(0.0,1.0,0.0) * abs(normal.z);
+	BINORMAL = normalize(BINORMAL);
+	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv2_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
+	uv1_triplanar_pos = VERTEX * uv1_scale + (uv1_offset + vec3(offset, offset, offset));
+	uv2_triplanar_pos = VERTEX * uv2_scale + (uv2_offset + vec3(offset, offset, offset));
+	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv2_power_normal/=dot(uv1_power_normal,vec3(1.0));
+	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+}
+
+
+
+
+vec4 triplanar_texture(sampler2D p_sampler,vec3 p_weights,vec3 p_triplanar_pos) {
+	vec4 samp=vec4(0.0);
+	samp+= texture(p_sampler,p_triplanar_pos.xy) * p_weights.z;
+	samp+= texture(p_sampler,p_triplanar_pos.xz) * p_weights.y;
+	samp+= texture(p_sampler,p_triplanar_pos.zy * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
+}
+
+
+void fragment() {
+	float offset;
+	offset = TIME * offset_speed;
+	vec4 albedo_tex = triplanar_texture(texture_albedo,uv1_power_normal,uv2_triplanar_pos - vec3(offset, offset, offset));
+	NORMAL_MAP = triplanar_texture(normal_map, uv2_power_normal, uv2_triplanar_pos- vec3(offset, offset, offset)).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(triplanar_texture(texture_metallic,uv1_power_normal,uv1_triplanar_pos),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(triplanar_texture(texture_roughness,uv1_power_normal,uv1_triplanar_pos),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	vec3 emission_tex = triplanar_texture(texture_emission,uv1_power_normal,uv1_triplanar_pos).rgb;
+	EMISSION = (emission.rgb+emission_tex)*emission_energy;
+	vec2 rim_tex = triplanar_texture(texture_rim,uv1_power_normal,uv1_triplanar_pos).xy;
+	RIM = rim*rim_tex.x;	RIM_TINT = rim_tint*rim_tex.y;
+	vec4 trans_color_tex = triplanar_texture(texture_subsurface_transmittance,uv1_power_normal,uv1_triplanar_pos);
+	SSS_TRANSMITTANCE_COLOR=transmittance_color*trans_color_tex;
+	SSS_TRANSMITTANCE_DEPTH=transmittance_depth;
+	SSS_TRANSMITTANCE_BOOST=transmittance_boost;
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_jte1n"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_plqdo"]
+gradient = SubResource("Gradient_jte1n")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_mr311")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("1_3m5yq")
+shader_parameter/normal_scale = 0.0
+shader_parameter/point_size = 0.0
+shader_parameter/roughness = 0.368
+shader_parameter/metallic_texture_channel = Vector4(0.01, 1.04, 0.47, -1.095)
+shader_parameter/texture_roughness = SubResource("GradientTexture2D_plqdo")
+shader_parameter/specular = 1.0
+shader_parameter/metallic = 0.36
+shader_parameter/texture_emission = ExtResource("1_3m5yq")
+shader_parameter/emission = Color(0.147114, 0.21703, 0.419285, 1)
+shader_parameter/emission_energy = 0.3
+shader_parameter/rim = 1.0
+shader_parameter/rim_tint = 0.0
+shader_parameter/transmittance_color = Color(1, 1, 1, 1)
+shader_parameter/transmittance_depth = 8.0
+shader_parameter/transmittance_boost = 1.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(0.78, 0.16, 0.265)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/offset_speed = 0.1

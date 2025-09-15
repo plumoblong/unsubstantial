@@ -1,0 +1,26 @@
+[gd_resource type="PlaneMesh" load_steps=3 format=3 uid="uid://6rlb33ae8e1r"]
+
+[ext_resource type="Texture2D" uid="uid://75bfio0kx2i" path="res://images/sparkle_small.png" id="1_4sewa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3w1kk"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_4sewa")
+heightmap_scale = -16.0
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 0.478
+point_size = 8.0
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[resource]
+material = SubResource("StandardMaterial3D_3w1kk")
+size = Vector2(0.15, 0.15)
+orientation = 2

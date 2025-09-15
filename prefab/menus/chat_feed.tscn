@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp3ooy8su1hye"]
+
+[ext_resource type="Script" uid="uid://ba12aoi3o8odw" path="res://src/menus/chat_feed.gd" id="1_7smie"]
+[ext_resource type="AudioStream" uid="uid://2vgn4ukh5dmp" path="res://sfx/chat_append.wav" id="2_0rih4"]
+
+[node name="ChatFeed" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7smie")
+
+[node name="MessageContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 229.0
+offset_bottom = 53.0
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0rih4")
+bus = &"SFX2"

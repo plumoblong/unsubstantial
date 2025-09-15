@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch7uxwho4t17y"]
+
+[ext_resource type="Script" uid="uid://77tgcj11ms4q" path="res://src/thank.gd" id="1_dadqo"]
+[ext_resource type="Texture2D" uid="uid://y306htvnxefy" path="res://images/thank.png" id="2_gmfs3"]
+[ext_resource type="AudioStream" uid="uid://da3i73qkwqdch" path="res://music/unknown.ogg" id="3_bii1v"]
+
+[node name="Thank" type="Node2D"]
+script = ExtResource("1_dadqo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gmfs3")
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bii1v")
+pitch_scale = 0.84
+autoplay = true
+bus = &"Music"

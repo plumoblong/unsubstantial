@@ -1,0 +1,95 @@
+[gd_scene load_steps=21 format=3 uid="uid://bpwhvorsucmn5"]
+
+[ext_resource type="Script" uid="uid://dr4it7887glkj" path="res://src/game.gd" id="1_uu38s"]
+[ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
+[ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
+[ext_resource type="AudioStream" uid="uid://b20cwcimf3pqt" path="res://music/level/key.ogg" id="8_400sm"]
+[ext_resource type="Script" uid="uid://c8l6vapm3bkg5" path="res://src/resource/item_pool.gd" id="9_abp7u"]
+[ext_resource type="AudioStream" uid="uid://d1c688sodgbo1" path="res://music/level/respawn.ogg" id="9_lip20"]
+[ext_resource type="AudioStream" uid="uid://mabafblxpkit" path="res://music/level/core.ogg" id="10_efr1a"]
+[ext_resource type="Resource" uid="uid://dfuv1fe86kg44" path="res://res/itempool/default_pool.tres" id="10_ux4dc"]
+[ext_resource type="Script" uid="uid://bo4hw3ok1f8yh" path="res://src/component/item_pool_manager.gd" id="10_yq8tf"]
+[ext_resource type="AudioStream" uid="uid://j31om87u5v2c" path="res://music/level/fractal.ogg" id="11_x3x2e"]
+[ext_resource type="PackedScene" uid="uid://c3g7y6xs8honh" path="res://prefab/menus/transition.tscn" id="24_b8t8i"]
+[ext_resource type="Script" uid="uid://qtuj5slhqqp6" path="res://src/component/chapter_manager.gd" id="33_d218c"]
+[ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="35_efr1a"]
+[ext_resource type="Resource" uid="uid://cgx52g0t14tml" path="res://res/chapter/ether.tres" id="36_x3x2e"]
+[ext_resource type="Resource" uid="uid://c7vt6mx0osl47" path="res://res/chapter/palace.tres" id="37_c3n0e"]
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="38_imfdu"]
+[ext_resource type="PackedScene" uid="uid://cp3ooy8su1hye" path="res://prefab/menus/chat_feed.tscn" id="40_imfdu"]
+[ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="42_lip20"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_xvte5"]
+shuffle = true
+fade_time = 0.25
+stream_count = 4
+stream_0 = ExtResource("8_400sm")
+stream_1 = ExtResource("9_lip20")
+stream_2 = ExtResource("10_efr1a")
+stream_3 = ExtResource("11_x3x2e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_400sm"]
+shader = ExtResource("38_imfdu")
+shader_parameter/modulate = Color(0.542515, 0, 0.513961, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_uu38s")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_2026n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Pause" parent="." instance=ExtResource("6_hgp5e")]
+visible = false
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPlaylist_xvte5")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+
+[node name="ItemPoolManager" type="Node" parent="."]
+script = ExtResource("10_yq8tf")
+item_pools = Array[ExtResource("9_abp7u")]([ExtResource("10_ux4dc")])
+
+[node name="ChapterManager" type="Node" parent="."]
+script = ExtResource("33_d218c")
+all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e")])
+
+[node name="Transition" parent="." instance=ExtResource("24_b8t8i")]
+layer = 2
+visible = false
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_400sm")
+offset_left = 1.0
+offset_top = 237.0
+offset_right = 41.0
+offset_bottom = 247.0
+theme_override_font_sizes/font_size = 8
+text = "gfdf"
+
+[node name="ChatFeed" parent="." instance=ExtResource("40_imfdu")]
+offset_left = 25.0
+offset_top = 12.0
+offset_right = 25.0
+offset_bottom = 12.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5476, 0, 0)
+stream = ExtResource("42_lip20")
+volume_db = -20.0
+unit_size = 250.0
+max_db = -5.0
+pitch_scale = 0.94
+panning_strength = 0.14
+bus = &"Ambient"
+attenuation_filter_cutoff_hz = 20500.0
+doppler_tracking = 1

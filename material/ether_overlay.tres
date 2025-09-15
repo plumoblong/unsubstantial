@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c4e8vymr51sw7"]
+
+[ext_resource type="Shader" uid="uid://2olmhccqsnm6" path="res://src/shader/scrolling.gdshader" id="1_55h3i"]
+
+[resource]
+shader = ExtResource("1_55h3i")
+shader_parameter/speed = Vector2(-0.25, -0.25)
+shader_parameter/modulate = Color(0.128082, 0.000230606, 0.282622, 1)

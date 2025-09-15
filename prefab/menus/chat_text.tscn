@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6s6faw1mtknr"]
+
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="1_6i8yb"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_hdjuc"]
+[ext_resource type="Script" uid="uid://1hcww3e0p32w" path="res://src/menus/chat_text.gd" id="3_0yrsq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdjuc"]
+shader = ExtResource("1_6i8yb")
+shader_parameter/modulate = Color(1, 0.447388, 0.447388, 1)
+shader_parameter/amount = 0.7
+shader_parameter/alpha = 1.0
+
+[node name="ChatText" type="Label"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_hdjuc")
+offset_right = 249.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("2_hdjuc")
+theme_override_font_sizes/font_size = 6
+text = "THERE HAS BEEN AN ERROR WITH THIS CHAT MESSAGE"
+autowrap_mode = 2
+script = ExtResource("3_0yrsq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+show_behind_parent = true
+layout_mode = 0
+offset_right = 162.0
+offset_bottom = 55.0

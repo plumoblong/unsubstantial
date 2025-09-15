@@ -1,0 +1,550 @@
+[gd_scene load_steps=16 format=3 uid="uid://dovrexvfpfqjp"]
+
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="1_4cq6u"]
+[ext_resource type="Script" uid="uid://gupw21wq2mfx" path="res://src/menus/pause.gd" id="1_pq3u6"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="1_xidnw"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_35y48"]
+[ext_resource type="PackedScene" uid="uid://sppppyvtblst" path="res://prefab/menus/options.tscn" id="4_1b2f7"]
+[ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="6_82fug"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="6_uuqui"]
+[ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="7_8nkmb"]
+[ext_resource type="Texture2D" uid="uid://ddqjtbx73fey4" path="res://images/item/passive/item_p2.png" id="7_njr3x"]
+[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="8_7qf5b"]
+[ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="8_8nkmb"]
+[ext_resource type="Script" uid="uid://1fnwx6m8s6v1" path="res://src/menus/item_preview.gd" id="8_qsdw3"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="10_gq4f7"]
+[ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="10_k4c6p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gl7j"]
+shader = ExtResource("1_xidnw")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="Pause" type="CanvasLayer"]
+
+[node name="Node2D" type="Node2D" parent="."]
+material = ExtResource("6_82fug")
+script = ExtResource("1_pq3u6")
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+visible = false
+offset_right = 480.0
+offset_bottom = 272.0
+color = Color(1, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_right = 480.0
+offset_bottom = 272.0
+color = Color(0, 0, 0, 0.564706)
+
+[node name="Main" type="Node2D" parent="Node2D"]
+visible = false
+use_parent_material = true
+position = Vector2(-4, 36)
+
+[node name="Continue" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_left = 4.0
+offset_top = 72.0
+offset_right = 484.0
+offset_bottom = 85.0
+text = "CONTINUE"
+alignment = 1
+
+[node name="Statistics" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_left = 4.0
+offset_top = 84.0
+offset_right = 484.0
+offset_bottom = 97.0
+text = "INVENTORY"
+alignment = 1
+
+[node name="Restart" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_left = 4.0
+offset_top = 96.0
+offset_right = 484.0
+offset_bottom = 109.0
+text = "RESTART"
+alignment = 1
+
+[node name="Options" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_left = 4.0
+offset_top = 108.0
+offset_right = 484.0
+offset_bottom = 121.0
+text = "OPTIONS"
+alignment = 1
+
+[node name="Exit" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_left = 4.0
+offset_top = 120.0
+offset_right = 484.0
+offset_bottom = 133.0
+text = "EXIT"
+alignment = 1
+
+[node name="ChapterInfo" type="RichTextLabel" parent="Node2D/Main"]
+use_parent_material = true
+clip_contents = false
+offset_left = 4.0
+offset_top = -4.0
+offset_right = 484.0
+offset_bottom = 56.0
+theme_override_fonts/normal_font = ExtResource("10_gq4f7")
+theme_override_fonts/mono_font = ExtResource("6_uuqui")
+theme_override_fonts/italics_font = ExtResource("7_8nkmb")
+theme_override_fonts/bold_italics_font = ExtResource("8_8nkmb")
+theme_override_fonts/bold_font = ExtResource("1_4cq6u")
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "[b][i]- Ether -[/i][/b]
+The Begginning
+
+[i]CHAPTER 1 STAGE 6
+
+ACTUAL STAGE 10
+"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Options" parent="Node2D" instance=ExtResource("4_1b2f7")]
+visible = false
+
+[node name="Statistics" type="Node2D" parent="Node2D"]
+material = ExtResource("6_82fug")
+
+[node name="Header" type="RichTextLabel" parent="Node2D/Statistics"]
+material = SubResource("ShaderMaterial_4gl7j")
+clip_contents = false
+offset_top = 28.0
+offset_right = 480.0
+offset_bottom = 38.0
+theme_override_fonts/normal_font = ExtResource("1_4cq6u")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][wave]INVENTORY"
+
+[node name="Items" type="Node2D" parent="Node2D/Statistics"]
+position = Vector2(148, 48)
+
+[node name="Item7" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item8" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 32.0
+offset_right = 56.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item9" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 64.0
+offset_right = 88.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item10" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 96.0
+offset_right = 120.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item11" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 128.0
+offset_right = 152.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item12" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 160.0
+offset_right = 184.0
+offset_bottom = 24.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item13" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_top = 28.0
+offset_right = 24.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item14" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 56.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item15" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 64.0
+offset_top = 28.0
+offset_right = 88.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item16" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 96.0
+offset_top = 28.0
+offset_right = 120.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item17" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 128.0
+offset_top = 28.0
+offset_right = 152.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item18" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 160.0
+offset_top = 28.0
+offset_right = 184.0
+offset_bottom = 52.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item19" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_top = 56.0
+offset_right = 24.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item20" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 56.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item21" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 64.0
+offset_top = 56.0
+offset_right = 88.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item22" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 96.0
+offset_top = 56.0
+offset_right = 120.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item23" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 128.0
+offset_top = 56.0
+offset_right = 152.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item24" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 184.0
+offset_bottom = 80.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item25" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_top = 84.0
+offset_right = 24.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item26" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 32.0
+offset_top = 84.0
+offset_right = 56.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item27" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 64.0
+offset_top = 84.0
+offset_right = 88.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item28" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 96.0
+offset_top = 84.0
+offset_right = 120.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item29" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 128.0
+offset_top = 84.0
+offset_right = 152.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Item30" type="TextureRect" parent="Node2D/Statistics/Items"]
+use_parent_material = true
+offset_left = 160.0
+offset_top = 84.0
+offset_right = 184.0
+offset_bottom = 108.0
+texture = ExtResource("7_njr3x")
+script = ExtResource("8_qsdw3")
+label = NodePath("../../Description")
+name_label = NodePath("../../Name")
+rarity = NodePath("../../Rarity")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Statistics"]
+visible = false
+position = Vector2(4, 4)
+texture = ExtResource("8_7qf5b")
+centered = false
+
+[node name="Rarity" type="Sprite2D" parent="Node2D/Statistics"]
+position = Vector2(240, 236)
+texture = ExtResource("10_k4c6p")
+vframes = 5
+
+[node name="Description" type="RichTextLabel" parent="Node2D/Statistics"]
+use_parent_material = true
+offset_top = 192.0
+offset_right = 480.0
+offset_bottom = 219.0
+theme_override_constants/line_separation = 3
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "???"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Name" type="RichTextLabel" parent="Node2D/Statistics"]
+use_parent_material = true
+clip_contents = false
+offset_top = 172.0
+offset_right = 480.0
+offset_bottom = 182.0
+theme_override_fonts/normal_font = ExtResource("10_gq4f7")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "???"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RestartConfirm" type="Node2D" parent="Node2D"]
+visible = false
+use_parent_material = true
+
+[node name="Name" type="RichTextLabel" parent="Node2D/RestartConfirm"]
+material = SubResource("ShaderMaterial_4gl7j")
+clip_contents = false
+offset_top = 100.0
+offset_right = 480.0
+offset_bottom = 110.0
+theme_override_fonts/normal_font = ExtResource("10_gq4f7")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Do you really want to restart your run?"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RestYes" parent="Node2D/RestartConfirm" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_top = 132.0
+offset_right = 480.0
+offset_bottom = 145.0
+text = "YES,   THIS RUN SUCKS"
+alignment = 1
+
+[node name="RestNo" parent="Node2D/RestartConfirm" instance=ExtResource("3_35y48")]
+use_parent_material = true
+offset_top = 148.0
+offset_right = 480.0
+offset_bottom = 161.0
+text = "NO."
+alignment = 1
+
+[connection signal="pressed" from="Node2D/Main/Continue" to="Node2D" method="continue_pressed"]
+[connection signal="pressed" from="Node2D/Main/Statistics" to="Node2D" method="statistics_pressed"]
+[connection signal="pressed" from="Node2D/Main/Restart" to="Node2D" method="restart_pressed"]
+[connection signal="pressed" from="Node2D/Main/Options" to="Node2D" method="options_pressed"]
+[connection signal="pressed" from="Node2D/Main/Exit" to="Node2D" method="exit_pressed"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item7" to="Node2D/Statistics/Items/Item7" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item7" to="Node2D/Statistics/Items/Item7" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item8" to="Node2D/Statistics/Items/Item8" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item8" to="Node2D/Statistics/Items/Item8" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item9" to="Node2D/Statistics/Items/Item9" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item9" to="Node2D/Statistics/Items/Item9" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item10" to="Node2D/Statistics/Items/Item10" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item10" to="Node2D/Statistics/Items/Item10" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item11" to="Node2D/Statistics/Items/Item11" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item11" to="Node2D/Statistics/Items/Item11" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item12" to="Node2D/Statistics/Items/Item12" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item12" to="Node2D/Statistics/Items/Item12" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item13" to="Node2D/Statistics/Items/Item13" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item13" to="Node2D/Statistics/Items/Item13" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item14" to="Node2D/Statistics/Items/Item14" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item14" to="Node2D/Statistics/Items/Item14" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item15" to="Node2D/Statistics/Items/Item15" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item15" to="Node2D/Statistics/Items/Item15" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item16" to="Node2D/Statistics/Items/Item16" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item16" to="Node2D/Statistics/Items/Item16" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item17" to="Node2D/Statistics/Items/Item17" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item17" to="Node2D/Statistics/Items/Item17" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item18" to="Node2D/Statistics/Items/Item18" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item18" to="Node2D/Statistics/Items/Item18" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item19" to="Node2D/Statistics/Items/Item19" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item19" to="Node2D/Statistics/Items/Item19" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item20" to="Node2D/Statistics/Items/Item20" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item20" to="Node2D/Statistics/Items/Item20" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item21" to="Node2D/Statistics/Items/Item21" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item21" to="Node2D/Statistics/Items/Item21" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item22" to="Node2D/Statistics/Items/Item22" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item22" to="Node2D/Statistics/Items/Item22" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item23" to="Node2D/Statistics/Items/Item23" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item23" to="Node2D/Statistics/Items/Item23" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item24" to="Node2D/Statistics/Items/Item24" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item24" to="Node2D/Statistics/Items/Item24" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item25" to="Node2D/Statistics/Items/Item25" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item25" to="Node2D/Statistics/Items/Item25" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item26" to="Node2D/Statistics/Items/Item26" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item26" to="Node2D/Statistics/Items/Item26" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item27" to="Node2D/Statistics/Items/Item27" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item27" to="Node2D/Statistics/Items/Item27" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item28" to="Node2D/Statistics/Items/Item28" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item28" to="Node2D/Statistics/Items/Item28" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item29" to="Node2D/Statistics/Items/Item29" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item29" to="Node2D/Statistics/Items/Item29" method="mouse_exited"]
+[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item30" to="Node2D/Statistics/Items/Item30" method="mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item30" to="Node2D/Statistics/Items/Item30" method="mouse_exited"]
+[connection signal="pressed" from="Node2D/RestartConfirm/RestYes" to="Node2D" method="rest_yes_pressed"]
+[connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_no_pressed"]
+
+[editable path="Node2D/Main/Continue"]
+[editable path="Node2D/Main/Statistics"]
+[editable path="Node2D/Main/Restart"]
+[editable path="Node2D/Main/Options"]
+[editable path="Node2D/Main/Exit"]
+[editable path="Node2D/RestartConfirm/RestYes"]
+[editable path="Node2D/RestartConfirm/RestNo"]

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://82uqbj4m0vpv"]
+
+[ext_resource type="Texture2D" uid="uid://dwl57vr3vw43y" path="res://textures/world/missing.png" id="1_k1to1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
+
+[resource]
+shading_mode = 0
+albedo_texture = ExtResource("1_k1to1")
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_axlsg")
+uv1_triplanar_sharpness = 150.0
+uv1_world_triplanar = true
+uv2_world_triplanar = true

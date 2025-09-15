@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b6q23nblt3odw"]
+
+[ext_resource type="Texture2D" uid="uid://c3roj0d7tj245" path="res://images/item/passive/item_p3.png" id="1_c7lm0"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_m3otw"]
+
+[sub_resource type="GDScript" id="GDScript_up87n"]
+script/source = "func pickup() -> void:
+	_G.player.stats.speed += 1.5
+"
+
+[resource]
+script = ExtResource("2_m3otw")
+item_name = "the fast"
+item_script = SubResource("GDScript_up87n")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_c7lm0")
+item_description = "Increases Movement Speed"

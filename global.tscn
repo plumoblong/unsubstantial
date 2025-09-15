@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0h6wgry1k7yc"]
+
+[ext_resource type="Script" uid="uid://duua0dhgdmd3i" path="res://global.gd" id="1_0nuii"]
+[ext_resource type="Texture2D" uid="uid://bgnqyuiynkaga" path="res://images/chapters.png" id="2_8tbuy"]
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="2_s7tmd"]
+[ext_resource type="Shader" uid="uid://dujud7csm8fs4" path="res://src/shader/acid_post.gdshader" id="3_bfr8n"]
+[ext_resource type="AudioStream" uid="uid://c2m2tnuvvje5j" path="res://sfx/ui/ui_hover.wav" id="5_hhif3"]
+[ext_resource type="AudioStream" uid="uid://dspnn1wc81waq" path="res://sfx/ui/ui_accept.wav" id="6_74nqk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bsn0b"]
+shader = ExtResource("3_bfr8n")
+shader_parameter/motion = Vector2(0, 0)
+shader_parameter/scale = 1.0
+shader_parameter/gamma = 1.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/inverted = false
+shader_parameter/use_sample_texture = true
+shader_parameter/enable_filter = true
+shader_parameter/speed = 4.0
+shader_parameter/power = 0.1
+shader_parameter/bit_depth = 10.0
+shader_parameter/dither = 0.125
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k62m"]
+shader = ExtResource("2_s7tmd")
+shader_parameter/modulate = Color(0, 1, 0.0499618, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+
+[node name="Global" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_0nuii")
+
+[node name="Funny" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.1088, 1.107)
+texture = ExtResource("2_8tbuy")
+centered = false
+hframes = 2
+frame = 1
+
+[node name="Flares" type="Node" parent="."]
+
+[node name="Flare" type="ColorRect" parent="."]
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bsn0b")
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+
+[node name="FPS" type="Label" parent="."]
+material = SubResource("ShaderMaterial_7k62m")
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 6.0
+theme_override_font_sizes/font_size = 8
+text = "2137 FPS"
+
+[node name="Version" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.180392)
+offset_left = 437.0
+offset_top = 1.0
+offset_right = 480.0
+offset_bottom = 6.0
+theme_override_font_sizes/font_size = 8
+text = "0.95"
+horizontal_alignment = 2
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="UIHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hhif3")
+volume_db = -15.0
+bus = &"SFX2"
+
+[node name="UIAccept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_74nqk")
+volume_db = -15.0
+bus = &"SFX2"

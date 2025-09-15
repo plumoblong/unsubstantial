@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://co4ad1ttwed2o"]
+
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_cqfiu"]
+[ext_resource type="Texture2D" uid="uid://brs44wp2lwm74" path="res://images/item/passive/item_p11.png" id="1_pfyxl"]
+
+[sub_resource type="GDScript" id="GDScript_urpk8"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet_damage_mult *= 0.4
+	_G.player.stats.bullet.fire_rate_mult *= 0.35
+"
+
+[resource]
+script = ExtResource("1_cqfiu")
+item_name = "nut nut."
+item_script = SubResource("GDScript_urpk8")
+type = 2
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_pfyxl")
+item_description = "Greatly increases Fire Rate
+also reduces Bullet Damage"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

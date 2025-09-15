@@ -1,0 +1,372 @@
+[gd_scene load_steps=12 format=3 uid="uid://blsyvncai3bhf"]
+
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_137lt"]
+[ext_resource type="Material" uid="uid://82uqbj4m0vpv" path="res://textures/world/missing.tres" id="2_6i6hl"]
+[ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="3_sp67b"]
+[ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="4_1g1fs"]
+[ext_resource type="PackedScene" uid="uid://dlgqehmfwh6eh" path="res://prefab/entity/level/light.tscn" id="5_11e72"]
+[ext_resource type="PackedScene" uid="uid://ymujxmrj2l1c" path="res://prefab/entity/level/crate.tscn" id="6_tl1r5"]
+[ext_resource type="PackedScene" uid="uid://bgpu1sil353c7" path="res://prefab/entity/level/level_end.tscn" id="7_scmx6"]
+[ext_resource type="Material" uid="uid://d0yutshnmwa8m" path="res://material/marble_0.tres" id="8_vsf4s"]
+[ext_resource type="PackedScene" uid="uid://bqhd3kqev377" path="res://prefab/entity/level/special_door.tscn" id="9_338ca"]
+[ext_resource type="PackedScene" uid="uid://c21y7tyipvd0n" path="res://prefab/entity/pursuer.tscn" id="10_2noc7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bu4e8"]
+flip_faces = true
+size = Vector2(200, 150)
+
+[node name="InterlopeTest" type="Node3D"]
+script = ExtResource("1_137lt")
+map_name = "interlope_test"
+
+[node name="Walls" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_6i6hl")
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+flip_faces = true
+size = Vector3(20, 15, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -25)
+flip_faces = true
+size = Vector3(10, 15, 30)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -50)
+flip_faces = true
+size = Vector3(20, 15, 20)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 5, -50)
+flip_faces = true
+size = Vector3(30, 15, 10)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 5, -50)
+flip_faces = true
+size = Vector3(50, 15, 40)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.5, -8, -65)
+flip_faces = true
+size = Vector3(29, 41, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.5, 5, -30)
+flip_faces = true
+size = Vector3(19, 15, 60)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95, -8, -10)
+flip_faces = true
+size = Vector3(10, 41, 20)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 5, 0)
+flip_faces = true
+size = Vector3(60, 15, 40)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, 30)
+flip_faces = true
+size = Vector3(20, 15, 20)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 5, 35)
+flip_faces = true
+size = Vector3(20, 15, 10)
+
+[node name="Floor" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("3_sp67b")
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 11.7, -14)
+mesh = SubResource("PlaneMesh_bu4e8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5, -14, -15)
+size = Vector3(105, 29, 110)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.5, -14, -35)
+size = Vector3(19, 29, 70)
+
+[node name="PalmTree" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, 6)
+
+[node name="PalmTree2" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -56)
+
+[node name="PalmTree3" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 3, -62)
+
+[node name="PalmTree4" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 3, -41)
+
+[node name="PalmTree12" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86, 3, -54)
+
+[node name="PalmTree13" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73, 3, 17)
+
+[node name="PalmTree14" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 3, -35)
+
+[node name="PalmTree15" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -43)
+
+[node name="PalmTree5" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103, 3, -35)
+
+[node name="PalmTree6" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114, 3, -51)
+
+[node name="PalmTree7" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114, 3, -6)
+
+[node name="PalmTree8" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 3, 2)
+
+[node name="PalmTree9" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 3, -11)
+
+[node name="PalmTree10" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 3, 1)
+
+[node name="PalmTree11" parent="." instance=ExtResource("4_1g1fs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 3, 27)
+
+[node name="Light" parent="." instance=ExtResource("5_11e72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0, 0)
+
+[node name="Crate" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 5.5, 2.6, -6.75)
+size = Vector3(6, 4, 3.5)
+
+[node name="Crate2" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -6.83688, 3.2, -44.8897)
+size = Vector3(7.4, 5.2, 2.7)
+
+[node name="Crate3" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 56.8433, 5.45, -38.4203)
+size = Vector3(7.4, 9.7, 6.8)
+
+[node name="Crate4" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648, 81.5527, 2.85, -34.5194)
+size = Vector3(3.5, 4.5, 12.8)
+
+[node name="Crate5" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.866026, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866026, 66.1514, 1.85, -59.0213)
+size = Vector3(5.6, 4.5, 10)
+
+[node name="Crate6" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, -0.965926, 115.051, 1.85, -33.1997)
+size = Vector3(5.6, 4.5, 5.2)
+
+[node name="Crate7" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 71.1233, 3.35, 7.5722)
+size = Vector3(5.6, 7.5, 17)
+
+[node name="Crate8" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 72.2062, 2.85, -15.6031)
+size = Vector3(5.6, 6.5, 10.4)
+
+[node name="Crate9" parent="." instance=ExtResource("6_tl1r5")]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 34.2197, 2.85, -11.1781)
+size = Vector3(5.6, 6.5, 13.7)
+
+[node name="LevelEnd" parent="." instance=ExtResource("7_scmx6")]
+transform = Transform3D(1.19209e-07, 0, 1, 0, 1, 0, -1, 0, 1.19209e-07, 79, 1.4, 35)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, -59)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 0, -44)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 0, -38)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, -52)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, -45)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70, 0, -66)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D11" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 112, 0, -60)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D12" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0, -43)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D13" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115, 0, -24)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D14" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 0, -4)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D15" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 0, -15)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D16" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82, 0, 14)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D17" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 12)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D18" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, -13)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D19" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 0)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D23" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 33)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="CSGCylinder3D24" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, 20)
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("8_vsf4s")
+
+[node name="Door" parent="." instance=ExtResource("9_338ca")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 118.5, 0.7, -11)
+
+[node name="Pursuer" parent="." instance=ExtResource("10_2noc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 39)

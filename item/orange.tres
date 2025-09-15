@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b42kldgkepjal"]
+
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_5dkry"]
+[ext_resource type="Texture2D" uid="uid://cqcsgu3m1t3qf" path="res://images/item/passive/item_p9.png" id="1_lihbs"]
+
+[sub_resource type="GDScript" id="GDScript_lihbs"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.fire_rate -= 0.1
+"
+
+[resource]
+script = ExtResource("1_5dkry")
+item_name = "Oreng"
+item_script = SubResource("GDScript_lihbs")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_lihbs")
+item_description = "Increases Attack Speed"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

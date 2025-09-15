@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://jhxjwgwpgfo3"]
+
+[ext_resource type="Script" uid="uid://d0iftfqyfaars" path="res://prefab/menus/flare.gd" id="1_4ncae"]
+
+[node name="Flare" type="ColorRect"]
+visible = false
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_4ncae")

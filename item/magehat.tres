@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cb28ds6pjc86j"]
+
+[ext_resource type="Texture2D" uid="uid://b1un5skna320m" path="res://images/item/passive/item_p27.png" id="1_dpib2"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_66qbs"]
+
+[sub_resource type="GDScript" id="GDScript_e3f7c"]
+script/source = "var bullet_hue : float = 0.0
+
+func pickup() -> void:
+	_G.player.stats.bullet.homing += 3.0
+
+func update(delta : float) -> void:
+	bullet_hue += delta * 0.25
+	_G.player.stats.bullet.color = _G.hsv_to_rgb(bullet_hue, 1.0, 1.0)
+"
+
+[resource]
+script = ExtResource("2_66qbs")
+item_name = "Some mage's hat"
+item_script = SubResource("GDScript_e3f7c")
+type = 3
+weight = 0.5
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_dpib2")
+item_description = "Your Bullets seek blood."

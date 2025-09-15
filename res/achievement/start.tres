@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://btdlru4dlwmue"]
+
+[ext_resource type="Texture2D" uid="uid://c0covg2icvto2" path="res://images/achievement/placeholder.png" id="1_3qtdj"]
+[ext_resource type="Script" uid="uid://cf3nqp67yndv8" path="res://src/resource/achievement.gd" id="1_jy4bv"]
+
+[resource]
+script = ExtResource("1_jy4bv")
+id = 0
+image = ExtResource("1_3qtdj")
+name = "Finally!"
+description = "Welcome to unsubstantial!"
+metadata/_custom_type_script = "uid://cf3nqp67yndv8"

@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnqecxiic80ve"]
+
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_424dn"]
+[ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="3_nipo2"]
+[ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="4_dek83"]
+[ext_resource type="PackedScene" uid="uid://dlgqehmfwh6eh" path="res://prefab/entity/level/light.tscn" id="5_uu36v"]
+[ext_resource type="PackedScene" uid="uid://ymujxmrj2l1c" path="res://prefab/entity/level/crate.tscn" id="6_qpvsn"]
+[ext_resource type="PackedScene" uid="uid://bgpu1sil353c7" path="res://prefab/entity/level/level_end.tscn" id="7_of6mb"]
+[ext_resource type="PackedScene" uid="uid://bljda3vh2o4o8" path="res://prefab/entity/level/gate.tscn" id="8_fq316"]
+[ext_resource type="PackedScene" uid="uid://b3brxruvi15bl" path="res://prefab/entity/level/falling_platform.tscn" id="10_3r3mx"]
+[ext_resource type="PackedScene" uid="uid://bk8hwt7lut1l3" path="res://prefab/entity/level/jump_pad.tscn" id="11_8ynie"]
+[ext_resource type="Material" uid="uid://d0yutshnmwa8m" path="res://material/marble_0.tres" id="12_sdo6w"]
+[ext_resource type="PackedScene" uid="uid://bqhd3kqev377" path="res://prefab/entity/level/special_door.tscn" id="13_isybq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p8shn"]
+size = Vector2(30, 30)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_da2kk"]
+flip_faces = true
+size = Vector2(30, 30)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_424dn")
+
+[node name="Walls" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+flip_faces = true
+size = Vector3(30, 15, 30)
+
+[node name="Floor" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("3_nipo2")
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("PlaneMesh_p8shn")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("PlaneMesh_da2kk")
+
+[node name="PalmTree" parent="." instance=ExtResource("4_dek83")]
+
+[node name="Light" parent="." instance=ExtResource("5_uu36v")]
+
+[node name="Crate" parent="." instance=ExtResource("6_qpvsn")]
+
+[node name="LevelEnd" parent="." instance=ExtResource("7_of6mb")]
+
+[node name="Gate" parent="." instance=ExtResource("8_fq316")]
+
+[node name="FallingPlatform" parent="." instance=ExtResource("10_3r3mx")]
+
+[node name="JumpPad" parent="." instance=ExtResource("11_8ynie")]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+radius = 3.0
+height = 80.0
+material = ExtResource("12_sdo6w")
+
+[node name="Door" parent="." instance=ExtResource("13_isybq")]

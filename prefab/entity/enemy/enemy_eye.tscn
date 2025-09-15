@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://csp24al3t1pq8"]
+
+[ext_resource type="Texture2D" uid="uid://0sw3trmkeidd" path="res://images/entity/eye.png" id="1_f3cx6"]
+[ext_resource type="Script" uid="uid://doie0nodwdv0h" path="res://src/entity/enemy_eye.gd" id="1_s32u2"]
+[ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="3_76rbu"]
+[ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="3_jf0cs"]
+[ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="4_eagth"]
+[ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="6_0ftp6"]
+[ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="6_aifo0"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="7_76rbu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s32u2"]
+radius = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_76rbu"]
+radius = 0.6
+
+[node name="EnemyEye" type="CharacterBody3D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 8
+motion_mode = 1
+script = ExtResource("1_s32u2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(0.899639, 0.899639, 0.899639, 1)
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_f3cx6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_s32u2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 0.5
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+omni_range = 10.0
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("3_76rbu")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://baw7jrp64qlgb"
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("3_jf0cs")
+max_speed = 18.0
+air_friction = 0.05
+metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
+
+[node name="EssenceComponent" type="Node" parent="."]
+script = ExtResource("4_eagth")
+set_max_essence_on_ready = false
+metadata/_custom_type_script = "uid://dvrmix7xqorev"
+
+[node name="Query" type="Area3D" parent="."]
+collision_layer = 262
+collision_mask = 262
+
+[node name="Hitbox" type="CollisionShape3D" parent="Query"]
+shape = SubResource("SphereShape3D_76rbu")
+
+[node name="Hazard" type="Area3D" parent="."]
+collision_layer = 263
+collision_mask = 263
+script = ExtResource("6_aifo0")
+damage = 50
+knockback_strength = 50.0
+metadata/_custom_type_script = "uid://dqg5sl3316gba"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazard"]
+shape = SubResource("SphereShape3D_s32u2")
+
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_0ftp6")
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26864, 0)
+visibility_range_end = 5.0
+visibility_range_end_margin = 5.0
+visibility_range_fade_mode = 1
+pixel_size = 0.011
+billboard = 1
+fixed_size = true
+texture_filter = 0
+text = "500"
+font = ExtResource("7_76rbu")
+font_size = 8
+outline_size = 0
+
+[connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
+[connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
+[connection signal="area_entered" from="Query" to="." method="query_area_entered"]

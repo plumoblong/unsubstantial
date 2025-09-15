@@ -1,0 +1,151 @@
+[gd_scene load_steps=15 format=3 uid="uid://rnbr27si431f"]
+
+[ext_resource type="Script" uid="uid://b78skfo2lkgm0" path="res://src/menus/end_game.gd" id="1_a5apm"]
+[ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="1_bxtiy"]
+[ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="2_vol1s"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="3_hj2js"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="4_quo72"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="5_quo72"]
+[ext_resource type="AudioStream" uid="uid://va5jilgn0q8" path="res://music/over.ogg" id="6_vol1s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a3esg"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_2ubgv"]
+offsets = PackedFloat32Array(0, 0.506964, 0.927577)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xa2ym"]
+gradient = SubResource("Gradient_2ubgv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vhmxq"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(215, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 128.0
+initial_velocity_max = 256.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.653876, 0.653876, 0.653876, 1)
+color_ramp = SubResource("GradientTexture1D_xa2ym")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_whqgk"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(107, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 96.0
+initial_velocity_max = 192.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.816804, 0.816804, 0.816804, 1)
+color_ramp = SubResource("GradientTexture1D_xa2ym")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a3esg"]
+shader = ExtResource("3_hj2js")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0.255608, 0.255608, 0.255608, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ubgv"]
+shader = ExtResource("3_hj2js")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0.255608, 0.255608, 0.255608, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="EndGame" type="Node2D"]
+script = ExtResource("1_a5apm")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(0.472845, 0.472845, 0.472845, 1)
+material = SubResource("CanvasItemMaterial_a3esg")
+position = Vector2(218, -10)
+amount = 64
+texture = ExtResource("2_vol1s")
+lifetime = 1.5
+speed_scale = 0.25
+trail_enabled = true
+trail_sections = 5
+trail_section_subdivisions = 5
+process_material = SubResource("ParticleProcessMaterial_vhmxq")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+modulate = Color(0.708186, 0.708186, 0.708186, 1)
+material = SubResource("CanvasItemMaterial_a3esg")
+position = Vector2(218, -10)
+scale = Vector2(2, 2)
+amount = 32
+texture = ExtResource("2_vol1s")
+speed_scale = 0.25
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_whqgk")
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_a3esg")
+offset_top = 49.0
+offset_right = 432.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("1_bxtiy")
+text = "[YOU BEAT THE GAME???]"
+horizontal_alignment = 1
+
+[node name="Stats" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_2ubgv")
+offset_top = 107.0
+offset_right = 432.0
+offset_bottom = 149.0
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]HIGHEST  ESSENCE:  1000
+
+KILLS:  14
+
+FRACTURES:  10
+
+ITEMS:  20
+
+"
+scroll_active = false
+
+[node name="Score" type="Label" parent="."]
+material = SubResource("ShaderMaterial_2ubgv")
+offset_top = 76.0
+offset_right = 431.0
+offset_bottom = 87.0
+theme_override_fonts/font = ExtResource("4_quo72")
+theme_override_font_sizes/font_size = 8
+text = "SCORE: 1000"
+horizontal_alignment = 1
+
+[node name="Score2" type="Label" parent="."]
+material = SubResource("ShaderMaterial_2ubgv")
+offset_top = 88.0
+offset_right = 431.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 8
+text = "HIGH SCORE: 1000"
+horizontal_alignment = 1
+
+[node name="Menu" parent="." instance=ExtResource("5_quo72")]
+offset_top = 178.0
+offset_right = 432.0
+offset_bottom = 190.0
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("4_quo72")
+text = "Menu"
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vol1s")
+volume_db = -6.15
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="Menu" to="." method="menu_pressed"]
+
+[editable path="Menu"]

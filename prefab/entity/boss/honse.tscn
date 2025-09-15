@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5titvu6s7fa4"]
+
+[ext_resource type="Texture2D" uid="uid://bs2oktfam7uq1" path="res://images/honse.png" id="1_4tj8m"]
+[ext_resource type="Script" uid="uid://dp8hq5u2dbybc" path="res://src/entity/boss/honse.gd" id="1_a6ym2"]
+[ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="3_l4qha"]
+[ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="4_j7pcj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0hvci"]
+radius = 4.0
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_a6ym2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0hvci")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_4tj8m")
+
+[node name="ShootComponent" type="Node" parent="."]
+script = ExtResource("3_l4qha")
+
+[node name="EssenceComponent" type="Node" parent="."]
+script = ExtResource("4_j7pcj")

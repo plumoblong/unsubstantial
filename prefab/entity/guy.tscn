@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://urs3hv37b52v"]
+
+[ext_resource type="Texture2D" uid="uid://tq1fw4dw6517" path="res://images/entity/guy.png" id="1_s5led"]
+[ext_resource type="Script" uid="uid://bl6h65823fe8u" path="res://src/entity/guy.gd" id="2_ujg7p"]
+
+[node name="Guy" type="Sprite3D"]
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_s5led")
+script = ExtResource("2_ujg7p")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119245, 0, 0)
+aabb = AABB(-0.5, -0.7, -0.5, 1, 1.4, 1)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="screen_enter"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="screen_exit"]

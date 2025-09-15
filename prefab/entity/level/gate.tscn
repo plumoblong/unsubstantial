@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bljda3vh2o4o8"]
+
+[ext_resource type="Material" uid="uid://cb1gbyj461xa2" path="res://textures/world/essence.tres" id="1_5lbwh"]
+[ext_resource type="Script" uid="uid://eboj0hec5pkw" path="res://src/entity/gate.gd" id="1_eqa2e"]
+[ext_resource type="Texture2D" uid="uid://bie00k146hgy" path="res://images/ui/map_indicator.png" id="3_mkyn1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5681w"]
+size = Vector3(16, 16, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tf60"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+disable_fog = true
+albedo_color = Color(1, 1, 1, 0.243137)
+albedo_texture = ExtResource("3_mkyn1")
+texture_filter = 0
+billboard_mode = 1
+fixed_size = true
+distance_fade_mode = 1
+distance_fade_min_distance = 5.0
+distance_fade_max_distance = 30.0
+
+[node name="Gate" type="CSGBox3D"]
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+size = Vector3(16, 16, 0.1)
+material = ExtResource("1_5lbwh")
+script = ExtResource("1_eqa2e")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.5)
+shape = SubResource("BoxShape3D_5681w")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+sorting_offset = 0.2
+material_override = SubResource("StandardMaterial3D_2tf60")
+cast_shadow = 0
+gi_mode = 0
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("3_mkyn1")
+hframes = 4
+vframes = 2
+
+[connection signal="body_entered" from="Area3D" to="." method="area_3d_body_entered"]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Chapter" load_steps=3 format=3 uid="uid://cgx52g0t14tml"]
+
+[ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="1_auwgg"]
+[ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_p7rvb"]
+
+[resource]
+script = ExtResource("1_p7rvb")
+chapter_name = "The Ether"
+description = "Another Beginning"
+id = 0
+environment = ExtResource("1_auwgg")
+y_boundary = -15.0
+rooms = Array[PackedScene]([])
+ambience_streams = Array[AudioStream]([])
+ambience_position = Vector3(100, 10, 100)
+metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

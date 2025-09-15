@@ -1,0 +1,167 @@
+[gd_resource type="Resource" script_class="Chapter" load_steps=16 format=3 uid="uid://c7vt6mx0osl47"]
+
+[ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="1_bd46r"]
+[ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_idgru"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="2_vp0qd"]
+[ext_resource type="Script" uid="uid://cgcjch1jmf8h7" path="res://src/resource/chapter_materials.gd" id="3_2goa0"]
+[ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/world/tile_floor.png" id="3_osujf"]
+[ext_resource type="Texture2D" uid="uid://b6r8llwchny4p" path="res://textures/world/bricks.png" id="5_266e6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ojx2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rucwu"]
+albedo_texture = ExtResource("3_osujf")
+metallic_specular = 0.0
+roughness = 0.7
+emission = Color(0, 0, 0.329412, 1)
+normal_scale = 2.0
+rim = 0.12
+rim_tint = 1.0
+clearcoat = 0.14
+clearcoat_roughness = 1.0
+anisotropy = 0.23
+ao_light_affect = 0.44
+ao_texture = SubResource("CompressedTexture2D_0ojx2")
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_axlsg")
+subsurf_scatter_strength = 0.5
+backlight = Color(0.714171, 0.714171, 0.714171, 1)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 150.0
+uv2_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdk3a"]
+albedo_color = Color(0.384809, 0, 0.865628, 1)
+albedo_texture = ExtResource("5_266e6")
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.6
+normal_enabled = true
+normal_scale = 2.0
+rim_tint = 0.86
+clearcoat = 0.01
+clearcoat_roughness = 0.19
+anisotropy = -0.43
+heightmap_scale = 3.342
+subsurf_scatter_strength = 1.0
+backlight = Color(0.862745, 0.0784314, 0.235294, 1)
+refraction_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+grow_amount = 14.71
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lk4t6"]
+albedo_color = Color(1, 0.433977, 0.889347, 1)
+albedo_texture = ExtResource("5_266e6")
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.6
+normal_enabled = true
+normal_scale = 2.0
+rim_tint = 0.86
+clearcoat = 0.01
+clearcoat_roughness = 0.19
+anisotropy = -0.43
+heightmap_scale = 3.342
+subsurf_scatter_strength = 1.0
+backlight = Color(0.862745, 0.0784314, 0.235294, 1)
+refraction_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+grow_amount = 14.71
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vqrs"]
+albedo_color = Color(1, 0.433977, 0.694322, 1)
+albedo_texture = ExtResource("5_266e6")
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.6
+normal_enabled = true
+normal_scale = 2.0
+rim_tint = 0.86
+clearcoat = 0.01
+clearcoat_roughness = 0.19
+anisotropy = -0.43
+heightmap_scale = 3.342
+subsurf_scatter_strength = 1.0
+backlight = Color(0.862745, 0.0784314, 0.235294, 1)
+refraction_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+grow_amount = 14.71
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_es8j2"]
+albedo_color = Color(0.566023, 1, 0.814618, 1)
+albedo_texture = ExtResource("5_266e6")
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.6
+normal_enabled = true
+normal_scale = 2.0
+rim_tint = 0.86
+clearcoat = 0.01
+clearcoat_roughness = 0.19
+anisotropy = -0.43
+heightmap_scale = 3.342
+subsurf_scatter_strength = 1.0
+backlight = Color(0.862745, 0.0784314, 0.235294, 1)
+refraction_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+grow_amount = 14.71
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0y4rq"]
+albedo_color = Color(0.376207, 0.858326, 1, 1)
+albedo_texture = ExtResource("5_266e6")
+metallic = 0.1
+metallic_specular = 0.0
+roughness = 0.6
+normal_enabled = true
+normal_scale = 2.0
+rim_tint = 0.86
+clearcoat = 0.01
+clearcoat_roughness = 0.19
+anisotropy = -0.43
+heightmap_scale = 3.342
+subsurf_scatter_strength = 1.0
+backlight = Color(0.862745, 0.0784314, 0.235294, 1)
+refraction_scale = 1.0
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+grow_amount = 14.71
+
+[sub_resource type="Resource" id="Resource_vp0qd"]
+script = ExtResource("3_2goa0")
+floor = Array[Material]([SubResource("StandardMaterial3D_rucwu")])
+wall = Array[Material]([SubResource("StandardMaterial3D_rdk3a"), SubResource("StandardMaterial3D_lk4t6"), SubResource("StandardMaterial3D_5vqrs"), SubResource("StandardMaterial3D_es8j2"), SubResource("StandardMaterial3D_0y4rq")])
+special_1 = Array[Material]([])
+special_2 = Array[Material]([])
+special_3 = Array[Material]([])
+special_4 = Array[Material]([])
+metadata/_custom_type_script = "uid://cgcjch1jmf8h7"
+
+[resource]
+script = ExtResource("1_idgru")
+chapter_name = "The Palace"
+description = "One of Many"
+id = 1
+environment = ExtResource("2_vp0qd")
+materials = SubResource("Resource_vp0qd")
+y_boundary = -12.0
+rooms = Array[PackedScene]([])
+ambience_streams = Array[AudioStream]([ExtResource("1_bd46r")])
+ambience_position = Vector3(100, 10, 100)
+metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

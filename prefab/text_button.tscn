@@ -1,0 +1,56 @@
+[gd_scene load_steps=14 format=3 uid="uid://bigdrrkje4e26"]
+
+[ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="1_xsgp7"]
+[ext_resource type="Script" uid="uid://jxih8ex04sdn" path="res://src/menus/text_button.gd" id="2_gqvp5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_41682"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc13n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4y1m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5xwy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqb1j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0p4k1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvp5y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2bv1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msbvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35pgr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dyegn"]
+
+[node name="Button" type="Button"]
+material = ExtResource("1_xsgp7")
+offset_right = 388.0
+offset_bottom = 13.0
+theme_override_colors/font_disabled_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_colors/font_hover_color = Color(1, 0.807292, 0.229167, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.916667, 0.530246, 0.0334201, 1)
+theme_override_font_sizes/font_size = 8
+theme_override_styles/focus = SubResource("StyleBoxEmpty_41682")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bc13n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_i4y1m")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_o5xwy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dqb1j")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0p4k1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bvp5y")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_f2bv1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_msbvj")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_35pgr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dyegn")
+text = "Button"
+alignment = 0
+script = ExtResource("2_gqvp5")
+hover_color = Color(1, 0.858824, 0.321569, 1)
+disabled_color = Color(0.266667, 0.266667, 0.266667, 1)
+shadow_hover_color = Color(0.194834, 0.112708, 0.0144433, 1)
+
+[connection signal="mouse_entered" from="." to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="mouse_exited"]

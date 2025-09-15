@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6idjun8710km"]
+
+[ext_resource type="Shader" uid="uid://cuk4ol211igqd" path="res://src/shader/spectrum_analyzer.gdshader" id="1_wjmtu"]
+
+[sub_resource type="GDScript" id="GDScript_qp7v7"]
+script/source = "extends Node2D
+
+
+@export var vu_count : int = 30
+@export var freq_max : float = 11050.0
+@export var min_db : int= 60
+@export var animation_speed : float = 0.1
+@export var height_scale : float = 8.0
+
+@onready var color_rect : ColorRect= $Spectrum
+
+var spectrum
+var min_values = []
+var max_values = []
+
+func _ready():
+	spectrum = AudioServer.get_bus_effect_instance(0, 1)
+	min_values.resize(vu_count)
+	min_values.fill(0.0)
+	max_values.resize(vu_count)
+	max_values.fill(0.0)
+
+func _process(delta : float) -> void:
+	var prev_hz = 0
+	var data = []
+	for i in range(1, vu_count + 1):
+		var hz = i * freq_max / vu_count
+		var f = spectrum.get_magnitude_for_frequency_range(prev_hz, hz)
+		var energy = clamp((min_db + linear_to_db(f.length())) / min_db, 0.0, 1.0)
+		data.append(energy * height_scale)
+		prev_hz = hz
+	for i in range(vu_count):
+		if data[i] > max_values[i]:
+			max_values[i] = data[i]
+		else:
+			max_values[i] = lerp(max_values[i], data[i], animation_speed)
+		if data[i] <= 0.0:
+			min_values[i] = lerp(min_values[i], 0.0, animation_speed)
+	var fft = []
+	for i in range(vu_count):
+		fft.append(lerp(min_values[i], max_values[i], animation_speed))
+	color_rect.get_material().set_shader_parameter(\"freq_data\", fft)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfw26"]
+shader = ExtResource("1_wjmtu")
+shader_parameter/freq_data = PackedFloat32Array(1, 0.1, 0.2, 4, 0.2, 6, 0.2, 8, 1, 0.2, 0, 0.2, 0, 0, 0.2, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="SoundVizualize" type="Node2D"]
+script = SubResource("GDScript_qp7v7")
+animation_speed = 0.5
+
+[node name="Spectrum" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mfw26")
+offset_right = 432.0
+offset_bottom = 243.0

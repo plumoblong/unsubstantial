@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://578i6furtqnt"]
+
+[ext_resource type="Texture2D" uid="uid://b5u12fvwioy5r" path="res://images/item/passive/diplopia.png" id="1_g6ms0"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_n6dk3"]
+
+[sub_resource type="GDScript" id="GDScript_xh2p5"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.shots += 1
+	_G.player.stats.bullet.spread_angle += 13.5
+	_G.player.stats.bullet.homing += 0.5
+	_G.player.stats.bullet_damage_mult *= 0.75
+"
+
+[resource]
+script = ExtResource("1_n6dk3")
+item_name = "Double Trouble"
+item_script = SubResource("GDScript_xh2p5")
+type = 2
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_g6ms0")
+item_description = "Fire 1 additional bullet
+Reduces Bullet Damage"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

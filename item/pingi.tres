@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://d1hvq475iw5s"]
+
+[ext_resource type="Texture2D" uid="uid://bhatfo0nsgido" path="res://images/item/passive/item_p21.png" id="1_0dciu"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_0gjqp"]
+
+[sub_resource type="GDScript" id="GDScript_c172x"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.homing += 0.2
+	_G.player.stats.bullet.fire_rate -= 0.07
+"
+
+[resource]
+script = ExtResource("2_0gjqp")
+item_name = "Stupid Bird"
+item_script = SubResource("GDScript_c172x")
+type = 1
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_0dciu")
+item_description = "Increases Accuracy and Attack Speed"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

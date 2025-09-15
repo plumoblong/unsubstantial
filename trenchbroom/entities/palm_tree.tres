@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://ikigflbn67te"]
+
+[ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="1_plrnr"]
+[ext_resource type="Script" uid="uid://rwwodvddu15o" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_r408e"]
+
+[resource]
+script = ExtResource("2_r408e")
+scene_file = ExtResource("1_plrnr")
+apply_rotation_on_map_build = true
+apply_scale_on_map_build = true
+classname = "palm_tree"
+description = "Palm Tree
+
+produces dim light"
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(0.768627, 0.768627, 1, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""
+metadata/_custom_type_script = "uid://rwwodvddu15o"

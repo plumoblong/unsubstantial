@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc7dcywxs75yw"]
+
+[ext_resource type="Texture2D" uid="uid://jyt45exm25qe" path="res://images/ui/grabber.png" id="1_e2vqh"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qrbn6"]
+thickness = 3
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yot74"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[node name="Slider" type="HSlider"]
+offset_left = 189.0
+offset_top = 108.0
+offset_right = 238.0
+offset_bottom = 124.0
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = -1
+theme_override_icons/grabber = ExtResource("1_e2vqh")
+theme_override_icons/grabber_highlight = ExtResource("1_e2vqh")
+theme_override_icons/grabber_disabled = ExtResource("1_e2vqh")
+theme_override_styles/slider = SubResource("StyleBoxLine_qrbn6")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_yot74")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_yot74")
+min_value = 75.0
+max_value = 130.0
+step = 5.0
+value = 90.0

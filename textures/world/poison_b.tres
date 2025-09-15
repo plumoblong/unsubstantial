@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://jljf4yjkymwo"]
+
+[ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_y6ud6"]
+[ext_resource type="Texture2D" uid="uid://c3n8fl2ts8ebe" path="res://textures/world/ethereal.png" id="2_sndu1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_y6ud6")
+shader_parameter/scroll_speed = Vector2(0, 1.5)
+shader_parameter/color = Color(0.44185, 0.44185, 0.44185, 1)
+shader_parameter/tex_scale = 0.5
+shader_parameter/albedo_tex = ExtResource("2_sndu1")
+shader_parameter/use_depth = false
+shader_parameter/emission_energy = 0.0
+shader_parameter/emission_color = Color(0, 0, 0, 1)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ymujxmrj2l1c"]
+
+[ext_resource type="Material" uid="uid://hn1cpq4c1txh" path="res://material/crate.tres" id="1_38v4r"]
+
+[node name="Crate" type="CSGBox3D"]
+use_collision = true
+collision_layer = 255
+collision_mask = 255
+size = Vector3(3, 3, 3)
+material = ExtResource("1_38v4r")

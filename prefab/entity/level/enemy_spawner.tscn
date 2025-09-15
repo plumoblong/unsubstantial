@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv7q6vgmketme"]
+
+[ext_resource type="Script" uid="uid://cjpkuqotw15ut" path="res://src/entity/enemy_spawner.gd" id="1_nmctl"]
+[ext_resource type="Texture2D" uid="uid://bfddls72uai65" path="res://images/entity/spawner.png" id="2_8ighv"]
+
+[node name="EnemySpawner" type="Node3D"]
+script = ExtResource("1_nmctl")
+func_godot_properties = {
+&"counted_enemy": 1,
+&"distance_to_spawn": 30.0,
+&"enemy": "enemy",
+&"one_shot": 1,
+&"spawn_delay": 0.0
+}
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+ignore_occlusion_culling = true
+pixel_size = 0.03
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture_filter = 0
+render_priority = 10
+texture = ExtResource("2_8ighv")

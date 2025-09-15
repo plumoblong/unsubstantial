@@ -1,0 +1,260 @@
+[gd_scene load_steps=21 format=3 uid="uid://b6dn73q0mhnx1"]
+
+[ext_resource type="Script" path="res://src/menu.gd" id="1_tbsmk"]
+[ext_resource type="Shader" path="res://shader/displacement.gdshader" id="2_uvkwc"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_hubvr"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_rjbvi"]
+[ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/essence2.png" id="3_wxxs1"]
+[ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/poison.png" id="4_3cjdq"]
+[ext_resource type="Shader" path="res://shader/shadow.gdshader" id="6_6mw4w"]
+[ext_resource type="Texture2D" uid="uid://lqsndjx87otm" path="res://images/logo.png" id="6_lsv3e"]
+[ext_resource type="AudioStream" uid="uid://7tc2qenx4yep" path="res://sfx/ui/ui_select.wav" id="7_xqnb3"]
+[ext_resource type="Texture2D" uid="uid://dtfmdb5og34cn" path="res://images/ui/promo_sheet.png" id="9_xdexj"]
+[ext_resource type="PackedScene" uid="uid://sppppyvtblst" path="res://prefab/menus/options.tscn" id="10_wes68"]
+[ext_resource type="AudioStream" uid="uid://samctduexn6j" path="res://music/beta.ogg" id="12_jwfp7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0oocb"]
+noise_type = 0
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_817nh"]
+resource_local_to_scene = true
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_0oocb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifaih"]
+render_priority = 0
+shader = ExtResource("2_uvkwc")
+shader_parameter/height_scale = 4.0
+shader_parameter/scroll_speed = 1.0
+shader_parameter/texture_scale = 48.0
+shader_parameter/emission_energy = 0.15
+shader_parameter/emission = Color(0.109863, 0.139114, 0.421875, 1)
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/displacement = SubResource("NoiseTexture2D_817nh")
+shader_parameter/albedo_texture = ExtResource("3_wxxs1")
+shader_parameter/emission_texture = ExtResource("4_3cjdq")
+
+[sub_resource type="BoxMesh" id="BoxMesh_v7orp"]
+size = Vector3(500, 0, 500)
+subdivide_width = 32
+subdivide_height = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61lpo"]
+shader = ExtResource("6_6mw4w")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0.677083, 0.402018, 0, 1)
+shader_parameter/self_modulate = Color(1, 0.90625, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5kv0"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4gbj"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_601k6"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(32, 0, 16, 16)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_tbsmk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 432.0
+offset_bottom = 244.0
+color = Color(0.133464, 0, 0.213542, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Poison" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.397, 0)
+top_level = true
+material_override = SubResource("ShaderMaterial_ifaih")
+mesh = SubResource("BoxMesh_v7orp")
+skeleton = NodePath("../..")
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Main"]
+use_parent_material = true
+position = Vector2(140, 36)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_lsv3e")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Main/Sprite2D"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(2.66667, 2.66667)
+texture = ExtResource("6_lsv3e")
+
+[node name="Label" type="Label" parent="Main"]
+material = SubResource("ShaderMaterial_61lpo")
+offset_left = 123.0
+offset_top = 46.0
+offset_right = 354.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("3_rjbvi")
+theme_override_font_sizes/font_size = 8
+text = "BETA"
+vertical_alignment = 1
+
+[node name="Start" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 64.0
+offset_right = 74.0
+offset_bottom = 77.0
+text = "NEW GaME"
+
+[node name="Shadow" parent="Main/Start" index="0"]
+text = "NEW RUN"
+
+[node name="Continue" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 75.0
+offset_right = 80.0
+offset_bottom = 88.0
+disabled = true
+text = "CONTINUE"
+
+[node name="Shadow" parent="Main/Continue" index="0"]
+text = "CONTINUE"
+
+[node name="Achievements" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 86.0
+offset_right = 96.0
+offset_bottom = 99.0
+disabled = true
+text = "ACHIEVEMENTS"
+
+[node name="Shadow" parent="Main/Achievements" index="0"]
+text = "ACHIEVEMENTS"
+
+[node name="Addons" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 97.0
+offset_right = 96.0
+offset_bottom = 110.0
+disabled = true
+text = "ADDONS"
+
+[node name="Shadow" parent="Main/Addons" index="0"]
+text = "ADDONS"
+
+[node name="Options" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 108.0
+offset_right = 80.0
+offset_bottom = 121.0
+text = "OPTIONS"
+
+[node name="Shadow" parent="Main/Options" index="0"]
+text = "OPTIONS"
+
+[node name="Exit" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 48.0
+offset_top = 119.0
+offset_right = 103.0
+offset_bottom = 132.0
+theme_override_colors/font_color = Color(1, 0.395833, 0.395833, 1)
+text = "EXIT"
+
+[node name="Shadow" parent="Main/Exit" index="0"]
+text = "EXIT"
+
+[node name="TextureButton" type="TextureButton" parent="Main"]
+offset_left = 384.0
+offset_top = 228.0
+offset_right = 400.0
+offset_bottom = 244.0
+texture_normal = SubResource("AtlasTexture_a5kv0")
+
+[node name="Youtube" type="TextureButton" parent="Main"]
+offset_left = 400.0
+offset_top = 228.0
+offset_right = 416.0
+offset_bottom = 244.0
+texture_normal = SubResource("AtlasTexture_y4gbj")
+
+[node name="Twitter" type="TextureButton" parent="Main"]
+offset_left = 416.0
+offset_top = 228.0
+offset_right = 432.0
+offset_bottom = 244.0
+texture_normal = SubResource("AtlasTexture_601k6")
+
+[node name="Version" type="Label" parent="Main"]
+offset_left = 1.0
+offset_top = 230.0
+offset_right = 232.0
+offset_bottom = 246.0
+theme_override_font_sizes/font_size = 8
+text = "BETA
+"
+vertical_alignment = 1
+
+[node name="Shadow" type="Label" parent="Main/Version"]
+modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 233.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 8
+text = "BETA
+"
+vertical_alignment = 1
+
+[node name="Options" parent="." instance=ExtResource("10_wes68")]
+visible = false
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="Button" parent="Debug" instance=ExtResource("3_hubvr")]
+offset_left = 388.0
+offset_top = 4.0
+offset_right = 426.0
+offset_bottom = 17.0
+text = "OPEN LEVEL"
+
+[node name="Shadow" parent="Debug/Button" index="0"]
+text = "OPEN LEVEL"
+
+[node name="UiSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xqnb3")
+bus = &"SFX2"
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_jwfp7")
+autoplay = true
+bus = &"Music"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("")
+use_native_dialog = true
+
+[connection signal="pressed" from="Main/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Main/Continue" to="." method="continue_pressed"]
+[connection signal="pressed" from="Main/Options" to="." method="options_pressed"]
+[connection signal="pressed" from="Main/Exit" to="." method="exit_pressed"]
+[connection signal="pressed" from="Main/TextureButton" to="." method="texture_button_pressed"]
+[connection signal="pressed" from="Main/Youtube" to="." method="youtube_pressed"]
+[connection signal="pressed" from="Main/Twitter" to="." method="twitter_pressed"]
+[connection signal="pressed" from="Debug/Button" to="." method="button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="file_dialog_file_selected"]
+
+[editable path="Main/Start"]
+[editable path="Main/Continue"]
+[editable path="Main/Achievements"]
+[editable path="Main/Addons"]
+[editable path="Main/Options"]
+[editable path="Main/Exit"]
+[editable path="Debug/Button"]

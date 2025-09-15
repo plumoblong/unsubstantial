@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx04ttns3ffw2"]
+
+[ext_resource type="Script" uid="uid://djqlw2mo16sp3" path="res://src/menus/item_choose.gd" id="1_5tqvd"]
+[ext_resource type="Texture2D" uid="uid://bsv2q0s4can0w" path="res://images/glow_square.png" id="2_5it62"]
+[ext_resource type="PackedScene" uid="uid://pxhkajoha3yf" path="res://prefab/menus/item_button.tscn" id="2_5je6w"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_1g6td"]
+[ext_resource type="PackedScene" uid="uid://d075i6nv4akax" path="res://prefab/menus/shattered_crystal.tscn" id="4_j2ksg"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="4_ucjgr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_plk0w"]
+blend_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kpxch"]
+shader = ExtResource("4_ucjgr")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="ItemChoose" type="Node2D"]
+script = ExtResource("1_5tqvd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 432.0
+offset_bottom = 243.0
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+
+[node name="Label2" type="Sprite2D" parent="."]
+modulate = Color(0.236334, 0.236334, 0.236334, 1)
+material = SubResource("CanvasItemMaterial_plk0w")
+position = Vector2(212, 22)
+scale = Vector2(1.8125, 0.5625)
+texture = ExtResource("2_5it62")
+
+[node name="Label4" type="Sprite2D" parent="."]
+modulate = Color(0.236334, 0.236334, 0.236334, 1)
+material = SubResource("CanvasItemMaterial_plk0w")
+position = Vector2(216, 220)
+scale = Vector2(0.84375, 0.34375)
+texture = ExtResource("2_5it62")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_right = 428.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("3_1g6td")
+theme_override_font_sizes/font_size = 8
+text = "LEVEL UP!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_top = 24.0
+offset_right = 428.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 8
+text = "CHOOSE  WISELY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Essence" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_top = 216.0
+offset_right = 432.0
+offset_bottom = 226.0
+theme_override_fonts/font = ExtResource("3_1g6td")
+theme_override_font_sizes/font_size = 8
+text = "500"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Text" type="Label" parent="Essence"]
+material = SubResource("ShaderMaterial_kpxch")
+use_parent_material = true
+layout_mode = 0
+offset_top = 10.0
+offset_right = 432.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 8
+text = "ESSENCE"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 432.0
+offset_bottom = 44.0
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect2"]
+layout_mode = 0
+offset_top = 196.0
+offset_right = 432.0
+offset_bottom = 240.0
+
+[node name="ShatteredCrystal1" parent="." instance=ExtResource("4_j2ksg")]
+visible = false
+modulate = Color(0.669315, 0.669315, 0.669315, 1)
+
+[node name="ShatteredCrystal2" parent="." instance=ExtResource("4_j2ksg")]
+visible = false
+modulate = Color(0.669315, 0.669315, 0.669315, 1)
+position = Vector2(216, 120)
+time_offset = 1.0
+
+[node name="ShatteredCrystal3" parent="." instance=ExtResource("4_j2ksg")]
+visible = false
+modulate = Color(0.669315, 0.669315, 0.669315, 1)
+position = Vector2(320, 120)
+time_offset = 2.0
+
+[node name="ItemButton" parent="." instance=ExtResource("2_5je6w")]
+position = Vector2(108, 114)
+
+[node name="ItemButton2" parent="." instance=ExtResource("2_5je6w")]
+position = Vector2(216, 114)
+time_offset = 1.5
+
+[node name="ItemButton3" parent="." instance=ExtResource("2_5je6w")]
+position = Vector2(328, 115)
+time_offset = 3.0
+
+[connection signal="pressed" from="ShatteredCrystal1" to="." method="shattered_crystal_1_pressed"]
+[connection signal="pressed" from="ShatteredCrystal2" to="." method="shattered_crystal_2_pressed"]
+[connection signal="pressed" from="ShatteredCrystal3" to="." method="shattered_crystal_3_pressed"]

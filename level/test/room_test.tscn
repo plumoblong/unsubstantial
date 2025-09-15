@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdy7aae2ymbcx"]
+
+[ext_resource type="PackedScene" uid="uid://gp6l62op1542" path="res://level/room_template.tscn" id="1_87cce"]
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_iubig"]
+
+[node name="RoomTest" type="Node3D"]
+script = ExtResource("1_iubig")
+
+[node name="RoomTemplate" parent="." instance=ExtResource("1_87cce")]
+
+[node name="RoomTemplate2" parent="." instance=ExtResource("1_87cce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+
+[node name="RoomTemplate3" parent="." instance=ExtResource("1_87cce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -30)
+
+[node name="RoomTemplate4" parent="." instance=ExtResource("1_87cce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, -60)
+
+[node name="RoomTemplate5" parent="." instance=ExtResource("1_87cce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, -60)
+
+[node name="RoomTemplate6" parent="." instance=ExtResource("1_87cce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 0, -60)

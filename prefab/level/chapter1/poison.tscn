@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjxjdq0k8hhxp"]
+
+[ext_resource type="Shader" uid="uid://3fwqewq713kv" path="res://src/shader/displacement.gdshader" id="1_y3xvw"]
+[ext_resource type="Texture2D" uid="uid://ckyirw0vnltwn" path="res://textures/world/poison_norm.png" id="2_k63kr"]
+[ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="3_e407g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g4eo5"]
+noise_type = 3
+seed = 1
+fractal_type = 0
+domain_warp_amplitude = 93.65
+domain_warp_fractal_type = 2
+domain_warp_fractal_octaves = 8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p1yhr"]
+resource_local_to_scene = true
+width = 1024
+height = 1024
+generate_mipmaps = false
+seamless = true
+bump_strength = 41.0
+noise = SubResource("FastNoiseLite_g4eo5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv7q6"]
+render_priority = 0
+shader = ExtResource("1_y3xvw")
+shader_parameter/height_scale = 8.0
+shader_parameter/displacement = SubResource("NoiseTexture2D_p1yhr")
+shader_parameter/albedo_texture = ExtResource("2_k63kr")
+shader_parameter/scroll_speed = 1.0
+shader_parameter/texture_scale = 128.0
+shader_parameter/noise_texture_scale = 50.0
+shader_parameter/emission_texture = ExtResource("3_e407g")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_88tkq"]
+size = Vector3(1024, 0, 1024)
+subdivide_width = 96
+subdivide_height = 96
+subdivide_depth = 73
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202942, 0.324158, -2.81705)
+material_override = SubResource("ShaderMaterial_sv7q6")
+ignore_occlusion_culling = true
+mesh = SubResource("BoxMesh_88tkq")

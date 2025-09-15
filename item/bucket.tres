@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dxrpei5yaq4jm"]
+
+[ext_resource type="Texture2D" uid="uid://buo2d01arwoqw" path="res://images/item/passive/item_p12.png" id="1_ypkcl"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_te3q6"]
+
+[sub_resource type="GDScript" id="GDScript_kb354"]
+script/source = "func pickup() -> void:
+	_G.player.stats.esc_max += 200
+	_G.player.essence_component.gain(300)
+
+	_G.player.stats.speed -= 1.0
+"
+
+[resource]
+script = ExtResource("2_te3q6")
+item_name = "Bucket of Slop"
+item_script = SubResource("GDScript_kb354")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_ypkcl")
+item_description = "Increases Max HP by 200
+Reduces Movement speed"

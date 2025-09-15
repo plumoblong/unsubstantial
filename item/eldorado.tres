@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bx0qq4hcjrjs"]
+
+[ext_resource type="Texture2D" uid="uid://chxqlrs8i2npu" path="res://images/item/passive/item_p4.png" id="1_mn4v2"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_0v7cr"]
+
+[sub_resource type="GDScript" id="GDScript_5yu1b"]
+script/source = "func pickup() -> void:
+	_G.player.stats.damage += 15
+"
+
+[resource]
+script = ExtResource("2_0v7cr")
+item_name = "Eldorado"
+item_script = SubResource("GDScript_5yu1b")
+type = 1
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_mn4v2")
+item_description = "Increases damage"

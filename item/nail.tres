@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://1da88ek114ti"]
+
+[ext_resource type="Texture2D" uid="uid://ct1pyn43vxt31" path="res://images/item/passive/item_p26.png" id="1_stckg"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_wjgu2"]
+
+[sub_resource type="GDScript" id="GDScript_6wwks"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.piercing = true
+"
+
+[resource]
+script = ExtResource("2_wjgu2")
+item_name = "The Nail"
+item_script = SubResource("GDScript_6wwks")
+type = 2
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_stckg")
+item_description = "Get Piercing Bullets"

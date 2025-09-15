@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxinpyif3wunr"]
+
+[ext_resource type="PackedScene" uid="uid://c0y77ah554381" path="res://prefab/menus/achievement_preview.tscn" id="1_l1ab4"]
+[ext_resource type="Resource" uid="uid://btdlru4dlwmue" path="res://res/achievement/start.tres" id="2_45g3j"]
+[ext_resource type="Resource" uid="uid://br443cubmsgqk" path="res://res/achievement/beat.tres" id="2_uiucm"]
+[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="4_cgddk"]
+
+[node name="Achievements" type="Node2D"]
+
+[node name="AchievementPreview" parent="." instance=ExtResource("1_l1ab4")]
+position = Vector2(216, 76)
+achievement = ExtResource("2_45g3j")
+
+[node name="AchievementPreview2" parent="." instance=ExtResource("1_l1ab4")]
+position = Vector2(216, 120)
+achievement = ExtResource("2_uiucm")
+check_id = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("4_cgddk")
+centered = false

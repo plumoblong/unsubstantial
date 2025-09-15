@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dx2ct6w3unmsx"]
+
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_raxjb"]
+[ext_resource type="Texture2D" uid="uid://3xqnt81myffg" path="res://images/item/passive/item_p30.png" id="1_vqucc"]
+
+[sub_resource type="GDScript" id="GDScript_mnlof"]
+script/source = "func pickup() -> void:
+	var a : int = randi_range(0, 2)
+	match a:
+		0: 
+			_G.player.stats.damage_mult *= 1.1
+		1:
+			_G.player.stats.speed *= 1.1
+		2:
+			_G.player.stats.esc_max *= 1.1
+"
+
+[resource]
+script = ExtResource("1_raxjb")
+item_name = "Fallback"
+item_script = SubResource("GDScript_mnlof")
+type = 4
+weight = 1.0
+remove_from_pool = true
+shop_cost = 250
+image = ExtResource("1_vqucc")
+item_description = "Randomly increases Damage, Speed or Max HP"

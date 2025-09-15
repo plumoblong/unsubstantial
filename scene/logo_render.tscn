@@ -1,0 +1,122 @@
+[gd_scene load_steps=9 format=3 uid="uid://cx7ompbg8s0nt"]
+
+[ext_resource type="FontFile" uid="uid://cpugiyv8k88xa" path="res://font/TerminusTTF-Bold-4.49.3.ttf" id="1_68id2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rjij"]
+metallic = 0.88
+metallic_specular = 0.84
+roughness = 0.26
+
+[sub_resource type="TextMesh" id="TextMesh_r2mq8"]
+text = "unsubstantial"
+font = ExtResource("1_68id2")
+font_size = 24
+
+[sub_resource type="Gradient" id="Gradient_31rkl"]
+interpolation_color_space = 2
+colors = PackedColorArray(0.0486331, 0, 0.108863, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xkojt"]
+gradient = SubResource("Gradient_31rkl")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e32bo"]
+sky_top_color = Color(0.057512, 0.436639, 0.195319, 1)
+sky_horizon_color = Color(0.0835634, 0.054902, 0.196078, 1)
+sky_curve = 0.409813
+ground_bottom_color = Color(0.427588, 0, 0.293102, 1)
+ground_horizon_color = Color(0.0546333, 0.108365, 0.197917, 1)
+ground_curve = 0.502135
+
+[sub_resource type="Sky" id="Sky_t78c5"]
+sky_material = SubResource("ProceduralSkyMaterial_e32bo")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_7qiyo"]
+background_mode = 1
+background_color = Color(0, 1, 0, 1)
+sky = SubResource("Sky_t78c5")
+ambient_light_source = 3
+ambient_light_color = Color(0.139664, 0.080843, 0.219402, 1)
+ambient_light_sky_contribution = 0.13
+ambient_light_energy = 0.9
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_white = 5.0
+ssao_radius = 8.79
+ssao_intensity = 8.77
+ssao_power = 1.91184
+ssao_detail = 2.53
+ssao_horizon = 0.21
+ssao_sharpness = 0.52
+ssao_light_affect = 1.0
+ssil_normal_rejection = 0.5
+glow_enabled = true
+glow_levels/1 = 2.0
+glow_levels/2 = 1.0
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_intensity = 0.5
+glow_strength = 0.5
+glow_mix = 0.27
+glow_bloom = 0.3
+glow_blend_mode = 0
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+fog_mode = 1
+fog_light_color = Color(0.565693, 0.294252, 0.556126, 1)
+fog_sun_scatter = 0.31
+fog_density = 0.2485
+fog_sky_affect = 0.35
+fog_depth_curve = 0.406125
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.826072, 0.556095, 0.701519, 1)
+volumetric_fog_emission = Color(0.0437857, 0, 0.14699, 1)
+volumetric_fog_emission_energy = 1.5
+volumetric_fog_anisotropy = 0.5
+volumetric_fog_ambient_inject = 1.2
+volumetric_fog_sky_affect = 0.5
+volumetric_fog_temporal_reprojection_amount = 0.618
+adjustment_enabled = true
+adjustment_contrast = 1.6
+adjustment_saturation = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_xkojt")
+
+[node name="Control" type="Camera3D"]
+projection = 2
+fov = 70.3
+size = 0.075
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.890856, 0.454286, 0, -0.454286, 0.890856, 0, 0, -0.729)
+material_override = SubResource("StandardMaterial3D_8rjij")
+mesh = SubResource("TextMesh_r2mq8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7qiyo")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.368, -4.467, -1.423)
+light_color = Color(0.644101, 0.568891, 0, 1)
+light_negative = true
+light_specular = 7.62
+shadow_enabled = true
+omni_range = 30.289
+omni_attenuation = -0.3
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.892, 0.154, 0.438)
+light_color = Color(0.880054, 0.598575, 3.85046e-07, 1)
+light_energy = 0.6
+light_indirect_energy = 3.64
+light_volumetric_fog_energy = 1.32
+light_specular = 8.18
+shadow_enabled = true
+omni_range = 1.76
+omni_attenuation = 0.126
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2441, -5.96046e-08, 0.27461)
+light_color = Color(0.570781, 0.000760466, 0.670314, 1)
+light_energy = 2.04
+light_specular = 5.22
+shadow_enabled = true

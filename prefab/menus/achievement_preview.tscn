@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0y77ah554381"]
+
+[ext_resource type="Script" uid="uid://ceo86gxlhsuei" path="res://prefab/menus/achievement_preview.gd" id="1_xyejt"]
+[ext_resource type="Texture2D" uid="uid://csdfb33ffkc7j" path="res://images/achievement/locked.png" id="2_tn71x"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="3_owow6"]
+[ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="4_fd4lo"]
+
+[node name="AchievementPreview" type="Node2D"]
+script = ExtResource("1_xyejt")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-74, -10)
+texture = ExtResource("2_tn71x")
+centered = false
+
+[node name="Name" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -10.0
+offset_right = 70.0
+theme_override_fonts/font = ExtResource("3_owow6")
+theme_override_font_sizes/font_size = 8
+text = "It's Time..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="."]
+offset_left = -46.0
+offset_right = 70.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("4_fd4lo")
+theme_override_font_sizes/font_size = 8
+text = "Beat the game for the first time"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

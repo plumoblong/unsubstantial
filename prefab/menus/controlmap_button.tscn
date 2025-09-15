@@ -1,0 +1,51 @@
+[gd_scene load_steps=15 format=3 uid="uid://b3ktawt4p5vo7"]
+
+[ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="1_hjsqu"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="1_knuas"]
+[ext_resource type="Script" uid="uid://cf7vmyes4d5yg" path="res://src/menus/controlmap_button.gd" id="2_rtvu2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_41682"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bc13n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4y1m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5xwy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqb1j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0p4k1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvp5y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f2bv1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msbvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35pgr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dyegn"]
+
+[node name="ControlMapButton" type="Button"]
+material = ExtResource("1_hjsqu")
+offset_right = 479.0
+offset_bottom = 13.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 0.807292, 0.229167, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.916667, 0.530246, 0.0334201, 1)
+theme_override_fonts/font = ExtResource("1_knuas")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/focus = SubResource("StyleBoxEmpty_41682")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bc13n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_i4y1m")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_o5xwy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dqb1j")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_0p4k1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bvp5y")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_f2bv1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_msbvj")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_35pgr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dyegn")
+text = "Walk Forward = [ W ]"
+script = ExtResource("2_rtvu2")

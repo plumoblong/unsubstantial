@@ -1,0 +1,123 @@
+[gd_scene load_steps=18 format=3 uid="uid://d075i6nv4akax"]
+
+[ext_resource type="Script" uid="uid://dah37445actju" path="res://src/menus/shattered_crystal.gd" id="1_1w8ya"]
+[ext_resource type="Texture2D" uid="uid://dt4hnmpbmaqlw" path="res://images/ui/diamond_select2.png" id="2_os7bv"]
+[ext_resource type="Texture2D" uid="uid://cch7emkq55n6k" path="res://images/glow.png" id="3_sskxf"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="4_32660"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5q1cf"]
+blend_mode = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oud5h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63jhs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g8kw0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f4a0b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0iiyb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fln87"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pct2b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67bnw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gpapq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4axj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ti3di"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gb5w6"]
+blend_mode = 1
+
+[node name="ShatteredCrystal1" type="Node2D"]
+modulate = Color(0.662745, 0.662745, 0.662745, 1)
+material = SubResource("CanvasItemMaterial_5q1cf")
+position = Vector2(108, 120)
+script = ExtResource("1_1w8ya")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -144.0
+offset_top = -160.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_os7bv")
+hframes = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+use_parent_material = true
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_os7bv")
+hframes = 2
+frame = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = -36.0
+offset_top = -52.0
+offset_right = 60.0
+offset_bottom = 92.0
+scale = Vector2(0.75, 0.75)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oud5h")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_63jhs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g8kw0")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_f4a0b")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0iiyb")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fln87")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pct2b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_67bnw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gpapq")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_a4axj")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ti3di")
+
+[node name="Text" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Text"]
+material = SubResource("CanvasItemMaterial_gb5w6")
+texture = ExtResource("3_sskxf")
+
+[node name="Essence" type="Label" parent="Text"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -48.0
+offset_top = -3.99998
+offset_right = 48.0
+offset_bottom = 4.00002
+theme_override_fonts/font = ExtResource("4_32660")
+theme_override_font_sizes/font_size = 8
+text = "500"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Text"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -48.0
+offset_top = -12.0
+offset_right = 48.0
+offset_bottom = -4.00002
+theme_override_font_sizes/font_size = 8
+text = "GET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Text"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -48.0
+offset_top = 5.33331
+offset_right = 48.0
+offset_bottom = 13.3333
+theme_override_font_sizes/font_size = 8
+text = "ESSENCE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Button" to="." method="button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="button_pressed"]

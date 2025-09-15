@@ -1,0 +1,382 @@
+[gd_scene load_steps=13 format=3 uid="uid://sppppyvtblst"]
+
+[ext_resource type="Script" uid="uid://df8cr5e3icx5v" path="res://src/menus/options.gd" id="1_ttx3v"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_gr5eh"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="3_lijvd"]
+[ext_resource type="PackedScene" uid="uid://dqrpg8nr6annb" path="res://prefab/menus/bool_button.tscn" id="5_eyrc5"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="5_v4hhl"]
+[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="6_kmcfh"]
+[ext_resource type="PackedScene" uid="uid://bc7dcywxs75yw" path="res://prefab/menus/slider.tscn" id="6_nmvj6"]
+[ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="7_eyqsm"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="9_ohru1"]
+[ext_resource type="PackedScene" uid="uid://co48ffgunv8s3" path="res://prefab/menus/control_map.tscn" id="10_2cury"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02tst"]
+shader = ExtResource("3_lijvd")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlcco"]
+shader = ExtResource("3_lijvd")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="Options" type="Node2D"]
+material = SubResource("ShaderMaterial_02tst")
+script = ExtResource("1_ttx3v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 480.0
+offset_bottom = 272.0
+color = Color(0.122005, 0.000197216, 0.237584, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 4)
+texture = ExtResource("6_kmcfh")
+centered = false
+
+[node name="Header" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_tlcco")
+clip_contents = false
+offset_top = 64.0
+offset_right = 480.0
+offset_bottom = 80.0
+theme_override_fonts/normal_font = ExtResource("3_gr5eh")
+theme_override_font_sizes/normal_font_size = 8
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+use_parent_material = true
+position = Vector2(0, 32)
+
+[node name="GeneralButton" parent="Node2D" instance=ExtResource("5_v4hhl")]
+use_parent_material = true
+offset_top = 64.0
+offset_right = 480.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "General"
+alignment = 1
+
+[node name="GRAPHICS" parent="Node2D" instance=ExtResource("5_v4hhl")]
+use_parent_material = true
+offset_top = 80.0
+offset_right = 480.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Graphics"
+alignment = 1
+
+[node name="Audio" parent="Node2D" instance=ExtResource("5_v4hhl")]
+use_parent_material = true
+offset_top = 96.0
+offset_right = 480.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Audio"
+alignment = 1
+
+[node name="Other" parent="Node2D" instance=ExtResource("5_v4hhl")]
+use_parent_material = true
+offset_top = 112.0
+offset_right = 480.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Controls"
+alignment = 1
+
+[node name="Screen1" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="ViewBob" parent="Screen1" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 192.0
+offset_top = 112.0
+offset_right = 288.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "View Bobbing"
+alignment = 1
+
+[node name="Fullscreen" parent="Screen1" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 288.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "Fullscreen"
+alignment = 1
+
+[node name="FOVText" type="Label" parent="Screen1"]
+material = ExtResource("7_eyqsm")
+offset_top = 136.0
+offset_right = 480.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "FIELD  OF VIEW:   90"
+horizontal_alignment = 1
+
+[node name="FOV" parent="Screen1" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 144.0
+offset_right = 284.0
+offset_bottom = 160.0
+step = 1.0
+
+[node name="Res" parent="Screen1" instance=ExtResource("5_v4hhl")]
+use_parent_material = true
+offset_top = 88.0
+offset_right = 480.0
+offset_bottom = 101.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Resolution"
+alignment = 1
+
+[node name="Screen4" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 32)
+
+[node name="LowMode" parent="Screen4" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 192.0
+offset_top = 88.0
+offset_right = 288.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Performance Mode"
+alignment = 1
+
+[node name="Vsync" parent="Screen4" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 139.0
+offset_top = 104.0
+offset_right = 235.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "Vertical Sync"
+alignment = 1
+
+[node name="UIDarkMode" parent="Screen4" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 139.0
+offset_top = 120.0
+offset_right = 235.0
+offset_bottom = 136.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "UI Dark Mode"
+alignment = 1
+
+[node name="MotionBlur" parent="Screen4" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 251.0
+offset_top = 120.0
+offset_right = 347.0
+offset_bottom = 136.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "Motion Blur"
+alignment = 1
+
+[node name="PostProcess" parent="Screen4" instance=ExtResource("5_eyrc5")]
+material = ExtResource("7_eyqsm")
+use_parent_material = false
+offset_left = 251.0
+offset_top = 104.0
+offset_right = 347.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+button_pressed = true
+text = "Post Process"
+alignment = 1
+
+[node name="ExposureText" type="Label" parent="Screen4"]
+material = ExtResource("7_eyqsm")
+offset_top = 56.0
+offset_right = 480.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "BRIGHTNESS: 50%"
+horizontal_alignment = 1
+
+[node name="Exposure" parent="Screen4" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 67.0
+offset_right = 284.0
+offset_bottom = 83.0
+min_value = 0.7
+max_value = 1.5
+step = 0.05
+value = 1.0
+
+[node name="Screen2" type="Node2D" parent="."]
+visible = false
+use_parent_material = true
+position = Vector2(0, 32)
+
+[node name="VolumeText" type="Label" parent="Screen2"]
+use_parent_material = true
+offset_top = 80.0
+offset_right = 480.0
+offset_bottom = 90.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "VOLUME:   100%"
+horizontal_alignment = 1
+
+[node name="Volume" parent="Screen2" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 88.0
+offset_right = 284.0
+offset_bottom = 104.0
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXText" type="Label" parent="Screen2"]
+use_parent_material = true
+offset_top = 108.0
+offset_right = 480.0
+offset_bottom = 118.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "SFX:   100%"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SFX" parent="Screen2" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 116.0
+offset_right = 284.0
+offset_bottom = 132.0
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicText" type="Label" parent="Screen2"]
+use_parent_material = true
+offset_top = 136.0
+offset_right = 480.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "MUSIC:   75%"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" parent="Screen2" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 144.0
+offset_right = 284.0
+offset_bottom = 160.0
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 0.75
+
+[node name="Screen3" parent="." instance=ExtResource("10_2cury")]
+visible = false
+
+[node name="SensText" type="Label" parent="Screen3"]
+material = ExtResource("7_eyqsm")
+offset_top = 188.0
+offset_right = 480.0
+offset_bottom = 198.0
+theme_override_fonts/font = ExtResource("9_ohru1")
+theme_override_font_sizes/font_size = 6
+text = "Mouse Sensitivity:   50%"
+horizontal_alignment = 1
+
+[node name="Sens" parent="Screen3" instance=ExtResource("6_nmvj6")]
+offset_left = 196.0
+offset_top = 196.0
+offset_right = 284.0
+offset_bottom = 212.0
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Deprecated1" type="Node2D" parent="."]
+visible = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Deprecated1"]
+material = ExtResource("7_eyqsm")
+offset_right = 480.0
+offset_bottom = 272.0
+theme_override_fonts/normal_font = ExtResource("9_ohru1")
+theme_override_fonts/bold_font = ExtResource("3_gr5eh")
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "[b][wave]CONTROLS[/wave][/b]
+
+Move - [ W, A, S, D ]
+
+Jump - [ SPACE ]
+
+Shoot - [ Mouse 1 ]
+
+Melee Dash - [ Mouse 2 ]
+
+Interact - [ E ]
+
+Show Chat Messages - [ Q ]
+
+Open Inventory - [ TAB ]
+
+Show FPS - [ F1 ]
+
+Screenshot - [ F4 ]
+
+
+Keybind configuration coming later.
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Node2D/GeneralButton" to="." method="general_button_pressed"]
+[connection signal="pressed" from="Node2D/GRAPHICS" to="." method="graphics_pressed"]
+[connection signal="pressed" from="Node2D/Audio" to="." method="audio_pressed"]
+[connection signal="pressed" from="Node2D/Other" to="." method="other_pressed"]
+[connection signal="pressed" from="Screen1/Fullscreen" to="." method="fullscreen_pressed"]
+[connection signal="gui_input" from="Screen1/Res" to="." method="res_gui_input"]
+[connection signal="toggled" from="Screen4/Vsync" to="." method="vsync_toggled"]
+
+[editable path="Node2D/GeneralButton"]
+[editable path="Node2D/GRAPHICS"]
+[editable path="Node2D/Audio"]
+[editable path="Node2D/Other"]
+[editable path="Screen1/Res"]

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://djhhounr3qago"]
+
+[ext_resource type="PackedScene" uid="uid://cv7q6vgmketme" path="res://prefab/entity/level/enemy_spawner.tscn" id="1_v1rw3"]
+[ext_resource type="Script" uid="uid://rwwodvddu15o" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_b5xmi"]
+
+[resource]
+script = ExtResource("2_b5xmi")
+scene_file = ExtResource("1_v1rw3")
+apply_rotation_on_map_build = true
+apply_scale_on_map_build = true
+classname = "ent_spawn"
+description = "Used for spawning enemies
+
+Aviable enemies: enemy, enemy_melee, enemy_eye"
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+&"counted_enemy": 1,
+&"distance_to_spawn": 25.0,
+&"enemy": "enemy",
+&"one_shot": 1,
+&"spawn_delay": 0.0
+}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(1, 0, 0, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""
+metadata/_custom_type_script = "uid://rwwodvddu15o"

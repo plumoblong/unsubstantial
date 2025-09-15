@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://djcrmgap53ew0"]
+
+[ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="1_0wpkx"]
+[ext_resource type="Script" uid="uid://rwwodvddu15o" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_hogyj"]
+
+[resource]
+script = ExtResource("2_hogyj")
+scene_file = ExtResource("1_0wpkx")
+apply_rotation_on_map_build = true
+apply_scale_on_map_build = true
+classname = "item_stall"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+"blind_chance": 15.0,
+"blind_type": 0,
+"item": "random"
+}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(1, 0, 1, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""
+metadata/_custom_type_script = "uid://rwwodvddu15o"

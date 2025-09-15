@@ -1,0 +1,153 @@
+[gd_scene load_steps=16 format=3 uid="uid://cjpmv3cakodso"]
+
+[ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="1_1hjcg"]
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_yrdo3"]
+[ext_resource type="Texture2D" uid="uid://c8wlyltv1118n" path="res://textures/world/yahermis.png" id="2_3kk46"]
+[ext_resource type="Texture2D" uid="uid://dp0dmo5a5nrtx" path="res://textures/world/emernem.jpg" id="4_t043d"]
+[ext_resource type="PackedScene" uid="uid://xgw0svibvib5" path="res://prefab/entity/boss/boss_father.tscn" id="6_x0ppa"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="7_hxti8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7ggm"]
+albedo_texture = ExtResource("2_3kk46")
+uv1_scale = Vector3(1.01, 1.01, 1.01)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fnca"]
+albedo_texture = ExtResource("4_t043d")
+uv1_scale = Vector3(1.01, 1.01, 1.01)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="Resource" id="Resource_x0ppa"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_hxti8"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_bc1g6"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_e7iml"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_rdp6r"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_avbnk"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[sub_resource type="Resource" id="Resource_c0dc6"]
+metadata/__load_path__ = "res://images/nikczem.png"
+
+[node name="BossTest" type="Node3D"]
+script = ExtResource("1_yrdo3")
+map_name = "bosstest"
+
+[node name="Arena" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17.189, 0)
+radius = 25.0
+height = 32.0
+sides = 16
+material = SubResource("StandardMaterial3D_s7ggm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -18.2, 44.4)
+size = Vector3(14, 30, 49)
+material = ExtResource("1_1hjcg")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -2)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -2)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 13)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -17)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -15)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 14)
+radius = 3.0
+height = 22.0
+material = SubResource("StandardMaterial3D_8fnca")
+
+[node name="Sprite3D" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 13, 14)
+billboard = 1
+texture = SubResource("Resource_x0ppa")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 13, -1)
+billboard = 1
+texture = SubResource("Resource_hxti8")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 13, -13)
+billboard = 1
+texture = SubResource("Resource_bc1g6")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, -20)
+billboard = 1
+texture = SubResource("Resource_e7iml")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 13, -17.1)
+billboard = 1
+texture = SubResource("Resource_rdp6r")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 13, -2)
+billboard = 1
+texture = SubResource("Resource_avbnk")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, 12)
+billboard = 1
+texture = SubResource("Resource_c0dc6")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 16, -64)
+light_energy = 4.0
+spot_range = 36.0
+spot_angle = 55.9098
+spot_angle_attenuation = 0.225313
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("6_x0ppa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -62)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_hxti8")

@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://do5bvms7jnr1h"]
+
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_fqxuw"]
+[ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_lmwok"]
+[ext_resource type="Material" uid="uid://hyqpmewdxg1p" path="res://material/reflective_1.tres" id="1_owcpi"]
+[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="2_cjgx3"]
+[ext_resource type="PackedScene" uid="uid://bk8hwt7lut1l3" path="res://prefab/entity/level/jump_pad.tscn" id="3_7fcwl"]
+[ext_resource type="AudioStream" uid="uid://m8bocn1yx6q0" path="res://music/ether.ogg" id="4_dsw36"]
+[ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="4_vdrxi"]
+[ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="5_gwswg"]
+[ext_resource type="PackedScene" uid="uid://cfmu0e1hdvitn" path="res://prefab/entity/level/gateway.tscn" id="7_ux0so"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hqy3w"]
+size = Vector2(250, 250)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mgqe"]
+render_priority = 0
+shader = ExtResource("1_lmwok")
+shader_parameter/scroll_speed = Vector2(1, 1)
+shader_parameter/color = Color(0.223958, 0.223958, 0.223958, 1)
+shader_parameter/tex_scale = 1.0
+shader_parameter/albedo_tex = ExtResource("2_cjgx3")
+shader_parameter/use_depth = false
+shader_parameter/emission_energy = 0.0
+shader_parameter/emission_color = Color(0, 0, 0, 1)
+
+[node name="Equit" type="Node3D"]
+script = ExtResource("1_fqxuw")
+map_name = "The Ether"
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+use_collision = true
+mesh = SubResource("PlaneMesh_hqy3w")
+material = ExtResource("1_owcpi")
+
+[node name="Solid" type="CSGCombiner3D" parent="."]
+material_override = SubResource("ShaderMaterial_7mgqe")
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+flip_faces = true
+radius = 22.0
+height = 30.0
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -32.5)
+flip_faces = true
+size = Vector3(10, 30, 30)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -42.5)
+operation = 2
+flip_faces = true
+size = Vector3(10, 15, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, -62.5)
+flip_faces = true
+size = Vector3(30, 25, 30)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, -2, 37.5)
+flip_faces = true
+size = Vector3(15, 15, 40)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 65)
+flip_faces = true
+radius = 20.0
+height = 30.0
+
+[node name="JumpPad" parent="." instance=ExtResource("3_7fcwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -31.5)
+speed = 22.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dsw36")
+autoplay = true
+bus = &"Music"
+
+[node name="ItemStall" parent="." instance=ExtResource("5_gwswg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.552, -62.5)
+
+[node name="Gateway" parent="." instance=ExtResource("7_ux0so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 65)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_vdrxi")

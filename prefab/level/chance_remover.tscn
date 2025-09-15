@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs30vnpv2ni3u"]
+
+[ext_resource type="Script" uid="uid://duiym4tnrwtc1" path="res://src/level/chance_remover.gd" id="1_esnod"]
+
+[node name="ChanceRemover" type="Node"]
+script = ExtResource("1_esnod")

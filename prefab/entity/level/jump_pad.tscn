@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=3 uid="uid://bk8hwt7lut1l3"]
+
+[ext_resource type="Script" uid="uid://bikoqjesotbdr" path="res://src/entity/jump_pad.gd" id="1_j5obp"]
+[ext_resource type="AudioStream" uid="uid://c2w8kq33cjc7f" path="res://sfx/crit_hit.wav" id="2_6cxlc"]
+[ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="2_8n0iy"]
+[ext_resource type="Texture2D" uid="uid://dtf80y5k4a324" path="res://textures/world/jump_pad.png" id="3_2wojm"]
+[ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="4_17oyl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_334q8"]
+render_priority = 0
+shader = ExtResource("2_8n0iy")
+shader_parameter/scroll_speed = Vector2(3, 3)
+shader_parameter/color = Color(1.00392, 1.00392, 1.00392, 1)
+shader_parameter/tex_scale = 1.0
+shader_parameter/albedo_tex = ExtResource("3_2wojm")
+shader_parameter/use_depth = true
+shader_parameter/emission_energy = 1.0
+shader_parameter/emission_color = Color(0.388235, 0.372549, 0.431373, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3u3rx"]
+material = SubResource("ShaderMaterial_334q8")
+radius = 2.5
+height = 0.8
+radial_segments = 10
+rings = 7
+is_hemisphere = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l1517"]
+height = 0.6
+radius = 2.6
+
+[sub_resource type="Curve" id="Curve_hoba1"]
+
+[sub_resource type="Curve" id="Curve_qlubs"]
+_data = [Vector2(0, 0.674208), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bs2s7"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0c5gi"]
+curve_x = SubResource("Curve_hoba1")
+curve_y = SubResource("Curve_qlubs")
+curve_z = SubResource("Curve_bs2s7")
+
+[sub_resource type="Curve" id="Curve_nxinx"]
+_data = [Vector2(0.686165, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fcfef"]
+curve = SubResource("Curve_nxinx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b1hgf"]
+emission_shape = 3
+emission_box_extents = Vector3(2, 0, 2)
+directional_velocity_min = 1.0
+directional_velocity_max = 14.09
+directional_velocity_curve = SubResource("CurveXYZTexture_0c5gi")
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_fcfef")
+
+[node name="JumpPad" type="Area3D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_j5obp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3u3rx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("CylinderShape3D_l1517")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 32
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_b1hgf")
+draw_pass_1 = ExtResource("4_17oyl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_volumetric_fog_energy = 2.0
+omni_range = 8.0
+omni_attenuation = 0.942809
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_6cxlc")
+volume_db = 3.0
+bus = &"SFX1"
+
+[connection signal="body_entered" from="." to="." method="body_entered"]

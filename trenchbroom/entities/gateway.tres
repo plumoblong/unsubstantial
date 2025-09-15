@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://ceyb1p7d7m7xm"]
+
+[ext_resource type="PackedScene" uid="uid://cfmu0e1hdvitn" path="res://prefab/entity/level/gateway.tscn" id="1_iprie"]
+[ext_resource type="Script" uid="uid://rwwodvddu15o" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_5oc3n"]
+
+[resource]
+script = ExtResource("2_5oc3n")
+scene_file = ExtResource("1_iprie")
+apply_rotation_on_map_build = true
+apply_scale_on_map_build = true
+classname = "level_end"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+&"animation": 1,
+&"finish": 0,
+&"loop": 0
+}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(1, 1, 1, 1),
+"size": AABB(-16, -16, -16, 16, 16, 16)
+}
+node_class = ""
+name_property = ""
+metadata/_custom_type_script = "uid://rwwodvddu15o"

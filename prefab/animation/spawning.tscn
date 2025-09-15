@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://y0oqhm1okpa2"]
+
+[ext_resource type="Texture2D" uid="uid://e8jsiuiprxdd" path="res://images/entity/spawning.png" id="2_c6qt6"]
+[ext_resource type="Script" uid="uid://c3a81ulkcprq0" path="res://src/animations/spawning.gd" id="2_n62t3"]
+[ext_resource type="AudioStream" uid="uid://duy8rv4nk8eae" path="res://sfx/enemy_spawn.wav" id="3_pc5ww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol05l"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk5d3"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpjnv"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wbnu"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjxls"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qks5d"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uymv1"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm2pp"]
+atlas = ExtResource("2_c6qt6")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x781n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol05l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk5d3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpjnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wbnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjxls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qks5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uymv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm2pp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Spawning" type="AnimatedSprite3D"]
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_x781n")
+frame = 7
+frame_progress = 1.0
+script = ExtResource("2_n62t3")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_pc5ww")
+volume_db = 10.0
+unit_size = 16.0
+pitch_scale = 0.5
+panning_strength = 3.0
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = -12.0
+doppler_tracking = 1
+
+[connection signal="animation_finished" from="." to="." method="animation_finished"]

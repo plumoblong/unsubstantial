@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://m5dmgkp1ikkw"]
+
+[ext_resource type="Script" uid="uid://baw4qijnudgp2" path="res://src/menus/credits.gd" id="1_bivbr"]
+[ext_resource type="Texture2D" uid="uid://b7weqvis861md" path="res://images/ui/background.png" id="2_w5eed"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_ige6w"]
+[ext_resource type="AudioStream" uid="uid://cwbrv1r1eybx8" path="res://music/end_demo.ogg" id="4_ooo2g"]
+[ext_resource type="Texture2D" uid="uid://lqsndjx87otm" path="res://images/logo.png" id="5_6h0io"]
+[ext_resource type="PackedScene" uid="uid://c6idjun8710km" path="res://prefab/menus/sound_vizualize.tscn" id="5_e5neg"]
+[ext_resource type="Texture2D" uid="uid://bsv2q0s4can0w" path="res://images/glow_square.png" id="6_f4r1r"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rgtpt"]
+blend_mode = 1
+
+[node name="Credits" type="Node2D"]
+script = ExtResource("1_bivbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w5eed")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_top = 68.0
+offset_right = 432.0
+offset_bottom = 152.0
+theme_override_fonts/normal_font = ExtResource("3_ige6w")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][wave amp=16][color=#ff0]THANKS FOR PLAYING![/color]
+
+... and thank you for downloading the game
+and giving it a try.
+
+If you want to support the game
+even more, concider donating on ko-fi.com!
+
+Found any bugs, want to give feedback?
+Join the[color=#8855ff] official Discord server![/color]
+
+[/wave]
+[color=#f00]PRESS SPACE TO CLOSE THE GAME"
+fit_content = true
+scroll_active = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ooo2g")
+volume_db = -5.584
+pitch_scale = 0.8
+autoplay = true
+bus = &"Music"
+
+[node name="SoundVizualize2" parent="." instance=ExtResource("5_e5neg")]
+visible = false
+position = Vector2(4, 4)
+vu_count = 64
+freq_max = 22100.0
+animation_speed = 0.01
+height_scale = 96.0
+
+[node name="SoundVizualize" parent="." instance=ExtResource("5_e5neg")]
+visible = false
+vu_count = 256
+freq_max = 22100.0
+animation_speed = 0.01
+height_scale = 96.0
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 10.0
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+modulate = Color(0.18359, 0.18359, 0.18359, 1)
+texture_filter = 2
+material = SubResource("CanvasItemMaterial_rgtpt")
+position = Vector2(216, 124)
+scale = Vector2(6.75, 0.75)
+texture = ExtResource("6_f4r1r")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+modulate = Color(0, 0, 0, 0.27451)
+position = Vector2(216, 124)
+texture = ExtResource("5_6h0io")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(216, 120)
+texture = ExtResource("5_6h0io")

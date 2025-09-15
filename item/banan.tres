@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://g7i86k2cksf4"]
+
+[ext_resource type="Texture2D" uid="uid://sa0v17sgbil8" path="res://images/item/passive/item_p10.png" id="1_745fq"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_o0uv0"]
+
+[sub_resource type="GDScript" id="GDScript_745fq"]
+script/source = "func pickup() -> void:
+	_G.player.stats.speed += 1.5
+	_G.player.stats.bullet.init_speed += 16.0
+"
+
+[resource]
+script = ExtResource("1_o0uv0")
+item_name = "Banan"
+item_script = SubResource("GDScript_745fq")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_745fq")
+item_description = "Increases Movement and Bullet Speed"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

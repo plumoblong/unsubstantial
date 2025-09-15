@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlgqehmfwh6eh"]
+
+[ext_resource type="Script" uid="uid://dc1fpdjf2m7wm" path="res://src/level/light.gd" id="1_xt47a"]
+[ext_resource type="Texture2D" uid="uid://if66kgnn6xnm" path="res://images/map/light.png" id="2_gosnb"]
+
+[node name="Light" type="OmniLight3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132767, -0.0269384, -0.0557618)
+light_energy = 0.75
+light_volumetric_fog_energy = 0.5
+distance_fade_begin = 80.0
+distance_fade_length = 20.0
+omni_range = 18.0
+omni_attenuation = 0.6
+script = ExtResource("1_xt47a")
+
+[node name="Light" type="Sprite3D" parent="."]
+layers = 33281
+pixel_size = 0.03
+billboard = 1
+double_sided = false
+texture_filter = 1
+texture = ExtResource("2_gosnb")

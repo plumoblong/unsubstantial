@@ -1,0 +1,227 @@
+[gd_scene load_steps=24 format=3 uid="uid://kvqt54u41kj6"]
+
+[ext_resource type="Script" uid="uid://mtpcrr75y3nl" path="res://src/menus/death_screen.gd" id="1_suiqt"]
+[ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="2_4q3rl"]
+[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="3_dky2g"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="4_u1iul"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="5_g7jl1"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="6_4q3rl"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="6_nhcqt"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="7_xh8cw"]
+[ext_resource type="Material" uid="uid://c4e8vymr51sw7" path="res://material/ether_overlay.tres" id="8_4q3rl"]
+[ext_resource type="Texture2D" uid="uid://5q40an056ilp" path="res://images/ui/gameover.png" id="9_1dylg"]
+[ext_resource type="AudioStream" uid="uid://dwd0xrf7ctua" path="res://music/game_over.ogg" id="9_4q3rl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_85pid"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_u1iul"]
+offsets = PackedFloat32Array(0, 0.506964, 0.927577)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xa2ym"]
+gradient = SubResource("Gradient_u1iul")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g7jl1"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(215, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 128.0
+initial_velocity_max = 256.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.653876, 0.653876, 0.653876, 1)
+color_ramp = SubResource("GradientTexture1D_xa2ym")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8awu0"]
+blend_mode = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wybt0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(107, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 96.0
+initial_velocity_max = 192.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.816804, 0.816804, 0.816804, 1)
+color_ramp = SubResource("GradientTexture1D_xa2ym")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ct4p2"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_k0qtg"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.151436, 0.853786, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.0550269, 0.0550269, 0.0550269, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7uvy"]
+gradient = SubResource("Gradient_k0qtg")
+width = 480
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmvwl"]
+shader = ExtResource("6_nhcqt")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0.699134, 0.699134, 0.699134, 1)
+shader_parameter/self_modulate = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85pid"]
+shader = ExtResource("6_nhcqt")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0.698039, 0.698039, 0.698039, 1)
+shader_parameter/self_modulate = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_evmie"]
+blend_mode = 2
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_suiqt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(0.472845, 0.472845, 0.472845, 1)
+material = SubResource("CanvasItemMaterial_85pid")
+position = Vector2(218, -10)
+amount = 64
+texture = ExtResource("2_4q3rl")
+lifetime = 2.0
+speed_scale = 0.25
+trail_enabled = true
+trail_sections = 5
+trail_section_subdivisions = 5
+process_material = SubResource("ParticleProcessMaterial_g7jl1")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+modulate = Color(0.708186, 0.708186, 0.708186, 1)
+material = SubResource("CanvasItemMaterial_8awu0")
+position = Vector2(218, -10)
+scale = Vector2(2, 2)
+amount = 32
+texture = ExtResource("2_4q3rl")
+lifetime = 2.0
+speed_scale = 0.25
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_wybt0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.454742, 0.454742, 0.454742, 1)
+material = SubResource("CanvasItemMaterial_ct4p2")
+scale = Vector2(1, 270)
+texture = SubResource("GradientTexture1D_h7uvy")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Stats" type="RichTextLabel" parent="."]
+material = SubResource("ShaderMaterial_cmvwl")
+offset_top = 123.0
+offset_right = 480.0
+offset_bottom = 165.0
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("4_u1iul")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "Enemies Killed:   14
+Took Damage:   10 times
+Items Collected:   20
+
+"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Reason" type="Label" parent="."]
+material = SubResource("ShaderMaterial_85pid")
+offset_top = 72.0
+offset_right = 480.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("5_g7jl1")
+theme_override_font_sizes/font_size = 8
+text = "\"You Died\""
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+material = SubResource("ShaderMaterial_85pid")
+offset_top = 92.0
+offset_right = 480.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("6_4q3rl")
+theme_override_font_sizes/font_size = 8
+text = "Score: 1000"
+horizontal_alignment = 1
+
+[node name="Score2" type="Label" parent="."]
+material = SubResource("ShaderMaterial_85pid")
+offset_top = 104.0
+offset_right = 480.0
+offset_bottom = 115.0
+theme_override_fonts/font = ExtResource("4_u1iul")
+theme_override_font_sizes/font_size = 6
+text = "High Score: 1000"
+horizontal_alignment = 1
+
+[node name="Restart" parent="." instance=ExtResource("7_xh8cw")]
+offset_top = 182.0
+offset_right = 480.0
+offset_bottom = 194.0
+theme_override_colors/font_hover_color = Color(0.202962, 0.246923, 0.671875, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.0334201, 0.613051, 0.916667, 1)
+theme_override_fonts/font = ExtResource("6_4q3rl")
+text = "Restart"
+alignment = 1
+normal_color = Color(0, 0, 0, 1)
+shadow_color = Color(0.698039, 0.698039, 0.698039, 1)
+shadow_hover_color = Color(0.698039, 0.698039, 0.698039, 1)
+metadata/_edit_group_ = true
+
+[node name="Menu" parent="." instance=ExtResource("7_xh8cw")]
+offset_top = 198.0
+offset_right = 480.0
+offset_bottom = 210.0
+theme_override_colors/font_hover_color = Color(0.202962, 0.246923, 0.671875, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.0334201, 0.613051, 0.916667, 1)
+theme_override_fonts/font = ExtResource("6_4q3rl")
+text = "Exit"
+alignment = 1
+normal_color = Color(0, 0, 0, 1)
+shadow_color = Color(0.698039, 0.698039, 0.698039, 1)
+shadow_hover_color = Color(0.698039, 0.698039, 0.698039, 1)
+metadata/_edit_group_ = true
+
+[node name="Gameover" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_evmie")
+position = Vector2(240, 44)
+texture = ExtResource("9_1dylg")
+
+[node name="Gameover2" type="Sprite2D" parent="Gameover"]
+modulate = Color(0, 0, 0, 0.164706)
+position = Vector2(2, 3)
+texture = ExtResource("9_1dylg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4q3rl")
+autoplay = true
+bus = &"Music"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = ExtResource("8_4q3rl")
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+texture = ExtResource("3_dky2g")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Restart" to="." method="button_pressed"]
+[connection signal="pressed" from="Menu" to="." method="menu_pressed"]
+
+[editable path="Restart"]
+[editable path="Menu"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dip2h2nlw33wm"]
+
+[ext_resource type="Texture2D" uid="uid://1uiqumh8g4rg" path="res://images/item/passive/beef.png" id="1_1a6tr"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_vln2b"]
+
+[sub_resource type="GDScript" id="GDScript_xgkk6"]
+script/source = "func pickup() -> void:
+	_G.player.stats.esc_max += 100
+	_G.player.essence_component.gain(100)
+"
+
+[resource]
+script = ExtResource("2_vln2b")
+item_name = "Beef"
+item_script = SubResource("GDScript_xgkk6")
+type = 0
+weight = 1.0
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_1a6tr")
+item_description = "Increases Max HP by 100"

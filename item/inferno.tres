@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b3ei2oxdyfokn"]
+
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_etjxg"]
+[ext_resource type="Texture2D" uid="uid://cfcl1dc6lh5vq" path="res://images/item/passive/item_p5.png" id="1_mh5do"]
+
+[sub_resource type="GDScript" id="GDScript_mh5do"]
+script/source = "func pickup() -> void:
+	_G.player.stats.bullet.destroy_object_enabled = true
+	_G.player.stats.bullet.destroy_object_amount = 1
+	_G.player.stats.bullet.destroy_object = load(\"res://prefab/entity/explosion.tscn\")
+	_G.player.stats.bullet.fire_rate_mult *= 1.25
+
+func update(_delta : float) -> void:
+	_G.player.stats.bullet.destroy_object_properties = {
+		&\"size\" : 6.0 * _G.player.stats.bullet.size_mult,
+		&\"damage\" : _G.player.stats.actual_damage * 0.6,
+		&\"color\" : _G.player.stats.bullet.color
+	}
+"
+
+[resource]
+script = ExtResource("1_etjxg")
+item_name = "Inferno"
+item_script = SubResource("GDScript_mh5do")
+type = 3
+weight = 0.25
+remove_from_pool = true
+shop_cost = 1000
+image = ExtResource("1_mh5do")
+item_description = "Get Exploding Bullets
+Decreases Attack Speed
+
+
+
+"
+metadata/_custom_type_script = "uid://dnca0vjfcnt65"

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0vccwsvxvq68"]
+
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="1_eotwe"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_ymm1c"]
+[ext_resource type="Script" uid="uid://bbkrbuyc4aout" path="res://src/menus/ui_pop_up.gd" id="3_fbx30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cybk"]
+shader = ExtResource("1_eotwe")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+
+[node name="UIPopUp" type="Label"]
+material = SubResource("ShaderMaterial_7cybk")
+offset_right = 40.0
+offset_bottom = 10.0
+theme_override_fonts/font = ExtResource("2_ymm1c")
+theme_override_font_sizes/font_size = 6
+text = "-100"
+script = ExtResource("3_fbx30")

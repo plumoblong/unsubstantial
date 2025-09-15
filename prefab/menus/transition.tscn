@@ -1,0 +1,294 @@
+[gd_scene load_steps=37 format=3 uid="uid://c3g7y6xs8honh"]
+
+[ext_resource type="Script" uid="uid://dc8kriy73evxm" path="res://src/menus/transition.gd" id="1_m4dgr"]
+[ext_resource type="Texture2D" uid="uid://bapowrd50hbbx" path="res://images/entity/player_rotation.png" id="1_w5lrs"]
+[ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="1_xgbm6"]
+[ext_resource type="Texture2D" uid="uid://cch7emkq55n6k" path="res://images/glow.png" id="2_eciup"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="5_nonil"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="6_5wkvi"]
+[ext_resource type="Material" uid="uid://c4e8vymr51sw7" path="res://material/ether_overlay.tres" id="7_cc0i3"]
+[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="8_545wm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nonil"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_iqlht"]
+offsets = PackedFloat32Array(0, 0.506964, 0.927577)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nonil"]
+gradient = SubResource("Gradient_iqlht")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cnby6"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(215, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 128.0
+initial_velocity_max = 256.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.653876, 0.653876, 0.653876, 1)
+color_ramp = SubResource("GradientTexture1D_nonil")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5wkvi"]
+blend_mode = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bj6dk"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(107, 0, 1)
+direction = Vector3(0, 1, 0)
+spread = 1.0
+initial_velocity_min = 96.0
+initial_velocity_max = 192.0
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.816804, 0.816804, 0.816804, 1)
+color_ramp = SubResource("GradientTexture1D_nonil")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hpfwl"]
+blend_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nonil"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wkvi"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc0i3"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_545wm"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gwr4"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqpj2"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gid4j"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m61q3"]
+atlas = ExtResource("1_w5lrs")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hnilo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nonil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wkvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc0i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_545wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gwr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqpj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gid4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m61q3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_dm05y"]
+offsets = PackedFloat32Array(0, 0.245125, 0.754875, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.96679, 0.96679, 0.96679, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yylga"]
+gradient = SubResource("Gradient_dm05y")
+
+[sub_resource type="Curve" id="Curve_v4eqy"]
+_data = [Vector2(0, 0), 0.0, 6.84395, 0, 0, Vector2(0.477027, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.04822, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_sahw5"]
+curve = SubResource("Curve_v4eqy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fd4ek"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(12, 24, 1)
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 8.0
+initial_velocity_max = 32.0
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_sahw5")
+color_ramp = SubResource("GradientTexture1D_yylga")
+
+[sub_resource type="Animation" id="Animation_8r53b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(216, 300)]
+}
+
+[sub_resource type="Animation" id="Animation_e686d"]
+resource_name = "transition"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(2.5, -0.784581),
+"update": 0,
+"values": [Vector2(240, 320), Vector2(240, -64)]
+}
+
+[sub_resource type="Animation" id="Animation_o8cil"]
+resource_name = "transition_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2.07053, -3.48219),
+"update": 0,
+"values": [Vector2(216, 121), Vector2(216, -64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t7m85"]
+_data = {
+&"RESET": SubResource("Animation_8r53b"),
+&"transition": SubResource("Animation_e686d"),
+&"transition_out": SubResource("Animation_o8cil")
+}
+
+[sub_resource type="Gradient" id="Gradient_5wkvi"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.151436, 0.853786, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_a12dk"]
+gradient = SubResource("Gradient_5wkvi")
+width = 480
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cc0i3"]
+shader = ExtResource("5_nonil")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[node name="Transition" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_m4dgr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+modulate = Color(0.472845, 0.472845, 0.472845, 1)
+material = SubResource("CanvasItemMaterial_nonil")
+position = Vector2(218, -10)
+amount = 64
+texture = ExtResource("1_xgbm6")
+lifetime = 1.5
+trail_enabled = true
+trail_sections = 5
+trail_section_subdivisions = 5
+process_material = SubResource("ParticleProcessMaterial_cnby6")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+modulate = Color(0.708186, 0.708186, 0.708186, 1)
+material = SubResource("CanvasItemMaterial_5wkvi")
+position = Vector2(218, -10)
+scale = Vector2(2, 2)
+amount = 32
+texture = ExtResource("1_xgbm6")
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_bj6dk")
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_hpfwl")
+position = Vector2(216, 300)
+sprite_frames = SubResource("SpriteFrames_hnilo")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+modulate = Color(0.554309, 0.554309, 0.554309, 1)
+use_parent_material = true
+scale = Vector2(0.7, 1.5)
+texture = ExtResource("2_eciup")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+modulate = Color(0.490948, 0.490948, 0.490948, 1)
+use_parent_material = true
+amount = 24
+texture = ExtResource("1_xgbm6")
+lifetime = 1.5
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fd4ek")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t7m85")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.454742, 0.454742, 0.454742, 1)
+scale = Vector2(1, 270)
+texture = SubResource("GradientTexture1D_a12dk")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_cc0i3")
+offset_top = 219.0
+offset_right = 432.0
+offset_bottom = 229.0
+theme_override_fonts/font = ExtResource("6_5wkvi")
+theme_override_font_sizes/font_size = 8
+text = "HI CZESC"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = ExtResource("7_cc0i3")
+offset_right = 480.0
+offset_bottom = 270.0
+texture = ExtResource("8_545wm")
+stretch_mode = 1
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_player_animation_finished"]

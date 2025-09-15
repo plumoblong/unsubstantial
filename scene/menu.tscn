@@ -1,0 +1,218 @@
+[gd_scene load_steps=21 format=3 uid="uid://b6dn73q0mhnx1"]
+
+[ext_resource type="Script" uid="uid://dv16xbqqjpc34" path="res://src/menu.gd" id="1_tbsmk"]
+[ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_hubvr"]
+[ext_resource type="AudioStream" uid="uid://dm5jx2m85bfqp" path="res://music/bullets.ogg" id="3_pgh6j"]
+[ext_resource type="PackedScene" uid="uid://cjxjdq0k8hhxp" path="res://prefab/level/chapter1/poison.tscn" id="4_pgh6j"]
+[ext_resource type="Texture2D" uid="uid://lqsndjx87otm" path="res://images/logo.png" id="6_lsv3e"]
+[ext_resource type="AudioStream" uid="uid://7tc2qenx4yep" path="res://sfx/ui/ui_select.wav" id="7_xqnb3"]
+[ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="8_wmmby"]
+[ext_resource type="Material" uid="uid://bcqe05a5waafm" path="res://src/shader/text_black_shader.tres" id="9_dyuxe"]
+[ext_resource type="Texture2D" uid="uid://bdqwk8veies1l" path="res://images/report.png" id="9_ho73k"]
+[ext_resource type="Texture2D" uid="uid://dtfmdb5og34cn" path="res://images/ui/promo_sheet.png" id="9_xdexj"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="10_8of67"]
+[ext_resource type="PackedScene" uid="uid://sppppyvtblst" path="res://prefab/menus/options.tscn" id="10_wes68"]
+[ext_resource type="PackedScene" uid="uid://dxinpyif3wunr" path="res://prefab/menus/achievement_screen.tscn" id="12_dyuxe"]
+[ext_resource type="AudioStream" uid="uid://samctduexn6j" path="res://music/beta.ogg" id="12_jwfp7"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="17_wmmby"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmmby"]
+shader = ExtResource("8_wmmby")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(0.427342, 0.427342, 0.427342, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp55b"]
+shader = ExtResource("8_wmmby")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5kv0"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4gbj"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_601k6"]
+atlas = ExtResource("9_xdexj")
+region = Rect2(32, 0, 16, 16)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_tbsmk")
+songs = Dictionary[AudioStreamOggVorbis, int]({
+ExtResource("12_jwfp7"): 9,
+ExtResource("3_pgh6j"): 1
+})
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 480.0
+offset_bottom = 272.0
+color = Color(0.296557, 0, 0.474491, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="MeshInstance3D" parent="Camera3D" instance=ExtResource("4_pgh6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.516, 0)
+top_level = true
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Main"]
+use_parent_material = true
+position = Vector2(32, 33)
+texture = ExtResource("6_lsv3e")
+centered = false
+
+[node name="Sprite2D3" type="Sprite2D" parent="Main/Sprite2D"]
+modulate = Color(0, 0, 0, 0.529412)
+show_behind_parent = true
+use_parent_material = true
+position = Vector2(2.66671, 4.00003)
+texture = ExtResource("6_lsv3e")
+centered = false
+
+[node name="Start" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 56.0
+offset_top = 80.0
+offset_right = 82.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+text = "Start"
+
+[node name="Achievements" parent="Main" instance=ExtResource("3_hubvr")]
+material = SubResource("ShaderMaterial_wmmby")
+offset_left = 56.0
+offset_top = 114.0
+offset_right = 129.0
+offset_bottom = 127.0
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+disabled = true
+text = "Achievements"
+
+[node name="Addons" parent="Main" instance=ExtResource("3_hubvr")]
+visible = false
+material = SubResource("ShaderMaterial_wmmby")
+offset_left = 56.0
+offset_top = 131.0
+offset_right = 104.0
+offset_bottom = 144.0
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+disabled = true
+text = "Addons"
+
+[node name="Options" parent="Main" instance=ExtResource("3_hubvr")]
+offset_left = 56.0
+offset_top = 97.0
+offset_right = 98.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+text = "Options"
+
+[node name="Exit" parent="Main" instance=ExtResource("3_hubvr")]
+material = SubResource("ShaderMaterial_qp55b")
+offset_left = 56.0
+offset_top = 132.0
+offset_right = 111.0
+offset_bottom = 145.0
+theme_override_colors/font_color = Color(1, 0.395833, 0.395833, 1)
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+text = "Exit"
+normal_color = Color(1, 0.235294, 0.32549, 1)
+hover_color = Color(1, 0.235294, 0.32549, 1)
+shadow_hover_color = Color(0.454491, 0, 0.162118, 1)
+
+[node name="TextureButton" type="TextureButton" parent="Main"]
+offset_left = 433.0
+offset_top = 247.5
+offset_right = 449.0
+offset_bottom = 263.5
+texture_normal = SubResource("AtlasTexture_a5kv0")
+
+[node name="Youtube" type="TextureButton" parent="Main"]
+offset_left = 449.0
+offset_top = 247.5
+offset_right = 465.0
+offset_bottom = 263.5
+texture_normal = SubResource("AtlasTexture_y4gbj")
+
+[node name="Twitter" type="TextureButton" parent="Main"]
+offset_left = 465.0
+offset_top = 247.5
+offset_right = 481.0
+offset_bottom = 263.5
+texture_normal = SubResource("AtlasTexture_601k6")
+
+[node name="Version2" type="Label" parent="Main"]
+material = ExtResource("9_dyuxe")
+offset_left = 420.0
+offset_top = 259.5
+offset_right = 480.0
+offset_bottom = 267.5
+theme_override_fonts/font = ExtResource("10_8of67")
+theme_override_font_sizes/font_size = 6
+text = "by plumoblong"
+horizontal_alignment = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="Main"]
+position = Vector2(410, 231.5)
+texture = ExtResource("9_ho73k")
+
+[node name="Options" parent="." instance=ExtResource("10_wes68")]
+visible = false
+
+[node name="Achievements" parent="." instance=ExtResource("12_dyuxe")]
+visible = false
+
+[node name="Debug" type="Node2D" parent="."]
+
+[node name="Button" parent="Debug" instance=ExtResource("3_hubvr")]
+offset_left = 369.0
+offset_top = 253.0
+offset_right = 416.0
+offset_bottom = 266.0
+text = "OPEN LEVEL"
+
+[node name="UiSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xqnb3")
+bus = &"SFX2"
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(248, 175)
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tscn")
+use_native_dialog = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("17_wmmby")
+
+[connection signal="pressed" from="Main/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Main/Achievements" to="." method="achievements_pressed"]
+[connection signal="pressed" from="Main/Options" to="." method="options_pressed"]
+[connection signal="pressed" from="Main/Exit" to="." method="exit_pressed"]
+[connection signal="pressed" from="Main/TextureButton" to="." method="texture_button_pressed"]
+[connection signal="pressed" from="Main/Youtube" to="." method="youtube_pressed"]
+[connection signal="pressed" from="Main/Twitter" to="." method="twitter_pressed"]
+[connection signal="pressed" from="Debug/Button" to="." method="button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="file_dialog_file_selected"]
+
+[editable path="Main/Start"]
+[editable path="Main/Achievements"]
+[editable path="Main/Addons"]
+[editable path="Main/Options"]
+[editable path="Main/Exit"]
+[editable path="Debug/Button"]

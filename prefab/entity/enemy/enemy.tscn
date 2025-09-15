@@ -1,0 +1,134 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwxkl6ilg2ynr"]
+
+[ext_resource type="Script" uid="uid://ioi1tokifblw" path="res://src/class/enemy_human.gd" id="1_02b0y"]
+[ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_mxx8l"]
+[ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_suopw"]
+[ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_qi521"]
+[ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="5_ksaek"]
+[ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="6_qqoev"]
+[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="7_nw88q"]
+[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="8_6l2v4"]
+[ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="9_02b0y"]
+[ext_resource type="Texture2D" uid="uid://emc2l5m25kfk" path="res://images/entity/human.png" id="9_po238"]
+[ext_resource type="PackedScene" uid="uid://cbeov66ersklw" path="res://prefab/entity/3d_bar.tscn" id="10_02b0y"]
+[ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="12_b5v5k"]
+[ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="13_x2dfq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c3pg5"]
+
+[sub_resource type="Resource" id="Resource_necmj"]
+script = ExtResource("8_6l2v4")
+bullet_scene = ExtResource("7_nw88q")
+color = Color(1, 1, 1, 1)
+size_mult = 1.0
+damage = 100
+fire_rate = 0.9
+fire_rate_mult = 1.0
+shoot_offset = Vector3(0, 0, 0)
+shots = 1
+spread_angle = 30.0
+knockback = 24.0
+piercing = false
+homing = 0.0
+homing_on_player = false
+homing_interlpolation = 0.75
+bouncy = false
+spectral = false
+stun = 0.1
+destroy_object_enabled = false
+destroy_on_life_time_end = true
+destroy_object_amount = 1
+destroy_object_properties = {}
+init_speed = 32.0
+fall_speed = 2.0
+life_time = 1.2
+can_parry = false
+parried_speed_multiplier = 0.75
+bypass = false
+metadata/_custom_type_script = "uid://0l4omg7gk8m8"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]
+radius = 0.66
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 4
+slide_on_ceiling = false
+script = ExtResource("1_02b0y")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0, 0, 1)
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+omni_range = 10.0
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_use_custom = true
+debug_path_custom_point_size = 1.0
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_c3pg5")
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("2_mxx8l")
+movement_component = NodePath("../MovementComponent")
+y_multiplier = 1.0
+
+[node name="ChaseComponent" type="Node" parent="."]
+script = ExtResource("3_suopw")
+agro_distance = 25.0
+attack_distance = 17.0
+min_distance = 8.0
+y_distance = 12.0
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("4_qi521")
+max_speed = 22.0
+default_speed = 16.0
+floor_friction = 0.08
+
+[node name="EssenceComponent" type="Node" parent="."]
+script = ExtResource("5_ksaek")
+set_max_essence_on_ready = false
+
+[node name="ShootComponent" type="Node" parent="."]
+script = ExtResource("6_qqoev")
+config = SubResource("Resource_necmj")
+
+[node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
+script = ExtResource("9_02b0y")
+hit_sfx = NodePath("../HitSFX")
+on_hit_velocity_loss = 0.65
+metadata/_custom_type_script = "uid://bj27qbealqfcr"
+
+[node name="Query" type="Area3D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="Hitbox" type="CollisionShape3D" parent="Query"]
+shape = SubResource("CapsuleShape3D_od4yj")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(0.73, 0.219, 0.219, 1)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("9_po238")
+
+[node name="3DBar" parent="." instance=ExtResource("10_02b0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_b5v5k")
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_x2dfq")
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+
+[connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
+[connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
+[connection signal="shooted" from="ShootComponent" to="." method="shoot_component_shooted"]
+[connection signal="area_entered" from="Query" to="." method="query_area_entered"]

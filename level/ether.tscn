@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=3 uid="uid://17o7p8c33otu"]
+
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_0x670"]
+[ext_resource type="Material" uid="uid://hyqpmewdxg1p" path="res://material/reflective_1.tres" id="2_gsr4n"]
+[ext_resource type="Material" uid="uid://bwtv8fojil2ps" path="res://material/ethereal_scroll.tres" id="3_1xbvn"]
+[ext_resource type="PackedScene" uid="uid://bk8hwt7lut1l3" path="res://prefab/entity/level/jump_pad.tscn" id="4_xv5jp"]
+[ext_resource type="AudioStream" uid="uid://m8bocn1yx6q0" path="res://music/ether.ogg" id="5_0wt71"]
+[ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="6_bxg8e"]
+[ext_resource type="PackedScene" uid="uid://cfmu0e1hdvitn" path="res://prefab/entity/level/gateway.tscn" id="7_ljq4l"]
+[ext_resource type="PackedScene" uid="uid://bbjj55nvus0cp" path="res://prefab/entity/level/music_muter.tscn" id="8_5qvdv"]
+[ext_resource type="Texture2D" uid="uid://cf5phfiv4eg1q" path="res://images/ui/controls.png" id="10_cphyg"]
+[ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="11_4ynrl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f4887"]
+size = Vector3(155, 75, 180)
+
+[node name="Equit" type="Node3D"]
+script = ExtResource("1_0x670")
+map_name = "ether"
+
+[node name="CSGMesh3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+use_collision = true
+size = Vector3(200, 1, 200)
+material = ExtResource("2_gsr4n")
+
+[node name="Solid" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("3_1xbvn")
+use_collision = true
+collision_layer = 15
+collision_mask = 15
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+flip_faces = true
+radius = 22.0
+height = 30.0
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -32.5)
+flip_faces = true
+size = Vector3(10, 30, 30)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -42.5)
+operation = 2
+flip_faces = true
+size = Vector3(10, 15, 10)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, -62.5)
+flip_faces = true
+size = Vector3(30, 25, 30)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -31.6667, 8, -0.833332)
+flip_faces = true
+size = Vector3(10, 30, 30)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -61.6667, 25.5, -0.833332)
+flip_faces = true
+size = Vector3(30, 25, 30)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 31.4277, 8, -0.833331)
+flip_faces = true
+size = Vector3(10, 30, 30)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 61.1926, 25.5, -0.833333)
+flip_faces = true
+size = Vector3(30, 25, 30)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Solid"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, -2, 37.5)
+flip_faces = true
+size = Vector3(15, 15, 40)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.25, 65)
+flip_faces = true
+radius = 20.0
+height = 72.5
+
+[node name="JumpPad" parent="." instance=ExtResource("4_xv5jp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -28.8718)
+speed = 27.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0wt71")
+autoplay = true
+bus = &"Music"
+
+[node name="ItemStall" parent="." instance=ExtResource("6_bxg8e")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 12.9813, -62.5)
+blind_chance = 75.0
+blind_type = false
+
+[node name="Gateway" parent="." instance=ExtResource("7_ljq4l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 65)
+
+[node name="MusicMuter" parent="." instance=ExtResource("8_5qvdv")]
+time = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicMuter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 12, 4.5)
+shape = SubResource("BoxShape3D_f4887")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.5)
+modulate = Color(0.518103, 0.518103, 0.518103, 1)
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("10_cphyg")
+hframes = 3
+vframes = 2
+frame = 3
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4.5)
+modulate = Color(0.518103, 0.518103, 0.518103, 1)
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("10_cphyg")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("11_4ynrl")

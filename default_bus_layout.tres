@@ -1,0 +1,72 @@
+[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://k7olxl7c024q"]
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_tr0xn"]
+resource_name = "Limiter"
+ceiling_db = -1.0
+soft_clip_db = 0.0
+soft_clip_ratio = 4.9
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_j3pel"]
+resource_name = "LowPassFilter"
+cutoff_hz = 20500.0
+resonance = 0.2
+db = 1
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4ctud"]
+resource_name = "Reverb"
+predelay_msec = 100.0
+room_size = 0.5
+spread = 0.74
+hipass = 0.1
+wet = 0.15
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_3fsuv"]
+resource_name = "Delay"
+tap1_pan = 1.0
+tap2_pan = -1.0
+feedback_active = true
+feedback_lowpass = 8980.0
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_j3pel"]
+resource_name = "EQ"
+band_db/32_hz = -3.3
+band_db/1000_hz = -4.6
+band_db/3200_hz = -5.2
+band_db/10000_hz = -10.5
+
+[resource]
+bus/0/volume_db = 1.12716
+bus/0/effect/0/effect = SubResource("AudioEffectLimiter_tr0xn")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectLowPassFilter_j3pel")
+bus/0/effect/1/enabled = true
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/2/name = &"SFX1"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_4ctud")
+bus/2/effect/0/enabled = true
+bus/3/name = &"SFX2"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/4/name = &"Ambient"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -2.55025
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectDelay_3fsuv")
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource("AudioEffectEQ_j3pel")
+bus/4/effect/1/enabled = false

@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://co48ffgunv8s3"]
+
+[ext_resource type="Script" uid="uid://dqby1scg5muas" path="res://src/menus/control_map.gd" id="1_eo31k"]
+[ext_resource type="PackedScene" uid="uid://b3ktawt4p5vo7" path="res://prefab/menus/controlmap_button.tscn" id="3_jgrtl"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_eo31k"]
+device = -1
+keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_cuthp"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventKey" id="InputEventKey_jgrtl"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_4oaxw"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_c4w4o"]
+button_mask = 1
+position = Vector2(117, 12)
+global_position = Vector2(117, 35)
+button_index = 1
+pressed = true
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_lao0o"]
+button_mask = 2
+position = Vector2(69, 14)
+global_position = Vector2(69, 37)
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_0hqvd"]
+device = -1
+keycode = 69
+unicode = 101
+
+[node name="ControlMap" type="Node2D"]
+script = ExtResource("1_eo31k")
+
+[node name="Page1" type="Node2D" parent="."]
+
+[node name="Walk" parent="." instance=ExtResource("3_jgrtl")]
+offset_top = 80.0
+offset_right = 248.0
+offset_bottom = 93.0
+action_string = "Move Forward"
+default_input = SubResource("InputEventKey_eo31k")
+
+[node name="Walk2" parent="." instance=ExtResource("3_jgrtl")]
+offset_left = 248.0
+offset_top = 80.0
+offset_right = 480.0
+offset_bottom = 93.0
+action_name = "down"
+action_string = "Move Backwards"
+default_input = SubResource("InputEventKey_cuthp")
+
+[node name="Walk3" parent="." instance=ExtResource("3_jgrtl")]
+offset_left = 248.0
+offset_top = 96.0
+offset_bottom = 109.0
+action_name = "left"
+action_string = "Move Left"
+default_input = SubResource("InputEventKey_jgrtl")
+
+[node name="Walk4" parent="." instance=ExtResource("3_jgrtl")]
+offset_top = 96.0
+offset_right = 248.0
+offset_bottom = 109.0
+action_name = "right"
+action_string = "Move Right"
+default_input = SubResource("InputEventKey_4oaxw")
+
+[node name="Jump" parent="." instance=ExtResource("3_jgrtl")]
+offset_top = 120.0
+offset_bottom = 133.0
+action_name = "jump"
+action_string = "Jump"
+default_input = SubResource("InputEventKey_4oaxw")
+
+[node name="Primary" parent="." instance=ExtResource("3_jgrtl")]
+offset_top = 144.0
+offset_right = 248.0
+offset_bottom = 157.0
+action_name = "shoot"
+action_string = "Shoot"
+default_input = SubResource("InputEventMouseButton_c4w4o")
+
+[node name="Secondary" parent="." instance=ExtResource("3_jgrtl")]
+offset_left = 248.0
+offset_top = 144.0
+offset_right = 480.0
+offset_bottom = 157.0
+action_name = "dash"
+action_string = "Melee Dash"
+default_input = SubResource("InputEventMouseButton_lao0o")
+
+[node name="INteract" parent="." instance=ExtResource("3_jgrtl")]
+offset_top = 160.0
+offset_bottom = 173.0
+action_name = "interact"
+action_string = "Interact"
+default_input = SubResource("InputEventKey_0hqvd")

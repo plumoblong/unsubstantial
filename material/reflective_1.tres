@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://hyqpmewdxg1p"]
+
+[resource]
+metallic = 1.0
+roughness = 0.0
+uv1_scale = Vector3(0.075, 0.075, 0.075)
+uv1_triplanar = true
+texture_filter = 0

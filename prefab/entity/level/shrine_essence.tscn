@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://ch4cgolek2p1t"]
+
+[ext_resource type="Script" uid="uid://h5dvk7jgd8l6" path="res://src/entity/shrine_essence.gd" id="1_fcnju"]
+[ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="2_3c0pd"]
+[ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="3_yuix0"]
+[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://textures/pbr/bricks.png" id="4_5e53h"]
+[ext_resource type="Texture2D" uid="uid://dim0sfgksysnb" path="res://images/entity/shrine.png" id="5_cjbp1"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="6_5ernt"]
+
+[sub_resource type="Gradient" id="Gradient_lw7qi"]
+offsets = PackedFloat32Array(0, 0.923469)
+colors = PackedColorArray(1, 1, 1, 1, 0.33237, 0.33237, 0.33237, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwtd1"]
+gradient = SubResource("Gradient_lw7qi")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2kh4"]
+albedo_color = Color(0.621, 0.57, 0.75, 1)
+albedo_texture = ExtResource("2_3c0pd")
+roughness_texture = SubResource("GradientTexture2D_dwtd1")
+emission = Color(0.0164378, 0, 0.431108, 1)
+emission_energy_multiplier = 0.23
+normal_scale = 0.4
+normal_texture = ExtResource("4_5e53h")
+rim = 0.12
+rim_tint = 1.0
+clearcoat_roughness = 1.0
+anisotropy = -0.58
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_transmittance_enabled = true
+subsurf_scatter_transmittance_depth = 8.0
+subsurf_scatter_transmittance_boost = 1.0
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("3_yuix0")
+refraction_scale = 0.08
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0, 1.655, 0)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kxqs"]
+atlas = ExtResource("5_cjbp1")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4vco"]
+atlas = ExtResource("5_cjbp1")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et4if"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kxqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4vco")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8c3ws"]
+size = Vector3(1.5, 2.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4210m"]
+
+[node name="Shrine" type="Area3D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_fcnju")
+pool = {
+"damage": 1,
+"hp": 1,
+"nothing": 2,
+"speed": 1,
+"xp": 1
+}
+one_shot = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.158938, 0)
+layers = 7
+material_override = SubResource("StandardMaterial3D_g2kh4")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(1.2, 0.6, 1.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+size = Vector3(1.4, 0.2, 1.4)
+
+[node name="Sprite3D" type="Sprite3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
+offset = Vector2(0, 24)
+modulate = Color(0.619608, 0.568627, 0.74902, 1)
+pixel_size = 0.03
+billboard = 1
+shaded = true
+texture_filter = 0
+render_priority = 1
+texture = ExtResource("5_cjbp1")
+hframes = 3
+
+[node name="Eye" type="AnimatedSprite3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
+offset = Vector2(0, 24)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+render_priority = 2
+sprite_frames = SubResource("SpriteFrames_et4if")
+frame_progress = 0.79504
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.891062, 0)
+shape = SubResource("BoxShape3D_8c3ws")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 1.44106, 0)
+material_override = SubResource("StandardMaterial3D_4210m")
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+collision_layer = 7
+collision_mask = 7
+size = Vector3(1.4, 2.6, 1.4)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14106, 0)
+visible = false
+pixel_size = 0.01
+billboard = 1
+outline_modulate = Color(0, 0, 0, 0)
+text = "1"
+font = ExtResource("6_5ernt")
+
+[connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="area_exited" from="." to="." method="area_exited"]
+[connection signal="interacted" from="." to="." method="on_interacted"]
