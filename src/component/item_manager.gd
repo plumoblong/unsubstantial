@@ -11,6 +11,12 @@ func _ready() -> void:
 		append(starting_items[i])
 
 func append(x : Item) -> void:
+	if x.item_script != null:
+		var scr : RefCounted = load(x.item_script.resource_path).new()
+		if scr.has_method("pickup"):
+			scr.pickup()
+		else:
+			print(x.id, " ", x.item_name, " no pickup()")
 	collected.append([x, load(x.item_script.resource_path).new()])
 	_G.game.chat.add_message("You got " + x.item_name + "!")
 	match x.type:
@@ -27,9 +33,9 @@ func append(x : Item) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Engine.get_physics_frames() % 2 == 0:
+	if Engine.get_physics_frames() % 3 == 0:
 		if not collected.is_empty():
 			for i in range(0, collected.size()):
 				if collected[i][1] != null:
 					if collected[i][1].has_method("update"):
-						collected[i][1].update(delta * 2.0)
+						collected[i][1].update(delta * 3.0)

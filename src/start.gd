@@ -15,17 +15,15 @@ func _ready() -> void:
 		_T.say("Conffile or Savefile returns null.", Color.YELLOW)
 	if FileAccess.file_exists(_G.CONFIG_PATH):
 		if not conffile.eof_reached():
-			var current_line = JSON.parse_string(conffile.get_line())
-			_G.merge_no_overwrite(current_line, _G.config)
+			_G.config = JSON.parse_string(conffile.get_line())
 			_T.say("Config File loaded", Color.GREEN)
 			
 	if FileAccess.file_exists(_G.SAVE_PATH):
 		if not savefile.eof_reached():
-			var current_line = JSON.parse_string(savefile.get_line())
-			_G.merge_no_overwrite(current_line, _G.save)
-			print("pre: ", current_line, "post: ", _G.save)
+			_G.save = JSON.parse_string(savefile.get_line())
+			#print("pre: ", current_line, "post: ", _G.save)
 			_T.say("Save File loaded", Color.GREEN)
-			print(typeof(current_line))
+			#print(typeof(current_line))
 	if _G.config.fullscreen:
 		get_window().mode = Window.MODE_FULLSCREEN
 	else:

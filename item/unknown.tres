@@ -13,10 +13,6 @@ script/source = "func pickup() -> void:
 script = ExtResource("2_5xun1")
 item_name = "Unknown"
 item_script = SubResource("GDScript_kb354")
-type = 0
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_54dmi")
 item_description = "Increases Range
 Decreases Bullet Speed"

@@ -14,7 +14,7 @@ func _ready() -> void:
 	input.grab_focus()
 	say("[center]Welcome to TUX!\nType help(page : int) for more information.[/center]")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not _G.show_fps: return
 	$Shadow.text = output.text
 	if Input.is_action_just_pressed("console"):
@@ -40,17 +40,16 @@ func input_text_submitted(command: String) -> void:
 	say(">> " + command + "\n")
 	history.push_front(command)
 	history_index = -1
-	var error = _expression.parse(command)
+	var error : Error = _expression.parse(command)
 	if error != OK:
 		say("ERROR " + str(error) + ": " + _expression.get_error_text())
 		return
 	
-	var result = _expression.execute([], self)
+	var result : Variant = _expression.execute([], self)
 	if not _expression.has_execute_failed():
 		if result != null:
 			say(result)
-	
-func say(log, color : Color = Color.WHITE, debug_only : bool = false) -> void:
+func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) -> void:
 	print("TUX: ", log)
 	if not _G.debug_mode and debug_only: return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
@@ -69,13 +68,14 @@ func help(page : int = -1) -> void:
 			say("In Game Commands")
 			say(" hitbox() - Shows/Hides hitbox shapes.")
 			say(" god() - Toggles god mode for the player.")
-			say(" clip() - Toggles noclip flying for the player. Useful for mapping")
-			say(" bright() - Toggles fullbright.")
+			say(" noclip() - Toggles noclip flying for the player. Useful for mapping")
+			say(" fullbright() - Toggles fullbright.")
 			say(" moveinf(show_debug : int) - Toggles movement info for player.")
 			say(" map(name : Text) - Changes the game map. Gets map file from game files.")
 			say(" map_custom(name : Text) - Changes the game map. Gets map file from custom_levels folder.\n                                       This can crash if the custom map isn't using unsubstantial assets.")
 			say(" set_pmvar(property : Text, value) - Sets a value of specified property in PlayerMovement.")
 			say(" dbg_camera() - Switches between the debug camera and the FPS camera.")
+			say(" add_item(name : Text) - Adds an item to the inventory. Use snake case for item names. For example \"Some Mage's Hat\" -> \"some_mages_hat\"")
 		2:
 			say("set_lp(enabled : bool, cutoff : float) - Configure the LowPassFilter on master audio bus.")
 		_:
@@ -217,3 +217,10 @@ func noclip() -> void:
 		_G.player.movement_component.noclip = true
 		_G.player.god_mode = true
 		say("Noclip enabled.")
+
+func add_item(path : String) -> void:
+	if _G.player == null or not _G.player.is_inside_tree(): 
+		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+		return
+	var x : Item = load("res://item/" + path + ".tres")
+	_G.player.items.append(x)

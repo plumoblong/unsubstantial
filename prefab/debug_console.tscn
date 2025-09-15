@@ -11,11 +11,11 @@ shader_parameter/modulate = Color(0.0994685, 0.0994685, 0.0994685, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg76u"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgo7y"]
 shader = ExtResource("4_jg76u")
@@ -74,13 +74,13 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_filter = 2
-theme_override_colors/font_placeholder_color = Color(1, 1, 1, 0.345098)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_placeholder_color = Color(1, 1, 1, 0.345098)
 theme_override_fonts/font = ExtResource("2_csl18")
 theme_override_font_sizes/font_size = 6
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ldr6d")
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_jg76u")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kgo7y")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_jg76u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ldr6d")
 placeholder_text = "help(page : int)"
 max_length = 101
 keep_editing_on_text_submit = true

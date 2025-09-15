@@ -203,64 +203,17 @@ cap_bottom = false
 
 [sub_resource type="Resource" id="Resource_ju7jx"]
 script = ExtResource("5_qqhji")
-bullet_scene = ExtResource("4_xed6q")
-color = Color(1, 1, 1, 1)
-size_mult = 1.0
-damage = 75
-fire_rate = 0.9
-fire_rate_mult = 1.0
-shoot_offset = Vector3(0, 0, 0)
-shots = 1
 spread_angle = 0.0
-knockback = 24.0
-piercing = false
 homing = 1.0
-homing_on_player = false
-homing_interlpolation = 0.75
-bouncy = false
-spectral = false
-stun = 0.1
-destroy_object_enabled = false
-destroy_on_life_time_end = true
-destroy_object_amount = 1
-destroy_object_properties = {}
-init_speed = 48.0
-fall_speed = 2.0
-life_time = 1.0
 can_parry = false
-parried_speed_multiplier = 0.75
-bypass = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="Resource" id="Resource_xed6q"]
 script = ExtResource("5_qqhji")
-bullet_scene = ExtResource("4_xed6q")
-color = Color(1, 1, 1, 1)
-size_mult = 1.0
-damage = 75
-fire_rate = 0.9
-fire_rate_mult = 1.0
-shoot_offset = Vector3(0, 0, 0)
-shots = 1
 spread_angle = 0.0
-knockback = 24.0
-piercing = false
 homing = 0.7
-homing_on_player = false
-homing_interlpolation = 0.75
-bouncy = false
-spectral = false
-stun = 0.1
-destroy_object_enabled = false
-destroy_on_life_time_end = true
-destroy_object_amount = 1
-destroy_object_properties = {}
-init_speed = 48.0
-fall_speed = 2.0
 life_time = 0.5
 can_parry = false
-parried_speed_multiplier = 0.75
-bypass = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbmd"]
@@ -295,6 +248,8 @@ scale_curve = SubResource("CurveTexture_uss2g")
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
+floor_stop_on_slope = false
+floor_constant_speed = true
 floor_max_angle = 1.0472
 script = ExtResource("1_colme")
 

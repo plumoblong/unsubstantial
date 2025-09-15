@@ -123,14 +123,6 @@ func _process(_delta : float) -> void:
 	
 func interaction_interacted() -> void:
 	destroy()
-	print(item.item_name, " get")
-	#$SFX.play()
-	if item.item_script != null:
-		var scr : RefCounted = load(item.item_script.resource_path).new()
-		if scr.has_method("pickup"):
-			scr.pickup()
-		else:
-			print(item.id, " ", item.item_name, " no pickup()")
 	_G.player.items.append(item)
 	if not free: _G.player.essence_component.fracture(item.shop_cost)
 

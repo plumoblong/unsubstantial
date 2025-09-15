@@ -20,33 +20,13 @@ height = 3.2
 
 [sub_resource type="Resource" id="Resource_y5ngk"]
 script = ExtResource("8_hrcbw")
-bullet_scene = ExtResource("7_2cd0i")
-color = Color(1, 1, 1, 1)
 size_mult = 2.0
-damage = 75
-fire_rate = 0.9
-fire_rate_mult = 1.0
-shoot_offset = Vector3(0, 0, 0)
 shots = 2
-spread_angle = 30.0
 knockback = 32.0
-piercing = false
-homing = 0.0
-homing_on_player = false
-homing_interlpolation = 0.75
 bouncy = true
-spectral = false
-stun = 0.1
-destroy_object_enabled = false
-destroy_on_life_time_end = true
-destroy_object_amount = 1
-destroy_object_properties = {}
 init_speed = 32.0
-fall_speed = 2.0
 life_time = 1.75
-can_parry = true
 parried_speed_multiplier = 1.25
-bypass = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x505i"]
@@ -65,6 +45,8 @@ light_specular = 0.0
 omni_range = 10.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+simplify_path = true
+simplify_epsilon = 1.0
 debug_use_custom = true
 debug_path_custom_point_size = 1.0
 
@@ -85,9 +67,10 @@ y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("4_rkk6f")
-max_speed = 17.6
-default_speed = 12.8
-floor_friction = 0.12
+max_speed = 26.0
+default_speed = 18.0
+speed_up = 8.0
+floor_friction = 0.11
 
 [node name="EssenceComponent" type="Node" parent="."]
 script = ExtResource("5_yg07u")
@@ -100,8 +83,8 @@ config = SubResource("Resource_y5ngk")
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
-essence = 400.0
-damage = 75.0
+essence = 450.0
+damage = 90.0
 on_hit_velocity_loss = 0.9
 xp_payout = 10
 metadata/_custom_type_script = "uid://tlvl68soe85"

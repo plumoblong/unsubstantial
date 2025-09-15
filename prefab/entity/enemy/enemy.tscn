@@ -18,33 +18,10 @@
 
 [sub_resource type="Resource" id="Resource_necmj"]
 script = ExtResource("8_6l2v4")
-bullet_scene = ExtResource("7_nw88q")
-color = Color(1, 1, 1, 1)
-size_mult = 1.0
 damage = 100
-fire_rate = 0.9
-fire_rate_mult = 1.0
-shoot_offset = Vector3(0, 0, 0)
-shots = 1
-spread_angle = 30.0
-knockback = 24.0
-piercing = false
-homing = 0.0
-homing_on_player = false
-homing_interlpolation = 0.75
-bouncy = false
-spectral = false
-stun = 0.1
-destroy_object_enabled = false
-destroy_on_life_time_end = true
-destroy_object_amount = 1
-destroy_object_properties = {}
 init_speed = 32.0
-fall_speed = 2.0
 life_time = 1.2
 can_parry = false
-parried_speed_multiplier = 0.75
-bypass = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]
@@ -63,6 +40,8 @@ light_specular = 0.0
 omni_range = 10.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+simplify_path = true
+simplify_epsilon = 1.0
 debug_use_custom = true
 debug_path_custom_point_size = 1.0
 

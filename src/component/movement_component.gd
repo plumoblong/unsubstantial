@@ -10,8 +10,8 @@ class_name MovementComponent
 @export var speed_mult_after_jump : float = 1.0
 
 @export var floor_friction : float = 0.1
-@export var air_friction : float = 0.001
-@export var fall_speed : float = 15.0
+@export var air_friction : float = 0.05
+@export var fall_speed : float = 16.0
 @export var jump_speed : float = 6.0
 
 var can_jump : bool = false

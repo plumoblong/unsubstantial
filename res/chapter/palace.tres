@@ -147,10 +147,6 @@ grow_amount = 14.71
 script = ExtResource("3_2goa0")
 floor = Array[Material]([SubResource("StandardMaterial3D_rucwu")])
 wall = Array[Material]([SubResource("StandardMaterial3D_rdk3a"), SubResource("StandardMaterial3D_lk4t6"), SubResource("StandardMaterial3D_5vqrs"), SubResource("StandardMaterial3D_es8j2"), SubResource("StandardMaterial3D_0y4rq")])
-special_1 = Array[Material]([])
-special_2 = Array[Material]([])
-special_3 = Array[Material]([])
-special_4 = Array[Material]([])
 metadata/_custom_type_script = "uid://cgcjch1jmf8h7"
 
 [resource]
@@ -161,7 +157,5 @@ id = 1
 environment = ExtResource("2_vp0qd")
 materials = SubResource("Resource_vp0qd")
 y_boundary = -12.0
-rooms = Array[PackedScene]([])
 ambience_streams = Array[AudioStream]([ExtResource("1_bd46r")])
-ambience_position = Vector3(100, 10, 100)
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

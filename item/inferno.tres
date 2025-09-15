@@ -24,8 +24,6 @@ item_name = "Inferno"
 item_script = SubResource("GDScript_mh5do")
 type = 3
 weight = 0.25
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_mh5do")
 item_description = "Get Exploding Bullets
 Decreases Attack Speed

@@ -188,7 +188,6 @@ func end_level(loop : bool = false) -> void:
 	stage += 1
 	actual_stage += 1
 	await get_tree().create_timer(0.75).timeout
-	_G.flare_screen(Color(1, 1, 1, 1), Color(1, 1, 1, 1), 0.75)
 	leveled_up = false
 	##_G.player.essence_component.essence = _G.player.stat.essence.max\
 	#all_gates_open = false

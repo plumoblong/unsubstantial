@@ -15,10 +15,6 @@ script/source = "func pickup() -> void:
 script = ExtResource("2_te3q6")
 item_name = "Bucket of Slop"
 item_script = SubResource("GDScript_kb354")
-type = 0
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_ypkcl")
 item_description = "Increases Max HP by 200
 Reduces Movement speed"

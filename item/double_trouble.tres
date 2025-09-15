@@ -16,9 +16,6 @@ script = ExtResource("1_n6dk3")
 item_name = "Double Trouble"
 item_script = SubResource("GDScript_xh2p5")
 type = 2
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_g6ms0")
 item_description = "Fire 1 additional bullet
 Reduces Bullet Damage"

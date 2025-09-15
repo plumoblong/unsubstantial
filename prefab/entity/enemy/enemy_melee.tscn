@@ -36,6 +36,8 @@ light_specular = 0.0
 omni_range = 10.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+simplify_path = true
+simplify_epsilon = 0.5
 debug_use_custom = true
 debug_path_custom_point_size = 1.0
 

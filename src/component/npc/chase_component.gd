@@ -16,13 +16,13 @@ var y_difference : float
 var concious : bool = false
 
 
-var update_rate : int = 2
+var update_rate : int = 1
 var chasing : bool
 var attacking : bool
 
 func _ready() -> void:
 	start_position = get_parent().global_position
-	update_rate = randi_range(2, 4)
+	#update_rate = randi_range(2, 4)
 	await get_tree().create_timer(0.5).timeout
 	concious = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -20,7 +20,5 @@ item_name = "Some mage's hat"
 item_script = SubResource("GDScript_e3f7c")
 type = 3
 weight = 0.5
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_dpib2")
 item_description = "Your Bullets seek blood."

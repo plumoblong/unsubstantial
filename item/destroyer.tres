@@ -15,9 +15,6 @@ script = ExtResource("2_1orme")
 item_name = "Destroyer"
 item_script = SubResource("GDScript_4c0tu")
 type = 1
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_4ktvt")
 item_description = "Increases  Movement and Fire Rate
 Decreases Damage"

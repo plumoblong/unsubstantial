@@ -11,12 +11,9 @@ script/source = "func pickup() -> void:
 
 [resource]
 script = ExtResource("1_cqfiu")
-item_name = "nut nut."
+item_name = "nut"
 item_script = SubResource("GDScript_urpk8")
 type = 2
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_pfyxl")
 item_description = "Greatly increases Fire Rate
 also reduces Bullet Damage"

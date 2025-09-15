@@ -45,7 +45,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	$InteractionTooltip.visible = get_parent().can_interact
 	$InteractionTooltip.text = "[center]" + get_parent().interact_tooltip
-	$InteractionTooltip/Description.text = "[center]" +  get_parent().interact_description.to_upper()
+	$InteractionTooltip/Description.text = "[center]" +  get_parent().interact_description
 	
 	$Debug.visible = _G.debug_mode
 	$MovementInfo/Label2.visible = show_movement_var

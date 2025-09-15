@@ -19,8 +19,6 @@ item_name = "Archetype"
 item_script = SubResource("GDScript_hano2")
 type = 3
 weight = 0.05
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_aoctm")
 item_description = "Fire 2 aditional shots
 Increases movement speed

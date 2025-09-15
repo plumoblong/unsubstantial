@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bckg4gv1paaoc"]
 
-[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="1_4dtvb"]
-[ext_resource type="Texture2D" uid="uid://b8bbioewnj6sp" path="res://images/item/passive/can.png" id="1_6su20"]
+[ext_resource type="Texture2D" uid="uid://b8bbioewnj6sp" path="res://images/item/passive/can.png" id="1_fph4r"]
+[ext_resource type="Script" uid="uid://dnca0vjfcnt65" path="res://src/resource/item.gd" id="2_j61nh"]
 
 [sub_resource type="GDScript" id="GDScript_6su20"]
 script/source = "func pickup() -> void:
@@ -11,14 +11,11 @@ script/source = "func pickup() -> void:
 "
 
 [resource]
-script = ExtResource("1_4dtvb")
+script = ExtResource("2_j61nh")
 item_name = "Energy Drink"
 item_script = SubResource("GDScript_6su20")
 type = 1
-weight = 1.0
-remove_from_pool = true
-shop_cost = 1000
-image = ExtResource("1_6su20")
+image = ExtResource("1_fph4r")
 item_description = "Gain a 10% XP Bonus
 Increases Luck"
 metadata/_custom_type_script = "uid://dnca0vjfcnt65"

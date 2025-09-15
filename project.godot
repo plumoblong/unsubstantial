@@ -32,6 +32,7 @@ _T="*res://prefab/debug_console.tscn"
 file_logging/enable_file_logging=true
 file_logging/log_path="user://ub_log.log"
 file_logging/max_log_files=3
+gdscript/warnings/enable=false
 gdscript/warnings/untyped_declaration=1
 shapes/collision/shape_color=Color(1, 0, 0.866667, 0.25098)
 

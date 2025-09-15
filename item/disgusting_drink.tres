@@ -19,8 +19,6 @@ item_name = "Disgusting Drink"
 item_script = SubResource("GDScript_bfcvv")
 type = 3
 weight = 0.25
-remove_from_pool = true
-shop_cost = 1000
 image = ExtResource("1_650ag")
 item_description = "Gain a 50% Damage Bonus
 Decreases Fire Rate and Dashing Cooldown"
