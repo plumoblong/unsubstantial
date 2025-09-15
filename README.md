@@ -8,4 +8,4 @@ https://youtu.be/_FFYBkMka60?si=KQSPaFGSVHHUCN59
 https://youtu.be/qvEUC-TjToo?si=PesBYkpjOcsSGXY4
 
 # Modding
-Modding the game is compeletely allowed but contact me on Discord / Twitter so i am aware of it
+Modding the game is compeletely allowed but contact me on Discord / Twitter so i am aware of it (@plumoblong on both platforms)
