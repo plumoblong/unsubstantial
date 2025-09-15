@@ -14,7 +14,7 @@ config/name="unsubstantial"
 run/main_scene="uid://cuhflxnivbv2b"
 config/use_custom_user_dir=true
 config/custom_user_dir_name=".unsubstantial"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -62,8 +62,8 @@ Enemy=""
 
 [gui]
 
-theme/custom_font="uid://b25yuro7twaf1"
 theme/default_font_antialiasing=0
+theme/custom_font="uid://b25yuro7twaf1"
 
 [importer_defaults]
 
@@ -271,9 +271,9 @@ tux_next={
 [physics]
 
 3d/physics_engine="Jolt Physics"
-jolt_physics_3d/simulation/areas_detect_static_bodies=true
 common/physics_interpolation=true
 common/enable_object_picking=false
+jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 [rendering]
 
