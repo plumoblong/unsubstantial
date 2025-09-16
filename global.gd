@@ -1,7 +1,7 @@
 extends Node
 class_name Global
 
-const VERSION : String = "0.96 indev4"
+const VERSION : String = "0.96 indev5"
 
 enum achievement {
 	START, BEAT, DIE, LUCK, LOOP

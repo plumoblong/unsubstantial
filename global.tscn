@@ -37,7 +37,6 @@ scale = Vector2(1.1088, 1.107)
 texture = ExtResource("2_8tbuy")
 centered = false
 hframes = 2
-frame = 1
 
 [node name="Flares" type="Node" parent="."]
 

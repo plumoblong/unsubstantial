@@ -2,14 +2,14 @@ extends Node3D
 class_name Game
 
 @onready var current_map : Node3D = get_node("Map") 
-@onready var special_room : Node3D = get_node("SpecialRoom")
+#@onready var special_room : Node3D = get_node("SpecialRoom")
 @onready var item_pool : ItemPoolManager = get_node("ItemPoolManager")
 @onready var transition : CanvasLayer = get_node("Transition")
 @onready var enemies  : Node = get_node("Enemies")
 @onready var pause_screen : Node2D = get_node("Pause/Node2D")
 @onready var chapter : ChapterManager = get_node("ChapterManager")
 @onready var chat : ChatFeed = get_node("ChatFeed")
-@onready var debug_light : Node3D = get_node("DebugLight")
+#@onready var debug_light : Node3D = get_node("DebugLight")
 
 var next_level : String
 
