@@ -34,7 +34,10 @@ file_logging/log_path="user://ub_log.log"
 file_logging/max_log_files=3
 gdscript/warnings/enable=false
 gdscript/warnings/untyped_declaration=1
-shapes/collision/shape_color=Color(1, 0, 0.866667, 0.25098)
+shapes/navigation/2d/geometry_edge_color=Color(0, 1, 0.1833334, 1)
+shapes/navigation/2d/geometry_face_color=Color(0.0666666, 1, 0, 0.4)
+shapes/collision/shape_color=Color(0, 1, 0.099999905, 0.5137255)
+shapes/collision/draw_2d_outlines=false
 
 [display]
 
