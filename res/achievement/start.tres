@@ -5,7 +5,6 @@
 
 [resource]
 script = ExtResource("1_jy4bv")
-id = 0
 image = ExtResource("1_3qtdj")
 name = "Finally!"
 description = "Welcome to unsubstantial!"

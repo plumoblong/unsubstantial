@@ -13,8 +13,8 @@ class_name EnemyComponent
 
 @export var on_hit_velocity_loss : float = 0.5
 @export var xp_payout : int = 3
-@export var xp_radius : float = 3.0
-@export var randomize_scale : float = 1.1
+@export var xp_radius : float = 1.5
+@export var randomize_scale : float = 1.2
 
 var random_factor : float = 0.0
 var time_spawned : float 
@@ -22,8 +22,9 @@ var time_spawned : float
 func setup(esc : EssenceComponent) -> void:
 	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
 	time_spawned = _G.time
-	var rand_scale = randf_range(1.0, randomize_scale)
-	get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
+	if randomize_scale != 1.0:
+		var rand_scale = randf_range(1.0, randomize_scale)
+		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
 	color = _G.hsv_to_rgb(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
 	damage *= _G.game.enemy_multiplier
@@ -56,5 +57,5 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 func handle_death() -> void:
 	_G.game.create_ghost(get_parent().global_position, sprite.texture, sprite.pixel_size)
 	_G.current_run.kills += 1
-	_G.game.create_xporb(get_parent().global_position, xp_payout, xp_radius)
+	_G.game.create_xporb(get_parent().global_position, int(ceil(float(xp_payout * _G.game.enemy_multiplier))), xp_radius)
 	get_parent().queue_free.call_deferred()

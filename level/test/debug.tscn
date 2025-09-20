@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="2_a265m"]
 [ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="4_kancn"]
 [ext_resource type="PackedScene" uid="uid://ch4cgolek2p1t" path="res://prefab/entity/level/shrine_essence.tscn" id="8_8ub2n"]
-[ext_resource type="PackedScene" uid="uid://5qa3gkkmkm37" path="res://prefab/entity/fire.tscn" id="8_ii2li"]
+[ext_resource type="PackedScene" uid="uid://bkhdly50ktf8t" path="res://prefab/entity/fire.tscn" id="8_ii2li"]
 [ext_resource type="Script" uid="uid://0sjwmbhopehj" path="res://src/level/loop_run.gd" id="8_ymy3u"]
 [ext_resource type="PackedScene" uid="uid://d0uboyn5x81e3" path="res://prefab/entity/level/shrine_time.tscn" id="9_f2i0y"]
 [ext_resource type="PackedScene" uid="uid://csp24al3t1pq8" path="res://prefab/entity/enemy/enemy_eye.tscn" id="9_mlh16"]

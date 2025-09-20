@@ -8,7 +8,7 @@ script/source = "func pickup() -> void:
 	_G.player.stats.bullet.destroy_object_enabled = true
 	_G.player.stats.bullet.destroy_object_amount = 1
 	_G.player.stats.bullet.destroy_object = load(\"res://prefab/entity/explosion.tscn\")
-	_G.player.stats.bullet.fire_rate_mult *= 1.25
+	_G.player.stats.attack_speed_mult *= 0.7
 
 func update(_delta : float) -> void:
 	_G.player.stats.bullet.destroy_object_properties = {

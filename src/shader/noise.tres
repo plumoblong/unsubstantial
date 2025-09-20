@@ -16,6 +16,6 @@ domain_warp_fractal_gain = 1.625
 [resource]
 width = 864
 height = 864
+noise = SubResource("FastNoiseLite_msxk4")
 seamless = true
 seamless_blend_skirt = 1.0
-noise = SubResource("FastNoiseLite_msxk4")

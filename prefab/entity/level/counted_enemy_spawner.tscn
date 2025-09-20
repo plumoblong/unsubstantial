@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv7rqxvb5keu0"]
+[gd_scene load_steps=5 format=3 uid="uid://cavvtjkavvesj"]
 
 [ext_resource type="Script" uid="uid://bm06n4jdlgwjk" path="res://src/level/counted_enemy_spawner.gd" id="1_dpyu7"]
 [ext_resource type="PackedScene" uid="uid://dwxkl6ilg2ynr" path="res://prefab/entity/enemy/enemy.tscn" id="2_ehg65"]

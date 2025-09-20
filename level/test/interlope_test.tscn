@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="3_sp67b"]
 [ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="4_1g1fs"]
 [ext_resource type="PackedScene" uid="uid://dlgqehmfwh6eh" path="res://prefab/entity/level/light.tscn" id="5_11e72"]
-[ext_resource type="PackedScene" uid="uid://ymujxmrj2l1c" path="res://prefab/entity/level/crate.tscn" id="6_tl1r5"]
+[ext_resource type="PackedScene" uid="uid://be83huhu4onji" path="res://prefab/entity/level/crate.tscn" id="6_tl1r5"]
 [ext_resource type="PackedScene" uid="uid://bgpu1sil353c7" path="res://prefab/entity/level/level_end.tscn" id="7_scmx6"]
 [ext_resource type="Material" uid="uid://d0yutshnmwa8m" path="res://material/marble_0.tres" id="8_vsf4s"]
 [ext_resource type="PackedScene" uid="uid://bqhd3kqev377" path="res://prefab/entity/level/special_door.tscn" id="9_338ca"]

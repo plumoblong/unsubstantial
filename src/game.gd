@@ -70,7 +70,7 @@ func _ready() -> void:
 func _process(_delta : float) -> void:
 	$WorldEnvironment.environment = chapter.current.environment
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = 1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05)
+	enemy_multiplier = clamp(1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05), 1.0, 100.0)
 	$Label.text = "ENEMY MULT: " + str(enemy_multiplier)
 	$Label.visible = _G.debug_mode
 	if _G.debug_mode: print(enemy_count)

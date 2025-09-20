@@ -53,7 +53,7 @@ func fracture(amount : int, combo : bool = false, i_time : float = 0.2) -> void:
 
 func gain(amount : int) -> void:
 	if not enabled: return
-	if essence >= max_essence: return
+	if ratio >= 1.0: return
 	essence += int(float(amount) * heal_multiplier)
 	gained.emit(amount * heal_multiplier)
 	return

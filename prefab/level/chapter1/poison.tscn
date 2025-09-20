@@ -17,9 +17,9 @@ resource_local_to_scene = true
 width = 1024
 height = 1024
 generate_mipmaps = false
+noise = SubResource("FastNoiseLite_g4eo5")
 seamless = true
 bump_strength = 41.0
-noise = SubResource("FastNoiseLite_g4eo5")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sv7q6"]
 render_priority = 0

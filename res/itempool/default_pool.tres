@@ -27,6 +27,5 @@
 
 [resource]
 script = ExtResource("23_t6fl6")
-id = "Default Pool"
 items = Array[ExtResource("1_70wfw")]([ExtResource("2_3s6bh"), ExtResource("3_igs1g"), ExtResource("4_nmydu"), ExtResource("5_gbn53"), ExtResource("6_3s6bh"), ExtResource("6_3c78v"), ExtResource("7_s0b6y"), ExtResource("9_igs1g"), ExtResource("8_2ffub"), ExtResource("9_ihrbj"), ExtResource("10_x0uuv"), ExtResource("11_vksc5"), ExtResource("13_mbway"), ExtResource("14_ibneq"), ExtResource("15_w71vq"), ExtResource("16_sjx37"), ExtResource("17_bcl2e"), ExtResource("18_ick1y"), ExtResource("19_rd71d"), ExtResource("20_ib0c0"), ExtResource("21_5c7re"), ExtResource("22_8qmgb")])
 metadata/_custom_type_script = "uid://c8l6vapm3bkg5"

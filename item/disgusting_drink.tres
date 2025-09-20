@@ -5,12 +5,8 @@
 
 [sub_resource type="GDScript" id="GDScript_bfcvv"]
 script/source = "func pickup() -> void:
-	_G.player.stats.damage_mult = 1.5
-	_G.player.stats.speed += 1.5
-	_G.player.stats.bullet.homing += 0.1
-	_G.player.stats.bullet.fire_rate_mult -= 0.2
-	_G.player.stats.dash_cooldown_mult -= 0.2
-	
+	_G.player.stats.damage_mult *= 1.4
+	_G.player.stats.attack_speed_mult *= 1.12 
 "
 
 [resource]
@@ -20,5 +16,5 @@ item_script = SubResource("GDScript_bfcvv")
 type = 3
 weight = 0.25
 image = ExtResource("1_650ag")
-item_description = "Gain a 50% Damage Bonus
-Decreases Fire Rate and Dashing Cooldown"
+item_description = "Gain a 40% Damage Bonus
+Increases Attack Speed"

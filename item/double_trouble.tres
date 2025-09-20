@@ -17,6 +17,6 @@ item_name = "Double Trouble"
 item_script = SubResource("GDScript_xh2p5")
 type = 2
 image = ExtResource("1_g6ms0")
-item_description = "Fire 1 additional bullet
+item_description = "Fire 1 additional Bulletś
 Reduces Bullet Damage"
 metadata/_custom_type_script = "uid://dnca0vjfcnt65"

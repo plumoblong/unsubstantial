@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjpmv3cakodso"]
+[gd_scene load_steps=9 format=3 uid="uid://cjpmv3cakodso"]
 
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="1_1hjcg"]
 [ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_yrdo3"]
@@ -20,27 +20,6 @@ uv1_scale = Vector3(1.01, 1.01, 1.01)
 uv1_triplanar = true
 uv1_world_triplanar = true
 texture_filter = 0
-
-[sub_resource type="Resource" id="Resource_x0ppa"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_hxti8"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_bc1g6"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_e7iml"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_rdp6r"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_avbnk"]
-metadata/__load_path__ = "res://images/nikczem.png"
-
-[sub_resource type="Resource" id="Resource_c0dc6"]
-metadata/__load_path__ = "res://images/nikczem.png"
 
 [node name="BossTest" type="Node3D"]
 script = ExtResource("1_yrdo3")
@@ -107,37 +86,30 @@ material = SubResource("StandardMaterial3D_8fnca")
 [node name="Sprite3D" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 13, 14)
 billboard = 1
-texture = SubResource("Resource_x0ppa")
 
 [node name="Sprite3D2" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 13, -1)
 billboard = 1
-texture = SubResource("Resource_hxti8")
 
 [node name="Sprite3D3" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 13, -13)
 billboard = 1
-texture = SubResource("Resource_bc1g6")
 
 [node name="Sprite3D4" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, -20)
 billboard = 1
-texture = SubResource("Resource_e7iml")
 
 [node name="Sprite3D5" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 13, -17.1)
 billboard = 1
-texture = SubResource("Resource_rdp6r")
 
 [node name="Sprite3D6" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 13, -2)
 billboard = 1
-texture = SubResource("Resource_avbnk")
 
 [node name="Sprite3D7" type="Sprite3D" parent="Arena"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, 12)
 billboard = 1
-texture = SubResource("Resource_c0dc6")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 16, -64)

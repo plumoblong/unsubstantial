@@ -5,12 +5,12 @@
 
 [sub_resource type="GDScript" id="GDScript_hano2"]
 script/source = "func pickup() -> void:
-	_G.player.stats.speed += 2.0
-	_G.player.stats.bullet.fire_rate_mult *= 1.5
+	_G.player.stats.attack_speed_mult * 0.6
 	
 	_G.player.stats.bullet.shots += 2
 	_G.player.stats.bullet.spread_angle += 12.0
 	_G.player.stats.bullet.homing -= 0.1 
+	_G.player.stats.bullet_damage_mult *= 0.75
 "
 
 [resource]
@@ -20,6 +20,5 @@ item_script = SubResource("GDScript_hano2")
 type = 3
 weight = 0.05
 image = ExtResource("1_aoctm")
-item_description = "Fire 2 aditional shots
-Increases movement speed
-Reduces attack speed"
+item_description = "Fire 2 aditional Bullets
+Reduces Attack Speed"

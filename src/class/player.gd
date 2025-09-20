@@ -13,12 +13,10 @@ class_name Player
 @onready var stats : ItemStats = get_node("ItemStats")
 
 @onready var dash_swoosh : AnimatedSprite3D = get_node("Head/Swoosh")
-
 @onready var hud : PlayerHUD = get_node("HUD")
 @onready var target : PlayerTarget = get_node("PlayerTarget")
 
 var score : int = 0
-var randomize_stats : bool = false
 var color : Color = Color.WHITE
 var has_key : bool = false
 var immune : bool = false
@@ -32,10 +30,9 @@ var can_control : bool = false
 var start_position : Vector3
 var interact_tooltip : String = ""
 var interact_description : String = ""
-var fallof : float = 0.0
 #var input_dir : Vector2
-var god_mode : bool = false
 
+var god_mode : bool = false
 var fullbright : bool = false
 
 func _enter_tree() -> void:
@@ -71,7 +68,7 @@ func _process(_delta : float) -> void:
 
 	$DeathCamera.fov = _G.config.fov - $PlayerDeathAnim.cam_offset
 
-	shoot_component.enabled = not _G.game.in_ether
+	#shoot_component.enabled = not _G.game.in_ether
 	essence_component.enabled = not _G.game.in_ether
 	level_component.enabled = not _G.game.in_ether
 	
@@ -208,13 +205,13 @@ func dash_component_dashed() -> void:
 	camera.tween_camera_fov2(-15.0, 1.5)
 
 
-	await get_tree().create_timer(0.4 * stats.dash_cooldown * stats.dash_cooldown_mult).timeout
+	await get_tree().create_timer(0.4 * stats.DASH_ATKSPD_BASE / (1 + stats.attack_speed)).timeout
 	_G.tween(camera, "multiplier", 1.0, 0.2)
 	hud.show_hand()
 	#hud.hide_punchhand()
 
 func essence_component_gained(amount : int) -> void:
-	_G.create_ui_popup("+" + str(amount), Vector2(38.0, 250.0))
+	_G.create_ui_popup("+" + str(amount), Vector2(float(randi_range(24.0, 38.0)), float(randi_range(224.0, 256.0))))
 
 func essence_component_fractured(amount : int, _crit : bool) -> void:
 	var time : float = clampf(amount / essence_component.max_essence, 0.25, 1.25)
@@ -222,6 +219,7 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 	_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
 	camera.tween_camera_fov(15.0, 0.5)
 	_G.current_run.hits_taken += 1
+	
 	camera.tween_camera_fov(-20.0, time)
 	$HitSFX.play()
 

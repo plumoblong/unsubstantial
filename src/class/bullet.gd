@@ -114,7 +114,7 @@ func seeker_body_entered(body : Node3D) -> void:
 	if body != target and body != get_parent():
 		target = body
 		
-func seeker_body_exited(_body : CharacterBody3D) -> void:
+func seeker_body_exited(_body : Node3D) -> void:
 	speed *= 1.1
 
 func animation_player_animation_finished(anim_name : String) -> void:

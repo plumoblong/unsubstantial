@@ -5,8 +5,3 @@
 
 [resource]
 script = ExtResource("1_axt3h")
-export_file = false
-target_map_editor = 1
-fgd_name = "FuncGodot"
-base_fgd_files = Array[Resource]([])
-entity_definitions = Array[ExtResource("1_ulnpg")]([])

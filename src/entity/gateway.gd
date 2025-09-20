@@ -9,6 +9,7 @@ var entered : bool = false
 }
 
 func _process(delta : float) -> void:
+	if Engine.is_editor_hint(): return
 	if not func_godot_properties["animation"]: return
 	$MeshInstance3D3.rotation_degrees.y += delta
 	$MeshInstance3D3.rotation_degrees.x += delta * 0.5

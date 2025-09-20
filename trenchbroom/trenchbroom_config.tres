@@ -9,28 +9,8 @@
 
 [resource]
 script = ExtResource("6_lhd7s")
-export_file = false
 game_name = "unsubstantial"
 icon = ExtResource("5_xdkvf")
-map_formats = Array[Dictionary]([{
-"format": "Valve",
-"initialmap": "initial_valve.map"
-}, {
-"format": "Standard",
-"initialmap": "initial_standard.map"
-}, {
-"format": "Quake2",
-"initialmap": "initial_quake2.map"
-}, {
-"format": "Quake3"
-}])
-textures_root_folder = "textures"
-texture_exclusion_patterns = Array[String](["*_albedo", "*_ao", "*_emission", "*_height", "*_metallic", "*_normal", "*_orm", "*_roughness", "*_sss"])
-palette_path = "textures/palette.lmp"
 fgd_file = ExtResource("4_xdkvf")
 entity_scale = "16"
-brush_tags = Array[Resource]([])
-brushface_tags = Array[Resource]([ExtResource("1_xdkvf"), ExtResource("2_blx85"), ExtResource("3_kci0q")])
-default_uv_scale = Vector2(1, 1)
-game_config_version = 0
 metadata/_custom_type_script = "uid://bbtnovkxalh6n"

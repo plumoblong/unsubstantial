@@ -5,8 +5,8 @@
 
 [sub_resource type="GDScript" id="GDScript_urpk8"]
 script/source = "func pickup() -> void:
-	_G.player.stats.bullet_damage_mult *= 0.4
-	_G.player.stats.bullet.fire_rate_mult *= 0.35
+	_G.player.stats.damage_mult *= 0.4
+	_G.player.stats.attack_speed_mult *= 3.6
 "
 
 [resource]
@@ -16,5 +16,5 @@ item_script = SubResource("GDScript_urpk8")
 type = 2
 image = ExtResource("1_pfyxl")
 item_description = "Greatly increases Fire Rate
-also reduces Bullet Damage"
+Reduces Damage"
 metadata/_custom_type_script = "uid://dnca0vjfcnt65"

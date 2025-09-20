@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://gp6l62op1542"]
+[gd_scene load_steps=9 format=3 uid="uid://gp6l62op1542"]
 
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="1_jptr3"]
 [ext_resource type="Script" uid="uid://cjbwtt0x3llg4" path="res://src/level/room.gd" id="1_s7ow8"]
@@ -11,21 +11,9 @@ size = Vector2(30, 30)
 size = Vector2(30, 20)
 orientation = 0
 
-[sub_resource type="Resource" id="Resource_2rrfw"]
-metadata/__load_path__ = "res://material/palace/bricks_0.tres"
-
-[sub_resource type="Resource" id="Resource_w8x4x"]
-metadata/__load_path__ = "res://material/palace/bricks_0.tres"
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_mi1sq"]
 size = Vector2(30, 20)
 orientation = 2
-
-[sub_resource type="Resource" id="Resource_8wpdh"]
-metadata/__load_path__ = "res://material/palace/bricks_0.tres"
-
-[sub_resource type="Resource" id="Resource_qk1ua"]
-metadata/__load_path__ = "res://material/palace/bricks_0.tres"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2dsrf"]
 size = Vector3(29.5, 20, 29.5)
@@ -58,24 +46,20 @@ collision_mask = 7
 [node name="Left" type="CSGMesh3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10, 0)
 mesh = SubResource("PlaneMesh_em28x")
-material = SubResource("Resource_2rrfw")
 
 [node name="Right" type="CSGMesh3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 10, 0)
 flip_faces = true
 mesh = SubResource("PlaneMesh_em28x")
-material = SubResource("Resource_w8x4x")
 
 [node name="Forward" type="CSGMesh3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -15)
 mesh = SubResource("PlaneMesh_mi1sq")
-material = SubResource("Resource_8wpdh")
 
 [node name="Back" type="CSGMesh3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 15)
 flip_faces = true
 mesh = SubResource("PlaneMesh_mi1sq")
-material = SubResource("Resource_qk1ua")
 
 [node name="Volume" type="Area3D" parent="."]
 collision_layer = 128

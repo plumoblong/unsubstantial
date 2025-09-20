@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="3_nipo2"]
 [ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="4_dek83"]
 [ext_resource type="PackedScene" uid="uid://dlgqehmfwh6eh" path="res://prefab/entity/level/light.tscn" id="5_uu36v"]
-[ext_resource type="PackedScene" uid="uid://ymujxmrj2l1c" path="res://prefab/entity/level/crate.tscn" id="6_qpvsn"]
+[ext_resource type="PackedScene" uid="uid://be83huhu4onji" path="res://prefab/entity/level/crate.tscn" id="6_qpvsn"]
 [ext_resource type="PackedScene" uid="uid://bgpu1sil353c7" path="res://prefab/entity/level/level_end.tscn" id="7_of6mb"]
 [ext_resource type="PackedScene" uid="uid://bljda3vh2o4o8" path="res://prefab/entity/level/gate.tscn" id="8_fq316"]
 [ext_resource type="PackedScene" uid="uid://b3brxruvi15bl" path="res://prefab/entity/level/falling_platform.tscn" id="10_3r3mx"]

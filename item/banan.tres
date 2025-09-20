@@ -5,8 +5,8 @@
 
 [sub_resource type="GDScript" id="GDScript_745fq"]
 script/source = "func pickup() -> void:
-	_G.player.stats.speed += 1.5
-	_G.player.stats.bullet.init_speed += 16.0
+	_G.player.stats.speed += 0.5
+	_G.player.stats.bullet.init_speed += 8.0
 "
 
 [resource]

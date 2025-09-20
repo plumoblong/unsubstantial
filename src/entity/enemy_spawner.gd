@@ -41,6 +41,7 @@ func spawn() -> void:
 
 func _process(_delta : float) -> void:
 	if Engine.is_editor_hint(): return
+	if Engine.get_physics_frames() % 4 == 0: return
 	$Sprite3D.visible = _G.debug_mode
 	if func_godot_properties["distance_to_spawn"] >= 0:
 		var distance_to_player : float = global_position.distance_to(_G.player.global_position)

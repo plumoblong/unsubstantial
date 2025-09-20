@@ -683,3 +683,39 @@ bbcode_enabled = true
 text = "[b]0[/b] pts"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Stats" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(10, 107)
+
+[node name="Sprite2D" type="Sprite2D" parent="Stats"]
+use_parent_material = true
+texture = ExtResource("8_4qm2a")
+centered = false
+
+[node name="Damage" type="Label" parent="Stats"]
+use_parent_material = true
+offset_left = 10.0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 11.0
+theme_override_font_sizes/font_size = 8
+text = "100 DMG"
+
+[node name="Speed" type="Label" parent="Stats"]
+use_parent_material = true
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 50.0
+offset_bottom = 21.0
+theme_override_font_sizes/font_size = 8
+text = "20 SPD"
+
+[node name="Firerate" type="Label" parent="Stats"]
+use_parent_material = true
+offset_left = 10.0
+offset_top = 20.0
+offset_right = 50.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 8
+text = "0.35 RATE"

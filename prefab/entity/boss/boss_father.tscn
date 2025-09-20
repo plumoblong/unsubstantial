@@ -13,29 +13,13 @@ height = 6.94789
 
 [sub_resource type="Resource" id="Resource_t7657"]
 script = ExtResource("6_nch6a")
-bullet_scene = ExtResource("5_3jl46")
-color = Color(1, 1, 1, 1)
-size_mult = 1.0
 damage = 300
 fire_rate = 40.0
-fire_rate_mult = 1.0
-shoot_offset = Vector3(0, 0, 0)
-shots = 1
-spread_angle = 30.0
-knockback = 24.0
-piercing = false
-homing = 0.0
 homing_on_player = true
-homing_interlpolation = 0.75
-bouncy = false
-spectral = false
-stun = 0.1
 init_speed = 16.0
 fall_speed = 0.0
 life_time = 40.0
-can_parry = true
 parried_speed_multiplier = 1.5
-bypass = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [node name="CharacterBody3D" type="CharacterBody3D"]

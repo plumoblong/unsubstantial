@@ -34,10 +34,10 @@ func _physics_process(delta : float) -> void:
 	if global_position.y <= -20.0:
 		essence_component.die()
 	
-	if not dash_component.can_dash:
-		chase_component.min_distance = 12.0
-	else:
-		chase_component.min_distance = 0.0
+	#if not dash_component.can_dash:
+		#chase_component.min_distance = 12.0
+	#else:
+		#chase_component.min_distance = 0.0
 	
 	#$Label3D.text = str(snappedf(float(essence_component.essence) / float(essence_component.start_essence) * 100, 1)) + "%"
 	#$Label3D.text = str(essence_component.essence)

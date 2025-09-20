@@ -5,4 +5,3 @@
 [resource]
 script = ExtResource("1_4ja6h")
 texture_path = "textures/special/skip"
-shader_attributes = Array[String](["qer_trans 0.4"])

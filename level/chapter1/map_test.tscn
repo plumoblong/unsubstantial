@@ -1270,6 +1270,7 @@ func_godot_properties = {
 "origin": "-968 -1056 16",
 "power": 35.0
 }
+speed = 35.0
 
 [node name="entity_2_item_stall" parent="FuncGodotMap" instance=ExtResource("8_ka4fq")]
 transform = Transform3D(8.94366e-09, 0, -0.75, 0, 0.75, 0, 0.75, 0, 8.94366e-09, -230, 32, -150)
