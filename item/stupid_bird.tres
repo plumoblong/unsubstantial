@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="GDScript_c172x"]
 script/source = "func pickup() -> void:
 	_G.player.stats.bullet.homing += 0.5
-	_G.player.stats.attack_speed *= 1.1
+	_G.player.stats.attack_speed *= 1.05
 "
 
 [resource]
@@ -15,5 +15,6 @@ item_name = "Stupid Bird"
 item_script = SubResource("GDScript_c172x")
 type = 1
 image = ExtResource("1_0dciu")
-item_description = "Increases Accuracy and Attack Speed"
+item_description = "Increases Accuracy and Attack Speed
+He keeps pissing me off!"
 metadata/_custom_type_script = "uid://dnca0vjfcnt65"

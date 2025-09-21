@@ -19,11 +19,12 @@ func _pressed() -> void:
 	get_parent().is_any_capturing = true
 
 func _process(delta: float) -> void:
+	if not visible: return
 	if not capturing:
 		text = action_string + ": [ " + key_string + " ]"
 		material.set_shader_parameter("self_modulate", Color.WHITE)
 	else:
-		text = action_string + ": [ ... ]"
+		text = action_string + ": [ Press Anything ]"
 		material.set_shader_parameter("self_modulate", Color.HOT_PINK)
 
 	if get_parent().is_any_capturing:

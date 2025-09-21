@@ -18,7 +18,7 @@ func mouse_entered() -> void:
 	hovering = true
 	modulate = Color.GRAY
 	if item != null:
-		desc.text = item.item_description.to_upper()
+		desc.text = item.item_description
 		names.text = item.item_name
 		rare.frame = item.type
 		rare.show()

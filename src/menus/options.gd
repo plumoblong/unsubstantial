@@ -59,7 +59,6 @@ func _process(_delta : float) -> void:
 		4:
 			$Header.text = "Graphics"
 			$Screen4/ExposureText.text = "Gamma: " + str($Screen4/Exposure.value * 100) + "%"
-			$Screen4/UIDarkMode.disabled = not $Screen4/PostProcess.button_pressed
 			
 			_G.config.video.low = $Screen4/LowMode.button_pressed
 			_G.config.video.post_process = $Screen4/PostProcess.button_pressed

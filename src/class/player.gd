@@ -79,6 +79,8 @@ func _process(_delta : float) -> void:
 	else:
 		camera.mbcam.get_parent().debug_draw = SubViewport.DEBUG_DRAW_DISABLED
 	
+	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
+	
 	if can_control and not movement_component.noclip:
 		if Input.is_action_pressed("shoot") and not dash_component.dashing:
 			shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
@@ -101,8 +103,7 @@ func _process(_delta : float) -> void:
 
 func _physics_process(delta : float) -> void:
 	
-	
-	
+
 	stats.update(movement_component, shoot_component, dash_component, essence_component, knock_component, $DashQuery, hud)
 	camera.update(-movement_component.input_dir.x)
 	#movement_component.on_floor = is_on_floor()

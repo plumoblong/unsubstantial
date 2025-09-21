@@ -613,7 +613,7 @@ vertical_alignment = 1
 
 [node name="Eye" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
-position = Vector2(240, 15)
+position = Vector2(240, 24)
 sprite_frames = SubResource("SpriteFrames_m62ne")
 autoplay = "default"
 frame_progress = 0.150472

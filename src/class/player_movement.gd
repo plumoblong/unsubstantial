@@ -1,8 +1,8 @@
 extends Component
 class_name PlayerMoveComponent
 
-# PLUMOBLONG WITH HELP FROM MAJIKAYOGAMES
-# FOR REUSE 2025 
+# plumoblong WITH HELP FROM MAJIKAYOGAMES
+# FOR REUSE 2025 / 2026 / WHENEVER
 # >|o
 
 @export var dash : DashComponent

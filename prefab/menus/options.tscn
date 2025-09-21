@@ -152,7 +152,6 @@ text = "Resolution"
 alignment = 1
 
 [node name="Screen4" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 32)
 
 [node name="LowMode" parent="Screen4" instance=ExtResource("5_eyrc5")]

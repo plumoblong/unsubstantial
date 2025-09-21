@@ -44,8 +44,8 @@ var actual_atkspd : float
 
 func update(mov : PlayerMoveComponent, atk : ShootComponent, dash : DashComponent, esc : EssenceComponent, knock : KnockbackComponent, dash_hit : Hazard, ui : PlayerHUD) -> void:
 	
-	actual_damage = int(damage * (damage_mult) * (1.0 + float(get_parent().level_component.level) / 13.3))
-	actual_atkspd = attack_speed * attack_speed_mult
+	actual_damage = int(damage * (damage_mult) * (1.0 + float(get_parent().level_component.level) / 25.0))
+	actual_atkspd = clampf(attack_speed * attack_speed_mult, 0.25, 5.0)
 	actual_crit = (crit_chance + (float(luck) / 5.0)) * crit_mult
 	
 	bullet.damage = actual_damage * bullet_damage_mult
@@ -58,7 +58,7 @@ func update(mov : PlayerMoveComponent, atk : ShootComponent, dash : DashComponen
 	#dash_hit.damage = int(float(actual_damage) * dash_damage_mult)
 	dash.dash_time = dash_time * dash_time_mult
 	dash.dash_speed = speed * 5.0
-	dash.cooldown = DASH_ATKSPD_BASE / (actual_atkspd)
+	dash.cooldown = maxf(DASH_ATKSPD_BASE / (actual_atkspd), 0.85)
 	dash_hit.knockback_strength = 64.0 * enemy_knockback
 	bullet.knockback = 24.0 * enemy_knockback
 	

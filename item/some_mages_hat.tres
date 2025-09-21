@@ -19,6 +19,6 @@ script = ExtResource("2_66qbs")
 item_name = "Some mage's hat"
 item_script = SubResource("GDScript_e3f7c")
 type = 3
-weight = 0.5
+weight = 0.25
 image = ExtResource("1_dpib2")
 item_description = "Your Bullets seek."

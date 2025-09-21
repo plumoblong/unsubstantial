@@ -22,7 +22,7 @@ var ss_count : int = 0
 var bob_offset : float = 0.0
 var height_offset : float = 0.0
 
-
+const TILT_LERP : float = 0.08
 
 func _ready() -> void:
 	anim.play("viewbob")
@@ -51,9 +51,9 @@ func update(t : float) -> void:
 	height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
 	var tilt_limit : float = -player.global_transform.basis.z.dot(-head.global_transform.basis.z)
 	if player.is_on_floor():
-		tilt = lerpf(tilt, t * tilt_amount, 0.05) * tilt_limit
+		tilt = lerpf(tilt, t * tilt_amount, TILT_LERP) #* tilt_limit
 	else:
-		tilt = lerpf(tilt, 0.0, 0.05)
+		tilt = lerpf(tilt, 0.0, TILT_LERP)
 
 	head.position.y = 1.816+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset
 	rotation_degrees.z = tilt

@@ -30,6 +30,6 @@ script = ExtResource("2_wwcfm")
 item_name = "Decimation"
 item_script = SubResource("GDScript_a2wsy")
 type = 3
-weight = 0.5
+weight = 0.25
 image = ExtResource("1_utfo1")
 item_description = "Massively increases Critical Chance"

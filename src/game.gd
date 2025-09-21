@@ -68,6 +68,7 @@ func _ready() -> void:
 	
 	
 func _process(_delta : float) -> void:
+	if Engine.get_process_frames() % 4 == 0: return
 	$WorldEnvironment.environment = chapter.current.environment
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
 	enemy_multiplier = clamp(1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05), 1.0, 100.0)
@@ -107,7 +108,7 @@ func _process(_delta : float) -> void:
 	#$ItemChoose.visible = in_transition
 	
 	_G.player.can_control = not $Pause.visible and not in_transition and _G.player.essence_component.alive
-	$WorldEnvironment.environment.glow_enabled = not _G.config.video.low
+	#$WorldEnvironment.environment.glow_enabled = not _G.config.video.low
 	
 func change_map(map_file_path : String) -> void:
 	var map_file : PackedScene = load(map_file_path)

@@ -96,9 +96,14 @@ func _ready() -> void:
 		get_window().mode = Window.MODE_WINDOWED
 	seed(int(Time.get_unix_time_from_system()))
 
-func _process(delta : float) -> void:
+func _physics_process(delta : float) -> void:
 	time += delta
 	$Version.text = VERSION.to_upper()
+	
+	if config.video.low:
+		get_viewport().scaling_3d_scale = 0.5
+	else:
+		get_viewport().scaling_3d_scale = 1.0
 	
 	$Shader.material.set_shader_parameter("gamma", config.video.exposure)
 	$Shader.material.set_shader_parameter("enable_filter", config.video.post_process)
@@ -180,7 +185,7 @@ func tween(node : Object, property : String, value, length : float = 1.0, trans 
 	
 func change_fullscreen() -> void:
 	if get_window().mode == Window.MODE_WINDOWED:
-		get_window().mode = Window.MODE_FULLSCREEN
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 		config.fullscreen = true
 	else:
 		get_window().mode = Window.MODE_WINDOWED
