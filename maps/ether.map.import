@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://debto365p0s20"
+path="res://.godot/imported/ether.map-2905495a71e479c058d0c7b05bc9bd26.tres"
+
+[deps]
+
+source_file="res://maps/ether.map"
+dest_files=["res://.godot/imported/ether.map-2905495a71e479c058d0c7b05bc9bd26.tres"]
+
+[params]
+

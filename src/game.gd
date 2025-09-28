@@ -4,12 +4,14 @@ class_name Game
 @onready var current_map : Node3D = get_node("Map") 
 #@onready var special_room : Node3D = get_node("SpecialRoom")
 @onready var item_pool : ItemPoolManager = get_node("ItemPoolManager")
-@onready var transition : CanvasLayer = get_node("Transition")
+@onready var transition : Transition = get_node("Transition")
 @onready var enemies  : Node = get_node("Enemies")
 @onready var pause_screen : Node2D = get_node("Pause/Node2D")
 @onready var chapter : ChapterManager = get_node("ChapterManager")
 @onready var chat : ChatFeed = get_node("ChatFeed")
 #@onready var debug_light : Node3D = get_node("DebugLight")
+
+const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 
 var next_level : String
 
@@ -133,6 +135,17 @@ func change_map(map_file_path : String) -> void:
 	else:
 		_T.say("File " + map_file_path + " doesn't exist.", Color.RED)
 
+func change_map_autobuild(map_file_path : String) -> void:
+	if map_file_path == '': return
+	current_map.queue_free()
+	var map_instance : Map = MAP_SCENE.instantiate()
+	map_instance.name = "Map"
+	current_map = map_instance
+
+	add_child(current_map)
+	current_map.build(map_file_path)
+
+	
 func mute_music(time : float = 1.0) -> void:
 	_G.tween($Music, "volume_db", linear_to_db(0.001), time, 0, 0)
 	
@@ -196,21 +209,14 @@ func end_level(loop : bool = false) -> void:
 	#_G.player.has_key = false
 	for n in enemies.get_children():
 		n.queue_free()
-	change_map("res://level/chapter1/map_test.tscn")
+	change_map_autobuild("res://maps/chapter1/map_1.map")
 	chat.add_message("You have beaten this level " + str(stage - 1) + " times.", Color.WHITE)
 
-		
 	$Ambience.global_position = Vector3(randf_range(-chapter.current.ambience_position.x, chapter.current.ambience_position.x), 
 	randf_range(-chapter.current.ambience_position.y, chapter.current.ambience_position.y), 
 	randf_range(-chapter.current.ambience_position.z, chapter.current.ambience_position.z))
 	$Ambience.stream = chapter.current.ambience_streams.pick_random()
 	$Ambience.play()
-	
-func save_game() -> void:
-	_G.save.can_continue = true
-	var s : PackedScene = PackedScene.new()
-	s.pack(self)
-	ResourceSaver.save(s, "user://last_run.tscn")
 
 func wait(time : float = 0.03) -> void:
 	time_scale = 0.01
@@ -222,3 +228,12 @@ func _notification(what) -> void:
 		if not _G.debug_mode:
 			$Pause.visible = true
 			pause_screen.show()
+func map_build_complete() -> void:
+	_G.player.global_position = Vector3.ZERO + Vector3(0.0, 1.0, 0.0)
+	_G.player.global_rotation = Vector3.ZERO
+	_G.player.velocity = Vector3.ZERO
+	chapter.current = chapter.all[current_map.chapter_id]
+	transition.ascend_out()
+
+func map_build_failed() -> void:
+	_T.say("Map failed to build. Check the log file for more information.", Color.RED)

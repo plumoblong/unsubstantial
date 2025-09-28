@@ -166,6 +166,7 @@ text = "High Score: 1000"
 horizontal_alignment = 1
 
 [node name="Restart" parent="." instance=ExtResource("7_xh8cw")]
+visible = false
 offset_top = 182.0
 offset_right = 480.0
 offset_bottom = 194.0
@@ -181,6 +182,7 @@ shadow_hover_color = Color(0.698039, 0.698039, 0.698039, 1)
 metadata/_edit_group_ = true
 
 [node name="Menu" parent="." instance=ExtResource("7_xh8cw")]
+visible = false
 offset_top = 198.0
 offset_right = 480.0
 offset_bottom = 210.0

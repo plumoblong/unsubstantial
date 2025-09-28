@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://17o7p8c33otu"]
+[gd_scene load_steps=11 format=3 uid="uid://17o7p8c33otu"]
 
-[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_0x670"]
-[ext_resource type="Material" uid="uid://hyqpmewdxg1p" path="res://material/reflective_1.tres" id="2_gsr4n"]
-[ext_resource type="Material" uid="uid://bwtv8fojil2ps" path="res://material/ethereal_scroll.tres" id="3_1xbvn"]
+[ext_resource type="Material" uid="uid://t6hjfcxivl64" path="res://textures/world/shiny.tres" id="1_uyjon"]
+[ext_resource type="Material" uid="uid://qilkeuk5s68v" path="res://textures/world/player_essence.tres" id="2_uui05"]
 [ext_resource type="PackedScene" uid="uid://bk8hwt7lut1l3" path="res://prefab/entity/level/jump_pad.tscn" id="4_xv5jp"]
 [ext_resource type="AudioStream" uid="uid://m8bocn1yx6q0" path="res://music/ether.ogg" id="5_0wt71"]
 [ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="6_bxg8e"]
@@ -15,17 +14,15 @@
 size = Vector3(155, 75, 180)
 
 [node name="Equit" type="Node3D"]
-script = ExtResource("1_0x670")
-map_name = "ether"
 
 [node name="CSGMesh3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 use_collision = true
 size = Vector3(200, 1, 200)
-material = ExtResource("2_gsr4n")
+material = ExtResource("1_uyjon")
 
 [node name="Solid" type="CSGCombiner3D" parent="."]
-material_override = ExtResource("3_1xbvn")
+material_override = ExtResource("2_uui05")
 use_collision = true
 collision_layer = 15
 collision_mask = 15

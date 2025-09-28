@@ -1,8 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpukikjfsg34i"]
+[gd_scene load_steps=22 format=3 uid="uid://dpukikjfsg34i"]
 
 [ext_resource type="Script" uid="uid://c2qm8sqdeucwu" path="res://src/entity/item_stall.gd" id="1_kkrgu"]
 [ext_resource type="Texture2D" uid="uid://c4e3rvpsimumw" path="res://textures/world/marble.png" id="3_jlal2"]
-[ext_resource type="Texture2D" uid="uid://bsk48vypokcnx" path="res://res/texture/glitch.tres" id="4_amqfh"]
 [ext_resource type="Texture2D" uid="uid://dmllxu5e0ctan" path="res://textures/world/poison_g.png" id="4_hc2id"]
 [ext_resource type="Texture2D" uid="uid://ckyirw0vnltwn" path="res://textures/world/poison_norm.png" id="4_jlal2"]
 [ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="5_1n4sn"]
@@ -377,7 +376,6 @@ billboard = 1
 double_sided = false
 texture_filter = 2
 render_priority = 1
-texture = ExtResource("4_amqfh")
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Blind" type="Sprite3D" parent="."]

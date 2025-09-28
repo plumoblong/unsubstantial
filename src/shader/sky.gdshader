@@ -1,7 +1,8 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, fog_disabled;
 
 uniform sampler2D sky_texture : source_color;
+uniform vec3 albedo : source_color = vec3(1, 1, 1);
 uniform bool lock_aspect = false;
 uniform float aspect_ratio = 1.3333333;
 uniform vec2 fov = vec2(180.0, 90.0);
@@ -30,5 +31,5 @@ void fragment() {
 	vec2 uv_offset = vec2(-offset.x, offset.y);
 	vec2 uv = (SCREEN_UV + uv_offset) * BG_COORDS.zw + BG_COORDS.xy;
 	uv *= vec2(tiling);
-	ALBEDO = texture(sky_texture, uv).rgb;
+	ALBEDO = texture(sky_texture, uv).rgb * albedo.rgb;
 }

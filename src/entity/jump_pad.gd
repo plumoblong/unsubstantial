@@ -17,6 +17,7 @@ func body_entered(body : CharacterBody3D) -> void:
 		$AudioStreamPlayer3D.play()
 		body.velocity.y = 0.0
 		body.velocity += transform.basis.y * speed
+		body.movement_component.can_jump = false
 	else:
 		if body.has_node("MovementComponent"):
 			body.movement_component.is_using_force = true

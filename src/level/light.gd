@@ -7,7 +7,7 @@ class_name Light
 	"range" = 18.0, "energy" = 0.75, "mesh_visible" = 1
 }
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	omni_range = func_godot_properties["range"]
 	light_energy = func_godot_properties["energy"]
 	#light_color = func_godot_properties["color"]

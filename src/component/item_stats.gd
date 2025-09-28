@@ -16,8 +16,8 @@ var crit_mult : float = 1.0
 
 var attack_speed : float = 1.0
 var attack_speed_mult : float = 1.0
-const BULLET_ATKSPD_BASE : float = 0.9
-const DASH_ATKSPD_BASE : float = 1.4
+var bullet_atkspd : float = 0.9
+var dash_atkspd : float = 1.4
 
 var size : float = 1.0
 
@@ -49,7 +49,7 @@ func update(mov : PlayerMoveComponent, atk : ShootComponent, dash : DashComponen
 	actual_crit = (crit_chance + (float(luck) / 5.0)) * crit_mult
 	
 	bullet.damage = actual_damage * bullet_damage_mult
-	bullet.fire_rate = BULLET_ATKSPD_BASE / (actual_atkspd)
+	bullet.fire_rate = bullet_atkspd / actual_atkspd
 	bullet.knockback = 24.0 * enemy_knockback
 	
 	atk.config = bullet
@@ -58,7 +58,7 @@ func update(mov : PlayerMoveComponent, atk : ShootComponent, dash : DashComponen
 	#dash_hit.damage = int(float(actual_damage) * dash_damage_mult)
 	dash.dash_time = dash_time * dash_time_mult
 	dash.dash_speed = speed * 5.0
-	dash.cooldown = maxf(DASH_ATKSPD_BASE / (actual_atkspd), 0.85)
+	dash.cooldown = maxf(dash_atkspd / actual_atkspd, 0.75)
 	dash_hit.knockback_strength = 64.0 * enemy_knockback
 	bullet.knockback = 24.0 * enemy_knockback
 	

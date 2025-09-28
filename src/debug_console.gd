@@ -1,3 +1,4 @@
+@tool
 extends CanvasLayer
 class_name TUX
 
@@ -139,10 +140,10 @@ func god() -> void:
 		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
 		return
 	if _G.player.god_mode:
-		_G.player.god_mode = false
+		_G.player.essence_component.immortal = true
 		say("God mode disabled.")
 	else:
-		_G.player.god_mode = true
+		_G.player.essence_component.immortal = false
 		say("God mode enabled.")
 	input.release_focus()
 	visible = false

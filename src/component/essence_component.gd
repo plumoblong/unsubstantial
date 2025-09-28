@@ -12,6 +12,7 @@ var alive : bool = true
 var times_fractured : int = 0
 var defense : float = 1.0
 var ratio : float = 1.0
+var immortal : bool = false
 
 signal gained(amount : int)
 signal fractured(amount : int, i_time : float)
@@ -34,7 +35,7 @@ func update() -> void:
 	if not enabled: return
 	if essence <= die_threshold:
 		die()
-		alive = false
+		
 	essence = clampi(essence, 0, max_essence)
 	ratio = float(essence) / float(max_essence)
 
@@ -60,6 +61,9 @@ func gain(amount : int) -> void:
 
 func die() -> void:
 	if alive:
-		died.emit(false)
-		#_T.say(get_parent().name +  " died :(")
-		alive = false
+		if not immortal:
+			died.emit(false)
+			#_T.say(get_parent().name +  " died :(")
+			alive = false
+	else:
+		essence = 1

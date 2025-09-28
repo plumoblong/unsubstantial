@@ -176,7 +176,7 @@ func change_window_size(size : int) -> void:
 	
 @warning_ignore("untyped_declaration")
 func tween(node : Object, property : String, value, length : float = 1.0, trans : int = Tween.TRANS_LINEAR, easing : int = Tween.EASE_IN_OUT) -> void:
-	#pass
+	 
 	var t := get_tree().create_tween()
 	t.set_trans(trans)
 	t.set_ease(easing)
@@ -359,3 +359,7 @@ func create_ui_popup(text : String = "HI.", position : Vector2 = Vector2.ZERO, v
 	d.color = color
 	d.invert_amount = invert
 	add_child(d)
+
+func set_shaderparam_once(material : ShaderMaterial, parameter : StringName, value : Variant) -> void:
+	material.set_shader_parameter(parameter, value)
+	return

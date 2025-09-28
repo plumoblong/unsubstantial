@@ -11,14 +11,14 @@ class_name PlayerMoveComponent
 @export var jump_buffer_timer : Timer
 
 @export var air_cap : float = 0.85 # dont know what this does lol
-@export var air_accel : float = 50.0 # how fast the player changes direction in air
+@export var air_accel : float = 48.0 # how fast the player changes direction in air
 @export var air_move_speed : float = 5.5 # how much the camera needs to move every frame to gain / maintain speed the bigger it is the easier it is to speed up 
 @export var jump_velocity : float = 7.6
 
 #ground
 @export var ground_cap : float = 2.4 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
 @export var fall_speed : float = 19.0
-@export var walk_speed : float = 20.0
+@export var walk_speed : float = 18.5
 @export var ground_accel : float = 8.0
 @export var ground_decel : float = 11.0
 @export var ground_friction : float = 3.0
@@ -81,7 +81,11 @@ func update(delta : float) -> void:
 			
 			if rad_to_deg(get_parent().get_floor_angle()) != 0.0:
 				if not dash.dashing:
-					get_parent().velocity.y -= fall_speed * delta
+					if get_parent().velocity.y >= 0:
+						
+						get_parent().velocity.y -= fall_speed * delta
+					else:
+						get_parent().velocity.y -= fall_speed * 1.3 * delta
 				
 			if get_parent().is_on_floor():
 				can_jump = true

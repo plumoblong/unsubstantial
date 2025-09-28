@@ -13,7 +13,7 @@ func _ready() -> void:
 	$Stats.text = "Enemies Killed:   " + str(_G.current_run.kills) + "\nTook Damage:   " + str(_G.current_run.hits_taken) + " times\nItems Collected:   " + str(_G.current_run.items_collected.common + _G.current_run.items_collected.uncommon + _G.current_run.items_collected.rare + _G.current_run.items_collected.legendary)
 	$Score.text = "Score: " + str(_G.current_run.score)
 	$Score2.text = "High Score: " + str(int(_G.save.high_score))
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	$Restart.show()
 	$Menu.show()
 	can_reset = true

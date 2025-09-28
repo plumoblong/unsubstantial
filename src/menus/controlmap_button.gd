@@ -22,10 +22,10 @@ func _process(delta: float) -> void:
 	if not visible: return
 	if not capturing:
 		text = action_string + ": [ " + key_string + " ]"
-		material.set_shader_parameter("self_modulate", Color.WHITE)
+		_G.set_shaderparam_once(material, "self_modulate", Color.WHITE)
 	else:
 		text = action_string + ": [ Press Anything ]"
-		material.set_shader_parameter("self_modulate", Color.HOT_PINK)
+		_G.set_shaderparam_once(material, "self_modulate", Color.HOT_PINK)
 
 	if get_parent().is_any_capturing:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE

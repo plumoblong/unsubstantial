@@ -39,7 +39,6 @@ offset_bottom = 272.0
 color = Color(0, 0, 0, 0.564706)
 
 [node name="Main" type="Node2D" parent="Node2D"]
-visible = false
 use_parent_material = true
 position = Vector2(-4, 36)
 
@@ -49,7 +48,9 @@ offset_left = 4.0
 offset_top = 72.0
 offset_right = 484.0
 offset_bottom = 85.0
-text = "CONTINUE"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Continue"
 alignment = 1
 
 [node name="Statistics" parent="Node2D/Main" instance=ExtResource("3_35y48")]
@@ -58,7 +59,9 @@ offset_left = 4.0
 offset_top = 84.0
 offset_right = 484.0
 offset_bottom = 97.0
-text = "INVENTORY"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Inventory"
 alignment = 1
 
 [node name="Restart" parent="Node2D/Main" instance=ExtResource("3_35y48")]
@@ -67,7 +70,9 @@ offset_left = 4.0
 offset_top = 96.0
 offset_right = 484.0
 offset_bottom = 109.0
-text = "RESTART"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Restart"
 alignment = 1
 
 [node name="Options" parent="Node2D/Main" instance=ExtResource("3_35y48")]
@@ -76,7 +81,9 @@ offset_left = 4.0
 offset_top = 108.0
 offset_right = 484.0
 offset_bottom = 121.0
-text = "OPTIONS"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Options"
 alignment = 1
 
 [node name="Exit" parent="Node2D/Main" instance=ExtResource("3_35y48")]
@@ -85,7 +92,9 @@ offset_left = 4.0
 offset_top = 120.0
 offset_right = 484.0
 offset_bottom = 133.0
-text = "EXIT"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Exit"
 alignment = 1
 
 [node name="ChapterInfo" type="RichTextLabel" parent="Node2D/Main"]
@@ -119,6 +128,7 @@ horizontal_alignment = 1
 visible = false
 
 [node name="Statistics" type="Node2D" parent="Node2D"]
+visible = false
 material = ExtResource("6_82fug")
 
 [node name="Header" type="RichTextLabel" parent="Node2D/Statistics"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6dn73q0mhnx1"]
+[gd_scene load_steps=20 format=3 uid="uid://b6dn73q0mhnx1"]
 
 [ext_resource type="Script" uid="uid://dv16xbqqjpc34" path="res://src/menu.gd" id="1_tbsmk"]
 [ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_hubvr"]
@@ -21,12 +21,6 @@ shader = ExtResource("8_wmmby")
 shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(0.427342, 0.427342, 0.427342, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp55b"]
-shader = ExtResource("8_wmmby")
-shader_parameter/direction = Vector2(-1, -1)
-shader_parameter/modulate = Color(0, 0, 0, 1)
-shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5kv0"]
 atlas = ExtResource("9_xdexj")
@@ -86,7 +80,6 @@ theme_override_font_sizes/font_size = 6
 text = "Start"
 
 [node name="Achievements" parent="Main" instance=ExtResource("3_hubvr")]
-material = SubResource("ShaderMaterial_wmmby")
 offset_left = 56.0
 offset_top = 114.0
 offset_right = 129.0
@@ -118,7 +111,6 @@ theme_override_font_sizes/font_size = 6
 text = "Options"
 
 [node name="Exit" parent="Main" instance=ExtResource("3_hubvr")]
-material = SubResource("ShaderMaterial_qp55b")
 offset_left = 56.0
 offset_top = 132.0
 offset_right = 111.0

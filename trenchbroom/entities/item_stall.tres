@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://djcrmgap53ew0"]
 
 [ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="1_0wpkx"]
-[ext_resource type="Script" uid="uid://rwwodvddu15o" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_hogyj"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_hogyj"]
 
 [resource]
 script = ExtResource("2_hogyj")

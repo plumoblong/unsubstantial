@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://m5dmgkp1ikkw"]
+[gd_scene load_steps=8 format=3 uid="uid://m5dmgkp1ikkw"]
 
 [ext_resource type="Script" uid="uid://baw4qijnudgp2" path="res://src/menus/credits.gd" id="1_bivbr"]
-[ext_resource type="Texture2D" uid="uid://b7weqvis861md" path="res://images/ui/background.png" id="2_w5eed"]
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_ige6w"]
 [ext_resource type="AudioStream" uid="uid://cwbrv1r1eybx8" path="res://music/end_demo.ogg" id="4_ooo2g"]
 [ext_resource type="Texture2D" uid="uid://lqsndjx87otm" path="res://images/logo.png" id="5_6h0io"]
@@ -14,15 +13,11 @@ blend_mode = 1
 [node name="Credits" type="Node2D"]
 script = ExtResource("1_bivbr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_w5eed")
-centered = false
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 clip_contents = false
 offset_top = 68.0
-offset_right = 432.0
-offset_bottom = 152.0
+offset_right = 480.0
+offset_bottom = 172.0
 theme_override_fonts/normal_font = ExtResource("3_ige6w")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true

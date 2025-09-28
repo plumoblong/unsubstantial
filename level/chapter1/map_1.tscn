@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://q45q03od1sk3"]
+
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_lxtaj"]
+[ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_m7sed"]
+[ext_resource type="Resource" uid="uid://c07h8g5oxasgv" path="res://trenchbroom/unsubstantial_map_settings.tres" id="3_oeveq"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_g5n5k"]
+geometry_parsed_geometry_type = 0
+agent_radius = 1.0
+agent_max_slope = 66.0
+vertices_per_polygon = 4.0
+
+[node name="PalaceMap1" type="NavigationRegion3D" node_paths=PackedStringArray("map_builder")]
+navigation_mesh = SubResource("NavigationMesh_g5n5k")
+script = ExtResource("1_lxtaj")
+map_builder = NodePath("FuncGodotMap")
+
+[node name="FuncGodotMap" type="Node3D" parent="."]
+script = ExtResource("2_m7sed")
+local_map_file = "uid://d18mc57u4hcuf"
+map_settings = ExtResource("3_oeveq")
+
+[connection signal="bake_finished" from="." to="." method="bake_finished"]

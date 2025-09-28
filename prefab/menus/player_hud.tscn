@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bnfk1f1uvunre"]
+[gd_scene load_steps=48 format=3 uid="uid://bnfk1f1uvunre"]
 
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="1_n17tt"]
 [ext_resource type="Script" uid="uid://cdijn4mxeb2pm" path="res://src/component/player_hud.gd" id="2_j5rt0"]
@@ -10,12 +10,6 @@
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="7_w4dv1"]
 [ext_resource type="Texture2D" uid="uid://bneeav7fi82mh" path="res://images/ui/stat_icons.png" id="8_4qm2a"]
 [ext_resource type="AudioStream" uid="uid://cn7wx3s2dhvjm" path="res://sfx/hit_marker.wav" id="9_u1awl"]
-[ext_resource type="Texture2D" uid="uid://dsptpp7wewp16" path="res://images/ui/progress_bar_empty.png" id="10_k3dgb"]
-[ext_resource type="Texture2D" uid="uid://dv8vopycwjk3r" path="res://images/ui/progress_bar_solid.png" id="11_vsj6l"]
-[ext_resource type="Shader" uid="uid://2olmhccqsnm6" path="res://src/shader/scrolling.gdshader" id="12_81b16"]
-[ext_resource type="Texture2D" uid="uid://d05qrmf6avtsq" path="res://images/ui/findthetexit.png" id="13_a28f5"]
-[ext_resource type="Texture2D" uid="uid://bmx3laup2ytq8" path="res://images/ui/progress_bar_big_empty.png" id="14_mmj1h"]
-[ext_resource type="Texture2D" uid="uid://bjj2fdr7mh61t" path="res://images/ui/progress_bar_big_solid.png" id="15_4k6h3"]
 [ext_resource type="Texture2D" uid="uid://c7nvymmhd51qv" path="res://images/ui/player/eye.png" id="16_nu6og"]
 [ext_resource type="Texture2D" uid="uid://lddvwgprmmpl" path="res://images/null.png" id="17_l7j4h"]
 [ext_resource type="Texture2D" uid="uid://c2ar5rwtyqfb4" path="res://images/ui/hud_infoicon.png" id="18_l0m6r"]
@@ -98,20 +92,6 @@ shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 0.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_art37"]
-blend_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7n5f"]
-shader = ExtResource("12_81b16")
-shader_parameter/speed = Vector2(1, 0)
-shader_parameter/modulate = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpgs2"]
-shader = ExtResource("1_n17tt")
-shader_parameter/modulate = Color(1, 1, 1, 1)
-shader_parameter/amount = 1.0
-shader_parameter/alpha = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kg1in"]
 atlas = ExtResource("16_nu6og")
@@ -284,6 +264,7 @@ material = SubResource("ShaderMaterial_ma48x")
 script = ExtResource("2_j5rt0")
 
 [node name="Vignette" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color(0.648759, 0.586502, 0.713182, 1)
 material = SubResource("CanvasItemMaterial_xed6q")
 offset_right = 480.0
@@ -364,6 +345,7 @@ vertical_alignment = 1
 position = Vector2(2, 21)
 
 [node name="Crosshair" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_xed6q")
 position = Vector2(241, 135)
 texture = ExtResource("5_s826l")
@@ -516,100 +498,6 @@ frame = 5
 [node name="HitmarkerSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_u1awl")
 bus = &"SFX2"
-
-[node name="Bars" type="Node2D" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_art37")
-use_parent_material = true
-position = Vector2(4, 256)
-
-[node name="Level" type="Node2D" parent="Bars"]
-use_parent_material = true
-position = Vector2(8, -12)
-
-[node name="Bar2" type="NinePatchRect" parent="Bars/Level"]
-modulate = Color(1, 1, 1, 0.25098)
-offset_top = 6.0
-offset_right = 116.0
-offset_bottom = 12.0
-texture = ExtResource("10_k3dgb")
-region_rect = Rect2(0, 0, 6, 6)
-patch_margin_left = 2
-patch_margin_right = 2
-
-[node name="Bar" type="NinePatchRect" parent="Bars/Level"]
-clip_children = 2
-light_mask = 257
-use_parent_material = true
-offset_top = 6.0
-offset_right = 116.0
-offset_bottom = 12.0
-texture = ExtResource("11_vsj6l")
-patch_margin_left = 2
-patch_margin_right = 2
-
-[node name="Sprite2D2" type="TextureRect" parent="Bars/Level/Bar"]
-visible = false
-material = SubResource("ShaderMaterial_h7n5f")
-layout_mode = 0
-offset_right = 116.0
-offset_bottom = 6.0
-texture = ExtResource("13_a28f5")
-stretch_mode = 1
-
-[node name="Level" type="Label" parent="Bars/Level"]
-use_parent_material = true
-offset_left = -1.0
-offset_top = 13.0
-offset_right = 113.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 8
-text = "LEVEL"
-uppercase = true
-
-[node name="XP" type="Label" parent="Bars/Level"]
-visible = false
-use_parent_material = true
-offset_left = -2.0
-offset_top = 13.0
-offset_right = 114.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 8
-text = "2127"
-horizontal_alignment = 2
-
-[node name="Essence" type="Node2D" parent="Bars"]
-use_parent_material = true
-position = Vector2(11, -19)
-
-[node name="Bar2" type="NinePatchRect" parent="Bars/Essence"]
-modulate = Color(1, 1, 1, 0.25098)
-offset_right = 119.0
-offset_bottom = 12.0
-texture = ExtResource("14_mmj1h")
-region_rect = Rect2(0, 0, 12, 12)
-patch_margin_left = 5
-patch_margin_right = 5
-
-[node name="Bar" type="NinePatchRect" parent="Bars/Essence"]
-use_parent_material = true
-offset_right = 119.0
-offset_bottom = 12.0
-texture = ExtResource("15_4k6h3")
-region_rect = Rect2(0, 0, 12, 12)
-patch_margin_left = 5
-patch_margin_right = 5
-
-[node name="Text" type="Label" parent="Bars/Essence"]
-material = SubResource("ShaderMaterial_qpgs2")
-use_parent_material = true
-offset_left = 6.0
-offset_top = -7.0
-offset_right = 120.0
-offset_bottom = 1.0
-theme_override_font_sizes/font_size = 8
-text = "ESSENCE"
-vertical_alignment = 1
 
 [node name="Eye" type="AnimatedSprite2D" parent="."]
 use_parent_material = true

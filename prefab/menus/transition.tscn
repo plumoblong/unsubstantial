@@ -159,7 +159,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_e686d"]
 resource_name = "transition"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -167,10 +166,10 @@ tracks/0/path = NodePath("Player:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(2.5, -0.784581),
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(-2, -0.784581),
 "update": 0,
-"values": [Vector2(240, 320), Vector2(240, -64)]
+"values": [Vector2(240, 320), Vector2(240, 135)]
 }
 
 [sub_resource type="Animation" id="Animation_o8cil"]
@@ -185,7 +184,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2.07053, -3.48219),
 "update": 0,
-"values": [Vector2(216, 121), Vector2(216, -64)]
+"values": [Vector2(240, 135), Vector2(240, -64)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t7m85"]

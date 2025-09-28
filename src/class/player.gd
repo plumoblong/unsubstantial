@@ -81,12 +81,13 @@ func _process(_delta : float) -> void:
 	
 	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
 	
-	if can_control and not movement_component.noclip:
-		if Input.is_action_pressed("shoot") and not dash_component.dashing:
-			shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
-		elif Input.is_action_pressed("dash"):
-			dash_component.dash(movement_component)
-	
+
+	if _G.config.video.low:
+		camera.far = 128.0
+		camera.mbcam.far = 64.0
+	else:
+		camera.far = 2048.0
+		camera.mbcam.far = 1028.0
 	if $HUD/Eye.animation == "open": $HUD/Eye.show()
 	
 	if shoot_component.enabled:
@@ -119,8 +120,7 @@ func _physics_process(delta : float) -> void:
 		#movement_component.direction = (transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)).normalized()
 	
 	$Hitbox.disabled = movement_component.noclip
-	
-	
+
 	if can_control:
 		if essence_component.alive:
 			movement_component.update(delta)
@@ -128,14 +128,15 @@ func _physics_process(delta : float) -> void:
 			camera.viewbob_amount = movement_component.moving / 2.0
 			if hud.visible: hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving / 1.5)
 			camera.anim.speed_scale = (velocity.length() / movement_component.walk_speed) * 0.75
-			if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
-				_G.current_run.die_reason = "You succumbed to the poison."
-				essence_component.die()
+			#if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
+				#_G.current_run.die_reason = "You succumbed to the poison."
+				#essence_component.die()
 			moving_forward = movement_component.input_dir.y < 0
-			if _G.config.video.low:
-				camera.far = 128.0
-			else:
-				camera.far = 2048.0
+			if not movement_component.noclip:
+				if Input.is_action_pressed("shoot") and not dash_component.dashing:
+					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
+				elif Input.is_action_pressed("dash"):
+					dash_component.dash(movement_component)
 			#if Input.is_action_just_pressed("jump") and movement_component.can_jump:
 				#movement_component.jump()
 			
@@ -160,12 +161,12 @@ func query_area_entered(area : Area3D) -> void:
 		if area is Hazard:
 			if area.damage < 1: return
 			_G.current_run.die_reason = area.die_reason
-			knock_component.knock(area.global_position, area.knockback_strength, area.knockback_y_strength)
+			knock_component.knock(area.parent.global_position, area.knockback_strength, area.knockback_y_strength)
 			essence_component.fracture(area.damage, area.crit)
 			start_immunity()
 
 func shooted() -> void:
-	hud.hide_hand()
+	hud.hide_hand(stats.bullet.fire_rate * stats.bullet.fire_rate_mult)
 	await get_tree().create_timer(shoot_component.shoot_delay * (stats.bullet.fire_rate * stats.bullet.fire_rate_mult)).timeout
 	#if not _G.game.in_ether:
 		#essence_component.essence -= clampi(stat.damage[0], stat.damage[2], 999) * stat.damage[1] / 2
@@ -182,7 +183,7 @@ func _on_essence_component_died(_combo : bool) -> void:
 	
 	_G.change_scene("res://scene/gameover.tscn", Color.BLACK, 0.75, 1.0, false)
 	return
-	#_G.game.gameover()
+	#_G.game.gameover()$Query/Hitbox
 	
 func dash_component_dashed() -> void:
 	hud.hide_hand()
@@ -206,7 +207,7 @@ func dash_component_dashed() -> void:
 	camera.tween_camera_fov2(-15.0, 1.5)
 
 
-	await get_tree().create_timer(0.4 * stats.DASH_ATKSPD_BASE / (1 + stats.attack_speed)).timeout
+	await get_tree().create_timer(0.4 * stats.dash_atkspd / (1 + stats.attack_speed)).timeout
 	_G.tween(camera, "multiplier", 1.0, 0.2)
 	hud.show_hand()
 	#hud.hide_punchhand()
@@ -233,7 +234,7 @@ func start_immunity(time : float = 1.0) -> void:
 	immune = false
 
 func level_component_xp_gained() -> void:
-	essence_component.gain((float(essence_component.max_essence) * 0.03))
+	essence_component.gain((float(essence_component.max_essence) * 0.02))
 	$XPPickupSFX.pitch_scale = randf_range(0.98, 1.02) + level_component.ratio / 1.75
 	$XPPickupSFX.play()
 
@@ -251,11 +252,12 @@ func dash_component_can_dash_now() -> void:
 
 func update_motionblur() -> void:
 	#camera.mbcam.fov = lerpf(camera.mbcam.fov ,camera.fov, mb_smoothing)
-	camera.mbcam.fov = camera.fov - (1.0 - essence_component.ratio)
+	var smoothing : float = 0.24 + essence_component.ratio * 0.75
+	camera.mbcam.fov = lerp(camera.mbcam.fov, camera.fov, smoothing)
 	camera.mbcam.global_rotation = camera.global_rotation
-	camera.mbcam.global_position = camera.global_position
+	#camera.mbcam.global_position = camera.global_position
 	#camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, mb_smoothing)
 	#camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, mb_smoothing)
 	#camera.mbcam.global_rotation.y = lerpf(camera.mbcam.global_rotation.y ,camera.global_rotation.y, mb_smoothing)
 	
-	#camera.mbcam.global_position = lerp(camera.mbcam.global_position ,camera.global_position, mb_smoothing)
+	camera.mbcam.global_position = lerp(camera.mbcam.global_position ,camera.global_position, smoothing)

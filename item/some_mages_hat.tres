@@ -18,7 +18,7 @@ func update(delta : float) -> void:
 script = ExtResource("2_66qbs")
 item_name = "Some mage's hat"
 item_script = SubResource("GDScript_e3f7c")
-type = 3
-weight = 0.25
+type = 2
+weight = 0.5
 image = ExtResource("1_dpib2")
-item_description = "Your Bullets seek."
+item_description = "Get Homing Bullets."

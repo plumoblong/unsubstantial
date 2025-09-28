@@ -51,7 +51,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Node2D" type="Node2D" parent="."]
-visible = false
 use_parent_material = true
 position = Vector2(0, 32)
 
@@ -96,6 +95,7 @@ text = "Controls"
 alignment = 1
 
 [node name="Screen1" type="Node2D" parent="."]
+visible = false
 position = Vector2(0, 32)
 
 [node name="ViewBob" parent="Screen1" instance=ExtResource("5_eyrc5")]
@@ -152,6 +152,7 @@ text = "Resolution"
 alignment = 1
 
 [node name="Screen4" type="Node2D" parent="."]
+visible = false
 position = Vector2(0, 32)
 
 [node name="LowMode" parent="Screen4" instance=ExtResource("5_eyrc5")]

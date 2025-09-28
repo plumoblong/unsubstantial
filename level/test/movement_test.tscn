@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=4 uid="uid://dxdshdk3c1fpu"]
 
 [ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_orc65"]
-[ext_resource type="Script" uid="uid://dhk3rvcnuj0a2" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_h82em"]
+[ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_h82em"]
 [ext_resource type="Resource" uid="uid://c07h8g5oxasgv" path="res://trenchbroom/unsubstantial_map_settings.tres" id="3_gkwpo"]
 [ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="3_qist2"]
 [ext_resource type="Material" uid="uid://82uqbj4m0vpv" path="res://textures/world/missing.tres" id="4_qist2"]
@@ -77,7 +77,6 @@ script = ExtResource("1_orc65")
 script = ExtResource("2_h82em")
 local_map_file = "uid://begjsxl7550f8"
 map_settings = ExtResource("3_gkwpo")
-metadata/_custom_type_script = "uid://dhk3rvcnuj0a2"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
 collision_layer = 7
