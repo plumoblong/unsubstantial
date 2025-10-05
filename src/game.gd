@@ -141,10 +141,14 @@ func change_map_autobuild(map_file_path : String) -> void:
 	var map_instance : Map = MAP_SCENE.instantiate()
 	map_instance.name = "Map"
 	current_map = map_instance
-
 	add_child(current_map)
+	chapter.current = chapter.all[current_map.chapter_id]
 	current_map.build(map_file_path)
-
+	if chapter.current != chapter.all[0]:
+		in_ether = false
+	_G.player.global_position = Vector3.ZERO
+	_G.player.global_rotation = Vector3.ZERO
+	_G.player.velocity = Vector3.ZERO
 	
 func mute_music(time : float = 1.0) -> void:
 	_G.tween($Music, "volume_db", linear_to_db(0.001), time, 0, 0)

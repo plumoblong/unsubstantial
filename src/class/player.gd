@@ -11,6 +11,7 @@ class_name Player
 @onready var knock_component : KnockbackComponent = get_node("KnockbackComponent")
 @onready var items : ItemManager = get_node("ItemManager")
 @onready var stats : ItemStats = get_node("ItemStats")
+@onready var hitbox : CollisionShape3D = get_node("Hitbox")
 
 @onready var dash_swoosh : AnimatedSprite3D = get_node("Head/Swoosh")
 @onready var hud : PlayerHUD = get_node("HUD")
@@ -128,15 +129,16 @@ func _physics_process(delta : float) -> void:
 			camera.viewbob_amount = movement_component.moving / 2.0
 			if hud.visible: hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving / 1.5)
 			camera.anim.speed_scale = (velocity.length() / movement_component.walk_speed) * 0.75
-			#if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
-				#_G.current_run.die_reason = "You succumbed to the poison."
-				#essence_component.die()
+			if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
+				_G.current_run.die_reason = "You succumbed to the poison."
+				essence_component.die()
 			moving_forward = movement_component.input_dir.y < 0
 			if not movement_component.noclip:
 				if Input.is_action_pressed("shoot") and not dash_component.dashing:
 					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
 				elif Input.is_action_pressed("dash"):
 					dash_component.dash(movement_component)
+			#hitbox.position.y = 1.0 + (float(movement_component.crouching))
 			#if Input.is_action_just_pressed("jump") and movement_component.can_jump:
 				#movement_component.jump()
 			
@@ -166,11 +168,11 @@ func query_area_entered(area : Area3D) -> void:
 			start_immunity()
 
 func shooted() -> void:
-	hud.hide_hand(stats.bullet.fire_rate * stats.bullet.fire_rate_mult)
-	await get_tree().create_timer(shoot_component.shoot_delay * (stats.bullet.fire_rate * stats.bullet.fire_rate_mult)).timeout
+	hud.hide_hand(stats.bullet_atkspd / stats.actual_atkspd * 0.25)
+	await get_tree().create_timer(shoot_component.shoot_delay * stats.bullet_atkspd / stats.actual_atkspd).timeout
 	#if not _G.game.in_ether:
 		#essence_component.essence -= clampi(stat.damage[0], stat.damage[2], 999) * stat.damage[1] / 2
-	$ShootSFX.pitch_scale = randf_range(1.80, 2.20) - (stats.bullet.fire_rate * stats.bullet.fire_rate_mult)
+	$ShootSFX.pitch_scale = randf_range(1.80, 2.20) - (stats.bullet_atkspd / stats.actual_atkspd)
 	$ShootSFX.play()
 
 func _on_essence_component_died(_combo : bool) -> void:
@@ -186,7 +188,7 @@ func _on_essence_component_died(_combo : bool) -> void:
 	#_G.game.gameover()$Query/Hitbox
 	
 func dash_component_dashed() -> void:
-	hud.hide_hand()
+	hud.hide_hand(stats.dash_atkspd / stats.actual_atkspd  * 0.15)
 	$HUD/Eye.play("close")
 	_G.tween(camera, "multiplier", 0.0, 0.2)
 	if not _G.game.in_ether: dash_swoosh.play("default")

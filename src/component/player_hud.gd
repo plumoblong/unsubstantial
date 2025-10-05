@@ -75,8 +75,8 @@ func hitmark() -> void:
 		
 func hide_hand(speed : float = 0.25) -> void:
 	hand_hidden = true
-	_G.tween($Weapon, "position", Vector2($Weapon.position.x, 336.0), speed * get_parent().stats.bullet.fire_rate * get_parent().stats.bullet.fire_rate_mult, Tween.TRANS_SINE)
-	await get_tree().create_timer(speed * get_parent().stats.bullet.fire_rate * get_parent().stats.bullet.fire_rate_mult).timeout
+	_G.tween($Weapon, "position", Vector2($Weapon.position.x, 336.0), speed, Tween.TRANS_SINE)
+	await get_tree().create_timer(speed).timeout
 	$Weapon.visible = false
 	return
 

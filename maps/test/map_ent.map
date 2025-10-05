@@ -1,0 +1,78 @@
+// Game: unsubstantial
+// Format: Standard
+// entity 0
+{
+"wad" ""
+"classname" "worldspawn"
+// brush 0
+{
+( -1152 512 16 ) ( -1152 -64 16 ) ( -1152 -64 -16 ) __TB_empty 0 0 0 1 1
+( -1152 -64 16 ) ( 1152 -64 16 ) ( 1152 -64 -16 ) __TB_empty 0 0 0 1 1
+( 1152 -64 -16 ) ( 1152 512 -16 ) ( -1152 512 -16 ) __TB_empty 0 0 0 1 1
+( -1152 512 16 ) ( 1152 512 16 ) ( 1152 -64 16 ) __TB_empty 0 0 0 1 1
+( 1152 512 -16 ) ( 1152 512 16 ) ( -1152 512 16 ) __TB_empty 0 0 0 1 1
+( 1152 -64 16 ) ( 1152 512 16 ) ( 1152 512 -16 ) __TB_empty 0 0 0 1 1
+}
+}
+// entity 1
+{
+"classname" "ent_spawn"
+"origin" "-1080 440 40"
+"enemy" "enemy"
+"one_shot" "1"
+"distance_to_spawn" "20"
+}
+// entity 2
+{
+"classname" "ent_spawn"
+"origin" "-952 440 40"
+"enemy" "enemy_melee"
+"one_shot" "1"
+"distance_to_spawn" "20"
+}
+// entity 3
+{
+"classname" "ent_spawn"
+"origin" "-824 440 40"
+"enemy" "guardian"
+"one_shot" "1"
+"distance_to_spawn" "20"
+}
+// entity 4
+{
+"classname" "item_stall"
+"origin" "-696 440 16"
+}
+// entity 5
+{
+"classname" "jump_pad"
+"origin" "-440 440 16"
+"power" "20"
+}
+// entity 6
+{
+"classname" "light"
+"origin" "-312 440 184"
+}
+// entity 7
+{
+"classname" "light"
+"origin" "-184 440 184"
+"range" "100"
+}
+// entity 8
+{
+"classname" "palm_tree"
+"origin" "-56 440 16"
+}
+// entity 9
+{
+"classname" "shrine_essence"
+"origin" "72 440 16"
+}
+// entity 10
+{
+"classname" "jump_pad"
+"origin" "-568 440 16"
+"power" "100"
+}

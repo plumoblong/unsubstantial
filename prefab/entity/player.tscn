@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene load_steps=55 format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -27,9 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://bg5h3h2stwvqw" path="res://sfx/player/jump.wav" id="38_jdfku"]
 [ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://src/entity/player_target.tscn" id="41_jdfku"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_diuwr"]
-radius = 0.9
-height = 2.1
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uadq4"]
+radius = 0.75
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jg7jr"]
 atlas = ExtResource("10_7yx1s")
@@ -217,7 +216,11 @@ can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbmd"]
-radius = 0.443406
+radius = 0.42
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_diuwr"]
+radius = 0.87
+height = 2.482
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8t5r2"]
 radius = 0.15
@@ -248,27 +251,23 @@ scale_curve = SubResource("CurveTexture_uss2g")
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
-floor_stop_on_slope = false
-floor_constant_speed = true
-floor_max_angle = 1.0472
 script = ExtResource("1_colme")
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-shape = SubResource("CapsuleShape3D_diuwr")
-debug_color = Color(1, 1, 1, 0)
-debug_fill = false
+shape = SubResource("CapsuleShape3D_uadq4")
+debug_color = Color(1, 0, 0, 1)
 
 [node name="DeathCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.947423, 0.319985, 0, -0.319985, 0.947423, 0, 2.38705, 2.0446)
 current = true
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Head"]
 handle_input_locally = false
+use_occlusion_culling = true
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
 gui_disable_input = true
@@ -278,12 +277,13 @@ positional_shadow_atlas_quad_0 = 0
 positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
-size = Vector2i(480, 270)
+oversampling = false
+size = Vector2i(432, 243)
 render_target_clear_mode = 1
 render_target_update_mode = 4
 
 [node name="MotionBlurCam" type="Camera3D" parent="Head/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 1.7, -2.97238e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 1.825, 0)
 current = true
 far = 2000.0
 
@@ -325,8 +325,9 @@ script = ExtResource("3_lq4sc")
 shoot_delay = 0.04
 config = SubResource("Resource_ju7jx")
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
+[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
 script = ExtResource("6_qqhji")
+hitbox = NodePath("../Hitbox")
 dash = NodePath("../DashComponent")
 land_sfx = NodePath("../LandSFX")
 jump_sfx = NodePath("../JumpSFX")
@@ -374,7 +375,7 @@ collision_mask = 810
 [node name="Hitbox" type="CollisionShape3D" parent="Query"]
 visible = false
 shape = SubResource("CapsuleShape3D_tjbmd")
-debug_color = Color(1, 0, 0.866667, 0)
+debug_color = Color(1, 0, 0.8666668, 0.7647059)
 debug_fill = false
 
 [node name="DashQuery" type="Area3D" parent="."]
@@ -391,8 +392,7 @@ parry = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 shape = SubResource("CapsuleShape3D_diuwr")
-debug_color = Color(1, 1, 1, 0)
-debug_fill = false
+debug_color = Color(1, 0, 0, 1)
 
 [node name="InteractionQuery" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00144917, 1, -0.00112629)

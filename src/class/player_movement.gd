@@ -5,6 +5,8 @@ class_name PlayerMoveComponent
 # FOR REUSE 2025 / 2026 / WHENEVER
 # >|o
 
+@export var hitbox : CollisionShape3D
+@onready var original_capsule_height = hitbox.shape.height
 @export var dash : DashComponent
 @export var land_sfx : AudioStreamPlayer3D
 @export var jump_sfx : AudioStreamPlayer3D
@@ -16,15 +18,21 @@ class_name PlayerMoveComponent
 @export var jump_velocity : float = 7.6
 
 #ground
-@export var ground_cap : float = 2.4 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
+@export var ground_cap : float = 1.7 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
 @export var fall_speed : float = 19.0
 @export var walk_speed : float = 18.5
+
 @export var ground_accel : float = 8.0
 @export var ground_decel : float = 11.0
 @export var ground_friction : float = 3.0
 
-@export var slope_fall_speed : float = 500.0
+#crouch
+const CROUCH_TRANSLATE : float = 0.7
+const CROUCH_JUMP_ADD : float = CROUCH_TRANSLATE * 0.8
+@export var crouch_speed : float = 0.15 # multiplied by walk_speed
+var crouching : bool = false
 
+@export var slope_fall_speed : float = 500.0
 @export var noclip_speed : float = 25.0
 
 var input_dir : Vector2
@@ -39,6 +47,7 @@ var auto_bhop : bool = false
 
 signal just_landed
 
+
 func _ready() -> void:
 	assert(get_parent() is Player)
 
@@ -47,13 +56,20 @@ func landed() -> void:
 	land_sfx.pitch_scale = randf_range(0.9, 1.1)
 	land_sfx.play()
 
+func get_move_speed() -> float:
+	if crouching:
+		return walk_speed * crouch_speed
+	else: return walk_speed
+
 func update(delta : float) -> void:
 	if not enabled: return
 	if get_parent().essence_component.alive:
 		input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 		
 		if not dash.dashing: wish_dir = get_parent().global_transform.basis * Vector3(input_dir.x, .0, input_dir.y)
-
+		
+		#handle_crouch(delta)
+		
 		if noclip:
 			var spd : float = noclip_speed
 			if Input.is_action_pressed("jump"):
@@ -79,13 +95,13 @@ func update(delta : float) -> void:
 				if can_jump and not jump_buffer_timer.is_stopped():
 					handle_jump(jump_velocity)
 			
-			if rad_to_deg(get_parent().get_floor_angle()) != 0.0:
-				if not dash.dashing:
-					if get_parent().velocity.y >= 0:
-						
-						get_parent().velocity.y -= fall_speed * delta
-					else:
-						get_parent().velocity.y -= fall_speed * 1.3 * delta
+			#if rad_to_deg(get_parent().get_floor_angle()) != 0.0:
+			if not dash.dashing:
+				if get_parent().velocity.y >= 0:
+					
+					get_parent().velocity.y -= fall_speed * delta
+				else:
+					get_parent().velocity.y -= fall_speed * (1.75 if crouching else 1.2) * delta
 				
 			if get_parent().is_on_floor():
 				can_jump = true
@@ -99,6 +115,7 @@ func update(delta : float) -> void:
 					moving = lerpf(moving, 0.0, 0.1)
 				was_on_floor = true
 			else:
+				can_jump = false
 				moving = lerpf(moving, 0.0, 0.1)
 				if not dash.dashing:
 					handle_air(delta)
@@ -122,9 +139,27 @@ func handle_ground(delta : float) -> void:
 	var new_speed : float = max(get_parent().velocity.length() - drop, 0.0)
 	if get_parent().velocity.length() > 0.0:
 		new_speed /= get_parent().velocity.length()
-	var side_vel : Vector2 = Vector2(get_parent().velocity.x * new_speed, get_parent().velocity.z * new_speed).limit_length(walk_speed * ground_cap)
+	var side_vel : Vector2 = Vector2(get_parent().velocity.x * new_speed, get_parent().velocity.z * new_speed).limit_length(get_move_speed() * ground_cap)
 	get_parent().velocity = Vector3(side_vel.x, get_parent().velocity.y, side_vel.y)
 	
+#func handle_crouch(delta : float) -> void:
+	#var was_crouched_last_frame : bool = crouching
+	#if Input.is_action_pressed("crouch"):
+		#crouching = true
+	#elif crouching and not get_parent().test_move(get_parent().global_transform, Vector3(0,CROUCH_TRANSLATE,0)):
+		#crouching = false
+	#var translate_y_if_possible : float = 0.0
+	#if was_crouched_last_frame != crouching and not get_parent().is_on_floor():
+		#translate_y_if_possible = CROUCH_JUMP_ADD if crouching else -CROUCH_JUMP_ADD
+#
+	#if translate_y_if_possible != 0.0:
+		#var result : KinematicCollision3D = KinematicCollision3D.new()
+		#get_parent().test_move(get_parent().global_transform, Vector3(0, translate_y_if_possible, 0), result)
+		#get_parent().position.y += result.get_travel().y
+	#
+	#get_parent().camera.head_base_height = 1.825 + (-CROUCH_TRANSLATE if crouching else 0)
+	#hitbox.shape.height = original_capsule_height - CROUCH_TRANSLATE if crouching else original_capsule_height
+	#hitbox.position.y = hitbox.shape.height / 2
 func handle_air(delta : float) -> void:
 	# Classic battle tested & fan favorite source/quake air movement recipe.
 	# CSS players gonna feel their gamer instincts kick in with this one

@@ -24,7 +24,10 @@ func _ready() -> void:
 		damage = config.damage
 	knockback_strength = config.knockback
 	stun_time = config.stun
-	speed = config.init_speed
+	if parent is Player:
+		speed = config.init_speed + (parent.velocity.length() * 0.75)
+	else:
+		speed = config.init_speed
 	if config.sprite_override != null:
 		sprite.texture = config.sprite_override
 	$OmniLight3D.light_color = config.color
@@ -153,7 +156,8 @@ func destroy_object_init(scene : PackedScene, properties : Dictionary) -> void:
 
 
 
-func body_entered(body: StaticBody3D) -> void:
+func body_entered(body: Node3D) -> void:
+	if body is not StaticBody3D: return
 	handle_destroy(body)
 
 func timer_timeout() -> void:

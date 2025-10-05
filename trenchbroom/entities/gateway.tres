@@ -16,4 +16,3 @@ meta_properties = {
 "color": Color(1, 1, 1, 1),
 "size": AABB(-16, -16, -16, 16, 16, 16)
 }
-metadata/_custom_type_script = "uid://rwwodvddu15o"

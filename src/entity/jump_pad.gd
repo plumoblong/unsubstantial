@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends Area3D
 class_name JumpPad
 
@@ -8,10 +8,10 @@ class_name JumpPad
 
 @export var speed : float = 20.0
 
-func _ready() -> void:
+func _func_godot_build_complete() -> void:
 	if func_godot_properties["power"] != -4664.0:
 		speed = func_godot_properties["power"]
-
+		
 func body_entered(body : CharacterBody3D) -> void:
 	if body is Player:
 		$AudioStreamPlayer3D.play()

@@ -5,7 +5,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.modulate = Color.BLACK
 	
 	var dir := DirAccess.open("user://")
-	dir.make_dir("custom_levels")
+	dir.make_dir("custom_maps")
 
 	var conffile := FileAccess.open(_G.CONFIG_PATH, FileAccess.READ)
 	var savefile := FileAccess.open(_G.SAVE_PATH, FileAccess.READ)

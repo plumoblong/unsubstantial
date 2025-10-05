@@ -1,4 +1,4 @@
-@tool
+
 extends CanvasLayer
 class_name TUX
 
@@ -15,6 +15,12 @@ func _ready() -> void:
 	input.grab_focus()
 	say("[center]Welcome to TUX!\nType help(page : int) for more information.[/center]")
 
+func format_command(input: String) -> String:
+	var parts = input.split(" ", false, 1) # split into max 2 parts
+	if parts.size() == 2:
+		return "%s(\"%s\")" % [parts[0], parts[1]]
+	return input
+	
 func _process(_delta: float) -> void:
 	if not _G.show_fps: return
 	$Shadow.text = output.text
@@ -36,10 +42,12 @@ func _process(_delta: float) -> void:
 			input.text = history[history_index]
 			input.caret_column = 102
 			
-func input_text_submitted(command: String) -> void:
+func input_text_submitted(text: String) -> void:
 	input.text = ""
-	say(">> " + command + "\n")
-	history.push_front(command)
+	history.push_front(text)
+	var command = format_command(text)
+	say(">> " + text + "\n")
+	
 	history_index = -1
 	var error : Error = _expression.parse(command)
 	if error != OK:
@@ -50,6 +58,7 @@ func input_text_submitted(command: String) -> void:
 	if not _expression.has_execute_failed():
 		if result != null:
 			say(result)
+
 func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) -> void:
 	print("TUX: ", log)
 	if not _G.debug_mode and debug_only: return
@@ -176,7 +185,7 @@ func map(path : String = "ether") -> void:
 	if _G.game == null or not _G.game.is_inside_tree(): 
 		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
 		return
-	_G.game.change_map("res://level/" + path + ".tscn")
+	_G.game.change_map_autobuild("res://maps/" + path + ".map")
 	input.release_focus()
 	visible = false
 	
@@ -184,7 +193,7 @@ func map_custom(path : String = "template") -> void:
 	if _G.game == null or not _G.game.is_inside_tree(): 
 		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
 		return
-	_G.game.change_map("user://custom_levels/" + path + ".tscn")
+	_G.game.change_map_autobuild("user://custom_maps/" + path + ".map")
 	input.release_focus()
 	visible = false
 

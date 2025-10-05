@@ -75,7 +75,6 @@ script = ExtResource("1_orc65")
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
 script = ExtResource("2_h82em")
-local_map_file = "uid://begjsxl7550f8"
 map_settings = ExtResource("3_gkwpo")
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]

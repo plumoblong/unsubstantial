@@ -1,5 +1,3 @@
-@tool
-
 extends Node3D
 class_name EnemySpawner
 
@@ -12,21 +10,19 @@ class_name EnemySpawner
 }
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
 var spawned : bool = false
-var random_factor : float = 0.0
+var distance_to_spawn : float = 30.0
 
-var real_spawn_delay : float = 32.0
-
-func _ready() -> void:
-	random_factor = randf_range(0.00, 1.00)
-	if func_godot_properties["spawn_delay"] == 30.0:
-		real_spawn_delay = randf_range(25.0, 35.0)
+func _func_godot_build_complete() -> void:
+	if func_godot_properties["distance_to_spawn"] == 30.0:
+		distance_to_spawn = randf_range(25.0, 35.0)
 	else:
-		real_spawn_delay = func_godot_properties["spawn_delay"]
+		distance_to_spawn = func_godot_properties["distance_to_spawn"]
 
 func spawn() -> void:
+	
 	if spawned: return
 	#if _G.debug_mode: return
-	await get_tree().create_timer(real_spawn_delay).timeout
+	await get_tree().create_timer(func_godot_properties["spawn_delay"]).timeout
 	create_anim()
 	var enemy_res : PackedScene = load("res://prefab/entity/enemy/" + func_godot_properties["enemy"] + ".tscn")
 	if enemy_res == null:
@@ -46,15 +42,10 @@ func spawn() -> void:
 	else: spawned = true
 
 func _process(_delta : float) -> void:
-	if Engine.is_editor_hint(): return
-	if Engine.get_physics_frames() % 8 == 0: return
 	$Sprite3D.visible = _G.debug_mode
-	if func_godot_properties["distance_to_spawn"] >= 0:
-		var distance_to_player : float = global_position.distance_to(_G.player.global_position)
-		if distance_to_player < func_godot_properties["distance_to_spawn"]:
-			spawn()
-	if _G.game.ending_level:
-		queue_free()
+	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
+	if distance_to_player < distance_to_spawn:
+		spawn()
 
 func create_anim() -> void:
 	var anim : Node = SPAWN_ANIM.instantiate()

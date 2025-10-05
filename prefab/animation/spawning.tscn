@@ -79,7 +79,7 @@ script = ExtResource("2_n62t3")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_pc5ww")
-volume_db = 10.0
+volume_db = 15.0
 unit_size = 16.0
 pitch_scale = 0.5
 panning_strength = 3.0

@@ -18,6 +18,7 @@ class_name PlayerCamera
 @export var multiplier : float = 1.0
 @export var motion_blur_offset : float = 1.25
 
+var head_base_height : float = 1.825
 var ss_count : int = 0
 var bob_offset : float = 0.0
 var height_offset : float = 0.0
@@ -54,8 +55,7 @@ func update(t : float) -> void:
 		tilt = lerpf(tilt, t * tilt_amount, TILT_LERP) #* tilt_limit
 	else:
 		tilt = lerpf(tilt, 0.0, TILT_LERP)
-
-	head.position.y = 1.816+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset
+	head.position.y = head_base_height+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset
 	rotation_degrees.z = tilt
 	
 	

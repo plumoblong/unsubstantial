@@ -2371,7 +2371,7 @@
 }
 // entity 116
 {
-"classname" "func_geo"
+"classname" "func_detail"
 // brush 0
 {
 ( -4608 2304 816 ) ( -4608 -384 816 ) ( -4608 -384 544 ) special/skip [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1

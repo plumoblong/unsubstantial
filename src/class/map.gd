@@ -1,6 +1,8 @@
 extends NavigationRegion3D
 class_name Map
 
+@export var use_auto_build : bool = false
+
 @export var map_name : String = "unnamed"
 @export var chapter_id : int = 1
 
@@ -10,6 +12,7 @@ signal level_built
 signal level_failed
 
 func _ready() -> void:
+	if not use_auto_build: return
 	map_builder.build_complete.connect(map_build_complete)
 	map_builder.build_failed.connect(map_build_failed)
 	level_built.connect(_G.game.map_build_complete)
@@ -20,7 +23,7 @@ func build(file_path : String) -> void:
 	map_builder.build()
 	
 func map_build_complete() -> void:
-	bake_navigation_mesh(false)
+	bake_navigation_mesh()
 
 func map_build_failed() -> void:
 	_T.say("Map failed to build. Check the log for more information", Color.RED)
