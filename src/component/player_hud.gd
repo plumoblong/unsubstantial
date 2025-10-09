@@ -44,10 +44,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	$MovementInfo/Key3.visible = Input.is_action_pressed("down")
 	$MovementInfo/Key4.visible = Input.is_action_pressed("left")
 	$MovementInfo/Key5.visible = Input.is_action_pressed("jump")
-	
-	$Stats/Damage.text = str(get_parent().stats.actual_damage)
-	$Stats/Speed.text = str(get_parent().stats.speed)
-	$Stats/Firerate.text = str(get_parent().stats.actual_atkspd)
+
 	
 
 func hitmark() -> void:

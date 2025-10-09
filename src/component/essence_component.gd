@@ -10,7 +10,7 @@ var essence : int
 var heal_multiplier : float = 1.0
 var alive : bool = true
 var times_fractured : int = 0
-var defense : float = 1.0
+var defense : float = 10.0
 var ratio : float = 1.0
 var immortal : bool = false
 
@@ -44,7 +44,7 @@ func fracture(amount : int, combo : bool = false, i_time : float = 0.2) -> void:
 		if not enabled or get_parent().god_mode: return
 	if alive:
 		if essence > amount:
-			var a : int = int(float(amount) * defense * damage_mult)
+			var a : int = int(float(amount) * 10.0/defense * damage_mult)
 			essence -= a
 			times_fractured += 1
 			fractured.emit(a, combo)

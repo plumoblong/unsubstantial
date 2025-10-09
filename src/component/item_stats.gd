@@ -3,15 +3,15 @@ class_name ItemStats
 
 var luck : int = 0
 
-var damage : int = 60
+var damage : int = 50
 var damage_mult : float = 1.0
-var dash_damage_mult : float = 1.25
+var dash_damage_mult : float = 1.2
 var bullet_damage_mult : float = 1.0
 
 var enemy_knockback : float = 1.0
 var self_knockback : float = 0.5
 
-var crit_chance : float = 2.0
+var crit_chance : float = 1.0
 var crit_mult : float = 1.0
 
 var attack_speed : float = 1.0
@@ -35,7 +35,7 @@ var esc_decay : float = 5.0
 
 var crosshair_width : float = 1.0
 
-var defense : float = 1.0
+var defense : float = 10.0
 
 var actual_damage : int
 var actual_crit : float

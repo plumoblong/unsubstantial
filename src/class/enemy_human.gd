@@ -33,6 +33,7 @@ func _physics_process(delta : float) -> void:
 	#$Label3D.text = str(snappedf(float(essence_component.essence) / float(essence_component.start_essence) * 100, 1)) + "%"
 	#$Label3D.text = str(essence_component.essence)
 	movement_component.on_floor = is_on_floor()
+	movement_component.can_jump = is_on_floor()
 	movement_component.update(delta, is_on_ceiling_only())
 	essence_component.update()
 	movement_component.enabled = _G.player.can_control
@@ -45,7 +46,6 @@ func _physics_process(delta : float) -> void:
 	
 	if chase_component.attacking and _G.player.can_control:
 		shoot_component.shoot(global_position.direction_to(_G.player.target.get_pos_multiplied(enemy.random_factor)), global_position + Vector3(0.0, 0.2, 0.0))
-	
 	chase_component.update(_G.player.target.get_pos_multiplied(0.3 + enemy.random_factor), movement_component, agent)
 
 

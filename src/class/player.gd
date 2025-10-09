@@ -127,12 +127,12 @@ func _physics_process(delta : float) -> void:
 			if hud.visible: hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving / 1.5)
 			camera.anim.speed_scale = (velocity.length() / movement_component.walk_speed) * 0.75
 			if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
-				_G.current_run.die_reason = "You succumbed to the poison."
+				_G.current_run.die_reason = "You went where you shouldnt."
 				essence_component.die()
 			moving_forward = movement_component.input_dir.y < 0
 			if not movement_component.noclip:
 				if Input.is_action_pressed("shoot") and not dash_component.dashing:
-					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
+					shoot_component.shoot(-camera.head.global_transform.basis.z, target.get_pos_multiplied(0.5) + Vector3(.0, .7, .0))
 				elif Input.is_action_pressed("dash"):
 					dash_component.dash(movement_component)
 			#hitbox.position.y = 1.0 + (float(movement_component.crouching))

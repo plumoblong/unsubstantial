@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dovrexvfpfqjp"]
+[gd_scene load_steps=13 format=3 uid="uid://dovrexvfpfqjp"]
 
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="1_4cq6u"]
 [ext_resource type="Script" uid="uid://gupw21wq2mfx" path="res://src/menus/pause.gd" id="1_pq3u6"]
@@ -8,12 +8,9 @@
 [ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="6_82fug"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="6_uuqui"]
 [ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="7_8nkmb"]
-[ext_resource type="Texture2D" uid="uid://ddqjtbx73fey4" path="res://images/item/passive/item_p2.png" id="7_njr3x"]
-[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="8_7qf5b"]
 [ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="8_8nkmb"]
-[ext_resource type="Script" uid="uid://1fnwx6m8s6v1" path="res://src/menus/item_preview.gd" id="8_qsdw3"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="10_gq4f7"]
-[ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="10_k4c6p"]
+[ext_resource type="PackedScene" uid="uid://ruui4a3p4otb" path="res://prefab/menus/inventory.tscn" id="10_k4c6p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gl7j"]
 shader = ExtResource("1_xidnw")
@@ -45,9 +42,9 @@ position = Vector2(-4, 36)
 [node name="Continue" parent="Node2D/Main" instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
-offset_top = 72.0
+offset_top = 66.0
 offset_right = 484.0
-offset_bottom = 85.0
+offset_bottom = 79.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Continue"
@@ -56,9 +53,9 @@ alignment = 1
 [node name="Statistics" parent="Node2D/Main" instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
-offset_top = 84.0
+offset_top = 78.0
 offset_right = 484.0
-offset_bottom = 97.0
+offset_bottom = 91.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Inventory"
@@ -67,9 +64,9 @@ alignment = 1
 [node name="Restart" parent="Node2D/Main" instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
-offset_top = 96.0
+offset_top = 90.0
 offset_right = 484.0
-offset_bottom = 109.0
+offset_bottom = 103.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Restart"
@@ -78,9 +75,9 @@ alignment = 1
 [node name="Options" parent="Node2D/Main" instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
-offset_top = 108.0
+offset_top = 102.0
 offset_right = 484.0
-offset_bottom = 121.0
+offset_bottom = 115.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Options"
@@ -89,9 +86,9 @@ alignment = 1
 [node name="Exit" parent="Node2D/Main" instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
-offset_top = 120.0
+offset_top = 114.0
 offset_right = 484.0
-offset_bottom = 133.0
+offset_bottom = 127.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Exit"
@@ -101,7 +98,7 @@ alignment = 1
 use_parent_material = true
 clip_contents = false
 offset_left = 4.0
-offset_top = -4.0
+offset_top = 7.0
 offset_right = 484.0
 offset_bottom = 56.0
 theme_override_fonts/normal_font = ExtResource("10_gq4f7")
@@ -117,351 +114,15 @@ bbcode_enabled = true
 text = "[b][i]- Ether -[/i][/b]
 The Begginning
 
-[i]CHAPTER 1 STAGE 6
-
-ACTUAL STAGE 10
-"
+[i]CHAPTER 1 STAGE 6"
 scroll_active = false
 horizontal_alignment = 1
 
 [node name="Options" parent="Node2D" instance=ExtResource("4_1b2f7")]
 visible = false
 
-[node name="Statistics" type="Node2D" parent="Node2D"]
+[node name="Statistics" parent="Node2D" instance=ExtResource("10_k4c6p")]
 visible = false
-material = ExtResource("6_82fug")
-
-[node name="Header" type="RichTextLabel" parent="Node2D/Statistics"]
-material = SubResource("ShaderMaterial_4gl7j")
-clip_contents = false
-offset_top = 28.0
-offset_right = 480.0
-offset_bottom = 38.0
-theme_override_fonts/normal_font = ExtResource("1_4cq6u")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-text = "[center][wave]INVENTORY"
-
-[node name="Items" type="Node2D" parent="Node2D/Statistics"]
-position = Vector2(148, 48)
-
-[node name="Item7" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_right = 24.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item8" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_right = 56.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item9" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_right = 88.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item10" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_right = 120.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item11" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_right = 152.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item12" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_right = 184.0
-offset_bottom = 24.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item13" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_top = 28.0
-offset_right = 24.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item14" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 28.0
-offset_right = 56.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item15" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 28.0
-offset_right = 88.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item16" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 28.0
-offset_right = 120.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item17" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 28.0
-offset_right = 152.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item18" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 28.0
-offset_right = 184.0
-offset_bottom = 52.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item19" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_top = 56.0
-offset_right = 24.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item20" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 56.0
-offset_right = 56.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item21" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 56.0
-offset_right = 88.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item22" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 56.0
-offset_right = 120.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item23" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 56.0
-offset_right = 152.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item24" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 56.0
-offset_right = 184.0
-offset_bottom = 80.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item25" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_top = 84.0
-offset_right = 24.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item26" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 84.0
-offset_right = 56.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item27" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 84.0
-offset_right = 88.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item28" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 84.0
-offset_right = 120.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item29" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 84.0
-offset_right = 152.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item30" type="TextureRect" parent="Node2D/Statistics/Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 84.0
-offset_right = 184.0
-offset_bottom = 108.0
-texture = ExtResource("7_njr3x")
-script = ExtResource("8_qsdw3")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Statistics"]
-visible = false
-position = Vector2(4, 4)
-texture = ExtResource("8_7qf5b")
-centered = false
-
-[node name="Rarity" type="Sprite2D" parent="Node2D/Statistics"]
-position = Vector2(240, 236)
-texture = ExtResource("10_k4c6p")
-vframes = 5
-
-[node name="Description" type="RichTextLabel" parent="Node2D/Statistics"]
-use_parent_material = true
-offset_top = 192.0
-offset_right = 480.0
-offset_bottom = 219.0
-theme_override_constants/line_separation = 3
-theme_override_fonts/normal_font = ExtResource("6_uuqui")
-theme_override_font_sizes/normal_font_size = 6
-bbcode_enabled = true
-text = "???"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Name" type="RichTextLabel" parent="Node2D/Statistics"]
-use_parent_material = true
-clip_contents = false
-offset_top = 172.0
-offset_right = 480.0
-offset_bottom = 182.0
-theme_override_fonts/normal_font = ExtResource("10_gq4f7")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-text = "???"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="RestartConfirm" type="Node2D" parent="Node2D"]
 visible = false
@@ -501,54 +162,6 @@ alignment = 1
 [connection signal="pressed" from="Node2D/Main/Restart" to="Node2D" method="restart_pressed"]
 [connection signal="pressed" from="Node2D/Main/Options" to="Node2D" method="options_pressed"]
 [connection signal="pressed" from="Node2D/Main/Exit" to="Node2D" method="exit_pressed"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item7" to="Node2D/Statistics/Items/Item7" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item7" to="Node2D/Statistics/Items/Item7" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item8" to="Node2D/Statistics/Items/Item8" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item8" to="Node2D/Statistics/Items/Item8" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item9" to="Node2D/Statistics/Items/Item9" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item9" to="Node2D/Statistics/Items/Item9" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item10" to="Node2D/Statistics/Items/Item10" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item10" to="Node2D/Statistics/Items/Item10" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item11" to="Node2D/Statistics/Items/Item11" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item11" to="Node2D/Statistics/Items/Item11" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item12" to="Node2D/Statistics/Items/Item12" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item12" to="Node2D/Statistics/Items/Item12" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item13" to="Node2D/Statistics/Items/Item13" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item13" to="Node2D/Statistics/Items/Item13" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item14" to="Node2D/Statistics/Items/Item14" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item14" to="Node2D/Statistics/Items/Item14" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item15" to="Node2D/Statistics/Items/Item15" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item15" to="Node2D/Statistics/Items/Item15" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item16" to="Node2D/Statistics/Items/Item16" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item16" to="Node2D/Statistics/Items/Item16" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item17" to="Node2D/Statistics/Items/Item17" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item17" to="Node2D/Statistics/Items/Item17" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item18" to="Node2D/Statistics/Items/Item18" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item18" to="Node2D/Statistics/Items/Item18" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item19" to="Node2D/Statistics/Items/Item19" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item19" to="Node2D/Statistics/Items/Item19" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item20" to="Node2D/Statistics/Items/Item20" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item20" to="Node2D/Statistics/Items/Item20" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item21" to="Node2D/Statistics/Items/Item21" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item21" to="Node2D/Statistics/Items/Item21" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item22" to="Node2D/Statistics/Items/Item22" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item22" to="Node2D/Statistics/Items/Item22" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item23" to="Node2D/Statistics/Items/Item23" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item23" to="Node2D/Statistics/Items/Item23" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item24" to="Node2D/Statistics/Items/Item24" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item24" to="Node2D/Statistics/Items/Item24" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item25" to="Node2D/Statistics/Items/Item25" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item25" to="Node2D/Statistics/Items/Item25" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item26" to="Node2D/Statistics/Items/Item26" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item26" to="Node2D/Statistics/Items/Item26" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item27" to="Node2D/Statistics/Items/Item27" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item27" to="Node2D/Statistics/Items/Item27" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item28" to="Node2D/Statistics/Items/Item28" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item28" to="Node2D/Statistics/Items/Item28" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item29" to="Node2D/Statistics/Items/Item29" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item29" to="Node2D/Statistics/Items/Item29" method="mouse_exited"]
-[connection signal="mouse_entered" from="Node2D/Statistics/Items/Item30" to="Node2D/Statistics/Items/Item30" method="mouse_entered"]
-[connection signal="mouse_exited" from="Node2D/Statistics/Items/Item30" to="Node2D/Statistics/Items/Item30" method="mouse_exited"]
 [connection signal="pressed" from="Node2D/RestartConfirm/RestYes" to="Node2D" method="rest_yes_pressed"]
 [connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_no_pressed"]
 

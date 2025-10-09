@@ -11,7 +11,10 @@ func _process(_delta : float) -> void:
 	$Options.visible = screen == 1
 	$Statistics.visible = screen == 2
 	$RestartConfirm.visible = screen == 3
-	$Main/ChapterInfo.text = "[b][i]- " + _G.game.chapter.current.chapter_name + " -[/i][/b]\n" + _G.game.chapter.current.description + "\n\n" + "[i]CHAPTER " + str(_G.game.chapter.current.id) + " STAGE " + str(_G.game.stage) + "\n\nACTUAL STAGE " + str(_G.game.actual_stage)
+	if _G.game.in_ether:
+		$Main/ChapterInfo.text = "[b][i]- " + _G.game.chapter.current.chapter_name + " -[/i][/b]\n" + _G.game.chapter.current.description + "\n\n" + "[i]ANOTHER BEGINNING"
+	else:
+		$Main/ChapterInfo.text = "[b][i]- " + _G.game.chapter.current.chapter_name + " -[/i][/b]\n" + _G.game.chapter.current.description + "\n\n" + "[i]CHAPTER " + str(_G.game.chapter.current.id) + " STAGE " + str(_G.game.stage)
 	$Main/Restart.disabled = _G.game.in_ether
 	
 	if screen == 2:
@@ -21,6 +24,14 @@ func _process(_delta : float) -> void:
 			items[i].visible = _G.player.items.collected.size() > i
 			if _G.player.items.collected.size() > i:
 				items[i].item = _G.player.items.collected[i][0]
+		
+		$Statistics/Stats.text = "DAMAGE " + str(_G.player.stats.actual_damage) + \
+		"\nCRIT-CHANCE " + str(int(_G.player.stats.crit_chance)) + \
+		"%\nATTACK-SPEED " + str(snappedf(_G.player.stats.actual_atkspd, 0.01)) + \
+		"\nMOVE-SPEED " + str(_G.player.stats.speed) + "m/s" + \
+		"\nMAX-ESSENCE " + str(_G.player.stats.esc_max) + "ESC" + \
+		"\nDEFENSE " + str(int(_G.player.stats.defense)) + \
+		"\nLUCK " + str(_G.player.stats.luck)
 
 
 func continue_pressed() -> void:

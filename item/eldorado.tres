@@ -5,7 +5,7 @@
 
 [sub_resource type="GDScript" id="GDScript_5yu1b"]
 script/source = "func pickup() -> void:
-	_G.player.stats.damage += 15
+	_G.player.stats.damage += 10
 "
 
 [resource]
@@ -14,4 +14,4 @@ item_name = "Eldorado"
 item_script = SubResource("GDScript_5yu1b")
 type = 1
 image = ExtResource("1_mn4v2")
-item_description = "Increases damage"
+item_description = "Increases Damage"
