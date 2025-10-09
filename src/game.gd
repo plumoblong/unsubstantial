@@ -28,7 +28,7 @@ var music_volume : float = 1.0
 #var special_aviable : bool = false
 var exit_pos : Vector3 = Vector3.ZERO
 
-var in_ether : bool = false
+var in_ether : bool = true
 var time_scale : float = 1.0
 
 var leveled_up : bool = false
@@ -60,9 +60,7 @@ func _ready() -> void:
 	_G.current_run.bosses_slained = 0
 	seed(int(Time.get_unix_time_from_system()))
 	if _G.starting_level == "":
-		change_map("res://level/ether.tscn")
-		in_ether = true
-		chapter.current = chapter.all[0]
+		change_map_autobuild("res://maps/ether.map")
 	else:
 		chapter.current = chapter.all[1]
 		change_map(_G.starting_level)
@@ -74,8 +72,10 @@ func _process(_delta : float) -> void:
 	$WorldEnvironment.environment = chapter.current.environment
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
 	enemy_multiplier = clamp(1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05), 1.0, 100.0)
-	$Label.text = "ENEMY MULT: " + str(enemy_multiplier)
+	$Label.text = "Difficulty: " + str(enemy_multiplier)
 	$Label.visible = _G.debug_mode
+	in_ether = chapter.current == chapter.all[0]
+
 	if _G.debug_mode: print(enemy_count)
 	if not in_transition:
 		if pause_screen.screen == 0:
@@ -142,10 +142,10 @@ func change_map_autobuild(map_file_path : String) -> void:
 	map_instance.name = "Map"
 	current_map = map_instance
 	add_child(current_map)
-	chapter.current = chapter.all[current_map.chapter_id]
 	current_map.build(map_file_path)
-	if chapter.current != chapter.all[0]:
-		in_ether = false
+	#if chapter.current != chapter.all[0]:
+		#in_ether = false
+	chapter.current = chapter.all[current_map.chapter_id]
 	_G.player.global_position = Vector3.ZERO
 	_G.player.global_rotation = Vector3.ZERO
 	_G.player.velocity = Vector3.ZERO
@@ -213,7 +213,7 @@ func end_level(loop : bool = false) -> void:
 	#_G.player.has_key = false
 	for n in enemies.get_children():
 		n.queue_free()
-	change_map_autobuild("res://maps/chapter1/map_1.map")
+	change_map_autobuild("res://maps/chapter1/map_2.map")
 	chat.add_message("You have beaten this level " + str(stage - 1) + " times.", Color.WHITE)
 
 	$Ambience.global_position = Vector3(randf_range(-chapter.current.ambience_position.x, chapter.current.ambience_position.x), 
@@ -240,4 +240,4 @@ func map_build_complete() -> void:
 	transition.ascend_out()
 
 func map_build_failed() -> void:
-	_T.say("Map failed to build. Check the log file for more information.", Color.RED)
+	pass

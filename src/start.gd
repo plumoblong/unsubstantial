@@ -20,9 +20,11 @@ func _ready() -> void:
 			
 	if FileAccess.file_exists(_G.SAVE_PATH):
 		if not savefile.eof_reached():
-			_G.save = JSON.parse_string(savefile.get_line())
+			var toset = JSON.parse_string(savefile.get_line())
+			if toset != null:
+				_G.save = toset
 			#print("pre: ", current_line, "post: ", _G.save)
-			_T.say("Save File loaded", Color.GREEN)
+				_T.say("Save File loaded", Color.GREEN)
 			#print(typeof(current_line))
 	if _G.config.fullscreen:
 		get_window().mode = Window.MODE_FULLSCREEN

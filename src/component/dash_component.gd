@@ -8,6 +8,7 @@ class_name DashComponent
 @export var dash_time_tresh : float = 4.0
 @export var auto_reset : bool = true
 @export var delay : float = 0.0
+@export var end_velocity_multiplier : float = 0.4
 
 var can_dash : bool = true
 var dashing : bool = false
@@ -51,20 +52,27 @@ func dash(mc : Component) -> void:
 			await get_tree().create_timer(dash_time / dash_time_tresh).timeout
 			dashing = false
 		elif mc is PlayerMoveComponent:
-			var speed : float = mc.walk_speed * (mc.ground_cap * 0.67)
+			var speed : float = mc.walk_speed * (mc.ground_cap)
 			var base_friction : float = mc.ground_friction
-			mc.ground_friction = -base_friction
+			
 			#get_parent().velocity = Vector3.ZERO\
 			var basis : Vector3 = -get_parent().camera.global_transform.basis.z.normalized()
 			if get_parent().is_on_floor():
-				final_vector = Vector3(basis.x * speed, 0.0, basis.z * speed)
+				mc.ground_friction = -base_friction
+				get_parent().velocity = Vector3(basis.x * dash_speed, 0.0, basis.z * dash_speed)
+				#just_dashed = false
+				#await get_tree().create_timer(dash_time).timeout
+				#dashing = false
+				#mc.ground_friction = base_friction
 			else:
-				final_vector = Vector3(basis.x * speed, basis.y * (speed * 0.45), basis.z * speed)
-			get_parent().velocity = final_vector
+				get_parent().velocity = Vector3(basis.x * dash_speed, basis.y * speed, basis.z * dash_speed)
 			just_dashed = false
 			await get_tree().create_timer(dash_time).timeout
+			get_parent().velocity *= end_velocity_multiplier
 			dashing = false
 			mc.ground_friction = base_friction
+			#get_parent().velocity = final_vector
+
 	else:
 		return
 

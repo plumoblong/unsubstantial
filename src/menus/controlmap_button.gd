@@ -2,7 +2,7 @@ extends Button
 class_name ControlMapButton
 
 @export var action_name : String = "up"
-
+@export var hover_color : Color
 @export var action_string : String = "Walk Forward"
 @export var default_input : InputEvent
 
@@ -19,13 +19,12 @@ func _pressed() -> void:
 	get_parent().is_any_capturing = true
 
 func _process(delta: float) -> void:
-	if not visible: return
 	if not capturing:
 		text = action_string + ": [ " + key_string + " ]"
-		_G.set_shaderparam_once(material, "self_modulate", Color.WHITE)
+		material.set_shader_parameter("self_modulate", Color.WHITE)
 	else:
 		text = action_string + ": [ Press Anything ]"
-		_G.set_shaderparam_once(material, "self_modulate", Color.HOT_PINK)
+		material.set_shader_parameter("self_modulate", hover_color)
 
 	if get_parent().is_any_capturing:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE

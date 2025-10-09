@@ -75,11 +75,8 @@ func _process(_delta : float) -> void:
 	
 	camera.mbcam.current = _G.config.video.motion_blur
 	$MotionBlur.visible = _G.config.video.motion_blur
-	if fullbright:
-		camera.mbcam.get_parent().debug_draw = SubViewport.DEBUG_DRAW_UNSHADED
-	else:
-		camera.mbcam.get_parent().debug_draw = SubViewport.DEBUG_DRAW_DISABLED
 	
+	camera.mbcam.get_parent().debug_draw = get_viewport().debug_draw
 	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
 	
 
@@ -253,13 +250,10 @@ func dash_component_can_dash_now() -> void:
 	$HUD/Eye.play("open")
 
 func update_motionblur() -> void:
-	#camera.mbcam.fov = lerpf(camera.mbcam.fov ,camera.fov, mb_smoothing)
-	var smoothing : float = 0.24 + essence_component.ratio * 0.75
-	camera.mbcam.fov = lerp(camera.mbcam.fov, camera.fov, smoothing)
-	camera.mbcam.global_rotation = camera.global_rotation
-	#camera.mbcam.global_position = camera.global_position
-	#camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, mb_smoothing)
-	#camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, mb_smoothing)
-	#camera.mbcam.global_rotation.y = lerpf(camera.mbcam.global_rotation.y ,camera.global_rotation.y, mb_smoothing)
-	
+	var smoothing : float = 0.35 + essence_component.ratio * 0.63
+	var smoothing_strong : float = 0.6 + essence_component.ratio * 0.39
+	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, smoothing)
+	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, smoothing)
+	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, smoothing_strong)
+	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, smoothing_strong)
 	camera.mbcam.global_position = lerp(camera.mbcam.global_position ,camera.global_position, smoothing)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://d0uk6cne6eirv"]
+
+[ext_resource type="PackedScene" uid="uid://ritmakpm76a7" path="res://prefab/entity/map_option.tscn" id="1_vaq5t"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_d7epk"]
+
+[resource]
+script = ExtResource("2_d7epk")
+scene_file = ExtResource("1_vaq5t")
+classname = "map_opt"
+description = "configure the map settings"
+class_properties = {
+"bake_navmesh": 1,
+"chapter_id": 1,
+"map_name": "unnamed"
+}
+meta_properties = {
+"color": Color(1, 0, 1, 1),
+"size": AABB(-12, -12, -12, 12, 12, 12)
+}

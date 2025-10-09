@@ -95,10 +95,11 @@ func _ready() -> void:
 	else:
 		get_window().mode = Window.MODE_WINDOWED
 	seed(int(Time.get_unix_time_from_system()))
-
+	$Version.text = VERSION.to_upper()
+	
 func _physics_process(delta : float) -> void:
 	time += delta
-	$Version.text = VERSION.to_upper()
+	
 	
 	if config.video.low:
 		get_viewport().scaling_3d_scale = 0.5
@@ -108,6 +109,7 @@ func _physics_process(delta : float) -> void:
 	$Shader.material.set_shader_parameter("gamma", config.video.exposure)
 	$Shader.material.set_shader_parameter("enable_filter", config.video.post_process)
 	$Shader.material.set_shader_parameter("inverted", shader_inverted)
+	
 	if Input.is_action_just_pressed("f11"):
 		change_fullscreen()
 	if Input.is_action_just_pressed("f1"):

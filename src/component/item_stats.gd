@@ -27,8 +27,7 @@ var deceleration : float = 0.5
 
 @export var bullet : BulletSettings
 
-var dash_time : float = 0.17
-var dash_time_mult : float = 1.0
+var dash_speed : float = 1.0
 
 var esc_max : int = 500
 var esc_mult : float = 1.0
@@ -56,8 +55,7 @@ func update(mov : PlayerMoveComponent, atk : ShootComponent, dash : DashComponen
 	atk.crit_chance = actual_crit
 
 	#dash_hit.damage = int(float(actual_damage) * dash_damage_mult)
-	dash.dash_time = dash_time * dash_time_mult
-	dash.dash_speed = speed * 5.0
+	dash.dash_speed = 96.0 * dash_speed * (speed / 20.0)
 	dash.cooldown = maxf(dash_atkspd / actual_atkspd, 0.75)
 	dash_hit.knockback_strength = 64.0 * enemy_knockback
 	bullet.knockback = 24.0 * enemy_knockback

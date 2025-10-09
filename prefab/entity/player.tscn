@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://src/entity/player_target.tscn" id="41_jdfku"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uadq4"]
-radius = 0.75
+radius = 0.6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jg7jr"]
 atlas = ExtResource("10_7yx1s")
@@ -218,9 +218,8 @@ metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbmd"]
 radius = 0.42
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_diuwr"]
-radius = 0.87
-height = 2.482
+[sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
+radius = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8t5r2"]
 radius = 0.15
@@ -278,7 +277,7 @@ positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
 oversampling = false
-size = Vector2i(432, 243)
+size = Vector2i(480, 270)
 render_target_clear_mode = 1
 render_target_update_mode = 4
 
@@ -355,6 +354,7 @@ bullet = SubResource("Resource_xed6q")
 
 [node name="DashComponent" type="Node" parent="."]
 script = ExtResource("6_4p10s")
+dash_time = 0.1
 cooldown = 1.1
 jump_height = 0.8
 dash_time_tresh = 8.0
@@ -390,8 +390,7 @@ parry = true
 
 [node name="Hitbox" type="CollisionShape3D" parent="DashQuery"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-shape = SubResource("CapsuleShape3D_diuwr")
+shape = SubResource("SphereShape3D_uadq4")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="InteractionQuery" type="Area3D" parent="."]

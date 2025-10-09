@@ -11,13 +11,13 @@ var entered : bool = false
 func _process(delta : float) -> void:
 	if Engine.is_editor_hint(): return
 	if not func_godot_properties["animation"]: return
-	$MeshInstance3D3.rotation_degrees.y += delta
-	$MeshInstance3D3.rotation_degrees.x += delta * 0.5
-	$MeshInstance3D3.rotation_degrees.z += delta * 0.5
+	$MeshInstance3D3.rotation_degrees.y += delta * 25.0
+	$MeshInstance3D3.rotation_degrees.x += delta * 25.0
+	$MeshInstance3D3.rotation_degrees.z += delta * 25.0
 	$MeshInstance3D.material_override.uv1_offset.y += delta * 0.25
 	$MeshInstance3D2.material_override.uv1_offset.y += delta * 0.125
 
 
-func area_entered(area: Area3D) -> void:
-	if area.get_parent() is Player:
+func body_entered(body: Node3D) -> void:
+	if body is Player:
 		_G.game.end_level()

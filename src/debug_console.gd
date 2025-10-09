@@ -157,13 +157,10 @@ func god() -> void:
 	input.release_focus()
 	visible = false
 
-func fullbright() -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
-		return
-	_G.player.fullbright = not _G.player.fullbright
+func debug_draw(id : int = 0) -> void:
+	get_viewport().debug_draw = id
+	_T.say("Changed viewport.debug_draw to " + str(get_viewport().get_debug_draw()))
 	input.release_focus()
-	visible = false
 
 func moveinf(show_debug : int = 0) -> void:
 	if _G.player == null or not _G.player.is_inside_tree(): 

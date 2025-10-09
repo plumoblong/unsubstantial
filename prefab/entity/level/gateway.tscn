@@ -49,8 +49,6 @@ radial_segments = 6
 rings = 3
 
 [node name="Gateway" type="Area3D"]
-collision_layer = 6
-collision_mask = 6
 script = ExtResource("1_s454h")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
@@ -75,7 +73,7 @@ material_override = SubResource("StandardMaterial3D_eprsi")
 mesh = SubResource("CylinderMesh_ocwtt")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.667861, -1.34125, -0.0707899, 0.22903, 0.0358254, 1.48198, -1.32345, -0.670646, 0.220742, 0, 39.5, 0)
+transform = Transform3D(0.667861, -1.34125, -0.0707899, 0.22903, 0.0358254, 1.48198, -1.32345, -0.670646, 0.220742, -0.055120055, 40.653934, 0.17187919)
 mesh = SubResource("SphereMesh_hec52")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D3"]
@@ -91,4 +89,4 @@ spot_attenuation = 0.0
 spot_angle = 11.0095
 spot_angle_attenuation = 1.10957
 
-[connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="body_entered" from="." to="." method="body_entered"]

@@ -3,8 +3,11 @@ class_name Map
 
 @export var use_auto_build : bool = false
 
-@export var map_name : String = "unnamed"
-@export var chapter_id : int = 1
+var map_name : String = "unnamed"
+var chapter_id : int = 1
+var bake_navmesh : bool = true
+
+var map_building : bool = false
 
 @export var map_builder : FuncGodotMap 
 
@@ -21,13 +24,19 @@ func _ready() -> void:
 func build(file_path : String) -> void:
 	map_builder.local_map_file = file_path
 	map_builder.build()
+	map_building = true
 	
 func map_build_complete() -> void:
-	bake_navigation_mesh()
+	if bake_navmesh:
+		bake_navigation_mesh()
+	else: bake_finished()
+	
 
 func map_build_failed() -> void:
 	_T.say("Map failed to build. Check the log for more information", Color.RED)
 	level_failed.emit()
+	map_building = false
 	
 func bake_finished() -> void:
 	level_built.emit()
+	map_building = false
