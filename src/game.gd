@@ -2,14 +2,11 @@ extends Node3D
 class_name Game
 
 @onready var current_map : Node3D = get_node("Map") 
-#@onready var special_room : Node3D = get_node("SpecialRoom")
 @onready var item_pool : ItemPoolManager = get_node("ItemPoolManager")
-@onready var transition : Transition = get_node("Transition")
 @onready var enemies  : Node = get_node("Enemies")
 @onready var pause_screen : Node2D = get_node("Pause/Node2D")
 @onready var chapter : ChapterManager = get_node("ChapterManager")
 @onready var chat : ChatFeed = get_node("ChatFeed")
-#@onready var debug_light : Node3D = get_node("DebugLight")
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 
@@ -27,13 +24,16 @@ var music_volume : float = 1.0
 #var in_special : bool = false
 #var special_aviable : bool = false
 var exit_pos : Vector3 = Vector3.ZERO
+var enemies_disabled : bool = false
 
 var in_ether : bool = true
 var time_scale : float = 1.0
 
 var leveled_up : bool = false
-var in_transition : bool = false
+
+var in_any_menu : bool = false
 var ending_level : bool = false
+
 var music : bool = false
 
 var all_gates_visible : bool = false
@@ -68,8 +68,7 @@ func _ready() -> void:
 	
 	
 func _process(_delta : float) -> void:
-	if Engine.get_process_frames() % 4 == 0: return
-	$WorldEnvironment.environment = chapter.current.environment
+	
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
 	enemy_multiplier = clamp(1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05), 1.0, 100.0)
 	$Label.text = "Difficulty: " + str(enemy_multiplier)
@@ -77,7 +76,7 @@ func _process(_delta : float) -> void:
 	in_ether = chapter.current == chapter.all[0]
 
 	if _G.debug_mode: print(enemy_count)
-	if not in_transition:
+	if not ending_level or not in_any_menu:
 		if pause_screen.screen == 0:
 			if Input.is_action_just_pressed("escape"):
 				$Pause.visible = not $Pause.visible
@@ -99,18 +98,9 @@ func _process(_delta : float) -> void:
 		else:
 			_G.time_scale[0] = 1.0 * time_scale
 			enemies.process_mode = Node.PROCESS_MODE_INHERIT
-		#if not in_ether: if enemy_count == 0:
-			#if not leveled_up and not $PursuerSpawn.spawned:
-				#_G.player.level_component.gain_xp(_G.player.level_component.max_xp / 2)
-				#chat.add_message("Everybody is dead... ", Color.RED)
-				#
 	else:  
 		$Pause.visible = false
-
-	#$ItemChoose.visible = in_transition
-	
-	_G.player.can_control = not $Pause.visible and not in_transition and _G.player.essence_component.alive
-	#$WorldEnvironment.environment.glow_enabled = not _G.config.video.low
+	_G.player.can_control = not $Pause.visible and not ending_level and _G.player.essence_component.alive and not in_any_menu
 	
 func change_map(map_file_path : String) -> void:
 	var map_file : PackedScene = load(map_file_path)
@@ -146,6 +136,7 @@ func change_map_autobuild(map_file_path : String) -> void:
 	#if chapter.current != chapter.all[0]:
 		#in_ether = false
 	chapter.current = chapter.all[current_map.chapter_id]
+	
 	_G.player.global_position = Vector3.ZERO
 	_G.player.global_rotation = Vector3.ZERO
 	_G.player.velocity = Vector3.ZERO
@@ -195,27 +186,22 @@ func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.
 
 func end_level(loop : bool = false) -> void:
 	if ending_level: return
-	#if not loop:
-		#if stage == 6:
-			#_G.change_scene("res://scene/end_game.tscn")
 	ending_level = true
 	$Ambience.stop()
 	level_changing.emit()
-	
-	transition.ascend_in()
+	if _G.config.ui_dark_mode:
+		$AnimFix/Color.color = Color(0,0,0,0)
+		_G.tween($AnimFix/Color, "color", Color(0,0,0,1), 0.5)
+	else:
+		$AnimFix/Color.color = Color(1,1,1,0)
+		_G.tween($AnimFix/Color, "color", Color(1,1,1,1), 0.5)
 	stage += 1
 	actual_stage += 1
 	await get_tree().create_timer(0.75).timeout
-	leveled_up = false
-	##_G.player.essence_component.essence = _G.player.stat.essence.max\
-	#all_gates_open = false
-	#all_gates_visible = false
-	#_G.player.has_key = false
+	
 	for n in enemies.get_children():
 		n.queue_free()
-	change_map_autobuild("res://maps/chapter1/map_2.map")
-	chat.add_message("You have beaten this level " + str(stage - 1) + " times.", Color.WHITE)
-
+	change_map_autobuild(chapter.get_map())
 	$Ambience.global_position = Vector3(randf_range(-chapter.current.ambience_position.x, chapter.current.ambience_position.x), 
 	randf_range(-chapter.current.ambience_position.y, chapter.current.ambience_position.y), 
 	randf_range(-chapter.current.ambience_position.z, chapter.current.ambience_position.z))
@@ -227,17 +213,22 @@ func wait(time : float = 0.03) -> void:
 	await get_tree().create_timer(time, true, false, true).timeout
 	time_scale = 1.0
 
-func _notification(what) -> void:
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-		if not _G.debug_mode:
-			$Pause.visible = true
-			pause_screen.show()
+#func _notification(what) -> void:
+	#if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		#if not _G.debug_mode:
+			#$Pause.visible = true
+			#pause_screen.show()
+			
 func map_build_complete() -> void:
-	_G.player.global_position = Vector3.ZERO + Vector3(0.0, 1.0, 0.0)
-	_G.player.global_rotation = Vector3.ZERO
-	_G.player.velocity = Vector3.ZERO
-	chapter.current = chapter.all[current_map.chapter_id]
-	transition.ascend_out()
+	if _G.config.ui_dark_mode:
+		$AnimFix/Color.color = Color(0,0,0,1)
+		_G.tween($AnimFix/Color, "color", Color(0,0,0,0), 0.5)
+	else:
+		$AnimFix/Color.color = Color(1,1,1,1)
+		_G.tween($AnimFix/Color, "color", Color(1,1,1,0), 0.5)
+	ending_level = false
+	#$WorldEnvironment.set_env
 
 func map_build_failed() -> void:
-	pass
+	$AnimFix/Color.hide()
+	ending_level = false

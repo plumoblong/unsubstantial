@@ -12,4 +12,4 @@ func knock(position : Vector3, strength : float = 10.0, y_strength : float = 1.0
 		movement_component.vel += -hit_position * Vector3(multiplier, y_multiplier * y_strength, multiplier) * (strength)
 	else:
 		#get_parent().global_position.y += 0.25
-		get_parent().velocity = -hit_position * Vector3(multiplier, y_multiplier, multiplier) * strength
+		get_parent().velocity = -hit_position * Vector3(multiplier, y_multiplier * y_strength, multiplier) * strength

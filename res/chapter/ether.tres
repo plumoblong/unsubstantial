@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_p7rvb")
 environment = ExtResource("1_auwgg")
+maps = Array[String](["ether"])
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

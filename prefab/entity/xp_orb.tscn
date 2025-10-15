@@ -39,11 +39,10 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 12.0
+"speed": 3.0
 }]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ifqro"]
-radius = 0.2
 
 [node name="XPOrb" type="Area3D"]
 script = ExtResource("1_fjw31")
@@ -54,7 +53,7 @@ billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_5l1h8")
 autoplay = "default"
-frame_progress = 0.900141
+frame_progress = 0.2365207
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_ifqro")

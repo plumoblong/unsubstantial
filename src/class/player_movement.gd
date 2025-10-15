@@ -18,7 +18,7 @@ class_name PlayerMoveComponent
 @export var jump_velocity : float = 7.8
 
 #ground
-@export var ground_cap : float = 1.7 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
+@export var ground_cap : float = 2.2 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
 @export var fall_speed : float = 19.0
 @export var walk_speed : float = 18.5
 

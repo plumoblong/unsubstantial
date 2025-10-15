@@ -20,10 +20,10 @@ var can_use : bool = true
 	
 func _physics_process(_delta: float) -> void:
 	enabled = not closed and can_use
-	current_cost = int(float(init_cost + (times_played * 50) * _G.player.stats.defense))
+	current_cost = int( float(init_cost + (times_played * (50 * 10.0/_G.player.stats.defense))) )
 	if can_interact and not closed and can_use:
-		_G.player.interact_tooltip = "Shrine of ESSENCE."
-		_G.player.interact_description = "Sacrifice " + str(int(current_cost)) + " ESSENCE"
+		interaction_tooltip = "Shrine of ESSENCE."
+		description_tooltip = "Sacrifice " + str(int(current_cost)) + " ESSENCE"
 	$CSGCombiner3D/Eye.visible = closed
 	
 func on_interacted() -> void:

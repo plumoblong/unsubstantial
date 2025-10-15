@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://c2w8kq33cjc7f" path="res://sfx/crit_hit.wav" id="2_6cxlc"]
 [ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="2_8n0iy"]
 [ext_resource type="Texture2D" uid="uid://dtf80y5k4a324" path="res://textures/world/jump_pad.png" id="3_2wojm"]
-[ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="4_17oyl"]
+[ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://scene/res/particle/particle_drawpass_sparkle1.tres" id="4_17oyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_334q8"]
 render_priority = 0

@@ -83,10 +83,10 @@ skeleton = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 39.2609, 0)
-light_volumetric_fog_energy = 0.25
-spot_range = 42.0168
+light_energy = 1.5
+light_volumetric_fog_energy = 0.509
+spot_range = 42.797882
 spot_attenuation = 0.0
-spot_angle = 11.0095
-spot_angle_attenuation = 1.10957
+spot_angle = 20.54
 
 [connection signal="body_entered" from="." to="." method="body_entered"]

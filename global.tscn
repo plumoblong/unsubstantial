@@ -17,8 +17,8 @@ shader_parameter/inverted = false
 shader_parameter/use_sample_texture = true
 shader_parameter/enable_filter = true
 shader_parameter/speed = 8.0
-shader_parameter/power = 0.20000000298024
-shader_parameter/bit_depth = 11.25
+shader_parameter/power = 0.10000000149012
+shader_parameter/bit_depth = 12.0
 shader_parameter/dither = 0.1499999966472
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7k62m"]

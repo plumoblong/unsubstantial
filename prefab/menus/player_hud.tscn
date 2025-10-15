@@ -355,33 +355,29 @@ position = Vector2(241, 135)
 texture = ExtResource("6_2ogxy")
 
 [node name="InteractionTooltip" type="RichTextLabel" parent="."]
-visible = false
 use_parent_material = true
 clip_contents = false
-offset_top = 167.0
+offset_top = 159.0
 offset_right = 480.0
-offset_bottom = 177.0
+offset_bottom = 169.0
 theme_override_fonts/normal_font = ExtResource("7_w4dv1")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "???"
 horizontal_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="InteractionTooltip"]
 use_parent_material = true
 layout_mode = 0
-offset_top = 10.0
+offset_top = 14.0
 offset_right = 480.0
-offset_bottom = 21.0
+offset_bottom = 49.0
 theme_override_constants/line_separation = 3
 theme_override_fonts/normal_font = ExtResource("19_7io55")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
-text = "?"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Alert" type="RichTextLabel" parent="."]
 visible = false

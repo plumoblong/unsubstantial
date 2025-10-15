@@ -358,6 +358,7 @@ clip_contents = false
 offset_left = 4.0
 offset_right = 478.0
 offset_bottom = 270.0
+mouse_filter = 2
 theme_override_constants/line_separation = 0
 theme_override_constants/paragraph_separation = 2
 theme_override_fonts/normal_font = ExtResource("10_jtats")

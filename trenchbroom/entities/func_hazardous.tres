@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://b4m48eho8uq4e"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_qwqmx"]
+[ext_resource type="Script" uid="uid://bnb7mrxivqnr" path="res://src/class/solid_hazard.gd" id="2_qwqmx"]
+
+[resource]
+script = ExtResource("1_qwqmx")
+spawn_type = 0
+build_occlusion = true
+collision_layer = 7
+collision_mask = 7
+script_class = ExtResource("2_qwqmx")
+classname = "hazard"
+description = "Hurts an EssenceComponent entity when standing on it"
+class_properties = {
+"cooldown": 20,
+"damage": 50,
+"die_reason": "You succumbed to the poison."
+}
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://5cow84q03m6a"

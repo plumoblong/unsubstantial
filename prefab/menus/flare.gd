@@ -10,9 +10,6 @@ var transition : Tween.TransitionType = Tween.TRANS_LINEAR
 
 var life_time : float = 0.0
 
-#func _ready() -> void:
-	#life_time = time
-
 func fade() -> void:
 	show()
 	color = start_color
@@ -21,9 +18,10 @@ func fade() -> void:
 	queue_free()
 
 func _process(delta: float) -> void:
+	time /= Engine.time_scale
 	if color != end_color:
 		if life_time <= time:
-			life_time += delta * Engine.time_scale
+			life_time += delta / Engine.time_scale
 		color.r = lerpf(start_color.r, end_color.r, life_time / time)
 		color.g = lerpf(start_color.g, end_color.g, life_time / time)
 		color.b = lerpf(start_color.b, end_color.b, life_time / time)

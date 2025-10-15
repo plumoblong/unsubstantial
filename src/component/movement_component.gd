@@ -62,7 +62,7 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 	
 	speed = clamp(speed, default_speed, 256.0)
 	if on_ceiling:
-		vel.y = 0.0
+		vel.y = fall_speed
 	
 func update_flying(delta : float) -> void:
 	if direction:

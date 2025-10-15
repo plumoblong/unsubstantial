@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhb015xkpbwkt"]
+
+[ext_resource type="Script" uid="uid://c7eww812gbewm" path="res://src/entity/map_hazard_cast.gd" id="1_3krrb"]
+
+[node name="MapHazardCast" type="RayCast3D"]
+target_position = Vector3(0, -0.4, 0)
+collision_mask = 4103
+script = ExtResource("1_3krrb")

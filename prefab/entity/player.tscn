@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene load_steps=56 format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -22,10 +22,11 @@
 [ext_resource type="PackedScene" uid="uid://bnfk1f1uvunre" path="res://prefab/menus/player_hud.tscn" id="17_dbo8y"]
 [ext_resource type="PackedScene" uid="uid://du62gvfekrgth" path="res://prefab/animation/player_death_anim.tscn" id="26_uadq4"]
 [ext_resource type="AudioStream" uid="uid://b5oil2dujs8sd" path="res://sfx/xp_pickup.wav" id="27_cwgh7"]
+[ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="27_yih3o"]
 [ext_resource type="AudioStream" uid="uid://sqeutd3cft3d" path="res://sfx/player/jump2.wav" id="36_a1dr2"]
 [ext_resource type="AudioStream" uid="uid://dlr5xxgdptexm" path="res://sfx/player/land.wav" id="37_a1dr2"]
 [ext_resource type="AudioStream" uid="uid://bg5h3h2stwvqw" path="res://sfx/player/jump.wav" id="38_jdfku"]
-[ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://src/entity/player_target.tscn" id="41_jdfku"]
+[ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://prefab/entity/player_target.tscn" id="41_jdfku"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uadq4"]
 radius = 0.6
@@ -266,6 +267,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Head"]
 handle_input_locally = false
+msaa_3d = 1
 use_occlusion_culling = true
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
@@ -405,7 +407,7 @@ debug_color = Color(1, 0, 0.866667, 0)
 debug_fill = false
 
 [node name="MotionBlur" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.596078)
+modulate = Color(1, 1, 1, 0.5019608)
 offset_right = 480.0
 offset_bottom = 270.0
 localize_numeral_system = false
@@ -470,6 +472,9 @@ smoothing = 0.8
 
 [node name="PlayerDeathAnim" parent="." instance=ExtResource("26_uadq4")]
 visible = false
+
+[node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("27_yih3o")]
+esc = NodePath("../EssenceComponent")
 
 [connection signal="reseted" from="ShootComponent" to="." method="shoot_component_reseted"]
 [connection signal="shooted" from="ShootComponent" to="." method="shooted"]

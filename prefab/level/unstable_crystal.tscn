@@ -1,0 +1,525 @@
+[gd_scene load_steps=45 format=3 uid="uid://djvampg2b0v17"]
+
+[ext_resource type="Texture2D" uid="uid://5ayxax3b5ale" path="res://images/entity/unstable_crystal.png" id="1_bvaf6"]
+[ext_resource type="Script" uid="uid://dxqh4igotolro" path="res://src/entity/unstable_crystal.gd" id="1_mahfd"]
+[ext_resource type="Texture2D" uid="uid://75bfio0kx2i" path="res://images/sparkle_small.png" id="2_mahfd"]
+[ext_resource type="PlaneMesh" uid="uid://ucfxmseirl2b" path="res://res/particle/particle_drawpass1.tres" id="3_kcwi5"]
+[ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="4_44crx"]
+[ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="5_prynk"]
+[ext_resource type="Texture2D" uid="uid://38dfeuetui5x" path="res://textures/pbr/pillar.png" id="6_6nmy1"]
+[ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="8_kcwi5"]
+
+[sub_resource type="Curve" id="Curve_ynk6r"]
+_data = [Vector2(0, 0), 0.0, 15.040538, 0, 0, Vector2(0.17731419, 1), 1.8524764, 1.8524764, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0uwxg"]
+curve = SubResource("Curve_ynk6r")
+
+[sub_resource type="Curve" id="Curve_o3tyh"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.75423735, 0), -1.9551274, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ypbir"]
+curve = SubResource("Curve_o3tyh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8mudq"]
+lifetime_randomness = 0.71
+emission_shape_scale = Vector3(0.5, 1.23, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+velocity_limit_curve = SubResource("CurveTexture_ypbir")
+gravity = Vector3(0, -3, 0)
+radial_accel_min = 4.0399976
+radial_accel_max = 5.799998
+tangential_accel_min = 5.2899976
+tangential_accel_max = 5.2899976
+damping_min = 3.0670002
+damping_max = 3.0670002
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_0uwxg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3w1kk"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_mahfd")
+heightmap_scale = -16.0
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 0.478
+point_size = 8.0
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3d8e2"]
+material = SubResource("StandardMaterial3D_3w1kk")
+size = Vector2(0.15, 0.15)
+orientation = 2
+
+[sub_resource type="Gradient" id="Gradient_30aa6"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mjnnl"]
+gradient = SubResource("Gradient_30aa6")
+width = 135
+height = 415
+metadata/_snap_enabled = true
+metadata/_snap_count = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lvh2"]
+render_priority = -1
+blend_mode = 1
+shading_mode = 0
+disable_fog = true
+albedo_color = Color(0.3816669, 0.18303046, 0.4311589, 1)
+albedo_texture = SubResource("GradientTexture2D_mjnnl")
+texture_filter = 1
+billboard_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoqwe"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(0, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m540j"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(128, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7qws"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(256, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2u1m"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(384, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmxdv"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(512, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ev4"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(640, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijywd"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(768, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw5bw"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(896, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4cb4"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1024, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo5ov"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1152, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygrqt"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1280, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hunu"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1408, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw100"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1536, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vgnv"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1664, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpjsf"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1792, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skeq1"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(1920, 0, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tklt3"]
+atlas = ExtResource("1_bvaf6")
+region = Rect2(2048, 0, 128, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2xbq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoqwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m540j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7qws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2u1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmxdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ev4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijywd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw5bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4cb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo5ov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygrqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hunu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw100")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vgnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpjsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skeq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tklt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skeq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpjsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vgnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw100")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hunu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygrqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo5ov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4cb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fw5bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijywd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ev4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmxdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2u1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7qws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m540j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_44crx"]
+size = Vector3(2.2, 4, 2.2)
+
+[sub_resource type="Gradient" id="Gradient_lw7qi"]
+offsets = PackedFloat32Array(0, 0.923469)
+colors = PackedColorArray(1, 1, 1, 1, 0.33237, 0.33237, 0.33237, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwtd1"]
+gradient = SubResource("Gradient_lw7qi")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkv8n"]
+albedo_color = Color(0.59668, 0.534373, 0.752727, 1)
+albedo_texture = ExtResource("4_44crx")
+metallic = 0.27
+metallic_specular = 1.0
+roughness = 0.63
+roughness_texture = SubResource("GradientTexture2D_dwtd1")
+emission = Color(0.0164378, 0, 0.431108, 1)
+emission_energy_multiplier = 0.23
+normal_enabled = true
+normal_scale = 0.6
+normal_texture = ExtResource("6_6nmy1")
+rim = 0.12
+rim_tint = 1.0
+clearcoat_roughness = 1.0
+anisotropy = -0.58
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+subsurf_scatter_transmittance_enabled = true
+subsurf_scatter_transmittance_depth = 8.0
+subsurf_scatter_transmittance_boost = 1.0
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("5_prynk")
+refraction_scale = 0.08
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_offset = Vector3(0, 1.655, 0)
+texture_filter = 0
+
+[sub_resource type="Animation" id="Animation_4xg7x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crystal:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Crystal:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShatterParticle:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Crystal:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_c71yd"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crystal:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.02, 0.3, 0.62, 0.9),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [2.2, 2.7, 2.2, 2.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShatterParticle:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.02),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crystal:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.02),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_0yjyj"]
+resource_name = "shatter"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Crystal:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShatterParticle:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Crystal:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iv8ro"]
+_data = {
+&"RESET": SubResource("Animation_4xg7x"),
+&"idle": SubResource("Animation_c71yd"),
+&"shatter": SubResource("Animation_0yjyj")
+}
+
+[node name="UnstableCrystal" type="Area3D"]
+script = ExtResource("1_mahfd")
+interaction_tooltip = "The Unstable Crystal"
+description_tooltip = "Shatter it."
+
+[node name="ShatterParticle" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6078124, 0)
+emitting = false
+amount = 128
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.91
+randomness = 0.47
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_8mudq")
+draw_passes = 2
+draw_pass_1 = SubResource("PlaneMesh_3d8e2")
+draw_pass_2 = ExtResource("3_kcwi5")
+
+[node name="Godray" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.520714, 0)
+material_override = SubResource("StandardMaterial3D_5lvh2")
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = SubResource("GradientTexture2D_mjnnl")
+
+[node name="Crystal" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+modulate = Color(0.5757751, 0.54004896, 0.5978129, 1)
+pixel_size = 0.015
+billboard = 1
+alpha_cut = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_v2xbq")
+autoplay = "default"
+frame_progress = 0.28052756
+
+[node name="collision_shape_3d" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shape = SubResource("BoxShape3D_44crx")
+
+[node name="csg_combiner_3d" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+material_override = SubResource("StandardMaterial3D_nkv8n")
+collision_layer = 4879
+collision_mask = 4879
+
+[node name="csg_cylinder_3d" type="CSGCylinder3D" parent="csg_combiner_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75, 0)
+radius = 2.0
+height = 0.93
+
+[node name="csg_cylinder_3d2" type="CSGCylinder3D" parent="csg_combiner_3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.4375, 0)
+radius = 1.5
+height = 0.875
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7926235, 0)
+light_color = Color(0.8883271, 0.7822485, 1, 1)
+light_energy = 1.3
+light_volumetric_fog_energy = 5.661
+light_specular = 3.0
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iv8ro")
+}
+speed_scale = 0.3
+blend_times = [&"shatter", &"idle", 0.5, &"shatter", &"shatter", 0.5]
+
+[node name="Player" parent="." instance=ExtResource("8_kcwi5")]
+transform = Transform3D(-0.47258148, 0, -0.881287, 1.5408949e-07, 1, -8.262897e-08, 0.881287, -1.7484598e-07, -0.47258148, -3.6025248, 0, 0)
+visible = false
+
+[connection signal="interacted" from="." to="." method="on_interacted"]

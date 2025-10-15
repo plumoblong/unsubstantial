@@ -10,15 +10,16 @@ agent_radius = 1.0
 agent_max_slope = 66.0
 vertices_per_polygon = 4.0
 
-[node name="Map" type="NavigationRegion3D" node_paths=PackedStringArray("map_builder")]
+[node name="Map" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_g5n5k")
 script = ExtResource("1_hk6l2")
 use_auto_build = true
-map_builder = NodePath("Builder")
 
 [node name="Builder" type="Node3D" parent="."]
 script = ExtResource("2_tyebk")
 map_settings = ExtResource("3_tldyv")
 build_flags = 2
+
+[node name="Environment" type="WorldEnvironment" parent="."]
 
 [connection signal="bake_finished" from="." to="." method="bake_finished"]

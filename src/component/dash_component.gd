@@ -22,12 +22,12 @@ var final_vector : Vector3 = Vector3.ZERO
 
 func update() -> void:
 	if not enabled: return
-	if can_reset and get_parent().is_on_floor():
+	if can_reset:
 		can_dash = true
 		can_dash_now.emit()
 		can_reset = false
 
-func dash(mc : Component) -> void:
+func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 	if not enabled: return
 	await get_tree().create_timer(delay).timeout
 	if can_dash:
@@ -40,7 +40,10 @@ func dash(mc : Component) -> void:
 		if mc is MovementComponent:
 			mc.friction = mc.floor_friction * 3.0
 			mc.speed = dash_speed
-			mc.direction = -get_parent().transform.basis.z
+			if direction == Vector3.ZERO:
+				mc.direction = -get_parent().transform.basis.z
+			else:
+				mc.direction = direction
 			if not mc.on_floor:
 				mc.vel.y = mc.jump_speed * jump_height
 			await get_tree().create_timer(dash_time / 10.0).timeout

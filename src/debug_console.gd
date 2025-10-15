@@ -194,6 +194,14 @@ func map_custom(path : String = "template") -> void:
 	input.release_focus()
 	visible = false
 
+func disable_enemies() -> void:
+	if _G.game == null or not _G.game.is_inside_tree(): 
+		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
+		return
+	_G.game.enemies_disabled = not _G.game.enemies_disabled
+	input.release_focus()
+	visible = false
+
 func set_pmvar(property : StringName, value : float = 0.0) -> void:
 	if _G.player == null or not _G.player.is_inside_tree(): 
 		say("Couldn't find player object. Make sure you are in Game.", Color.RED)

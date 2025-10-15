@@ -2,7 +2,6 @@ extends CharacterBody3D
 class_name Player
 
 @onready var camera : PlayerCamera = get_node("Head/Camera")
-#@onready var movement_component : MovementComponent = get_node("MovementComponent")
 @onready var movement_component : PlayerMoveComponent = get_node("PlayerMovement")
 @onready var essence_component : EssenceComponent = get_node("EssenceComponent")
 @onready var shoot_component : ShootComponent = get_node("ShootComponent")
@@ -16,6 +15,7 @@ class_name Player
 @onready var dash_swoosh : AnimatedSprite3D = get_node("Head/Swoosh")
 @onready var hud : PlayerHUD = get_node("HUD")
 @onready var target : PlayerTarget = get_node("PlayerTarget")
+@onready var mblur : TextureRect = get_node("MotionBlur")
 
 var score : int = 0
 var color : Color = Color.WHITE
@@ -29,8 +29,7 @@ var can_interact : bool = false
 var can_control : bool = false
 
 var start_position : Vector3
-var interact_tooltip : String = ""
-var interact_description : String = ""
+
 #var input_dir : Vector2
 
 var god_mode : bool = false
@@ -74,7 +73,7 @@ func _process(_delta : float) -> void:
 	level_component.enabled = not _G.game.in_ether
 	
 	camera.mbcam.current = _G.config.video.motion_blur
-	$MotionBlur.visible = _G.config.video.motion_blur
+	mblur.visible = _G.config.video.motion_blur
 	
 	camera.mbcam.get_parent().debug_draw = get_viewport().debug_draw
 	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
@@ -132,8 +131,8 @@ func _physics_process(delta : float) -> void:
 			moving_forward = movement_component.input_dir.y < 0
 			if not movement_component.noclip:
 				if Input.is_action_pressed("shoot") and not dash_component.dashing:
-					shoot_component.shoot(-camera.head.global_transform.basis.z, target.get_pos_multiplied(0.5) + Vector3(.0, .7, .0))
-				elif Input.is_action_pressed("dash"):
+					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
+				elif Input.is_action_just_pressed("dash"):
 					dash_component.dash(movement_component)
 			#hitbox.position.y = 1.0 + (float(movement_component.crouching))
 			#if Input.is_action_just_pressed("jump") and movement_component.can_jump:
@@ -142,6 +141,9 @@ func _physics_process(delta : float) -> void:
 			
 			if Input.is_action_just_pressed("f2") and essence_component.alive:
 				hud.visible = not hud.visible
+			
+			if _G.game.ending_level:
+				can_control = false
 	else:
 		velocity = Vector3.ZERO
 		camera.anim.speed_scale = 0
@@ -177,7 +179,7 @@ func _on_essence_component_died(_combo : bool) -> void:
 	if $PlayerDeathAnim.played: return
 	camera.mbcam.get_parent().render_target_update_mode = SubViewport.UPDATE_DISABLED
 	death_anim()
-	_G.tween($MotionBlur, "modulate", Color(1.0, 1.0, 1.0, 0.0))
+	_G.tween(mblur, "modulate", Color(1.0, 1.0, 1.0, 0.0))
 	await get_tree().create_timer(2.0).timeout
 	
 	_G.change_scene("res://scene/gameover.tscn", Color.BLACK, 0.75, 1.0, false)
@@ -217,12 +219,13 @@ func essence_component_gained(amount : int) -> void:
 func essence_component_fractured(amount : int, _crit : bool) -> void:
 	var time : float = clampf(amount / essence_component.max_essence, 0.25, 1.25)
 	_G.flare_screen(Color(1, 1, 1, 0.7), Color.TRANSPARENT, time)
-	_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
-	camera.tween_camera_fov(15.0, 0.5)
-	_G.current_run.hits_taken += 1
-	
-	camera.tween_camera_fov(-20.0, time)
-	$HitSFX.play()
+	if amount > 5:
+		$HitSFX.pitch_scale = randf_range(0.95, 1.05)
+		$HitSFX.play()
+		_G.flare_screen(Color(1, 1, 1, 0.7), Color.TRANSPARENT, time)
+		camera.tween_camera_fov(15.0, 0.5)
+		_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
+		_G.current_run.hits_taken += 1
 
 func shoot_component_reseted() -> void:
 	hud.show_hand()
@@ -250,10 +253,10 @@ func dash_component_can_dash_now() -> void:
 	$HUD/Eye.play("open")
 
 func update_motionblur() -> void:
-	var smoothing : float = 0.35 + essence_component.ratio * 0.63
-	var smoothing_strong : float = 0.6 + essence_component.ratio * 0.39
-	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, smoothing)
-	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, smoothing)
-	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, smoothing_strong)
-	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, smoothing_strong)
-	camera.mbcam.global_position = lerp(camera.mbcam.global_position ,camera.global_position, smoothing)
+	const SMOOTHING : float = 0.75
+	#var smoothing_strong : float = 0.6 + essence_component.ratio * 0.39
+	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING)
+	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, SMOOTHING)
+	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, SMOOTHING)
+	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, SMOOTHING)
+	camera.mbcam.global_position = lerp(camera.mbcam.global_position ,camera.global_position, SMOOTHING)

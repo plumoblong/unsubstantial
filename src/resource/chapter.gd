@@ -6,12 +6,9 @@ class_name Chapter
 @export var id : int = 0
 
 @export var environment : Environment
-#@export var materials : ChapterMaterials
+@export var maps : Array[String]
+@export var map_fallback : String
 
 @export var y_boundary : float = -15.0
-#@export var rooms : Array[PackedScene]
-#@export var end_room : PackedScene
-#@export var chapter_end_room : PackedScene
-#@export var key_room : PackedScene
 @export var ambience_streams : Array[AudioStream]
 @export var ambience_position : Vector3 = Vector3(100.0, 10.0, 100.0)

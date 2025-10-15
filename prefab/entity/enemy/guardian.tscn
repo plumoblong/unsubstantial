@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cg4uq1u5r27yr"]
+[gd_scene load_steps=18 format=3 uid="uid://cg4uq1u5r27yr"]
 
 [ext_resource type="Script" uid="uid://b2c72hgigbsg3" path="res://src/entity/quardian.gd" id="1_5sof3"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_y5ngk"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="11_ehkvo"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="12_xq50c"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="13_y5ngk"]
+[ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_snofy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_asf4w"]
 radius = 0.6
@@ -83,8 +84,8 @@ config = SubResource("Resource_y5ngk")
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
-essence = 450.0
-damage = 90.0
+essence = 300.0
+damage = 80.0
 on_hit_velocity_loss = 0.9
 xp_payout = 10
 metadata/_custom_type_script = "uid://tlvl68soe85"
@@ -117,6 +118,10 @@ attenuation_filter_cutoff_hz = 20500.0
 stream = ExtResource("12_xq50c")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
+
+[node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("14_snofy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1291933, 0)
+esc = NodePath("../EssenceComponent")
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

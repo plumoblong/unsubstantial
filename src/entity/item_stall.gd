@@ -24,11 +24,13 @@ var collected : bool = false
 @export var link_to_gate : NodePath
 
 @onready var sprite : Sprite3D = get_node("Item")
+@onready var interaction : Interaction = get_node("Interaction")
 
 var linked_stall : ItemStall
 var linked_gate : Gate
 var reroll : bool = false
 
+##Gets item from Trenchbroom map entity config.
 func get_item_from_tb() -> void:
 
 	if func_godot_properties["blind_chance"] != null:
@@ -41,6 +43,7 @@ func get_item_from_tb() -> void:
 		var item_res = load("res://res/item/" + func_godot_properties["item"] + ".tres")
 		if item_res != null:
 			item = item_res
+			
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	get_item_from_tb()
@@ -109,16 +112,16 @@ func _process(_delta : float) -> void:
 	if $Interaction.can_interact:
 		if not blind:
 			if free:
-				_G.player.interact_tooltip = "Get [wave]" + item.item_name.to_upper()
+				interaction.interaction_tooltip = "Get [wave]" + item.item_name.to_upper()
 			else:
-				_G.player.interact_tooltip = "Get [wave]" + item.item_name.to_upper()+ "[/wave] for " + str(item.shop_cost) + "esc"
-			_G.player.interact_description = item.item_description
+				interaction.interaction_tooltip = "Get [wave]" + item.item_name.to_upper()+ "[/wave] for " + str(item.shop_cost) + "esc"
+			interaction.description_tooltip = item.item_description
 		else:
 			if free:
-				_G.player.interact_tooltip = "Get [wave]???" 
+				interaction.interact_tooltip = "Get [wave]???" 
 			else:
-				_G.player.interact_tooltip = "Get [wave]???[/wave] for " + str(item.shop_cost) + "esc"
-			_G.player.interact_description = "???"
+				interaction.interact_tooltip = "Get [wave]???[/wave] for " + str(item.shop_cost) + "esc"
+			interaction.description_tooltip = "???"
 
 	
 func interaction_interacted() -> void:

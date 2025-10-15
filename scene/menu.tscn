@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6dn73q0mhnx1"]
+[gd_scene load_steps=23 format=3 uid="uid://b6dn73q0mhnx1"]
 
 [ext_resource type="Script" uid="uid://dv16xbqqjpc34" path="res://src/menu.gd" id="1_tbsmk"]
 [ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_hubvr"]
 [ext_resource type="AudioStream" uid="uid://dm5jx2m85bfqp" path="res://music/bullets.ogg" id="3_pgh6j"]
 [ext_resource type="PackedScene" uid="uid://cjxjdq0k8hhxp" path="res://prefab/level/chapter1/poison.tscn" id="4_pgh6j"]
+[ext_resource type="Texture2D" uid="uid://ckyirw0vnltwn" path="res://textures/world/poison_norm.png" id="5_pgh6j"]
 [ext_resource type="Texture2D" uid="uid://lqsndjx87otm" path="res://images/logo.png" id="6_lsv3e"]
 [ext_resource type="AudioStream" uid="uid://7tc2qenx4yep" path="res://sfx/ui/ui_select.wav" id="7_xqnb3"]
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="8_wmmby"]
@@ -14,7 +15,82 @@
 [ext_resource type="PackedScene" uid="uid://sppppyvtblst" path="res://prefab/menus/options.tscn" id="10_wes68"]
 [ext_resource type="PackedScene" uid="uid://dxinpyif3wunr" path="res://prefab/menus/achievement_screen.tscn" id="12_dyuxe"]
 [ext_resource type="AudioStream" uid="uid://samctduexn6j" path="res://music/beta.ogg" id="12_jwfp7"]
-[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="17_wmmby"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://scene/res/env/palace.tres" id="17_wmmby"]
+
+[sub_resource type="Shader" id="Shader_w31tq"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.5.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_nearest_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_nearest, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_nearest, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_emission : source_color, hint_default_black, filter_nearest, repeat_enable;
+uniform vec4 emission : source_color;
+uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy + vec2(TIME * 0.25, TIME * 0.25);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	vec3 color_mult;
+	color_mult = vec3(1.5 + sin(TIME * 2.0) / 2.0);
+	ALBEDO = albedo.rgb * color_mult * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+
+	// Emission: Enabled
+	vec3 emission_tex = texture(texture_emission, base_uv).rgb;
+	// Emission Operator: Add
+	EMISSION = (emission.rgb + emission_tex) * emission_energy;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgh6j"]
+render_priority = 0
+shader = SubResource("Shader_w31tq")
+shader_parameter/albedo = Color(1.2222813, 1.2222813, 1.2222813, 1)
+shader_parameter/texture_albedo = ExtResource("5_pgh6j")
+shader_parameter/albedo_texture_size = Vector2i(64, 64)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv1_scale = Vector3(256, 256, 256)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wmmby"]
 shader = ExtResource("8_wmmby")
@@ -51,8 +127,9 @@ color = Color(0.296557, 0, 0.474491, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
 
 [node name="MeshInstance3D" parent="Camera3D" instance=ExtResource("4_pgh6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.516, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.514, 0)
 top_level = true
+material_override = SubResource("ShaderMaterial_pgh6j")
 
 [node name="Main" type="Node2D" parent="."]
 

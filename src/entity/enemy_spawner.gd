@@ -9,6 +9,8 @@ class_name EnemySpawner
 	"spawn_delay" = 0.0,
 }
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
+const ENEMY_CAP : int = 3
+
 var spawned : bool = false
 var distance_to_spawn : float = 30.0
 
@@ -18,9 +20,13 @@ func _func_godot_build_complete() -> void:
 	else:
 		distance_to_spawn = func_godot_properties["distance_to_spawn"]
 
+func _ready() -> void:
+	$light.omni_range = distance_to_spawn
+
 func spawn() -> void:
 	
-	if spawned: return
+	if _G.game.enemies_disabled or spawned: return
+	if _G.game.enemies.get_child_count() >= ENEMY_CAP: return
 	#if _G.debug_mode: return
 	await get_tree().create_timer(func_godot_properties["spawn_delay"]).timeout
 	create_anim()
@@ -42,10 +48,11 @@ func spawn() -> void:
 	else: spawned = true
 
 func _process(_delta : float) -> void:
-	$Sprite3D.visible = _G.debug_mode
+	#$Sprite3D.visible = _G.debug_mode
+	#$light.omni_range = distance_to_spawn
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
 	if distance_to_player < distance_to_spawn:
-		spawn()
+		if _G.player.is_on_floor(): spawn()
 
 func create_anim() -> void:
 	var anim : Node = SPAWN_ANIM.instantiate()

@@ -27,8 +27,8 @@ func ascend_out() -> void:
 	_G.player.start_immunity(2)
 
 
-func animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "transition":
-		await get_tree().create_timer(0.3).timeout
-		can_change_scene = true
-		ascend_out()
+#func animation_player_animation_finished(anim_name: StringName) -> void:
+	#if anim_name == "transition":
+		#await get_tree().create_timer(0.3).timeout
+		#can_change_scene = true
+		#ascend_out()

@@ -8,7 +8,7 @@
 albedo_texture = ExtResource("1_7oe1u")
 metallic = 0.1
 metallic_specular = 1.0
-roughness = 0.6
+roughness = 0.65
 emission = Color(0, 0, 0.329412, 1)
 normal_enabled = true
 normal_scale = 2.0
@@ -18,7 +18,6 @@ rim_tint = 1.0
 clearcoat = 0.14
 clearcoat_roughness = 1.0
 anisotropy = 0.23
-ao_enabled = true
 ao_light_affect = 0.65
 ao_texture = ExtResource("2_axlsg")
 heightmap_scale = 11.4

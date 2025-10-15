@@ -3,13 +3,14 @@ class_name Map
 
 @export var use_auto_build : bool = false
 
+@onready var env : WorldEnvironment = get_node("Environment")
+@onready var map_builder : FuncGodotMap = get_node("Builder")
+
 var map_name : String = "unnamed"
 var chapter_id : int = 1
 var bake_navmesh : bool = true
 
 var map_building : bool = false
-
-@export var map_builder : FuncGodotMap 
 
 signal level_built
 signal level_failed
@@ -39,4 +40,5 @@ func map_build_failed() -> void:
 	
 func bake_finished() -> void:
 	level_built.emit()
+	env.environment = _G.game.chapter.all[chapter_id].environment
 	map_building = false

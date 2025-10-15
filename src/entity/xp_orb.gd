@@ -7,11 +7,11 @@ var speed : float
 var random_mult : float
 
 func _ready() -> void:
-	speed = randf_range(0.3, 0.8)
-	random_mult = randf_range(1.1, 1.25)
+	speed = randf_range(3.4, 6.7)
+	random_mult = randf_range(1.02, 1.1)
 
 func _physics_process(delta : float) -> void:
-	var direction : Vector3 = global_position.direction_to(_G.player.global_position)
+	var direction : Vector3 = global_position.direction_to(_G.player.global_position + Vector3(0.0, 1.0, 0.0))
 	speed *= random_mult
 	speed = clamp(speed, 0.0, 64.0)
 	global_position += direction * speed * delta

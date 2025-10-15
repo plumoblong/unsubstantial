@@ -3,8 +3,11 @@ class_name MapOptions
 
 @export var func_godot_properties : Dictionary = {
 	"map_name" : "unnamed",
+	"music" : "",
 	"chapter_id" : 1,
-	"bake_navmesh" : 1
+	"bake_navmesh" : 1,
+	"use_map_obstacle" : 1,
+	
 }
 
 func _func_godot_build_complete() -> void:

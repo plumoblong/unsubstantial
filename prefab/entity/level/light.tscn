@@ -6,7 +6,7 @@
 [node name="Light" type="OmniLight3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132767, -0.0269384, -0.0557618)
 light_energy = 0.75
-light_volumetric_fog_energy = 0.5
+light_volumetric_fog_energy = 0.35
 distance_fade_begin = 80.0
 distance_fade_length = 20.0
 omni_range = 18.0

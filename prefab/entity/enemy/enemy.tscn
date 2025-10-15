@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwxkl6ilg2ynr"]
+[gd_scene load_steps=18 format=3 uid="uid://dwxkl6ilg2ynr"]
 
 [ext_resource type="Script" uid="uid://ioi1tokifblw" path="res://src/class/enemy_human.gd" id="1_02b0y"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_mxx8l"]
@@ -8,11 +8,12 @@
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="6_qqoev"]
 [ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="7_nw88q"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="8_6l2v4"]
-[ext_resource type="Script" path="res://src/component/enemy_component.gd" id="9_02b0y"]
+[ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="9_02b0y"]
 [ext_resource type="Texture2D" uid="uid://emc2l5m25kfk" path="res://images/entity/human.png" id="9_po238"]
 [ext_resource type="PackedScene" uid="uid://cbeov66ersklw" path="res://prefab/entity/3d_bar.tscn" id="10_02b0y"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="12_b5v5k"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="13_x2dfq"]
+[ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_mxx8l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c3pg5"]
 
@@ -106,6 +107,10 @@ attenuation_filter_cutoff_hz = 20500.0
 stream = ExtResource("13_x2dfq")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
+
+[node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("14_mxx8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+esc = NodePath("../EssenceComponent")
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

@@ -411,7 +411,6 @@ font_size = 8
 
 [node name="Interaction" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40077, 0)
-visible = false
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("7_6uf45")

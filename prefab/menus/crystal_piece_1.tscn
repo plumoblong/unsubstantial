@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://d385nyl04mn7c"]
+
+[ext_resource type="Script" uid="uid://cdkbeeg11l462" path="res://src/menus/crystal_piece.gd" id="1_deuxg"]
+[ext_resource type="Texture2D" uid="uid://cjlw2pjo7fje0" path="res://images/ui/diamond_shattered.png" id="2_h2gp0"]
+[ext_resource type="Texture2D" uid="uid://cch7emkq55n6k" path="res://images/glow.png" id="3_lp214"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="4_lqquj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q61hg"]
+blend_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_popfq"]
+size = Vector2(80, 96)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qcpl0"]
+blend_mode = 1
+
+[node name="CrystalPiece1" type="Area2D"]
+material = SubResource("CanvasItemMaterial_q61hg")
+script = ExtResource("1_deuxg")
+
+[node name="Bound" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_popfq")
+
+[node name="Sprites" type="Node2D" parent="."]
+use_parent_material = true
+scale = Vector2(1.2, 1.2)
+
+[node name="Sprite1" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_h2gp0")
+hframes = 7
+
+[node name="Sprite2" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(24, -32)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("2_h2gp0")
+hframes = 7
+frame = 1
+
+[node name="Sprite3" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(-23.999996, 32.000004)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("2_h2gp0")
+hframes = 7
+frame = 2
+
+[node name="Sprite4" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(-23.999996, -32)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("2_h2gp0")
+hframes = 7
+frame = 3
+
+[node name="Sprite5" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(24.000008, 32.000004)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("2_h2gp0")
+hframes = 7
+frame = 4
+
+[node name="Glow" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_qcpl0")
+position = Vector2(-1.9073486e-06, 0.83333576)
+scale = Vector2(1.25, 0.5)
+texture = ExtResource("3_lp214")
+
+[node name="Info" type="Label" parent="."]
+modulate = Color(0.6530534, 0.6530534, 0.6530534, 1)
+use_parent_material = true
+offset_left = -39.999996
+offset_top = -48.333332
+offset_right = 40.000004
+offset_bottom = 48.33334
+theme_override_fonts/font = ExtResource("4_lqquj")
+theme_override_font_sizes/font_size = 8
+text = "+10% Knockback"
+horizontal_alignment = 1
+vertical_alignment = 1

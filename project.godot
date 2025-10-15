@@ -287,7 +287,7 @@ crouch={
 
 [physics]
 
-3d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=4
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 common/enable_object_picking=false
@@ -305,9 +305,10 @@ textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=0
 textures/light_projectors/filter=0
+occlusion_culling/occlusion_rays_per_thread=128
 environment/glow/upscale_mode=0
 environment/subsurface_scattering/subsurface_scattering_quality=0
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 occlusion_culling/use_occlusion_culling=true
-environment/defaults/default_environment="res://res/env/palace.tres"
+environment/defaults/default_environment="uid://dspdyqrgm5xt3"

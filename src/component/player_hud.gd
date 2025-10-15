@@ -12,6 +12,9 @@ var crosshair_tween_active : bool = false
 var show_movement_info : bool = false
 var show_movement_var : bool = false
 
+var interact_tooltip : String = ""
+var interact_description : String = ""
+
 var score_lerp : float = 0.0
 var health_lerp : float = 0.0
 
@@ -26,11 +29,11 @@ func update(viewbob : Vector2, spd : float) -> void:
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	$Info/Score.text = "[b]" + str(int(round(score_lerp))) + "[/b] pts"
 	
-	$Info/EssenceIcon.speed_scale = 1.1 - get_parent().essence_component.ratio
+	$Info/EssenceIcon.speed_scale = pow(1.1 - get_parent().essence_component.ratio, 2)
 	$Info/EssenceIcon/Essence.text = "[b]" + str(get_parent().essence_component.essence) + "[/b]esc"
 	$InteractionTooltip.visible = get_parent().can_interact
-	$InteractionTooltip.text = "[center]" + get_parent().interact_tooltip
-	$InteractionTooltip/Description.text = "[center]" +  get_parent().interact_description
+	$InteractionTooltip.text = interact_tooltip
+	$InteractionTooltip/Description.text = interact_description
 	
 	$Debug.visible = _G.debug_mode
 	$MovementInfo/Label2.visible = show_movement_var

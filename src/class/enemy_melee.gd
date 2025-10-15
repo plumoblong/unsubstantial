@@ -26,10 +26,10 @@ func essence_component_fractured(amount : int, i_time : float) -> void:
 func _physics_process(delta : float) -> void:
 	# Add the gravity.
 	
-	look_at(_G.player.target.get_pos_multiplied(enemy.random_factor))
+	#look_at(_G.player.target.get_pos_multiplied(enemy.random_factor))
 	if _G.player.can_control:
 		if dash_component.can_dash and chase_component.attacking:
-			dash_component.dash(movement_component)
+			dash_component.dash(movement_component, global_position.direction_to(_G.player.target.get_pos_multiplied(enemy.random_factor)))
 	agent.debug_enabled = _G.debug_mode
 	if global_position.y <= -20.0:
 		essence_component.die()
@@ -49,7 +49,7 @@ func _physics_process(delta : float) -> void:
 	movement_component.enabled = _G.player.can_control
 	chase_component.enabled = _G.player.can_control
 	$HitSFX.pitch_scale = clamp($HitSFX.pitch_scale, 1.0, 1.5)
-	velocity = movement_component.vel * Vector3(_G.player.can_control, _G.player.can_control, _G.player.can_control)
+	velocity = movement_component.vel * float(_G.player.can_control)
 	move_and_slide()
 	chase_component.update(_G.player.target.get_pos_multiplied(.5 + enemy.random_factor), movement_component, agent)
 
