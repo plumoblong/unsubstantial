@@ -39,9 +39,9 @@ func _physics_process(delta : float) -> void:
 	#else:
 		#chase_component.min_distance = 0.0
 	
-	#$Label3D.text = str(snappedf(float(essence_component.essence) / float(essence_component.start_essence) * 100, 1)) + "%"
-	#$Label3D.text = str(essence_component.essence)
+	$DashQuery/Hitbox.disabled = not dash_component.dashing
 	$"3DBar".from_value = essence_component.ratio
+	$ChaseComponent.min_distance = 0.0 if dash_component.dashing else 5.0
 	movement_component.on_floor = is_on_floor()
 	movement_component.update(delta, is_on_ceiling_only())
 	essence_component.update()

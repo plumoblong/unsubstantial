@@ -37,8 +37,8 @@
 }
 // entity 3
 {
-"classname" "item_stall"
-"origin" "1176 0 240"
+"classname" "shrine_crystal"
+"origin" "1176 8 248"
 }
 // entity 4
 {

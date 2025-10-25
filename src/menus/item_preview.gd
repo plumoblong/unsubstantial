@@ -3,7 +3,6 @@ extends TextureRect
 @export var label : NodePath
 @export var name_label : NodePath
 @export var rarity : NodePath
-@export var item : Item
 var hovering : bool = false
 
 @onready var desc : RichTextLabel = get_node(label)

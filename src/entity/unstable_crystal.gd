@@ -9,3 +9,5 @@ func _func_godot_build_complete() -> void:
 
 func on_interacted() -> void:
 	anim.play("shatter")
+	_G.game.crystal_choose.start_choose()
+	return

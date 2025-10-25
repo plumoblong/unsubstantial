@@ -15,6 +15,7 @@ class_name EnemyComponent
 @export var xp_payout : int = 3
 @export var xp_radius : float = 1.5
 @export var randomize_scale : float = 1.2
+@export var distance_to_despawn : float = 50.0
 
 var random_factor : float = 0.0
 var time_spawned : float 
@@ -31,6 +32,11 @@ func setup(esc : EssenceComponent) -> void:
 	esc.max_essence = int(float(essence) * _G.game.enemy_multiplier)
 	esc.essence = int(float(essence) * _G.game.enemy_multiplier)
 	sprite.modulate = color
+
+func _process(_delta : float) -> void:
+	var distance_to_player : float = get_parent().global_position.distance_to(_G.player.global_position)
+	if distance_to_despawn < distance_to_player:
+		get_parent().queue_free() 
 
 func handle_fracture(amount : int, i_time : float, mov : MovementComponent, light : Light3D) -> void:
 	if mov is MovementComponent:

@@ -8,6 +8,7 @@ class_name Chapter
 @export var environment : Environment
 @export var maps : Array[String]
 @export var map_fallback : String
+@export var remove_maps_from_pool : bool = true
 
 @export var y_boundary : float = -15.0
 @export var ambience_streams : Array[AudioStream]

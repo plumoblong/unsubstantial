@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://djvampg2b0v17"]
+[gd_scene load_steps=44 format=3 uid="uid://djvampg2b0v17"]
 
 [ext_resource type="Texture2D" uid="uid://5ayxax3b5ale" path="res://images/entity/unstable_crystal.png" id="1_bvaf6"]
 [ext_resource type="Script" uid="uid://dxqh4igotolro" path="res://src/entity/unstable_crystal.gd" id="1_mahfd"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="4_44crx"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="5_prynk"]
 [ext_resource type="Texture2D" uid="uid://38dfeuetui5x" path="res://textures/pbr/pillar.png" id="6_6nmy1"]
-[ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="8_kcwi5"]
 
 [sub_resource type="Curve" id="Curve_ynk6r"]
 _data = [Vector2(0, 0), 0.0, 15.040538, 0, 0, Vector2(0.17731419, 1), 1.8524764, 1.8524764, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -263,8 +262,9 @@ animations = [{
 "speed": 11.0
 }]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_44crx"]
-size = Vector3(2.2, 4, 2.2)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mahfd"]
+radius = 1.5
+height = 6.0
 
 [sub_resource type="Gradient" id="Gradient_lw7qi"]
 offsets = PackedFloat32Array(0, 0.923469)
@@ -400,7 +400,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_0yjyj"]
 resource_name = "shatter"
-length = 0.2
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -446,6 +446,8 @@ _data = {
 }
 
 [node name="UnstableCrystal" type="Area3D"]
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_mahfd")
 interaction_tooltip = "The Unstable Crystal"
 description_tooltip = "Shatter it."
@@ -486,11 +488,12 @@ frame_progress = 0.28052756
 
 [node name="collision_shape_3d" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-shape = SubResource("BoxShape3D_44crx")
+shape = SubResource("CapsuleShape3D_mahfd")
 
 [node name="csg_combiner_3d" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
 material_override = SubResource("StandardMaterial3D_nkv8n")
+use_collision = true
 collision_layer = 4879
 collision_mask = 4879
 
@@ -518,8 +521,6 @@ libraries = {
 speed_scale = 0.3
 blend_times = [&"shatter", &"idle", 0.5, &"shatter", &"shatter", 0.5]
 
-[node name="Player" parent="." instance=ExtResource("8_kcwi5")]
-transform = Transform3D(-0.47258148, 0, -0.881287, 1.5408949e-07, 1, -8.262897e-08, 0.881287, -1.7484598e-07, -0.47258148, -3.6025248, 0, 0)
-visible = false
-
+[connection signal="area_entered" from="." to="." method="area_entered"]
+[connection signal="area_exited" from="." to="." method="area_exited"]
 [connection signal="interacted" from="." to="." method="on_interacted"]

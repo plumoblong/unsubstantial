@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpwhvorsucmn5"]
+[gd_scene load_steps=20 format=3 uid="uid://bpwhvorsucmn5"]
 
 [ext_resource type="Script" uid="uid://dr4it7887glkj" path="res://src/game.gd" id="1_uu38s"]
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
+[ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
 [ext_resource type="AudioStream" uid="uid://b20cwcimf3pqt" path="res://music/level/key.ogg" id="8_400sm"]
 [ext_resource type="Script" uid="uid://c8l6vapm3bkg5" path="res://src/resource/item_pool.gd" id="9_abp7u"]
@@ -36,6 +37,9 @@ script = ExtResource("1_uu38s")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Pause" parent="." instance=ExtResource("6_hgp5e")]
+visible = false
+
+[node name="CrystalChoose" parent="." instance=ExtResource("4_ux4dc")]
 visible = false
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

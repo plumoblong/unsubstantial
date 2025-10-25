@@ -27,7 +27,7 @@ func _ready() -> void:
 				_T.say("Save File loaded", Color.GREEN)
 			#print(typeof(current_line))
 	if _G.config.fullscreen:
-		get_window().mode = Window.MODE_FULLSCREEN
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 	else:
 		get_window().mode = Window.MODE_WINDOWED
 	if _G.config.video.v_sync:

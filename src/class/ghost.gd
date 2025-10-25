@@ -11,6 +11,7 @@ var t : int
 
 func _ready() -> void:
 	texture = sprite
+	$Particles.emitting = true
 	_G.player.camera.tween_camera_fov(15, 1.7)
 	_G.tween(self, "modulate", Color.TRANSPARENT, lifetime)
 	$SFX.pitch_scale = randf_range(0.90, 1.1)

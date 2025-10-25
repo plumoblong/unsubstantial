@@ -1,17 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://ruui4a3p4otb"]
+[gd_scene load_steps=8 format=3 uid="uid://ruui4a3p4otb"]
 
 [ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="1_ekk7n"]
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="2_jtats"]
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_f7gt8"]
-[ext_resource type="Texture2D" uid="uid://ddqjtbx73fey4" path="res://images/item/passive/item_p2.png" id="4_7eqyd"]
-[ext_resource type="Script" uid="uid://1fnwx6m8s6v1" path="res://src/menus/item_preview.gd" id="5_patfd"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="5_7vwyn"]
 [ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="6_x7mk6"]
-[ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="7_e6qjg"]
-[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="8_ojdwr"]
-[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="9_2oxco"]
-[ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="10_jtats"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gl7j"]
+shader = ExtResource("2_jtats")
+shader_parameter/direction = Vector2(-1, -1)
+shader_parameter/modulate = Color(0, 0, 0, 1)
+shader_parameter/self_modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vwyn"]
 shader = ExtResource("2_jtats")
 shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
@@ -29,288 +30,7 @@ offset_bottom = 38.0
 theme_override_fonts/normal_font = ExtResource("3_f7gt8")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][wave]INVENTORY"
-
-[node name="Items" type="Node2D" parent="."]
-position = Vector2(148, 53)
-
-[node name="Item7" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_right = 24.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item8" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_right = 56.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item9" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_right = 88.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item10" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_right = 120.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item11" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_right = 152.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item12" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_right = 184.0
-offset_bottom = 24.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item13" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_top = 28.0
-offset_right = 24.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item14" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 28.0
-offset_right = 56.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item15" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 28.0
-offset_right = 88.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item16" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 28.0
-offset_right = 120.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item17" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 28.0
-offset_right = 152.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item18" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 28.0
-offset_right = 184.0
-offset_bottom = 52.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item19" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_top = 56.0
-offset_right = 24.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item20" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 56.0
-offset_right = 56.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item21" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 56.0
-offset_right = 88.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item22" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 56.0
-offset_right = 120.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item23" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 56.0
-offset_right = 152.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item24" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 56.0
-offset_right = 184.0
-offset_bottom = 80.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item25" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_top = 84.0
-offset_right = 24.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item26" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 32.0
-offset_top = 84.0
-offset_right = 56.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item27" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 64.0
-offset_top = 84.0
-offset_right = 88.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item28" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 96.0
-offset_top = 84.0
-offset_right = 120.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item29" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 128.0
-offset_top = 84.0
-offset_right = 152.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
-
-[node name="Item30" type="TextureRect" parent="Items"]
-use_parent_material = true
-offset_left = 160.0
-offset_top = 84.0
-offset_right = 184.0
-offset_bottom = 108.0
-texture = ExtResource("4_7eqyd")
-script = ExtResource("5_patfd")
-label = NodePath("../../Description")
-name_label = NodePath("../../Name")
-rarity = NodePath("../../Rarity")
+text = "[center][wave]Statistics"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -318,51 +38,17 @@ position = Vector2(4, 4)
 texture = ExtResource("6_x7mk6")
 centered = false
 
-[node name="Rarity" type="Sprite2D" parent="."]
-position = Vector2(240, 236)
-texture = ExtResource("7_e6qjg")
-vframes = 5
-
-[node name="Description" type="RichTextLabel" parent="."]
-use_parent_material = true
-offset_top = 192.0
-offset_right = 480.0
-offset_bottom = 219.0
-theme_override_constants/line_separation = 3
-theme_override_fonts/normal_font = ExtResource("8_ojdwr")
-theme_override_font_sizes/normal_font_size = 6
-bbcode_enabled = true
-text = "???"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Name" type="RichTextLabel" parent="."]
-use_parent_material = true
-clip_contents = false
-offset_top = 172.0
-offset_right = 480.0
-offset_bottom = 182.0
-theme_override_fonts/normal_font = ExtResource("9_2oxco")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-text = "???"
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
-
 [node name="Stats" type="RichTextLabel" parent="."]
-modulate = Color(1, 1, 1, 0.3764706)
+material = SubResource("ShaderMaterial_7vwyn")
 clip_contents = false
-offset_left = 4.0
-offset_right = 478.0
+offset_left = 128.0
+offset_right = 352.0
 offset_bottom = 270.0
 mouse_filter = 2
 theme_override_constants/line_separation = 0
 theme_override_constants/paragraph_separation = 2
-theme_override_fonts/normal_font = ExtResource("10_jtats")
-theme_override_font_sizes/normal_font_size = 8
+theme_override_fonts/normal_font = ExtResource("5_7vwyn")
+theme_override_font_sizes/normal_font_size = 6
 text = "DAMAGE 50
 CRIT-CHANCE 1%
 ATTACK-SPEED 1.00
@@ -375,54 +61,5 @@ LUCK 0
 "
 fit_content = true
 scroll_active = false
-horizontal_alignment = 3
+horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="mouse_entered" from="Items/Item7" to="Items/Item7" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item7" to="Items/Item7" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item8" to="Items/Item8" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item8" to="Items/Item8" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item9" to="Items/Item9" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item9" to="Items/Item9" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item10" to="Items/Item10" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item10" to="Items/Item10" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item11" to="Items/Item11" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item11" to="Items/Item11" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item12" to="Items/Item12" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item12" to="Items/Item12" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item13" to="Items/Item13" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item13" to="Items/Item13" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item14" to="Items/Item14" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item14" to="Items/Item14" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item15" to="Items/Item15" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item15" to="Items/Item15" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item16" to="Items/Item16" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item16" to="Items/Item16" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item17" to="Items/Item17" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item17" to="Items/Item17" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item18" to="Items/Item18" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item18" to="Items/Item18" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item19" to="Items/Item19" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item19" to="Items/Item19" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item20" to="Items/Item20" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item20" to="Items/Item20" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item21" to="Items/Item21" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item21" to="Items/Item21" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item22" to="Items/Item22" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item22" to="Items/Item22" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item23" to="Items/Item23" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item23" to="Items/Item23" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item24" to="Items/Item24" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item24" to="Items/Item24" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item25" to="Items/Item25" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item25" to="Items/Item25" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item26" to="Items/Item26" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item26" to="Items/Item26" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item27" to="Items/Item27" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item27" to="Items/Item27" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item28" to="Items/Item28" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item28" to="Items/Item28" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item29" to="Items/Item29" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item29" to="Items/Item29" method="mouse_exited"]
-[connection signal="mouse_entered" from="Items/Item30" to="Items/Item30" method="mouse_entered"]
-[connection signal="mouse_exited" from="Items/Item30" to="Items/Item30" method="mouse_exited"]

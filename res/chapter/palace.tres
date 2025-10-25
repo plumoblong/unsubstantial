@@ -12,6 +12,6 @@ id = 1
 environment = ExtResource("2_vp0qd")
 maps = Array[String](["chapter1/map_1", "chapter1/map_2"])
 map_fallback = "chapter1/map_1"
-y_boundary = -12.0
+remove_maps_from_pool = false
 ambience_streams = Array[AudioStream]([ExtResource("1_bd46r")])
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

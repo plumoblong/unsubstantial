@@ -83,7 +83,7 @@ const UIPOP_FILE : PackedScene = preload("res://prefab/menus/ui_pop_up.tscn")
 var shader_inverted : bool = false
 
 var lowpass_cutoff : float = 1.0  # n * 20500 hz (why so low? idk ask godot devs)
-var lowpass_enabled : bool = true
+var lowpass_enabled : bool = false
 
 var low_pass : AudioEffectLowPassFilter = AudioServer.get_bus_effect(0, 1)
 
@@ -99,8 +99,6 @@ func _ready() -> void:
 	
 func _physics_process(delta : float) -> void:
 	time += delta
-	
-	
 	if config.video.low:
 		get_viewport().scaling_3d_scale = 0.5
 	else:

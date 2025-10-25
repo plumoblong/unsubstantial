@@ -148,12 +148,7 @@ func god() -> void:
 	if _G.player == null or not _G.player.is_inside_tree(): 
 		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
 		return
-	if _G.player.god_mode:
-		_G.player.essence_component.immortal = true
-		say("God mode disabled.")
-	else:
-		_G.player.essence_component.immortal = false
-		say("God mode enabled.")
+	_G.player.god_mode = not _G.player.god_mode
 	input.release_focus()
 	visible = false
 

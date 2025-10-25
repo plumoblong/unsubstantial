@@ -39,6 +39,7 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 		
 		if mc is MovementComponent:
 			mc.friction = mc.floor_friction * 3.0
+			var old_speed : float = mc.speed
 			mc.speed = dash_speed
 			if direction == Vector3.ZERO:
 				mc.direction = -get_parent().transform.basis.z
@@ -48,10 +49,7 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 				mc.vel.y = mc.jump_speed * jump_height
 			await get_tree().create_timer(dash_time / 10.0).timeout
 			just_dashed = false
-			if mc.on_floor:
-				mc.speed = mc.max_speed * 1.1
-			else:
-				mc.speed = mc.max_speed - (mc.max_speed / 6.0)
+			mc.speed = old_speed
 			await get_tree().create_timer(dash_time / dash_time_tresh).timeout
 			dashing = false
 		elif mc is PlayerMoveComponent:

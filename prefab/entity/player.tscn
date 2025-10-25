@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene load_steps=62 format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="5_gk4kr"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="5_qqhji"]
 [ext_resource type="Script" uid="uid://c3klywbeud1cv" path="res://src/component/dash_component.gd" id="6_4p10s"]
-[ext_resource type="Script" uid="uid://bie27w77rgkhb" path="res://src/component/item_manager.gd" id="6_ic4c1"]
 [ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/class/player_movement.gd" id="6_qqhji"]
 [ext_resource type="Script" uid="uid://n0hn8be3qkfd" path="res://src/component/level_component.gd" id="6_xa7gf"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_d7qgd"]
@@ -217,7 +216,8 @@ can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbmd"]
-radius = 0.42
+radius = 0.3
+height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
 radius = 1.0
@@ -248,6 +248,48 @@ initial_velocity_max = 2.0
 gravity = Vector3(0, -0.5, 0)
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_uss2g")
+
+[sub_resource type="Curve" id="Curve_uadq4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.21342623, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yih3o"]
+curve = SubResource("Curve_uadq4")
+
+[sub_resource type="Gradient" id="Gradient_v641o"]
+offsets = PackedFloat32Array(0, 0.15771812, 0.81543624, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_blxug"]
+gradient = SubResource("Gradient_v641o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v641o"]
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_blxug")
+alpha_curve = SubResource("CurveTexture_yih3o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blxug"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.40816796, 0.40816796, 0.40816796, 1)
+albedo_texture = ExtResource("7_j4gl1")
+heightmap_scale = -16.0
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow_amount = 0.478
+point_size = 8.0
+distance_fade_min_distance = 2.0
+distance_fade_max_distance = 3.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4adam"]
+material = SubResource("StandardMaterial3D_blxug")
+orientation = 2
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
@@ -301,6 +343,7 @@ frame = 12
 frame_progress = 1.0
 
 [node name="Camera" type="Camera3D" parent="Head"]
+doppler_tracking = 1
 current = true
 script = ExtResource("2_t4gyb")
 
@@ -347,9 +390,6 @@ y_multiplier = 0.4
 [node name="LevelComponent" type="Node" parent="."]
 script = ExtResource("6_xa7gf")
 
-[node name="ItemManager" type="Node" parent="."]
-script = ExtResource("6_ic4c1")
-
 [node name="ItemStats" type="Node" parent="."]
 script = ExtResource("9_m21cj")
 bullet = SubResource("Resource_xed6q")
@@ -375,7 +415,6 @@ collision_layer = 810
 collision_mask = 810
 
 [node name="Hitbox" type="CollisionShape3D" parent="Query"]
-visible = false
 shape = SubResource("CapsuleShape3D_tjbmd")
 debug_color = Color(1, 0, 0.8666668, 0.7647059)
 debug_fill = false
@@ -425,6 +464,15 @@ draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_awlim")
 draw_pass_1 = ExtResource("9_5ax3k")
 
+[node name="FastParticle" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 16
+interpolate = false
+draw_order = 1
+process_material = SubResource("ParticleProcessMaterial_v641o")
+draw_pass_1 = SubResource("PlaneMesh_4adam")
+
 [node name="ShootSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_m35d1")
 bus = &"SFX1"
@@ -466,9 +514,10 @@ one_shot = true
 ignore_time_scale = true
 
 [node name="PlayerTarget" parent="." instance=ExtResource("41_jdfku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.649026, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 target_distance = 0.15
-smoothing = 0.8
+smoothing = 0.5
 
 [node name="PlayerDeathAnim" parent="." instance=ExtResource("26_uadq4")]
 visible = false

@@ -7,6 +7,7 @@ class_name Game
 @onready var pause_screen : Node2D = get_node("Pause/Node2D")
 @onready var chapter : ChapterManager = get_node("ChapterManager")
 @onready var chat : ChatFeed = get_node("ChatFeed")
+@onready var crystal_choose : CrystalChoose = get_node("CrystalChoose")
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 
@@ -65,7 +66,6 @@ func _ready() -> void:
 		chapter.current = chapter.all[1]
 		change_map(_G.starting_level)
 	$Pause.hide()
-	
 	
 func _process(_delta : float) -> void:
 	
@@ -176,14 +176,14 @@ func create_popup_text(pos : Vector3, text : String = "kupsztal", color : Color 
 	pp.big = crit
 	
 func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.0) -> void:
-	for i in range(amount / (int(leveled_up) + 1)):
+	for i in range(amount):
 		var res : PackedScene = load("res://prefab/entity/xp_orb.tscn")
 		var obj : Node3D = res.instantiate()
 		if get_tree() != null:
 			await get_tree().create_timer(0.0 + i / 50.0).timeout
 		add_child(obj)
 		obj.global_position = pos + Vector3(randf_range(-spawn_radius / 2.0, spawn_radius / 2.0), randf_range(-spawn_radius / 2.0, spawn_radius / 2.0), randf_range(-spawn_radius / 2.0, spawn_radius / 2.0))
-
+		
 func end_level(loop : bool = false) -> void:
 	if ending_level: return
 	ending_level = true
@@ -201,7 +201,8 @@ func end_level(loop : bool = false) -> void:
 	
 	for n in enemies.get_children():
 		n.queue_free()
-	change_map_autobuild(chapter.get_map())
+	var m : String = chapter.get_map()
+	change_map_autobuild(m)
 	$Ambience.global_position = Vector3(randf_range(-chapter.current.ambience_position.x, chapter.current.ambience_position.x), 
 	randf_range(-chapter.current.ambience_position.y, chapter.current.ambience_position.y), 
 	randf_range(-chapter.current.ambience_position.z, chapter.current.ambience_position.z))
@@ -212,12 +213,6 @@ func wait(time : float = 0.03) -> void:
 	time_scale = 0.01
 	await get_tree().create_timer(time, true, false, true).timeout
 	time_scale = 1.0
-
-#func _notification(what) -> void:
-	#if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-		#if not _G.debug_mode:
-			#$Pause.visible = true
-			#pause_screen.show()
 			
 func map_build_complete() -> void:
 	if _G.config.ui_dark_mode:

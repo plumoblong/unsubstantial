@@ -54,8 +54,9 @@ script = ExtResource("2_mxx8l")
 movement_component = NodePath("../MovementComponent")
 y_multiplier = 1.0
 
-[node name="ChaseComponent" type="Node" parent="."]
+[node name="ChaseComponent" type="Node" parent="." node_paths=PackedStringArray("movebackhelper")]
 script = ExtResource("3_suopw")
+movebackhelper = NodePath("../MoveBackHelper")
 agro_distance = 25.0
 attack_distance = 17.0
 min_distance = 8.0
@@ -63,8 +64,7 @@ y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("4_qi521")
-max_speed = 22.0
-default_speed = 16.0
+speed = 21.0
 floor_friction = 0.08
 
 [node name="EssenceComponent" type="Node" parent="."]
@@ -79,6 +79,7 @@ config = SubResource("Resource_necmj")
 script = ExtResource("9_02b0y")
 hit_sfx = NodePath("../HitSFX")
 on_hit_velocity_loss = 0.65
+xp_payout = 2
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
 [node name="Query" type="Area3D" parent="."]
@@ -111,6 +112,12 @@ attenuation_filter_cutoff_hz = 20500.0
 [node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("14_mxx8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 esc = NodePath("../EssenceComponent")
+
+[node name="MoveBackHelper" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Node" type="Node3D" parent="MoveBackHelper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
