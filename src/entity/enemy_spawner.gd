@@ -9,7 +9,7 @@ class_name EnemySpawner
 	"spawn_delay" = 0.0,
 }
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 3
+const ENEMY_CAP : int = 5
 
 var spawned : bool = false
 var distance_to_spawn : float = 30.0

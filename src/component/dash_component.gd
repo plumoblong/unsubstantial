@@ -22,7 +22,7 @@ var final_vector : Vector3 = Vector3.ZERO
 
 func update() -> void:
 	if not enabled: return
-	if can_reset:
+	if can_reset and get_parent().is_on_floor():
 		can_dash = true
 		can_dash_now.emit()
 		can_reset = false

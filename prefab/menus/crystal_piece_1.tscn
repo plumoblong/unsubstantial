@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d385nyl04mn7c"]
+[gd_scene load_steps=15 format=3 uid="uid://d385nyl04mn7c"]
 
 [ext_resource type="Script" uid="uid://cdkbeeg11l462" path="res://src/menus/crystal_piece.gd" id="1_deuxg"]
 [ext_resource type="Texture2D" uid="uid://cjlw2pjo7fje0" path="res://images/ui/diamond_shattered.png" id="2_h2gp0"]
@@ -22,6 +22,12 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.1)
 metadata/_snap_enabled = true
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2gp0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lp214"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqquj"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_deuxg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_deuxg"]
@@ -40,10 +46,13 @@ texture = SubResource("GradientTexture2D_h2gp0")
 
 [node name="Bound" type="Button" parent="."]
 offset_left = -64.0
-offset_top = -63.999992
+offset_top = -64.0
 offset_right = 64.0
-offset_bottom = 64.00001
+offset_bottom = 64.0
 mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2gp0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lp214")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lqquj")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_deuxg")
 disabled = true
 
