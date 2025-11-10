@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://c6lu6dfgssn4"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_ahj1q"]
+[ext_resource type="Script" uid="uid://cdi6g3m5d26e4" path="res://src/entity/map/map_gate.gd" id="2_ahj1q"]
+
+[resource]
+script = ExtResource("1_ahj1q")
+collision_layer = 7
+collision_mask = 7
+script_class = ExtResource("2_ahj1q")
+classname = "ent_gate"
+description = "Upon defeating the specified amount of enemies, disables the collision of object."
+class_properties = {
+"kills_required": 3
+}
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://5cow84q03m6a"

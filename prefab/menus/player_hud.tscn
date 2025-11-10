@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bnfk1f1uvunre"]
+[gd_scene load_steps=50 format=3 uid="uid://bnfk1f1uvunre"]
 
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="1_n17tt"]
 [ext_resource type="Script" uid="uid://cdijn4mxeb2pm" path="res://src/component/player_hud.gd" id="2_j5rt0"]
@@ -117,9 +117,17 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("16_nu6og")
 region = Rect2(0, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jf25"]
+atlas = ExtResource("16_nu6og")
+region = Rect2(336, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmti3"]
 atlas = ExtResource("16_nu6og")
 region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl77j"]
+atlas = ExtResource("16_nu6og")
+region = Rect2(384, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ht47"]
 atlas = ExtResource("16_nu6og")
@@ -155,25 +163,28 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kg1in")
 }, {
-"duration": 1.0,
+"duration": 0.91,
 "texture": SubResource("AtlasTexture_yi3x2")
 }, {
-"duration": 1.0,
+"duration": 0.81,
 "texture": SubResource("AtlasTexture_uavjq")
 }, {
-"duration": 1.0,
+"duration": 0.71,
 "texture": SubResource("AtlasTexture_siy1j")
 }, {
-"duration": 1.0,
+"duration": 0.01,
 "texture": SubResource("AtlasTexture_kuxdn")
 }],
 "loop": false,
 "name": &"close",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_rtfc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jf25")
 }, {
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_vmti3")
@@ -181,8 +192,14 @@ animations = [{
 "duration": 0.7,
 "texture": SubResource("AtlasTexture_rtfc8")
 }, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl77j")
+}, {
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_7ht47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl77j")
 }, {
 "duration": 5.7,
 "texture": SubResource("AtlasTexture_rtfc8")
@@ -204,13 +221,13 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.71,
 "texture": SubResource("AtlasTexture_tgv5t")
 }, {
-"duration": 1.0,
+"duration": 0.81,
 "texture": SubResource("AtlasTexture_51w8j")
 }, {
-"duration": 1.0,
+"duration": 0.91,
 "texture": SubResource("AtlasTexture_by6fe")
 }, {
 "duration": 1.0,
@@ -218,7 +235,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"open",
-"speed": 10.0
+"speed": 13.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4chq7"]
@@ -498,8 +515,10 @@ bus = &"SFX2"
 use_parent_material = true
 position = Vector2(240, 24)
 sprite_frames = SubResource("SpriteFrames_m62ne")
+animation = &"open"
 autoplay = "default"
-frame_progress = 0.150472
+frame = 3
+frame_progress = 1.0
 
 [node name="Info" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_4chq7")

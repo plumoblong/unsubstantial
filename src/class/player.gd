@@ -206,6 +206,7 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 		camera.tween_camera_fov(15.0, 0.5)
 		_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
 		_G.current_run.hits_taken += 1
+		dash_component.can_reset = true
 
 func shoot_component_reseted() -> void:
 	hud.show_hand()
@@ -234,7 +235,8 @@ func dash_component_can_dash_now() -> void:
 
 func update_motionblur() -> void:
 	const SMOOTHING : float = 0.8
-	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING) * (0.98 + essence_component.ratio * 0.02) 
+	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING) * (0.98 + essence_component.ratio * 0.02) \
+	+ ((movement_component.speed_bonus - 1.0) * 20.0)
 	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, SMOOTHING)
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, SMOOTHING)
 	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, SMOOTHING)

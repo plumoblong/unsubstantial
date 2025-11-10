@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgpu1sil353c7"]
 
-[ext_resource type="Script" uid="uid://18l2vrmp1sxq" path="res://src/entity/level_end.gd" id="1_qovhv"]
+[ext_resource type="Script" uid="uid://18l2vrmp1sxq" path="res://src/entity/map/level_end.gd" id="1_qovhv"]
 [ext_resource type="Material" uid="uid://hn1cpq4c1txh" path="res://material/crate.tres" id="2_4gg5d"]
 [ext_resource type="Material" uid="uid://djs0htkjng54b" path="res://material/white.tres" id="3_npi43"]
 

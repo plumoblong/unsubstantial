@@ -43,6 +43,7 @@ var pursuer_spawned : bool = false
 var enemy_count : int = 0
 var enemy_spawner_count : int = 0
 var enemy_multiplier : float = 1.0
+var enemies_killed : int = 0
 
 signal level_changing
 
@@ -127,6 +128,7 @@ func change_map(map_file_path : String) -> void:
 
 func change_map_autobuild(map_file_path : String) -> void:
 	if map_file_path == '': return
+	enemies_killed = 0
 	current_map.queue_free()
 	var map_instance : Map = MAP_SCENE.instantiate()
 	map_instance.name = "Map"
@@ -209,8 +211,8 @@ func end_level(loop : bool = false) -> void:
 	$Ambience.stream = chapter.current.ambience_streams.pick_random()
 	$Ambience.play()
 
-func wait(time : float = 0.03) -> void:
-	time_scale = 0.01
+func wait(time : float = 0.07) -> void:
+	time_scale = 0.0
 	await get_tree().create_timer(time, true, false, true).timeout
 	time_scale = 1.0
 			

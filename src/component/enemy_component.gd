@@ -15,7 +15,6 @@ class_name EnemyComponent
 @export var xp_payout : int = 3
 @export var xp_radius : float = 1.5
 @export var randomize_scale : float = 1.2
-@export var distance_to_despawn : float = 50.0
 
 var random_factor : float = 0.0
 var time_spawned : float 
@@ -32,11 +31,6 @@ func setup(esc : EssenceComponent) -> void:
 	esc.max_essence = int(float(essence) * _G.game.enemy_multiplier)
 	esc.essence = int(float(essence) * _G.game.enemy_multiplier)
 	sprite.modulate = color
-
-func _process(_delta : float) -> void:
-	var distance_to_player : float = get_parent().global_position.distance_to(_G.player.global_position)
-	if distance_to_despawn < distance_to_player:
-		get_parent().queue_free() 
 
 func handle_fracture(amount : int, i_time : float, mov : MovementComponent, light : Light3D) -> void:
 	if mov is MovementComponent:
@@ -56,6 +50,7 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 		if not area.parent is Player: return
 		if sprite.modulate != Color.WHITE: 
 			esc.fracture(area.damage, area.crit, area.stun_time)
+			_G.game.wait()
 			if area.get_parent() is Player: area.get_parent().hud.hitmark()
 			knock.knock(area.get_parent().global_position, area.knockback_strength, area.knockback_y_strength)
 			if area is Bullet: area.hit()
@@ -63,5 +58,6 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 func handle_death() -> void:
 	_G.game.create_ghost(get_parent().global_position, sprite.texture, sprite.pixel_size)
 	_G.current_run.kills += 1
+	_G.game.enemies_killed += 1
 	_G.game.create_xporb(get_parent().global_position, int(ceil(float(xp_payout * _G.game.enemy_multiplier))), xp_radius)
 	get_parent().queue_free.call_deferred()

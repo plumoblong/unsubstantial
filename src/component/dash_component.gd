@@ -78,7 +78,7 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 		return
 
 func reset() -> void:
-	can_dash = false
+	if can_dash: can_dash = false
 	await get_tree().create_timer(cooldown).timeout
 	can_reset = true
 	return

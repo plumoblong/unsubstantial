@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://sppppyvtblst" path="res://prefab/menus/options.tscn" id="10_wes68"]
 [ext_resource type="PackedScene" uid="uid://dxinpyif3wunr" path="res://prefab/menus/achievement_screen.tscn" id="12_dyuxe"]
 [ext_resource type="AudioStream" uid="uid://samctduexn6j" path="res://music/beta.ogg" id="12_jwfp7"]
-[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://scene/res/env/palace.tres" id="17_wmmby"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="17_wmmby"]
 
 [sub_resource type="Shader" id="Shader_w31tq"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.5.stable's StandardMaterial3D.

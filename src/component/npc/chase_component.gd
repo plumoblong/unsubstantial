@@ -33,15 +33,15 @@ func _ready() -> void:
 func update(target_position : Vector3, movement_component : MovementComponent, agent : NavigationAgent3D) -> void:
 	target_distance = get_parent().global_position.distance_to(target_position)
 	target_direction = get_parent().global_position.direction_to(target_position)
-	movebackhelper.look_at(target_position * Vector3(1.0, 0.0, 1.0))
-	
+	movebackhelper.look_at(target_position)
 	attacking = concious and target_distance < attack_distance
-	if target_distance > min_distance:
-		agent.target_position = target_position
+	#var seperate_check : bool = target_position.y + 1.0 < get_parent().global_position.y
+	if not target_position.y + 1.0 < get_parent().global_position.y:
+		if target_distance > min_distance:
+			agent.target_position = target_position
+		else: 
+			agent.target_position = movebackhelper.get_child(0).global_position
 	else:
-		agent.target_position = movebackhelper.get_child(0).global_position
-	
-	
-	
+		agent.target_position = start_position
 	agent_position  = get_parent().global_position.direction_to(agent.get_next_path_position())
 	movement_component.direction = agent_position

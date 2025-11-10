@@ -89,7 +89,7 @@ func update() -> void:
 	actual_atkspd = clampf(attack_speed * attack_speed_mult, 0.25, 5.0)
 	actual_crit = (crit_chance + (float(luck) / 5.0)) * crit_mult
 	
-	bullet.damage = actual_damage * bullet_damage_mult
+	bullet.damage = (actual_damage * bullet_damage_mult) / (1 if bullet.shots <= 1 else int(float(bullet.shots) * 0.5))
 	bullet.fire_rate = bullet_atkspd / actual_atkspd
 	bullet.knockback = 24.0 * knockback
 	bullet.spread_angle = bullet.shots * 5.0

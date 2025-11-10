@@ -210,7 +210,6 @@ metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 [sub_resource type="Resource" id="Resource_xed6q"]
 script = ExtResource("5_qqhji")
 spread_angle = 0.0
-homing = 0.7
 life_time = 0.5
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"

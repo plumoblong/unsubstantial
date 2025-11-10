@@ -44,7 +44,6 @@ metadata/_custom_type_script = "uid://baw7jrp64qlgb"
 
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("3_jf0cs")
-max_speed = 18.0
 metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
 
 [node name="EssenceComponent" type="Node" parent="."]

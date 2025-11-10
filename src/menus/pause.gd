@@ -25,13 +25,12 @@ func _process(_delta : float) -> void:
 		" ESC\nAttack Speed: " + str(int(_G.player.stats.actual_atkspd * 100.0)) + \
 		"%\nMove Speed: " + str(snappedf(_G.player.stats.speed, 0.1)) + \
 		"m/s\n\nMax Essence: " + str(_G.player.stats.esc_max) + \
-		" ESC\nEssence Healing: " + str(int(_G.player.stats.esc_mult * 10.0)) + \
+		" ESC\nEssence Healing: " + str(int(10.0 * _G.player.essence_component.heal_multiplier)) + \
 		" ESC\nDefense: " + str(snappedf(_G.player.stats.defense, 0.1)) + \
 		"\n\nKnockback: " + str(int(_G.player.stats.knockback * 100.0)) + \
 		"%\nCritical Chance: " + str(int(_G.player.stats.crit_chance)) + \
 		"%\nLuck: " + str(_G.player.stats.luck)
 		
-
 
 func continue_pressed() -> void:
 	get_parent().hide()

@@ -40,7 +40,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	#if show_movement_var:
 	if Engine.get_physics_frames() % 4 == 0:
 		$MovementInfo/Label2.text = "BASIS: " + str(_G.vector_to_string(-get_parent().camera.head.global_transform.basis.z)) + "\nDASH VECTOR: " + _G.vector_to_string(get_parent().dash_component.final_vector) + "\nVEL: " + _G.vector_to_string(get_parent().velocity) + "\nCAN JUNP: " + str(get_parent().movement_component.can_jump).to_upper() + "\nDASHING: " + str(get_parent().dash_component.dashing).to_upper()
-		$MovementInfo/Label.text = str(snappedf((get_parent().velocity * Vector3(1.0, 0.0, 1.0)).length(), 0.01)) + "\n m/s"
+		$MovementInfo/Label.text = str(snappedf((get_parent().velocity * Vector3(1.0, 0.0, 1.0)).length(), 0.01)) + " m/s\n" + str(snappedf(get_parent().movement_component.speed_bonus, 0.01)) + "  BONUS"
 	
 	$MovementInfo/Key1.visible = Input.is_action_pressed("up")
 	$MovementInfo/Key2.visible = Input.is_action_pressed("right")
@@ -53,6 +53,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 func hitmark() -> void:
 	hitmarker_alpha = 1.0
 	$HitmarkerSFX.pitch_scale = randf_range(0.8, 1.0)
+	get_parent().movement_component.speed_bonus *= 1.25
 	$HitmarkerSFX.play()
 	#_G.game.wait()
 	_G.tween(self, "hitmarker_alpha", 0, 0.7 / get_parent().stats.actual_atkspd)
