@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="5_gk4kr"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="5_qqhji"]
 [ext_resource type="Script" uid="uid://c3klywbeud1cv" path="res://src/component/dash_component.gd" id="6_4p10s"]
-[ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/class/player_movement.gd" id="6_qqhji"]
+[ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/component/player_movement.gd" id="6_qqhji"]
 [ext_resource type="Script" uid="uid://n0hn8be3qkfd" path="res://src/component/level_component.gd" id="6_xa7gf"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_d7qgd"]
 [ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/entity/player.png" id="7_j4gl1"]
@@ -210,6 +210,7 @@ metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 [sub_resource type="Resource" id="Resource_xed6q"]
 script = ExtResource("5_qqhji")
 spread_angle = 0.0
+homing = 0.5
 life_time = 0.5
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
@@ -445,7 +446,7 @@ debug_color = Color(1, 0, 0.866667, 0)
 debug_fill = false
 
 [node name="MotionBlur" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.5019608)
+modulate = Color(1, 1, 1, 0.4509804)
 offset_right = 480.0
 offset_bottom = 270.0
 localize_numeral_system = false

@@ -5,8 +5,8 @@ class_name MovementComponent
 
 #@export var max_speed : float = 20.0
 @export var speed : float = 10.0
-#@export var speed_up : float = 6.0
-#@export var speed_down : float = 9.0
+@export var speed_up : float = 6.0
+@export var speed_down : float = 9.0
 @export var speed_mult_after_jump : float = 1.0
 
 @export var floor_friction : float = 0.1
@@ -21,6 +21,7 @@ var direction : Vector3 = Vector3.ZERO
 var vel : Vector3
 var on_floor : bool = false
 var moving : float = 0.0
+var actual_speed : float = 0.0
 
 var is_using_force : bool = false
 
@@ -40,10 +41,10 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 	if direction:
 		if on_floor:
 			moving = lerpf(moving, 1.0, friction * 2.0)
-			#if speed < max_speed - (max_speed / 6.0):
-				#speed += delta * speed_up
-			#elif speed > max_speed - (max_speed / 6.0):
-				#speed -= delta * speed_down
+			if actual_speed < speed - (speed / 6.0):
+				actual_speed += delta * speed_up
+			elif actual_speed > speed - (speed / 6.0):
+				actual_speed -= delta * speed_down
 		else:
 			moving = lerpf(moving, 0.0, friction)
 			#if vel.y >= 0.0:
@@ -51,10 +52,10 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 					#speed += delta * speed_up * 0.75
 		#if speed > max_speed:
 			#speed -= delta * speed_down * 2.0
-		vel.x = lerpf(vel.x, direction.x * speed, friction)	
-		vel.z = lerpf(vel.z, direction.z * speed, friction)
+		vel.x = lerpf(vel.x, direction.x * actual_speed, friction)	
+		vel.z = lerpf(vel.z, direction.z * actual_speed, friction)
 	else:
-		#speed -= delta * speed_down
+		actual_speed -= delta * speed_down
 		vel.x = lerpf(vel.x, 0.0, friction)
 		vel.z = lerpf(vel.z, 0.0, friction)
 		moving = lerpf(moving, 0.0, friction / 2.0)

@@ -281,13 +281,11 @@ material = SubResource("ShaderMaterial_ma48x")
 script = ExtResource("2_j5rt0")
 
 [node name="Vignette" type="TextureRect" parent="."]
-visible = false
-self_modulate = Color(0.648759, 0.586502, 0.713182, 1)
 material = SubResource("CanvasItemMaterial_xed6q")
-offset_right = 480.0
-offset_bottom = 270.0
-scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(240, 135)
+offset_left = -48.0
+offset_top = -40.0
+offset_right = 528.0
+offset_bottom = 320.0
 texture = SubResource("GradientTexture2D_m21cj")
 expand_mode = 1
 

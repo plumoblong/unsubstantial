@@ -83,15 +83,18 @@
 // entity 3
 {
 "classname" "ent_spawn"
-"origin" "-1400 776 8"
+"origin" "-1400 776 40"
+"enemy" "enemy_triple"
 }
 // entity 4
 {
 "classname" "ent_spawn"
-"origin" "-1512 616 8"
+"origin" "-1512 616 40"
+"enemy" "enemy_triple"
 }
 // entity 5
 {
 "classname" "ent_spawn"
-"origin" "-1304 584 8"
+"origin" "-1304 584 40"
+"enemy" "enemy_triple"
 }

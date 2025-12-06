@@ -24,5 +24,8 @@ func _process(_delta: float) -> void:
 	else:
 		modulate = saved_modulate
 	if hide_if_full:
-		visible = frame != 0
+		visible = _G.player.hud.visible and frame != 0
+	else:
+		visible = _G.player.hud.visible
 	frame = int((1.0 - to_value) * 32.0)
+	

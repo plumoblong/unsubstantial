@@ -47,7 +47,7 @@ func update(t : float) -> void:
 	#h_offset = viewbob_x * viewbob_amount
 	var vb = viewbob_amount * float(_G.config.view_bob)
 	fov_offsets.z = vb  * 15.0 * multiplier
-	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * vb
+	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * vb 
 	bob_offset = viewbob_y * vb * multiplier
 	height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
 	var tilt_limit : float = -player.global_transform.basis.z.dot(-head.global_transform.basis.z)

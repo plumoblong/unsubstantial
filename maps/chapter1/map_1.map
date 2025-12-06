@@ -608,7 +608,7 @@
 {
 "classname" "ent_spawn"
 "origin" "-3896 -472 40"
-"enemy" "enemy"
+"enemy" "enemy_triple"
 }
 // entity 65
 {

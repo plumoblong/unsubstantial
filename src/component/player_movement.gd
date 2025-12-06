@@ -48,7 +48,6 @@ var auto_bhop : bool = false
 
 signal just_landed
 
-
 func _ready() -> void:
 	assert(get_parent() is Player)
 
@@ -66,9 +65,6 @@ func update(delta : float) -> void:
 		input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 		
 		if not dash.dashing: wish_dir = get_parent().global_transform.basis * Vector3(input_dir.x, .0, input_dir.y)
-		
-		#handle_crouch(delta)
-		
 		if noclip:
 			var spd : float = noclip_speed
 			if Input.is_action_pressed("jump"):
@@ -100,7 +96,7 @@ func update(delta : float) -> void:
 					
 					get_parent().velocity.y -= fall_speed * delta
 				else:
-					get_parent().velocity.y -= fall_speed * (1.75 if crouching else 1.2) * delta
+					get_parent().velocity.y -= fall_speed * 1.2 * delta
 				
 			if get_parent().is_on_floor():
 				can_jump = true
@@ -113,7 +109,7 @@ func update(delta : float) -> void:
 				else:
 					moving = lerpf(moving, 0.0, 0.1)
 				was_on_floor = true
-				speed_bonus = lerpf(speed_bonus, 1.0, 0.045)
+				speed_bonus = clampf(lerpf(speed_bonus, 1.0, 0.03), 0.24, 1.75)
 			else:
 				can_jump = false
 				moving = lerpf(moving, 0.0, 0.1)

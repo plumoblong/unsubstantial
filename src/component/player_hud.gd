@@ -25,7 +25,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	$Weapon.offset.x = ((viewbob.x * 24) * spd)
 	$Weapon.offset.y = ((viewbob.y * 32) * spd) + (clamp(get_parent().camera.height_offset * 0.5, -1.0, 2.0) * 32.0)
 	
-	$Vignette.modulate.a = 1.0 - get_parent().essence_component.ratio
+	$Vignette.modulate.a = (get_parent().movement_component.speed_bonus - 0.9)
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	$Info/Score.text = "[b]" + str(int(round(score_lerp))) + "[/b] pts"
 	
@@ -37,8 +37,8 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	$Debug.visible = _G.debug_mode
 	$MovementInfo/Label2.visible = show_movement_var
-	#if show_movement_var:
-	if Engine.get_physics_frames() % 4 == 0:
+
+	if Engine.get_physics_frames() % 3 == 0:
 		$MovementInfo/Label2.text = "BASIS: " + str(_G.vector_to_string(-get_parent().camera.head.global_transform.basis.z)) + "\nDASH VECTOR: " + _G.vector_to_string(get_parent().dash_component.final_vector) + "\nVEL: " + _G.vector_to_string(get_parent().velocity) + "\nCAN JUNP: " + str(get_parent().movement_component.can_jump).to_upper() + "\nDASHING: " + str(get_parent().dash_component.dashing).to_upper()
 		$MovementInfo/Label.text = str(snappedf((get_parent().velocity * Vector3(1.0, 0.0, 1.0)).length(), 0.01)) + " m/s\n" + str(snappedf(get_parent().movement_component.speed_bonus, 0.01)) + "  BONUS"
 	
@@ -48,12 +48,10 @@ func update(viewbob : Vector2, spd : float) -> void:
 	$MovementInfo/Key4.visible = Input.is_action_pressed("left")
 	$MovementInfo/Key5.visible = Input.is_action_pressed("jump")
 
-	
-
 func hitmark() -> void:
 	hitmarker_alpha = 1.0
 	$HitmarkerSFX.pitch_scale = randf_range(0.8, 1.0)
-	get_parent().movement_component.speed_bonus *= 1.25
+	get_parent().movement_component.speed_bonus *= 1.15
 	$HitmarkerSFX.play()
 	#_G.game.wait()
 	_G.tween(self, "hitmarker_alpha", 0, 0.7 / get_parent().stats.actual_atkspd)

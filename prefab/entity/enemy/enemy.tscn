@@ -65,6 +65,7 @@ y_distance = 12.0
 [node name="MovementComponent" type="Node" parent="."]
 script = ExtResource("4_qi521")
 speed = 21.0
+speed_up = 16.0
 floor_friction = 0.08
 
 [node name="EssenceComponent" type="Node" parent="."]

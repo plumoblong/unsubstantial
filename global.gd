@@ -82,10 +82,7 @@ const UIPOP_FILE : PackedScene = preload("res://prefab/menus/ui_pop_up.tscn")
 
 var shader_inverted : bool = false
 
-var lowpass_cutoff : float = 1.0  # n * 20500 hz (why so low? idk ask godot devs)
 var lowpass_enabled : bool = false
-
-var low_pass : AudioEffectLowPassFilter = AudioServer.get_bus_effect(0, 1)
 
 var time_scale : Array[float] = [1.0, 1.0]
 
@@ -121,8 +118,7 @@ func _physics_process(delta : float) -> void:
 	AudioServer.set_bus_volume_db(1, linear_to_db(config.sound.music))
 	
 	
-	low_pass.cutoff_hz = 20500 * lowpass_cutoff
-	AudioServer.set_bus_effect_enabled(0, 1, lowpass_enabled)
+	AudioServer.set_bus_effect_enabled(0, 2, lowpass_enabled)
 	
 	Engine.time_scale = time_scale[0] * time_scale[1]
 	
