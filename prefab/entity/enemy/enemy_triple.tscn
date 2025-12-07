@@ -20,12 +20,10 @@ height = 2.25
 
 [sub_resource type="Resource" id="Resource_80l44"]
 script = ExtResource("8_7vmag")
-size_mult = 2.0
-damage = 100
-fire_rate = 0.7
-shots = 2
-knockback = 64.0
-init_speed = 24.0
+size_mult = 1.5
+damage = 60
+fire_rate = 0.5
+init_speed = 32.0
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
@@ -78,18 +76,18 @@ set_max_essence_on_ready = false
 
 [node name="ShootComponent" type="Node" parent="."]
 script = ExtResource("6_0trvk")
-shoot_delay = 0.5
 config = SubResource("Resource_80l44")
 
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_sp5a6")
 hit_sfx = NodePath("../HitSFX")
 essence = 200.0
-damage = 50.0
+damage = 60.0
 on_hit_velocity_loss = 1.1
 xp_payout = 6
 spawn_ent_on_death = true
 ent_path = "uid://cgbt6cm5sfcfn"
+ent_max = 4
 ent_min = 2
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 

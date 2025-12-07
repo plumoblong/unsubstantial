@@ -66,7 +66,7 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 		if not area.parent is Player: return
 		if sprite.modulate != Color.WHITE: 
 			esc.fracture(area.damage, area.crit, area.stun_time)
-			_G.game.wait()
+			#_G.game.wait()
 			if area.get_parent() is Player: area.get_parent().hud.hitmark()
 			knock.knock(area.get_parent().global_position, area.knockback_strength, area.knockback_y_strength)
 			if area is Bullet: area.hit()

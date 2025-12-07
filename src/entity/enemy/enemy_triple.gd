@@ -45,7 +45,7 @@ func _physics_process(delta : float) -> void:
 	move_and_slide()
 	
 	if chase_component.attacking and _G.player.can_control:
-		shoot_component.shoot(global_position.direction_to(_G.player.target.get_pos_multiplied(0.4 + enemy.random_factor)), global_position + Vector3(0.0, 0.2, 0.0))
+		shoot_component.shoot(global_position.direction_to(_G.player.target.get_pos_multiplied(0.4)), global_position + Vector3(0.0, 0.2, 0.0))
 	chase_component.update(_G.player.target.get_pos_multiplied(0.6 + enemy.random_factor), movement_component, agent)
 
 

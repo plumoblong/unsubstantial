@@ -68,7 +68,6 @@ set_max_essence_on_ready = false
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_w77qk")
 hit_sfx = NodePath("../HitSFX")
-essence = 75.0
 damage = 75.0
 on_hit_velocity_loss = 0.65
 xp_payout = 1
@@ -94,7 +93,7 @@ texture_filter = 0
 texture = ExtResource("8_ienij")
 
 [node name="3DBar" parent="." instance=ExtResource("11_i3v08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.79999995, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("12_w8fs2")

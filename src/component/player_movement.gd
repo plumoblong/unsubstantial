@@ -44,7 +44,7 @@ var was_on_floor : bool = false
 var speed_bonus : float = 1.0
 
 var noclip : bool = false
-var auto_bhop : bool = false
+var auto_bhop : bool = true
 
 signal just_landed
 

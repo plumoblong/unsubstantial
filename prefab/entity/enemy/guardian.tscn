@@ -64,7 +64,7 @@ script = ExtResource("3_snofy")
 movebackhelper = NodePath("../MoveBackHelper")
 agro_distance = 25.0
 attack_distance = 17.0
-min_distance = 15.0
+min_distance = 10.0
 y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="."]
