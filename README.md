@@ -2,7 +2,8 @@
 This is a public repository of https://plumoblong.itch.io/unsubstantial!
 
 # About
-Boomer Shooter inspired rouge-lite experience. You can [read more here!](https://plumoblong.itch.io/unsubstantial)
+Boomer Shooter inspired arcade rouge-lite experience. You can [read more here!](https://plumoblong.itch.io/unsubstantial)
+I started developing it May 9th 2024
 Join the community at https://discord.gg/t2RjkVAn3Z!!!
 
 Credit to [Majikayo Games](https://www.youtube.com/@MajikayoGames/videos) for the Source Engine styled movement (from version 0.96 onwards) and the [DungeonGenerator addon](https://github.com/majikayogames/SimpleDungeons) in older version (before 0.96) and other codebase help. Thank you!
