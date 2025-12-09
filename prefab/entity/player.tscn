@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene load_steps=61 format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="5_qqhji"]
 [ext_resource type="Script" uid="uid://c3klywbeud1cv" path="res://src/component/dash_component.gd" id="6_4p10s"]
 [ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/component/player_movement.gd" id="6_qqhji"]
-[ext_resource type="Script" uid="uid://n0hn8be3qkfd" path="res://src/component/level_component.gd" id="6_xa7gf"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_d7qgd"]
 [ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/entity/player.png" id="7_j4gl1"]
 [ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="9_5ax3k"]
@@ -309,7 +308,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Head"]
 handle_input_locally = false
-msaa_3d = 1
 use_occlusion_culling = true
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
@@ -386,9 +384,6 @@ die_threshold = 0
 script = ExtResource("5_gk4kr")
 movement_component = NodePath("../PlayerMovement")
 y_multiplier = 0.4
-
-[node name="LevelComponent" type="Node" parent="."]
-script = ExtResource("6_xa7gf")
 
 [node name="ItemStats" type="Node" parent="."]
 script = ExtResource("9_m21cj")
@@ -505,6 +500,7 @@ bus = &"SFX1"
 [node name="XPPickupSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("27_cwgh7")
 volume_db = 6.0
+max_polyphony = 3
 bus = &"SFX1"
 
 [node name="JumpBufferTimer" type="Timer" parent="."]
@@ -530,8 +526,6 @@ esc = NodePath("../EssenceComponent")
 [connection signal="died" from="EssenceComponent" to="." method="_on_essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
 [connection signal="gained" from="EssenceComponent" to="." method="essence_component_gained"]
-[connection signal="leveled_up" from="LevelComponent" to="." method="level_component_leveled_up"]
-[connection signal="xp_gained" from="LevelComponent" to="." method="level_component_xp_gained"]
 [connection signal="can_dash_now" from="DashComponent" to="." method="dash_component_can_dash_now"]
 [connection signal="dashed" from="DashComponent" to="." method="dash_component_dashed"]
 [connection signal="area_entered" from="Query" to="." method="query_area_entered"]

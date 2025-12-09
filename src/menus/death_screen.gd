@@ -4,13 +4,10 @@ var can_reset : bool = false
 
 func _ready() -> void:
 	#_G.save.can_continue = false
-	if _G.config.ui_dark_mode:
-		_G.shader_inverted = true
-	else:
-		_G.shader_inverted = false
+	$DarkMode.visible = _G.config.ui_dark_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Reason.text = _G.current_run.die_reason
-	$Stats.text = "Enemies Killed:   " + str(_G.current_run.kills) + "\nTook Damage:   " + str(_G.current_run.hits_taken) + " times\nItems Collected:   " + str(_G.current_run.items_collected.common + _G.current_run.items_collected.uncommon + _G.current_run.items_collected.rare + _G.current_run.items_collected.legendary)
+	$Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.items_collected.common + _G.current_run.items_collected.uncommon + _G.current_run.items_collected.rare + _G.current_run.items_collected.legendary)
 	$Score.text = "Score: " + str(_G.current_run.score)
 	$Score2.text = "High Score: " + str(int(_G.save.high_score))
 	await get_tree().create_timer(1.0).timeout
@@ -22,7 +19,6 @@ func play_again() -> void:
 	if not can_reset: return
 	
 	_G.change_scene("res://scene/game.tscn")
-	_G.shader_inverted = false
 
 func _process(_delta : float) -> void:
 	if Input.is_action_just_pressed("jump"):

@@ -47,9 +47,8 @@ func spawn() -> void:
 		queue_free()
 	else: spawned = true
 
-func _process(_delta : float) -> void:
-	#$Sprite3D.visible = _G.debug_mode
-	#$light.omni_range = distance_to_spawn
+func _physics_process(_delta : float) -> void:
+	if Engine.get_physics_frames() % 10 != 0: return
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
 	if distance_to_player < distance_to_spawn:
 		if _G.player.is_on_floor(): spawn()

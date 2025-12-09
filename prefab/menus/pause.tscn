@@ -36,6 +36,7 @@ offset_bottom = 272.0
 color = Color(0, 0, 0, 0.564706)
 
 [node name="Main" type="Node2D" parent="Node2D"]
+visible = false
 use_parent_material = true
 position = Vector2(-4, 36)
 
@@ -125,7 +126,6 @@ visible = false
 visible = false
 
 [node name="RestartConfirm" type="Node2D" parent="Node2D"]
-visible = false
 use_parent_material = true
 
 [node name="Name" type="RichTextLabel" parent="Node2D/RestartConfirm"]
@@ -146,7 +146,9 @@ use_parent_material = true
 offset_top = 132.0
 offset_right = 480.0
 offset_bottom = 145.0
-text = "YES,   THIS RUN SUCKS"
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "Yes!"
 alignment = 1
 
 [node name="RestNo" parent="Node2D/RestartConfirm" instance=ExtResource("3_35y48")]
@@ -154,7 +156,9 @@ use_parent_material = true
 offset_top = 148.0
 offset_right = 480.0
 offset_bottom = 161.0
-text = "NO."
+theme_override_fonts/font = ExtResource("6_uuqui")
+theme_override_font_sizes/font_size = 6
+text = "No!"
 alignment = 1
 
 [connection signal="pressed" from="Node2D/Main/Continue" to="Node2D" method="continue_pressed"]
@@ -163,7 +167,7 @@ alignment = 1
 [connection signal="pressed" from="Node2D/Main/Options" to="Node2D" method="options_pressed"]
 [connection signal="pressed" from="Node2D/Main/Exit" to="Node2D" method="exit_pressed"]
 [connection signal="pressed" from="Node2D/RestartConfirm/RestYes" to="Node2D" method="rest_yes_pressed"]
-[connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_no_pressed"]
+[connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_yes_pressed"]
 
 [editable path="Node2D/Main/Continue"]
 [editable path="Node2D/Main/Statistics"]

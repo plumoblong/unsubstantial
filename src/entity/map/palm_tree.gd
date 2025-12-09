@@ -6,7 +6,7 @@ func _ready() -> void:
 	rotation_degrees.y = randf_range(0.0, 360.0)
 	position.y -= randf_range(0.00, 0.35)
 	var size : float = randf_range(0.9, 1.4)
-	var tc : Color = _G.hsv_to_rgb(randf_range(0.00, 1.00), randf_range(0.3, 0.7), 1.0)
+	var tc : Color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.3, 0.7), 1.0)
 	$"../Top".modulate = tc
 	$"../Top2".modulate = tc
 	$"../Top3".modulate = tc

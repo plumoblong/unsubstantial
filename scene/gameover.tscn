@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://kvqt54u41kj6"]
+[gd_scene load_steps=25 format=3 uid="uid://kvqt54u41kj6"]
 
 [ext_resource type="Script" uid="uid://mtpcrr75y3nl" path="res://src/menus/death_screen.gd" id="1_suiqt"]
 [ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="2_4q3rl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Material" uid="uid://c4e8vymr51sw7" path="res://material/ether_overlay.tres" id="8_4q3rl"]
 [ext_resource type="Texture2D" uid="uid://5q40an056ilp" path="res://images/ui/gameover.png" id="9_1dylg"]
 [ext_resource type="AudioStream" uid="uid://dwd0xrf7ctua" path="res://music/game_over.ogg" id="9_4q3rl"]
+[ext_resource type="Material" uid="uid://0gsbnjffxggx" path="res://material/ui_invert.tres" id="12_g7jl1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_85pid"]
 blend_mode = 2
@@ -220,6 +221,14 @@ offset_bottom = 270.0
 mouse_filter = 2
 texture = ExtResource("3_dky2g")
 stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="DarkMode" type="ColorRect" parent="."]
+texture_repeat = 2
+material = ExtResource("12_g7jl1")
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Restart" to="." method="button_pressed"]

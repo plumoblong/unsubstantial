@@ -80,8 +80,6 @@ var in_close_menu : bool = false
 const FLARE_FILE : PackedScene = preload("res://prefab/flare.tscn")
 const UIPOP_FILE : PackedScene = preload("res://prefab/menus/ui_pop_up.tscn")
 
-var shader_inverted : bool = false
-
 var lowpass_enabled : bool = false
 
 var time_scale : Array[float] = [1.0, 1.0]
@@ -103,7 +101,6 @@ func _physics_process(delta : float) -> void:
 	
 	$Shader.material.set_shader_parameter("gamma", config.video.exposure)
 	$Shader.material.set_shader_parameter("enable_filter", config.video.post_process)
-	$Shader.material.set_shader_parameter("inverted", shader_inverted)
 	
 	if Input.is_action_just_pressed("f11"):
 		change_fullscreen()
@@ -134,7 +131,7 @@ func get_resolution() -> float:
 		return _G.config.resolution
 	else:
 		return DisplayServer.screen_get_size(DisplayServer.window_get_current_screen()).x / 432.0
-func flare_screen(start_color : Color = Color.WHITE, end_color : Color = Color.TRANSPARENT, length : float = 1.0) -> void:
+func flare_screen(start_color : Color = _G.get_color_darkmode(true, 1.0), end_color : Color = Color.TRANSPARENT, length : float = 1.0) -> void:
 	var flare : Flare = FLARE_FILE.instantiate()
 	$Flares.add_child(flare)
 	flare.start_color = start_color
@@ -161,8 +158,8 @@ func vector_to_angle3d(vec : Vector3) -> Vector3:
 	var pitch = asin(-vec.y)
 	return Vector3(pitch, yaw, 0.0)
 
-func sine_movement(freq : float, amplitude : float, offset : float = 0.0) -> float:
-	return sin(offset + time *freq)*(amplitude * 0.01)
+func sine_movement(freq : float, amplitude : float, delta : float, offset : float = 0.0) -> float:
+	return sin((offset + time) *freq ) * (amplitude * delta)
 
 func change_window_size(size : int) -> void:
 	size = clampi(size, -1, (DisplayServer.screen_get_size(DisplayServer.window_get_current_screen()).x / 432.0)) + 1
@@ -198,7 +195,6 @@ func change_scene(file : String, color : Color = Color.BLACK, trans_in : float =
 	tween($Flare, "color", color, trans_in, 0, 0)
 	await get_tree().create_timer(trans_in, true, false, true).timeout
 	get_tree().change_scene_to_file(file)
-	_G.shader_inverted = false
 	tween($Flare, "color", Color(color.r, color.g, color.b, 0.0), trans_out, 0, 0)
 	await get_tree().create_timer(trans_out, true, false, true).timeout
 	time_scale[0] = 1.0
@@ -215,46 +211,6 @@ func change_scene_packed(packed_scene : PackedScene, color : Color = Color.BLACK
 	time_scale[0] = 1.0
 	time_scale[1] = 1.0
 	
-func hsv_to_rgb(h : float, s : float, v : float, a : float = 1.0) -> Color:
-	#based on code at
-	#http://stackoverflow.com/questions/51203917/math-behind-hsv-to-rgb-conversion-of-colors
-	var r : float
-	var g : float
-	var b : float
-
-	var i : int = floor(h * 6)
-	var f : float = h * 6 - i
-	var p : float = v * (1 - s)
-	var q : float = v * (1 - f * s)
-	var t : float = v * (1 - (1 - f) * s)
-
-	match (int(i) % 6):
-		0:
-			r = v
-			g = t
-			b = p
-		1:
-			r = q
-			g = v
-			b = p
-		2:
-			r = p
-			g = v
-			b = t
-		3:
-			r = p
-			g = q
-			b = v
-		4:
-			r = t
-			g = p
-			b = v
-		5:
-			r = v
-			g = p
-			b = q
-	return Color(r, g, b, a)
-
 func get_all_children(node : Node) -> Array[Node]:
 	var nodes : Array[Node] = []
 
@@ -359,3 +315,15 @@ func create_ui_popup(text : String = "HI.", position : Vector2 = Vector2.ZERO, v
 func set_shaderparam_once(material : ShaderMaterial, parameter : StringName, value : Variant) -> void:
 	material.set_shader_parameter(parameter, value)
 	return
+	
+func get_color_darkmode(white : bool = true, alpha : float = 1.0) -> Color:
+	if white:
+		if config.ui_dark_mode:
+			return Color.BLACK * Color(1, 1, 1, alpha)
+		else:
+			return Color.WHITE * Color(1, 1, 1, alpha)
+	else:
+		if config.ui_dark_mode:
+			return Color.WHITE * Color(1, 1, 1, alpha)
+		else:
+			return Color.BLACK * Color(1, 1, 1, alpha)

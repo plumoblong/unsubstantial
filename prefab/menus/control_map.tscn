@@ -47,14 +47,14 @@ script = ExtResource("1_eo31k")
 
 [node name="Page1" type="Node2D" parent="."]
 
-[node name="Walk" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Walk" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_top = 80.0
 offset_right = 248.0
 offset_bottom = 93.0
 action_string = "Move Forward"
 default_input = SubResource("InputEventKey_eo31k")
 
-[node name="Walk2" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Walk2" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_left = 248.0
 offset_top = 80.0
 offset_right = 480.0
@@ -63,7 +63,7 @@ action_name = "down"
 action_string = "Move Backwards"
 default_input = SubResource("InputEventKey_cuthp")
 
-[node name="Walk3" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Walk3" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_left = 248.0
 offset_top = 96.0
 offset_bottom = 109.0
@@ -71,7 +71,7 @@ action_name = "left"
 action_string = "Move Left"
 default_input = SubResource("InputEventKey_jgrtl")
 
-[node name="Walk4" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Walk4" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_top = 96.0
 offset_right = 248.0
 offset_bottom = 109.0
@@ -79,14 +79,14 @@ action_name = "right"
 action_string = "Move Right"
 default_input = SubResource("InputEventKey_4oaxw")
 
-[node name="Jump" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Jump" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_top = 120.0
 offset_bottom = 133.0
 action_name = "jump"
 action_string = "Jump"
 default_input = SubResource("InputEventKey_4oaxw")
 
-[node name="Primary" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Primary" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_top = 144.0
 offset_right = 248.0
 offset_bottom = 157.0
@@ -94,7 +94,7 @@ action_name = "shoot"
 action_string = "Shoot"
 default_input = SubResource("InputEventMouseButton_c4w4o")
 
-[node name="Secondary" parent="." instance=ExtResource("3_jgrtl")]
+[node name="Secondary" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_left = 248.0
 offset_top = 144.0
 offset_right = 480.0
@@ -103,7 +103,7 @@ action_name = "dash"
 action_string = "Melee Dash"
 default_input = SubResource("InputEventMouseButton_lao0o")
 
-[node name="INteract" parent="." instance=ExtResource("3_jgrtl")]
+[node name="INteract" parent="Page1" instance=ExtResource("3_jgrtl")]
 offset_top = 160.0
 offset_bottom = 173.0
 action_name = "interact"

@@ -20,6 +20,7 @@ shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.6
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xed6q"]
 blend_mode = 1
@@ -80,18 +81,21 @@ shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0nrv"]
 shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f5we3"]
 shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 0.0
+shader_parameter/grayscale = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kg1in"]
 atlas = ExtResource("16_nu6og")
@@ -243,6 +247,7 @@ shader = ExtResource("1_n17tt")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.5
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vak41"]
 atlas = ExtResource("18_l0m6r")
@@ -521,31 +526,6 @@ frame_progress = 1.0
 [node name="Info" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_4chq7")
 position = Vector2(0, 262)
-
-[node name="LevelIcon" type="Sprite2D" parent="Info"]
-visible = false
-use_parent_material = true
-position = Vector2(96, -6)
-texture = ExtResource("18_l0m6r")
-centered = false
-offset = Vector2(0, -12)
-hframes = 3
-vframes = 2
-frame = 4
-
-[node name="Level" type="RichTextLabel" parent="Info/LevelIcon"]
-use_parent_material = true
-offset_left = 13.0
-offset_top = -10.0
-offset_right = 76.0
-offset_bottom = 6.0
-theme_override_fonts/normal_font = ExtResource("19_7io55")
-theme_override_fonts/bold_font = ExtResource("7_w4dv1")
-theme_override_font_sizes/normal_font_size = 6
-theme_override_font_sizes/bold_font_size = 8
-bbcode_enabled = true
-text = "[b]10[/b] 20xp"
-metadata/_edit_use_anchors_ = true
 
 [node name="EssenceIcon" type="AnimatedSprite2D" parent="Info"]
 use_parent_material = true

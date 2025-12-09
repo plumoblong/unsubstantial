@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://t41ot1nhnt07"]
+[gd_scene load_steps=19 format=3 uid="uid://t41ot1nhnt07"]
 
 [ext_resource type="Script" uid="uid://b4fyi72hf3jb" path="res://src/menus/crystal_choose.gd" id="1_153j7"]
 [ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="2_bibjs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="4_euku5"]
 [ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="4_t7sn6"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="5_t7sn6"]
+[ext_resource type="Material" uid="uid://0gsbnjffxggx" path="res://material/ui_invert.tres" id="8_q61hg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t7sn6"]
 blend_mode = 2
@@ -202,4 +203,12 @@ offset_bottom = 270.0
 mouse_filter = 2
 texture = ExtResource("4_euku5")
 stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="DarkMode" type="ColorRect" parent="."]
+texture_repeat = 2
+material = ExtResource("8_q61hg")
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
 metadata/_edit_lock_ = true

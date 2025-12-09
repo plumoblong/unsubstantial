@@ -4,7 +4,6 @@ uniform vec2 motion = vec2(0.0);
 uniform float scale : hint_range(-1000.0, 1000.0, 0.1) = 1.0;
 uniform float gamma : hint_range(0.0, 2.0, 0.05) = 1.0;
 uniform vec2 offset = vec2(0.0);
-uniform bool inverted = false;
 
 uniform sampler2D noise_offset : filter_nearest, repeat_enable;
 // uniform bool use_sample_texture = false;
@@ -17,7 +16,8 @@ uniform float power : hint_range(0.0, 1.0, 0.01) = 1.0;
 uniform float bit_depth : hint_range(1.0, 32.0, 0.25);
 uniform float dither : hint_range(0.0, 0.5, 0.0025);
 
-varying vec2 base_uv;
+varying vec2 uv_offset;
+//varying vec2 screen_uv;
 
 vec3 gamma_correct (vec3 val) {
 	vec3 color;
@@ -41,49 +41,38 @@ vec4 hsv_to_rgb(vec4 hsva) {
 	return vec4(hsva.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), hsva.y), 1.0);
 }
 
-void vertex() {
-	base_uv = (VERTEX + TIME * (motion * vec2(speed * 2.0))) * TEXTURE_PIXEL_SIZE * (1.0/scale);
-}
-
 void fragment(){
-	
-	vec2 uvs = SCREEN_UV * scale;
-	vec4 init_tex = texture(screen_texture, uvs);
+
+	vec4 init_tex = texture(screen_texture, SCREEN_UV );
 	vec4 final_color;
-	
+
 	// vec3 final_tex;
 	if (enable_filter == true) {
-		
+
 		//vec2 pixel_size = 1.0 / vec2(320.0 / 2.0 , 180.0 / 2.0);
-		
-		vec4 noise = texture(noise_offset, base_uv);
+
+		vec4 noise = texture(noise_offset, UV);
 		float time_offset = TIME * (speed / 64.0);
 		vec4 posterized;
-		
-		float a = floor(mod(SCREEN_UV.x / SCREEN_PIXEL_SIZE.x, 2.0));
-		float b = floor(mod(SCREEN_UV.y / SCREEN_PIXEL_SIZE.y, 2.0));
+
+		float a = ceil(mod(SCREEN_UV.x / SCREEN_PIXEL_SIZE.x, 2.0));
+		float b = ceil(mod(SCREEN_UV.y / SCREEN_PIXEL_SIZE.y, 2.0));
 		float c = mod(a + b, 2.0);
-		posterized.r = round(init_tex.r * bit_depth + dither) / bit_depth * c;
-		posterized.g = round(init_tex.g * bit_depth + dither) / bit_depth * c;
-		posterized.b = round(init_tex.b * bit_depth + dither) / bit_depth * c;
+		posterized.r = floor(init_tex.r * bit_depth + dither) / bit_depth * c;
+		posterized.g = floor(init_tex.g * bit_depth + dither) / bit_depth * c;
+		posterized.b = floor(init_tex.b * bit_depth + dither) / bit_depth * c;
 		c = 1.0 - c;
-		posterized.r += round(init_tex.r * bit_depth - dither) / bit_depth * c;
-		posterized.g += round(init_tex.g * bit_depth - dither) / bit_depth * c;
-		posterized.b += round(init_tex.b * bit_depth - dither) / bit_depth * c;
+		posterized.r += floor(init_tex.r * bit_depth - dither) / bit_depth * c;
+		posterized.g += floor(init_tex.g * bit_depth - dither) / bit_depth * c;
+		posterized.b += floor(init_tex.b * bit_depth - dither) / bit_depth * c;
 
         vec4 tex = rgb_to_hsv(posterized);
-		
+
 		final_color = mix(posterized, hsv_to_rgb(vec4(tex.x + (mod(posterized.r, 1) + time_offset), tex.y, tex.z, 1.0)), power);
 	} else {
 		final_color.rgb = init_tex.rgb;
 	};
-	
-	if (inverted == true) {
-		COLOR.rgb = gamma_correct(mix(final_color.rgb, 1.0 - final_color.rrr, 1.0));
-	} else {
-		COLOR.rgb = gamma_correct(final_color.rgb);
-	};
-	
+	COLOR.rgb = gamma_correct(final_color.rgb);
 	COLOR.a = 1.0;
 
 }

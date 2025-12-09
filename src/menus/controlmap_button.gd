@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _pressed() -> void:
 	capturing = true
-	get_parent().is_any_capturing = true
+	get_parent().get_parent().is_any_capturing = true
 
 func _process(delta: float) -> void:
 	if not capturing:
@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		text = action_string + ": [ Press Anything ]"
 		material.set_shader_parameter("self_modulate", hover_color)
 
-	if get_parent().is_any_capturing:
+	if get_parent().get_parent().is_any_capturing:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		disabled = true
 	else:
@@ -40,11 +40,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if capturing and event.pressed:
 			if Input.is_key_pressed(KEY_ESCAPE):
 				capturing = false
-				get_parent().is_any_capturing = false
+				get_parent().get_parent().is_any_capturing = false
 				InputMap.action_erase_events(action_name)
 				InputMap.action_add_event(action_name, default_input)
 			else:
 				capturing = false
-				get_parent().is_any_capturing = false
+				get_parent().get_parent().is_any_capturing = false
 				InputMap.action_erase_events(action_name)
 				InputMap.action_add_event(action_name, event)

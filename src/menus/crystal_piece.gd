@@ -5,6 +5,7 @@ class_name CrystalPiece
 
 @onready var sprites : Node2D = get_node("Sprites")
 @onready var info : Label = get_node("Info")
+@onready var anim : AnimationPlayer = get_node("Anim")
 
 @export var first : bool = false
 var enabled : bool = false
@@ -57,8 +58,11 @@ func get_rarities_dictionary() -> Dictionary:
 func on_start() -> void:
 	stat_rarities = get_stats_dictionary()
 	
-	for i : Sprite2D in sprites.get_children():
+	for i in sprites.get_children():
 		i.frame = randi_range(0, 6)
+		i.anim_offset = randf_range(0.0, 6.0)
+		i.frequency = randf_range(0.75, 1.25)
+		i.amplitude = randf_range(4.0, 8.0)
 		i.flip_h = bool(randi_range(0, 1))
 		i.flip_v = bool(randi_range(0, 1))
 		var rscale : float = randf_range(0.25, 0.6)
@@ -73,11 +77,13 @@ func _process(_delta: float) -> void:
 
 	if not enabled:
 		hovered = false
-	sprites.modulate = Color(1.0 - (float(hovered) * 0.3), 1.0 - (float(hovered) * 0.3), 1.0 - (float(hovered) * 0.3), 1.0)
+		$Bound.mouse_filter = Control.MouseFilter.MOUSE_FILTER_IGNORE
+	else:
+		$Bound.mouse_filter = Control.MouseFilter.MOUSE_FILTER_PASS
 	
 	if chosen_stat.is_empty(): return
 	
-	$Rarity.frame = chosen_rarity - 2
+	$Rarity.frame = (chosen_rarity - 2) + (int(_G.config.ui_dark_mode) * 4)
 	
 	if hovered:
 		if Input.is_action_just_pressed("ui_press"):
@@ -85,6 +91,7 @@ func _process(_delta: float) -> void:
 				_G.player.stats.add_stat(chosen_stat[0], chosen_stat[chosen_rarity], 1.0)
 			else:
 				_G.player.stats.add_stat(chosen_stat[0], 0.0, 1.0 + chosen_stat[chosen_rarity])
+			_G.current_run.items_collected[int(chosen_stat[chosen_rarity]) - 2] += 1
 			get_parent().end_choose()
 
 	if chosen_stat[chosen_rarity] > 0.0:
@@ -120,7 +127,8 @@ func mouse_entered() -> void:
 	if enabled:
 		hovered = true
 		get_parent().description_text = chosen_stat[6]
+		anim.play("hover_in")
 
 func mouse_exited() -> void:
-	if enabled:
-		hovered = false
+	hovered = false
+	anim.play("hover_out")

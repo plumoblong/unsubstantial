@@ -6,7 +6,7 @@ class_name Player
 @onready var essence_component : EssenceComponent = get_node("EssenceComponent")
 @onready var shoot_component : ShootComponent = get_node("ShootComponent")
 @onready var dash_component : DashComponent = get_node("DashComponent")
-@onready var level_component : LevelComponent = get_node("LevelComponent")
+
 @onready var knock_component : KnockbackComponent = get_node("KnockbackComponent")
 @onready var stats : ItemStats = get_node("ItemStats")
 @onready var hitbox : CollisionShape3D = get_node("Hitbox")
@@ -99,7 +99,7 @@ func _physics_process(delta : float) -> void:
 	camera.update(-movement_component.input_dir.x)
 	dash_component.update()
 	essence_component.update()
-	level_component.update()
+	
 	$Hitbox.disabled = movement_component.noclip
 
 	if can_control:
@@ -198,11 +198,10 @@ func essence_component_gained(amount : int) -> void:
 
 func essence_component_fractured(amount : int, _crit : bool) -> void:
 	var time : float = clampf(amount / essence_component.max_essence, 0.25, 1.25)
-	_G.flare_screen(Color(1, 1, 1, 0.7), Color.TRANSPARENT, time)
+	_G.flare_screen(Color(1.0, 0.0, 0.0, 0.7), Color.TRANSPARENT, time)
 	if amount > 5:
 		$HitSFX.pitch_scale = randf_range(0.95, 1.05)
 		$HitSFX.play()
-		_G.flare_screen(Color(1, 1, 1, 0.7), Color.TRANSPARENT, time)
 		camera.tween_camera_fov(15.0, 0.5)
 		_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
 		_G.current_run.hits_taken += 1
@@ -217,14 +216,6 @@ func start_immunity(time : float = 1.0) -> void:
 	await get_tree().create_timer(time).timeout
 	immune = false
 
-func level_component_xp_gained() -> void:
-	essence_component.gain(int(10.0 * essence_component.heal_multiplier))
-	$XPPickupSFX.pitch_scale = randf_range(0.98, 1.02) + level_component.ratio / 1.75
-	$XPPickupSFX.play()
-
-func level_component_leveled_up() -> void:
-	_G.game.leveled_up = true
-
 func eye_animation_finished() -> void:
 	if $HUD/Eye.animation == "open":
 		$HUD/Eye.play("default")
@@ -235,8 +226,8 @@ func dash_component_can_dash_now() -> void:
 	$HUD/Eye.play("open")
 
 func update_motionblur() -> void:
-	const SMOOTHING : float = 0.8
-	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING) * (0.98 + essence_component.ratio * 0.02) + ((movement_component.speed_bonus - 1.0) * 20.0)
+	const SMOOTHING : float = 0.9
+	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING) + ((movement_component.speed_bonus - 1.0) * 20.0)
 	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, SMOOTHING)
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, SMOOTHING)
 	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, SMOOTHING)

@@ -41,10 +41,10 @@ func setup(esc : EssenceComponent) -> void:
 		var rand_scale = randf_range(1.0, randomize_scale) if randomize_scale > 1.0 else randf_range(randomize_scale, 1.0)
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
-	color = _G.hsv_to_rgb(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
+	color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
 	damage *= _G.game.enemy_multiplier
-	esc.max_essence = int(float(essence) * _G.game.enemy_multiplier)
-	esc.essence = int(float(essence) * _G.game.enemy_multiplier)
+	esc.max_essence = essence
+	esc.essence = essence
 	sprite.modulate = color
 	esc.enabled = true
 	

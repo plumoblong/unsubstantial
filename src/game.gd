@@ -71,7 +71,7 @@ func _ready() -> void:
 func _process(_delta : float) -> void:
 	
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = clamp(1 + snappedf(((actual_stage - 2) / 7.5) + ((_G.player.level_component.level - 1) / 7.5) + _G.current_run.times_looped, 0.05), 1.0, 100.0)
+	enemy_multiplier = 1 + sqrt(float(actual_stage - 1.0) * 0.13) * float(actual_stage)
 	$Label.text = "Difficulty: " + str(enemy_multiplier)
 	$Label.visible = _G.debug_mode
 	in_ether = chapter.current == chapter.all[0]
@@ -101,6 +101,8 @@ func _process(_delta : float) -> void:
 			enemies.process_mode = Node.PROCESS_MODE_INHERIT
 	else:  
 		$Pause.visible = false
+		pause_screen.screen = 0
+		_G.time_scale[0] = 1.0 * time_scale
 	_G.player.can_control = not $Pause.visible and not ending_level and _G.player.essence_component.alive and not in_any_menu
 	
 func change_map(map_file_path : String) -> void:
@@ -191,12 +193,8 @@ func end_level(loop : bool = false) -> void:
 	ending_level = true
 	$Ambience.stop()
 	level_changing.emit()
-	if _G.config.ui_dark_mode:
-		$AnimFix/Color.color = Color(0,0,0,0)
-		_G.tween($AnimFix/Color, "color", Color(0,0,0,1), 0.5)
-	else:
-		$AnimFix/Color.color = Color(1,1,1,0)
-		_G.tween($AnimFix/Color, "color", Color(1,1,1,1), 0.5)
+	$AnimFix/Color.color = _G.get_color_darkmode(true, 0.0)
+	_G.tween($AnimFix/Color, "color", _G.get_color_darkmode(true, 1.0), 0.5)
 	stage += 1
 	actual_stage += 1
 	await get_tree().create_timer(0.75).timeout
@@ -217,12 +215,8 @@ func wait(time : float = 0.07) -> void:
 	time_scale = 1.0
 			
 func map_build_complete() -> void:
-	if _G.config.ui_dark_mode:
-		$AnimFix/Color.color = Color(0,0,0,1)
-		_G.tween($AnimFix/Color, "color", Color(0,0,0,0), 0.5)
-	else:
-		$AnimFix/Color.color = Color(1,1,1,1)
-		_G.tween($AnimFix/Color, "color", Color(1,1,1,0), 0.5)
+	$AnimFix/Color.color = _G.get_color_darkmode(true, 1.0)
+	_G.tween($AnimFix/Color, "color", _G.get_color_darkmode(true, 0.0), 0.5)
 	ending_level = false
 	#$WorldEnvironment.set_env
 

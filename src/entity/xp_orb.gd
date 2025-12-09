@@ -1,7 +1,7 @@
 extends Area3D
 class_name XPOrb
 
-@export var xp_amount : int = 1
+@export var heal_amount : int = 1
 var speed : float
 
 var random_mult : float
@@ -19,5 +19,7 @@ func _physics_process(delta : float) -> void:
 
 func body_entered(body : Node3D) -> void:
 	if body is not Player: return
-	body.level_component.gain_xp(xp_amount)
+	body.essence_component.gain(10.0 * heal_amount * body.essence_component.heal_multiplier)
 	queue_free.call_deferred()
+	body.get_node("XPPickupSFX").pitch_scale = randf_range(0.85, 1.15)
+	body.get_node("XPPickupSFX").play()

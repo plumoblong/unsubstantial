@@ -228,9 +228,13 @@ func noclip() -> void:
 		_G.player.god_mode = true
 		say("Noclip enabled.")
 
-func add_item(path : String) -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
-		return
-	var x : Item = load("res://item/" + path + ".tres")
-	_G.player.items.append(x)
+#func add_item(path : String) -> void:
+	#if _G.player == null or not _G.player.is_inside_tree(): 
+		#say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+		#return
+	#var x : Item = load("res://item/" + path + ".tres")
+	#_G.player.items.append(x)
+
+func dark() -> void:
+	_G.config.ui_dark_mode = not _G.config.ui_dark_mode
+	say("Dark Mode: " + str(_G.config.ui_dark_mode))

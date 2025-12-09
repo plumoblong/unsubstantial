@@ -10,6 +10,7 @@ shader = ExtResource("2_ldr6d")
 shader_parameter/modulate = Color(0.0994685, 0.0994685, 0.0994685, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
 
