@@ -15,11 +15,11 @@ radius = 0.3
 
 [sub_resource type="Gradient" id="Gradient_vqshh"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.533333)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vpea4"]
 gradient = SubResource("Gradient_vqshh")
+width = 16
 
 [sub_resource type="Curve" id="Curve_uh2de"]
 _data = [Vector2(0, 1), 0.0, -2.64529, 0, 0, Vector2(1, 0), -1.12529, 0.0, 0, 0]
@@ -31,7 +31,7 @@ metadata/_snap_count = 16
 curve = SubResource("Curve_uh2de")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhh02"]
-gravity = Vector3(0, -4.78, 0)
+gravity = Vector3(0, -1, 0)
 scale_curve = SubResource("CurveTexture_dg1jc")
 color_ramp = SubResource("GradientTexture1D_vpea4")
 
@@ -257,10 +257,8 @@ shape = SubResource("SphereShape3D_nhh02")
 debug_color = Color(0, 1, 0.966667, 0.25098)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00211072, 0, 0)
-amount = 16
-speed_scale = 2.0
-fixed_fps = 40
+amount = 32
+speed_scale = 1.5
 visibility_aabb = AABB(-8, -8, -8, 16, 16, 16)
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_nhh02")
@@ -278,13 +276,13 @@ draw_pass_1 = SubResource("PlaneMesh_h0xjc")
 
 [node name="StaticSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_34tb2")
-attenuation_model = 1
 volume_db = 1.0
 unit_size = 5.0
 pitch_scale = 1.75
 panning_strength = 2.0
 bus = &"SFX1"
-attenuation_filter_db = -12.4
+attenuation_filter_cutoff_hz = 4096.0
+attenuation_filter_db = -19.9
 doppler_tracking = 1
 
 [node name="ImpactSFX" type="AudioStreamPlayer3D" parent="."]

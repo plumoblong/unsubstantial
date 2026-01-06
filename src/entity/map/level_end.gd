@@ -1,15 +1,19 @@
 extends Area3D
 class_name LevelEnd
 
-#func _process(_delta : float) -> void:
-	#$Opener/Hitbox.disabled = get_child_count() - 7 != 0
-	##print(get_child_count()- 7)
-	#$MeshInstance3D2.mesh.text = str(get_child_count()- 7)
-	#
-func opener_body_entered(_body : Player) -> void:
-	$AnimationPlayer.play("open")
-	
+var opened : bool = false
 
-func body_entered(_body : Player) -> void:
-	_G.game.end_level()
+@export var func_godot_properties : Dictionary = {
+	"enabled" = 1
+}
+
+func opener_body_entered(body : Node3D) -> void:
+	if body is not Player: return
+	if opened or not func_godot_properties["enabled"]: return
+	opened = true
+	$Animation.play("open")
+
+func body_entered(body : Node3D) -> void:
+	if body is Player and func_godot_properties["enabled"]:
+		_G.game.end_level()
 	

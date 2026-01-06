@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene load_steps=62 format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -28,6 +28,14 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uadq4"]
 radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbo8y"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("7_j4gl1")
+texture_filter = 0
+texture_repeat = false
+billboard_mode = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jg7jr"]
 atlas = ExtResource("10_7yx1s")
@@ -201,6 +209,8 @@ cap_bottom = false
 
 [sub_resource type="Resource" id="Resource_ju7jx"]
 script = ExtResource("5_qqhji")
+size_mult = 1.25
+fire_rate = 0.8
 spread_angle = 0.0
 homing = 1.0
 can_parry = false
@@ -208,14 +218,15 @@ metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="Resource" id="Resource_xed6q"]
 script = ExtResource("5_qqhji")
+size_mult = 1.5
 spread_angle = 0.0
 homing = 0.5
 life_time = 0.5
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjbmd"]
-radius = 0.3
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih3o"]
+radius = 0.4
 height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
@@ -303,11 +314,21 @@ debug_color = Color(1, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 0.947423, 0.319985, 0, -0.319985, 0.947423, 0, 2.38705, 2.0446)
 current = true
 
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2155579, 0.4072353)
+visible = false
+material_override = SubResource("StandardMaterial3D_dbo8y")
+pixel_size = 0.03
+billboard = 2
+texture_filter = 0
+texture = ExtResource("7_j4gl1")
+
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.825, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1.825, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Head"]
 handle_input_locally = false
+use_debanding = true
 use_occlusion_culling = true
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
@@ -396,21 +417,14 @@ cooldown = 1.1
 jump_height = 0.8
 dash_time_tresh = 8.0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.1)
-visible = false
-pixel_size = 0.03
-billboard = 2
-texture_filter = 0
-texture = ExtResource("7_j4gl1")
-
 [node name="Query" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 810
 collision_mask = 810
 
 [node name="Hitbox" type="CollisionShape3D" parent="Query"]
-shape = SubResource("CapsuleShape3D_tjbmd")
+transform = Transform3D(1, 0, 0, 0, 0.9999572, -0.009250113, 0, 0.009250113, 0.9999572, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_yih3o")
 debug_color = Color(1, 0, 0.8666668, 0.7647059)
 debug_fill = false
 
@@ -441,7 +455,7 @@ debug_color = Color(1, 0, 0.866667, 0)
 debug_fill = false
 
 [node name="MotionBlur" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.4509804)
+modulate = Color(1, 1, 1, 0.49803922)
 offset_right = 480.0
 offset_bottom = 270.0
 localize_numeral_system = false

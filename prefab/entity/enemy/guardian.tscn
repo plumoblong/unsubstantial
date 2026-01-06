@@ -45,7 +45,7 @@ script = ExtResource("1_5sof3")
 light_color = Color(1, 0, 0, 1)
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
-omni_range = 10.0
+omni_range = 20.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true
@@ -86,6 +86,7 @@ config = SubResource("Resource_y5ngk")
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
 essence = 300.0
+damage = 50.0
 on_hit_velocity_loss = 0.9
 xp_payout = 8
 metadata/_custom_type_script = "uid://tlvl68soe85"

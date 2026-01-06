@@ -1,7 +1,8 @@
 [gd_resource type="Environment" load_steps=6 format=3 uid="uid://dw7lwf2t20oyb"]
 
 [sub_resource type="Gradient" id="Gradient_aw213"]
-colors = PackedColorArray(0.105794, 0, 0.260417, 1, 1, 1, 1, 1)
+interpolation_color_space = 2
+colors = PackedColorArray(0.05882353, 0, 0.18431373, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_jfgqc"]
 gradient = SubResource("Gradient_aw213")
@@ -66,6 +67,6 @@ volumetric_fog_ambient_inject = 1.5
 volumetric_fog_sky_affect = 0.0
 volumetric_fog_temporal_reprojection_enabled = false
 adjustment_enabled = true
-adjustment_brightness = 0.75
 adjustment_contrast = 1.5
+adjustment_saturation = 1.1
 adjustment_color_correction = SubResource("GradientTexture1D_jfgqc")

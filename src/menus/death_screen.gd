@@ -7,7 +7,7 @@ func _ready() -> void:
 	$DarkMode.visible = _G.config.ui_dark_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Reason.text = _G.current_run.die_reason
-	$Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.items_collected.common + _G.current_run.items_collected.uncommon + _G.current_run.items_collected.rare + _G.current_run.items_collected.legendary)
+	$Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.crystals_collected)
 	$Score.text = "Score: " + str(_G.current_run.score)
 	$Score2.text = "High Score: " + str(int(_G.save.high_score))
 	await get_tree().create_timer(1.0).timeout

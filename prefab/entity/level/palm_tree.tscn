@@ -71,10 +71,10 @@ texture = ExtResource("1_emndo")
 
 [node name="Light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93332, 0)
-light_energy = 0.8
-light_volumetric_fog_energy = 1.5
-light_size = 1.0
-omni_range = 20.0
+light_energy = 0.4
+light_bake_mode = 0
+omni_range = 25.0
+omni_attenuation = 0.5
 
 [node name="Script" type="Node3D" parent="."]
 script = ExtResource("2_5wcbj")

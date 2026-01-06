@@ -11,7 +11,6 @@ func _ready() -> void:
 	$Screen2/Music.value = _G.config.sound.music
 	$Screen2/SFX.value =_G.config.sound.sfx
 	$Screen4/LowMode.button_pressed = _G.config.video.low
-	$Screen4/PostProcess.button_pressed = _G.config.video.post_process
 	$Screen4/Vsync.button_pressed = _G.config.video.v_sync
 	$Screen4/Exposure.value = _G.config.video.exposure
 	$Screen4/UIDarkMode.button_pressed = _G.config.ui_dark_mode
@@ -61,7 +60,6 @@ func _process(_delta : float) -> void:
 			$Screen4/ExposureText.text = "Gamma: " + str($Screen4/Exposure.value * 100) + "%"
 			
 			_G.config.video.low = $Screen4/LowMode.button_pressed
-			_G.config.video.post_process = $Screen4/PostProcess.button_pressed
 			_G.config.video.v_sync = $Screen4/Vsync.button_pressed
 			_G.config.ui_dark_mode = $Screen4/UIDarkMode.button_pressed
 			_G.config.video.exposure = $Screen4/Exposure.value

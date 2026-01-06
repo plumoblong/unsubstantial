@@ -1,23 +1,17 @@
 shader_type canvas_item;
 
 uniform vec2 motion = vec2(0.0);
-uniform float scale : hint_range(-1000.0, 1000.0, 0.1) = 1.0;
 uniform float gamma : hint_range(0.0, 2.0, 0.05) = 1.0;
-uniform vec2 offset = vec2(0.0);
-
-uniform sampler2D noise_offset : filter_nearest, repeat_enable;
 // uniform bool use_sample_texture = false;
 uniform bool enable_filter = true;
-uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_enable, filter_nearest;
 uniform float speed : hint_range(0.0, 256.0, 4.0) = 32;
 //uniform float alpha : hint_range(1.0, 100.0, 0.5) = 2.0;
+//uniform float dither_mod : hint_range(0, 1.0, 0.05) = 0.25;
+uniform float dither_size : hint_range(-8.00, 7.99, 0.01) = 1.0;
 uniform float power : hint_range(0.0, 1.0, 0.01) = 1.0;
 
 uniform float bit_depth : hint_range(1.0, 32.0, 0.25);
-uniform float dither : hint_range(0.0, 0.5, 0.0025);
-
-varying vec2 uv_offset;
-//varying vec2 screen_uv;
 
 vec3 gamma_correct (vec3 val) {
 	vec3 color;
@@ -25,54 +19,91 @@ vec3 gamma_correct (vec3 val) {
     return color;
 }
 
-vec4 rgb_to_hsv(vec4 rgba) {
-	vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-	vec4 p = mix(vec4(rgba.bg, K.wz), vec4(rgba.gb, K.xy), step(rgba.b, rgba.g));
-	vec4 q = mix(vec4(p.xyw, rgba.r), vec4(rgba.r, p.yzx), step(p.x, rgba.r));
+vec3 rgb_to_hsv(vec3 rgb) {
+    float cmax = max(max(rgb.r, rgb.g), rgb.b);
+    float cmin = min(min(rgb.r, rgb.g), rgb.b);
+    float delta = cmax - cmin;
 
-	float d = q.x - min(q.w, q.y);
-	float e = 1.0e-10;
-	return vec4(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x, 1.0);
+    // Hue calculation
+    float h = 0.0;
+    if (delta > 0.0) {
+        if (cmax == rgb.r) {
+            h = mod((rgb.g - rgb.b) / delta, 6.0);
+        } else if (cmax == rgb.g) {
+            h = (rgb.b - rgb.r) / delta + 2.0;
+        } else {
+            h = (rgb.r - rgb.g) / delta + 4.0;
+        }
+        h /= 6.0;
+    }
+
+    // Saturation
+    float s = (cmax > 0.0) ? delta / cmax : 0.0;
+
+    // Value
+    float v = cmax;
+
+    return vec3(h, s, v);
 }
 
-vec4 hsv_to_rgb(vec4 hsva) {
-	vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-	vec3 p = abs(fract(hsva.xxx + K.xyz) * 6.0 - K.www);
-	return vec4(hsva.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), hsva.y), 1.0);
+vec3 hsv_to_rgb(vec3 hsv) {
+    float h = hsv.x * 6.0;
+    float s = hsv.y;
+    float v = hsv.z;
+
+    float c = v * s;
+    float x = c * (1.0 - abs(mod(h, 2.0) - 1.0));
+    float m = v - c;
+
+    vec3 rgb;
+    if (h < 1.0) {
+        rgb = vec3(c, x, 0.0);
+    } else if (h < 2.0) {
+        rgb = vec3(x, c, 0.0);
+    } else if (h < 3.0) {
+        rgb = vec3(0.0, c, x);
+    } else if (h < 4.0) {
+        rgb = vec3(0.0, x, c);
+    } else if (h < 5.0) {
+        rgb = vec3(x, 0.0, c);
+    } else {
+        rgb = vec3(c, 0.0, x);
+    }
+
+    return rgb + m;
+}
+
+float dither_pattern(vec2 pos) {
+	int x = int(mod(pos.x, 2.0));
+	int y = int(mod(pos.y, 2.0));
+
+	const int bayer2[4] = int[4](
+		0, 2,
+		3, 1
+	);
+
+	int index = x + y * 2;
+	return float(bayer2[index]) / 3.0;
 }
 
 void fragment(){
+	vec4 init_tex = texture(screen_texture, SCREEN_UV);
+	vec3 final_color;
 
-	vec4 init_tex = texture(screen_texture, SCREEN_UV );
-	vec4 final_color;
-
-	// vec3 final_tex;
-	if (enable_filter == true) {
-
-		//vec2 pixel_size = 1.0 / vec2(320.0 / 2.0 , 180.0 / 2.0);
-
-		vec4 noise = texture(noise_offset, UV);
-		float time_offset = TIME * (speed / 64.0);
-		vec4 posterized;
-
-		float a = ceil(mod(SCREEN_UV.x / SCREEN_PIXEL_SIZE.x, 2.0));
-		float b = ceil(mod(SCREEN_UV.y / SCREEN_PIXEL_SIZE.y, 2.0));
-		float c = mod(a + b, 2.0);
-		posterized.r = floor(init_tex.r * bit_depth + dither) / bit_depth * c;
-		posterized.g = floor(init_tex.g * bit_depth + dither) / bit_depth * c;
-		posterized.b = floor(init_tex.b * bit_depth + dither) / bit_depth * c;
-		c = 1.0 - c;
-		posterized.r += floor(init_tex.r * bit_depth - dither) / bit_depth * c;
-		posterized.g += floor(init_tex.g * bit_depth - dither) / bit_depth * c;
-		posterized.b += floor(init_tex.b * bit_depth - dither) / bit_depth * c;
-
-        vec4 tex = rgb_to_hsv(posterized);
-
-		final_color = mix(posterized, hsv_to_rgb(vec4(tex.x + (mod(posterized.r, 1) + time_offset), tex.y, tex.z, 1.0)), power);
+	if (enable_filter) {
+		vec2 screen_pos = SCREEN_UV / SCREEN_PIXEL_SIZE;
+		float dither = dither_pattern(screen_pos);
+		// Posterize in one operation per channel
+		vec3 scaled = init_tex.rgb * bit_depth;
+		vec3 posterized = clamp(floor(scaled + (dither) * (dither_size / bit_depth)), 0.0, bit_depth) / bit_depth;
+		float time_offset = TIME * speed * 0.015625; // 1/64 precomputed
+		vec3 tex = rgb_to_hsv(posterized);
+		tex.x += mod(posterized.b, 1.0) + time_offset;
+		final_color = mix(posterized, hsv_to_rgb(tex), power);
 	} else {
-		final_color.rgb = init_tex.rgb;
-	};
-	COLOR.rgb = gamma_correct(final_color.rgb);
-	COLOR.a = 1.0;
+		final_color = init_tex.rgb;
+	}
 
+	COLOR.rgb = gamma_correct(final_color);
+	COLOR.a = 1.0;
 }

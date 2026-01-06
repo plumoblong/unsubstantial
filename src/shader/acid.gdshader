@@ -3,7 +3,7 @@ render_mode blend_mix,depth_draw_opaque,ambient_light_disabled,ensure_correct_no
 uniform vec2 scroll_speed = vec2(3.0, 3.0);
 //uniform float static_intensity : hint_range(0.0, 1.0, 0.05) = 0.25;
 uniform vec3 color : source_color = vec3(1.0);
-uniform float tex_scale: hint_range(0.25, 10.0, 0.01) = 1.0;
+uniform float tex_scale: hint_range(0.1, 10.0, 0.01) = 1.0;
 uniform sampler2D albedo_tex : hint_default_white, filter_nearest;
 uniform bool use_depth = false;
 

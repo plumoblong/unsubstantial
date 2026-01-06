@@ -9,7 +9,6 @@ class_name Map
 var map_name : String = "unnamed"
 var chapter_id : int = 1
 var bake_navmesh : bool = true
-
 var map_building : bool = false
 
 signal level_built

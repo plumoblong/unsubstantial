@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_5oc3n")
 scene_file = ExtResource("1_iprie")
-classname = "level_end"
+classname = "gateway"
 class_properties = {
 &"animation": 1,
 &"finish": 0,

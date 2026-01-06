@@ -105,7 +105,7 @@ func _physics_process(delta : float) -> void:
 	if can_control:
 		if essence_component.alive:
 			movement_component.update(delta)
-			move_and_slide()
+			
 			camera.viewbob_amount = movement_component.moving / 2.0
 			if hud.visible: hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving / 1.5)
 			camera.anim.speed_scale = (velocity.length() / movement_component.walk_speed) * 0.75
@@ -115,7 +115,7 @@ func _physics_process(delta : float) -> void:
 			moving_forward = movement_component.input_dir.y < 0
 			if not movement_component.noclip:
 				if Input.is_action_pressed("shoot") and not dash_component.dashing:
-					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position)
+					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position - Vector3(0.0, 0.2, 0.0))
 				elif Input.is_action_just_pressed("dash"):
 					dash_component.dash(movement_component)
 			if Input.is_action_just_pressed("f2") and essence_component.alive:
@@ -124,8 +124,8 @@ func _physics_process(delta : float) -> void:
 			if _G.game.ending_level:
 				can_control = false
 			$FastParticle.emitting = velocity.length() >= movement_component.walk_speed * 1.55
+		move_and_slide()
 	else:
-		velocity = Vector3.ZERO
 		camera.anim.speed_scale = 0
 		camera.viewbob_amount = 0
 	$DashQuery/Hitbox.disabled = not dash_component.dashing
@@ -194,7 +194,8 @@ func dash_component_dashed() -> void:
 	#hud.hide_punchhand()
 
 func essence_component_gained(amount : int) -> void:
-	_G.create_ui_popup("+" + str(amount), Vector2(float(randi_range(24.0, 38.0)), float(randi_range(224.0, 256.0))))
+	if not hud.visible: return
+	_G.create_ui_popup("+" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position)
 
 func essence_component_fractured(amount : int, _crit : bool) -> void:
 	var time : float = clampf(amount / essence_component.max_essence, 0.25, 1.25)
@@ -203,7 +204,8 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 		$HitSFX.pitch_scale = randf_range(0.95, 1.05)
 		$HitSFX.play()
 		camera.tween_camera_fov(15.0, 0.5)
-		_G.create_ui_popup("-" + str(amount), Vector2(38.0, 250.0), Vector2.UP, Color.RED)
+		if not hud.visible: return
+		_G.create_ui_popup("-" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position - Vector2(12.0, 0.0), Vector2.UP, Color.RED)
 		_G.current_run.hits_taken += 1
 		dash_component.can_reset = true
 		movement_component.speed_bonus *= 0.35
@@ -226,8 +228,8 @@ func dash_component_can_dash_now() -> void:
 	$HUD/Eye.play("open")
 
 func update_motionblur() -> void:
-	const SMOOTHING : float = 0.9
-	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING) + ((movement_component.speed_bonus - 1.0) * 20.0)
+	const SMOOTHING : float = 0.92
+	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING)
 	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z ,camera.tilt, SMOOTHING)
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x ,camera.global_rotation.x, SMOOTHING)
 	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y ,camera.global_rotation.y, SMOOTHING)

@@ -1,12 +1,12 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cpg8uwx6vhnua"]
 
-[ext_resource type="Texture2D" uid="uid://bqbsolkaej8xb" path="res://textures/world/gate_dif.png" id="1_0fpmp"]
+[ext_resource type="Texture2D" uid="uid://dnk80y6yyrg5q" path="res://textures/world/poison_b.png" id="1_0fpmp"]
 
 [sub_resource type="Shader" id="Shader_0fpmp"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.
 
 shader_type spatial;
-render_mode blend_add, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, unshaded;
+render_mode blend_add, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx, unshaded;
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_nearest, repeat_enable;
@@ -49,7 +49,7 @@ void vertex() {
 	// UV1 Triplanar: Enabled
 	uv1_power_normal = pow(abs(NORMAL), vec3(uv1_blend_sharpness));
 	vec3 uv1_offset = vec3(0, 0, 0);
-	uv1_offset.y -= TIME * 0.4;
+	uv1_offset.y += TIME * 0.4;
 	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
 	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
 	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
@@ -74,36 +74,23 @@ void fragment() {
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 	float roughness_tex = dot(triplanar_texture(texture_roughness, uv1_power_normal, uv1_triplanar_pos), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
-
-	{
-		// Distance Fade: Pixel Dither
-		float fade_distance = length(VERTEX);
-
-		// Use interleaved gradient noise, which is fast but still looks good.
-		const vec3 magic = vec3(0.06711056, 0.00583715, 52.9829189);
-		float fade = clamp(smoothstep(distance_fade_min, distance_fade_max, fade_distance), 0.0, 1.0);
-		// Use a hard cap to prevent a few stray pixels from remaining when past the fade-out distance.
-		if (fade < 0.001 || fade < fract(magic.z * fract(dot(FRAGCOORD.xy, magic.xy)))) {
-			discard;
-		}
-	}
 }
 "
 
 [resource]
 render_priority = 0
 shader = SubResource("Shader_0fpmp")
-shader_parameter/albedo = Color(0.7764706, 0.6745098, 0.89411765, 1)
+shader_parameter/albedo = Color(0.8968132, 0.7115445, 1, 1)
 shader_parameter/texture_albedo = ExtResource("1_0fpmp")
 shader_parameter/distance_fade_min = 0.0
-shader_parameter/distance_fade_max = 19.99999955296
+shader_parameter/distance_fade_max = 0.0
 shader_parameter/albedo_texture_size = Vector2i(0, 0)
-shader_parameter/point_size = 1.0
+shader_parameter/point_size = 0.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
-shader_parameter/uv1_blend_sharpness = 1.0
-shader_parameter/uv1_scale = Vector3(0.25, 0.25, 0.25)
+shader_parameter/uv1_blend_sharpness = 1.0000000475
+shader_parameter/uv1_scale = Vector3(0.1, 0.1, 0.1)
 shader_parameter/uv2_scale = Vector3(0, 0, 0)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)

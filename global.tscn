@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c0h6wgry1k7yc"]
 
 [ext_resource type="Script" uid="uid://duua0dhgdmd3i" path="res://global.gd" id="1_0nuii"]
-[ext_resource type="Texture2D" uid="uid://bgnqyuiynkaga" path="res://images/chapters.png" id="2_8tbuy"]
+[ext_resource type="Texture2D" uid="uid://cdxnw413lf5cj" path="res://images/debug/color_test2.png" id="2_74nqk"]
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="2_s7tmd"]
 [ext_resource type="Shader" uid="uid://dujud7csm8fs4" path="res://src/shader/acid_post.gdshader" id="3_bfr8n"]
 [ext_resource type="AudioStream" uid="uid://c2m2tnuvvje5j" path="res://sfx/ui/ui_hover.wav" id="5_hhif3"]
@@ -10,14 +10,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bsn0b"]
 shader = ExtResource("3_bfr8n")
 shader_parameter/motion = Vector2(0, 0)
-shader_parameter/scale = 1.0
 shader_parameter/gamma = 1.0
-shader_parameter/offset = Vector2(0, 0)
 shader_parameter/enable_filter = true
-shader_parameter/speed = 16.0
+shader_parameter/speed = 12.0
+shader_parameter/dither_size = 2.4999997653040005
 shader_parameter/power = 0.1499999966472
-shader_parameter/bit_depth = 10.0
-shader_parameter/dither = 0.15999999642368
+shader_parameter/bit_depth = 8.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7k62m"]
 shader = ExtResource("2_s7tmd")
@@ -32,9 +30,11 @@ script = ExtResource("1_0nuii")
 
 [node name="Funny" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("2_8tbuy")
+texture_filter = 1
+texture_repeat = 1
+scale = Vector2(0.9375, 0.52734375)
+texture = ExtResource("2_74nqk")
 centered = false
-hframes = 2
 
 [node name="Flares" type="Node" parent="."]
 

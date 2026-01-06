@@ -49,10 +49,10 @@ func get_stats_dictionary() -> Dictionary:
 	
 func get_rarities_dictionary() -> Dictionary:
 	return {
-	"2" : 35 - _G.player.stats.luck / 2, 
-	"3" : 20 + _G.player.stats.luck, 
-	"4" : 12  + _G.player.stats.luck, 
-	"5" : 3 + _G.player.stats.luck
+	"2" : clampi(35 - _G.player.stats.luck, 5, 40), 
+	"3" : clampi(20 - _G.player.stats.luck / 2, 10, 25), 
+	"4" : clampi(12  +_G.player.stats.luck, 5, 20), 
+	"5" : clampi(3 + _G.player.stats.luck, 2, 15)
 	}
 
 func on_start() -> void:
@@ -91,7 +91,8 @@ func _process(_delta: float) -> void:
 				_G.player.stats.add_stat(chosen_stat[0], chosen_stat[chosen_rarity], 1.0)
 			else:
 				_G.player.stats.add_stat(chosen_stat[0], 0.0, 1.0 + chosen_stat[chosen_rarity])
-			_G.current_run.items_collected[int(chosen_stat[chosen_rarity]) - 2] += 1
+			_G.current_run.crystals_collected += 1
+			print(_G.current_run.items_collected)
 			get_parent().end_choose()
 
 	if chosen_stat[chosen_rarity] > 0.0:

@@ -352,9 +352,9 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="MovementInfo"]
 use_parent_material = true
-offset_top = 48.0
+offset_top = 59.0
 offset_right = 480.0
-offset_bottom = 61.0
+offset_bottom = 72.0
 theme_override_font_sizes/font_size = 8
 text = "0.0
 SPEED"
@@ -370,6 +370,7 @@ position = Vector2(241, 135)
 texture = ExtResource("5_s826l")
 
 [node name="Hitmarker" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_t0nrv")
 position = Vector2(241, 135)
 texture = ExtResource("6_2ogxy")
@@ -516,7 +517,7 @@ bus = &"SFX2"
 
 [node name="Eye" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
-position = Vector2(240, 24)
+position = Vector2(240, 40)
 sprite_frames = SubResource("SpriteFrames_m62ne")
 animation = &"open"
 autoplay = "default"
@@ -529,18 +530,19 @@ position = Vector2(0, 262)
 
 [node name="EssenceIcon" type="AnimatedSprite2D" parent="Info"]
 use_parent_material = true
-position = Vector2(12, -5)
+position = Vector2(14, -4)
 sprite_frames = SubResource("SpriteFrames_feq3x")
 autoplay = "default"
 frame_progress = 0.01827133
+speed_scale = 0.5
 centered = false
 offset = Vector2(0, -12)
 
 [node name="Essence" type="RichTextLabel" parent="Info/EssenceIcon"]
 use_parent_material = true
-offset_left = 11.0
+offset_left = 12.0
 offset_top = -11.0
-offset_right = 74.0
+offset_right = 75.0
 offset_bottom = 5.0
 theme_override_fonts/normal_font = ExtResource("19_7io55")
 theme_override_fonts/bold_font = ExtResource("7_w4dv1")
@@ -550,7 +552,33 @@ bbcode_enabled = true
 text = "[b]100[/b]esc"
 metadata/_edit_use_anchors_ = true
 
+[node name="CrystalIcon" type="Sprite2D" parent="Info"]
+visible = false
+use_parent_material = true
+position = Vector2(12, -17)
+texture = ExtResource("18_l0m6r")
+centered = false
+offset = Vector2(0, -12)
+hframes = 3
+vframes = 3
+frame = 3
+
+[node name="Crystal" type="RichTextLabel" parent="Info/CrystalIcon"]
+use_parent_material = true
+offset_left = 12.0
+offset_top = -11.0
+offset_right = 75.0
+offset_bottom = 5.0
+theme_override_fonts/normal_font = ExtResource("19_7io55")
+theme_override_fonts/bold_font = ExtResource("7_w4dv1")
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "[b]1[/b]"
+metadata/_edit_use_anchors_ = true
+
 [node name="Score" type="RichTextLabel" parent="Info"]
+visible = false
 use_parent_material = true
 offset_left = 407.0
 offset_top = -16.0

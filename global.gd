@@ -2,6 +2,7 @@ extends Node
 class_name Global
 
 const VERSION : String = "0.96 indev 7"
+const CONFIG_VERSION : int = 1
 
 enum achievement {
 	START, BEAT, DIE, LUCK, LOOP
@@ -28,7 +29,6 @@ var config : Dictionary = {
 		music = 0.5,
 	},
 	video = {
-		post_process = true,
 		exposure = 1.0,
 		low = false, ## disables glow and reduces render distance
 		v_sync = false,
@@ -43,6 +43,7 @@ var current_run : Dictionary = {
 
 	kills = 0,
 	hits_taken = 0,
+	crystals_collected = 0,
 	items_collected = {
 		common = 0,
 		uncommon = 0,
@@ -72,8 +73,8 @@ var game : Game
 var time : float = 0.0
 var starting_level : String = "res://level/test/dengeon_test.tscn"
 
-var CONFIG_PATH : String = "user://config" + VERSION.to_snake_case() + ".dat" 
-var SAVE_PATH : String = "user://save.dat" 
+var CONFIG_PATH : String = "user://config_v" + str(CONFIG_VERSION) + ".json" 
+var SAVE_PATH : String = "user://save.json" 
 
 var in_close_menu : bool = false
 
@@ -92,7 +93,7 @@ func _ready() -> void:
 	seed(int(Time.get_unix_time_from_system()))
 	$Version.text = VERSION.to_upper()
 	
-func _physics_process(delta : float) -> void:
+func _process(delta : float) -> void:
 	time += delta
 	if config.video.low:
 		get_viewport().scaling_3d_scale = 0.5
@@ -100,7 +101,6 @@ func _physics_process(delta : float) -> void:
 		get_viewport().scaling_3d_scale = 1.0
 	
 	$Shader.material.set_shader_parameter("gamma", config.video.exposure)
-	$Shader.material.set_shader_parameter("enable_filter", config.video.post_process)
 	
 	if Input.is_action_just_pressed("f11"):
 		change_fullscreen()
@@ -113,13 +113,7 @@ func _physics_process(delta : float) -> void:
 	AudioServer.set_bus_volume_db(2, linear_to_db(config.sound.sfx))
 	AudioServer.set_bus_volume_db(3, linear_to_db(config.sound.sfx))
 	AudioServer.set_bus_volume_db(1, linear_to_db(config.sound.music))
-	
-	
-	AudioServer.set_bus_effect_enabled(0, 2, lowpass_enabled)
-	
 	Engine.time_scale = time_scale[0] * time_scale[1]
-	
-	
 	if not _G.config.fullscreen:
 		var clean_res : Vector2i = Vector2i(snappedi(DisplayServer.screen_get_size(0).x, 480), snappedi(DisplayServer.screen_get_size(0).x, 270))
 		get_window().size = clamp(Vector2i(480, 270) * int(config.resolution), Vector2i(480, 270), clean_res)
@@ -168,13 +162,13 @@ func change_window_size(size : int) -> void:
 	get_window().move_to_center()
 	
 @warning_ignore("untyped_declaration")
-func tween(node : Object, property : String, value, length : float = 1.0, trans : int = Tween.TRANS_LINEAR, easing : int = Tween.EASE_IN_OUT) -> void:
+func tween(node : Object, property : String, value, length : float = 1.0, trans : int = Tween.TRANS_LINEAR, easing : int = Tween.EASE_IN_OUT) -> Tween:
 	 
 	var t := get_tree().create_tween()
 	t.set_trans(trans)
 	t.set_ease(easing)
 	t.tween_property(node, property, value, length)
-	return
+	return t
 	
 func change_fullscreen() -> void:
 	if get_window().mode == Window.MODE_WINDOWED:
@@ -255,9 +249,10 @@ func choose_from_chance(values : Dictionary):
 	if not weighted_list.is_empty():
 		return weighted_list.pick_random() 
 
-func get_achievement(a : achievement) -> void:
+func get_achievement(a : achievement, count_to_save : bool = true) -> void:
 	if save.achieved.has(a): return
 	else:
+		if not count_to_save: return
 		save.achieved.append(a)
 		
 func save_files() -> void:

@@ -45,11 +45,11 @@ func _process(_delta: float) -> void:
 func input_text_submitted(text: String) -> void:
 	input.text = ""
 	history.push_front(text)
-	var command = format_command(text)
+	#var command = text
 	say(">> " + text + "\n")
 	
 	history_index = -1
-	var error : Error = _expression.parse(command)
+	var error : Error = _expression.parse(text)
 	if error != OK:
 		say("ERROR " + str(error) + ": " + _expression.get_error_text())
 		return
@@ -238,3 +238,8 @@ func noclip() -> void:
 func dark() -> void:
 	_G.config.ui_dark_mode = not _G.config.ui_dark_mode
 	say("Dark Mode: " + str(_G.config.ui_dark_mode))
+
+func add_stat(stat : String = "Damage", amount_add : float = 0.0, amount_mult : float = 1.0) -> void:
+	_G.player.stats.add_stat(stat, amount_add, amount_mult)
+	say("Stat " + stat + " increased by " + str(amount_add) + " and multiplied by " + str(amount_mult))
+	#add_stat("Luck", 5.0, 1.0)

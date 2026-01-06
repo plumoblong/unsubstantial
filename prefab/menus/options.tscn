@@ -51,6 +51,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Node2D" type="Node2D" parent="."]
+visible = false
 use_parent_material = true
 position = Vector2(0, 32)
 
@@ -152,27 +153,25 @@ text = "Resolution"
 alignment = 1
 
 [node name="Screen4" type="Node2D" parent="."]
-visible = false
 position = Vector2(0, 32)
 
 [node name="LowMode" parent="Screen4" instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 192.0
+offset_left = 248.0
 offset_top = 88.0
-offset_right = 288.0
+offset_right = 344.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
-text = "Performance Mode"
+text = "Low Quality"
 alignment = 1
 
 [node name="Vsync" parent="Screen4" instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 139.0
-offset_top = 104.0
-offset_right = 235.0
-offset_bottom = 120.0
+offset_left = 136.0
+offset_top = 88.0
+offset_right = 232.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -182,10 +181,10 @@ alignment = 1
 [node name="UIDarkMode" parent="Screen4" instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 139.0
-offset_top = 120.0
-offset_right = 235.0
-offset_bottom = 136.0
+offset_left = 136.0
+offset_top = 104.0
+offset_right = 232.0
+offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -195,27 +194,14 @@ alignment = 1
 [node name="MotionBlur" parent="Screen4" instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 251.0
-offset_top = 120.0
-offset_right = 347.0
-offset_bottom = 136.0
-theme_override_fonts/font = ExtResource("9_ohru1")
-theme_override_font_sizes/font_size = 6
-button_pressed = true
-text = "Motion Blur"
-alignment = 1
-
-[node name="PostProcess" parent="Screen4" instance=ExtResource("5_eyrc5")]
-material = ExtResource("7_eyqsm")
-use_parent_material = false
-offset_left = 251.0
+offset_left = 248.0
 offset_top = 104.0
-offset_right = 347.0
+offset_right = 344.0
 offset_bottom = 120.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
-text = "Post Process"
+text = "Motion Blur"
 alignment = 1
 
 [node name="ExposureText" type="Label" parent="Screen4"]

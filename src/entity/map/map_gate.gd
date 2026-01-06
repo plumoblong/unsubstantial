@@ -27,12 +27,4 @@ func _process(_delta: float) -> void:
 	if _G.game.enemies_killed >= func_godot_properties["kills_required"]:
 		hitbox.disabled = true
 		material.set_shader_parameter("distance_fade_min", 1.0)
-		material.set_shader_parameter("albedo", Color("9c88b3"))
-		_G.game.chat.add_message("A gate has opened.")
-	if not checked:
-		if (global_position * Vector3(1.0, 0.0, 1.0)).distance_to(_G.player.global_position  * Vector3(1.0, 0.0, 1.0)) < 7.0:
-			_G.game.chat.add_message("You need to kill " + str(func_godot_properties["kills_required"] - _G.game.enemies_killed) + " enemies to unlock this gate.")
-			checked = true
-	else:
-		if (global_position * Vector3(1.0, 0.0, 1.0)).distance_to(_G.player.global_position * Vector3(1.0, 0.0, 1.0)) > 14.0:
-			checked = false
+		material.set_shader_parameter("albedo", Color("291e36ff"))

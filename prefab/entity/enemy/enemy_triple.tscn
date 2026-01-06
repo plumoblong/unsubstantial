@@ -41,7 +41,7 @@ script = ExtResource("1_80l44")
 light_color = Color(1, 0, 0, 1)
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
-omni_range = 10.0
+omni_range = 17.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 simplify_path = true

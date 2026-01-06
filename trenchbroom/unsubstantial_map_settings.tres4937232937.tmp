@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="FuncGodotMapSettings" load_steps=8 format=3 uid="uid://c07h8g5oxasgv"]
+
+[ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/world/tile_floor.png" id="1_xc068"]
+[ext_resource type="Resource" uid="uid://dxtt0gn2y6y4m" path="res://trenchbroom/unsubstantial_fgd.tres" id="2_sveto"]
+[ext_resource type="Script" uid="uid://38q6k0ctahjn" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="3_k6if4"]
+[ext_resource type="Script" uid="uid://cij36hpqc46c" path="res://addons/func_godot/src/import/quake_wad_file.gd" id="4_sveto"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ojx2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rucwu"]
+albedo_texture = ExtResource("1_xc068")
+metallic_specular = 0.0
+roughness = 0.7
+emission = Color(0, 0, 0.329412, 1)
+normal_scale = 2.0
+rim = 0.12
+rim_tint = 1.0
+clearcoat = 0.14
+clearcoat_roughness = 1.0
+anisotropy = 0.23
+ao_light_affect = 0.44
+ao_texture = SubResource("CompressedTexture2D_0ojx2")
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_axlsg")
+subsurf_scatter_strength = 0.5
+backlight = Color(0.714171, 0.714171, 0.714171, 1)
+uv1_triplanar_sharpness = 150.0
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 0
+
+[resource]
+script = ExtResource("3_k6if4")
+inverse_scale_factor = 16.0
+entity_fgd = ExtResource("2_sveto")
+use_groups_hierarchy = true
+texture_file_extensions = Array[String](["png"])
+default_material = SubResource("StandardMaterial3D_rucwu")

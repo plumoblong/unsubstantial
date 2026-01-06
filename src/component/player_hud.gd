@@ -18,6 +18,8 @@ var interact_description : String = ""
 var score_lerp : float = 0.0
 var health_lerp : float = 0.0
 
+var last_hitmarker_tween : Tween
+
 func update(viewbob : Vector2, spd : float) -> void:
 	hitmarker.material.set_shader_parameter("alpha", hitmarker_alpha)
 	$MovementInfo.visible = show_movement_info
@@ -29,8 +31,9 @@ func update(viewbob : Vector2, spd : float) -> void:
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	$Info/Score.text = "[b]" + str(int(round(score_lerp))) + "[/b] pts"
 	
-	$Info/EssenceIcon.speed_scale = pow(1.1 - get_parent().essence_component.ratio, 2)
-	$Info/EssenceIcon/Essence.text = "[b]" + str(get_parent().essence_component.essence) + "[/b]esc"
+	#$Info/EssenceIcon.speed_scale = pow(1.1 - get_parent().essence_component.ratio, 2)
+	$Info/EssenceIcon/Essence.text = "[b]" + str(get_parent().essence_component.essence) + "[/b]/" + str(get_parent().essence_component.max_essence) + "esc"
+	$Info/CrystalIcon/Crystal.text = "[b]" + str(_G.current_run.crystals_collected) + "[/b]"
 	$InteractionTooltip.visible = get_parent().can_interact
 	$InteractionTooltip.text = interact_tooltip
 	$InteractionTooltip/Description.text = interact_description
@@ -49,28 +52,13 @@ func update(viewbob : Vector2, spd : float) -> void:
 	$MovementInfo/Key5.visible = Input.is_action_pressed("jump")
 
 func hitmark() -> void:
+	if last_hitmarker_tween: last_hitmarker_tween.kill()
 	hitmarker_alpha = 1.0
 	$HitmarkerSFX.pitch_scale = randf_range(0.8, 1.0)
-	get_parent().movement_component.speed_bonus *= 1.15
+	get_parent().movement_component.speed_bonus *= 1.1
 	$HitmarkerSFX.play()
 	#_G.game.wait()
-	_G.tween(self, "hitmarker_alpha", 0, 0.7 / get_parent().stats.actual_atkspd)
-	#var cw : float = crosshair_width
-	#var cwm : float = cw * 1.5
-	#crosshair_width = lerp(cwm * 1.5, cw, 0.5)
-	#await get_tree().create_timer(0.5).timeout
-	#return
-	#if not crosshair_tween_active:
-		#crosshair_tween_active = true
-		#var cw : float = crosshair_width
-		#var cwm : float = cw * 1.5
-		#crosshair_width = cwm
-		#_G.tween(self, "crosshair_width", cw, 0.5, 0, Tween.EASE_OUT)
-		#await get_tree().create_timer(0.5).timeout
-		#crosshair_tween_active = false
-		#return
-	#else:
-		#return
+	last_hitmarker_tween = _G.tween(self, "hitmarker_alpha", 0, 0.7 / get_parent().stats.actual_atkspd)
 		
 func hide_hand(speed : float = 0.25) -> void:
 	hand_hidden = true

@@ -48,6 +48,7 @@ window/size/borderless=true
 window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
 window/vsync/vsync_mode=0
 
 [editor]
@@ -310,7 +311,9 @@ rendering_device/driver.ios="vulkan"
 rendering_device/driver.macos="vulkan"
 rendering_device/fallback_to_d3d12=false
 renderer/rendering_method.mobile="forward_plus"
+driver/threads/thread_model=2
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
 textures/default_filters/use_nearest_mipmap_filter=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=0
@@ -320,5 +323,8 @@ environment/glow/upscale_mode=0
 environment/subsurface_scattering/subsurface_scattering_quality=0
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+anti_aliasing/quality/use_debanding=true
 occlusion_culling/use_occlusion_culling=true
+lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=2
+lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=2
 environment/defaults/default_environment="uid://dspdyqrgm5xt3"

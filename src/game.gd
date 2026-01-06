@@ -52,11 +52,7 @@ func _ready() -> void:
 	_G.save.can_continue = false
 	_G.current_run.kills = 0
 	_G.current_run.hits_taken = 0
-	_G.current_run.items_collected.common = 0
-	_G.current_run.items_collected.uncommon = 0
-	_G.current_run.items_collected.rare = 0
-	_G.current_run.items_collected.legendary = 0
-	_G.current_run.items_collected.mythic = 0
+	_G.current_run.crystals_collected = 0
 	_G.current_run.times_bought = 0
 	_G.current_run.times_looped = 0
 	_G.current_run.bosses_slained = 0

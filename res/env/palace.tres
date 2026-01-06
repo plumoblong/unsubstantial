@@ -2,17 +2,17 @@
 
 [sub_resource type="Gradient" id="Gradient_31rkl"]
 interpolation_color_space = 2
-colors = PackedColorArray(0.0486331, 0, 0.108863, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.007843138, 0, 0.015686275, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xkojt"]
 gradient = SubResource("Gradient_31rkl")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e32bo"]
 sky_top_color = Color(0.057512, 0.436639, 0.195319, 1)
-sky_horizon_color = Color(0.0835634, 0.054902, 0.196078, 1)
+sky_horizon_color = Color(0.04460405, 0.020688128, 0.13001806, 1)
 sky_curve = 0.409813
 ground_bottom_color = Color(0.427588, 0, 0.293102, 1)
-ground_horizon_color = Color(0.0546333, 0.108365, 0.197917, 1)
+ground_horizon_color = Color(0.039310392, 0.10274599, 0.20243043, 1)
 ground_curve = 0.502135
 
 [sub_resource type="Sky" id="Sky_t78c5"]
@@ -29,7 +29,6 @@ ambient_light_energy = 0.9
 reflected_light_source = 1
 tonemap_mode = 3
 tonemap_white = 5.0
-ssao_enabled = true
 ssao_radius = 12.22
 ssao_intensity = 13.42
 ssao_power = 1.4489037
@@ -62,9 +61,10 @@ volumetric_fog_emission = Color(0.0437857, 0, 0.14699, 1)
 volumetric_fog_emission_energy = 1.5
 volumetric_fog_anisotropy = 0.5
 volumetric_fog_ambient_inject = 1.2
-volumetric_fog_sky_affect = 0.5
+volumetric_fog_sky_affect = 0.7
 volumetric_fog_temporal_reprojection_amount = 0.618
 adjustment_enabled = true
-adjustment_contrast = 1.6
+adjustment_brightness = 1.05
+adjustment_contrast = 1.5
 adjustment_saturation = 1.1
 adjustment_color_correction = SubResource("GradientTexture1D_xkojt")

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://2mvdcxf7ysii"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aewgb"]
+
+[resource]
+shading_mode = 0
+heightmap_scale = 11.4
+heightmap_texture = SubResource("CompressedTexture2D_aewgb")
+uv1_triplanar_sharpness = 150.0
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+texture_filter = 0
