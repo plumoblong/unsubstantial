@@ -9,9 +9,9 @@ var added_stats : Array[Dictionary]
 
 var luck : int = 0
 
-var damage : int = 30
+var damage : int = 42
 var damage_mult : float = 1.0
-var dash_damage_mult : float = 1.5
+var dash_damage_mult : float = 1.25
 var bullet_damage_mult : float = 1.0
 
 var knockback : float = 1.0

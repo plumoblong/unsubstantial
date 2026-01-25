@@ -85,7 +85,8 @@ config = SubResource("Resource_y5ngk")
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
-essence = 300.0
+essence = 250.0
+essence_death_threshold = 30.0
 damage = 50.0
 on_hit_velocity_loss = 0.9
 xp_payout = 8

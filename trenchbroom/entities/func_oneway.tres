@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://dvqc0ry7ydqrd"]
+
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_n886d"]
+[ext_resource type="Script" uid="uid://cyjqdampc4pe5" path="res://src/trenchbroom/func_oneway.gd" id="2_n886d"]
+
+[resource]
+script = ExtResource("1_n886d")
+spawn_type = 0
+collision_layer = 7
+collision_mask = 7
+script_class = ExtResource("2_n886d")
+classname = "func_oneway"
+description = "Enables collision if the player is above the brush"
+node_class = "StaticBody3D"
+metadata/_custom_type_script = "uid://5cow84q03m6a"

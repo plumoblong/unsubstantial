@@ -8,6 +8,7 @@ class_name EnemyComponent
 @export var color : Color = Color.MAGENTA
 
 @export var essence : float = 100
+@export var essence_death_threshold : float = 10
 
 @export var damage : float = 100.0
 
@@ -45,6 +46,7 @@ func setup(esc : EssenceComponent) -> void:
 	damage *= _G.game.enemy_multiplier
 	esc.max_essence = essence
 	esc.essence = essence
+	esc.die_threshold = essence_death_threshold
 	sprite.modulate = color
 	esc.enabled = true
 	

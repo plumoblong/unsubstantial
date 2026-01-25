@@ -3,8 +3,8 @@ extends Node3D
 func _ready() -> void:
 	
 	$"../PalmTree".flip_h = bool(randi_range(0, 1))
-	rotation_degrees.y = randf_range(0.0, 360.0)
-	position.y -= randf_range(0.00, 0.35)
+	get_parent().rotation_degrees.y = randf_range(0.0, 360.0)
+	get_parent().position.y -= randf_range(0.00, 0.35)
 	var size : float = randf_range(0.9, 1.4)
 	var tc : Color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.3, 0.7), 1.0)
 	$"../Top".modulate = tc

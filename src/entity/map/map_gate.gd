@@ -3,13 +3,10 @@ extends StaticBody3D
 @export var func_godot_properties : Dictionary = {
 	"kills_required" : 3
 }
-
 var hitbox : CollisionShape3D
 var mesh : MeshInstance3D
-var checked : bool = false
 
 const GATE_MAT : ShaderMaterial = preload("res://textures/world/gate.tres")
-
 var material : ShaderMaterial
 
 func _func_godot_build_complete() -> void:
@@ -22,7 +19,6 @@ func _func_godot_build_complete() -> void:
 	mesh.material_override = material
 	
 func _process(_delta: float) -> void:
-	
 	if hitbox.disabled : return
 	if _G.game.enemies_killed >= func_godot_properties["kills_required"]:
 		hitbox.disabled = true

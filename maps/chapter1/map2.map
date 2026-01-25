@@ -1223,6 +1223,7 @@
 "classname" "level_end"
 "origin" "336 0 0"
 "angle" "180"
+"enabled" "0"
 "_tb_layer" "1"
 }
 // entity 125

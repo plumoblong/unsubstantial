@@ -11,11 +11,6 @@ render_mode blend_add, depth_draw_opaque, cull_disabled, diffuse_burley, specula
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_nearest, repeat_enable;
 
-uniform float distance_fade_min : hint_range(0.0, 4096.0, 0.01);
-uniform float distance_fade_max : hint_range(0.0, 4096.0, 0.01);
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
 uniform float roughness : hint_range(0.0, 1.0);
 uniform sampler2D texture_metallic : hint_default_white, filter_nearest, repeat_enable;
 uniform vec4 metallic_texture_channel;
@@ -29,9 +24,6 @@ uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
 varying vec3 uv1_power_normal;
 
 uniform vec3 uv1_scale;
-
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
 
 void vertex() {
 	vec3 normal = NORMAL;
@@ -82,15 +74,9 @@ render_priority = 0
 shader = SubResource("Shader_0fpmp")
 shader_parameter/albedo = Color(0.8968132, 0.7115445, 1, 1)
 shader_parameter/texture_albedo = ExtResource("1_0fpmp")
-shader_parameter/distance_fade_min = 0.0
-shader_parameter/distance_fade_max = 0.0
-shader_parameter/albedo_texture_size = Vector2i(0, 0)
-shader_parameter/point_size = 0.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
 shader_parameter/specular = 0.0
 shader_parameter/metallic = 0.0
 shader_parameter/uv1_blend_sharpness = 1.0000000475
 shader_parameter/uv1_scale = Vector3(0.25, 0.25, 0.25)
-shader_parameter/uv2_scale = Vector3(0, 0, 0)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)

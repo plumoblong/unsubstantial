@@ -81,7 +81,8 @@ config = SubResource("Resource_80l44")
 [node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_sp5a6")
 hit_sfx = NodePath("../HitSFX")
-essence = 200.0
+essence = 150.0
+essence_death_threshold = 20.0
 damage = 60.0
 on_hit_velocity_loss = 1.1
 xp_payout = 6
@@ -129,6 +130,8 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Node" type="Node3D" parent="MoveBackHelper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="area_3d" type="Area3D" parent="."]
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

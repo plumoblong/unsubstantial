@@ -185,7 +185,7 @@ func dash_component_dashed() -> void:
 	$DashSFX.play()
 	#if not _G.game.in_ether:
 		#essence_component.essence -= int($DashQuery.damage / 2.0)
-	camera.tween_camera_fov2(-15.0, 1.5)
+	#camera.tween_camera_fov2(-15.0, 1.5)
 
 
 	await get_tree().create_timer(0.4 * stats.dash_atkspd / (1 + stats.attack_speed)).timeout

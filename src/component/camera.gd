@@ -52,7 +52,7 @@ func update(t : float) -> void:
 	height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
 	var tilt_limit : float = -player.global_transform.basis.z.dot(-head.global_transform.basis.z)
 	if player.is_on_floor():
-		tilt = lerpf(tilt, t * tilt_amount, TILT_LERP) #* tilt_limit
+		tilt = lerpf(tilt, t * tilt_amount, TILT_LERP)
 	else:
 		tilt = lerpf(tilt, 0.0, TILT_LERP)
 	head.position.y = head_base_height+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset

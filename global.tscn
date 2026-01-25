@@ -13,7 +13,7 @@ shader_parameter/motion = Vector2(0, 0)
 shader_parameter/gamma = 1.0
 shader_parameter/enable_filter = true
 shader_parameter/speed = 12.0
-shader_parameter/dither_size = 2.4999997653040005
+shader_parameter/dither_size = 3.4999997429519993
 shader_parameter/power = 0.1499999966472
 shader_parameter/bit_depth = 8.0
 

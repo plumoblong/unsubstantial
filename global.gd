@@ -106,6 +106,8 @@ func _process(delta : float) -> void:
 		change_fullscreen()
 	if Input.is_action_just_pressed("f1"):
 		show_fps = not show_fps
+	if Input.is_action_just_pressed("toggle_fb"):
+		get_viewport().debug_draw = int(not bool(get_viewport().debug_draw))
 	$FPS.text = str(Engine.get_frames_per_second()) + " FPS"
 	$Debug.visible = debug_mode
 	$FPS.visible = show_fps

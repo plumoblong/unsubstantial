@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://b4m48eho8uq4e"]
 
-[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_qwqmx"]
-[ext_resource type="Script" uid="uid://bnb7mrxivqnr" path="res://src/solid_hazard.gd" id="2_qwqmx"]
+[ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_bwxby"]
+[ext_resource type="Script" uid="uid://bnb7mrxivqnr" path="res://src/solid_hazard.gd" id="2_qs3jq"]
 
 [resource]
-script = ExtResource("1_qwqmx")
+script = ExtResource("1_bwxby")
 spawn_type = 0
 build_occlusion = true
 collision_layer = 7
 collision_mask = 7
-script_class = ExtResource("2_qwqmx")
-classname = "hazard"
+script_class = ExtResource("2_qs3jq")
+classname = "func_hazard"
 description = "Hurts an EssenceComponent entity when standing on it"
 class_properties = {
 "cooldown": 20,

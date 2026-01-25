@@ -73,6 +73,7 @@ metadata/_custom_type_script = "uid://c3klywbeud1cv"
 script = ExtResource("7_awu5q")
 hit_sfx = NodePath("../HitSFX")
 essence = 150.0
+essence_death_threshold = 20.0
 on_hit_velocity_loss = 0.75
 metadata/_custom_type_script = "uid://tlvl68soe85"
 

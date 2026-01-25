@@ -71,12 +71,12 @@ orientation = 2
 interpolation_mode = 2
 interpolation_color_space = 2
 offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.61880153, 0.61880153, 0.61880153, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mjnnl"]
 gradient = SubResource("Gradient_30aa6")
 width = 135
-height = 415
+height = 1024
 metadata/_snap_enabled = true
 metadata/_snap_count = 8
 
@@ -468,7 +468,7 @@ draw_pass_1 = SubResource("PlaneMesh_3d8e2")
 draw_pass_2 = ExtResource("3_kcwi5")
 
 [node name="Godray" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.520714, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.153255, 0)
 material_override = SubResource("StandardMaterial3D_5lvh2")
 pixel_size = 0.04
 billboard = 2

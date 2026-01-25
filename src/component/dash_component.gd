@@ -54,12 +54,10 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 			dashing = false
 		elif mc is PlayerMoveComponent:
 			var speed : float = mc.walk_speed * (mc.ground_cap)
-			var base_friction : float = mc.ground_friction
 			
 			#get_parent().velocity = Vector3.ZERO\
 			var basis : Vector3 = -get_parent().camera.global_transform.basis.z.normalized()
 			if get_parent().is_on_floor():
-				mc.ground_friction = -base_friction
 				get_parent().velocity = Vector3(basis.x * dash_speed, 0.0, basis.z * dash_speed)
 				#just_dashed = false
 				#await get_tree().create_timer(dash_time).timeout
@@ -71,7 +69,6 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 			await get_tree().create_timer(dash_time).timeout
 			get_parent().velocity *= end_velocity_multiplier
 			dashing = false
-			mc.ground_friction = base_friction
 			#get_parent().velocity = final_vector
 
 	else:
