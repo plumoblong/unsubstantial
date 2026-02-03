@@ -72,8 +72,7 @@ func _process(_delta : float) -> void:
 	
 	camera.mbcam.get_parent().debug_draw = get_viewport().debug_draw
 	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
-
-
+	
 	if _G.config.video.low:
 		camera.far = 128.0
 		camera.mbcam.far = 64.0
@@ -108,7 +107,7 @@ func _physics_process(delta : float) -> void:
 			
 			camera.viewbob_amount = movement_component.moving / 2.0
 			if hud.visible: hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving / 1.5)
-			camera.anim.speed_scale = (velocity.length() / movement_component.walk_speed) * 0.75
+			camera.anim.speed_scale = (velocity.length() / 25.0)
 			if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
 				_G.current_run.die_reason = "You went somewhere you shouldn't."
 				essence_component.die()
@@ -118,6 +117,9 @@ func _physics_process(delta : float) -> void:
 					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position - Vector3(0.0, 0.2, 0.0))
 				elif Input.is_action_just_pressed("dash"):
 					dash_component.dash(movement_component)
+			else:
+				if Input.is_action_pressed("interact"):
+					shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position - Vector3(0.0, 0.2, 0.0))
 			if Input.is_action_just_pressed("f2") and essence_component.alive:
 				hud.visible = not hud.visible
 			
@@ -180,7 +182,7 @@ func dash_component_dashed() -> void:
 	else:
 		$DashQuery.crit = false
 		$DashQuery.damage = int(float(stats.actual_damage) * stats.dash_damage_mult)
-	start_immunity(0.5)
+	start_immunity(0.3)
 	$DashSFX.pitch_scale = randf_range(0.9, 1.1)
 	$DashSFX.play()
 	#if not _G.game.in_ether:

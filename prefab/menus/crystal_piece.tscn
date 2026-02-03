@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://d385nyl04mn7c"]
+
+[ext_resource type="Script" uid="uid://cdkbeeg11l462" path="res://src/menus/crystal_piece.gd" id="1_squgq"]
+[ext_resource type="Texture2D" uid="uid://cr5jrwsuw62bk" path="res://images/item/shard/default.png" id="3_squgq"]
+[ext_resource type="Texture2D" uid="uid://f12kswwika5o" path="res://images/ui/diamond_select_bg1.png" id="4_48dtb"]
+[ext_resource type="Texture2D" uid="uid://cch7emkq55n6k" path="res://images/glow.png" id="4_xcjxr"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="5_4g75m"]
+[ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="6_rnqqe"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q61hg"]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qcpl0"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_deuxg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h2gp0"]
+gradient = SubResource("Gradient_deuxg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2gp0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lp214"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqquj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_deuxg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48dtb"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_deuxg"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_lp214"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h2gp0"]
+resource_name = "hover_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.06666667, 0.45),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.46711743, 0.46711743, 0.46711743, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_lqquj"]
+resource_name = "hover_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 0.45),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Color(0.46711743, 0.46711743, 0.46711743, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcpl0"]
+_data = {
+&"RESET": SubResource("Animation_lp214"),
+&"hover_in": SubResource("Animation_h2gp0"),
+&"hover_out": SubResource("Animation_lqquj")
+}
+
+[node name="CrystalPiece1" type="Node2D" unique_id=687883265]
+material = SubResource("CanvasItemMaterial_q61hg")
+script = ExtResource("1_squgq")
+
+[node name="Glow2" type="Sprite2D" parent="." unique_id=418675845]
+modulate = Color(0.26543766, 0.26543766, 0.26543766, 1)
+material = SubResource("CanvasItemMaterial_qcpl0")
+use_parent_material = true
+position = Vector2(-1.9073486e-06, 0.83333576)
+scale = Vector2(2.5, 2.5)
+texture = SubResource("GradientTexture2D_h2gp0")
+
+[node name="Bound" type="Button" parent="." unique_id=913707903]
+offset_left = -32.0
+offset_top = -64.0
+offset_right = 32.0
+offset_bottom = 64.0
+focus_mode = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2gp0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lp214")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lqquj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_deuxg")
+disabled = true
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=375915920]
+use_parent_material = true
+texture = ExtResource("4_48dtb")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=629945602]
+modulate = Color(0.6687972, 0.6687972, 0.6687972, 1)
+material = SubResource("CanvasItemMaterial_48dtb")
+position = Vector2(0, -24)
+texture = ExtResource("3_squgq")
+
+[node name="Glow3" type="Sprite2D" parent="." unique_id=636072732]
+modulate = Color(0.5986477, 0.5986477, 0.5986477, 1)
+material = SubResource("CanvasItemMaterial_deuxg")
+position = Vector2(0, 32)
+scale = Vector2(1.9775722, 0.46193334)
+texture = ExtResource("4_xcjxr")
+
+[node name="Info" type="Label" parent="." unique_id=1115349985]
+use_parent_material = true
+offset_left = -39.999996
+offset_top = -40.0
+offset_right = 40.000004
+offset_bottom = 56.333344
+theme_override_fonts/font = ExtResource("5_4g75m")
+theme_override_font_sizes/font_size = 8
+text = "+10% Knockback"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shadow" type="Label" parent="Info" unique_id=1910976881]
+modulate = Color(0.32, 0.32, 0.32, 1)
+use_parent_material = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 81.0
+offset_bottom = 97.66667
+theme_override_fonts/font = ExtResource("5_4g75m")
+theme_override_font_sizes/font_size = 8
+text = "+10% Knockback"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shadow2" type="Label" parent="Info" unique_id=1240946966]
+modulate = Color(0.16, 0.16, 0.16, 1)
+use_parent_material = true
+layout_mode = 0
+offset_left = 1.9999962
+offset_top = 2.333332
+offset_right = 82.0
+offset_bottom = 99.0
+theme_override_fonts/font = ExtResource("5_4g75m")
+theme_override_font_sizes/font_size = 8
+text = "+10% Knockback"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Glow" type="Sprite2D" parent="Info" unique_id=233310559]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_deuxg")
+position = Vector2(39.999992, 48.833336)
+scale = Vector2(2.12, 0.848)
+texture = ExtResource("4_xcjxr")
+
+[node name="Rarity" type="Sprite2D" parent="." unique_id=1696931750]
+use_parent_material = true
+position = Vector2(0, 32)
+texture = ExtResource("6_rnqqe")
+vframes = 8
+
+[node name="Anim" type="AnimationPlayer" parent="." unique_id=2093231405]
+libraries/ = SubResource("AnimationLibrary_qcpl0")
+
+[connection signal="mouse_entered" from="Bound" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="Bound" to="." method="mouse_exited"]

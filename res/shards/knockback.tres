@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://bwxmv1i4g7p28"]
+
+[ext_resource type="Texture2D" uid="uid://bcxsljoc4sxwk" path="res://images/item/shard/knockback.png" id="1_85p0p"]
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_xjrrr"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_85p0p"]
+
+[sub_resource type="Resource" id="Resource_sfver"]
+script = ExtResource("1_xjrrr")
+statistic = "knockback"
+operator = 2
+value = 1.05
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_2t7kl"]
+script = ExtResource("1_xjrrr")
+statistic = "speed"
+operator = 2
+value = 1.1
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_h05d7"]
+script = ExtResource("1_xjrrr")
+statistic = "speed"
+operator = 2
+value = 1.15
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_lm05e"]
+script = ExtResource("1_xjrrr")
+statistic = "speed"
+operator = 2
+value = 1.2
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_85p0p")
+stat_name = "Knockback"
+image = ExtResource("1_85p0p")
+modulates = Dictionary[ExtResource("1_xjrrr"), int]({
+SubResource("Resource_sfver"): 15,
+SubResource("Resource_2t7kl"): 7,
+SubResource("Resource_h05d7"): 3,
+SubResource("Resource_lm05e"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

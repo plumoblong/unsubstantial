@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://7h76bp2anp6m"]
+
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_c2qt3"]
+[ext_resource type="Texture2D" uid="uid://dw4q8cds7wk1m" path="res://images/item/shard/attack_speed.png" id="1_dbqwc"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_c2qt3"]
+
+[sub_resource type="Resource" id="Resource_c2qt3"]
+script = ExtResource("1_c2qt3")
+statistic = "attack_speed"
+operator = 2
+value = 1.1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_dbqwc"]
+script = ExtResource("1_c2qt3")
+statistic = "attack_speed"
+operator = 2
+value = 1.15
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_20r62"]
+script = ExtResource("1_c2qt3")
+statistic = "attack_speed"
+operator = 2
+value = 1.2
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_e5gxp"]
+script = ExtResource("1_c2qt3")
+statistic = "attack_speed"
+operator = 2
+value = 1.3
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_c2qt3")
+stat_name = "Attack Speed"
+image = ExtResource("1_dbqwc")
+shop_cost = 200
+modulates = Dictionary[ExtResource("1_c2qt3"), int]({
+SubResource("Resource_c2qt3"): 10,
+SubResource("Resource_dbqwc"): 6,
+SubResource("Resource_20r62"): 2,
+SubResource("Resource_e5gxp"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

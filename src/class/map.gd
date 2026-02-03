@@ -22,9 +22,11 @@ func _ready() -> void:
 	level_failed.connect(_G.game.map_build_failed)
 	
 func build(file_path : String) -> void:
+
 	map_builder.local_map_file = file_path
 	map_builder.build()
 	map_building = true
+
 	
 func map_build_complete() -> void:
 	if bake_navmesh:
@@ -40,4 +42,6 @@ func map_build_failed() -> void:
 func bake_finished() -> void:
 	level_built.emit()
 	env.environment = _G.game.chapter.all[chapter_id].environment
+	_G.game.in_ether = chapter_id == 0
+	_G.game.chapter.current = _G.game.chapter.all[chapter_id]
 	map_building = false

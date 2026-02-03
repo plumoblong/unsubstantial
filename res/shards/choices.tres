@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://k5svjg7yxksv"]
+
+[ext_resource type="Texture2D" uid="uid://cu58jvjlfrfa" path="res://images/item/shard/choices.png" id="1_2o1r5"]
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_2ygss"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_2o1r5"]
+
+[sub_resource type="Resource" id="Resource_sfver"]
+script = ExtResource("1_2ygss")
+statistic = "choices"
+rarity = 3
+dont_number_stat = true
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_2o1r5")
+stat_name = "More Choices"
+image = ExtResource("1_2o1r5")
+weight = 0.1
+shop_cost = 300
+modulates = Dictionary[ExtResource("1_2ygss"), int]({
+SubResource("Resource_sfver"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

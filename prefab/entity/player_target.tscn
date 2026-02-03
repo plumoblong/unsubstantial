@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://e0fqyaaa5i4h"]
+[gd_scene format=3 uid="uid://e0fqyaaa5i4h"]
 
 [ext_resource type="Script" uid="uid://b2k76iwp5gwil" path="res://src/entity/player_target.gd" id="1_qp7mj"]
 [ext_resource type="Texture2D" uid="uid://cdnox0c0g04cb" path="res://images/entity/player_black.png" id="2_32vkg"]
 
-[node name="PlayerTarget" type="Node3D"]
+[node name="PlayerTarget" type="Node3D" unique_id=297686677]
 top_level = true
 script = ExtResource("1_qp7mj")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1402352133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 modulate = Color(1, 1, 1, 0.482353)
 pixel_size = 0.03

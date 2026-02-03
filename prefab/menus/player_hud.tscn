@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bnfk1f1uvunre"]
+[gd_scene format=3 uid="uid://bnfk1f1uvunre"]
 
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="1_n17tt"]
 [ext_resource type="Script" uid="uid://cdijn4mxeb2pm" path="res://src/component/player_hud.gd" id="2_j5rt0"]
@@ -281,11 +281,43 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="HUD" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hqjk"]
+atlas = ExtResource("18_l0m6r")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tou1b"]
+atlas = ExtResource("18_l0m6r")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74bm3"]
+atlas = ExtResource("18_l0m6r")
+region = Rect2(24, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n17tt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hqjk")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_tou1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hqjk")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_74bm3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="HUD" type="Node2D" unique_id=1189780673]
 material = SubResource("ShaderMaterial_ma48x")
 script = ExtResource("2_j5rt0")
 
-[node name="Vignette" type="TextureRect" parent="."]
+[node name="Vignette" type="TextureRect" parent="." unique_id=1473640428]
 material = SubResource("CanvasItemMaterial_xed6q")
 offset_left = -48.0
 offset_top = -40.0
@@ -294,23 +326,23 @@ offset_bottom = 320.0
 texture = SubResource("GradientTexture2D_m21cj")
 expand_mode = 1
 
-[node name="Weapon" type="AnimatedSprite2D" parent="."]
+[node name="Weapon" type="AnimatedSprite2D" parent="." unique_id=1017758244]
 material = SubResource("CanvasItemMaterial_ju7jx")
 position = Vector2(240, 270)
 sprite_frames = SubResource("SpriteFrames_tnp3a")
 autoplay = "default"
 frame_progress = 0.0429761
 
-[node name="MovementInfo" type="Node2D" parent="."]
+[node name="MovementInfo" type="Node2D" parent="." unique_id=1198064493]
 material = SubResource("ShaderMaterial_xed6q")
 
-[node name="Key1" type="Sprite2D" parent="MovementInfo"]
+[node name="Key1" type="Sprite2D" parent="MovementInfo" unique_id=766332505]
 use_parent_material = true
 position = Vector2(241, 135)
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 
-[node name="Key2" type="Sprite2D" parent="MovementInfo"]
+[node name="Key2" type="Sprite2D" parent="MovementInfo" unique_id=1609316059]
 use_parent_material = true
 position = Vector2(240, 134)
 rotation = 1.57079
@@ -318,7 +350,7 @@ texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 flip_h = true
 
-[node name="Key3" type="Sprite2D" parent="MovementInfo"]
+[node name="Key3" type="Sprite2D" parent="MovementInfo" unique_id=573773613]
 use_parent_material = true
 position = Vector2(241, 134)
 rotation = 3.14159
@@ -326,20 +358,20 @@ texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 flip_h = true
 
-[node name="Key5" type="Sprite2D" parent="MovementInfo"]
+[node name="Key5" type="Sprite2D" parent="MovementInfo" unique_id=329520189]
 use_parent_material = true
 position = Vector2(233, 148)
 texture = ExtResource("5_j5rt0")
 centered = false
 
-[node name="Key4" type="Sprite2D" parent="MovementInfo"]
+[node name="Key4" type="Sprite2D" parent="MovementInfo" unique_id=1745620923]
 use_parent_material = true
 position = Vector2(241, 134)
 rotation = 4.71238
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 
-[node name="Label" type="Label" parent="MovementInfo"]
+[node name="Label" type="Label" parent="MovementInfo" unique_id=1463697322]
 use_parent_material = true
 offset_top = 101.0
 offset_right = 480.0
@@ -350,7 +382,7 @@ SPEED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="MovementInfo"]
+[node name="Label2" type="Label" parent="MovementInfo" unique_id=960164862]
 use_parent_material = true
 offset_top = 59.0
 offset_right = 480.0
@@ -361,21 +393,21 @@ SPEED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Debug" type="Node2D" parent="."]
+[node name="Debug" type="Node2D" parent="." unique_id=217866802]
 position = Vector2(2, 21)
 
-[node name="Crosshair" type="Sprite2D" parent="."]
+[node name="Crosshair" type="Sprite2D" parent="." unique_id=1881976011]
 material = SubResource("ShaderMaterial_xed6q")
 position = Vector2(241, 135)
 texture = ExtResource("5_s826l")
 
-[node name="Hitmarker" type="Sprite2D" parent="."]
+[node name="Hitmarker" type="Sprite2D" parent="." unique_id=2079977172]
 visible = false
 material = SubResource("ShaderMaterial_t0nrv")
 position = Vector2(241, 135)
 texture = ExtResource("6_2ogxy")
 
-[node name="InteractionTooltip" type="RichTextLabel" parent="."]
+[node name="InteractionTooltip" type="RichTextLabel" parent="." unique_id=1339801524]
 use_parent_material = true
 clip_contents = false
 offset_top = 159.0
@@ -386,7 +418,7 @@ theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 horizontal_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="InteractionTooltip"]
+[node name="Description" type="RichTextLabel" parent="InteractionTooltip" unique_id=1847674824]
 use_parent_material = true
 layout_mode = 0
 offset_top = 14.0
@@ -400,7 +432,7 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Alert" type="RichTextLabel" parent="."]
+[node name="Alert" type="RichTextLabel" parent="." unique_id=373585083]
 visible = false
 material = SubResource("ShaderMaterial_f5we3")
 clip_contents = false
@@ -415,28 +447,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Extra" type="Node2D" parent="."]
+[node name="Extra" type="Node2D" parent="." unique_id=1447704519]
 use_parent_material = true
 
-[node name="Stats" type="Node2D" parent="Extra"]
+[node name="Stats" type="Node2D" parent="Extra" unique_id=1505996271]
 visible = false
 use_parent_material = true
 position = Vector2(9, 103)
 
-[node name="Damage" type="Label" parent="Extra/Stats"]
+[node name="Damage" type="Label" parent="Extra/Stats" unique_id=1610421580]
 use_parent_material = true
 offset_right = 40.0
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D" type="Sprite2D" parent="Extra/Stats/Damage"]
+[node name="Sprite2D" type="Sprite2D" parent="Extra/Stats/Damage" unique_id=313814852]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 
-[node name="Speed" type="Label" parent="Extra/Stats"]
+[node name="Speed" type="Label" parent="Extra/Stats" unique_id=1584918117]
 use_parent_material = true
 offset_top = 7.0
 offset_right = 40.0
@@ -444,14 +476,14 @@ offset_bottom = 17.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Speed"]
+[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Speed" unique_id=133065556]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 frame = 1
 
-[node name="Jump" type="Label" parent="Extra/Stats"]
+[node name="Jump" type="Label" parent="Extra/Stats" unique_id=1793147996]
 use_parent_material = true
 offset_top = 14.0
 offset_right = 40.0
@@ -459,14 +491,14 @@ offset_bottom = 24.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Jump"]
+[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Jump" unique_id=104914894]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 frame = 2
 
-[node name="Firerate" type="Label" parent="Extra/Stats"]
+[node name="Firerate" type="Label" parent="Extra/Stats" unique_id=2022125826]
 use_parent_material = true
 offset_top = 21.0
 offset_right = 40.0
@@ -474,14 +506,14 @@ offset_bottom = 31.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Firerate"]
+[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Firerate" unique_id=586974314]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 frame = 3
 
-[node name="Dashrate" type="Label" parent="Extra/Stats"]
+[node name="Dashrate" type="Label" parent="Extra/Stats" unique_id=1666129628]
 use_parent_material = true
 offset_top = 28.0
 offset_right = 57.0
@@ -489,14 +521,14 @@ offset_bottom = 38.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Dashrate"]
+[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Dashrate" unique_id=1891212203]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 frame = 4
 
-[node name="Special" type="Label" parent="Extra/Stats"]
+[node name="Special" type="Label" parent="Extra/Stats" unique_id=1059450237]
 use_parent_material = true
 offset_top = 35.0
 offset_right = 57.0
@@ -504,18 +536,18 @@ offset_bottom = 45.0
 theme_override_font_sizes/font_size = 8
 text = "100%"
 
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Special"]
+[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Special" unique_id=29854552]
 use_parent_material = true
 position = Vector2(-5, 2)
 texture = ExtResource("8_4qm2a")
 hframes = 6
 frame = 5
 
-[node name="HitmarkerSFX" type="AudioStreamPlayer" parent="."]
+[node name="HitmarkerSFX" type="AudioStreamPlayer" parent="." unique_id=1709177967]
 stream = ExtResource("9_u1awl")
 bus = &"SFX2"
 
-[node name="Eye" type="AnimatedSprite2D" parent="."]
+[node name="Eye" type="AnimatedSprite2D" parent="." unique_id=1440863849]
 use_parent_material = true
 position = Vector2(240, 40)
 sprite_frames = SubResource("SpriteFrames_m62ne")
@@ -524,11 +556,11 @@ autoplay = "default"
 frame = 3
 frame_progress = 1.0
 
-[node name="Info" type="Node2D" parent="."]
+[node name="Info" type="Node2D" parent="." unique_id=211372391]
 material = SubResource("ShaderMaterial_4chq7")
 position = Vector2(0, 262)
 
-[node name="EssenceIcon" type="AnimatedSprite2D" parent="Info"]
+[node name="EssenceIcon" type="AnimatedSprite2D" parent="Info" unique_id=687641502]
 use_parent_material = true
 position = Vector2(14, -4)
 sprite_frames = SubResource("SpriteFrames_feq3x")
@@ -538,7 +570,7 @@ speed_scale = 0.5
 centered = false
 offset = Vector2(0, -12)
 
-[node name="Essence" type="RichTextLabel" parent="Info/EssenceIcon"]
+[node name="Essence" type="RichTextLabel" parent="Info/EssenceIcon" unique_id=1405330743]
 use_parent_material = true
 offset_left = 12.0
 offset_top = -11.0
@@ -552,18 +584,16 @@ bbcode_enabled = true
 text = "[b]100[/b]esc"
 metadata/_edit_use_anchors_ = true
 
-[node name="CrystalIcon" type="Sprite2D" parent="Info"]
-visible = false
+[node name="CrystalIcon" type="AnimatedSprite2D" parent="Info" unique_id=1535087682]
 use_parent_material = true
-position = Vector2(12, -17)
-texture = ExtResource("18_l0m6r")
+position = Vector2(14, -16)
+sprite_frames = SubResource("SpriteFrames_n17tt")
+autoplay = "default"
+frame_progress = 0.7936811
 centered = false
 offset = Vector2(0, -12)
-hframes = 3
-vframes = 3
-frame = 3
 
-[node name="Crystal" type="RichTextLabel" parent="Info/CrystalIcon"]
+[node name="Crystal" type="RichTextLabel" parent="Info/CrystalIcon" unique_id=1260305302]
 use_parent_material = true
 offset_left = 12.0
 offset_top = -11.0
@@ -574,10 +604,10 @@ theme_override_fonts/bold_font = ExtResource("7_w4dv1")
 theme_override_font_sizes/normal_font_size = 6
 theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
-text = "[b]1[/b]"
+text = "[b]1[/b]shard"
 metadata/_edit_use_anchors_ = true
 
-[node name="Score" type="RichTextLabel" parent="Info"]
+[node name="Score" type="RichTextLabel" parent="Info" unique_id=1002799850]
 visible = false
 use_parent_material = true
 offset_left = 407.0

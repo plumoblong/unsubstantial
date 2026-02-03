@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://j3tceeh6ww5r"]
+
+[sub_resource type="Shader" id="Shader_3oed6"]
+code = "shader_type spatial;
+
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
+uniform float scale : hint_range(0.7, 0.98) = 0.9;
+uniform vec2 offset_direction = vec2(0.01, 0.01);
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+    
+    // Scale from center and add slight offset
+    uv = (uv - 0.5) * scale + 0.5 + offset_direction;
+    
+    vec3 color = texture(screen_texture, uv).rgb;
+    ALBEDO = color;
+}"
+
+[resource]
+render_priority = 0
+shader = SubResource("Shader_3oed6")
+shader_parameter/scale = 0.98000001907349
+shader_parameter/offset_direction = Vector2(0.01, 0.01)

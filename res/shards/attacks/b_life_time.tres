@@ -1,0 +1,53 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://dq02355lwewa1"]
+
+[ext_resource type="Texture2D" uid="uid://bsy1nqxm555nq" path="res://images/item/shard/b_life_time.png" id="1_8up4n"]
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_s0w6h"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_8up4n"]
+
+[sub_resource type="Resource" id="Resource_0631i"]
+script = ExtResource("1_s0w6h")
+statistic = "life_time"
+bullet_set = true
+operator = 2
+value = 1.25
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_s0w6h"]
+script = ExtResource("1_s0w6h")
+statistic = "life_time"
+bullet_set = true
+operator = 2
+value = 1.5
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_8up4n"]
+script = ExtResource("1_s0w6h")
+statistic = "life_time"
+bullet_set = true
+operator = 2
+value = 1.75
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_1gme3"]
+script = ExtResource("1_s0w6h")
+statistic = "life_time"
+bullet_set = true
+operator = 2
+value = 2.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_8up4n")
+stat_name = "Shot Range"
+image = ExtResource("1_8up4n")
+shop_cost = 150
+modulates = Dictionary[ExtResource("1_s0w6h"), int]({
+SubResource("Resource_0631i"): 12,
+SubResource("Resource_s0w6h"): 7,
+SubResource("Resource_8up4n"): 4,
+SubResource("Resource_1gme3"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

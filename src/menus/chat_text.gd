@@ -16,3 +16,5 @@ func _ready() -> void:
 
 func _process(_delta : float) -> void:
 	material.set_shader_parameter("alpha", alpha)
+	if alpha == 0.0:
+		queue_free()

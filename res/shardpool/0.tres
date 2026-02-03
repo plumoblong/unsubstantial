@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatShardPool" format=3 uid="uid://c05dcvn7ft2yk"]
+
+[ext_resource type="Script" uid="uid://bgbbtgjetypx6" path="res://src/resource/shard_pool.gd" id="1_bd3yc"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_c4ffe"]
+[ext_resource type="Resource" uid="uid://y1w007jqpju1" path="res://res/shards/damage.tres" id="3_fmmun"]
+[ext_resource type="Resource" uid="uid://7h76bp2anp6m" path="res://res/shards/attack_speed.tres" id="4_k5btp"]
+[ext_resource type="Resource" uid="uid://bpyggo0dbjeo2" path="res://res/shards/luck.tres" id="5_u2363"]
+[ext_resource type="Resource" uid="uid://ii0b00jw5rrn" path="res://res/shards/movement_speed.tres" id="6_f37cl"]
+[ext_resource type="Resource" uid="uid://7ulcyju0ei4q" path="res://res/shards/defense.tres" id="7_5njd1"]
+[ext_resource type="Resource" uid="uid://csryy21ph85ds" path="res://res/shards/healing.tres" id="8_5uv8r"]
+[ext_resource type="Resource" uid="uid://d1yp3jta2xwh8" path="res://res/shards/max_esc.tres" id="9_c0tc1"]
+[ext_resource type="Resource" uid="uid://6odjskauo8qw" path="res://res/shards/crit_chance.tres" id="10_0mt2x"]
+[ext_resource type="Resource" uid="uid://cjl626j6giy0l" path="res://res/shards/attacks/b_speed.tres" id="11_c0tc1"]
+[ext_resource type="Resource" uid="uid://dq02355lwewa1" path="res://res/shards/attacks/b_life_time.tres" id="12_0mt2x"]
+[ext_resource type="Resource" uid="uid://k5svjg7yxksv" path="res://res/shards/choices.tres" id="13_0mt2x"]
+
+[resource]
+script = ExtResource("1_bd3yc")
+shards = Array[ExtResource("2_c4ffe")]([ExtResource("3_fmmun"), ExtResource("4_k5btp"), ExtResource("5_u2363"), ExtResource("6_f37cl"), ExtResource("7_5njd1"), ExtResource("8_5uv8r"), ExtResource("9_c0tc1"), ExtResource("10_0mt2x"), ExtResource("11_c0tc1"), ExtResource("12_0mt2x"), ExtResource("13_0mt2x")])
+metadata/_custom_type_script = "uid://bgbbtgjetypx6"

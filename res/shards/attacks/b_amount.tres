@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://bi8emdgpnb8fv"]
+
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_byh4w"]
+[ext_resource type="Texture2D" uid="uid://cf641wcpyv1fr" path="res://images/item/shard/b_amount.png" id="1_xrgqm"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_xrgqm"]
+
+[sub_resource type="Resource" id="Resource_byh4w"]
+script = ExtResource("1_byh4w")
+statistic = "shots"
+bullet_set = true
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_xrgqm"]
+script = ExtResource("1_byh4w")
+statistic = "shots"
+bullet_set = true
+value = 2.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_xrgqm")
+stat_name = "Shot Amount"
+image = ExtResource("1_xrgqm")
+shop_cost = 200
+modulates = Dictionary[ExtResource("1_byh4w"), int]({
+SubResource("Resource_byh4w"): 10,
+SubResource("Resource_xrgqm"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

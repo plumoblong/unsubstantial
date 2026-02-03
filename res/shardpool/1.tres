@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StatShardPool" format=3 uid="uid://d2vm3ngfvj7r"]
+
+[ext_resource type="Script" uid="uid://bgbbtgjetypx6" path="res://src/resource/shard_pool.gd" id="1_3i8bt"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_i5emq"]
+[ext_resource type="Resource" uid="uid://cjl626j6giy0l" path="res://res/shards/attacks/b_speed.tres" id="3_duttb"]
+[ext_resource type="Resource" uid="uid://bi8emdgpnb8fv" path="res://res/shards/attacks/b_amount.tres" id="4_lakv2"]
+[ext_resource type="Resource" uid="uid://b1g8nonl2j5a0" path="res://res/shards/attacks/b_homing.tres" id="5_3i8bt"]
+[ext_resource type="Resource" uid="uid://n628316nc4dq" path="res://res/shards/attacks/b_weight.tres" id="6_i5emq"]
+[ext_resource type="Resource" uid="uid://bi6qiss0cpeat" path="res://res/shards/attacks/b_piercing.tres" id="7_mr35i"]
+[ext_resource type="Resource" uid="uid://dq02355lwewa1" path="res://res/shards/attacks/b_life_time.tres" id="8_68l5r"]
+[ext_resource type="Resource" uid="uid://ce2yqwcrh1c1g" path="res://res/shards/attacks/b_bouncy.tres" id="8_duttb"]
+
+[resource]
+script = ExtResource("1_3i8bt")
+pool_id = 1
+pool_name = "Attrubute Shard Pool"
+pool_crystal_color = Color(1, 0.3706619, 0.50977874, 1)
+shards = Array[ExtResource("2_i5emq")]([ExtResource("3_duttb"), ExtResource("4_lakv2"), ExtResource("5_3i8bt"), ExtResource("6_i5emq"), ExtResource("8_68l5r"), ExtResource("8_duttb"), ExtResource("7_mr35i")])
+metadata/_custom_type_script = "uid://bgbbtgjetypx6"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://c6lu6dfgssn4"]
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" format=3 uid="uid://c6lu6dfgssn4"]
 
 [ext_resource type="Script" uid="uid://5cow84q03m6a" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_ahj1q"]
 [ext_resource type="Script" uid="uid://cdi6g3m5d26e4" path="res://src/entity/map/map_gate.gd" id="2_ahj1q"]

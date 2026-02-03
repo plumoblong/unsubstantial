@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cgbt6cm5sfcfn"]
+[gd_scene format=3 uid="uid://cgbt6cm5sfcfn"]
 
 [ext_resource type="Script" uid="uid://cr0g5n61n16g5" path="res://src/entity/enemy/enemy_small.gd" id="1_dwdt7"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_o8h2q"]
@@ -20,52 +20,52 @@ height = 1.0
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]
 height = 1.2
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" unique_id=664851699]
 collision_layer = 4
 collision_mask = 4
 slide_on_ceiling = false
 script = ExtResource("1_dwdt7")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=728543848]
 light_color = Color(1, 0, 0, 1)
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 10.0
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=774373814]
 simplify_path = true
 simplify_epsilon = 1.0
 debug_use_custom = true
 debug_path_custom_point_size = 1.0
 
-[node name="Hitbox" type="CollisionShape3D" parent="."]
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=650559289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11425781, 0)
 shape = SubResource("CapsuleShape3D_c3pg5")
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("movement_component")]
+[node name="KnockbackComponent" type="Node" parent="." unique_id=1455241462 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_o8h2q")
 movement_component = NodePath("../MovementComponent")
 y_multiplier = 1.0
 
-[node name="ChaseComponent" type="Node" parent="." node_paths=PackedStringArray("movebackhelper")]
+[node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movebackhelper")]
 script = ExtResource("3_k6xin")
 movebackhelper = NodePath("../MoveBackHelper")
 agro_distance = 25.0
 min_distance = 1.0
 y_distance = 12.0
 
-[node name="MovementComponent" type="Node" parent="."]
+[node name="MovementComponent" type="Node" parent="." unique_id=259630483]
 script = ExtResource("4_0dpl7")
 speed = 23.0
 speed_up = 16.0
 speed_mult_after_jump = 1.1
 jump_speed = 4.0
 
-[node name="EssenceComponent" type="Node" parent="."]
+[node name="EssenceComponent" type="Node" parent="." unique_id=1109450702]
 script = ExtResource("5_b3h2g")
 set_max_essence_on_ready = false
 
-[node name="EnemyComponent" type="Node" parent="." node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=539105117 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_w77qk")
 hit_sfx = NodePath("../HitSFX")
 damage = 75.0
@@ -75,45 +75,45 @@ xp_radius = 0.0
 randomize_scale = 1.5
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
-[node name="Query" type="Area3D" parent="."]
+[node name="Query" type="Area3D" parent="." unique_id=113299010]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("7_dwdt7")
 die_reason = "You got humbled."
 
-[node name="Hitbox" type="CollisionShape3D" parent="Query"]
+[node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=1580192065]
 shape = SubResource("CapsuleShape3D_od4yj")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=788217579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27499998, 0)
 modulate = Color(0.73, 0.219, 0.219, 1)
 pixel_size = 0.04
 billboard = 1
 texture_filter = 0
 texture = ExtResource("8_ienij")
 
-[node name="3DBar" parent="." instance=ExtResource("11_i3v08")]
+[node name="3DBar" parent="." unique_id=1445756247 instance=ExtResource("11_i3v08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 
-[node name="ShootSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=472752322]
 stream = ExtResource("12_w8fs2")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="." unique_id=1106962551]
 stream = ExtResource("13_mm25u")
 pitch_scale = 1.36
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("14_kgpnm")]
+[node name="MapHazardCast" parent="." unique_id=2066686662 node_paths=PackedStringArray("esc") instance=ExtResource("14_kgpnm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 esc = NodePath("../EssenceComponent")
 
-[node name="MoveBackHelper" type="Node3D" parent="."]
+[node name="MoveBackHelper" type="Node3D" parent="." unique_id=1332837033]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Node" type="Node3D" parent="MoveBackHelper"]
+[node name="Node" type="Node3D" parent="MoveBackHelper" unique_id=1533084949]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]

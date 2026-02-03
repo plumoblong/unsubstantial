@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cpg8uwx6vhnua"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cpg8uwx6vhnua"]
 
-[ext_resource type="Texture2D" uid="uid://bqbsolkaej8xb" path="res://textures/world/gate_dif.png" id="1_0fpmp"]
+[ext_resource type="Texture2D" uid="uid://ty751l2aimi2" path="res://textures/world/gate_dif.png" id="1_0fpmp"]
 
 [sub_resource type="Shader" id="Shader_0fpmp"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's StandardMaterial3D.

@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://f0s1pbvhimks"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://f0s1pbvhimks"]
 
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="1_cl5m8"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="2_ts1ek"]

@@ -4,12 +4,13 @@ class_name EnemyComponent
 @onready var sprite : Sprite3D = get_parent().get_node("Sprite3D")
 
 @export var hit_sfx : AudioStreamPlayer3D
+@export var nav_agent : NavigationAgent3D
 
 @export var color : Color = Color.MAGENTA
+@export var use_difficulty_factor : bool = true
 
 @export var essence : float = 100
 @export var essence_death_threshold : float = 10
-
 @export var damage : float = 100.0
 
 @export var on_hit_velocity_loss : float = 0.5
@@ -36,19 +37,26 @@ func setup(esc : EssenceComponent) -> void:
 	if spawn_ent_on_death: 
 		ent_scene = load(ent_path)
 		ent_amount = randi_range(ent_min, ent_max)
-	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
+	
 	time_spawned = _G.time
 	if randomize_scale != 1.0:
 		var rand_scale = randf_range(1.0, randomize_scale) if randomize_scale > 1.0 else randf_range(randomize_scale, 1.0)
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
 	color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
-	damage *= _G.game.enemy_multiplier
+	
 	esc.max_essence = essence
 	esc.essence = essence
 	esc.die_threshold = essence_death_threshold
 	sprite.modulate = color
 	esc.enabled = true
+	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
+	if not use_difficulty_factor: return
+	damage *= _G.game.enemy_multiplier
+	esc.essence *= get_difficulty_factor(0.5)
+	esc.max_essence *= get_difficulty_factor(0.5)
+	esc.die_threshold *= get_difficulty_factor(0.75)
+	#get_parent().scale *= clamp(get_difficulty_factor(0.05), 1.0, 1.5)
 	
 func handle_fracture(amount : int, i_time : float, mov : MovementComponent, light : Light3D) -> void:
 	if mov is MovementComponent:
@@ -92,3 +100,10 @@ func handle_death() -> void:
 	_G.game.enemies_killed += 1
 	_G.game.create_xporb(get_parent().global_position, int(ceil(float(xp_payout * _G.game.enemy_multiplier))), xp_radius)
 	get_parent().queue_free.call_deferred()
+
+func shoot_to_player(shoot_component : ShootComponent, target_mult : float = 1.5, y_offset : float = 0.2) -> void:
+	shoot_component.shoot(get_parent().global_position.direction_to(_G.player.target.get_pos_multiplied(target_mult + random_factor) \
+	+ Vector3(0.0, 0.15 + (random_factor * 0.2), 0.0)), get_parent().global_position + Vector3(0.0, y_offset, 0.0))
+
+func get_difficulty_factor(mult : float = 1.0) -> float:
+	return 1.0 + ((_G.game.enemy_multiplier - 1.0) * mult)

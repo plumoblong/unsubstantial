@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cujfaq8u4onm0"]
+[gd_scene format=3 uid="uid://cujfaq8u4onm0"]
 
 [ext_resource type="Texture2D" uid="uid://dbgc3mbbxohl" path="res://images/environment/waterfall.png" id="1_1b5jy"]
 [ext_resource type="Script" uid="uid://domqlu8bdbi3h" path="res://src/prop/poison_waterfall.gd" id="1_mjm1s"]
@@ -140,19 +140,19 @@ orientation = 2
 height = 30.015625
 radius = 1.5
 
-[node name="PoisonWaterfall" type="Area3D"]
+[node name="PoisonWaterfall" type="Area3D" unique_id=119028584]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_mjm1s")
 damage = 150
 die_reason = "You took a shower!"
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1615387888]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49, 0)
 material_override = SubResource("ShaderMaterial_i4ive")
 mesh = SubResource("PlaneMesh_n36y4")
 
-[node name="particles" type="GPUParticles3D" parent="."]
+[node name="particles" type="GPUParticles3D" parent="." unique_id=673257725]
 amount = 64
 lifetime = 0.75
 randomness = 1.0
@@ -160,6 +160,16 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_swrfu")
 draw_pass_1 = SubResource("PlaneMesh_mjm1s")
 
-[node name="collision_shape_3d" type="CollisionShape3D" parent="."]
+[node name="collision_shape_3d" type="CollisionShape3D" parent="." unique_id=740178025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.001953, 0)
 shape = SubResource("CylinderShape3D_e85lb")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1059362997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.25, 0)
+light_color = Color(1, 0.32681847, 0.6897959, 1)
+light_energy = 0.8
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 1.5
+light_specular = 6.0
+omni_range = 60.0
+omni_attenuation = 1.25

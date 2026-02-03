@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://b1g8nonl2j5a0"]
+
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_738qq"]
+[ext_resource type="Texture2D" uid="uid://cxiqbl6vedio2" path="res://images/item/shard/b_homing.png" id="1_er02h"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_er02h"]
+
+[sub_resource type="Resource" id="Resource_0631i"]
+script = ExtResource("1_738qq")
+statistic = "homing"
+bullet_set = true
+operator = 2
+value = 1.25
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_s0w6h"]
+script = ExtResource("1_738qq")
+statistic = "homing"
+bullet_set = true
+operator = 2
+value = 1.5
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_8up4n"]
+script = ExtResource("1_738qq")
+statistic = "homing"
+bullet_set = true
+operator = 2
+value = 2.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_er02h")
+stat_name = "Shot Homing"
+image = ExtResource("1_er02h")
+shop_cost = 200
+modulates = Dictionary[ExtResource("1_738qq"), int]({
+SubResource("Resource_0631i"): 10,
+SubResource("Resource_s0w6h"): 5,
+SubResource("Resource_8up4n"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

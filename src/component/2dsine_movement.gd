@@ -8,4 +8,4 @@ class_name SineMovement2D
 @onready var start_position : Vector2 = global_position
 
 func _physics_process(delta: float) -> void:
-    offset.y = _G.sine_movement(frequency, amplitude, anim_offset, delta)
+	offset.y = _G.sine_movement(frequency, amplitude, anim_offset, delta)

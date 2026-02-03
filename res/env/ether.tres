@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=6 format=3 uid="uid://dw7lwf2t20oyb"]
+[gd_resource type="Environment" format=3 uid="uid://dw7lwf2t20oyb"]
 
 [sub_resource type="Gradient" id="Gradient_aw213"]
 interpolation_color_space = 2
@@ -34,10 +34,13 @@ tonemap_white = 1.5
 ssr_enabled = true
 ssr_fade_in = 0.621159
 ssr_depth_tolerance = 128.0
-ssao_radius = 16.0
-ssao_intensity = 0.0
-ssao_power = 14.7737
-ssao_detail = 2.58
+ssao_enabled = true
+ssao_radius = 0.66
+ssao_intensity = 16.0
+ssao_power = 13.784352
+ssao_horizon = 0.32
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
 ssil_radius = 0.01
 ssil_normal_rejection = 0.5
 sdfgi_use_occlusion = true

@@ -3,7 +3,7 @@ class_name ChatFeed
 
 @onready var message_container = $MessageContainer
 
-const MAX_MESSAGES := 6
+const MAX_MESSAGES := 5
 const LABEL : PackedScene = preload("res://prefab/menus/chat_text.tscn")
 var message_history: Array = []
 
@@ -17,15 +17,15 @@ func _show_message(text: String, color : Color = Color.WHITE) -> void:
 	var label = LABEL.instantiate()
 	label.text = text
 	label.color = color
-	label.size.x = 256.0
+	label.size.x = 270.0
 	message_container.add_child(label)
 	
 	if message_container.get_child_count() > MAX_MESSAGES:
 		message_container.get_child(0).queue_free()
 
 func _process(delta : float) -> void:
-	if Input.is_action_just_pressed("chat"):
-		_show_last_messages()
+	#if Input.is_action_just_pressed("chat"):
+		#_show_last_messages()
 
 	if message_history.size() > MAX_MESSAGES:
 		message_history.pop_front()

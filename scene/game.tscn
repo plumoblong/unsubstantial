@@ -1,15 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpwhvorsucmn5"]
+[gd_scene format=3 uid="uid://bpwhvorsucmn5"]
 
 [ext_resource type="Script" uid="uid://dr4it7887glkj" path="res://src/game.gd" id="1_uu38s"]
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
 [ext_resource type="AudioStream" uid="uid://b20cwcimf3pqt" path="res://music/level/key.ogg" id="8_400sm"]
-[ext_resource type="Script" uid="uid://c8l6vapm3bkg5" path="res://src/resource/item_pool.gd" id="9_abp7u"]
 [ext_resource type="AudioStream" uid="uid://d1c688sodgbo1" path="res://music/level/respawn.ogg" id="9_lip20"]
 [ext_resource type="AudioStream" uid="uid://mabafblxpkit" path="res://music/level/core.ogg" id="10_efr1a"]
-[ext_resource type="Resource" uid="uid://dfuv1fe86kg44" path="res://res/itempool/default_pool.tres" id="10_ux4dc"]
-[ext_resource type="Script" uid="uid://bo4hw3ok1f8yh" path="res://src/component/item_pool_manager.gd" id="10_yq8tf"]
 [ext_resource type="AudioStream" uid="uid://j31om87u5v2c" path="res://music/level/fractal.ogg" id="11_x3x2e"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="16_ux4dc"]
 [ext_resource type="Script" uid="uid://qtuj5slhqqp6" path="res://src/component/chapter_manager.gd" id="33_d218c"]
@@ -28,36 +25,35 @@ stream_1 = ExtResource("9_lip20")
 stream_2 = ExtResource("10_efr1a")
 stream_3 = ExtResource("11_x3x2e")
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" unique_id=449548246]
 script = ExtResource("1_uu38s")
 
-[node name="Map" type="Node3D" parent="."]
+[node name="Map" type="Node3D" parent="." unique_id=1555837574]
 
-[node name="Player" parent="." instance=ExtResource("3_2026n")]
+[node name="Player" parent="." unique_id=477399054 instance=ExtResource("3_2026n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Pause" parent="." instance=ExtResource("6_hgp5e")]
-
-[node name="CrystalChoose" parent="." instance=ExtResource("4_ux4dc")]
+[node name="CrystalChoose" parent="." unique_id=1178752380 instance=ExtResource("4_ux4dc")]
+layer = 1
 visible = false
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Pause" parent="." unique_id=1492571051 instance=ExtResource("6_hgp5e")]
+layer = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2010867329]
 stream = SubResource("AudioStreamPlaylist_xvte5")
 volume_db = -80.0
 autoplay = true
 bus = &"Music"
 
-[node name="ItemPoolManager" type="Node" parent="."]
-script = ExtResource("10_yq8tf")
-item_pools = Array[ExtResource("9_abp7u")]([ExtResource("10_ux4dc")])
-
-[node name="ChapterManager" type="Node" parent="."]
+[node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
 script = ExtResource("33_d218c")
+current = ExtResource("36_x3x2e")
 all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e")])
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="Node" parent="." unique_id=1809856368]
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1724005951]
 visible = false
 offset_left = 10.0
 offset_top = 222.0
@@ -67,13 +63,9 @@ theme_override_fonts/font = ExtResource("16_ux4dc")
 theme_override_font_sizes/font_size = 6
 text = "gfdf"
 
-[node name="ChatFeed" parent="." instance=ExtResource("40_imfdu")]
-offset_left = 25.0
-offset_top = 12.0
-offset_right = 25.0
-offset_bottom = 12.0
+[node name="ChatFeed" parent="." unique_id=1286036292 instance=ExtResource("40_imfdu")]
 
-[node name="Ambience" type="AudioStreamPlayer3D" parent="."]
+[node name="Ambience" type="AudioStreamPlayer3D" parent="." unique_id=558550754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5476, 0, 0)
 stream = ExtResource("42_lip20")
 volume_db = -20.0
@@ -85,10 +77,16 @@ bus = &"Ambient"
 attenuation_filter_cutoff_hz = 20500.0
 doppler_tracking = 1
 
-[node name="AnimFix" type="CanvasLayer" parent="."]
+[node name="AnimFix" type="CanvasLayer" parent="." unique_id=5178760]
 layer = 4
 
-[node name="Color" type="ColorRect" parent="AnimFix"]
+[node name="Color" type="ColorRect" parent="AnimFix" unique_id=1286034838]
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=1500097401]
+wait_time = 20.0
+ignore_time_scale = true
+
+[connection signal="timeout" from="Timer" to="." method="timer_timeout"]

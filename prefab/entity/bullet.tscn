@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b47uxbakyj2nq"]
+[gd_scene format=3 uid="uid://b47uxbakyj2nq"]
 
 [ext_resource type="Script" uid="uid://cpwtp01tp3tkl" path="res://src/class/bullet.gd" id="1_5oqnd"]
 [ext_resource type="Texture2D" uid="uid://cf5c1ljmst3lm" path="res://images/bullet.png" id="1_affj2"]
@@ -31,7 +31,7 @@ metadata/_snap_count = 16
 curve = SubResource("Curve_uh2de")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhh02"]
-gravity = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_dg1jc")
 color_ramp = SubResource("GradientTexture1D_vpea4")
 
@@ -213,50 +213,51 @@ _data = {
 &"despawn": SubResource("Animation_s0qpv")
 }
 
-[node name="Bullet" type="Area3D" groups=["Hazard"]]
+[node name="Bullet" type="Area3D" unique_id=2061881333 groups=["Hazard"]]
 top_level = true
 collision_layer = 6
 collision_mask = 6
 collision_priority = 2.0
+input_capture_on_drag = true
 script = ExtResource("1_5oqnd")
 knockback_strength = 24.0
 knockback_y_strength = 0.35
 stun_time = 0.1
 die_reason = "You Got Shot!"
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1481290390]
 visibility_range_begin = 2.0
 visibility_range_begin_margin = 0.5
-visibility_range_fade_mode = 1
 pixel_size = 0.03
 billboard = 1
+no_depth_test = true
 texture_filter = 0
 texture = ExtResource("1_affj2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1354041273]
 shape = SubResource("SphereShape3D_6aqa8")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=888833661]
 light_volumetric_fog_energy = 0.1
 shadow_enabled = true
 
-[node name="Seeker" type="Area3D" parent="."]
+[node name="Seeker" type="Area3D" parent="." unique_id=888608032]
 collision_layer = 524
 collision_mask = 524
 
-[node name="Hitbox" type="CollisionShape3D" parent="Seeker"]
+[node name="Hitbox" type="CollisionShape3D" parent="Seeker" unique_id=75093351]
 shape = SubResource("SphereShape3D_h0xjc")
 debug_color = Color(0, 1, 0.75391, 0.25098)
 
-[node name="ParrySeeker" type="Area3D" parent="."]
+[node name="ParrySeeker" type="Area3D" parent="." unique_id=821998680]
 collision_layer = 524
 collision_mask = 524
 
-[node name="Hitbox" type="CollisionShape3D" parent="ParrySeeker"]
+[node name="Hitbox" type="CollisionShape3D" parent="ParrySeeker" unique_id=1299935258]
 shape = SubResource("SphereShape3D_nhh02")
 debug_color = Color(0, 1, 0.966667, 0.25098)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1253749915]
 amount = 32
 speed_scale = 1.5
 visibility_aabb = AABB(-8, -8, -8, 16, 16, 16)
@@ -264,7 +265,7 @@ draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_nhh02")
 draw_pass_1 = SubResource("PlaneMesh_nanj5")
 
-[node name="Impact" type="GPUParticles3D" parent="."]
+[node name="Impact" type="GPUParticles3D" parent="." unique_id=592600225]
 emitting = false
 amount = 24
 lifetime = 0.75
@@ -274,7 +275,7 @@ explosiveness = 0.74
 process_material = SubResource("ParticleProcessMaterial_m2u5t")
 draw_pass_1 = SubResource("PlaneMesh_h0xjc")
 
-[node name="StaticSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="StaticSFX" type="AudioStreamPlayer3D" parent="." unique_id=1346719133]
 stream = ExtResource("4_34tb2")
 volume_db = 1.0
 unit_size = 5.0
@@ -285,7 +286,7 @@ attenuation_filter_cutoff_hz = 4096.0
 attenuation_filter_db = -19.9
 doppler_tracking = 1
 
-[node name="ImpactSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="ImpactSFX" type="AudioStreamPlayer3D" parent="." unique_id=595115608]
 stream = ExtResource("5_h0xjc")
 attenuation_model = 1
 unit_size = 20.0
@@ -293,18 +294,16 @@ pitch_scale = 1.42
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_au7w0")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=722415559]
+libraries/ = SubResource("AnimationLibrary_au7w0")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=476404595]
 one_shot = true
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1489019058]
 target_position = Vector3(0, 0, -1)
+collision_mask = 255
 hit_from_inside = true
-hit_back_faces = false
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
 [connection signal="body_entered" from="." to="." method="body_entered"]

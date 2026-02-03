@@ -1,7 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://qilkeuk5s68v"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://qilkeuk5s68v"]
 
 [ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_y2utw"]
-[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="2_pc4vj"]
+[ext_resource type="Texture2D" uid="uid://cxvt6el5g3tp5" path="res://textures/world/player_essence.png" id="2_pc4vj"]
 
 [resource]
 render_priority = 0

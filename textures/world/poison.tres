@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c37u5yfdhlgle"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c37u5yfdhlgle"]
 
 [ext_resource type="Texture2D" uid="uid://dnk80y6yyrg5q" path="res://textures/world/poison_b.png" id="1_w31tq"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="2_38ypc"]

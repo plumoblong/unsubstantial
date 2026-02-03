@@ -33,7 +33,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	#$Info/EssenceIcon.speed_scale = pow(1.1 - get_parent().essence_component.ratio, 2)
 	$Info/EssenceIcon/Essence.text = "[b]" + str(get_parent().essence_component.essence) + "[/b]/" + str(get_parent().essence_component.max_essence) + "esc"
-	$Info/CrystalIcon/Crystal.text = "[b]" + str(_G.current_run.crystals_collected) + "[/b]"
+	$Info/CrystalIcon/Crystal.text = "[b]" + str(_G.current_run.crystals_collected) + "[/b]shard" if _G.current_run.crystals_collected == 1 else "[b]" + str(_G.current_run.crystals_collected) + "[/b]shards"
 	$InteractionTooltip.visible = get_parent().can_interact
 	$InteractionTooltip.text = interact_tooltip
 	$InteractionTooltip/Description.text = interact_description

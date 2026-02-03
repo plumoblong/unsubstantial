@@ -60,7 +60,7 @@ func update(delta : float) -> void:
 	if not enabled: return
 	if get_parent().essence_component.alive:
 		input_dir = Input.get_vector("left", "right", "up", "down").normalized()
-		
+		moving = lerpf(moving, get_parent().velocity.length() / walk_speed * float(get_parent().is_on_floor() and not dash.dashing), 0.1)
 		if not dash.dashing: wish_dir = get_parent().global_transform.basis * Vector3(input_dir.x, .0, input_dir.y)
 		if noclip:
 			var spd : float = noclip_speed
@@ -101,15 +101,10 @@ func update(delta : float) -> void:
 					landed()
 				if not dash.dashing:
 					handle_ground(delta)
-				if input_dir.length() != 0.0:
-					moving = lerpf(moving, 1.0, 0.1)
-				else:
-					moving = lerpf(moving, 0.0, 0.1)
 				was_on_floor = true
 				speed_bonus = clampf(lerpf(speed_bonus, 1.0, 0.03), 0.24, 1.75)
 			else:
 				can_jump = false
-				moving = lerpf(moving, 0.0, 0.1)
 				if not dash.dashing:
 					handle_air(delta)
 				was_on_floor = false

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,ambient_light_disabled,ensure_correct_normals,unshaded;
+render_mode blend_mix,depth_draw_opaque,unshaded;
 uniform vec2 scroll_speed = vec2(3.0, 3.0);
 //uniform float static_intensity : hint_range(0.0, 1.0, 0.05) = 0.25;
 uniform vec3 color : source_color = vec3(1.0);

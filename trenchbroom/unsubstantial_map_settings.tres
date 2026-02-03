@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FuncGodotMapSettings" load_steps=8 format=3 uid="uid://c07h8g5oxasgv"]
+[gd_resource type="Resource" script_class="FuncGodotMapSettings" format=3 uid="uid://c07h8g5oxasgv"]
 
 [ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/world/tile_floor.png" id="1_xc068"]
 [ext_resource type="Resource" uid="uid://dxtt0gn2y6y4m" path="res://trenchbroom/unsubstantial_fgd.tres" id="2_sveto"]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://t41ot1nhnt07"]
+[gd_scene format=3 uid="uid://t41ot1nhnt07"]
 
 [ext_resource type="Script" uid="uid://b4fyi72hf3jb" path="res://src/menus/crystal_choose.gd" id="1_153j7"]
 [ext_resource type="Texture2D" uid="uid://dkuddb07m5y4j" path="res://images/glow_dither.png" id="2_bibjs"]
 [ext_resource type="Material" uid="uid://c4e8vymr51sw7" path="res://material/ether_overlay.tres" id="3_3t38p"]
-[ext_resource type="PackedScene" uid="uid://d385nyl04mn7c" path="res://prefab/menus/crystal_piece_1.tscn" id="3_euku5"]
-[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="4_euku5"]
+[ext_resource type="Texture2D" uid="uid://cxvt6el5g3tp5" path="res://textures/world/player_essence.png" id="4_euku5"]
 [ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="4_t7sn6"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="5_t7sn6"]
 [ext_resource type="Material" uid="uid://0gsbnjffxggx" path="res://material/ui_invert.tres" id="8_q61hg"]
@@ -63,18 +62,18 @@ width = 480
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q61hg"]
 blend_mode = 2
 
-[node name="CrystalChoose" type="CanvasLayer"]
+[node name="CrystalChoose" type="CanvasLayer" unique_id=1335997934]
 layer = 2
 script = ExtResource("1_153j7")
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="." unique_id=578880896]
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=1133997374]
 offset_right = 480.0
 offset_bottom = 270.0
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="Background"]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Background" unique_id=1675806063]
 modulate = Color(0.472845, 0.472845, 0.472845, 1)
 material = SubResource("CanvasItemMaterial_t7sn6")
 position = Vector2(218, -10)
@@ -87,7 +86,7 @@ trail_sections = 5
 trail_section_subdivisions = 5
 process_material = SubResource("ParticleProcessMaterial_popfq")
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="Background"]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Background" unique_id=957312885]
 modulate = Color(0.708186, 0.708186, 0.708186, 1)
 material = SubResource("CanvasItemMaterial_4fk76")
 position = Vector2(218, -10)
@@ -99,7 +98,7 @@ speed_scale = 0.25
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_37rmq")
 
-[node name="Sprite2D" type="Sprite2D" parent="Background"]
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1352041709]
 modulate = Color(0.454742, 0.454742, 0.454742, 1)
 material = SubResource("CanvasItemMaterial_gdmuk")
 scale = Vector2(1, 270)
@@ -107,27 +106,20 @@ texture = SubResource("GradientTexture1D_1dabs")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="CrystalPiece1" parent="." node_paths=PackedStringArray("linked") instance=ExtResource("3_euku5")]
-position = Vector2(144, 128)
-linked = NodePath(".")
-first = true
+[node name="Crystals" type="Node2D" parent="." unique_id=1888808479]
 
-[node name="CrystalPiece2" parent="." node_paths=PackedStringArray("linked") instance=ExtResource("3_euku5")]
-position = Vector2(336, 128)
-linked = NodePath("../CrystalPiece1")
-
-[node name="Text" type="Label" parent="."]
+[node name="Text" type="Label" parent="." unique_id=670891074]
 material = SubResource("CanvasItemMaterial_q61hg")
 offset_right = 480.0
 offset_bottom = 61.0
 theme_override_fonts/font = ExtResource("4_t7sn6")
 theme_override_font_sizes/font_size = 16
-text = "Choose Wisely..."
+text = "Choose wisely..."
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Shadow" type="Label" parent="Text"]
+[node name="Shadow" type="Label" parent="Text" unique_id=1091418098]
 modulate = Color(0.48299408, 0.48299408, 0.48299408, 1)
 material = SubResource("CanvasItemMaterial_q61hg")
 layout_mode = 0
@@ -137,11 +129,11 @@ offset_right = 481.0
 offset_bottom = 62.0
 theme_override_fonts/font = ExtResource("4_t7sn6")
 theme_override_font_sizes/font_size = 16
-text = "Choose Wisely..."
+text = "Choose wisely..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shadow2" type="Label" parent="Text"]
+[node name="Shadow2" type="Label" parent="Text" unique_id=303370962]
 modulate = Color(0.25341398, 0.25341398, 0.25341398, 1)
 material = SubResource("CanvasItemMaterial_q61hg")
 layout_mode = 0
@@ -151,11 +143,12 @@ offset_right = 482.0
 offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("4_t7sn6")
 theme_override_font_sizes/font_size = 16
-text = "Choose Wisely..."
+text = "Choose wisely..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Text2" type="Label" parent="."]
+[node name="Text2" type="Label" parent="." unique_id=1520803319]
+visible = false
 material = SubResource("CanvasItemMaterial_q61hg")
 offset_top = 208.0
 offset_right = 480.0
@@ -167,7 +160,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Shadow" type="Label" parent="Text2"]
+[node name="Shadow" type="Label" parent="Text2" unique_id=679605322]
 modulate = Color(0.48299408, 0.48299408, 0.48299408, 1)
 material = SubResource("CanvasItemMaterial_q61hg")
 layout_mode = 0
@@ -181,7 +174,7 @@ text = ". . ."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shadow2" type="Label" parent="Text2"]
+[node name="Shadow2" type="Label" parent="Text2" unique_id=1927754289]
 modulate = Color(0.25341398, 0.25341398, 0.25341398, 1)
 material = SubResource("CanvasItemMaterial_q61hg")
 layout_mode = 0
@@ -195,7 +188,7 @@ text = ". . ."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=306412492]
 texture_repeat = 2
 material = ExtResource("3_3t38p")
 offset_right = 480.0
@@ -205,10 +198,9 @@ texture = ExtResource("4_euku5")
 stretch_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="DarkMode" type="ColorRect" parent="."]
+[node name="DarkMode" type="ColorRect" parent="." unique_id=139411355]
 texture_repeat = 2
 material = ExtResource("8_q61hg")
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
-metadata/_edit_lock_ = true

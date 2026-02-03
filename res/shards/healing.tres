@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://csryy21ph85ds"]
+
+[ext_resource type="Texture2D" uid="uid://d1dgc3kwhwmli" path="res://images/item/shard/healing.png" id="1_3rk07"]
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_fsnt1"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_3rk07"]
+
+[sub_resource type="Resource" id="Resource_sfver"]
+script = ExtResource("1_fsnt1")
+statistic = "esc_mult"
+operator = 2
+value = 1.05
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_fsnt1"]
+script = ExtResource("1_fsnt1")
+statistic = "esc_mult"
+operator = 2
+value = 1.1
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_3rk07"]
+script = ExtResource("1_fsnt1")
+statistic = "esc_mult"
+operator = 2
+value = 1.25
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_r8t22"]
+script = ExtResource("1_fsnt1")
+statistic = "esc_mult"
+operator = 2
+value = 1.5
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_3rk07")
+stat_name = "Healing"
+image = ExtResource("1_3rk07")
+modulates = Dictionary[ExtResource("1_fsnt1"), int]({
+SubResource("Resource_sfver"): 12,
+SubResource("Resource_fsnt1"): 8,
+SubResource("Resource_3rk07"): 5,
+SubResource("Resource_r8t22"): 2
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

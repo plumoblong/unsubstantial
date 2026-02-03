@@ -2,7 +2,6 @@ extends Node3D
 class_name Game
 
 @onready var current_map : Node3D = get_node("Map") 
-@onready var item_pool : ItemPoolManager = get_node("ItemPoolManager")
 @onready var enemies  : Node = get_node("Enemies")
 @onready var pause_screen : Node2D = get_node("Pause/Node2D")
 @onready var chapter : ChapterManager = get_node("ChapterManager")
@@ -43,6 +42,7 @@ var pursuer_spawned : bool = false
 var enemy_count : int = 0
 var enemy_spawner_count : int = 0
 var enemy_multiplier : float = 1.0
+var difficulty_bonus : float = 1.0
 var enemies_killed : int = 0
 
 signal level_changing
@@ -56,7 +56,9 @@ func _ready() -> void:
 	_G.current_run.times_bought = 0
 	_G.current_run.times_looped = 0
 	_G.current_run.bosses_slained = 0
-	seed(int(Time.get_unix_time_from_system()))
+	if _G.run_seed == 0:
+		_G.run_seed = int(Time.get_unix_time_from_system())
+	seed(_G.run_seed)
 	if _G.starting_level == "":
 		change_map_autobuild("res://maps/ether.map")
 	else:
@@ -67,9 +69,9 @@ func _ready() -> void:
 func _process(_delta : float) -> void:
 	
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = 1 + sqrt(float(actual_stage - 1.0) * 0.13) * float(actual_stage)
+	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.4) * difficulty_bonus
 	$Label.text = "Difficulty: " + str(enemy_multiplier)
-	$Label.visible = _G.debug_mode
+	$Label.visible = _G.show_fps
 	in_ether = chapter.current == chapter.all[0]
 
 	if _G.debug_mode: print(enemy_count)
@@ -133,10 +135,7 @@ func change_map_autobuild(map_file_path : String) -> void:
 	current_map = map_instance
 	add_child(current_map)
 	current_map.build(map_file_path)
-	#if chapter.current != chapter.all[0]:
-		#in_ether = false
-	chapter.current = chapter.all[current_map.chapter_id]
-	
+
 	_G.player.global_position = Vector3.ZERO
 	_G.player.global_rotation = Vector3.ZERO
 	_G.player.velocity = Vector3.ZERO
@@ -191,6 +190,7 @@ func end_level(loop : bool = false) -> void:
 	level_changing.emit()
 	$AnimFix/Color.color = _G.get_color_darkmode(true, 0.0)
 	_G.tween($AnimFix/Color, "color", _G.get_color_darkmode(true, 1.0), 0.5)
+	switch_chapters()
 	stage += 1
 	actual_stage += 1
 	await get_tree().create_timer(0.75).timeout
@@ -219,3 +219,13 @@ func map_build_complete() -> void:
 func map_build_failed() -> void:
 	$AnimFix/Color.hide()
 	ending_level = false
+
+
+func timer_timeout() -> void:
+	_G.player.camera.screenshot()
+
+func switch_chapters() -> void:
+	match actual_stage:
+		0:
+			chapter.current = chapter.all[1]
+	stage = 1

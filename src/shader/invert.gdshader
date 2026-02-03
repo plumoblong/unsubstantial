@@ -11,8 +11,8 @@ void fragment(){
 
 	vec4 color = vec4(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, texture(TEXTURE, UV).a);
 	if (grayscale) {
-		COLOR = vec4(1.0 - (color.rbg * vec3(amount)),  color.a * alpha) * texture(TEXTURE, UV).rgba * modulate;
+		COLOR = vec4(alpha - (color.rbg * vec3(amount)),  color.a) * modulate;
 	} else {
-		COLOR = vec4(1.0 - (color.rgb  * vec3(amount)),  color.a * alpha) * texture(TEXTURE, UV).rgba * modulate;
+		COLOR = vec4(alpha - (color.rgb  * vec3(amount)),  color.a)  * modulate;
 	}
 }

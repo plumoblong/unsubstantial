@@ -9,7 +9,7 @@ class_name EnemySpawner
 	"spawn_delay" = 0.0,
 }
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 5
+const ENEMY_CAP : int = 3
 
 var spawned : bool = false
 var distance_to_spawn : float = 30.0
@@ -51,7 +51,10 @@ func _physics_process(_delta : float) -> void:
 	if Engine.get_physics_frames() % 10 != 0: return
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
 	if distance_to_player < distance_to_spawn:
-		if _G.player.is_on_floor(): spawn()
+		$RayCast3D.target_position = global_position.direction_to(_G.player.global_position).normalized() * -distance_to_player
+		if not $RayCast3D.is_colliding():
+			spawn()
+	
 
 func create_anim() -> void:
 	var anim : Node = SPAWN_ANIM.instantiate()

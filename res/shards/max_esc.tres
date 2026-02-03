@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://d1yp3jta2xwh8"]
+
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_ja2wj"]
+[ext_resource type="Texture2D" uid="uid://cg33r74aqmltj" path="res://images/item/shard/max_esc.png" id="1_ysmrf"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_ysmrf"]
+
+[sub_resource type="Resource" id="Resource_ja2wj"]
+script = ExtResource("1_ja2wj")
+statistic = "esc_max"
+value = 50.0
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_ysmrf"]
+script = ExtResource("1_ja2wj")
+statistic = "esc_max"
+value = 100.0
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_1enw1"]
+script = ExtResource("1_ja2wj")
+statistic = "esc_max"
+value = 200.0
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_bwijc"]
+script = ExtResource("1_ja2wj")
+statistic = "esc_max"
+value = 300.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_ysmrf")
+stat_name = "Max Essence"
+image = ExtResource("1_ysmrf")
+shop_cost = 50
+modulates = Dictionary[ExtResource("1_ja2wj"), int]({
+SubResource("Resource_ja2wj"): 12,
+SubResource("Resource_ysmrf"): 6,
+SubResource("Resource_1enw1"): 3,
+SubResource("Resource_bwijc"): 1
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

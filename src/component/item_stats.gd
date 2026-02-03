@@ -5,11 +5,13 @@ class_name ItemStats
 
 # These are the default stats for the player. They will be modified by items and shrines.
 
-var added_stats : Array[Dictionary]
+var added_stats : Array[Modulate]
 
+#only affects choosing the crystal shards
 var luck : int = 0
+var choices : int = 2
 
-var damage : int = 42
+var damage : int = 40
 var damage_mult : float = 1.0
 var dash_damage_mult : float = 1.25
 var bullet_damage_mult : float = 1.0
@@ -21,8 +23,8 @@ var crit_mult : float = 1.0
 
 var attack_speed : float = 1.0
 var attack_speed_mult : float = 1.0
-var bullet_atkspd : float = 0.75
-var dash_atkspd : float = 1.25
+var bullet_atkspd : float = 0.85
+var dash_atkspd : float = 1.3
 
 var size : float = 1.0
 
@@ -46,45 +48,9 @@ var actual_damage : int
 var actual_crit : float
 var actual_atkspd : float
 
-func add_stat(stat : String, to_add : float = 0.0, to_mult : float = 1.0) -> void:
-	match stat:
-		"Damage":
-			damage += int(to_add)
-			damage = int(damage * to_mult)
-		"Attack Speed":
-			attack_speed += to_add
-			attack_speed_mult *= to_mult
-		"Move Speed":
-			speed += to_add
-			speed *= to_mult
-		"Knockback":
-			knockback += to_add
-			knockback *= to_mult
-		"Max Essence":
-			esc_max += to_add
-			esc_max *= to_mult
-			p.essence_component.gain(int(to_add + (p.essence_component.essence * to_mult)))
-		"Healing":
-			esc_mult += to_add
-			esc_mult *= to_mult
-		"Defense":
-			defense += to_add
-			defense *= to_mult
-		"Bullet Count":
-			bullet.shots += int(to_add)
-			bullet.shots = int(bullet.shots * to_mult)
-		"Luck":
-			luck += int(to_add)
-			luck *= to_mult
-		"Bullet Range":
-			bullet.life_time += to_add
-			bullet.life_time *= to_mult
-		"Bullet Speed":
-			bullet.init_speed += to_add
-			bullet.life_time *= to_mult
-	_T.say("added " + stat)
-	added_stats.append({"Statistic" : stat, "Add Bonus" : to_add, "Mult Bonus" : to_mult})
-
+func add_stat(modulate : Modulate) -> void:
+	added_stats.push_front(modulate)
+	
 func update() -> void:
 	
 	actual_damage = int(damage * (damage_mult))
@@ -94,7 +60,7 @@ func update() -> void:
 	bullet.damage = (actual_damage * bullet_damage_mult) / (1 if bullet.shots <= 1 else int(float(bullet.shots) * 0.5))
 	bullet.fire_rate = bullet_atkspd / actual_atkspd
 	bullet.knockback = 24.0 * knockback
-	bullet.spread_angle = bullet.shots * 5.0
+	bullet.spread_angle = bullet.shots * 5
 	
 	p.shoot_component.config = bullet
 	p.shoot_component.crit_chance = actual_crit
@@ -116,3 +82,9 @@ func update() -> void:
 	_G.current_run.score = score_additive - score_substract
 	if _G.current_run.score > _G.save.high_score:
 		_G.save.high_score = _G.current_run.score
+		
+	for i : Modulate in added_stats:
+		if not i.stat_appended:
+			i.append(self)
+		else:
+			break

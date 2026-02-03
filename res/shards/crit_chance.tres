@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://6odjskauo8qw"]
+
+[ext_resource type="Texture2D" uid="uid://4x2itmyg1rb" path="res://images/item/shard/crit_chance.png" id="1_vyk3q"]
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_xaaji"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_vyk3q"]
+
+[sub_resource type="Resource" id="Resource_sfver"]
+script = ExtResource("1_xaaji")
+statistic = "crit_chance"
+operator = 2
+value = 1.1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_2t7kl"]
+script = ExtResource("1_xaaji")
+statistic = "crit_chance"
+operator = 2
+value = 1.25
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_h05d7"]
+script = ExtResource("1_xaaji")
+statistic = "crit_chance"
+operator = 2
+value = 1.5
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_lm05e"]
+script = ExtResource("1_xaaji")
+statistic = "crit_chance"
+operator = 2
+value = 2.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_vyk3q")
+stat_name = "Crit Chance"
+image = ExtResource("1_vyk3q")
+weight = 0.75
+shop_cost = 250
+modulates = Dictionary[ExtResource("1_xaaji"), int]({
+SubResource("Resource_sfver"): 10,
+SubResource("Resource_2t7kl"): 7,
+SubResource("Resource_h05d7"): 4,
+SubResource("Resource_lm05e"): 2
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

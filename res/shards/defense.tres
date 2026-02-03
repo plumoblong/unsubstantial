@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="StatShard" format=3 uid="uid://7ulcyju0ei4q"]
+
+[ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_58hmv"]
+[ext_resource type="Texture2D" uid="uid://dy11ajbl5ylek" path="res://images/item/shard/defense.png" id="1_wqesx"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_r4npq"]
+
+[sub_resource type="Resource" id="Resource_sfver"]
+script = ExtResource("1_58hmv")
+statistic = "defense"
+operator = 2
+value = 1.1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_fsnt1"]
+script = ExtResource("1_58hmv")
+statistic = "defense"
+operator = 2
+value = 1.2
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_3rk07"]
+script = ExtResource("1_58hmv")
+statistic = "defense"
+operator = 2
+value = 1.4
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_r8t22"]
+script = ExtResource("1_58hmv")
+statistic = "defense"
+operator = 2
+value = 1.75
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[resource]
+script = ExtResource("2_r4npq")
+stat_name = "Defense"
+image = ExtResource("1_wqesx")
+modulates = Dictionary[ExtResource("1_58hmv"), int]({
+SubResource("Resource_sfver"): 12,
+SubResource("Resource_fsnt1"): 8,
+SubResource("Resource_3rk07"): 5,
+SubResource("Resource_r8t22"): 2
+})
+metadata/_custom_type_script = "uid://yu3n1cklhslt"

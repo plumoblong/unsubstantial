@@ -1,4 +1,4 @@
-[gd_resource type="PlaneMesh" load_steps=3 format=3 uid="uid://6rlb33ae8e1r"]
+[gd_resource type="PlaneMesh" format=3 uid="uid://6rlb33ae8e1r"]
 
 [ext_resource type="Texture2D" uid="uid://75bfio0kx2i" path="res://images/sparkle_small.png" id="1_4sewa"]
 

@@ -19,11 +19,11 @@ class_name BulletSettings
 @export var knockback : float = 24.0
 
 @export_subgroup("other funny properties")
-@export var piercing : bool = false
+@export var pierces : int = 0
 @export var homing : float = 0.0
 @export var homing_on_player : bool = false
 @export var homing_interlpolation : float = 0.75
-@export var bouncy : bool = false
+@export var bounciness : float = 0.0
 @export var spectral : bool = false
 @export var stun : float = 0.1
 
@@ -36,7 +36,7 @@ class_name BulletSettings
 
 @export_subgroup("speed")
 @export var init_speed : float = 48.0
-@export var fall_speed : float = 2.0
+@export var fall_speed : float = 0.1
 @export var life_time : float = 1.0
 
 @export_subgroup("parrying")

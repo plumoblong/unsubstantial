@@ -45,6 +45,7 @@ func _ready() -> void:
 
 func update(t : float) -> void:
 	#h_offset = viewbob_x * viewbob_amount
+	#anim.speed_scale = player.velocity.length() / player.stats.speed
 	var vb = viewbob_amount * float(_G.config.view_bob)
 	fov_offsets.z = vb  * 15.0 * multiplier
 	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * vb 
@@ -89,9 +90,11 @@ func screenshot() -> void:
 	var image : Image = get_viewport().get_texture().get_image()
 	image.resize(1920, 1080, Image.INTERPOLATE_NEAREST)
 	ss_count += 1
-	var image_path : String = get_user_photos_path() + "/unsubstantial/capture_" + str(ss_count) + ".png"
+	var date : Dictionary = Time.get_datetime_dict_from_system(false)
+	var date_string : String = str(date.year) + "_" + str(date.month) + "_" + str(date.day) + "_" + str(date.hour) + "-" + str(date.minute) + "-" + str(date.second)
+	var image_path : String = get_user_photos_path() + "/unsubstantial/capture_" + date_string + ".png"
 	image.save_png(image_path)
-	_G.game.chat.add_message("Saved screenshot as capture_" + str(ss_count) + ".png", Color.DEEP_PINK)
+	_G.game.chat.add_message("Saved screenshot as capture_" + date_string + ".png", Color.DEEP_PINK)
 	_G.game.chat.show()
 
 #func motion_blur_update() -> void:

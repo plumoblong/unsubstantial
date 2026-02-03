@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bkqg70cb7gxl7"]
+[gd_scene format=3 uid="uid://bkqg70cb7gxl7"]
 
 [ext_resource type="Script" uid="uid://c7d7w64t28gfx" path="res://src/class/player.gd" id="1_colme"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
@@ -208,7 +208,10 @@ metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 script = ExtResource("5_qqhji")
 size_mult = 1.25
 spread_angle = 0.0
+knockback = 32.0
+pierces = 2
 homing = 0.25
+fall_speed = 0.25
 life_time = 0.5
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
@@ -228,8 +231,8 @@ height = 1.5
 viewport_path = NodePath("Head/SubViewport")
 
 [sub_resource type="Curve" id="Curve_rko62"]
-_data = [Vector2(0, 0), 0.0, 25.1396, 0, 0, Vector2(0.0625, 0.625), 3.45663, 1.76241, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 0.75), -1.70505, -1.70505, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
+_data = [Vector2(0, 0), 0.0, 2.9502583, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 0.75), -1.70505, -1.70505, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 metadata/_snap_count = 64
 
 [sub_resource type="CurveTexture" id="CurveTexture_uss2g"]
@@ -238,14 +241,14 @@ curve = SubResource("Curve_rko62")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_awlim"]
 emission_shape = 1
 emission_sphere_radius = 50.0
-angle_min = -168.1
-angle_max = 308.2
 spread = 180.0
 initial_velocity_min = 1.0
-initial_velocity_max = 2.0
-gravity = Vector3(0, -0.5, 0)
+initial_velocity_max = 3.0
+gravity = Vector3(0, -0.1, 0)
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_uss2g")
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 1.0
 
 [sub_resource type="Curve" id="Curve_uadq4"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.21342623, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -289,20 +292,20 @@ distance_fade_max_distance = 3.0
 material = SubResource("StandardMaterial3D_blxug")
 orientation = 2
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=1499817254]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 script = ExtResource("1_colme")
 
-[node name="Hitbox" type="CollisionShape3D" parent="."]
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=182380019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_uadq4")
 debug_color = Color(1, 0, 0, 1)
 
-[node name="DeathCamera" type="Camera3D" parent="."]
+[node name="DeathCamera" type="Camera3D" parent="." unique_id=1251413674]
 transform = Transform3D(1, 0, 0, 0, 0.947423, 0.319985, 0, -0.319985, 0.947423, 0, 2.38705, 2.0446)
 current = true
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=294872625]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2155579, 0.4072353)
 visible = false
 material_override = SubResource("StandardMaterial3D_dbo8y")
@@ -311,10 +314,10 @@ billboard = 2
 texture_filter = 0
 texture = ExtResource("7_j4gl1")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1482572399]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1.825, 0)
 
-[node name="SubViewport" type="SubViewport" parent="Head"]
+[node name="SubViewport" type="SubViewport" parent="Head" unique_id=403614849]
 handle_input_locally = false
 use_debanding = true
 use_occlusion_culling = true
@@ -332,12 +335,12 @@ size = Vector2i(480, 270)
 render_target_clear_mode = 1
 render_target_update_mode = 4
 
-[node name="MotionBlurCam" type="Camera3D" parent="Head/SubViewport"]
+[node name="MotionBlurCam" type="Camera3D" parent="Head/SubViewport" unique_id=1507912389]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 1.825, 0)
 current = true
 far = 2000.0
 
-[node name="Swoosh" type="AnimatedSprite3D" parent="Head"]
+[node name="Swoosh" type="AnimatedSprite3D" parent="Head" unique_id=546911925]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -1, 0)
 visible = false
 offset = Vector2(0, 24)
@@ -349,28 +352,26 @@ sprite_frames = SubResource("SpriteFrames_222w4")
 frame = 12
 frame_progress = 1.0
 
-[node name="Camera" type="Camera3D" parent="Head"]
+[node name="Camera" type="Camera3D" parent="Head" unique_id=984251525]
 doppler_tracking = 1
 current = true
 script = ExtResource("2_t4gyb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera"]
-libraries = {
-&"": SubResource("AnimationLibrary_ic3gn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera" unique_id=1693941162]
+libraries/ = SubResource("AnimationLibrary_ic3gn")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1572910204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48258, 0)
 light_energy = 0.7
 light_volumetric_fog_energy = 0.0
 omni_range = 15.0
 
-[node name="ShootComponent" type="Node" parent="."]
+[node name="ShootComponent" type="Node" parent="." unique_id=108388983]
 script = ExtResource("3_lq4sc")
 shoot_delay = 0.04
 config = SubResource("Resource_ju7jx")
 
-[node name="PlayerMovement" type="Node" parent="." node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
+[node name="PlayerMovement" type="Node" parent="." unique_id=1545350429 node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
 script = ExtResource("6_qqhji")
 hitbox = NodePath("../Hitbox")
 dash = NodePath("../DashComponent")
@@ -379,64 +380,64 @@ jump_sfx = NodePath("../JumpSFX")
 jump_buffer_timer = NodePath("../JumpBufferTimer")
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
-[node name="EssenceComponent" type="Node" parent="."]
+[node name="EssenceComponent" type="Node" parent="." unique_id=1886786574]
 script = ExtResource("1_jvg2f")
 die_threshold = 0
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("movement_component")]
+[node name="KnockbackComponent" type="Node" parent="." unique_id=384435963 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("5_gk4kr")
 movement_component = NodePath("../PlayerMovement")
 y_multiplier = 0.4
 
-[node name="ItemStats" type="Node" parent="."]
+[node name="ItemStats" type="Node" parent="." unique_id=405505347]
 script = ExtResource("9_m21cj")
 bullet = SubResource("Resource_xed6q")
 
-[node name="DashComponent" type="Node" parent="."]
+[node name="DashComponent" type="Node" parent="." unique_id=1322946939]
 script = ExtResource("6_4p10s")
 dash_time = 0.1
 cooldown = 1.1
 jump_height = 0.8
 dash_time_tresh = 8.0
 
-[node name="Query" type="Area3D" parent="."]
+[node name="Query" type="Area3D" parent="." unique_id=1874605582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 810
 collision_mask = 810
 
-[node name="Hitbox" type="CollisionShape3D" parent="Query"]
+[node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=881845703]
 transform = Transform3D(1, 0, 0, 0, 0.9999572, -0.009250113, 0, 0.009250113, 0.9999572, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_yih3o")
 debug_color = Color(1, 0, 0.8666668, 0.7647059)
 debug_fill = false
 
-[node name="DashQuery" type="Area3D" parent="."]
+[node name="DashQuery" type="Area3D" parent="." unique_id=629772925]
 collision_layer = 810
 collision_mask = 810
 script = ExtResource("7_d7qgd")
 damage = 200
-knockback_strength = 64.0
+knockback_strength = 96.0
 knockback_y_strength = 0.1
 stun_time = 0.6
 parry = true
 
-[node name="Hitbox" type="CollisionShape3D" parent="DashQuery"]
+[node name="Hitbox" type="CollisionShape3D" parent="DashQuery" unique_id=333303855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_uadq4")
 debug_color = Color(1, 0, 0, 1)
 
-[node name="InteractionQuery" type="Area3D" parent="."]
+[node name="InteractionQuery" type="Area3D" parent="." unique_id=1236938087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00144917, 1, -0.00112629)
 collision_layer = 8
 collision_mask = 8
 
-[node name="Hitbox" type="CollisionShape3D" parent="InteractionQuery"]
+[node name="Hitbox" type="CollisionShape3D" parent="InteractionQuery" unique_id=587793018]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.479403, -1.26424)
 shape = SubResource("CapsuleShape3D_8t5r2")
 debug_color = Color(1, 0, 0.866667, 0)
 debug_fill = false
 
-[node name="MotionBlur" type="TextureRect" parent="."]
+[node name="MotionBlur" type="TextureRect" parent="." unique_id=333387838]
 modulate = Color(1, 1, 1, 0.49803922)
 offset_right = 480.0
 offset_bottom = 270.0
@@ -444,18 +445,18 @@ localize_numeral_system = false
 texture = SubResource("ViewportTexture_uadq4")
 expand_mode = 1
 
-[node name="HUD" parent="." instance=ExtResource("17_dbo8y")]
+[node name="HUD" parent="." unique_id=25760681 instance=ExtResource("17_dbo8y")]
 
-[node name="Ambient" type="GPUParticles3D" parent="."]
+[node name="Ambient" type="GPUParticles3D" parent="." unique_id=962078150]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-amount = 256
-lifetime = 8.0
+amount = 128
+lifetime = 5.0
 randomness = 1.0
-draw_order = 1
+draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_awlim")
 draw_pass_1 = ExtResource("9_5ax3k")
 
-[node name="FastParticle" type="GPUParticles3D" parent="."]
+[node name="FastParticle" type="GPUParticles3D" parent="." unique_id=1135202769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 emitting = false
 amount = 16
@@ -464,11 +465,11 @@ draw_order = 1
 process_material = SubResource("ParticleProcessMaterial_v641o")
 draw_pass_1 = SubResource("PlaneMesh_4adam")
 
-[node name="ShootSFX" type="AudioStreamPlayer" parent="."]
+[node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=1165803921]
 stream = ExtResource("14_m35d1")
 bus = &"SFX1"
 
-[node name="JumpSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="JumpSFX" type="AudioStreamPlayer3D" parent="." unique_id=241430846]
 stream = ExtResource("36_a1dr2")
 volume_db = -10.0
 max_db = -1.0
@@ -476,7 +477,7 @@ bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 attenuation_filter_db = 0.0
 
-[node name="LandSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="LandSFX" type="AudioStreamPlayer3D" parent="." unique_id=132223123]
 stream = ExtResource("37_a1dr2")
 volume_db = -10.0
 max_db = -1.0
@@ -484,37 +485,37 @@ bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 attenuation_filter_db = 0.0
 
-[node name="DashSFX" type="AudioStreamPlayer" parent="."]
+[node name="DashSFX" type="AudioStreamPlayer" parent="." unique_id=922496574]
 stream = ExtResource("38_jdfku")
 volume_db = -3.0
 bus = &"SFX1"
 
-[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+[node name="HitSFX" type="AudioStreamPlayer" parent="." unique_id=1319393519]
 stream = ExtResource("16_38g7u")
 bus = &"SFX1"
 
-[node name="XPPickupSFX" type="AudioStreamPlayer" parent="."]
+[node name="XPPickupSFX" type="AudioStreamPlayer" parent="." unique_id=1049144362]
 stream = ExtResource("27_cwgh7")
 volume_db = 6.0
 max_polyphony = 3
 bus = &"SFX1"
 
-[node name="JumpBufferTimer" type="Timer" parent="."]
+[node name="JumpBufferTimer" type="Timer" parent="." unique_id=621087226]
 process_callback = 0
 wait_time = 0.02
 one_shot = true
 ignore_time_scale = true
 
-[node name="PlayerTarget" parent="." instance=ExtResource("41_jdfku")]
+[node name="PlayerTarget" parent="." unique_id=1115094477 instance=ExtResource("41_jdfku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visible = false
 target_distance = 0.15
 smoothing = 0.5
 
-[node name="PlayerDeathAnim" parent="." instance=ExtResource("26_uadq4")]
+[node name="PlayerDeathAnim" parent="." unique_id=1927554531 instance=ExtResource("26_uadq4")]
 visible = false
 
-[node name="MapHazardCast" parent="." node_paths=PackedStringArray("esc") instance=ExtResource("27_yih3o")]
+[node name="MapHazardCast" parent="." unique_id=80243204 node_paths=PackedStringArray("esc") instance=ExtResource("27_yih3o")]
 esc = NodePath("../EssenceComponent")
 
 [connection signal="reseted" from="ShootComponent" to="." method="shoot_component_reseted"]

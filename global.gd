@@ -36,6 +36,8 @@ var config : Dictionary = {
 	},
 }
 
+var run_seed : int = 0
+
 var current_run : Dictionary = {
 	
 	die_reason = "You got shot.",
@@ -246,10 +248,9 @@ func values_match(values : Array, expected_value):
 func choose_from_chance(values : Dictionary):
 	var weighted_list : Array = []
 	for key in values.keys():
-		for i in values[key]:
+		for i in max(values[key], 1):
 			weighted_list.append(key)
-	if not weighted_list.is_empty():
-		return weighted_list.pick_random() 
+	return weighted_list.pick_random() 
 
 func get_achievement(a : achievement, count_to_save : bool = true) -> void:
 	if save.achieved.has(a): return
