@@ -1986,6 +1986,74 @@
 }
 // entity 62
 {
+"classname" "ent_spawn"
+"origin" "-1880 -2472 248"
+"enemy" "enemy_melee"
+"distance_to_spawn" "30"
+}
+// entity 63
+{
+"classname" "ent_spawn"
+"origin" "-1720 -3736 168"
+"enemy" "guardian"
+"distance_to_spawn" "30"
+}
+// entity 64
+{
+"classname" "ent_spawn"
+"origin" "-1896 -3656 168"
+"enemy" "enemy"
+"distance_to_spawn" "30"
+}
+// entity 65
+{
+"classname" "ent_spawn"
+"origin" "-1560 -3672 168"
+"enemy" "enemy_melee"
+"distance_to_spawn" "30"
+}
+// entity 66
+{
+"classname" "vine_gen"
+"origin" "-1352 632 488"
+}
+// entity 67
+{
+"classname" "vine_gen"
+"origin" "-1832 104 488"
+}
+// entity 68
+{
+"classname" "vine_gen"
+"origin" "-1672 -632 488"
+}
+// entity 69
+{
+"classname" "vine_gen"
+"origin" "-808 -40 376"
+}
+// entity 70
+{
+"classname" "vine_gen"
+"origin" "-1784 -1304 600"
+}
+// entity 71
+{
+"classname" "vine_gen"
+"origin" "-1720 -2760 600"
+}
+// entity 72
+{
+"classname" "vine_gen"
+"origin" "-1736 -3784 600"
+}
+// entity 73
+{
+"classname" "vine_gen"
+"origin" "-2328 -120 488"
+}
+// entity 74
+{
 "classname" "func_group"
 "_tb_type" "_tb_layer"
 "_tb_name" "Entities"
@@ -2091,84 +2159,84 @@
 ( -3264 1216 80 ) ( -3264 1920 80 ) ( -3264 1920 -176 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 63
+// entity 75
 {
 "classname" "misc_prop"
 "origin" "-1352 -472 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 64
+// entity 76
 {
 "classname" "misc_prop"
 "origin" "-2232 -1160 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 65
+// entity 77
 {
 "classname" "misc_prop"
 "origin" "-1448 -1336 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 66
+// entity 78
 {
 "classname" "misc_prop"
 "origin" "-1312 656 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 67
+// entity 79
 {
 "classname" "misc_prop"
 "origin" "-1576 344 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 68
+// entity 80
 {
 "classname" "misc_prop"
 "origin" "-2344 -360 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 69
+// entity 81
 {
 "classname" "misc_prop"
 "origin" "-2184 696 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 70
+// entity 82
 {
 "classname" "misc_prop"
 "origin" "-2184 368 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 71
+// entity 83
 {
 "classname" "misc_prop"
 "origin" "-2376 -3048 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 72
+// entity 84
 {
 "classname" "misc_prop"
 "origin" "-1448 -2840 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 73
+// entity 85
 {
 "classname" "misc_prop"
 "origin" "-1200 1888 -136"
 "prop_name" "poison_waterfall"
 "_tb_layer" "1"
 }
-// entity 74
+// entity 86
 {
 "classname" "misc_prop"
 "origin" "-1280 1248 -136"

@@ -310,6 +310,7 @@ pathfinding/max_threads=-1
 [physics]
 
 3d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=4
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 common/enable_object_picking=false
@@ -317,30 +318,26 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 [rendering]
 
-occlusion_culling/bvh_build_quality=1
 textures/canvas_textures/default_texture_filter=0
-rendering_device/driver.windows="d3d12"
-rendering_device/driver.ios="vulkan"
-rendering_device/driver.macos="vulkan"
 renderer/rendering_method.mobile="forward_plus"
 driver/threads/thread_model=2
-lights_and_shadows/directional_shadow/size=1024
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+driver/depth_prepass/enable=false
 textures/default_filters/use_nearest_mipmap_filter=true
 environment/ssao/quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
-anti_aliasing/quality/use_debanding=true
 textures/decals/filter=0
-occlusion_culling/occlusion_rays_per_thread=256
+occlusion_culling/occlusion_rays_per_thread=128
 environment/glow/upscale_mode=0
 environment/screen_space_reflection/half_size=false
 environment/subsurface_scattering/subsurface_scattering_quality=0
+environment/volumetric_fog/volume_size=32
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 occlusion_culling/use_occlusion_culling=true
-lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=3
-lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=3
-lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=4
-lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=5
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=0
 environment/defaults/default_environment="uid://dspdyqrgm5xt3"

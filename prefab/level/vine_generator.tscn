@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8njpgustr126"]
+
+[ext_resource type="Script" uid="uid://cgns7d1ilqk1m" path="res://src/level/vine_generator.gd" id="1_hkrt3"]
+
+[node name="VineGenerator" type="Node3D" unique_id=1233770146]
+script = ExtResource("1_hkrt3")

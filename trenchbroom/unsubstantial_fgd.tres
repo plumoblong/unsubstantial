@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=23 format=3 uid="uid://dxtt0gn2y6y4m"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" format=3 uid="uid://dxtt0gn2y6y4m"]
 
 [ext_resource type="Script" uid="uid://drlmgulwbjwqu" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_o81sr"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_xpdw1"]
@@ -21,7 +21,7 @@
 [ext_resource type="Resource" uid="uid://c1k2lotbx3g2d" path="res://trenchbroom/entities/misc_prop.tres" id="18_f7rqf"]
 [ext_resource type="Resource" uid="uid://dktw2gn6mofpv" path="res://trenchbroom/entities/level_end.tres" id="19_ql0er"]
 [ext_resource type="Resource" uid="uid://dvqc0ry7ydqrd" path="res://trenchbroom/entities/func_oneway.tres" id="20_e2a35"]
-[ext_resource type="Resource" uid="uid://1w810kmasv60" path="res://trenchbroom/entities/rising_poison.tres" id="21_e2a35"]
+[ext_resource type="Resource" uid="uid://btgfy7fj51osd" path="res://trenchbroom/entities/vine_gen.tres" id="21_e2a35"]
 
 [resource]
 script = ExtResource("1_o81sr")

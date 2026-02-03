@@ -166,6 +166,7 @@ shape = SubResource("CylinderShape3D_e85lb")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1059362997]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.25, 0)
+visible = false
 light_color = Color(1, 0.32681847, 0.6897959, 1)
 light_energy = 0.8
 light_indirect_energy = 2.0

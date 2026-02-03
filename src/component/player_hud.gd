@@ -3,6 +3,27 @@ class_name PlayerHUD
 
 @onready var crosshair : Node2D = $Crosshair
 @onready var hitmarker : Sprite2D = $Hitmarker
+@onready var weapon : Node = $Weapon
+@onready var vignette : Node = $Vignette
+@onready var movement_info : Node = $MovementInfo
+@onready var info_score : RichTextLabel = $Info/Score
+@onready var info_essence : RichTextLabel = $Info/EssenceIcon/Essence
+@onready var info_crystal : RichTextLabel = $Info/CrystalIcon/Crystal
+@onready var interaction_tooltip : Control = $InteractionTooltip
+@onready var interaction_description : RichTextLabel = $InteractionTooltip/Description
+@onready var debug_panel : Node2D = $Debug
+@onready var hitmarker_sfx : AudioStreamPlayer = $HitmarkerSFX
+
+# Movement info nodes
+@onready var movement_label : Label = $MovementInfo/Label
+@onready var movement_label2 : Label = $MovementInfo/Label2
+@onready var movement_keys : Array = [
+	$MovementInfo/Key1,
+	$MovementInfo/Key2,
+	$MovementInfo/Key3,
+	$MovementInfo/Key4,
+	$MovementInfo/Key5
+]
 
 var hitmarker_alpha : float = 0.0
 
@@ -20,67 +41,82 @@ var health_lerp : float = 0.0
 
 var last_hitmarker_tween : Tween
 
-func update(viewbob : Vector2, spd : float) -> void:
-	hitmarker.material.set_shader_parameter("alpha", hitmarker_alpha)
-	$MovementInfo.visible = show_movement_info
-	$Weapon.modulate = get_parent().stats.bullet.color
-	$Weapon.offset.x = ((viewbob.x * 24) * spd)
-	$Weapon.offset.y = ((viewbob.y * 32) * spd) + (clamp(get_parent().camera.height_offset * 0.5, -1.0, 2.0) * 32.0)
-	
-	$Vignette.modulate.a = (get_parent().movement_component.speed_bonus - 0.9)
-	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
-	$Info/Score.text = "[b]" + str(int(round(score_lerp))) + "[/b] pts"
-	
-	#$Info/EssenceIcon.speed_scale = pow(1.1 - get_parent().essence_component.ratio, 2)
-	$Info/EssenceIcon/Essence.text = "[b]" + str(get_parent().essence_component.essence) + "[/b]/" + str(get_parent().essence_component.max_essence) + "esc"
-	$Info/CrystalIcon/Crystal.text = "[b]" + str(_G.current_run.crystals_collected) + "[/b]shard" if _G.current_run.crystals_collected == 1 else "[b]" + str(_G.current_run.crystals_collected) + "[/b]shards"
-	$InteractionTooltip.visible = get_parent().can_interact
-	$InteractionTooltip.text = interact_tooltip
-	$InteractionTooltip/Description.text = interact_description
-	
-	$Debug.visible = _G.debug_mode
-	$MovementInfo/Label2.visible = show_movement_var
+# Cached parent references
+var player : Player
+var player_camera : Camera3D
+var player_essence : EssenceComponent
+var player_movement : PlayerMoveComponent
+var player_stats : ItemStats
+var player_dash : DashComponent
 
-	if Engine.get_physics_frames() % 3 == 0:
-		$MovementInfo/Label2.text = "BASIS: " + str(_G.vector_to_string(-get_parent().camera.head.global_transform.basis.z)) + "\nDASH VECTOR: " + _G.vector_to_string(get_parent().dash_component.final_vector) + "\nVEL: " + _G.vector_to_string(get_parent().velocity) + "\nCAN JUNP: " + str(get_parent().movement_component.can_jump).to_upper() + "\nDASHING: " + str(get_parent().dash_component.dashing).to_upper()
-		$MovementInfo/Label.text = str(snappedf((get_parent().velocity * Vector3(1.0, 0.0, 1.0)).length(), 0.01)) + " m/s\n" + str(snappedf(get_parent().movement_component.speed_bonus, 0.01)) + "  BONUS"
+# Cached strings to reduce allocations
+const BOLD_START : String = "[b]"
+const BOLD_END : String = "[/b]"
+const PTS_SUFFIX : String = " pts"
+const ESC_SUFFIX : String = "esc"
+const SHARD_SINGULAR : String = "shard"
+const SHARDS_PLURAL : String = "shards"
+
+func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
+	player = get_parent()
+	player_camera = player.camera
+	player_essence = player.essence_component
+	player_movement = player.movement_component
+	player_stats = player.stats
+	player_dash = player.dash_component
+
+func update(viewbob : Vector2, spd : float) -> void:
+	if player == null: return
+	hitmarker.material.set_shader_parameter("alpha", hitmarker_alpha)
+	movement_info.visible = show_movement_info
+	weapon.modulate = player_stats.bullet.color
+	weapon.offset.x = (viewbob.x * 24) * spd
+	weapon.offset.y = ((viewbob.y * 32) * spd) + (clamp(player_camera.height_offset * 0.5, -1.0, 2.0) * 32.0)
 	
-	$MovementInfo/Key1.visible = Input.is_action_pressed("up")
-	$MovementInfo/Key2.visible = Input.is_action_pressed("right")
-	$MovementInfo/Key3.visible = Input.is_action_pressed("down")
-	$MovementInfo/Key4.visible = Input.is_action_pressed("left")
-	$MovementInfo/Key5.visible = Input.is_action_pressed("jump")
+	vignette.modulate.a = player_movement.speed_bonus - 0.9
+	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
+	info_score.text = BOLD_START + str(int(round(score_lerp))) + BOLD_END + PTS_SUFFIX
+	
+	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
+	
+	var crystals : int = _G.current_run.crystals_collected
+	info_crystal.text = BOLD_START + str(crystals) + BOLD_END + (SHARD_SINGULAR if crystals == 1 else SHARDS_PLURAL)
+	
+	interaction_tooltip.visible = player.can_interact
+	interaction_tooltip.text = interact_tooltip
+	interaction_description.text = interact_description
+	
+	debug_panel.visible = _G.debug_mode
+	movement_label2.visible = show_movement_var
+	
+	if Engine.get_physics_frames() % 3 == 0:
+		movement_label2.text = "BASIS: " + str(_G.vector_to_string(-player_camera.head.global_transform.basis.z)) + "\nDASH VECTOR: " + _G.vector_to_string(player_dash.final_vector) + "\nVEL: " + _G.vector_to_string(player.velocity) + "\nCAN JUNP: " + str(player_movement.can_jump).to_upper() + "\nDASHING: " + str(player_dash.dashing).to_upper()
+		movement_label.text = str(snappedf((player.velocity * Vector3(1.0, 0.0, 1.0)).length(), 0.01)) + " m/s\n" + str(snappedf(player_movement.speed_bonus, 0.01)) + "  BONUS"
+	
+	# Update movement keys visibility
+	movement_keys[0].visible = Input.is_action_pressed("up")
+	movement_keys[1].visible = Input.is_action_pressed("right")
+	movement_keys[2].visible = Input.is_action_pressed("down")
+	movement_keys[3].visible = Input.is_action_pressed("left")
+	movement_keys[4].visible = Input.is_action_pressed("jump")
 
 func hitmark() -> void:
-	if last_hitmarker_tween: last_hitmarker_tween.kill()
+	if last_hitmarker_tween:
+		last_hitmarker_tween.kill()
 	hitmarker_alpha = 1.0
-	$HitmarkerSFX.pitch_scale = randf_range(0.8, 1.0)
-	get_parent().movement_component.speed_bonus *= 1.1
-	$HitmarkerSFX.play()
-	#_G.game.wait()
-	last_hitmarker_tween = _G.tween(self, "hitmarker_alpha", 0, 0.7 / get_parent().stats.actual_atkspd)
-		
+	hitmarker_sfx.pitch_scale = randf_range(0.8, 1.0)
+	player_movement.speed_bonus *= 1.1
+	hitmarker_sfx.play()
+	last_hitmarker_tween = _G.tween(self, "hitmarker_alpha", 0, 0.7 / player_stats.actual_atkspd)
+
 func hide_hand(speed : float = 0.25) -> void:
 	hand_hidden = true
-	_G.tween($Weapon, "position", Vector2($Weapon.position.x, 336.0), speed, Tween.TRANS_SINE)
+	_G.tween(weapon, "position", Vector2(weapon.position.x, 336.0), speed, Tween.TRANS_SINE)
 	await get_tree().create_timer(speed).timeout
-	$Weapon.visible = false
-	return
+	weapon.visible = false
 
 func show_hand(speed : float = 0.25) -> void:
 	hand_hidden = false
-	$Weapon.visible = true
-	_G.tween($Weapon, "position", Vector2($Weapon.position.x, 256.0), speed * get_parent().stats.bullet.fire_rate * get_parent().stats.bullet.fire_rate_mult, Tween.TRANS_SINE)
-	return
-
-#func hide_punchhand(speed : float = 0.2) -> void:
-	#returnd
-	#punchhand_hidden = true
-	#_G.tween($PunchHand, "position", Vector2($PunchHand.position.x, 350), speed * clamp(get_parent().stat.dash.cooldown[0], 0.8, 1.0), Tween.TRANS_SINE, Tween.EASE_IN)
-	#return
-	
-#func show_punchhand(speed : float = 0.1) -> void:
-	#return
-	#punchhand_hidden = false
-	#_G.tween($PunchHand, "position", Vector2($PunchHand.position.x, 280), speed * clamp(get_parent().stat.dash.cooldown[0], 0.8, 1.0), Tween.TRANS_SINE, Tween.EASE_IN)
-	#return
+	weapon.visible = true
+	_G.tween(weapon, "position", Vector2(weapon.position.x, 256.0), speed * player_stats.bullet.fire_rate * player_stats.bullet.fire_rate_mult, Tween.TRANS_SINE)

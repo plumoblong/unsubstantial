@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cildjulf2bpn6"]
+
+[ext_resource type="Texture2D" uid="uid://bebbq6xgaa6pv" path="res://images/map/glowing_vines.png" id="1_lycgd"]
+[ext_resource type="Script" uid="uid://cxqery11rhtax" path="res://src/level/vine.gd" id="2_efj5g"]
+[ext_resource type="Texture2D" uid="uid://dc7obljmqb63h" path="res://images/map/glowing_moss.png" id="3_efj5g"]
+
+[node name="Vine" type="Sprite3D" unique_id=897978709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+centered = false
+offset = Vector2(-16, -132)
+pixel_size = 0.06
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_lycgd")
+hframes = 6
+frame = 5
+script = ExtResource("2_efj5g")
+
+[node name="Grass" type="Node3D" parent="." unique_id=1425348355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Grass1" type="Sprite3D" parent="Grass" unique_id=634616641]
+visibility_range_end = 40.0
+visibility_range_end_margin = 30.0
+visibility_range_fade_mode = 1
+centered = false
+offset = Vector2(-16, -32)
+flip_v = true
+pixel_size = 0.04
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_efj5g")
+hframes = 3
+
+[node name="Grass2" type="Sprite3D" parent="Grass" unique_id=1406498359]
+visibility_range_end = 40.0
+visibility_range_end_margin = 30.0
+visibility_range_fade_mode = 1
+centered = false
+offset = Vector2(-16, -32)
+flip_v = true
+pixel_size = 0.04
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_efj5g")
+hframes = 3
+
+[node name="Grass3" type="Sprite3D" parent="Grass" unique_id=977666197]
+visibility_range_end = 40.0
+visibility_range_end_margin = 30.0
+visibility_range_fade_mode = 1
+centered = false
+offset = Vector2(-16, -32)
+flip_v = true
+pixel_size = 0.04
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_efj5g")
+hframes = 3
+
+[node name="Light" type="OmniLight3D" parent="." unique_id=2001409199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
+omni_range = 10.0

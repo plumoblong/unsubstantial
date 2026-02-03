@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dwxkl6ilg2ynr"]
 
-[ext_resource type="Script" uid="uid://ioi1tokifblw" path="res://src/class/enemy_human.gd" id="1_02b0y"]
+[ext_resource type="Script" uid="uid://b1mpyff3hn02u" path="res://src/entity/enemy/enemy_human.gd" id="1_mxx8l"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_mxx8l"]
 [ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_suopw"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_qi521"]
@@ -32,7 +32,7 @@ radius = 0.66
 collision_layer = 4
 collision_mask = 4
 slide_on_ceiling = false
-script = ExtResource("1_02b0y")
+script = ExtResource("1_mxx8l")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=879000962]
 light_color = Color(1, 0, 0, 1)

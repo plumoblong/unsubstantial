@@ -20,62 +20,74 @@ signal can_dash_now
 
 var final_vector : Vector3 = Vector3.ZERO
 
+# Cached values
+var parent : Node
+var tree : SceneTree
+
+func _ready() -> void:
+	parent = get_parent()
+	tree = get_tree()
+
 func update() -> void:
 	if not enabled: return
-	if can_reset and get_parent().is_on_floor():
+	if can_reset and parent.is_on_floor():
 		can_dash = true
 		can_dash_now.emit()
 		can_reset = false
 
 func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
-	if not enabled: return
-	await get_tree().create_timer(delay).timeout
-	if can_dash:
-		if auto_reset:
-			reset()
-		dashing = true
-		just_dashed = true
-		dashed.emit()
-		
-		if mc is MovementComponent:
-			mc.friction = mc.floor_friction * 3.0
-			var old_speed : float = mc.speed
-			mc.speed = dash_speed
-			if direction == Vector3.ZERO:
-				mc.direction = -get_parent().transform.basis.z
-			else:
-				mc.direction = direction
-			if not mc.on_floor:
-				mc.vel.y = mc.jump_speed * jump_height
-			await get_tree().create_timer(dash_time / 10.0).timeout
-			just_dashed = false
-			mc.speed = old_speed
-			await get_tree().create_timer(dash_time / dash_time_tresh).timeout
-			dashing = false
-		elif mc is PlayerMoveComponent:
-			var speed : float = mc.walk_speed * (mc.ground_cap)
-			
-			#get_parent().velocity = Vector3.ZERO\
-			var basis : Vector3 = -get_parent().camera.global_transform.basis.z.normalized()
-			if get_parent().is_on_floor():
-				get_parent().velocity = Vector3(basis.x * dash_speed, 0.0, basis.z * dash_speed)
-				#just_dashed = false
-				#await get_tree().create_timer(dash_time).timeout
-				#dashing = false
-				#mc.ground_friction = base_friction
-			else:
-				get_parent().velocity = Vector3(basis.x * dash_speed, basis.y * speed, basis.z * dash_speed)
-			just_dashed = false
-			await get_tree().create_timer(dash_time).timeout
-			get_parent().velocity *= end_velocity_multiplier
-			dashing = false
-			#get_parent().velocity = final_vector
+	if not enabled or not can_dash: return
+	
+	if delay > 0.0:
+		await tree.create_timer(delay).timeout
+	
+	if auto_reset:
+		reset()
+	
+	dashing = true
+	just_dashed = true
+	dashed.emit()
+	
+	if mc is MovementComponent:
+		_dash_movement_component(mc, direction)
+	elif mc is PlayerMoveComponent:
+		_dash_player_component(mc)
 
+func _dash_movement_component(mc : MovementComponent, direction : Vector3) -> void:
+	mc.friction = mc.floor_friction * 3.0
+	var old_speed : float = mc.speed
+	mc.speed = dash_speed
+	
+	if direction == Vector3.ZERO:
+		mc.direction = -parent.transform.basis.z
 	else:
-		return
+		mc.direction = direction
+	
+	if not mc.on_floor:
+		mc.vel.y = mc.jump_speed * jump_height
+	
+	await tree.create_timer(dash_time / 10.0).timeout
+	just_dashed = false
+	mc.speed = old_speed
+	await tree.create_timer(dash_time / dash_time_tresh).timeout
+	dashing = false
+
+func _dash_player_component(mc : PlayerMoveComponent) -> void:
+	var speed : float = mc.walk_speed * mc.ground_cap
+	var basis : Vector3 = -parent.camera.global_transform.basis.z.normalized()
+	
+	if parent.is_on_floor():
+		parent.velocity = Vector3(basis.x * dash_speed, 0.0, basis.z * dash_speed)
+	else:
+		parent.velocity = Vector3(basis.x * dash_speed, basis.y * speed, basis.z * dash_speed)
+	
+	just_dashed = false
+	await tree.create_timer(dash_time).timeout
+	parent.velocity *= end_velocity_multiplier
+	dashing = false
 
 func reset() -> void:
-	if can_dash: can_dash = false
-	await get_tree().create_timer(cooldown).timeout
+	if can_dash:
+		can_dash = false
+	await tree.create_timer(cooldown).timeout
 	can_reset = true
-	return

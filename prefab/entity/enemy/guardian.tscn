@@ -26,9 +26,10 @@ fire_rate = 0.75
 shots = 2
 spread_angle = 20.0
 knockback = 32.0
-bounciness = 1.0
+bounciness = 1.1
 init_speed = 36.0
-life_time = 1.75
+fall_speed = 0.2
+life_time = 2.0
 parried_speed_multiplier = 1.25
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 

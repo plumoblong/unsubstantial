@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0h6wgry1k7yc"]
+[gd_scene format=3 uid="uid://c0h6wgry1k7yc"]
 
 [ext_resource type="Script" uid="uid://duua0dhgdmd3i" path="res://global.gd" id="1_0nuii"]
 [ext_resource type="Texture2D" uid="uid://cdxnw413lf5cj" path="res://images/debug/color_test2.png" id="2_74nqk"]
@@ -24,11 +24,11 @@ shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
 
-[node name="Global" type="CanvasLayer"]
+[node name="Global" type="CanvasLayer" unique_id=895008726]
 layer = 10
 script = ExtResource("1_0nuii")
 
-[node name="Funny" type="Sprite2D" parent="."]
+[node name="Funny" type="Sprite2D" parent="." unique_id=1334686801]
 visible = false
 texture_filter = 1
 texture_repeat = 1
@@ -36,22 +36,22 @@ scale = Vector2(0.9375, 0.52734375)
 texture = ExtResource("2_74nqk")
 centered = false
 
-[node name="Flares" type="Node" parent="."]
+[node name="Flares" type="Node" parent="." unique_id=1635563859]
 
-[node name="Flare" type="ColorRect" parent="."]
+[node name="Flare" type="ColorRect" parent="." unique_id=378190921]
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Shader" type="ColorRect" parent="."]
+[node name="Shader" type="ColorRect" parent="." unique_id=947613574]
 material = SubResource("ShaderMaterial_bsn0b")
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 
-[node name="FPS" type="Label" parent="."]
+[node name="FPS" type="Label" parent="." unique_id=1005697652]
 material = SubResource("ShaderMaterial_7k62m")
 offset_left = 1.0
 offset_top = 1.0
@@ -60,7 +60,7 @@ offset_bottom = 6.0
 theme_override_font_sizes/font_size = 8
 text = "2137 FPS"
 
-[node name="Version" type="Label" parent="."]
+[node name="Version" type="Label" parent="." unique_id=133672967]
 modulate = Color(1, 1, 1, 0.180392)
 offset_left = 437.0
 offset_top = 1.0
@@ -70,14 +70,14 @@ theme_override_font_sizes/font_size = 8
 text = "0.95"
 horizontal_alignment = 2
 
-[node name="Debug" type="Node2D" parent="."]
+[node name="Debug" type="Node2D" parent="." unique_id=131262262]
 
-[node name="UIHover" type="AudioStreamPlayer" parent="."]
+[node name="UIHover" type="AudioStreamPlayer" parent="." unique_id=275419281]
 stream = ExtResource("5_hhif3")
 volume_db = -15.0
 bus = &"SFX2"
 
-[node name="UIAccept" type="AudioStreamPlayer" parent="."]
+[node name="UIAccept" type="AudioStreamPlayer" parent="." unique_id=1440890358]
 stream = ExtResource("6_74nqk")
 volume_db = -15.0
 bus = &"SFX2"

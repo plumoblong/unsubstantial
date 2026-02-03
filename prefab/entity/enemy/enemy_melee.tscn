@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://duxyfg6i08iui"]
 
-[ext_resource type="Script" uid="uid://bpxruysqcwpf6" path="res://src/class/enemy_melee.gd" id="1_f2mgi"]
+[ext_resource type="Script" uid="uid://d228tte3rosor" path="res://src/entity/enemy/enemy_melee.gd" id="1_0s5mw"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_ei8lu"]
 [ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_olih5"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_5hjl1"]
@@ -27,7 +27,7 @@ radius = 0.66
 collision_layer = 4
 collision_mask = 4
 slide_on_ceiling = false
-script = ExtResource("1_f2mgi")
+script = ExtResource("1_0s5mw")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1444135213]
 light_color = Color(1, 0, 0, 1)

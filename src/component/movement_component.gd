@@ -1,9 +1,6 @@
 extends Component
 class_name MovementComponent
 
-
-
-#@export var max_speed : float = 20.0
 @export var speed : float = 10.0
 @export var speed_up : float = 6.0
 @export var speed_down : float = 9.0
@@ -27,8 +24,22 @@ var is_using_force : bool = false
 
 signal jumped
 
+# Cached calculations
+var speed_threshold : float
+var friction_double : float
+var friction_half : float
+
+func _ready() -> void:
+	_update_cached_values()
+
+func _update_cached_values() -> void:
+	speed_threshold = speed - (speed / 6.0)
+	friction_double = floor_friction * 2.0
+	friction_half = floor_friction / 2.0
+
 func update(delta : float, on_ceiling : bool = false) -> void:
 	if not enabled: return
+	
 	if not on_floor:
 		vel.y -= fall_speed * delta
 		friction = air_friction
@@ -40,41 +51,33 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 	
 	if direction:
 		if on_floor:
-			moving = lerpf(moving, 1.0, friction * 2.0)
-			if actual_speed < speed - (speed / 6.0):
+			moving = lerpf(moving, 1.0, friction_double)
+			if actual_speed < speed_threshold:
 				actual_speed += delta * speed_up
-			elif actual_speed > speed - (speed / 6.0):
+			elif actual_speed > speed_threshold:
 				actual_speed -= delta * speed_down
 		else:
 			moving = lerpf(moving, 0.0, friction)
-			#if vel.y >= 0.0:
-				#if speed < max_speed:
-					#speed += delta * speed_up * 0.75
-		#if speed > max_speed:
-			#speed -= delta * speed_down * 2.0
-		vel.x = lerpf(vel.x, direction.x * actual_speed, friction)	
+		
+		vel.x = lerpf(vel.x, direction.x * actual_speed, friction)
 		vel.z = lerpf(vel.z, direction.z * actual_speed, friction)
 	else:
 		actual_speed -= delta * speed_down
 		vel.x = lerpf(vel.x, 0.0, friction)
 		vel.z = lerpf(vel.z, 0.0, friction)
-		moving = lerpf(moving, 0.0, friction / 2.0)
+		moving = lerpf(moving, 0.0, friction_half)
 	
-	#speed = clamp(speed, default_speed, 256.0)
 	if on_ceiling:
 		vel.y = fall_speed
-	
+
 func update_flying(delta : float) -> void:
 	if direction:
 		moving = lerpf(moving, 1.0, air_friction)
-		#if speed < max_speed - (max_speed / 7.5):
-			#speed += (delta * speed_up)
 		vel.x = lerpf(vel.x, direction.x * speed, air_friction)
 		vel.z = lerpf(vel.z, direction.z * speed, air_friction)
 		vel.y = lerpf(vel.y, direction.y * speed, air_friction)
 	else:
 		moving = lerpf(moving, 0.0, air_friction)
-		#speed -= delta * speed_down
 		vel.x = lerpf(vel.x, 0.0, air_friction)
 		vel.z = lerpf(vel.z, 0.0, air_friction)
 		vel.y = lerpf(vel.y, 0.0, air_friction)
@@ -82,6 +85,5 @@ func update_flying(delta : float) -> void:
 func jump(amt : float = jump_speed) -> void:
 	if not enabled: return
 	can_jump = false
-	
 	vel.y = amt
 	jumped.emit()

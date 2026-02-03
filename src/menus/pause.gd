@@ -1,36 +1,71 @@
 extends Node2D
 
+@onready var main_screen : Node = $Main
+@onready var options_screen : Node = $Options
+@onready var statistics_screen : Node = $Statistics
+@onready var restart_confirm_screen : Node = $RestartConfirm
+@onready var chapter_info : RichTextLabel = $Main/ChapterInfo
+@onready var restart_button : Button = $Main/Restart
+@onready var stats_label : RichTextLabel = $Statistics/Stats
+
+# Cached references
+var player_stats : ItemStats
+var player_essence : EssenceComponent
+var chapter : ChapterManager
+
+# Cached strings to reduce allocations
+const BOLD_START : String = "[b][i]- "
+const BOLD_END : String = " -[/i][/b]\n"
+const ETHER_SUFFIX : String = "\n\n[i]ANOTHER BEGINNING"
+const CHAPTER_PREFIX : String = "\n\n[i]CHAPTER "
+const STAGE_PREFIX : String = " STAGE "
+
 var screen : int = 0
+
+func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
+	player_stats = _G.player.stats
+	player_essence = _G.player.essence_component
+	chapter = _G.game.chapter
 
 func _process(_delta : float) -> void:
 	if not visible: return
+	if chapter == null: return
+	
 	if Input.is_action_just_pressed("escape"):
-		if $Options.screen == 0:
+		if options_screen.screen == 0:
 			screen = 0
 	
-	$Main.visible = screen == 0
-	$Options.visible = screen == 1
-	$Statistics.visible = screen == 2
-	$RestartConfirm.visible = screen == 3
+	# Update screen visibility
+	main_screen.visible = screen == 0
+	options_screen.visible = screen == 1
+	statistics_screen.visible = screen == 2
+	restart_confirm_screen.visible = screen == 3
 	
+	# Update chapter info
+	var current_chapter = chapter.current
 	if _G.game.in_ether:
-		$Main/ChapterInfo.text = "[b][i]- " + _G.game.chapter.current.chapter_name + " -[/i][/b]\n" + _G.game.chapter.current.description + "\n\n" + "[i]ANOTHER BEGINNING"
+		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + ETHER_SUFFIX
 	else:
-		$Main/ChapterInfo.text = "[b][i]- " + _G.game.chapter.current.chapter_name + " -[/i][/b]\n" + _G.game.chapter.current.description + "\n\n" + "[i]CHAPTER " + str(_G.game.chapter.current.id) + " STAGE " + str(_G.game.stage)
-	$Main/Restart.disabled = _G.game.in_ether
+		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + CHAPTER_PREFIX + str(current_chapter.id) + STAGE_PREFIX + str(_G.game.stage)
 	
+	restart_button.disabled = _G.game.in_ether
+	
+	# Update statistics screen
 	if screen == 2:
-		$Statistics/Stats.text = "Crystals Shards Collected: " + str(_G.player.stats.added_stats.size()) + \
-		"\n\nDamage: " + str(_G.player.stats.actual_damage) + \
-		" ESC\nAttack Speed: " + str(int(_G.player.stats.actual_atkspd * 100.0)) + \
-		"%\nMove Speed: " + str(snappedf(_G.player.stats.speed, 0.1)) + \
-		"m/s\n\nMax Essence: " + str(_G.player.stats.esc_max) + \
-		" ESC\nEssence Healing: " + str(int(10.0 * _G.player.essence_component.heal_multiplier)) + \
-		" ESC\nDefense: " + str(snappedf(_G.player.stats.defense, 0.1)) + \
-		"\n\nKnockback: " + str(int(_G.player.stats.knockback * 100.0)) + \
-		"%\nCritical Chance: " + str(int(_G.player.stats.crit_chance)) + \
-		"%\nLuck: " + str(_G.player.stats.luck)
-		
+		_update_statistics()
+
+func _update_statistics() -> void:
+	stats_label.text = "Crystals Shards Collected: " + str(player_stats.added_stats.size()) + \
+		"\n\nDamage: " + str(player_stats.actual_damage) + \
+		" ESC\nAttack Speed: " + str(int(player_stats.actual_atkspd * 100.0)) + \
+		"%\nMove Speed: " + str(snappedf(player_stats.speed, 0.1)) + \
+		"m/s\n\nMax Essence: " + str(player_stats.esc_max) + \
+		" ESC\nEssence Healing: " + str(int(10.0 * player_essence.heal_multiplier)) + \
+		" ESC\nDefense: " + str(snappedf(player_stats.defense, 0.1)) + \
+		"\n\nKnockback: " + str(int(player_stats.knockback * 100.0)) + \
+		"%\nCritical Chance: " + str(int(player_stats.crit_chance)) + \
+		"%\nLuck: " + str(player_stats.luck)
 
 func continue_pressed() -> void:
 	get_parent().hide()
@@ -40,7 +75,7 @@ func restart_pressed() -> void:
 
 func options_pressed() -> void:
 	screen = 1
-	
+
 func exit_pressed() -> void:
 	_G.change_scene("res://scene/menu.tscn")
 
