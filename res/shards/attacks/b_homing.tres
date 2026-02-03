@@ -8,8 +8,6 @@
 script = ExtResource("1_738qq")
 statistic = "homing"
 bullet_set = true
-operator = 2
-value = 1.25
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -17,8 +15,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("1_738qq")
 statistic = "homing"
 bullet_set = true
-operator = 2
-value = 1.5
+value = 2.5
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -26,8 +23,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("1_738qq")
 statistic = "homing"
 bullet_set = true
-operator = 2
-value = 2.0
+value = 5.0
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 

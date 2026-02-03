@@ -209,7 +209,6 @@ script = ExtResource("5_qqhji")
 size_mult = 1.25
 spread_angle = 0.0
 knockback = 32.0
-pierces = 2
 homing = 0.25
 fall_speed = 0.25
 life_time = 0.5

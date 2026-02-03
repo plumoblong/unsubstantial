@@ -2,8 +2,8 @@ extends Interaction
 class_name UnstableCrystal
 
 var poolpool : Dictionary[String, int] = {
-	"res://res/shardpool/0.tres" : 9,
-	"res://res/shardpool/1.tres" : 3
+	"res://res/shardpool/0.tres" : 5,
+	"res://res/shardpool/1.tres" : clampf(1 + _G.player.stats.luck / 5, 1, 3),
 }
 
 @export var func_godot_properties : Dictionary = {

@@ -18,7 +18,7 @@ var bullet_damage_mult : float = 1.0
 
 var knockback : float = 1.0
 
-var crit_chance : float = 1.0
+var crit_chance : float = 0.0
 var crit_mult : float = 1.0
 
 var attack_speed : float = 1.0
@@ -50,7 +50,8 @@ var actual_atkspd : float
 
 func add_stat(modulate : Modulate) -> void:
 	added_stats.push_front(modulate)
-	
+	modulate.append(self)
+
 func update() -> void:
 	
 	actual_damage = int(damage * (damage_mult))
@@ -82,9 +83,3 @@ func update() -> void:
 	_G.current_run.score = score_additive - score_substract
 	if _G.current_run.score > _G.save.high_score:
 		_G.save.high_score = _G.current_run.score
-		
-	for i : Modulate in added_stats:
-		if not i.stat_appended:
-			i.append(self)
-		else:
-			break

@@ -228,4 +228,3 @@ func switch_chapters() -> void:
 	match actual_stage:
 		0:
 			chapter.current = chapter.all[1]
-	stage = 1
