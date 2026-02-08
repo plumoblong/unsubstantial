@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhlg2cwi8we73"]
+[gd_scene format=3 uid="uid://dhlg2cwi8we73"]
 
 [ext_resource type="Script" uid="uid://dvsk6p4j2ls0s" path="res://src/entity/gateway.gd" id="1_tnxjf"]
 [ext_resource type="Texture2D" uid="uid://bftjgqicpqfig" path="res://images/entity/door.png" id="2_a3it0"]
@@ -7,10 +7,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_tnxjf"]
 size = Vector3(2, 3, 0.5)
 
-[node name="Doorway" type="Area3D"]
+[node name="Doorway" type="Area3D" unique_id=1255954548]
 script = ExtResource("1_tnxjf")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1674622966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60173, 0)
 centered = false
 offset = Vector2(-16, -32)
@@ -18,17 +18,17 @@ pixel_size = 0.05
 texture_filter = 0
 texture = ExtResource("2_a3it0")
 
-[node name="Hitbox" type="CollisionShape3D" parent="."]
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=1220959049]
 transform = Transform3D(1, 0.000644174, -0.000169511, -0.000644295, 1, -0.000691155, 0.00016905, 0.000691268, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_tnxjf")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1314685374]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 light_indirect_energy = 2.0
 omni_range = 10.0
 omni_attenuation = 0.5
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1163235126]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 stream = ExtResource("3_tnxjf")
 volume_db = -3.78

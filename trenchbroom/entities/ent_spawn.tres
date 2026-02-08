@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://djhhounr3qago"]
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://djhhounr3qago"]
 
 [ext_resource type="PackedScene" uid="uid://cv7q6vgmketme" path="res://prefab/entity/level/enemy_spawner.tscn" id="1_v1rw3"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_b5xmi"]

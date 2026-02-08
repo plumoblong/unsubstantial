@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ruui4a3p4otb"]
+[gd_scene format=3 uid="uid://ruui4a3p4otb"]
 
 [ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="1_ekk7n"]
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="2_jtats"]
@@ -18,10 +18,10 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[node name="Statistics" type="Node2D"]
+[node name="Statistics" type="Node2D" unique_id=59219854]
 material = ExtResource("1_ekk7n")
 
-[node name="Header" type="RichTextLabel" parent="."]
+[node name="Header" type="RichTextLabel" parent="." unique_id=279976837]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
 offset_top = 28.0
@@ -32,13 +32,13 @@ theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[center][wave]Statistics"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1309144298]
 visible = false
 position = Vector2(4, 4)
 texture = ExtResource("6_x7mk6")
 centered = false
 
-[node name="Stats" type="RichTextLabel" parent="."]
+[node name="Stats" type="RichTextLabel" parent="." unique_id=957326127]
 material = SubResource("ShaderMaterial_7vwyn")
 clip_contents = false
 offset_left = 128.0

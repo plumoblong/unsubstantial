@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqrpg8nr6annb"]
+[gd_scene format=3 uid="uid://dqrpg8nr6annb"]
 
 [ext_resource type="Texture2D" uid="uid://c1d0j5md0wx5k" path="res://images/ui/check_icons1.png" id="1_lkutc"]
 [ext_resource type="Texture2D" uid="uid://rgsuj8w4ep4l" path="res://images/ui/check_icons0.png" id="2_lbxny"]
@@ -25,7 +25,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vg5fs"]
 
-[node name="BoolButton" type="CheckBox"]
+[node name="BoolButton" type="CheckBox" unique_id=2013139457]
 use_parent_material = true
 offset_left = 188.0
 offset_top = 80.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dovrexvfpfqjp"]
+[gd_scene format=3 uid="uid://dovrexvfpfqjp"]
 
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="1_4cq6u"]
 [ext_resource type="Script" uid="uid://gupw21wq2mfx" path="res://src/menus/pause.gd" id="1_pq3u6"]
@@ -18,29 +18,29 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[node name="Pause" type="CanvasLayer"]
+[node name="Pause" type="CanvasLayer" unique_id=500622813]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1915458041]
 material = ExtResource("6_82fug")
 script = ExtResource("1_pq3u6")
 
-[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+[node name="ColorRect2" type="ColorRect" parent="Node2D" unique_id=1828171789]
 visible = false
 offset_right = 480.0
 offset_bottom = 272.0
 color = Color(1, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="ColorRect" type="ColorRect" parent="Node2D" unique_id=1561393876]
 offset_right = 480.0
 offset_bottom = 272.0
 color = Color(0, 0, 0, 0.564706)
 
-[node name="Main" type="Node2D" parent="Node2D"]
+[node name="Main" type="Node2D" parent="Node2D" unique_id=1554593729]
 visible = false
 use_parent_material = true
 position = Vector2(-4, 36)
 
-[node name="Continue" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+[node name="Continue" parent="Node2D/Main" unique_id=1815381217 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
 offset_top = 66.0
@@ -51,7 +51,7 @@ theme_override_font_sizes/font_size = 6
 text = "Continue"
 alignment = 1
 
-[node name="Statistics" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+[node name="Statistics" parent="Node2D/Main" unique_id=779973404 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
 offset_top = 78.0
@@ -62,7 +62,7 @@ theme_override_font_sizes/font_size = 6
 text = "Inventory"
 alignment = 1
 
-[node name="Restart" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+[node name="Restart" parent="Node2D/Main" unique_id=1750864993 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
 offset_top = 90.0
@@ -73,7 +73,7 @@ theme_override_font_sizes/font_size = 6
 text = "Restart"
 alignment = 1
 
-[node name="Options" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+[node name="Options" parent="Node2D/Main" unique_id=1338030900 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
 offset_top = 102.0
@@ -84,7 +84,7 @@ theme_override_font_sizes/font_size = 6
 text = "Options"
 alignment = 1
 
-[node name="Exit" parent="Node2D/Main" instance=ExtResource("3_35y48")]
+[node name="Exit" parent="Node2D/Main" unique_id=352898548 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_left = 4.0
 offset_top = 114.0
@@ -95,7 +95,7 @@ theme_override_font_sizes/font_size = 6
 text = "Exit"
 alignment = 1
 
-[node name="ChapterInfo" type="RichTextLabel" parent="Node2D/Main"]
+[node name="ChapterInfo" type="RichTextLabel" parent="Node2D/Main" unique_id=1257345569]
 use_parent_material = true
 clip_contents = false
 offset_left = 4.0
@@ -119,16 +119,16 @@ The Begginning
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Options" parent="Node2D" instance=ExtResource("4_1b2f7")]
+[node name="Options" parent="Node2D" unique_id=660777894 instance=ExtResource("4_1b2f7")]
 visible = false
 
-[node name="Statistics" parent="Node2D" instance=ExtResource("10_k4c6p")]
+[node name="Statistics" parent="Node2D" unique_id=2086002278 instance=ExtResource("10_k4c6p")]
 visible = false
 
-[node name="RestartConfirm" type="Node2D" parent="Node2D"]
+[node name="RestartConfirm" type="Node2D" parent="Node2D" unique_id=1381063349]
 use_parent_material = true
 
-[node name="Name" type="RichTextLabel" parent="Node2D/RestartConfirm"]
+[node name="Name" type="RichTextLabel" parent="Node2D/RestartConfirm" unique_id=1322966350]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
 offset_top = 100.0
@@ -141,7 +141,7 @@ text = "Do you really want to restart your run?"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="RestYes" parent="Node2D/RestartConfirm" instance=ExtResource("3_35y48")]
+[node name="RestYes" parent="Node2D/RestartConfirm" unique_id=1161609179 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_top = 132.0
 offset_right = 480.0
@@ -151,7 +151,7 @@ theme_override_font_sizes/font_size = 6
 text = "Yes!"
 alignment = 1
 
-[node name="RestNo" parent="Node2D/RestartConfirm" instance=ExtResource("3_35y48")]
+[node name="RestNo" parent="Node2D/RestartConfirm" unique_id=1974264354 instance=ExtResource("3_35y48")]
 use_parent_material = true
 offset_top = 148.0
 offset_right = 480.0

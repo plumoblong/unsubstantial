@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://ejc57i5gkl1c"]
+[gd_scene format=4 uid="uid://ejc57i5gkl1c"]
 
 [ext_resource type="Script" uid="uid://cyjqdampc4pe5" path="res://src/trenchbroom/func_oneway.gd" id="1_niq03"]
 [ext_resource type="Script" uid="uid://8v6xqtkat4pv" path="res://src/level/rising_poison.gd" id="1_pj438"]
@@ -22,17 +22,17 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gwryx"]
 points = PackedVector3Array(240, 0.9999999, 240, 240, -1.0000001, 240, -240, 0.9999999, 240, -240, -1.0000001, 240, 240, 0.9999999, -240, 240, -1.0000001, -240, -240, 0.9999999, -240, -240, -1.0000001, -240)
 
-[node name="RisingPoison" type="Node3D"]
+[node name="RisingPoison" type="Node3D" unique_id=2125189013]
 script = ExtResource("1_pj438")
 
-[node name="Poison" type="StaticBody3D" parent="."]
+[node name="Poison" type="StaticBody3D" parent="." unique_id=254378033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9999999, 0)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_niq03")
 
-[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="Poison"]
+[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="Poison" unique_id=587925508]
 mesh = SubResource("ArrayMesh_fckmi")
 
-[node name="entity_1_brush_0_collision_shape" type="CollisionShape3D" parent="Poison"]
+[node name="entity_1_brush_0_collision_shape" type="CollisionShape3D" parent="Poison" unique_id=964765412]
 shape = SubResource("ConvexPolygonShape3D_gwryx")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjxjdq0k8hhxp"]
+[gd_scene format=3 uid="uid://cjxjdq0k8hhxp"]
 
 [ext_resource type="Material" uid="uid://c37u5yfdhlgle" path="res://textures/world/poison.tres" id="1_qo158"]
 
@@ -8,7 +8,7 @@ subdivide_width = 96
 subdivide_height = 96
 subdivide_depth = 73
 
-[node name="MeshInstance3D" type="MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" unique_id=9830602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202942, 0.324158, -2.81705)
 material_override = ExtResource("1_qo158")
 ignore_occlusion_culling = true

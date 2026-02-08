@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3brxruvi15bl"]
+[gd_scene format=3 uid="uid://b3brxruvi15bl"]
 
 [ext_resource type="Script" uid="uid://tqkvetak6ua3" path="res://src/entity/map/falling_platform.gd" id="1_ao6pn"]
 [ext_resource type="Texture2D" uid="uid://co03ou6m5vcpq" path="res://textures/world/essence.png" id="2_e1mxe"]
@@ -99,38 +99,36 @@ _data = {
 &"appear": SubResource("Animation_67gae")
 }
 
-[node name="FallingPlatform" type="StaticBody3D"]
+[node name="FallingPlatform" type="StaticBody3D" unique_id=112828465]
 script = ExtResource("1_ao6pn")
 
-[node name="Outline" type="CSGBox3D" parent="."]
+[node name="Outline" type="CSGBox3D" parent="." unique_id=327790297]
 transparency = 0.75
 flip_faces = true
 size = Vector3(9.9, 3, 9.9)
 material = SubResource("StandardMaterial3D_oisd7")
 
-[node name="Crate" type="CSGBox3D" parent="."]
+[node name="Crate" type="CSGBox3D" parent="." unique_id=1810910853]
 size = Vector3(9.5, 2.5, 9.5)
 material = SubResource("StandardMaterial3D_gxoqf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=81437293]
 shape = SubResource("BoxShape3D_4iwm0")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=1285680449]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1491851879]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09191, 0)
 shape = SubResource("BoxShape3D_lgiwn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_yv252")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1735712440]
+libraries/ = SubResource("AnimationLibrary_yv252")
 
-[node name="ForEnemies" type="StaticBody3D" parent="."]
+[node name="ForEnemies" type="StaticBody3D" parent="." unique_id=1385068069]
 collision_layer = 254
 collision_mask = 254
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ForEnemies"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ForEnemies" unique_id=2020254874]
 shape = SubResource("BoxShape3D_4iwm0")
 
 [connection signal="body_entered" from="Area3D" to="." method="area_3d_body_entered"]

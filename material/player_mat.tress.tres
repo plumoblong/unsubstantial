@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://wiwiprlsejji"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://wiwiprlsejji"]
 
 [ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_7ws70"]
 [ext_resource type="Texture2D" uid="uid://dmllxu5e0ctan" path="res://textures/world/poison_g.png" id="2_f8x33"]

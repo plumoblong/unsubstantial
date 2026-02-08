@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0uboyn5x81e3"]
+[gd_scene format=3 uid="uid://d0uboyn5x81e3"]
 
 [ext_resource type="Script" uid="uid://bj6vb0fg0oo6d" path="res://src/entity/shrine_time.gd" id="1_p8h3h"]
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="2_i0tsy"]
@@ -47,12 +47,12 @@ size = Vector3(1.5, 2.5, 1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4210m"]
 
-[node name="Shrine" type="Area3D"]
+[node name="Shrine" type="Area3D" unique_id=2048871077]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_p8h3h")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1318703918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68, 0)
 modulate = Color(0.619608, 0.568627, 0.74902, 1)
 pixel_size = 0.03
@@ -61,23 +61,23 @@ double_sided = false
 texture_filter = 0
 texture = ExtResource("5_ge0id")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=2039282581]
 layers = 7
 material_override = SubResource("StandardMaterial3D_g2kh4")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=715693204]
 size = Vector3(1.2, 0.6, 1.2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=635131488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 size = Vector3(1.4, 0.2, 1.4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=209002805]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 shape = SubResource("BoxShape3D_8c3ws")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1825904748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 1.6, 0)
 material_override = SubResource("StandardMaterial3D_4210m")
 transparency = 1.0

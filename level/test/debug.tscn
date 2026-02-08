@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cbquk88xq6dqs"]
+[gd_scene format=3 uid="uid://cbquk88xq6dqs"]
 
 [ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_osxnd"]
 [ext_resource type="Material" uid="uid://bhxd3sfg8q482" path="res://textures/world/tile_floor.tres" id="2_a265m"]
-[ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="4_kancn"]
+[ext_resource type="PackedScene" uid="uid://d27hum87eioec" path="res://prefab/entity/item_stall.tscn" id="4_kancn"]
 [ext_resource type="PackedScene" uid="uid://ch4cgolek2p1t" path="res://prefab/entity/level/shrine_essence.tscn" id="8_8ub2n"]
 [ext_resource type="PackedScene" uid="uid://bkhdly50ktf8t" path="res://prefab/entity/fire.tscn" id="8_ii2li"]
 [ext_resource type="Script" uid="uid://0sjwmbhopehj" path="res://src/level/loop_run.gd" id="8_ymy3u"]
@@ -55,11 +55,11 @@ _data = {
 &"show": SubResource("Animation_usmp7")
 }
 
-[node name="time" type="NavigationRegion3D"]
+[node name="time" type="NavigationRegion3D" unique_id=1181407827]
 navigation_mesh = SubResource("NavigationMesh_mlh16")
 script = ExtResource("1_osxnd")
 
-[node name="CSGMesh3D" type="CSGBox3D" parent="."]
+[node name="CSGMesh3D" type="CSGBox3D" parent="." unique_id=1256392102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -24.253)
 use_collision = true
 collision_layer = 7
@@ -67,133 +67,131 @@ collision_mask = 7
 size = Vector3(100, 1, 100)
 material = ExtResource("2_a265m")
 
-[node name="ItemStall" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall" parent="." unique_id=829590173 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -10, 0, 0)
 blind_chance = 0.0
 
-[node name="ItemStall2" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall2" parent="." unique_id=1300741506 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -10, 0, -7)
 blind_chance = 0.0
 
-[node name="ItemStall3" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall3" parent="." unique_id=896127366 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -10, 0, -13)
 blind_chance = 0.0
 
-[node name="ItemStall4" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall4" parent="." unique_id=512879119 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -10, 0, -20)
 blind_chance = 0.0
 
-[node name="ItemStall5" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall5" parent="." unique_id=1472558672 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -16, 0, -2)
 blind_chance = 0.0
 
-[node name="ItemStall6" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall6" parent="." unique_id=314135882 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -16, 0, -9)
 blind_chance = 0.0
 
-[node name="ItemStall7" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall7" parent="." unique_id=1183566941 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -18, -0.2, -16)
 blind_chance = 0.0
 
-[node name="ItemStall8" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall8" parent="." unique_id=1700436790 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -18, -0.2, -23)
 blind_chance = 0.0
 
-[node name="ItemStall9" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall9" parent="." unique_id=6748956 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -27, 0, -16)
 blind_chance = 0.0
 
-[node name="ItemStall10" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall10" parent="." unique_id=1569325420 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -27, 0, -23)
 blind_chance = 0.0
 
-[node name="ItemStall11" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall11" parent="." unique_id=449014443 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -17, 0, -39)
 blind_chance = 0.0
 
-[node name="ItemStall12" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall12" parent="." unique_id=1372750985 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -17, 0, -46)
 blind_chance = 0.0
 
-[node name="ItemStall13" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall13" parent="." unique_id=650817494 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24, -0.2, -28)
 blind_chance = 0.0
 
-[node name="ItemStall14" parent="." instance=ExtResource("4_kancn")]
+[node name="ItemStall14" parent="." unique_id=1844126561 instance=ExtResource("4_kancn")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -24, -0.2, -35)
 blind_chance = 0.0
 
-[node name="Fire" parent="." instance=ExtResource("8_ii2li")]
+[node name="Fire" parent="." unique_id=1802839252 instance=ExtResource("8_ii2li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -11)
 
-[node name="Fire2" parent="." instance=ExtResource("8_ii2li")]
+[node name="Fire2" parent="." unique_id=1112283153 instance=ExtResource("8_ii2li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -15)
 size = 1.5
 
-[node name="Fire3" parent="." instance=ExtResource("8_ii2li")]
+[node name="Fire3" parent="." unique_id=493674339 instance=ExtResource("8_ii2li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -19)
 
-[node name="Fire4" parent="." instance=ExtResource("8_ii2li")]
+[node name="Fire4" parent="." unique_id=1019002816 instance=ExtResource("8_ii2li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -23)
 size = 2.5
 
-[node name="Fire5" parent="." instance=ExtResource("8_ii2li")]
+[node name="Fire5" parent="." unique_id=1331498659 instance=ExtResource("8_ii2li")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -27)
 size = 3.0
 
-[node name="Shrine" parent="." instance=ExtResource("8_8ub2n")]
+[node name="Shrine" parent="." unique_id=1300435998 instance=ExtResource("8_8ub2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.405556, -36)
 
-[node name="Shrine2" parent="." instance=ExtResource("8_8ub2n")]
+[node name="Shrine2" parent="." unique_id=2041129750 instance=ExtResource("8_8ub2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.405556, -36)
 
-[node name="Shrine3" parent="." instance=ExtResource("8_8ub2n")]
+[node name="Shrine3" parent="." unique_id=1981734077 instance=ExtResource("8_8ub2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.405556, -36)
 
-[node name="Node" type="Node3D" parent="."]
+[node name="Node" type="Node3D" parent="." unique_id=463307488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.2, 0)
 script = ExtResource("8_ymy3u")
 
-[node name="Shrine" parent="Node" instance=ExtResource("9_f2i0y")]
+[node name="Shrine" parent="Node" unique_id=674326910 instance=ExtResource("9_f2i0y")]
 transform = Transform3D(-2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, 0, -4.7, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node" unique_id=1724539126]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_4upir")
-}
+libraries/ = SubResource("AnimationLibrary_4upir")
 
-[node name="Gateway" parent="Node" instance=ExtResource("10_i8mis")]
+[node name="Gateway" parent="Node" unique_id=757501645 instance=ExtResource("10_i8mis")]
 transform = Transform3D(-5.96046e-08, 0, -1, 0, 1, 0, 1, 0, -5.96046e-08, 5.5, -13.5, 0)
 
-[node name="EnemyEye" parent="." instance=ExtResource("9_mlh16")]
+[node name="EnemyEye" parent="." unique_id=1651557025 instance=ExtResource("9_mlh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6561, 3.77609, -63.8214)
 
-[node name="EnemyEye2" parent="." instance=ExtResource("9_mlh16")]
+[node name="EnemyEye2" parent="." unique_id=708710236 instance=ExtResource("9_mlh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6561, 3.1948, -60.7283)
 
-[node name="EnemyEye3" parent="." instance=ExtResource("9_mlh16")]
+[node name="EnemyEye3" parent="." unique_id=624150904 instance=ExtResource("9_mlh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6561, 2.69516, -58.0621)
 
-[node name="EnemyEye4" parent="." instance=ExtResource("9_mlh16")]
+[node name="EnemyEye4" parent="." unique_id=1480009013 instance=ExtResource("9_mlh16")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6561, 2.35826, -55.7915)
 
-[node name="Light" parent="." instance=ExtResource("10_xtvef")]
+[node name="Light" parent="." unique_id=370164947 instance=ExtResource("10_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00250578, 5.52731, -9.45398)
 
-[node name="Light2" parent="." instance=ExtResource("10_xtvef")]
+[node name="Light2" parent="." unique_id=741039244 instance=ExtResource("10_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3815, 5.52731, -25.5441)
 
-[node name="Light3" parent="." instance=ExtResource("10_xtvef")]
+[node name="Light3" parent="." unique_id=1773486496 instance=ExtResource("10_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58655, 5.52731, -31.9639)
 
-[node name="Light4" parent="." instance=ExtResource("10_xtvef")]
+[node name="Light4" parent="." unique_id=495354778 instance=ExtResource("10_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.1575, 5.52731, -7.82871)
 
-[node name="Light5" parent="." instance=ExtResource("10_xtvef")]
+[node name="Light5" parent="." unique_id=1619110896 instance=ExtResource("10_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.71009, 5.52731, -29.6707)
 
-[node name="EnemyMelee" parent="." instance=ExtResource("11_xtvef")]
+[node name="EnemyMelee" parent="." unique_id=2111278497 instance=ExtResource("11_xtvef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.943121, 1.00903, 14.9972)
 
 [connection signal="used" from="Node/Shrine" to="Node" method="shrine_used"]

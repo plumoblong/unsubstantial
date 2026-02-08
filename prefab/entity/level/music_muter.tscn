@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbjj55nvus0cp"]
+[gd_scene format=3 uid="uid://bbjj55nvus0cp"]
 
 [ext_resource type="Script" uid="uid://ct54vgird8oib" path="res://src/music_muter.gd" id="1_loc7s"]
 
-[node name="MusicMuter" type="Area3D"]
+[node name="MusicMuter" type="Area3D" unique_id=740837662]
 script = ExtResource("1_loc7s")
 
 [connection signal="body_entered" from="." to="." method="body_entered"]

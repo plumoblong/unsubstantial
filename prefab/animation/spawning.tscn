@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://y0oqhm1okpa2"]
+[gd_scene format=3 uid="uid://y0oqhm1okpa2"]
 
 [ext_resource type="Texture2D" uid="uid://e8jsiuiprxdd" path="res://images/entity/spawning.png" id="2_c6qt6"]
 [ext_resource type="Script" uid="uid://c3a81ulkcprq0" path="res://src/animations/spawning.gd" id="2_n62t3"]
@@ -68,7 +68,7 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Spawning" type="AnimatedSprite3D"]
+[node name="Spawning" type="AnimatedSprite3D" unique_id=1395401717]
 pixel_size = 0.05
 billboard = 1
 texture_filter = 0
@@ -77,7 +77,7 @@ frame = 7
 frame_progress = 1.0
 script = ExtResource("2_n62t3")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=2092059007]
 stream = ExtResource("3_pc5ww")
 volume_db = 15.0
 unit_size = 16.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cuhflxnivbv2b"]
+[gd_scene format=3 uid="uid://cuhflxnivbv2b"]
 
 [ext_resource type="Script" uid="uid://ct8drvl8xm65b" path="res://src/start.gd" id="1_qm06k"]
 [ext_resource type="Texture2D" uid="uid://ccfsssvwowu35" path="res://images/plumoblong_3d.png" id="2_xmel7"]
@@ -139,10 +139,10 @@ animations = [{
 "speed": 13.0
 }]
 
-[node name="Start" type="Node2D"]
+[node name="Start" type="Node2D" unique_id=1783723985]
 script = ExtResource("1_qm06k")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=465046258]
 modulate = Color(0.34375, 0.34375, 0.34375, 1)
 offset_right = 432.0
 offset_bottom = 244.0
@@ -150,13 +150,13 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=891919791]
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_hf7vm")
 frame = 24
 frame_progress = 1.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1539416363]
 stream = ExtResource("3_bhewb")
 volume_db = -10.0
 bus = &"SFX1"

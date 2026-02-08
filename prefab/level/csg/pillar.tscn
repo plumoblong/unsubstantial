@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://brmovny3p56s5"]
+[gd_scene format=3 uid="uid://brmovny3p56s5"]
 
 [ext_resource type="Material" uid="uid://d0yutshnmwa8m" path="res://material/marble_0.tres" id="1_1rwhe"]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" unique_id=374988123]
 use_collision = true
 collision_layer = 7
 collision_mask = 7

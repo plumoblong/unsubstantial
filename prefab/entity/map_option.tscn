@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://ritmakpm76a7"]
+[gd_scene format=3 uid="uid://ritmakpm76a7"]
 
 [ext_resource type="Script" uid="uid://b0ckpl13mff3" path="res://src/entity/map/map_option.gd" id="1_7g86h"]
 [ext_resource type="Texture2D" uid="uid://g3pqvc7jtv7f" path="res://images/debug/map.png" id="1_fwqp4"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="3_kgqol"]
 
-[node name="MapOptionEntity" type="Node3D"]
+[node name="MapOptionEntity" type="Node3D" unique_id=10408186]
 script = ExtResource("1_7g86h")
 
-[node name="Sprite" type="Sprite3D" parent="."]
+[node name="Sprite" type="Sprite3D" parent="." unique_id=1744125057]
 billboard = 1
 fixed_size = true
 texture_filter = 0
 texture = ExtResource("1_fwqp4")
 
-[node name="Info" type="Label3D" parent="."]
+[node name="Info" type="Label3D" parent="." unique_id=810939282]
 pixel_size = 0.01
 billboard = 1
 fixed_size = true

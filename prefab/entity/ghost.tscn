@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://clmqggk8q2ks0"]
+[gd_scene format=3 uid="uid://clmqggk8q2ks0"]
 
 [ext_resource type="Texture2D" uid="uid://emc2l5m25kfk" path="res://images/entity/human.png" id="1_l6j7n"]
 [ext_resource type="Script" uid="uid://cqbmip354frve" path="res://src/class/ghost.gd" id="2_ih84x"]
@@ -21,7 +21,7 @@ gravity = Vector3(0, -0.5, 0)
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_uss2g")
 
-[node name="Ghost" type="Sprite3D"]
+[node name="Ghost" type="Sprite3D" unique_id=702704374]
 pixel_size = 0.03
 billboard = 1
 double_sided = false
@@ -30,13 +30,13 @@ texture_filter = 0
 texture = ExtResource("1_l6j7n")
 script = ExtResource("2_ih84x")
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1988253468]
 stream = ExtResource("4_8bnhk")
 unit_size = 7.0
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 13667.0
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=650111038]
 emitting = false
 amount = 32
 lifetime = 1.5

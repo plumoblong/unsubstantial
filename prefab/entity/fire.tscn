@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkhdly50ktf8t"]
+[gd_scene format=3 uid="uid://bkhdly50ktf8t"]
 
 [ext_resource type="Script" uid="uid://cwr53u2s61v3p" path="res://src/entity/fire.gd" id="1_nqpfa"]
 [ext_resource type="Texture2D" uid="uid://cf5c1ljmst3lm" path="res://images/bullet.png" id="2_gf758"]
@@ -69,23 +69,23 @@ material = SubResource("StandardMaterial3D_hluo1")
 size = Vector2(0.15, 0.15)
 orientation = 2
 
-[node name="Fire" type="Area3D"]
+[node name="Fire" type="Area3D" unique_id=2065631778]
 collision_layer = 15
 collision_mask = 15
 script = ExtResource("1_nqpfa")
 damage = 300
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=824247580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("SphereShape3D_1qtbf")
 
-[node name="Outer" type="GPUParticles3D" parent="."]
+[node name="Outer" type="GPUParticles3D" parent="." unique_id=989765141]
 amount = 96
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_gh1ns")
 draw_pass_1 = SubResource("PlaneMesh_126v3")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1707011807]
 modulate = Color(0.943969, 0.640289, 0.948052, 1)
 pixel_size = 0.03
 billboard = 1

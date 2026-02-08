@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bgpu1sil353c7"]
+[gd_scene format=4 uid="uid://bgpu1sil353c7"]
 
 [ext_resource type="Script" uid="uid://18l2vrmp1sxq" path="res://src/entity/map/level_end.gd" id="1_qovhv"]
 [ext_resource type="Material" uid="uid://ccoymg2e5yjc3" path="res://textures/world/metal.tres" id="2_q2gr2"]
@@ -145,85 +145,83 @@ _data = {
 &"open": SubResource("Animation_hdlbe")
 }
 
-[node name="LevelEnd" type="Area3D"]
+[node name="LevelEnd" type="Area3D" unique_id=880059450]
 script = ExtResource("1_qovhv")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1610908262]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.23779875, 2.7746663, 0.18411028)
 shape = SubResource("BoxShape3D_t5fja")
 
-[node name="Opener" type="Area3D" parent="."]
+[node name="Opener" type="Area3D" parent="." unique_id=698338861]
 
-[node name="Hitbox" type="CollisionShape3D" parent="Opener"]
+[node name="Hitbox" type="CollisionShape3D" parent="Opener" unique_id=1792854469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1192627, 0)
 shape = SubResource("CylinderShape3D_5lg1d")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." unique_id=1994483360]
 transform = Transform3D(-5.4639237e-08, 0, 1.75, 0, 1.25, 0, -1.25, 0, -7.649493e-08, -0.1841103, -1, -0.18638998)
 
-[node name="DoorLeft" type="StaticBody3D" parent="Model"]
+[node name="DoorLeft" type="StaticBody3D" parent="Model" unique_id=1955694466]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.25, 0.015, 1.45)
 collision_layer = 775
 collision_mask = 775
 
-[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="Model/DoorLeft"]
+[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="Model/DoorLeft" unique_id=2104068429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000800997, 3.652298, -0.7001607)
 mesh = SubResource("ArrayMesh_824b2")
 
-[node name="entity_3_collision_shape" type="CollisionShape3D" parent="Model/DoorLeft"]
+[node name="entity_3_collision_shape" type="CollisionShape3D" parent="Model/DoorLeft" unique_id=1692417566]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65, -0.7)
 shape = SubResource("ConcavePolygonShape3D_vn6in")
 
-[node name="DoorRight" type="StaticBody3D" parent="Model"]
+[node name="DoorRight" type="StaticBody3D" parent="Model" unique_id=398469850]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 0.25, 0.015, -1.45)
 collision_layer = 775
 collision_mask = 775
 
-[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="Model/DoorRight"]
+[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="Model/DoorRight" unique_id=2031599290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65, -0.7)
 mesh = SubResource("ArrayMesh_824b2")
 
-[node name="entity_3_collision_shape" type="CollisionShape3D" parent="Model/DoorRight"]
+[node name="entity_3_collision_shape" type="CollisionShape3D" parent="Model/DoorRight" unique_id=1776592128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.65, -0.7)
 shape = SubResource("ConcavePolygonShape3D_vn6in")
 
-[node name="Frame" type="Node3D" parent="Model"]
+[node name="Frame" type="Node3D" parent="Model" unique_id=483621268]
 
-[node name="entity_1_func_geo" type="StaticBody3D" parent="Model/Frame"]
+[node name="entity_1_func_geo" type="StaticBody3D" parent="Model/Frame" unique_id=1993258478]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.000038, -4.7683716e-05)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="Model/Frame/entity_1_func_geo"]
+[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="Model/Frame/entity_1_func_geo" unique_id=1706539924]
 mesh = SubResource("ArrayMesh_1jdp3")
 
-[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="Model/Frame/entity_1_func_geo"]
+[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="Model/Frame/entity_1_func_geo" unique_id=1105522204]
 occluder = SubResource("ArrayOccluder3D_kfysm")
 
-[node name="entity_1_collision_shape" type="CollisionShape3D" parent="Model/Frame/entity_1_func_geo"]
+[node name="entity_1_collision_shape" type="CollisionShape3D" parent="Model/Frame/entity_1_func_geo" unique_id=1512509300]
 shape = SubResource("ConcavePolygonShape3D_johdc")
 
-[node name="White" type="StaticBody3D" parent="Model/Frame"]
+[node name="White" type="StaticBody3D" parent="Model/Frame" unique_id=2139224113]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 3.661499, -1.9073486e-06)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="Model/Frame/White"]
+[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="Model/Frame/White" unique_id=2028189005]
 mesh = SubResource("ArrayMesh_1h2pn")
 
-[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="Model/Frame/White"]
+[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="Model/Frame/White" unique_id=377448816]
 occluder = SubResource("ArrayOccluder3D_bwlkn")
 
-[node name="entity_2_collision_shape" type="CollisionShape3D" parent="Model/Frame/White"]
+[node name="entity_2_collision_shape" type="CollisionShape3D" parent="Model/Frame/White" unique_id=485612588]
 shape = SubResource("ConcavePolygonShape3D_y1vwj")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_madfn")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=60272618]
+libraries/ = SubResource("AnimationLibrary_madfn")
 speed_scale = 1.75
 
-[node name="omni_light_3d" type="OmniLight3D" parent="."]
+[node name="omni_light_3d" type="OmniLight3D" parent="." unique_id=1536693128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.414258, 0.5419792)
 omni_range = 5.847855
 

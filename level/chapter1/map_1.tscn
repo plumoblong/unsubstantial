@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://q45q03od1sk3"]
+[gd_scene format=3 uid="uid://q45q03od1sk3"]
 
 [ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_lxtaj"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_m7sed"]
@@ -10,12 +10,11 @@ agent_radius = 1.0
 agent_max_slope = 66.0
 vertices_per_polygon = 4.0
 
-[node name="PalaceMap1" type="NavigationRegion3D" node_paths=PackedStringArray("map_builder")]
+[node name="PalaceMap1" type="NavigationRegion3D" unique_id=368522940]
 navigation_mesh = SubResource("NavigationMesh_g5n5k")
 script = ExtResource("1_lxtaj")
-map_builder = NodePath("FuncGodotMap")
 
-[node name="FuncGodotMap" type="Node3D" parent="."]
+[node name="FuncGodotMap" type="Node3D" parent="." unique_id=1858695855]
 script = ExtResource("2_m7sed")
 local_map_file = "uid://d18mc57u4hcuf"
 map_settings = ExtResource("3_oeveq")

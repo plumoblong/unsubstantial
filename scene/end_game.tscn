@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://rnbr27si431f"]
+[gd_scene format=3 uid="uid://rnbr27si431f"]
 
 [ext_resource type="Script" uid="uid://b78skfo2lkgm0" path="res://src/menus/end_game.gd" id="1_a5apm"]
 [ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="1_bxtiy"]
@@ -56,10 +56,10 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0.255608, 0.255608, 0.255608, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[node name="EndGame" type="Node2D"]
+[node name="EndGame" type="Node2D" unique_id=520227579]
 script = ExtResource("1_a5apm")
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=443025763]
 modulate = Color(0.472845, 0.472845, 0.472845, 1)
 material = SubResource("CanvasItemMaterial_a3esg")
 position = Vector2(218, -10)
@@ -72,7 +72,7 @@ trail_sections = 5
 trail_section_subdivisions = 5
 process_material = SubResource("ParticleProcessMaterial_vhmxq")
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="." unique_id=2059006888]
 modulate = Color(0.708186, 0.708186, 0.708186, 1)
 material = SubResource("CanvasItemMaterial_a3esg")
 position = Vector2(218, -10)
@@ -83,7 +83,7 @@ speed_scale = 0.25
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_whqgk")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1169291364]
 material = SubResource("ShaderMaterial_a3esg")
 offset_top = 49.0
 offset_right = 432.0
@@ -92,7 +92,7 @@ theme_override_fonts/font = ExtResource("1_bxtiy")
 text = "[YOU BEAT THE GAME???]"
 horizontal_alignment = 1
 
-[node name="Stats" type="RichTextLabel" parent="."]
+[node name="Stats" type="RichTextLabel" parent="." unique_id=2060240082]
 material = SubResource("ShaderMaterial_2ubgv")
 offset_top = 107.0
 offset_right = 432.0
@@ -110,7 +110,7 @@ ITEMS:  20
 "
 scroll_active = false
 
-[node name="Score" type="Label" parent="."]
+[node name="Score" type="Label" parent="." unique_id=618405471]
 material = SubResource("ShaderMaterial_2ubgv")
 offset_top = 76.0
 offset_right = 431.0
@@ -120,7 +120,7 @@ theme_override_font_sizes/font_size = 8
 text = "SCORE: 1000"
 horizontal_alignment = 1
 
-[node name="Score2" type="Label" parent="."]
+[node name="Score2" type="Label" parent="." unique_id=1396836775]
 material = SubResource("ShaderMaterial_2ubgv")
 offset_top = 88.0
 offset_right = 431.0
@@ -129,7 +129,7 @@ theme_override_font_sizes/font_size = 8
 text = "HIGH SCORE: 1000"
 horizontal_alignment = 1
 
-[node name="Menu" parent="." instance=ExtResource("5_quo72")]
+[node name="Menu" parent="." unique_id=752533332 instance=ExtResource("5_quo72")]
 offset_top = 178.0
 offset_right = 432.0
 offset_bottom = 190.0
@@ -140,7 +140,7 @@ text = "Menu"
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=508913705]
 stream = ExtResource("6_vol1s")
 volume_db = -6.15
 autoplay = true

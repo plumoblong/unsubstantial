@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bigdrrkje4e26"]
+[gd_scene format=3 uid="uid://bigdrrkje4e26"]
 
 [ext_resource type="Script" uid="uid://jxih8ex04sdn" path="res://src/menus/text_button.gd" id="2_gqvp5"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_qbhvy"]
@@ -25,7 +25,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_41682"]
 
-[node name="Button" type="Button"]
+[node name="Button" type="Button" unique_id=1590082477]
 offset_right = 388.0
 offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -52,7 +52,7 @@ hover_color = Color(1, 0.858824, 0.321569, 1)
 disabled_color = Color(0.266667, 0.266667, 0.266667, 1)
 shadow_hover_color = Color(0.194834, 0.112708, 0.0144433, 1)
 
-[node name="Shadow" type="Button" parent="."]
+[node name="Shadow" type="Button" parent="." unique_id=476682395]
 process_mode = 4
 z_index = -1
 layout_mode = 0

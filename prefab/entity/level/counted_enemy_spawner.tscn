@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cavvtjkavvesj"]
+[gd_scene format=3 uid="uid://cavvtjkavvesj"]
 
 [ext_resource type="Script" uid="uid://bm06n4jdlgwjk" path="res://src/level/counted_enemy_spawner.gd" id="1_dpyu7"]
 [ext_resource type="PackedScene" uid="uid://dwxkl6ilg2ynr" path="res://prefab/entity/enemy/enemy.tscn" id="2_ehg65"]
 [ext_resource type="PackedScene" uid="uid://duxyfg6i08iui" path="res://prefab/entity/enemy/enemy_melee.tscn" id="3_p1m2w"]
 [ext_resource type="Texture2D" uid="uid://blgn3y70to4gj" path="res://placeholder.png" id="4_p1m2w"]
 
-[node name="CountedEnemySpawner" type="Node3D"]
+[node name="CountedEnemySpawner" type="Node3D" unique_id=797282548]
 script = ExtResource("1_dpyu7")
 enemies = Dictionary[PackedScene, int]({
 ExtResource("2_ehg65"): 20,
@@ -14,7 +14,7 @@ ExtResource("3_p1m2w"): 9
 chance_to_spawn = 30
 chance_each_actual_stage = 7
 
-[node name="Sprite2D" type="Sprite3D" parent="."]
+[node name="Sprite2D" type="Sprite3D" parent="." unique_id=304384498]
 modulate = Color(1, 0, 0, 1)
 pixel_size = 0.02
 billboard = 1

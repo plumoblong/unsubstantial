@@ -1,10 +1,10 @@
-[gd_scene load_steps=67 format=4 uid="uid://17o7p8c33otu"]
+[gd_scene format=4 uid="uid://17o7p8c33otu"]
 
 [ext_resource type="Material" uid="uid://t6hjfcxivl64" path="res://textures/world/shiny.tres" id="1_uyjon"]
 [ext_resource type="Material" uid="uid://qilkeuk5s68v" path="res://textures/world/player_essence.tres" id="2_uui05"]
 [ext_resource type="PackedScene" uid="uid://bk8hwt7lut1l3" path="res://prefab/entity/level/jump_pad.tscn" id="4_xv5jp"]
 [ext_resource type="AudioStream" uid="uid://m8bocn1yx6q0" path="res://music/ether.ogg" id="5_0wt71"]
-[ext_resource type="PackedScene" uid="uid://dpukikjfsg34i" path="res://prefab/entity/item_stall.tscn" id="6_bxg8e"]
+[ext_resource type="PackedScene" uid="uid://d27hum87eioec" path="res://prefab/entity/item_stall.tscn" id="6_bxg8e"]
 [ext_resource type="PackedScene" uid="uid://cfmu0e1hdvitn" path="res://prefab/entity/level/gateway.tscn" id="7_ljq4l"]
 [ext_resource type="PackedScene" uid="uid://bbjj55nvus0cp" path="res://prefab/entity/level/music_muter.tscn" id="8_5qvdv"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="9_uui05"]
@@ -438,98 +438,98 @@ _surfaces = [{
 vertices = PackedVector3Array(-88, -1, 88, 88, -1, 88, 88, -1, -88, -88, -1, -88)
 indices = PackedInt32Array(0, 1, 2, 0, 2, 3)
 
-[node name="Equit" type="Node3D"]
+[node name="Equit" type="Node3D" unique_id=1347533099]
 
-[node name="CSGMesh3D" type="CSGBox3D" parent="."]
+[node name="CSGMesh3D" type="CSGBox3D" parent="." unique_id=524255307]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 use_collision = true
 size = Vector3(200, 1, 200)
 material = ExtResource("1_uyjon")
 
-[node name="Solid" type="CSGCombiner3D" parent="."]
+[node name="Solid" type="CSGCombiner3D" parent="." unique_id=1686424817]
 material_override = ExtResource("2_uui05")
 use_collision = true
 collision_layer = 15
 collision_mask = 15
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Solid"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Solid" unique_id=1680474235]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 flip_faces = true
 radius = 22.0
 height = 30.0
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Solid" unique_id=1236134443]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -32.5)
 flip_faces = true
 size = Vector3(10, 30, 30)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="Solid" unique_id=2026308068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, -42.5)
 operation = 2
 flip_faces = true
 size = Vector3(10, 15, 10)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="Solid" unique_id=2135254909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.5, -62.5)
 flip_faces = true
 size = Vector3(30, 25, 30)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Solid" unique_id=1320583148]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -31.6667, 8, -0.833332)
 flip_faces = true
 size = Vector3(10, 30, 30)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="Solid" unique_id=1529496329]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -61.6667, 25.5, -0.833332)
 flip_faces = true
 size = Vector3(30, 25, 30)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="Solid" unique_id=794317547]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 31.4277, 8, -0.833331)
 flip_faces = true
 size = Vector3(10, 30, 30)
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="Solid" unique_id=1106699911]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 61.1926, 25.5, -0.833333)
 flip_faces = true
 size = Vector3(30, 25, 30)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Solid"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Solid" unique_id=1079426542]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, -2, 37.5)
 flip_faces = true
 size = Vector3(15, 15, 40)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Solid"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Solid" unique_id=1372432144]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.25, 65)
 flip_faces = true
 radius = 20.0
 height = 72.5
 
-[node name="JumpPad" parent="." instance=ExtResource("4_xv5jp")]
+[node name="JumpPad" parent="." unique_id=578005398 instance=ExtResource("4_xv5jp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -28.8718)
 speed = 27.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=414295754]
 stream = ExtResource("5_0wt71")
 autoplay = true
 bus = &"Music"
 
-[node name="ItemStall" parent="." instance=ExtResource("6_bxg8e")]
+[node name="ItemStall" parent="." unique_id=1228246195 instance=ExtResource("6_bxg8e")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 12.9813, -62.5)
-blind_chance = 75.0
 blind_type = false
+blind_chance = 75.0
 
-[node name="Gateway" parent="." instance=ExtResource("7_ljq4l")]
+[node name="Gateway" parent="." unique_id=593708529 instance=ExtResource("7_ljq4l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 65)
 
-[node name="MusicMuter" parent="." instance=ExtResource("8_5qvdv")]
+[node name="MusicMuter" parent="." unique_id=1375925246 instance=ExtResource("8_5qvdv")]
 time = 0.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicMuter"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MusicMuter" unique_id=2128414483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 12, 4.5)
 shape = SubResource("BoxShape3D_f4887")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=416813939]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4.5)
 modulate = Color(0.518103, 0.518103, 0.518103, 1)
 pixel_size = 0.04
@@ -540,7 +540,7 @@ hframes = 3
 vframes = 2
 frame = 3
 
-[node name="Sprite3D3" type="Sprite3D" parent="."]
+[node name="Sprite3D3" type="Sprite3D" parent="." unique_id=1954861016]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4.5)
 modulate = Color(0.518103, 0.518103, 0.518103, 1)
 pixel_size = 0.04
@@ -551,261 +551,261 @@ hframes = 3
 vframes = 2
 frame = 1
 
-[node name="func_godot_map" type="Node3D" parent="."]
+[node name="func_godot_map" type="Node3D" parent="." unique_id=1670664690]
 script = ExtResource("9_uui05")
 local_map_file = "uid://debto365p0s20"
 map_settings = ExtResource("10_0x670")
 metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 
-[node name="entity_0_worldspawn" type="StaticBody3D" parent="func_godot_map"]
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="func_godot_map" unique_id=2107539225]
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="func_godot_map/entity_0_worldspawn"]
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="func_godot_map/entity_0_worldspawn" unique_id=1025100102]
 mesh = SubResource("ArrayMesh_gsr4n")
 
-[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/entity_0_worldspawn"]
+[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/entity_0_worldspawn" unique_id=811831547]
 occluder = SubResource("ArrayOccluder3D_1xbvn")
 
-[node name="entity_0_collision_shape" type="CollisionShape3D" parent="func_godot_map/entity_0_worldspawn"]
+[node name="entity_0_collision_shape" type="CollisionShape3D" parent="func_godot_map/entity_0_worldspawn" unique_id=1511753531]
 shape = SubResource("ConcavePolygonShape3D_xv5jp")
 
-[node name="layer_1_Walls" type="Node3D" parent="func_godot_map"]
+[node name="layer_1_Walls" type="Node3D" parent="func_godot_map" unique_id=1735865549]
 
-[node name="entity_2_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_2_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=2007690951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5, -35.25)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo"]
+[node name="entity_2_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo" unique_id=946439747]
 mesh = SubResource("ArrayMesh_0wt71")
 
-[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo"]
+[node name="entity_2_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo" unique_id=973067064]
 occluder = SubResource("ArrayOccluder3D_bxg8e")
 
-[node name="entity_2_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo"]
+[node name="entity_2_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_2_func_geo" unique_id=611662377]
 shape = SubResource("ConcavePolygonShape3D_ljq4l")
 
-[node name="entity_3_func_illusionary" type="Node3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_3_func_illusionary" type="Node3D" parent="func_godot_map/layer_1_Walls" unique_id=1882053425]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.5, 0)
 
-[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_3_func_illusionary"]
+[node name="entity_3_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_3_func_illusionary" unique_id=1152507134]
 mesh = SubResource("ArrayMesh_5qvdv")
 
-[node name="entity_3_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_3_func_illusionary"]
+[node name="entity_3_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_3_func_illusionary" unique_id=1329620964]
 occluder = SubResource("ArrayOccluder3D_xsimy")
 
-[node name="entity_4_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_4_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=603762740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.039774, 12.999878, -16.680714)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_4_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo"]
+[node name="entity_4_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo" unique_id=1140576458]
 mesh = SubResource("ArrayMesh_cphyg")
 
-[node name="entity_4_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo"]
+[node name="entity_4_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo" unique_id=1259825479]
 occluder = SubResource("ArrayOccluder3D_4ynrl")
 
-[node name="entity_4_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo"]
+[node name="entity_4_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_4_func_geo" unique_id=415704311]
 shape = SubResource("ConcavePolygonShape3D_feawg")
 
-[node name="entity_5_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_5_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1620801005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.237564, 12.999878, -6.1798477)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_5_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo"]
+[node name="entity_5_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo" unique_id=1770715187]
 mesh = SubResource("ArrayMesh_rcyki")
 
-[node name="entity_5_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo"]
+[node name="entity_5_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo" unique_id=586348155]
 occluder = SubResource("ArrayOccluder3D_vhyhh")
 
-[node name="entity_5_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo"]
+[node name="entity_5_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_5_func_geo" unique_id=80862237]
 shape = SubResource("ConcavePolygonShape3D_nycnb")
 
-[node name="entity_6_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_6_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=986470399]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.97474, 12.999878, 6.9902396)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_6_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo"]
+[node name="entity_6_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo" unique_id=665522060]
 mesh = SubResource("ArrayMesh_607uo")
 
-[node name="entity_6_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo"]
+[node name="entity_6_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo" unique_id=1573348447]
 occluder = SubResource("ArrayOccluder3D_qsgio")
 
-[node name="entity_6_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo"]
+[node name="entity_6_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_6_func_geo" unique_id=1312503459]
 shape = SubResource("ConcavePolygonShape3D_06lp2")
 
-[node name="entity_7_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_7_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1106882577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.039991, 12.999878, 16.680664)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_7_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo"]
+[node name="entity_7_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo" unique_id=1041134151]
 mesh = SubResource("ArrayMesh_6us60")
 
-[node name="entity_7_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo"]
+[node name="entity_7_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo" unique_id=1581610657]
 occluder = SubResource("ArrayOccluder3D_yidpq")
 
-[node name="entity_7_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo"]
+[node name="entity_7_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_7_func_geo" unique_id=1109016133]
 shape = SubResource("ConcavePolygonShape3D_j1aj1")
 
-[node name="entity_8_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_8_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1935075644]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.999878, 20.5)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_8_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo"]
+[node name="entity_8_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo" unique_id=1616237966]
 mesh = SubResource("ArrayMesh_o41cq")
 
-[node name="entity_8_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo"]
+[node name="entity_8_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo" unique_id=1936798782]
 occluder = SubResource("ArrayOccluder3D_3easf")
 
-[node name="entity_8_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo"]
+[node name="entity_8_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_8_func_geo" unique_id=956237839]
 shape = SubResource("ConcavePolygonShape3D_tebld")
 
-[node name="entity_9_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_9_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1632037556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.040035, 12.999878, 16.680786)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_9_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo"]
+[node name="entity_9_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo" unique_id=2106632112]
 mesh = SubResource("ArrayMesh_tfk33")
 
-[node name="entity_9_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo"]
+[node name="entity_9_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo" unique_id=16972185]
 occluder = SubResource("ArrayOccluder3D_pih38")
 
-[node name="entity_9_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo"]
+[node name="entity_9_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_9_func_geo" unique_id=1625784268]
 shape = SubResource("ConcavePolygonShape3D_5mwcj")
 
-[node name="entity_10_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_10_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=2127759836]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.237549, 12.999878, 6.17946)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_10_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo"]
+[node name="entity_10_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo" unique_id=1732912226]
 mesh = SubResource("ArrayMesh_gqgec")
 
-[node name="entity_10_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo"]
+[node name="entity_10_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo" unique_id=2096973012]
 occluder = SubResource("ArrayOccluder3D_b4cp7")
 
-[node name="entity_10_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo"]
+[node name="entity_10_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_10_func_geo" unique_id=1358214826]
 shape = SubResource("ConcavePolygonShape3D_7ahro")
 
-[node name="entity_11_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_11_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=441008928]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.974758, 12.999878, -6.9905744)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_11_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo"]
+[node name="entity_11_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo" unique_id=1253184868]
 mesh = SubResource("ArrayMesh_cv1e8")
 
-[node name="entity_11_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo"]
+[node name="entity_11_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo" unique_id=1147831500]
 occluder = SubResource("ArrayOccluder3D_swkc6")
 
-[node name="entity_11_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo"]
+[node name="entity_11_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_11_func_geo" unique_id=1251352983]
 shape = SubResource("ConcavePolygonShape3D_mad2d")
 
-[node name="entity_12_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_12_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=872820882]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.039773, 12.999878, -16.680714)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_12_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo"]
+[node name="entity_12_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo" unique_id=1954107444]
 mesh = SubResource("ArrayMesh_gb4bh")
 
-[node name="entity_12_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo"]
+[node name="entity_12_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo" unique_id=1454284389]
 occluder = SubResource("ArrayOccluder3D_6ji3e")
 
-[node name="entity_12_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo"]
+[node name="entity_12_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_12_func_geo" unique_id=75335133]
 shape = SubResource("ConcavePolygonShape3D_crqdv")
 
-[node name="entity_13_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_13_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1055897538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 16.999878, -40.25)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_13_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo"]
+[node name="entity_13_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo" unique_id=763554345]
 mesh = SubResource("ArrayMesh_fiink")
 
-[node name="entity_13_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo"]
+[node name="entity_13_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo" unique_id=1435468078]
 occluder = SubResource("ArrayOccluder3D_3bsbx")
 
-[node name="entity_13_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo"]
+[node name="entity_13_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_13_func_geo" unique_id=697492706]
 shape = SubResource("ConcavePolygonShape3D_k38kc")
 
-[node name="entity_14_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_14_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=2130332497]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 16.999878, -40.25)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_14_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo"]
+[node name="entity_14_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo" unique_id=377811680]
 mesh = SubResource("ArrayMesh_pg8t1")
 
-[node name="entity_14_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo"]
+[node name="entity_14_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo" unique_id=132265915]
 occluder = SubResource("ArrayOccluder3D_1v1xj")
 
-[node name="entity_14_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo"]
+[node name="entity_14_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_14_func_geo" unique_id=520141444]
 shape = SubResource("ConcavePolygonShape3D_npqpr")
 
-[node name="entity_15_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_15_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=877901329]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, -73.5)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_15_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo"]
+[node name="entity_15_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo" unique_id=724559399]
 mesh = SubResource("ArrayMesh_wes01")
 
-[node name="entity_15_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo"]
+[node name="entity_15_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo" unique_id=1510308715]
 occluder = SubResource("ArrayOccluder3D_110tb")
 
-[node name="entity_15_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo"]
+[node name="entity_15_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_15_func_geo" unique_id=2030910166]
 shape = SubResource("ConcavePolygonShape3D_n3muf")
 
-[node name="entity_16_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_16_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1250335539]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 16.999878, -73.5)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_16_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo"]
+[node name="entity_16_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo" unique_id=1879996477]
 mesh = SubResource("ArrayMesh_j847s")
 
-[node name="entity_16_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo"]
+[node name="entity_16_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo" unique_id=1694194986]
 occluder = SubResource("ArrayOccluder3D_xilbv")
 
-[node name="entity_16_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo"]
+[node name="entity_16_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_16_func_geo" unique_id=257160424]
 shape = SubResource("ConcavePolygonShape3D_f47bm")
 
-[node name="entity_17_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_17_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=812624552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 16.999878, -73.5)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_17_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo"]
+[node name="entity_17_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo" unique_id=2070583606]
 mesh = SubResource("ArrayMesh_5xjbt")
 
-[node name="entity_17_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo"]
+[node name="entity_17_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo" unique_id=902724552]
 occluder = SubResource("ArrayOccluder3D_8q1l5")
 
-[node name="entity_17_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo"]
+[node name="entity_17_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_17_func_geo" unique_id=1344952104]
 shape = SubResource("ConcavePolygonShape3D_23rgf")
 
-[node name="entity_18_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls"]
+[node name="entity_18_func_geo" type="StaticBody3D" parent="func_godot_map/layer_1_Walls" unique_id=1331622136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.999878, -88.5)
 collision_layer = 527
 collision_mask = 527
 
-[node name="entity_18_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo"]
+[node name="entity_18_mesh_instance" type="MeshInstance3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo" unique_id=1171956568]
 mesh = SubResource("ArrayMesh_vrxlm")
 
-[node name="entity_18_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo"]
+[node name="entity_18_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo" unique_id=491415313]
 occluder = SubResource("ArrayOccluder3D_g7d57")
 
-[node name="entity_18_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo"]
+[node name="entity_18_collision_shape" type="CollisionShape3D" parent="func_godot_map/layer_1_Walls/entity_18_func_geo" unique_id=123664957]
 shape = SubResource("ConcavePolygonShape3D_8bv11")
 
-[node name="entity_19_item_stall" parent="func_godot_map/layer_1_Walls" instance=ExtResource("6_bxg8e")]
+[node name="entity_19_item_stall" parent="func_godot_map/layer_1_Walls" unique_id=837395569 instance=ExtResource("6_bxg8e")]
 transform = Transform3D(1.0430319e-07, 0, 0.75, 0, 0.75, 0, -0.75, 0, 1.0430319e-07, 0, 15, -62)
 func_godot_properties = {
 "_tb_layer": "1",
@@ -817,11 +817,11 @@ func_godot_properties = {
 "origin": "-992 0 240"
 }
 
-[node name="entity_1_func_illusionary" type="Node3D" parent="func_godot_map"]
+[node name="entity_1_func_illusionary" type="Node3D" parent="func_godot_map" unique_id=1879795760]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
 
-[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="func_godot_map/entity_1_func_illusionary"]
+[node name="entity_1_mesh_instance" type="MeshInstance3D" parent="func_godot_map/entity_1_func_illusionary" unique_id=1260568878]
 mesh = SubResource("ArrayMesh_xp3sw")
 
-[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/entity_1_func_illusionary"]
+[node name="entity_1_occluder_instance" type="OccluderInstance3D" parent="func_godot_map/entity_1_func_illusionary" unique_id=1993976488]
 occluder = SubResource("ArrayOccluder3D_5fyy8")

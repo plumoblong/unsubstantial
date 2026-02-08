@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Chapter" load_steps=3 format=3 uid="uid://cgx52g0t14tml"]
+[gd_resource type="Resource" script_class="Chapter" format=3 uid="uid://cgx52g0t14tml"]
 
 [ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="1_auwgg"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_p7rvb"]

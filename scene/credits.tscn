@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://m5dmgkp1ikkw"]
+[gd_scene format=3 uid="uid://m5dmgkp1ikkw"]
 
 [ext_resource type="Script" uid="uid://baw4qijnudgp2" path="res://src/menus/credits.gd" id="1_bivbr"]
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_ige6w"]
@@ -10,10 +10,10 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rgtpt"]
 blend_mode = 1
 
-[node name="Credits" type="Node2D"]
+[node name="Credits" type="Node2D" unique_id=1289369240]
 script = ExtResource("1_bivbr")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=533416144]
 clip_contents = false
 offset_top = 68.0
 offset_right = 480.0
@@ -37,14 +37,14 @@ Join the[color=#8855ff] official Discord server![/color]
 fit_content = true
 scroll_active = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=394448529]
 stream = ExtResource("4_ooo2g")
 volume_db = -5.584
 pitch_scale = 0.8
 autoplay = true
 bus = &"Music"
 
-[node name="SoundVizualize2" parent="." instance=ExtResource("5_e5neg")]
+[node name="SoundVizualize2" parent="." unique_id=342329332 instance=ExtResource("5_e5neg")]
 visible = false
 position = Vector2(4, 4)
 vu_count = 64
@@ -52,21 +52,21 @@ freq_max = 22100.0
 animation_speed = 0.01
 height_scale = 96.0
 
-[node name="SoundVizualize" parent="." instance=ExtResource("5_e5neg")]
+[node name="SoundVizualize" parent="." unique_id=1638908561 instance=ExtResource("5_e5neg")]
 visible = false
 vu_count = 256
 freq_max = 22100.0
 animation_speed = 0.01
 height_scale = 96.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=57586613]
 offset_right = 40.0
 offset_bottom = 10.0
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1803045815]
 visible = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=601401892]
 modulate = Color(0.18359, 0.18359, 0.18359, 1)
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_rgtpt")
@@ -74,11 +74,11 @@ position = Vector2(216, 124)
 scale = Vector2(6.75, 0.75)
 texture = ExtResource("6_f4r1r")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D" unique_id=645069428]
 modulate = Color(0, 0, 0, 0.27451)
 position = Vector2(216, 124)
 texture = ExtResource("5_6h0io")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=1910509457]
 position = Vector2(216, 120)
 texture = ExtResource("5_6h0io")

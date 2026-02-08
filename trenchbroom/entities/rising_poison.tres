@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://1w810kmasv60"]
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://1w810kmasv60"]
 
 [ext_resource type="PackedScene" uid="uid://ejc57i5gkl1c" path="res://prefab/level/rising_poison.tscn" id="1_1q7n6"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_3dnr0"]

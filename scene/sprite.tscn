@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dauwi7ddooqqy"]
+[gd_scene format=3 uid="uid://dauwi7ddooqqy"]
 
 [ext_resource type="Script" uid="uid://ctt5owbbc0ujr" path="res://src/sprite_scene.gd" id="1_ycx8f"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=120703984]
 script = ExtResource("1_ycx8f")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1761694377]
 offset_right = 432.0
 offset_bottom = 243.0
 expand_mode = 1

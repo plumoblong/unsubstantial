@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://csp24al3t1pq8"]
+[gd_scene format=3 uid="uid://csp24al3t1pq8"]
 
 [ext_resource type="Texture2D" uid="uid://0sw3trmkeidd" path="res://images/entity/eye.png" id="1_f3cx6"]
 [ext_resource type="Script" uid="uid://doie0nodwdv0h" path="res://src/entity/enemy_eye.gd" id="1_s32u2"]
@@ -15,50 +15,50 @@ radius = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_76rbu"]
 radius = 0.6
 
-[node name="EnemyEye" type="CharacterBody3D" groups=["Enemy"]]
+[node name="EnemyEye" type="CharacterBody3D" unique_id=1640755446 groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_s32u2")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=644515102]
 modulate = Color(0.899639, 0.899639, 0.899639, 1)
 pixel_size = 0.05
 billboard = 1
 texture_filter = 0
 texture = ExtResource("1_f3cx6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=620264601]
 shape = SubResource("SphereShape3D_s32u2")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1163809080]
 light_energy = 0.5
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 10.0
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("movement_component")]
+[node name="KnockbackComponent" type="Node" parent="." unique_id=1511008547 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("3_76rbu")
 movement_component = NodePath("../MovementComponent")
 metadata/_custom_type_script = "uid://baw7jrp64qlgb"
 
-[node name="MovementComponent" type="Node" parent="."]
+[node name="MovementComponent" type="Node" parent="." unique_id=2133379741]
 script = ExtResource("3_jf0cs")
 metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
 
-[node name="EssenceComponent" type="Node" parent="."]
+[node name="EssenceComponent" type="Node" parent="." unique_id=85001978]
 script = ExtResource("4_eagth")
 set_max_essence_on_ready = false
 metadata/_custom_type_script = "uid://dvrmix7xqorev"
 
-[node name="Query" type="Area3D" parent="."]
+[node name="Query" type="Area3D" parent="." unique_id=1328090585]
 collision_layer = 262
 collision_mask = 262
 
-[node name="Hitbox" type="CollisionShape3D" parent="Query"]
+[node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=894614706]
 shape = SubResource("SphereShape3D_76rbu")
 
-[node name="Hazard" type="Area3D" parent="."]
+[node name="Hazard" type="Area3D" parent="." unique_id=669978566]
 collision_layer = 263
 collision_mask = 263
 script = ExtResource("6_aifo0")
@@ -66,15 +66,15 @@ damage = 50
 knockback_strength = 50.0
 metadata/_custom_type_script = "uid://dqg5sl3316gba"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazard"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hazard" unique_id=1326138821]
 shape = SubResource("SphereShape3D_s32u2")
 
-[node name="HitSFX" type="AudioStreamPlayer3D" parent="."]
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="." unique_id=357211605]
 stream = ExtResource("6_0ftp6")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=500660746]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26864, 0)
 visibility_range_end = 5.0
 visibility_range_end_margin = 5.0

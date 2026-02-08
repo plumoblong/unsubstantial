@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://be83huhu4onji"]
+[gd_scene format=3 uid="uid://be83huhu4onji"]
 
 [ext_resource type="Material" uid="uid://hn1cpq4c1txh" path="res://material/crate.tres" id="1_38v4r"]
 
-[node name="Crate" type="CSGBox3D"]
+[node name="Crate" type="CSGBox3D" unique_id=1745229877]
 use_collision = true
 collision_layer = 255
 collision_mask = 255

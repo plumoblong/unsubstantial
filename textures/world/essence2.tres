@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://2mvdcxf7ysii"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://2mvdcxf7ysii"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aewgb"]
 

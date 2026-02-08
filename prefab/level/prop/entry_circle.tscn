@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcw8f5preqv4d"]
+[gd_scene format=3 uid="uid://bcw8f5preqv4d"]
 
 [ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_edjkd"]
-[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="2_5peyk"]
+[ext_resource type="Texture2D" uid="uid://cxvt6el5g3tp5" path="res://textures/world/player_essence.png" id="2_5peyk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_73c8m"]
 render_priority = 0
@@ -20,6 +20,6 @@ outer_radius = 12.0
 rings = 8
 ring_segments = 6
 
-[node name="EntryCircle" type="MeshInstance3D"]
+[node name="EntryCircle" type="MeshInstance3D" unique_id=1356593726]
 material_override = SubResource("ShaderMaterial_73c8m")
 mesh = SubResource("TorusMesh_y6p6c")

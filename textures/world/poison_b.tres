@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://jljf4yjkymwo"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://jljf4yjkymwo"]
 
 [ext_resource type="Shader" uid="uid://dhiolnova5p0h" path="res://src/shader/acid.gdshader" id="1_y6ud6"]
 [ext_resource type="Texture2D" uid="uid://c3n8fl2ts8ebe" path="res://textures/world/ethereal.png" id="2_sndu1"]

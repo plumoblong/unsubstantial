@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c4e8vymr51sw7"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c4e8vymr51sw7"]
 
 [ext_resource type="Shader" uid="uid://2olmhccqsnm6" path="res://src/shader/scrolling.gdshader" id="1_55h3i"]
 

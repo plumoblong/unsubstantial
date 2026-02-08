@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://mwe2s1bd7x51"]
+[gd_scene format=3 uid="uid://mwe2s1bd7x51"]
 
 [ext_resource type="Script" uid="uid://bkdignk3renla" path="res://src/menus/bossbar.gd" id="1_usf1d"]
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="3_gt3w2"]
@@ -11,17 +11,19 @@ shader = ExtResource("3_gt3w2")
 shader_parameter/modulate = Color(0.695568, 0, 0.111848, 1)
 shader_parameter/amount = 0.5
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a30yq"]
 shader = ExtResource("3_gt3w2")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.52
 shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
-[node name="Bossbar" type="Node2D"]
+[node name="Bossbar" type="Node2D" unique_id=67375352]
 script = ExtResource("1_usf1d")
 
-[node name="Bar" type="NinePatchRect" parent="."]
+[node name="Bar" type="NinePatchRect" parent="." unique_id=1980416354]
 material = SubResource("ShaderMaterial_2udb0")
 offset_left = 116.0
 offset_top = 43.0
@@ -31,7 +33,7 @@ texture = ExtResource("4_oh8v5")
 patch_margin_left = 5
 patch_margin_right = 5
 
-[node name="Name" type="Label" parent="."]
+[node name="Name" type="Label" parent="." unique_id=1784698432]
 material = SubResource("ShaderMaterial_a30yq")
 offset_top = 37.0
 offset_right = 432.0
@@ -41,7 +43,7 @@ text = "THE FATHER"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Health" type="Label" parent="."]
+[node name="Health" type="Label" parent="." unique_id=1500463308]
 material = SubResource("ShaderMaterial_a30yq")
 offset_top = 44.0
 offset_right = 432.0
@@ -51,13 +53,13 @@ theme_override_font_sizes/font_size = 8
 text = "10000"
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1027492476]
 material = SubResource("ShaderMaterial_a30yq")
 position = Vector2(216, 56)
 texture = ExtResource("5_a30yq")
 centered = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=172126332]
 material = SubResource("ShaderMaterial_a30yq")
 position = Vector2(178, 56)
 texture = ExtResource("5_a30yq")

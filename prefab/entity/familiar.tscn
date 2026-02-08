@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4kiw3sh4g1or"]
+[gd_scene format=3 uid="uid://c4kiw3sh4g1or"]
 
 [ext_resource type="Script" uid="uid://bcb5j3ild1f0m" path="res://src/entity/familiar.gd" id="2_fg05p"]
 
-[node name="Familiar" type="Sprite3D"]
+[node name="Familiar" type="Sprite3D" unique_id=1380756335]
 pixel_size = 0.001
 billboard = 1
 texture_filter = 0

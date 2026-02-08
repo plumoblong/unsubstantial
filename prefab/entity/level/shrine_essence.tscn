@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ch4cgolek2p1t"]
+[gd_scene format=3 uid="uid://ch4cgolek2p1t"]
 
 [ext_resource type="Script" uid="uid://h5dvk7jgd8l6" path="res://src/entity/map/shrine_essence.gd" id="1_fcnju"]
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="2_3c0pd"]
@@ -70,7 +70,7 @@ size = Vector3(1.5, 2.5, 1.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4210m"]
 
-[node name="Shrine" type="Area3D"]
+[node name="Shrine" type="Area3D" unique_id=1014682856]
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_fcnju")
@@ -83,20 +83,20 @@ pool = {
 }
 one_shot = false
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=75246914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.158938, 0)
 layers = 7
 material_override = SubResource("StandardMaterial3D_g2kh4")
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=379677743]
 size = Vector3(1.2, 0.6, 1.2)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=167231131]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 size = Vector3(1.4, 0.2, 1.4)
 
-[node name="Sprite3D" type="Sprite3D" parent="CSGCombiner3D"]
+[node name="Sprite3D" type="Sprite3D" parent="CSGCombiner3D" unique_id=206996295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
 offset = Vector2(0, 24)
 modulate = Color(0.619608, 0.568627, 0.74902, 1)
@@ -108,7 +108,7 @@ render_priority = 1
 texture = ExtResource("5_cjbp1")
 hframes = 3
 
-[node name="Eye" type="AnimatedSprite3D" parent="CSGCombiner3D"]
+[node name="Eye" type="AnimatedSprite3D" parent="CSGCombiner3D" unique_id=1903299875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98, 0)
 offset = Vector2(0, 24)
 pixel_size = 0.03
@@ -118,11 +118,11 @@ render_priority = 2
 sprite_frames = SubResource("SpriteFrames_et4if")
 frame_progress = 0.79504
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1994456210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.891062, 0)
 shape = SubResource("BoxShape3D_8c3ws")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=191721385]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 1.44106, 0)
 material_override = SubResource("StandardMaterial3D_4210m")
 transparency = 1.0
@@ -132,7 +132,7 @@ collision_layer = 7
 collision_mask = 7
 size = Vector3(1.4, 2.6, 1.4)
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=796105210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.14106, 0)
 visible = false
 pixel_size = 0.01

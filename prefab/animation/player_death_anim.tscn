@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://du62gvfekrgth"]
+[gd_scene format=3 uid="uid://du62gvfekrgth"]
 
 [ext_resource type="Script" uid="uid://rm7uqe1b5i56" path="res://src/animations/player_death_anim.gd" id="1_aqf1p"]
 [ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/entity/player.png" id="2_oxswj"]
@@ -238,24 +238,24 @@ _data = {
 &"main": SubResource("Animation_idnxk")
 }
 
-[node name="PlayerDeathAnim" type="Node3D"]
+[node name="PlayerDeathAnim" type="Node3D" unique_id=608876072]
 script = ExtResource("1_aqf1p")
 
-[node name="Sprite" type="Sprite3D" parent="."]
+[node name="Sprite" type="Sprite3D" parent="." unique_id=444755300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 pixel_size = 0.03
 billboard = 1
 texture_filter = 0
 texture = ExtResource("2_oxswj")
 
-[node name="Ripple" type="Sprite3D" parent="."]
+[node name="Ripple" type="Sprite3D" parent="." unique_id=1522149059]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 pixel_size = 0.0001
 axis = 1
 texture_filter = 0
 texture = ExtResource("3_i2tay")
 
-[node name="Ripple2" type="Sprite3D" parent="."]
+[node name="Ripple2" type="Sprite3D" parent="." unique_id=343840407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 modulate = Color(1, 1, 1, 0)
 pixel_size = 0.11
@@ -263,7 +263,7 @@ axis = 1
 texture_filter = 0
 texture = ExtResource("3_i2tay")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1802562585]
 emitting = false
 amount = 64
 lifetime = 1.5
@@ -273,12 +273,10 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_i2tay")
 draw_pass_1 = SubResource("PlaneMesh_yyxaj")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ktv1i")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=1722672827]
+libraries/ = SubResource("AnimationLibrary_ktv1i")
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=1317933157]
 stream = ExtResource("5_yyxaj")
 unit_size = 7.0
 pitch_scale = 1.1

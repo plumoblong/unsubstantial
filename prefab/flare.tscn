@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://jhxjwgwpgfo3"]
+[gd_scene format=3 uid="uid://jhxjwgwpgfo3"]
 
 [ext_resource type="Script" uid="uid://d0iftfqyfaars" path="res://prefab/menus/flare.gd" id="1_4ncae"]
 
-[node name="Flare" type="ColorRect"]
+[node name="Flare" type="ColorRect" unique_id=2143146083]
 visible = false
 offset_right = 480.0
 offset_bottom = 270.0

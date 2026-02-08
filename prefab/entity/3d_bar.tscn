@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbeov66ersklw"]
+[gd_scene format=3 uid="uid://cbeov66ersklw"]
 
 [ext_resource type="Texture2D" uid="uid://disi2pq8kabfc" path="res://images/ui/bar_sheet.png" id="1_1quof"]
 [ext_resource type="Script" uid="uid://b7b5j6bracfv6" path="res://src/component/3dui_bar.gd" id="2_rve22"]
 
-[node name="3DBar" type="Sprite3D"]
+[node name="3DBar" type="Sprite3D" unique_id=1370733443]
 visibility_range_end = 15.0
 visibility_range_end_margin = 2.0
 visibility_range_fade_mode = 1

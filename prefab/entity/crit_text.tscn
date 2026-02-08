@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://crdpa3bc3bh0r"]
+[gd_scene format=3 uid="uid://crdpa3bc3bh0r"]
 
 [ext_resource type="Script" uid="uid://d2l3cu75ctnr4" path="res://src/entity/crit_text.gd" id="1_cj7v6"]
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="2_h4vh4"]
 
-[node name="CritText" type="Node3D"]
+[node name="CritText" type="Node3D" unique_id=1794363761]
 script = ExtResource("1_cj7v6")
 
-[node name="Sprite" type="Label3D" parent="."]
+[node name="Sprite" type="Label3D" parent="." unique_id=838870809]
 pixel_size = 0.0025
 billboard = 1
 double_sided = false

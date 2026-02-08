@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c3g7y6xs8honh"]
+[gd_scene format=3 uid="uid://c3g7y6xs8honh"]
 
 [ext_resource type="Script" uid="uid://dc8kriy73evxm" path="res://src/menus/transition.gd" id="1_m4dgr"]
 [ext_resource type="Texture2D" uid="uid://bapowrd50hbbx" path="res://images/entity/player_rotation.png" id="1_w5lrs"]
@@ -7,7 +7,7 @@
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="5_nonil"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="6_5wkvi"]
 [ext_resource type="Material" uid="uid://c4e8vymr51sw7" path="res://material/ether_overlay.tres" id="7_cc0i3"]
-[ext_resource type="Texture2D" uid="uid://slhiqf47cg0t" path="res://textures/world/player_essence.png" id="8_545wm"]
+[ext_resource type="Texture2D" uid="uid://cxvt6el5g3tp5" path="res://textures/world/player_essence.png" id="8_545wm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nonil"]
 blend_mode = 2
@@ -209,15 +209,15 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[node name="Transition" type="CanvasLayer"]
+[node name="Transition" type="CanvasLayer" unique_id=1448676005]
 layer = 3
 script = ExtResource("1_m4dgr")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2033630097]
 offset_right = 480.0
 offset_bottom = 270.0
 
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=240397298]
 modulate = Color(0.472845, 0.472845, 0.472845, 1)
 material = SubResource("CanvasItemMaterial_nonil")
 position = Vector2(218, -10)
@@ -229,7 +229,7 @@ trail_sections = 5
 trail_section_subdivisions = 5
 process_material = SubResource("ParticleProcessMaterial_cnby6")
 
-[node name="GPUParticles2D3" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="." unique_id=1547899306]
 modulate = Color(0.708186, 0.708186, 0.708186, 1)
 material = SubResource("CanvasItemMaterial_5wkvi")
 position = Vector2(218, -10)
@@ -239,19 +239,19 @@ texture = ExtResource("1_xgbm6")
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_bj6dk")
 
-[node name="Player" type="AnimatedSprite2D" parent="."]
+[node name="Player" type="AnimatedSprite2D" parent="." unique_id=1329052803]
 material = SubResource("CanvasItemMaterial_hpfwl")
 position = Vector2(216, 300)
 sprite_frames = SubResource("SpriteFrames_hnilo")
 autoplay = "default"
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=588382475]
 modulate = Color(0.554309, 0.554309, 0.554309, 1)
 use_parent_material = true
 scale = Vector2(0.7, 1.5)
 texture = ExtResource("2_eciup")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Player"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Player" unique_id=1693195527]
 modulate = Color(0.490948, 0.490948, 0.490948, 1)
 use_parent_material = true
 amount = 24
@@ -260,18 +260,16 @@ lifetime = 1.5
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_fd4ek")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t7m85")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=273619410]
+libraries/ = SubResource("AnimationLibrary_t7m85")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=135150289]
 modulate = Color(0.454742, 0.454742, 0.454742, 1)
 scale = Vector2(1, 270)
 texture = SubResource("GradientTexture1D_a12dk")
 centered = false
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1486748770]
 visible = false
 material = SubResource("ShaderMaterial_cc0i3")
 offset_top = 219.0
@@ -282,7 +280,7 @@ theme_override_font_sizes/font_size = 8
 text = "HI CZESC"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=694617551]
 texture_repeat = 2
 material = ExtResource("7_cc0i3")
 offset_right = 480.0
