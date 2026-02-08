@@ -43,6 +43,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_8up4n")
 stat_name = "Shot Range"
 image = ExtResource("1_8up4n")
+weight = 0.9
 shop_cost = 150
 modulates = Dictionary[ExtResource("1_s0w6h"), int]({
 SubResource("Resource_0631i"): 12,

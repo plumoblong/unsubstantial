@@ -4,9 +4,7 @@
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="1_jvg2f"]
 [ext_resource type="Script" uid="uid://kjpqppxmflnb" path="res://src/component/camera.gd" id="2_t4gyb"]
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="3_lq4sc"]
-[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="4_xed6q"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="5_gk4kr"]
-[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="5_qqhji"]
 [ext_resource type="Script" uid="uid://c3klywbeud1cv" path="res://src/component/dash_component.gd" id="6_4p10s"]
 [ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/component/player_movement.gd" id="6_qqhji"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_d7qgd"]
@@ -15,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://16hgcrj87yib" path="res://images/swoosh1.png" id="9_j401f"]
 [ext_resource type="Script" uid="uid://cxtg4t1vqrpka" path="res://src/component/item_stats.gd" id="9_m21cj"]
 [ext_resource type="Texture2D" uid="uid://r6s00gqu01qt" path="res://images/ui/transparent.png" id="10_7yx1s"]
+[ext_resource type="Resource" uid="uid://urpkcw7ubogg" path="res://res/bullet_cfg/player_default.tres" id="11_62pul"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="14_m35d1"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="16_38g7u"]
 [ext_resource type="PackedScene" uid="uid://bnfk1f1uvunre" path="res://prefab/menus/player_hud.tscn" id="17_dbo8y"]
@@ -195,29 +194,9 @@ _data = {
 &"viewbob": SubResource("Animation_lr1bw")
 }
 
-[sub_resource type="Resource" id="Resource_ju7jx"]
-script = ExtResource("5_qqhji")
-size_mult = 1.25
-fire_rate = 0.8
-spread_angle = 0.0
-homing = 1.0
-can_parry = false
-metadata/_custom_type_script = "uid://0l4omg7gk8m8"
-
-[sub_resource type="Resource" id="Resource_xed6q"]
-script = ExtResource("5_qqhji")
-size_mult = 1.25
-spread_angle = 0.0
-knockback = 32.0
-homing = 0.25
-fall_speed = 0.25
-life_time = 0.5
-can_parry = false
-metadata/_custom_type_script = "uid://0l4omg7gk8m8"
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih3o"]
-radius = 0.35
-height = 1.0
+radius = 0.25
+height = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
 radius = 1.0
@@ -368,8 +347,6 @@ omni_range = 15.0
 
 [node name="ShootComponent" type="Node" parent="." unique_id=108388983]
 script = ExtResource("3_lq4sc")
-shoot_delay = 0.04
-config = SubResource("Resource_ju7jx")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1545350429 node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
 script = ExtResource("6_qqhji")
@@ -391,7 +368,7 @@ y_multiplier = 0.4
 
 [node name="ItemStats" type="Node" parent="." unique_id=405505347]
 script = ExtResource("9_m21cj")
-bullet = SubResource("Resource_xed6q")
+bullet = ExtResource("11_62pul")
 
 [node name="DashComponent" type="Node" parent="." unique_id=1322946939]
 script = ExtResource("6_4p10s")

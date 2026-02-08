@@ -6,7 +6,7 @@ class_name PlayerMoveComponent
 # >|o
 
 @export var hitbox : CollisionShape3D
-@onready var original_capsule_height = hitbox.shape.height
+@onready var original_capsule_height : float = hitbox.shape.height
 @export var dash : DashComponent
 @export var land_sfx : AudioStreamPlayer3D
 @export var jump_sfx : AudioStreamPlayer3D
@@ -26,12 +26,6 @@ var ground_accel : float = 14.0
 var ground_decel : float = 7.0
 var ground_friction : float = 3.5
 
-#crouch
-#const CROUCH_TRANSLATE : float = 0.7
-#const CROUCH_JUMP_ADD : float = CROUCH_TRANSLATE * 0.8
-#@export var crouch_speed : float = 0.15 # multiplied by walk_speed
-#var crouching : bool = false
-
 var slope_fall_speed : float = 500.0
 var noclip_speed : float = 25.0
 
@@ -46,168 +40,163 @@ var speed_bonus : float = 1.0
 var noclip : bool = false
 var auto_bhop : bool = false
 
+# Cached references
+var _player : Player
+var _player_velocity : Vector3
+var _is_dashing : bool
+var _is_alive : bool
+
 signal just_landed
 
 func _ready() -> void:
 	assert(get_parent() is Player)
+	_player = get_parent()
 
 func landed() -> void:
 	just_landed.emit()
 	land_sfx.pitch_scale = randf_range(0.9, 1.1)
 	land_sfx.play()
-	
+
 func update(delta : float) -> void:
 	if not enabled: return
-	if get_parent().essence_component.alive:
-		input_dir = Input.get_vector("left", "right", "up", "down").normalized()
-		moving = lerpf(moving, get_parent().velocity.length() / walk_speed * float(get_parent().is_on_floor() and not dash.dashing), 0.1)
-		if not dash.dashing: wish_dir = get_parent().global_transform.basis * Vector3(input_dir.x, .0, input_dir.y)
-		if noclip:
-			var spd : float = noclip_speed
-			if Input.is_action_pressed("jump"):
-				spd = noclip_speed * 2.0
-			else:
-				spd = noclip_speed
-			get_parent().velocity = wish_dir * spd
-			if Input.is_action_pressed("shoot"):
-				get_parent().velocity.y = spd
-			elif Input.is_action_pressed("dash"):
-				get_parent().velocity.y = -spd
-			else:
-				get_parent().velocity.y = 0.0
-		else:
-			
-			if auto_bhop:
-				if can_jump:
-					if Input.is_action_pressed("jump"):
-						handle_jump(delta, jump_velocity)
-			else:
-				if Input.is_action_just_pressed("jump"):
-					jump_buffer_timer.start()
-				if can_jump and not jump_buffer_timer.is_stopped():
-					handle_jump(delta, jump_velocity)
-			
-			#if rad_to_deg(get_parent().get_floor_angle()) != 0.0:
-			if not dash.dashing:
-				if get_parent().velocity.y >= 0:
-					
-					get_parent().velocity.y -= fall_speed * delta
-				else:
-					get_parent().velocity.y -= fall_speed * 1.2 * delta
-				
-			if get_parent().is_on_floor():
-				can_jump = true
-				if not was_on_floor:
-					landed()
-				if not dash.dashing:
-					handle_ground(delta)
-				was_on_floor = true
-				speed_bonus = clampf(lerpf(speed_bonus, 1.0, 0.03), 0.24, 1.75)
-			else:
-				can_jump = false
-				if not dash.dashing:
-					handle_air(delta)
-				was_on_floor = false
+	
+	# Cache frequently accessed properties
+	_is_alive = _player.essence_component.alive
+	_is_dashing = dash.dashing
+	_player_velocity = _player.velocity
+	
+	if not _is_alive:
+		_player.velocity = Vector3.ZERO
+		return
+	
+	# Input handling
+	input_dir = Input.get_vector("left", "right", "up", "down").normalized()
+	var is_on_floor : bool = _player.is_on_floor()
+	moving = lerpf(moving, _player_velocity.length() / walk_speed * float(is_on_floor and not _is_dashing), 0.1)
+	
+	if not _is_dashing:
+		wish_dir = _player.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+	
+	if noclip:
+		_handle_noclip()
 	else:
-		get_parent().velocity = Vector3.ZERO
-	
-	
-	
-	
-func handle_ground(delta : float) -> void:
-	# Similar to the air movement. Acceleration and friction on ground.
-	if not enabled: return
-	var cur_speed_in_wish_dir : float = get_parent().velocity.dot(wish_dir)
-	var add_speed_till_cap : float = walk_speed * speed_bonus - cur_speed_in_wish_dir
-	if add_speed_till_cap > 0.0:
-		var accel_speed : float = ground_accel * delta * walk_speed * speed_bonus
-		accel_speed = minf(accel_speed, add_speed_till_cap)
-		get_parent().velocity += accel_speed * wish_dir
-	# Apply friction
-	var control : float = max(get_parent().velocity.length(), ground_decel)
-	var drop : float = control * ground_friction * delta
-	var new_speed : float = max(get_parent().velocity.length() - drop, 0.0)
-	if get_parent().velocity.length() > 0.0:
-		new_speed /= get_parent().velocity.length()
-	var side_vel : Vector2 = Vector2(get_parent().velocity.x * new_speed, get_parent().velocity.z * new_speed).limit_length(walk_speed * ground_cap * speed_bonus)
-	get_parent().velocity = Vector3(side_vel.x, get_parent().velocity.y, side_vel.y)
-	
-#func handle_crouch(delta : float) -> void:
-	#var was_crouched_last_frame : bool = crouching
-	#if Input.is_action_pressed("crouch"):
-		#crouching = true
-	#elif crouching and not get_parent().test_move(get_parent().global_transform, Vector3(0,CROUCH_TRANSLATE,0)):
-		#crouching = false
-	#var translate_y_if_possible : float = 0.0
-	#if was_crouched_last_frame != crouching and not get_parent().is_on_floor():
-		#translate_y_if_possible = CROUCH_JUMP_ADD if crouching else -CROUCH_JUMP_ADD
-#
-	#if translate_y_if_possible != 0.0:
-		#var result : KinematicCollision3D = KinematicCollision3D.new()
-		#get_parent().test_move(get_parent().global_transform, Vector3(0, translate_y_if_possible, 0), result)
-		#get_parent().position.y += result.get_travel().y
-	#
-	#get_parent().camera.head_base_height = 1.825 + (-CROUCH_TRANSLATE if crouching else 0)
-	#hitbox.shape.height = original_capsule_height - CROUCH_TRANSLATE if crouching else original_capsule_height
-	#hitbox.position.y = hitbox.shape.height / 2
-func handle_air(delta : float) -> void:
-	# Classic battle tested & fan favorite source/quake air movement recipe.
-	# CSS players gonna feel their gamer instincts kick in with this one
-	if not enabled: return
-	var cur_speed_in_wish_dir : float = get_parent().velocity.dot(wish_dir)
-	# Wish speed (if wish_dir > 0 length) capped to air_cap
-	var capped_speed : float = min((air_move_speed * wish_dir).length(), air_cap)
-	# How much to get to the speed the player wishes (in the new dir)
-	# Notice this allows for infinite speed. If wish_dir is perpendicular, we always need to add velocity
-	#  no matter how fast we're going. This is what allows for things like bhop in CSS & Quake.
-	# Also happens to just give some very nice feeling movement & responsiveness when in the air.
-	var add_speed_till_cap : float = capped_speed - cur_speed_in_wish_dir
-	if add_speed_till_cap > 0.0:
-		var accel_speed : float = air_accel * delta # Usually is adding this one.
-		#accel_speed = min(accel_speed, add_speed_till_cap) # Works ok without this but sticking to the recipe
-		get_parent().velocity += accel_speed * air_move_speed * wish_dir
-	
-	if get_parent().is_on_wall():
-		if is_surface_too_steep(get_parent().get_wall_normal()):
-			get_parent().motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+		_handle_jump_input(delta)
+		_handle_gravity(delta)
+		
+		if is_on_floor:
+			_handle_floor_logic(delta)
 		else:
-			get_parent().motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
-		clip_velocity(get_parent().get_wall_normal(), 1)
+			can_jump = false
+			if not _is_dashing:
+				handle_air(delta)
+			was_on_floor = false
 	
+	# Apply cached velocity back
+	_player.velocity = _player_velocity
+
+func _handle_noclip() -> void:
+	var spd : float = noclip_speed * (2.0 if Input.is_action_pressed("jump") else 1.0)
+	_player_velocity = wish_dir * spd
+	
+	if Input.is_action_pressed("shoot"):
+		_player_velocity.y = spd
+	elif Input.is_action_pressed("dash"):
+		_player_velocity.y = -spd
+	else:
+		_player_velocity.y = 0.0
+
+func _handle_jump_input(delta : float) -> void:
+	if auto_bhop:
+		if can_jump and Input.is_action_pressed("jump"):
+			handle_jump(delta, jump_velocity)
+	else:
+		if Input.is_action_just_pressed("jump"):
+			jump_buffer_timer.start()
+		if can_jump and not jump_buffer_timer.is_stopped():
+			handle_jump(delta, jump_velocity)
+
+func _handle_gravity(delta : float) -> void:
+	if _is_dashing: return
+	
+	var gravity_multiplier : float = 1.2 if _player_velocity.y < 0 else 1.0
+	_player_velocity.y -= fall_speed * gravity_multiplier * delta
+
+func _handle_floor_logic(delta : float) -> void:
+	can_jump = true
+	if not was_on_floor:
+		landed()
+	if not _is_dashing:
+		handle_ground(delta)
+	was_on_floor = true
+	speed_bonus = clampf(lerpf(speed_bonus, 1.0, 0.03), 0.24, 1.75)
+
+func handle_ground(delta : float) -> void:
+	if not enabled: return
+	
+	# Acceleration
+	var cur_speed_in_wish_dir : float = _player_velocity.dot(wish_dir)
+	var add_speed_till_cap : float = walk_speed * speed_bonus - cur_speed_in_wish_dir
+	
+	if add_speed_till_cap > 0.0:
+		var accel_speed : float = minf(ground_accel * delta * walk_speed * speed_bonus, add_speed_till_cap)
+		_player_velocity += accel_speed * wish_dir
+	
+	# Friction
+	var velocity_length : float = _player_velocity.length()
+	var control : float = maxf(velocity_length, ground_decel)
+	var drop : float = control * ground_friction * delta
+	var new_speed : float = maxf(velocity_length - drop, 0.0)
+	
+	if velocity_length > 0.0:
+		new_speed /= velocity_length
+		var side_vel : Vector2 = Vector2(_player_velocity.x * new_speed, _player_velocity.z * new_speed).limit_length(walk_speed * ground_cap * speed_bonus)
+		_player_velocity = Vector3(side_vel.x, _player_velocity.y, side_vel.y)
+
+func handle_air(delta : float) -> void:
+	if not enabled: return
+	
+	var cur_speed_in_wish_dir : float = _player_velocity.dot(wish_dir)
+	var capped_speed : float = minf((air_move_speed * wish_dir).length(), air_cap)
+	var add_speed_till_cap : float = capped_speed - cur_speed_in_wish_dir
+	
+	if add_speed_till_cap > 0.0:
+		var accel_speed : float = air_accel * delta
+		_player_velocity += accel_speed * air_move_speed * wish_dir
+	
+	if _player.is_on_wall():
+		var wall_normal : Vector3 = _player.get_wall_normal()
+		_player.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING if is_surface_too_steep(wall_normal) else CharacterBody3D.MOTION_MODE_GROUNDED
+		clip_velocity(wall_normal, 1)
+
 func clip_velocity(normal: Vector3, overbounce : float) -> void:
-	# When strafing into wall, + gravity, velocity will be pointing much in the opposite direction of the normal
-	# So with this code, we will back up and off of the wall, cancelling out our strafe + gravity, allowing surf.
-	var backoff : float = get_parent().velocity.dot(normal) * overbounce
-	# Not in original recipe. Maybe because of the ordering of the loop, in original source it
-	# shouldn't be the case that velocity can be away away from plane while also colliding.
-	# Without this, it's possible to get stuck in ceilings
+	var backoff : float = _player_velocity.dot(normal) * overbounce
 	if backoff >= 0.0: return
 	
-	var change = normal * backoff
-	get_parent().velocity -= change
+	var change : Vector3 = normal * backoff
+	_player_velocity -= change
 	
-	# Second iteration to make sure not still moving through plane
-	# Not sure why this is necessary but it was in the original recipe so keeping it.
-	var adjust : float = get_parent().velocity.dot(normal)
+	# Second iteration
+	var adjust : float = _player_velocity.dot(normal)
 	if adjust < 0.0:
-		get_parent().velocity -= normal * adjust
+		_player_velocity -= normal * adjust
 
 func is_surface_too_steep(normal : Vector3) -> bool:
-	var max_slope_ang_dot = Vector3.UP.rotated(Vector3(1.0,0,0), get_parent().floor_max_angle).dot(Vector3.UP)
-	if normal.dot(Vector3.UP) < max_slope_ang_dot:
-		return true
-	return false
+	var max_slope_ang_dot : float = Vector3.UP.rotated(Vector3(1.0, 0.0, 0.0), _player.floor_max_angle).dot(Vector3.UP)
+	return normal.dot(Vector3.UP) < max_slope_ang_dot
 
 func handle_jump(delta : float, speed : float = jump_velocity) -> void:
 	if not enabled: return
+	
 	jump_sfx.pitch_scale = randf_range(0.9, 1.1)
-	var act_speed : float = speed * Engine.time_scale
-	if get_parent().is_on_floor():
-		get_parent().velocity += get_parent().get_floor_normal() * act_speed
+	var act_speed : float = speed / Engine.time_scale
+	
+	if _player.is_on_floor():
+		_player_velocity += _player.get_floor_normal() * act_speed
 	else:
-		if get_parent().velocity.y > speed and not dash.dashing:
-			get_parent().velocity.y += act_speed
+		if _player_velocity.y > speed and not _is_dashing:
+			_player_velocity.y += act_speed
 		else:
-			get_parent().velocity.y = act_speed
+			_player_velocity.y = act_speed
+	
 	can_jump = false
 	jump_sfx.play()

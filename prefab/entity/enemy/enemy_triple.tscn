@@ -23,7 +23,7 @@ script = ExtResource("8_7vmag")
 damage = 60
 fire_rate = 1.3
 shots = 3
-fall_speed = -0.1
+fall_speed = -0.3
 can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 

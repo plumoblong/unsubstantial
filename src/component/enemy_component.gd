@@ -53,8 +53,8 @@ func setup(esc : EssenceComponent) -> void:
 	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
 	if not use_difficulty_factor: return
 	damage *= _G.game.enemy_multiplier
-	esc.essence *= get_difficulty_factor(0.5)
-	esc.max_essence *= get_difficulty_factor(0.5)
+	esc.essence *= get_difficulty_factor(0.75)
+	esc.max_essence *= get_difficulty_factor(0.75)
 	esc.die_threshold *= get_difficulty_factor(0.75)
 	#get_parent().scale *= clamp(get_difficulty_factor(0.05), 1.0, 1.5)
 	
@@ -98,7 +98,7 @@ func handle_death() -> void:
 	_G.game.create_ghost(get_parent().global_position, sprite.texture, sprite.pixel_size * get_parent().scale.y)
 	_G.current_run.kills += 1
 	_G.game.enemies_killed += 1
-	_G.game.create_xporb(get_parent().global_position, int(ceil(float(xp_payout * _G.game.enemy_multiplier))), xp_radius)
+	_G.game.create_xporb(get_parent().global_position, xp_payout, xp_radius)
 	get_parent().queue_free.call_deferred()
 
 func shoot_to_player(shoot_component : ShootComponent, target_mult : float = 1.5, y_offset : float = 0.2) -> void:

@@ -22,17 +22,14 @@ func _ready() -> void:
 	level_failed.connect(_G.game.map_build_failed)
 	
 func build(file_path : String) -> void:
-
 	map_builder.local_map_file = file_path
+	_G.game.current_map_path = file_path
 	map_builder.build()
 	map_building = true
-
 	
 func map_build_complete() -> void:
 	if bake_navmesh:
 		bake_navigation_mesh()
-	else: bake_finished()
-	
 
 func map_build_failed() -> void:
 	_T.say("Map failed to build. Check the log for more information", Color.RED)
@@ -45,3 +42,4 @@ func bake_finished() -> void:
 	_G.game.in_ether = chapter_id == 0
 	_G.game.chapter.current = _G.game.chapter.all[chapter_id]
 	map_building = false
+	_G.game.update_rpc()

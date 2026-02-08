@@ -6,11 +6,21 @@ class_name ChapterManager
 @export var all : Array[Chapter]
 @export var special : Array[Chapter]
 
+const MAP_PREFIX : String = "res://maps/"
+const MAP_SUFFIX : String = ".map"
+
+var last_map : int = -1
+
 func get_map() -> String:
-	if current.map_fallback.is_empty(): return "res://maps/chapter1/map_1.map"
-	if current.maps.is_empty(): return "res://maps/" + current.map_fallback + ".map"
-	if not current.remove_maps_from_pool: return "res://maps/" + current.maps.pick_random() + ".map"
-	var n : int = randi_range(0, current.maps.size() - 1)
-	var map : String = current.maps[n]
-	current.maps.remove_at(n)
-	return "res://maps/" + map + ".map"
+	if current.maps.is_empty(): return MAP_PREFIX + current.map_fallback + MAP_SUFFIX
+	var maps : Array[String] = compile_map_array()
+	var chosen : String = MAP_PREFIX + maps[randi() % maps.size()] + MAP_SUFFIX
+	_T.say(chosen)
+	return chosen
+		
+func compile_map_array() -> Array[String]:
+	var maps : Array[String] = current.maps
+	if last_map >= 0 and last_map < maps.size():
+		maps.remove_at(last_map)
+	_T.say(maps)
+	return maps

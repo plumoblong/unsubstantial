@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BulletSettings" format=3 uid="uid://urpkcw7ubogg"]
+
+[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="1_pvhna"]
+[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="2_g3jxu"]
+
+[resource]
+script = ExtResource("2_g3jxu")
+size_mult = 1.25
+spread_angle = 0.0
+knockback = 32.0
+homing = 0.25
+fall_speed = 0.25
+life_time = 0.5
+can_parry = false
+metadata/_custom_type_script = "uid://0l4omg7gk8m8"

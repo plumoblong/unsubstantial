@@ -4,6 +4,7 @@ var can_reset : bool = false
 
 func _ready() -> void:
 	#_G.save.can_continue = false
+	_G.change_discord_rpc(false, "Game Over", str(_G.current_run.score) + " Score", "", "")
 	$DarkMode.visible = _G.config.ui_dark_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Reason.text = _G.current_run.die_reason

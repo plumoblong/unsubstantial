@@ -1,6 +1,5 @@
-[gd_scene load_steps=22 format=3 uid="uid://dpukikjfsg34i"]
+[gd_scene format=3 uid="uid://d27hum87eioec"]
 
-[ext_resource type="Script" uid="uid://c2qm8sqdeucwu" path="res://src/entity/item_stall.gd" id="1_kkrgu"]
 [ext_resource type="Texture2D" uid="uid://c4e3rvpsimumw" path="res://textures/world/marble.png" id="3_jlal2"]
 [ext_resource type="Texture2D" uid="uid://dmllxu5e0ctan" path="res://textures/world/poison_g.png" id="4_hc2id"]
 [ext_resource type="Texture2D" uid="uid://ckyirw0vnltwn" path="res://textures/world/poison_norm.png" id="4_jlal2"]
@@ -9,6 +8,145 @@
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="6_kam1u"]
 [ext_resource type="Script" uid="uid://5ocjh4l18ly4" path="res://src/class/interaction.gd" id="7_6uf45"]
 [ext_resource type="AudioStream" uid="uid://bq57e5tm1s2c0" path="res://sfx/ui/accept.wav" id="10_jlal2"]
+
+[sub_resource type="GDScript" id="GDScript_qxfgl"]
+script/source = "@tool
+extends Node3D
+class_name ItemStall
+
+@export var func_godot_properties : Dictionary = {
+	\"item\" = \"random\",
+	\"blind_chance\" = 15.0,
+	\"blind_type\" = 0
+}
+
+var item : Item = null
+var blind : bool = false
+
+var random_pool : ItemPoolManager.Pool
+var item_name : String = \"Unknown\"
+var item_desc : String = \"Unknown\"
+var collected : bool = false
+
+@export var item_override : Item # pusta zmienna -  bierze z item poolki
+@export var free : bool = true
+@export var blind_chance : float = 15.0
+@export var blind_type : bool = false
+@export var link_to_stall : NodePath
+@export var link_to_gate : NodePath
+
+@onready var sprite : Sprite3D = get_node(\"Item\")
+@onready var interaction : Interaction = get_node(\"Interaction\")
+
+var linked_stall : ItemStall
+var linked_gate : Gate
+var reroll : bool = false
+
+##Gets item from Trenchbroom map entity config.
+func get_item_from_tb() -> void:
+
+	if func_godot_properties[\"blind_chance\"] != null:
+		blind_chance = bool(func_godot_properties[\"blind_chance\"])
+	if func_godot_properties[\"blind_type\"] != null:
+		blind_type = func_godot_properties[\"blind_chance\"]
+	if func_godot_properties[\"item\"] == \"random\" or func_godot_properties[\"item\"] == \"\":
+		return
+	else:
+		var item_res = load(\"res://res/item/\" + func_godot_properties[\"item\"] + \".tres\")
+		if item_res != null:
+			item = item_res
+			
+func _ready() -> void:
+	if Engine.is_editor_hint(): return
+	get_item_from_tb()
+	if link_to_stall != NodePath(\"\"):
+		linked_stall = get_node(link_to_stall)	
+	if link_to_gate != NodePath(\"\"):
+		linked_gate = get_node(link_to_gate)
+	if item_override == null:
+		item = _G.game.item_pool.pick_an_item(random_pool)
+	else:
+		item = item_override
+	var c : float = randf_range(0.0, 100.0)
+	if c <= blind_chance:
+		blind = true
+	else:
+		blind = false
+	if not blind_type:
+		$Blind.frame = item.type
+	else:
+		$Blind.frame = 0
+	$Blind.visible = blind
+	$Item.visible = not blind
+	#$Ambient.play()
+
+func _process(_delta : float) -> void:
+	#if reroll: use_reroll()
+	if Engine.is_editor_hint(): return
+	if item.type > 0:
+		$GPUParticles3D.amount = item.type
+	else:
+		$GPUParticles3D.hide()
+	#$OmniLight3D.omni_range = float(item.type) + 1.0
+	if not blind_type:
+		match item.type:
+			Item.TYPE.UNCOMMON:
+				$OmniLight3D.light_color = Color.CYAN
+			Item.TYPE.RARE:
+				$OmniLight3D.light_color = Color.MAGENTA
+			Item.TYPE.LEGENDARY:
+				$OmniLight3D.light_color = Color.GOLD
+			Item.TYPE.BOSS:
+				$OmniLight3D.light_color = Color.RED
+			_:
+				$OmniLight3D.light_color = Color.WHITE
+	else:
+		$OmniLight3D.light_color = Color.WHITE
+
+	sprite.texture = item.image
+	$ID.text = str(item.item_name)
+	$ID.visible = _G.debug_mode
+	
+	if linked_stall != null:
+		if linked_stall is ItemStall:
+			if linked_stall.collected:
+				destroy()
+				linked_stall.destroy()
+	
+	if linked_gate != null:
+		if linked_gate is Gate:
+			if collected:
+				if linked_gate.done == false: 
+					linked_gate.done = true
+			
+	$Interaction.enabled = not collected
+
+	if $Interaction.can_interact:
+		if not blind:
+			if free:
+				interaction.interaction_tooltip = \"Get [wave]\" + item.item_name.to_upper()
+			else:
+				interaction.interaction_tooltip = \"Get [wave]\" + item.item_name.to_upper()+ \"[/wave] for \" + str(item.shop_cost) + \"esc\"
+			interaction.description_tooltip = item.item_description
+		else:
+			if free:
+				interaction.interact_tooltip = \"Get [wave]???\" 
+			else:
+				interaction.interact_tooltip = \"Get [wave]???[/wave] for \" + str(item.shop_cost) + \"esc\"
+			interaction.description_tooltip = \"???\"
+
+	
+func interaction_interacted() -> void:
+	destroy()
+	_G.player.items.append(item)
+	if not free: _G.player.essence_component.fracture(item.shop_cost)
+
+func destroy() -> void:
+	if collected: return
+	collected = true
+	$AnimationPlayer.play(\"take\")
+	$SFX.play()
+"
 
 [sub_resource type="Shader" id="Shader_mr311"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
@@ -331,9 +469,9 @@ _data = {
 &"take": SubResource("Animation_jlal2")
 }
 
-[node name="ItemStall" type="Node3D"]
+[node name="ItemStall" type="Node3D" unique_id=1424553465]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
-script = ExtResource("1_kkrgu")
+script = SubResource("GDScript_qxfgl")
 func_godot_properties = {
 &"blind_chance": 15.0,
 &"blind_type": false,
@@ -341,34 +479,34 @@ func_godot_properties = {
 }
 blind_type = true
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=2060131018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2881, 0)
 material_override = SubResource("ShaderMaterial_8t1ur")
 use_collision = true
 collision_layer = 255
 collision_mask = 255
 
-[node name="CSGBox3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1029360203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.332031, 0)
 radius = 0.594
 height = 1.91406
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=27108722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0.7, 5.96046e-08)
 size = Vector3(1.2, 0.3, 1.2)
 
-[node name="Glass" type="CSGBox3D" parent="."]
+[node name="Glass" type="CSGBox3D" parent="." unique_id=1333278116]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 2.65319, 5.96046e-08)
 sorting_offset = 1.0
 size = Vector3(0.9, 1.4, 0.9)
 material = SubResource("StandardMaterial3D_8t1ur")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=625569002]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 2.72428, 0)
 light_energy = 0.5
 light_volumetric_fog_energy = 2.5
 
-[node name="Item" type="Sprite3D" parent="."]
+[node name="Item" type="Sprite3D" parent="." unique_id=1248426307]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.70613, 0)
 visible = false
 pixel_size = 0.035
@@ -378,7 +516,7 @@ texture_filter = 2
 render_priority = 1
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Blind" type="Sprite3D" parent="."]
+[node name="Blind" type="Sprite3D" parent="." unique_id=1157838223]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.70613, 0)
 pixel_size = 0.035
 billboard = 1
@@ -390,14 +528,14 @@ hframes = 5
 frame = 4
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1145711921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6881, 0)
 visible = false
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_f8p42")
 draw_pass_1 = ExtResource("5_1n4sn")
 
-[node name="ID" type="Label3D" parent="."]
+[node name="ID" type="Label3D" parent="." unique_id=1944044570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7881, 0)
 visible = false
 pixel_size = 0.03
@@ -409,17 +547,17 @@ text = "1000"
 font = ExtResource("6_kam1u")
 font_size = 8
 
-[node name="Interaction" type="Area3D" parent="."]
+[node name="Interaction" type="Area3D" parent="." unique_id=959773028]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40077, 0)
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("7_6uf45")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction" unique_id=863377737]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.670695, 0)
 shape = SubResource("CapsuleShape3D_7hmak")
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+[node name="SFX" type="AudioStreamPlayer3D" parent="." unique_id=441967619]
 transform = Transform3D(1.33333, 0, 0, 0, 1.33333, 0, 0, 0, 1.33333, 0, 1.40613, 0)
 stream = ExtResource("10_jlal2")
 volume_db = -15.196
@@ -428,10 +566,8 @@ pitch_scale = 0.84
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 12304.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_8t1ur")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1354835845]
+libraries/ = SubResource("AnimationLibrary_8t1ur")
 
 [connection signal="area_entered" from="Interaction" to="Interaction" method="area_entered"]
 [connection signal="area_exited" from="Interaction" to="Interaction" method="area_exited"]

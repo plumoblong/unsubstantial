@@ -13,7 +13,6 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 [sub_resource type="Resource" id="Resource_2t7kl"]
 script = ExtResource("1_xaaji")
 statistic = "crit_chance"
-operator = 2
 value = 5.0
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
@@ -21,7 +20,6 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 [sub_resource type="Resource" id="Resource_h05d7"]
 script = ExtResource("1_xaaji")
 statistic = "crit_chance"
-operator = 2
 value = 10.0
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
@@ -35,9 +33,9 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_vyk3q")
-stat_name = "% Crit Chance"
+stat_name = "Crit Chance"
 image = ExtResource("1_vyk3q")
-weight = 0.75
+weight = 0.5
 shop_cost = 250
 modulates = Dictionary[ExtResource("1_xaaji"), int]({
 SubResource("Resource_sfver"): 12,

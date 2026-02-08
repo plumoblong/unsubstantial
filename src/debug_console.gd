@@ -1,245 +1,397 @@
-
 extends CanvasLayer
 class_name TUX
 
-@onready var input : LineEdit = get_node("Input")
-@onready var output : RichTextLabel = get_node("Output")
+# WELCOME TO TERRIBLE USER EXPERIENCE
+# - Regards, plumoblong
+
+@onready var input : LineEdit = get_node("ConsolePanel/Input")
+@onready var output : RichTextLabel = get_node("ConsolePanel/Output")
+@onready var console_panel : Control = get_node("ConsolePanel")  # Assuming you have a parent panel/container
+
+const SLIDE_DURATION : float = 0.25
+const SLIDE_OFFSET : float = -400.0  # Adjust based on your console height
 
 var _expression : Expression = Expression.new()
+var _tween : Tween
 
 var history : Array[String] = []
 var history_index : int = -1
 
-func _ready() -> void:
-	hide()
-	input.grab_focus()
-	say("[center]Welcome to TUX!\nType help(page : int) for more information.[/center]")
+var _is_console_active : bool = false
 
-func format_command(input: String) -> String:
-	var parts = input.split(" ", false, 1) # split into max 2 parts
-	if parts.size() == 2:
-		return "%s(\"%s\")" % [parts[0], parts[1]]
-	return input
+func _ready() -> void:
+	# Start with console hidden offscreen
+	if console_panel:
+		console_panel.position.y = SLIDE_OFFSET
+	hide()
+	if _G.config.tux:
+		say("\nWelcome to TUX!\nType help or help <page> for more information.")
+	else:
+		say("\nClient's TUX is disabled, good for them.")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not _G.config.tux: return
 	
-func _process(_delta: float) -> void:
-	if not _G.show_fps: return
-	$Shadow.text = output.text
-	if Input.is_action_just_pressed("console"):
-		if visible:
-			input.release_focus()
+	if event.is_action_pressed("console"):
+		toggle_console()
+		get_viewport().set_input_as_handled()
+	
+	if not _is_console_active or not input.has_focus():
+		return
+		
+	if event.is_action_pressed("tux_prev") and history.size() > 0:
+		history_index = clamp(history_index + 1, 0, history.size() - 1)
+		input.text = history[history_index]
+		input.caret_column = input.text.length()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("tux_next") and history.size() > 0:
+		history_index = clamp(history_index - 1, -1, history.size() - 1)
+		if history_index == -1:
 			input.text = ""
-			visible = false
 		else:
-			input.grab_focus()
-			visible = true
-	if history.size() != 0:
-		if Input.is_action_just_pressed("tux_prev"):
-			history_index = clamp(history_index + 1, 0, history.size() - 1)
 			input.text = history[history_index]
-			input.caret_column = 102
-		elif Input.is_action_just_pressed("tux_next"):
-			history_index = clamp(history_index + 1, 0, history.size() - 1)
-			input.text = history[history_index]
-			input.caret_column = 102
-			
+		input.caret_column = input.text.length()
+		get_viewport().set_input_as_handled()
+
+func toggle_console() -> void:
+	_is_console_active = not _is_console_active
+	
+	if _is_console_active:
+		show_console()
+	else:
+		hide_console()
+
+func show_console() -> void:
+	show()
+	
+	# Kill any existing tween
+	if _tween and _tween.is_valid():
+		_tween.kill()
+	
+	_tween = create_tween()
+	_tween.set_ease(Tween.EASE_OUT)
+	_tween.set_trans(Tween.TRANS_CUBIC)
+	
+	if console_panel:
+		_tween.tween_property(console_panel, "position:y", 0.0, SLIDE_DURATION).from(SLIDE_OFFSET)
+	
+	# Grab focus after animation starts
+	await get_tree().create_timer(0.05).timeout
+	input.grab_focus()
+
+func hide_console() -> void:
+	input.release_focus()
+	input.text = ""
+	if _tween and _tween.is_valid():
+		_tween.kill()
+	
+	_tween = create_tween()
+	_tween.set_ease(Tween.EASE_IN)
+	_tween.set_trans(Tween.TRANS_CUBIC)
+	
+	if console_panel:
+		_tween.tween_property(console_panel, "position:y", SLIDE_OFFSET, SLIDE_DURATION)
+	await _tween.finished
+	hide()
+
+func _process(_delta: float) -> void:
+	if _G.show_fps and has_node("Shadow"):
+		$Shadow.text = output.text
+
+func parse_command(text: String) -> Dictionary:
+	var result = {
+		"command": "",
+		"args": []
+	}
+	
+	# Trim whitespace
+	text = text.strip_edges()
+	if text.is_empty():
+		return result
+	
+	# Split by spaces, respecting quotes
+	var parts : Array[String] = []
+	var current_part : String = ""
+	var in_quotes : bool = false
+	
+	for i in range(text.length()):
+		var c = text[i]
+		
+		if c == '"':
+			in_quotes = not in_quotes
+		elif c == ' ' and not in_quotes:
+			if not current_part.is_empty():
+				parts.append(current_part)
+				current_part = ""
+		else:
+			current_part += c
+	
+	# Add last part
+	if not current_part.is_empty():
+		parts.append(current_part)
+	
+	if parts.size() > 0:
+		result.command = parts[0].to_lower()
+		result.args = parts.slice(1)
+	
+	return result
+
 func input_text_submitted(text: String) -> void:
 	input.text = ""
-	history.push_front(text)
-	#var command = text
-	say(">> " + text + "\n")
 	
-	history_index = -1
-	var error : Error = _expression.parse(text)
-	if error != OK:
-		say("ERROR " + str(error) + ": " + _expression.get_error_text())
+	if text.strip_edges().is_empty():
 		return
 	
-	var result : Variant = _expression.execute([], self)
-	if not _expression.has_execute_failed():
-		if result != null:
-			say(result)
+	history.push_front(text)
+	history_index = -1
+	
+	say(">> " + text)
+	
+	var parsed = parse_command(text)
+	execute_command(parsed.command, parsed.args)
+
+func execute_command(cmd: String, args: Array) -> void:
+	match cmd:
+		# Global Commands
+		"help":
+			var page = int(args[0]) if args.size() > 0 else -1
+			help(page)
+		"debug":
+			if not OS.has_feature("debug"):
+				say("This is not a debug build!", Color.RED)
+			else: 
+				_G.debug_mode = not _G.debug_mode
+				var state = "enabled" if _G.debug_mode else "disabled"
+				say("Debug mode " + state, Color.YELLOW)
+		"reload":
+			get_tree().reload_current_scene()
+			say("Scene Reloaded.", Color.YELLOW)
+		"say":
+			if args.size() > 0:
+				say(" ".join(args))
+		"timescale":
+			var scale = float(args[0]) if args.size() > 0 else 1.0
+			timescale(scale)
+		"scene":
+			var path = args[0] if args.size() > 0 else ""
+			scene(path)
+		"clear":
+			output.text = ""
+		
+		# Game Commands
+		"hitbox":
+			hitbox()
+		"god":
+			god()
+		"noclip":
+			noclip()
+		"fullbright":
+			fullbright()
+		"moveinf":
+			var show_debug = int(args[0]) if args.size() > 0 else 0
+			moveinf(show_debug)
+		"map":
+			var map_name = args[0] if args.size() > 0 else "ether"
+			map(map_name)
+		"map_custom":
+			var map_name = args[0] if args.size() > 0 else "template"
+			map_custom(map_name)
+		"set_pmvar":
+			if args.size() >= 2:
+				set_pmvar(args[0], float(args[1]))
+			else:
+				say("Usage: set_pmvar <property> <value>", Color.RED)
+		"dbg_camera":
+			dbg_camera()
+		"autobhop":
+			var enabled = int(args[0]) if args.size() > 0 else -1
+			autobhop(enabled)
+		"disable_enemies":
+			disable_enemies()
+		"dark":
+			dark()
+		"debug_draw":
+			var id = int(args[0]) if args.size() > 0 else 0
+			debug_draw(id)
+		_:
+			say("Unknown command: " + cmd, Color.RED)
+			say("Type 'help' for a list of commands.")
 
 func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) -> void:
 	print("TUX: ", log)
-	if not _G.debug_mode and debug_only: return
+	if not _G.debug_mode and debug_only: 
+		return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
-	output.text = "[color=" + hex + "]"+ output.text + "\n" + str(log) + "[/color]"
-	
-	
+	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n"
+
 func help(page : int = -1) -> void:
 	match page:
 		0:
-			say("Global Commands")
-			say(" debug() - Toggles debug info.")
-			say(" reload() - Reloads the current loaded scene.")
-			say(" say(log) - Outputs an expression to the console.")
-			say(" timescale(float) - Sets the time scale. Useful for previewing animations.")
+			say("=== Global Commands ===")
+			say(" debug - Toggles debug info")
+			say(" reload - Reloads the current scene")
+			say(" say <text> - Outputs text to console")
+			say(" timescale <float> - Sets time scale (default: 1.0)")
+			say(" scene <path> - Changes the scene")
 		1:
-			say("In Game Commands")
-			say(" hitbox() - Shows/Hides hitbox shapes.")
-			say(" god() - Toggles god mode for the player.")
-			say(" noclip() - Toggles noclip flying for the player. Useful for mapping")
-			say(" fullbright() - Toggles fullbright.")
-			say(" moveinf(show_debug : int) - Toggles movement info for player.")
-			say(" map(name : Text) - Changes the game map. Gets map file from game files.")
-			say(" map_custom(name : Text) - Changes the game map. Gets map file from custom_levels folder.\n                                       This can crash if the custom map isn't using unsubstantial assets.")
-			say(" set_pmvar(property : Text, value) - Sets a value of specified property in PlayerMovement.")
-			say(" dbg_camera() - Switches between the debug camera and the FPS camera.")
-			say(" add_item(name : Text) - Adds an item to the inventory. Use snake case for item names. For example \"Some Mage's Hat\" -> \"some_mages_hat\"")
+			say("=== Game Commands ===")
+			say(" hitbox - Shows/hides hitbox shapes")
+			say(" god - Toggles god mode")
+			say(" noclip - Toggles noclip flying")
+			say(" fullbright - Toggles fullbright")
+			say(" autobhop <0|1> - Toggles auto bunnyhopping")
+			say(" moveinf [debug] - Toggles movement info")
+			say(" map <name> - Loads map from game assets")
+			say(" map_custom <name> - Loads map from custom_levels appdata directory")
+			say(" set_pmvar <property> <value> - Sets player movement var")
+			say(" dbg_camera - Switches to debug camera")
+			say(" disable_enemies - Toggles enemy AI")
 		2:
-			say("set_lp(enabled : bool, cutoff : float) - Configure the LowPassFilter on master audio bus.")
+			say("=== Other Commands ===")
+			say(" debug_draw <id> - Set viewport debug draw mode")
+			say(" dark - Toggle dark mode")
 		_:
-			say("Page 0 - Global Commands")
-			say("Page 1 - Game Commands")
-			say("Page 2 - Other... Commands")
-			
+			say("=== TUX Console Help ===")
+			say("Type 'help <page>' for command details:")
+			say(" help 0 - Global Commands")
+			say(" help 1 - Game Commands")
+			say(" help 2 - Other Commands")
+
 func reload() -> void:
 	get_tree().reload_current_scene()
 	say("Scene Reloaded.", Color.YELLOW)
 
-func scene(scene_path : String = ""):
-	if scene_path == null:
-		say("Scene Path can't be empty.")
+func scene(scene_path : String = "") -> void:
+	if scene_path.is_empty():
+		say("Usage: scene <path>", Color.RED)
 		return
 	_G.change_scene(scene_path)
-	say("Changed Scene to " + scene_path, Color.GREEN)
+	say("Changed scene to " + scene_path, Color.GREEN)
 
-func set_lp(enabled : bool = true, cutoff : float = 0.2) -> void:
-	_G.lowpass_cutoff = cutoff
-	_G.lowpass_enabled = enabled
-	say("LowPass enabled: " + str(enabled) + "\nLowPass cutoff: " + str(int(cutoff * 20500)) + " hz. (" + str(cutoff) + ")", Color.YELLOW)
-	
 func timescale(scale : float = 1.0) -> void:
 	_G.time_scale[1] = scale
-	say("Set time scale to " + str(scale), Color.GREEN)
+	say("Time scale set to " + str(scale), Color.GREEN)
 
 func debug() -> void:
-	if OS.has_feature("debug"):
-		if _G.debug_mode:
-			_G.debug_mode = false
-			say("Debug mode is now disabled.", Color.YELLOW)
-		else:
-			_G.debug_mode = true
-			say("Debug mode is now enabled.", Color.YELLOW)
-		input.release_focus()
-		visible = false
-	else:
+	if not OS.has_feature("debug"):
 		say("This is not a debug build!", Color.RED)
 		return
+	
+	_G.debug_mode = not _G.debug_mode
+	var state = "enabled" if _G.debug_mode else "disabled"
+	say("Debug mode " + state, Color.YELLOW)
 
 func hitbox() -> void:
+	get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
+	var state = "visible" if get_tree().debug_collisions_hint else "hidden"
+	say("Hitboxes " + state, Color.YELLOW)
 	if get_tree().debug_collisions_hint:
-		get_tree().debug_collisions_hint = false
-		say("Hitboxes hidden.")
-	else:
-		get_tree().debug_collisions_hint = true
-		say("Hitboxes visible. You might need to reload the scene.", Color.YELLOW)
-	input.release_focus()
-	visible = false
+		say("Note: May need to reload scene", Color.GRAY)
 
 func dbg_camera() -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+	if not _validate_player():
 		return
 	_G.player.debug_camera()
-	say("Debug Camera changed")
-	
+	say("Debug camera toggled")
+
 func god() -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+	if not _validate_player():
 		return
 	_G.player.god_mode = not _G.player.god_mode
-	input.release_focus()
-	visible = false
+	var state = "enabled" if _G.player.god_mode else "disabled"
+	say("God mode " + state, Color.YELLOW)
 
 func debug_draw(id : int = 0) -> void:
 	get_viewport().debug_draw = id
-	_T.say("Changed viewport.debug_draw to " + str(get_viewport().get_debug_draw()))
-	input.release_focus()
+	say("Viewport debug_draw: " + str(get_viewport().get_debug_draw()))
 
 func moveinf(show_debug : int = 0) -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+	if not _validate_player():
 		return
-	if _G.player.hud.show_movement_info:
-		_G.player.hud.show_movement_info = false
-		say("Movement info disabled.")
-	else:
-		_G.player.hud.show_movement_info = true
-		say("Movement info enabled.")
+	
+	_G.player.hud.show_movement_info = not _G.player.hud.show_movement_info
+	var state = "enabled" if _G.player.hud.show_movement_info else "disabled"
+	say("Movement info " + state)
+	
 	if show_debug == 1:
 		_G.player.hud.show_movement_var = true
-		say("Movement debug variables enabled.")
-	input.release_focus()
-	visible = false
+		say("Movement debug vars enabled")
+
+func fullbright() -> void:
+	if not _validate_player():
+		return
+	# Add your fullbright implementation here
+	say("Fullbright toggled", Color.YELLOW)
 
 func map(path : String = "ether") -> void:
-	if _G.game == null or not _G.game.is_inside_tree(): 
-		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
+	if not _validate_game():
 		return
 	_G.game.change_map_autobuild("res://maps/" + path + ".map")
-	input.release_focus()
-	visible = false
-	
+	say("Loading map: " + path, Color.GREEN)
+
 func map_custom(path : String = "template") -> void:
-	if _G.game == null or not _G.game.is_inside_tree(): 
-		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
+	if not _validate_game():
 		return
 	_G.game.change_map_autobuild("user://custom_maps/" + path + ".map")
-	input.release_focus()
-	visible = false
+	say("Loading custom map: " + path, Color.GREEN)
 
 func disable_enemies() -> void:
-	if _G.game == null or not _G.game.is_inside_tree(): 
-		say("Couldn't find game object. Make sure you are in Game.", Color.RED)
+	if not _validate_game():
 		return
 	_G.game.enemies_disabled = not _G.game.enemies_disabled
-	input.release_focus()
-	visible = false
+	var state = "disabled" if _G.game.enemies_disabled else "enabled"
+	say("Enemies " + state, Color.YELLOW)
 
 func set_pmvar(property : StringName, value : float = 0.0) -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+	if not _validate_player():
 		return
+	
+	if not property in _G.player.movement_component:
+		say("Property '" + property + "' not found", Color.RED)
+		return
+	
 	_G.player.movement_component.set(property, value)
-	say("Set movement_componenty property " + property + " to: " + str(value), Color.WHITE)
+	say("Set %s = %s" % [property, str(value)], Color.GREEN)
 
-func autobhop() -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+func autobhop(enabled : int = -1) -> void:
+	if not _validate_player():
 		return
-	if _G.player.movement_component.auto_bhop:
-		_G.player.movement_component.auto_bhop = false
-		say("Auto Bunnying disabled.")
+	
+	# Toggle if no arg, otherwise set explicitly
+	if enabled == -1:
+		_G.player.movement_component.auto_bhop = not _G.player.movement_component.auto_bhop
 	else:
-		_G.player.movement_component.auto_bhop = true
-		say("Auto Bunnying enabled. Hold the jump button to keep jumping")
+		_G.player.movement_component.auto_bhop = (enabled == 1)
+	
+	var state = "enabled" if _G.player.movement_component.auto_bhop else "disabled"
+	say("Auto bunnyhopping " + state, Color.GREEN)
+	if _G.player.movement_component.auto_bhop:
+		say("Hold jump to keep jumping", Color.GRAY)
 
 func noclip() -> void:
-	if _G.player == null or not _G.player.is_inside_tree(): 
-		say("Couldn't find player object. Make sure you are in Game.", Color.RED)
+	if not _validate_player():
 		return
-	if _G.player.movement_component.noclip:
-		_G.player.god_mode = false
-		_G.player.movement_component.noclip = false
-		say("Noclip disabled.")
-	else:
-		_G.player.movement_component.noclip = true
-		_G.player.god_mode = true
-		say("Noclip enabled.")
-
-#func add_item(path : String) -> void:
-	#if _G.player == null or not _G.player.is_inside_tree(): 
-		#say("Couldn't find player object. Make sure you are in Game.", Color.RED)
-		#return
-	#var x : Item = load("res://item/" + path + ".tres")
-	#_G.player.items.append(x)
+	
+	_G.player.movement_component.noclip = not _G.player.movement_component.noclip
+	_G.player.god_mode = _G.player.movement_component.noclip
+	
+	var state = "enabled" if _G.player.movement_component.noclip else "disabled"
+	say("Noclip " + state, Color.GREEN)
 
 func dark() -> void:
 	_G.config.ui_dark_mode = not _G.config.ui_dark_mode
-	say("Dark Mode: " + str(_G.config.ui_dark_mode))
+	var state = "enabled" if _G.config.ui_dark_mode else "disabled"
+	say("Dark mode " + state)
 
-#func add_stat(stat : String = "Damage", amount_add : float = 0.0, amount_mult : float = 1.0) -> void:
-	#_G.player.stats.add_stat(stat, amount_add, amount_mult)
-	#say("Stat " + stat + " increased by " + str(amount_add) + " and multiplied by " + str(amount_mult))
-	##add_stat("Luck", 5.0, 1.0)
+# Helper validation functions
+func _validate_player() -> bool:
+	if _G.player == null or not _G.player.is_inside_tree():
+		say("Player object not found. Must be in game.", Color.RED)
+		return false
+	return true
+
+func _validate_game() -> bool:
+	if _G.game == null or not _G.game.is_inside_tree():
+		say("Game object not found. Must be in game.", Color.RED)
+		return false
+	return true

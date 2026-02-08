@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 
 	if chosen_stat == null: return
 	
-	$Rarity.frame = chosen_modulate.rarity
+	$Rarity.frame = chosen_modulate.rarity + (int(_G.config.ui_dark_mode) * 4)
 	info.text = chosen_modulate.get_description(chosen_stat.stat_name)
 	stat_icon.use_parent_material = _G.config.ui_dark_mode
 	if hovered:

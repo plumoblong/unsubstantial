@@ -49,14 +49,15 @@ func _physics_process(delta : float) -> void:
 	movement_component.enabled = player_can_control
 	chase_component.enabled = player_can_control
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)
+	chase_component.update(_G.player.global_position, movement_component, agent)
 	
 	velocity = movement_component.vel * float(player_can_control)
 	
-	if on_floor:
+	if chase_component.attacking and on_floor:
 		movement_component.jump()
 	
 	move_and_slide()
-	chase_component.update(_G.player.global_position, movement_component, agent)
+	
 
 func query_area_entered(area : Area3D) -> void:
 	enemy.handle_query(area, essence_component, knockback_component)

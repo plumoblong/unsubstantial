@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b6dn73q0mhnx1"]
+[gd_scene format=3 uid="uid://b6dn73q0mhnx1"]
 
 [ext_resource type="Script" uid="uid://dv16xbqqjpc34" path="res://src/menu.gd" id="1_tbsmk"]
 [ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="3_hubvr"]
@@ -110,36 +110,36 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("9_xdexj")
 region = Rect2(32, 0, 16, 16)
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="Node2D" unique_id=34055133]
 script = ExtResource("1_tbsmk")
 songs = Dictionary[AudioStreamOggVorbis, int]({
 ExtResource("12_jwfp7"): 9,
 ExtResource("3_pgh6j"): 1
 })
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=530521486]
 visible = false
 offset_right = 480.0
 offset_bottom = 272.0
 color = Color(0.296557, 0, 0.474491, 1)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1199745209]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
 
-[node name="MeshInstance3D" parent="Camera3D" instance=ExtResource("4_pgh6j")]
+[node name="MeshInstance3D" parent="Camera3D" unique_id=960820754 instance=ExtResource("4_pgh6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.514, 0)
 top_level = true
 material_override = SubResource("ShaderMaterial_pgh6j")
 
-[node name="Main" type="Node2D" parent="."]
+[node name="Main" type="Node2D" parent="." unique_id=267570443]
 
-[node name="Sprite2D" type="Sprite2D" parent="Main"]
+[node name="Sprite2D" type="Sprite2D" parent="Main" unique_id=321099230]
 use_parent_material = true
 position = Vector2(32, 33)
 texture = ExtResource("6_lsv3e")
 centered = false
 
-[node name="Sprite2D3" type="Sprite2D" parent="Main/Sprite2D"]
+[node name="Sprite2D3" type="Sprite2D" parent="Main/Sprite2D" unique_id=588478236]
 modulate = Color(0, 0, 0, 0.529412)
 show_behind_parent = true
 use_parent_material = true
@@ -147,7 +147,7 @@ position = Vector2(2.66671, 4.00003)
 texture = ExtResource("6_lsv3e")
 centered = false
 
-[node name="Start" parent="Main" instance=ExtResource("3_hubvr")]
+[node name="Start" parent="Main" unique_id=1169837878 instance=ExtResource("3_hubvr")]
 offset_left = 56.0
 offset_top = 80.0
 offset_right = 82.0
@@ -156,7 +156,7 @@ theme_override_fonts/font = ExtResource("10_8of67")
 theme_override_font_sizes/font_size = 6
 text = "Start"
 
-[node name="Achievements" parent="Main" instance=ExtResource("3_hubvr")]
+[node name="Achievements" parent="Main" unique_id=273133564 instance=ExtResource("3_hubvr")]
 offset_left = 56.0
 offset_top = 114.0
 offset_right = 129.0
@@ -166,7 +166,7 @@ theme_override_font_sizes/font_size = 6
 disabled = true
 text = "Achievements"
 
-[node name="Addons" parent="Main" instance=ExtResource("3_hubvr")]
+[node name="Addons" parent="Main" unique_id=277478715 instance=ExtResource("3_hubvr")]
 visible = false
 material = SubResource("ShaderMaterial_wmmby")
 offset_left = 56.0
@@ -178,7 +178,7 @@ theme_override_font_sizes/font_size = 6
 disabled = true
 text = "Addons"
 
-[node name="Options" parent="Main" instance=ExtResource("3_hubvr")]
+[node name="Options" parent="Main" unique_id=13478014 instance=ExtResource("3_hubvr")]
 offset_left = 56.0
 offset_top = 97.0
 offset_right = 98.0
@@ -187,7 +187,7 @@ theme_override_fonts/font = ExtResource("10_8of67")
 theme_override_font_sizes/font_size = 6
 text = "Options"
 
-[node name="Exit" parent="Main" instance=ExtResource("3_hubvr")]
+[node name="Exit" parent="Main" unique_id=699680188 instance=ExtResource("3_hubvr")]
 offset_left = 56.0
 offset_top = 132.0
 offset_right = 111.0
@@ -200,28 +200,28 @@ normal_color = Color(1, 0.235294, 0.32549, 1)
 hover_color = Color(1, 0.235294, 0.32549, 1)
 shadow_hover_color = Color(0.454491, 0, 0.162118, 1)
 
-[node name="TextureButton" type="TextureButton" parent="Main"]
+[node name="TextureButton" type="TextureButton" parent="Main" unique_id=2126282425]
 offset_left = 433.0
 offset_top = 247.5
 offset_right = 449.0
 offset_bottom = 263.5
 texture_normal = SubResource("AtlasTexture_a5kv0")
 
-[node name="Youtube" type="TextureButton" parent="Main"]
+[node name="Youtube" type="TextureButton" parent="Main" unique_id=669515626]
 offset_left = 449.0
 offset_top = 247.5
 offset_right = 465.0
 offset_bottom = 263.5
 texture_normal = SubResource("AtlasTexture_y4gbj")
 
-[node name="Twitter" type="TextureButton" parent="Main"]
+[node name="Twitter" type="TextureButton" parent="Main" unique_id=451610012]
 offset_left = 465.0
 offset_top = 247.5
 offset_right = 481.0
 offset_bottom = 263.5
 texture_normal = SubResource("AtlasTexture_601k6")
 
-[node name="Version2" type="Label" parent="Main"]
+[node name="Version2" type="Label" parent="Main" unique_id=1309803027]
 material = ExtResource("9_dyuxe")
 offset_left = 420.0
 offset_top = 259.5
@@ -232,33 +232,33 @@ theme_override_font_sizes/font_size = 6
 text = "by plumoblong"
 horizontal_alignment = 2
 
-[node name="Sprite2D2" type="Sprite2D" parent="Main"]
+[node name="Sprite2D2" type="Sprite2D" parent="Main" unique_id=1368483552]
 position = Vector2(410, 231.5)
 texture = ExtResource("9_ho73k")
 
-[node name="Options" parent="." instance=ExtResource("10_wes68")]
+[node name="Options" parent="." unique_id=1724041887 instance=ExtResource("10_wes68")]
 visible = false
 
-[node name="Achievements" parent="." instance=ExtResource("12_dyuxe")]
+[node name="Achievements" parent="." unique_id=1068283680 instance=ExtResource("12_dyuxe")]
 visible = false
 
-[node name="Debug" type="Node2D" parent="."]
+[node name="Debug" type="Node2D" parent="." unique_id=1810535713]
 
-[node name="Button" parent="Debug" instance=ExtResource("3_hubvr")]
+[node name="Button" parent="Debug" unique_id=1155066258 instance=ExtResource("3_hubvr")]
 offset_left = 369.0
 offset_top = 253.0
 offset_right = 416.0
 offset_bottom = 266.0
 text = "OPEN LEVEL"
 
-[node name="UiSFX" type="AudioStreamPlayer" parent="."]
+[node name="UiSFX" type="AudioStreamPlayer" parent="." unique_id=605595659]
 stream = ExtResource("7_xqnb3")
 bus = &"SFX2"
 
-[node name="Theme" type="AudioStreamPlayer" parent="."]
+[node name="Theme" type="AudioStreamPlayer" parent="." unique_id=1815501969]
 bus = &"Music"
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=117118104]
 title = "Open a File"
 size = Vector2i(358, 175)
 ok_button_text = "Open"
@@ -266,7 +266,7 @@ file_mode = 0
 filters = PackedStringArray("*.tscn")
 use_native_dialog = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1455778038]
 environment = ExtResource("17_wmmby")
 
 [connection signal="pressed" from="Main/Start" to="." method="_on_start_pressed"]

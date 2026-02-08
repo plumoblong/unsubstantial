@@ -106,7 +106,7 @@ func hitmark() -> void:
 		last_hitmarker_tween.kill()
 	hitmarker_alpha = 1.0
 	hitmarker_sfx.pitch_scale = randf_range(0.8, 1.0)
-	player_movement.speed_bonus *= 1.1
+	player_movement.speed_bonus *= 1.05
 	hitmarker_sfx.play()
 	last_hitmarker_tween = _G.tween(self, "hitmarker_alpha", 0, 0.7 / player_stats.actual_atkspd)
 

@@ -1,22 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bybynv0w77eib"]
+[gd_scene format=3 uid="uid://bybynv0w77eib"]
 
 [ext_resource type="Script" uid="uid://dmonf6eklpxus" path="res://src/debug_console.gd" id="1_7bfnr"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_csl18"]
-[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="2_ldr6d"]
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="4_jg76u"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jg76u"]
-shader = ExtResource("2_ldr6d")
-shader_parameter/modulate = Color(0.0994685, 0.0994685, 0.0994685, 1)
-shader_parameter/amount = 1.0
-shader_parameter/alpha = 1.0
-shader_parameter/grayscale = false
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg76u"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kgo7y"]
 shader = ExtResource("4_jg76u")
@@ -24,18 +10,32 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[node name="DebugConsole" type="CanvasLayer"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgo7y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg76u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
+
+[node name="DebugConsole" type="CanvasLayer" unique_id=1454306381]
 layer = 9
 script = ExtResource("1_7bfnr")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_jg76u")
-offset_right = 480.0
-offset_bottom = 102.0
+[node name="ConsolePanel" type="Control" parent="." unique_id=778142941]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Shadow" type="RichTextLabel" parent="."]
+[node name="ColorRect" type="ColorRect" parent="ConsolePanel" unique_id=38416686]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 222.0
+color = Color(0, 0, 0, 0.757)
+
+[node name="Shadow" type="RichTextLabel" parent="ConsolePanel" unique_id=210017629]
 visible = false
 modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 480.0
@@ -49,11 +49,13 @@ scroll_active = false
 scroll_following = true
 vertical_alignment = 2
 
-[node name="Output" type="RichTextLabel" parent="."]
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 479.0
-offset_bottom = 92.0
+[node name="Output" type="RichTextLabel" parent="ConsolePanel" unique_id=439356205]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 478.0
+offset_bottom = 209.0
+focus_mode = 2
 theme_override_constants/line_separation = 1
 theme_override_fonts/normal_font = ExtResource("2_csl18")
 theme_override_font_sizes/normal_font_size = 6
@@ -61,13 +63,27 @@ bbcode_enabled = true
 text = "[color=00ff00]TUX Loaded![/color]"
 scroll_following = true
 vertical_alignment = 2
+selection_enabled = true
 
-[node name="Input" type="LineEdit" parent="."]
+[node name="Label" type="Label" parent="ConsolePanel" unique_id=1280787750]
+material = SubResource("ShaderMaterial_kgo7y")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 212.0
+offset_right = 10.0
+offset_bottom = 220.0
+theme_override_fonts/font = ExtResource("2_csl18")
+theme_override_font_sizes/font_size = 6
+text = ">> "
+clip_text = true
+
+[node name="Input" type="LineEdit" parent="ConsolePanel" unique_id=994313435]
 clip_contents = true
+layout_mode = 0
 offset_left = 11.0
-offset_top = 93.0
+offset_top = 212.0
 offset_right = 479.0
-offset_bottom = 101.0
+offset_bottom = 220.0
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
@@ -82,7 +98,6 @@ theme_override_font_sizes/font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kgo7y")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_jg76u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ldr6d")
-placeholder_text = "help(page : int)"
 max_length = 101
 keep_editing_on_text_submit = true
 emoji_menu_enabled = false
@@ -90,15 +105,4 @@ deselect_on_focus_loss_enabled = false
 caret_blink = true
 caret_force_displayed = true
 
-[node name="Label" type="Label" parent="."]
-material = SubResource("ShaderMaterial_kgo7y")
-offset_left = 1.0
-offset_top = 93.0
-offset_right = 10.0
-offset_bottom = 101.0
-theme_override_fonts/font = ExtResource("2_csl18")
-theme_override_font_sizes/font_size = 6
-text = ">> "
-clip_text = true
-
-[connection signal="text_submitted" from="Input" to="." method="input_text_submitted"]
+[connection signal="text_submitted" from="ConsolePanel/Input" to="." method="input_text_submitted"]

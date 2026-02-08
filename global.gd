@@ -7,7 +7,6 @@ const CONFIG_VERSION : int = 1
 enum achievement {
 	START, BEAT, DIE, LUCK, LOOP
 }
-
 var show_fps : bool = false
 var debug_mode : bool = false
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -21,7 +20,8 @@ var config : Dictionary = {
 	view_bob = true,
 	controls = {
 		sensitivity = 0.5,
-		bind = {}
+		bind = {
+		}
 	},
 	sound = {
 		master = 0.75,
@@ -32,7 +32,7 @@ var config : Dictionary = {
 		exposure = 1.0,
 		low = false,
 		v_sync = false,
-		motion_blur = true,
+		motion_blur = false,
 	},
 }
 
@@ -108,13 +108,26 @@ func _ready() -> void:
 	seed(int(Time.get_unix_time_from_system()))
 	version_label.text = VERSION.to_upper()
 	
+	_setup_discord_rpc()
 	
-
 func _setup_audio_buses() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(config.sound.master))
 	AudioServer.set_bus_volume_db(1, linear_to_db(config.sound.music))
 	AudioServer.set_bus_volume_db(2, linear_to_db(config.sound.sfx))
 	AudioServer.set_bus_volume_db(3, linear_to_db(config.sound.sfx))
+
+func change_discord_rpc(update_timestamp : bool = true, details : String = "Chapter 1 Stage 2", state = "5 Shards", small_image : String = "chapter_icon0", small_image_text : String = "The Ether", large_image : String = "poison", large_image_text : String = "plumoblong.github.io", ) -> void:
+	DiscordRPC.details = details
+	DiscordRPC.state = state
+	DiscordRPC.large_image = large_image
+	DiscordRPC.large_image_text = large_image_text
+	DiscordRPC.small_image = small_image
+	DiscordRPC.small_image_text = small_image_text
+	if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
+	DiscordRPC.refresh()
+	
+func _setup_discord_rpc() -> void:
+	DiscordRPC.app_id = 1316162745384702043
 
 func _process(delta : float) -> void:
 	time += delta
@@ -126,7 +139,7 @@ func _process(delta : float) -> void:
 	_cached_shader_material.set_shader_parameter("gamma", config.video.exposure)
 	
 	_handle_input()
-	_update_ui()
+	_update_ui(delta)
 	_update_window_size()
 	_setup_audio_buses()
 	
@@ -140,12 +153,14 @@ func _handle_input() -> void:
 	if Input.is_action_just_pressed("toggle_fb"):
 		_cached_viewport.debug_draw = int(not bool(_cached_viewport.debug_draw))
 
-func _update_ui() -> void:
-	if show_fps:
-		fps_label.text = str(Engine.get_frames_per_second()) + " FPS"
+func _update_ui(delta : float = 0.0) -> void:
 	fps_label.visible = show_fps
 	debug_node.visible = debug_mode
-
+	
+	if show_fps:
+		if Engine.get_physics_frames() % 30 == 0:
+			fps_label.text = str(int(1/delta)) + " FPS\n" + str(float(delta * 1000.0 / Engine.time_scale)) + "ms"
+		
 func _update_window_size() -> void:
 	if not config.fullscreen:
 		var screen_size := DisplayServer.screen_get_size(0)
@@ -336,3 +351,17 @@ func set_shaderparam_once(material : ShaderMaterial, parameter : StringName, val
 func get_color_darkmode(white : bool = true, alpha : float = 1.0) -> Color:
 	var base_color := Color.WHITE if (white == config.ui_dark_mode) else Color.BLACK
 	return base_color * Color(1, 1, 1, alpha)
+
+func return_input_binds_to_dict() -> Dictionary:
+	#TODO: Loop through are supported bindable InputMap actions and return their input values to a Dictionary.
+	#      Meant to be used for saving the input binds into config.json
+	return {
+		"up" = InputMap.action_get_events("up")[0],
+		"down" = InputMap.action_get_events("down")[0],
+		"left" = InputMap.action_get_events("left")[0],
+		"right" = InputMap.action_get_events("right")[0],
+		"jump" = InputMap.action_get_events("jump")[0],
+		"dash" = InputMap.action_get_events("dash")[0],
+		"shoot" = InputMap.action_get_events("shoot")[0],
+		"interact" = InputMap.action_get_events("interact")[0],
+	}

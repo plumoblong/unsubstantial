@@ -58,7 +58,6 @@ func debug_camera() -> void:
 func death_anim() -> void:
 	if not essence_component.alive:
 		return
-	
 	camera.current = false
 	death_camera.current = true
 	player_death_anim.show()

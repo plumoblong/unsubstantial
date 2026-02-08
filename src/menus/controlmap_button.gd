@@ -2,7 +2,7 @@ extends Button
 class_name ControlMapButton
 
 @export var action_name : String = "up"
-@export var hover_color : Color
+@export var hover_color : Color = Color.YELLOW
 @export var action_string : String = "Walk Forward"
 @export var default_input : InputEvent
 
@@ -16,7 +16,7 @@ var shader_mat : ShaderMaterial
 # String constants
 const TEXT_PREFIX : String = ": [ "
 const TEXT_SUFFIX : String = " ]"
-const CAPTURING_TEXT : String = ": [ Press Anything ]"
+const CAPTURING_TEXT : String = ": [ Input Anything ]"
 
 func _ready() -> void:
 	shader_mat = material.duplicate()
@@ -58,3 +58,5 @@ func _unhandled_input(event : InputEvent) -> void:
 				InputMap.action_add_event(action_name, default_input)
 			else:
 				InputMap.action_add_event(action_name, event)
+			
+			_G.config.controls.bind = _G.return_input_binds_to_dict()

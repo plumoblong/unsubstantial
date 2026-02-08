@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_2o1r5")
 stat_name = "More Choices"
 image = ExtResource("1_2o1r5")
-weight = 0.1
+weight = 0.2
 shop_cost = 300
 modulates = Dictionary[ExtResource("1_2ygss"), int]({
 SubResource("Resource_sfver"): 1

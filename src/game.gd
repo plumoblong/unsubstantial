@@ -18,6 +18,7 @@ const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 var next_level : String
 var time_pause : bool = false
 var current_level : String = ""
+var current_map_path : String = ""
 var level_time : float = 0
 var stage : int = 0
 var actual_stage : int = 0
@@ -68,6 +69,7 @@ func _setup_starting_level() -> void:
 	else:
 		chapter.current = chapter.all[1]
 		change_map(_G.starting_level)
+	
 
 func _process(_delta : float) -> void:
 	_update_game_state()
@@ -77,13 +79,9 @@ func _process(_delta : float) -> void:
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.4) * difficulty_bonus
+	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.2) * difficulty_bonus
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier)
-	difficulty_label.visible = _G.show_fps
 	in_ether = chapter.current == chapter.all[0]
-	
-	if _G.debug_mode:
-		print(enemy_count)
 
 func _handle_input() -> void:
 	if ending_level or in_any_menu:
@@ -261,3 +259,11 @@ func switch_chapters() -> void:
 	match actual_stage:
 		0:
 			chapter.current = chapter.all[1]
+			stage = 0
+
+func update_rpc(update_timestamp : bool = false) -> void:
+	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)
+	var rpc_state : String = current_map_path
+	var rpc_small_img : String = "chapter_icon" + str(chapter.current.id)
+	var rpc_small_img_text : String = chapter.current.chapter_name
+	_G.change_discord_rpc(update_timestamp, rpc_details, rpc_state, rpc_small_img, rpc_small_img_text)

@@ -57,21 +57,19 @@ var screen : int = 0
 var screen_size : Vector2i
 
 func _ready() -> void:
-	cfg = _G.config
 	screen_size = DisplayServer.screen_get_size()
-	
 	# Initialize values
-	s1_fullscreen.button_pressed = cfg.fullscreen
-	s1_viewbob.button_pressed = cfg.view_bob
-	s1_fov.value = cfg.fov
-	s3_sens.value = cfg.controls.sensitivity
-	s2_volume.value = cfg.sound.master
-	s2_music.value = cfg.sound.music
-	s2_sfx.value = cfg.sound.sfx
-	s4_lowmode.button_pressed = cfg.video.low
-	s4_vsync.button_pressed = cfg.video.v_sync
-	s4_exposure.value = cfg.video.exposure
-	s4_ui_darkmode.button_pressed = cfg.ui_dark_mode
+	s1_fullscreen.button_pressed = _G.config.fullscreen
+	s1_viewbob.button_pressed = _G.config.view_bob
+	s1_fov.value = _G.config.fov
+	s3_sens.value = _G.config.controls.sensitivity
+	s2_volume.value = _G.config.sound.master
+	s2_music.value = _G.config.sound.music
+	s2_sfx.value = _G.config.sound.sfx
+	s4_lowmode.button_pressed = _G.config.video.low
+	s4_vsync.button_pressed = _G.config.video.v_sync
+	s4_exposure.value = _G.config.video.exposure
+	s4_ui_darkmode.button_pressed = _G.config.ui_dark_mode
 
 func _process(_delta : float) -> void:
 	if not visible: return
@@ -88,6 +86,7 @@ func _process(_delta : float) -> void:
 			if not s3_sens.get_parent().is_any_capturing:
 				screen = 0
 				header.text = HEADER_OPTIONS
+				_G.save_files()
 	
 	match screen:
 		1:
@@ -102,17 +101,18 @@ func _process(_delta : float) -> void:
 func _update_general_screen() -> void:
 	header.text = HEADER_GENERAL
 	s1_fov_text.text = FOV_TEXT + str(int(s1_fov.value))
-	s1_fullscreen.button_pressed = cfg.fullscreen
+	s1_fullscreen.button_pressed = _G.config.fullscreen
 	
-	if not cfg.fullscreen:
-		var res : int = cfg.resolution
+	if not _G.config.fullscreen:
+		var res : int = _G.config.resolution
 		s1_res.text = WINDOW_SIZE_TEXT + str(480 * res) + "x" + str(270 * res)
 	else:
 		s1_res.text = WINDOW_SIZE_TEXT + str(screen_size.x) + "x" + str(screen_size.y)
 	
-	s1_res.disabled = cfg.fullscreen
-	cfg.view_bob = s1_viewbob.button_pressed
-	cfg.fov = s1_fov.value
+	s1_res.get_node("Shadow").text = s1_res.text
+	s1_res.disabled = _G.config.fullscreen
+	_G.config.view_bob = s1_viewbob.button_pressed
+	_G.config.fov = s1_fov.value
 
 func _update_audio_screen() -> void:
 	header.text = HEADER_AUDIO
@@ -120,24 +120,24 @@ func _update_audio_screen() -> void:
 	s2_volume_text.text = MASTER_VOL_TEXT + str(int(s2_volume.value * 100)) + PERCENT_SUFFIX
 	s2_music_text.text = MUSIC_VOL_TEXT + str(int(s2_music.value * 100)) + PERCENT_SUFFIX
 	
-	cfg.sound.master = s2_volume.value
-	cfg.sound.sfx = s2_sfx.value
-	cfg.sound.music = s2_music.value
+	_G.config.sound.master = s2_volume.value
+	_G.config.sound.sfx = s2_sfx.value
+	_G.config.sound.music = s2_music.value
 
 func _update_controls_screen() -> void:
 	header.text = HEADER_CONTROLS
 	s3_sens_text.text = SENS_TEXT + str(int(s3_sens.value * 100)) + PERCENT_SUFFIX
-	cfg.controls.sensitivity = s3_sens.value
+	_G.config.controls.sensitivity = s3_sens.value
 
 func _update_graphics_screen() -> void:
 	header.text = HEADER_GRAPHICS
 	s4_exposure_text.text = GAMMA_TEXT + str(int(s4_exposure.value * 100)) + PERCENT_SUFFIX
 	
-	cfg.video.low = s4_lowmode.button_pressed
-	cfg.video.v_sync = s4_vsync.button_pressed
-	cfg.ui_dark_mode = s4_ui_darkmode.button_pressed
-	cfg.video.exposure = s4_exposure.value
-	cfg.video.motion_blur = s4_motion_blur.button_pressed
+	_G.config.video.low = s4_lowmode.button_pressed
+	_G.config.video.v_sync = s4_vsync.button_pressed
+	_G.config.ui_dark_mode = s4_ui_darkmode.button_pressed
+	_G.config.video.exposure = s4_exposure.value
+	_G.config.video.motion_blur = s4_motion_blur.button_pressed
 
 func fullscreen_pressed() -> void:
 	_G.change_fullscreen()
@@ -152,9 +152,9 @@ func res_gui_input(event : InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				cfg.resolution += 1
+				_G.config.resolution += 1
 			MOUSE_BUTTON_RIGHT:
-				cfg.resolution -= 1
+				_G.config.resolution -= 1
 
 func other_pressed() -> void:
 	screen = 3
@@ -164,6 +164,6 @@ func graphics_pressed() -> void:
 
 func vsync_toggled(a : bool) -> void:
 	if a:
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)

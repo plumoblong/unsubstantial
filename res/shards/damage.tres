@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_xe6bi"]
 script = ExtResource("1_xe6bi")
-value = 15.0
+value = 10.0
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_v2jpd"]
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_m1m7g"]
 script = ExtResource("1_xe6bi")
-value = 20.0
+value = 15.0
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -30,27 +30,27 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_a4r87"]
 script = ExtResource("1_xe6bi")
-value = 35.0
+value = 25.0
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_c2u78"]
 script = ExtResource("1_xe6bi")
 operator = 2
-value = 1.5
+value = 1.35
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_bqqxf"]
 script = ExtResource("1_xe6bi")
 operator = 2
-value = 2.0
+value = 1.75
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_kh3nr"]
 script = ExtResource("1_xe6bi")
-value = 75.0
+value = 60.0
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 

@@ -12,6 +12,7 @@ func _ready() -> void:
 	_G.get_achievement(_G.achievement.START)
 	$Theme.stream = _G.choose_from_chance(songs)
 	$Theme.play()
+	_G.change_discord_rpc(true, "In Main Menu", "", "", "")
 	
 func _process(delta : float) -> void:
 	if Input.is_action_just_pressed("f2"):
