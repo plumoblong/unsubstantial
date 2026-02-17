@@ -1,7 +1,7 @@
 extends Node
 class_name Global
 
-const VERSION : String = "0.96 indev 7"
+const VERSION : String = "0.96 indev 8"
 const CONFIG_VERSION : int = 1
 
 enum achievement {
@@ -109,14 +109,19 @@ func _ready() -> void:
 	version_label.text = VERSION.to_upper()
 	
 	_setup_discord_rpc()
+
+func _setup_discord_rpc() -> void:
+	if OS.has_feature("web"): return
+	DiscordRPC.app_id = 1316162745384702043
 	
 func _setup_audio_buses() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(config.sound.master))
 	AudioServer.set_bus_volume_db(1, linear_to_db(config.sound.music))
 	AudioServer.set_bus_volume_db(2, linear_to_db(config.sound.sfx))
 	AudioServer.set_bus_volume_db(3, linear_to_db(config.sound.sfx))
-
+	
 func change_discord_rpc(update_timestamp : bool = true, details : String = "Chapter 1 Stage 2", state = "5 Shards", small_image : String = "chapter_icon0", small_image_text : String = "The Ether", large_image : String = "poison", large_image_text : String = "plumoblong.github.io", ) -> void:
+	if OS.has_feature("web"): return
 	DiscordRPC.details = details
 	DiscordRPC.state = state
 	DiscordRPC.large_image = large_image
@@ -126,9 +131,6 @@ func change_discord_rpc(update_timestamp : bool = true, details : String = "Chap
 	if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
 	DiscordRPC.refresh()
 	
-func _setup_discord_rpc() -> void:
-	DiscordRPC.app_id = 1316162745384702043
-
 func _process(delta : float) -> void:
 	time += delta
 	
@@ -159,7 +161,7 @@ func _update_ui(delta : float = 0.0) -> void:
 	
 	if show_fps:
 		if Engine.get_physics_frames() % 30 == 0:
-			fps_label.text = str(int(1/delta)) + " FPS\n" + str(float(delta * 1000.0 / Engine.time_scale)) + "ms"
+			fps_label.text = str(int(1/delta) * Engine.time_scale) + " FPS\n" + str(float(delta * 1000.0)) + "ms"
 		
 func _update_window_size() -> void:
 	if not config.fullscreen:
@@ -365,3 +367,45 @@ func return_input_binds_to_dict() -> Dictionary:
 		"shoot" = InputMap.action_get_events("shoot")[0],
 		"interact" = InputMap.action_get_events("interact")[0],
 	}
+	
+func string_to_input_event(text: String) -> InputEvent:
+	if "InputEventMouseButton" in text:
+		var event = InputEventMouseButton.new()
+		event.button_index = _get_int(text, "button_index")
+		event.pressed = "pressed=true" in text
+		event.position = _get_vector2(text, "position")
+		event.button_mask = _get_int(text, "button_mask")
+		event.double_click = "double_click=false" in text
+		return event
+	
+	if "InputEventKey" in text:
+		var event = InputEventKey.new()
+		event.keycode = _get_int(text, "keycode")
+		event.pressed = "pressed=true" in text
+		event.echo = "echo=true" in text
+		event.physical_keycode = "physical=true" in text
+		return event
+	
+	return null
+
+func _get_int(text: String, key: String) -> int:
+	var start = text.find(key + "=")
+	if start == -1:
+		return 0
+	start += key.length() + 1
+	var end = text.find(",", start)
+	if end == -1:
+		end = text.length()
+	var value = text.substr(start, end - start).strip_edges()
+	return int(value.split(" ")[0])
+
+func _get_vector2(text: String, key: String) -> Vector2:
+	var start = text.find(key + "=")
+	if start == -1:
+		return Vector2.ZERO
+	start += key.length() + 1
+	var end = text.find(")", start) + 1
+	var vec_str = text.substr(start, end - start)
+	vec_str = vec_str.replace("(", "").replace(")", "")
+	var parts = vec_str.split(",")
+	return Vector2(float(parts[0]), float(parts[1]))

@@ -6,12 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_ja2wj"]
 script = ExtResource("1_ja2wj")
+stat_name = "Max Essence"
 statistic = "esc_max"
 value = 50.0
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_ysmrf"]
 script = ExtResource("1_ja2wj")
+stat_name = "Max Essence"
 statistic = "esc_max"
 value = 100.0
 rarity = 1
@@ -19,6 +21,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_1enw1"]
 script = ExtResource("1_ja2wj")
+stat_name = "Max Essence"
 statistic = "esc_max"
 value = 200.0
 rarity = 2
@@ -26,6 +29,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_bwijc"]
 script = ExtResource("1_ja2wj")
+stat_name = "Max Essence"
 statistic = "esc_max"
 value = 300.0
 rarity = 3

@@ -79,7 +79,7 @@ func _process(_delta : float) -> void:
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.2) * difficulty_bonus
+	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier)
 	in_ether = chapter.current == chapter.all[0]
 
@@ -98,9 +98,11 @@ func _handle_input() -> void:
 			pause_node.visible = true
 			pause_screen.show()
 			pause_screen.screen = 2
+			pause_screen.statistics_screen.create_shard_grid()
 	elif pause_screen.screen == 2:
 		if Input.is_action_just_pressed("inventory"):
 			pause_screen.show()
+			pause_screen.statistics_screen.delete_shard_grid()
 			pause_screen.screen = 0
 
 func _update_pause_state() -> void:

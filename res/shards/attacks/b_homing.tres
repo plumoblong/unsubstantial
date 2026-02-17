@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_0631i"]
 script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
 statistic = "homing"
 bullet_set = true
 rarity = 1
@@ -13,6 +14,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_s0w6h"]
 script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
 statistic = "homing"
 bullet_set = true
 value = 2.5
@@ -21,6 +23,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_8up4n"]
 script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
 statistic = "homing"
 bullet_set = true
 value = 5.0

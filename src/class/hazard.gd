@@ -6,8 +6,8 @@ var parent : Node
 @export var damage : int = 100
 @export var crit : bool = false
 
-@export var knockback_strength : float = 10.0
-@export var knockback_y_strength : float = 1.0
+@export var knockback_strength : float = 1.0
+@export var knockback_from_parent_pos : bool = true
 @export var stun_time : float = 0.2
 @export var parry : bool = false
 

@@ -6,12 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_vjut8"]
 script = ExtResource("1_vjut8")
+stat_name = "Luck"
 statistic = "luck"
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_0pnmv"]
 script = ExtResource("1_vjut8")
+stat_name = "Luck"
 statistic = "luck"
 value = 3.0
 rarity = 2
@@ -19,6 +21,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_a6i3f"]
 script = ExtResource("1_vjut8")
+stat_name = "Luck"
 statistic = "luck"
 value = 5.0
 rarity = 3

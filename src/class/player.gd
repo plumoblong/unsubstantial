@@ -166,7 +166,7 @@ func _process_player_input() -> void:
 		can_control = false
 
 func query_area_entered(area : Area3D) -> void:
-	if immune or dash_component.dashing or god_mode:
+	if immune or dash_component.dashing:
 		return
 	
 	if area.get_parent() != self and area is Hazard:
@@ -175,6 +175,8 @@ func query_area_entered(area : Area3D) -> void:
 		
 		_G.current_run.die_reason = area.die_reason
 		essence_component.fracture(area.damage, area.crit)
+		var knock_pos : Vector3 = area.parent.global_position if area.knockback_from_parent_pos else area.global_position
+		knock_component.knock(knock_pos, area.knockback_strength)
 		start_immunity()
 
 func shooted() -> void:
@@ -241,7 +243,8 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 		
 		_G.current_run.hits_taken += 1
 		dash_component.can_reset = true
-		movement_component.speed_bonus *= 0.35
+		movement_component.speed_bonus *= 0.5
+		
 
 func shoot_component_reseted() -> void:
 	hud.show_hand()

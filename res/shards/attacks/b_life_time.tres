@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_0631i"]
 script = ExtResource("1_s0w6h")
+stat_name = "Shot Range"
 statistic = "life_time"
 bullet_set = true
 operator = 2
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_s0w6h"]
 script = ExtResource("1_s0w6h")
+stat_name = "Shot Range"
 statistic = "life_time"
 bullet_set = true
 operator = 2
@@ -23,6 +25,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_8up4n"]
 script = ExtResource("1_s0w6h")
+stat_name = "Shot Range"
 statistic = "life_time"
 bullet_set = true
 operator = 2
@@ -32,6 +35,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_1gme3"]
 script = ExtResource("1_s0w6h")
+stat_name = "Shot Range"
 statistic = "life_time"
 bullet_set = true
 operator = 2

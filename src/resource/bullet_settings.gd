@@ -15,8 +15,9 @@ class_name BulletSettings
 @export_subgroup("shooting")
 @export var shoot_offset : Vector3 = Vector3.ZERO
 @export var shots : int = 1
+@export var inaccuracy : float = 0.0
 @export var spread_angle : float = 30.0
-@export var knockback : float = 24.0
+@export var knockback : float = 2.0
 
 @export_subgroup("other funny properties")
 @export var pierces : int = 0

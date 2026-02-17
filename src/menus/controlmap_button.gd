@@ -48,15 +48,21 @@ func _process(_delta : float) -> void:
 	key_string = str(InputMap.action_get_events(action_name)[0].as_text())
 
 func _unhandled_input(event : InputEvent) -> void:
-	if capturing and event.pressed:
-		if event is InputEventKey or event is InputEventMouseButton:
-			capturing = false
-			control_map.is_any_capturing = false
-			InputMap.action_erase_events(action_name)
+	if capturing and event.is_pressed():
+		if event is InputEventKey:
+			_add_bind(event)
+		elif event is InputEventMouseButton:
+			event.double_click = false
+			_add_bind(event)
 			
-			if Input.is_key_pressed(KEY_ESCAPE):
-				InputMap.action_add_event(action_name, default_input)
-			else:
-				InputMap.action_add_event(action_name, event)
+func _add_bind(event : InputEvent) -> void:
+	capturing = false
+	control_map.is_any_capturing = false
+	InputMap.action_erase_events(action_name)
+	
+	if Input.is_key_pressed(KEY_ESCAPE):
+		InputMap.action_add_event(action_name, default_input)
+	else:
+		InputMap.action_add_event(action_name, event)
 			
-			_G.config.controls.bind = _G.return_input_binds_to_dict()
+	_G.config.controls.bind = _G.return_input_binds_to_dict()

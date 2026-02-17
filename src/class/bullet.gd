@@ -28,7 +28,7 @@ const BASE_SIZE : float = 0.5
 const SIZE_CLAMP_MIN : float = 34.0
 const SIZE_CLAMP_MAX : float = 1000.0
 const SIZE_DIVISOR : float = 400.0
-const PIERCE_HITBOX_ACTIVATE_TIME : float = 50.0
+const PIERCE_HITBOX_ACTIVATE_TIME : float = 32.0
 
 func _ready() -> void:
 	pierces_left = config.pierces
@@ -85,12 +85,13 @@ func _setup_scale() -> void:
 	var clamped_damage: float = clampf(damage, SIZE_CLAMP_MIN, SIZE_CLAMP_MAX)
 	var size: float = BASE_SIZE + clampf(clamped_damage / SIZE_DIVISOR, 0.0, 3.0)
 	
-	collision_shape.shape.radius = size * 0.85
+	collision_shape.shape.radius = clampf(size * 0.3, 0.1, 1.0)
 	scale = Vector3.ONE * size * config.size_mult
 	config.bounciness = clampf(config.bounciness, 0.0, 1.75)
 
 func _start_lifetime() -> void:
 	$Timer.start(config.life_time)
+	collision_shape.disabled = false
 
 func _apply_gravity() -> void:
 	world_velocity.y -= config.fall_speed

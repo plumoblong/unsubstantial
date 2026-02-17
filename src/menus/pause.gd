@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var main_screen : Node = $Main
 @onready var options_screen : Node = $Options
-@onready var statistics_screen : Node = $Statistics
+@onready var statistics_screen : InventoryUI = $Statistics
 @onready var restart_confirm_screen : Node = $RestartConfirm
 @onready var chapter_info : RichTextLabel = $Main/ChapterInfo
 @onready var restart_button : Button = $Main/Restart
@@ -35,14 +35,11 @@ func _process(_delta : float) -> void:
 	if Input.is_action_just_pressed("escape"):
 		if options_screen.screen == 0:
 			screen = 0
-	
-	# Update screen visibility
 	main_screen.visible = screen == 0
 	options_screen.visible = screen == 1
 	statistics_screen.visible = screen == 2
 	restart_confirm_screen.visible = screen == 3
-	
-	# Update chapter info
+
 	var current_chapter = chapter.current
 	if _G.game.in_ether:
 		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + ETHER_SUFFIX
@@ -50,22 +47,9 @@ func _process(_delta : float) -> void:
 		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + CHAPTER_PREFIX + str(current_chapter.id) + STAGE_PREFIX + str(_G.game.stage)
 	
 	restart_button.disabled = _G.game.in_ether
-	
-	# Update statistics screen
-	if screen == 2:
-		_update_statistics()
 
-func _update_statistics() -> void:
-	stats_label.text = "Crystals Shards Collected: " + str(player_stats.added_stats.size()) + \
-		"\n\nDamage: " + str(player_stats.actual_damage) + \
-		" ESC\nAttack Speed: " + str(int(player_stats.actual_atkspd * 100.0)) + \
-		"%\nMove Speed: " + str(snappedf(player_stats.speed, 0.1)) + \
-		"m/s\n\nMax Essence: " + str(player_stats.esc_max) + \
-		" ESC\nEssence Healing: " + str(int(10.0 * player_essence.heal_multiplier)) + \
-		" ESC\nDefense: " + str(snappedf(player_stats.defense, 0.1)) + \
-		"\n\nKnockback: " + str(int(player_stats.knockback * 100.0)) + \
-		"%\nCritical Chance: " + str(int(player_stats.crit_chance)) + \
-		"%\nLuck: " + str(player_stats.luck)
+#func _update_statistics() -> void:
+	#
 
 func continue_pressed() -> void:
 	get_parent().hide()
@@ -81,6 +65,7 @@ func exit_pressed() -> void:
 
 func statistics_pressed() -> void:
 	screen = 2
+	statistics_screen.create_shard_grid()
 
 func rest_yes_pressed() -> void:
 	_G.change_scene("res://scene/game.tscn")

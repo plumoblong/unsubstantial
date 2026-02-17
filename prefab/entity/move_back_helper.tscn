@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://2qvy2ah2sdna"]
+
+[ext_resource type="Script" uid="uid://dmxf10sqvg7kl" path="res://src/entity/enemy/entity_move_helper.gd" id="1_8u1qb"]
+
+[node name="MoveBackHelper" type="Node3D" unique_id=984334338]
+script = ExtResource("1_8u1qb")
+
+[node name="Back" type="Node3D" parent="." unique_id=823532822]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Right" type="Node3D" parent="." unique_id=2098337398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Left" type="Node3D" parent="." unique_id=2006601783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

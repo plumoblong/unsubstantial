@@ -15,6 +15,7 @@ run/main_scene="uid://cuhflxnivbv2b"
 config/use_custom_user_dir=true
 config/custom_user_dir_name=".unsubstantial"
 config/features=PackedStringArray("4.6", "Forward Plus")
+run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
@@ -30,11 +31,13 @@ buses/default_bus_layout="uid://th2mssiikuvl"
 
 _G="*res://global.tscn"
 _T="*res://prefab/debug_console.tscn"
+DiscordRPCLoader="*uid://dky4kpbtgswgb"
 
 [debug]
 
+settings/physics_interpolation/enable_warnings=false
 file_logging/enable_file_logging=true
-file_logging/log_path="user://unsubstantial.txt"
+file_logging/log_path="user://log.txt"
 file_logging/max_log_files=3
 gdscript/warnings/enable=false
 gdscript/warnings/untyped_declaration=1
@@ -63,7 +66,7 @@ naming/script_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg", "res://addons/func_godot/plugin.cfg")
 
 [func_godot]
 

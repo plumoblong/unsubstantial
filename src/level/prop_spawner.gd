@@ -5,6 +5,8 @@ class_name PropSpawner
 	"scale" = Vector3(1,1,1), "prop_name" = ""
 }
 
+
+
 func _func_godot_build_complete() -> void:
 	var prop_file = load("res://prefab/level/prop/" + func_godot_properties["prop_name"] + ".tscn")
 	var prop_obj = prop_file.instantiate()

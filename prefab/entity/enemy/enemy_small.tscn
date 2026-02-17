@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_dwdt7"]
 [ext_resource type="Texture2D" uid="uid://btnjop7peo7e0" path="res://images/entity/human_small.png" id="8_ienij"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="9_w77qk"]
-[ext_resource type="PackedScene" uid="uid://cbeov66ersklw" path="res://prefab/entity/3d_bar.tscn" id="11_i3v08"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="12_w8fs2"]
+[ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="13_ienij"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="13_mm25u"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_kgpnm"]
 
@@ -46,13 +46,12 @@ shape = SubResource("CapsuleShape3D_c3pg5")
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1455241462 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_o8h2q")
 movement_component = NodePath("../MovementComponent")
-y_multiplier = 1.0
 
-[node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movebackhelper")]
+[node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_k6xin")
-movebackhelper = NodePath("../MoveBackHelper")
-agro_distance = 25.0
-min_distance = 0.0
+movehelper = NodePath("../MoveBackHelper")
+min_distance = 0.5
+strafe_enabled = false
 y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="." unique_id=259630483]
@@ -95,9 +94,6 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("8_ienij")
 
-[node name="3DBar" parent="." unique_id=1445756247 instance=ExtResource("11_i3v08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.82500005, 0)
-
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=472752322]
 stream = ExtResource("12_w8fs2")
 bus = &"SFX1"
@@ -110,14 +106,10 @@ bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="MapHazardCast" parent="." unique_id=2066686662 node_paths=PackedStringArray("esc") instance=ExtResource("14_kgpnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5607906, 0)
 esc = NodePath("../EssenceComponent")
 
-[node name="MoveBackHelper" type="Node3D" parent="." unique_id=1332837033]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-
-[node name="Node" type="Node3D" parent="MoveBackHelper" unique_id=1533084949]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("13_ienij")]
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

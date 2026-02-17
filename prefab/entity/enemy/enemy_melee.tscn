@@ -11,14 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://c6dbbnkdnhup6" path="res://images/entity/buffed.png" id="8_ei8lu"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="10_guxfu"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="11_15kmb"]
-[ext_resource type="PackedScene" uid="uid://cbeov66ersklw" path="res://prefab/entity/3d_bar.tscn" id="11_a7atj"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="13_0s5mw"]
+[ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="14_a7qjk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c3pg5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ei8lu"]
-radius = 0.736626
-height = 1.84593
+[sub_resource type="SphereShape3D" id="SphereShape3D_a7qjk"]
+radius = 0.8467768
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]
 radius = 0.66
@@ -49,10 +48,12 @@ shape = SubResource("CapsuleShape3D_c3pg5")
 script = ExtResource("2_ei8lu")
 movement_component = NodePath("../MovementComponent")
 
-[node name="ChaseComponent" type="Node" parent="." unique_id=349184039 node_paths=PackedStringArray("movebackhelper")]
+[node name="ChaseComponent" type="Node" parent="." unique_id=349184039 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_olih5")
-movebackhelper = NodePath("../MoveBackHelper")
+movehelper = NodePath("../MoveBackHelper")
 agro_distance = 30.0
+min_distance = 0.0
+strafe_enabled = false
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1193077039]
 script = ExtResource("4_5hjl1")
@@ -64,8 +65,10 @@ script = ExtResource("5_57pmb")
 
 [node name="DashComponent" type="Node" parent="." unique_id=1720225600]
 script = ExtResource("6_ei8lu")
-dash_speed = 256.0
+dash_speed = 512.0
 cooldown = 1.5
+delay = 0.12
+end_velocity_multiplier = 0.5
 metadata/_custom_type_script = "uid://c3klywbeud1cv"
 
 [node name="EnemyComponent" type="Node" parent="." unique_id=2097189607 node_paths=PackedStringArray("hit_sfx")]
@@ -81,11 +84,11 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("7_ei8lu")
 damage = 200
-knockback_strength = 32.0
+knockback_strength = 3.0
 die_reason = "You got punched too hard"
 
 [node name="Hitbox" type="CollisionShape3D" parent="DashQuery" unique_id=1195568939]
-shape = SubResource("CapsuleShape3D_ei8lu")
+shape = SubResource("SphereShape3D_a7qjk")
 debug_color = Color(0, 1, 1, 1)
 
 [node name="Query" type="Area3D" parent="." unique_id=593680968]
@@ -113,18 +116,11 @@ stream = ExtResource("11_15kmb")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="3DBar" parent="." unique_id=1678106018 instance=ExtResource("11_a7atj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
-
 [node name="MapHazardCast" parent="." unique_id=837425959 node_paths=PackedStringArray("esc") instance=ExtResource("13_0s5mw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 esc = NodePath("../EssenceComponent")
 
-[node name="MoveBackHelper" type="Node3D" parent="." unique_id=1685405915]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-
-[node name="Node" type="Node3D" parent="MoveBackHelper" unique_id=1298709754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("14_a7qjk")]
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

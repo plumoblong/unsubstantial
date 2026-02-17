@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_byh4w"]
 script = ExtResource("1_byh4w")
+stat_name = "Additional Shot"
 statistic = "shots"
 bullet_set = true
 rarity = 3

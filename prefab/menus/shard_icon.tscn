@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://dss5ltxrl0kmk"]
+
+[ext_resource type="Script" uid="uid://dwxp17mw4rogn" path="res://src/menus/shard_icon.gd" id="1_5rga6"]
+[ext_resource type="Texture2D" uid="uid://c2qcbr6hinxw8" path="res://images/item/shard_quality_big.png" id="2_5rga6"]
+[ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="3_lwjjq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7r5ay"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_5rga6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.5, 0.5, 0.5, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_lwjjq"]
+resource_name = "in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.5, 0.5, 0.5, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, -4.0]
+}
+
+[sub_resource type="Animation" id="Animation_7r5ay"]
+resource_name = "out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.5, 0.5, 0.5, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [-4.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxgyb"]
+_data = {
+&"RESET": SubResource("Animation_5rga6"),
+&"in": SubResource("Animation_lwjjq"),
+&"out": SubResource("Animation_7r5ay")
+}
+
+[node name="ShardIcon" type="Node2D" unique_id=1239332999]
+material = SubResource("CanvasItemMaterial_7r5ay")
+script = ExtResource("1_5rga6")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=838187072]
+modulate = Color(0.5019608, 0, 0.2509804, 1)
+self_modulate = Color(0.5, 0.5, 0.5, 1)
+use_parent_material = true
+texture = ExtResource("2_5rga6")
+hframes = 4
+frame = 3
+
+[node name="Stat" type="Sprite2D" parent="." unique_id=623193555]
+modulate = Color(0.75, 0.75, 0.75, 1)
+use_parent_material = true
+texture = ExtResource("3_lwjjq")
+
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=62885349]
+libraries/ = SubResource("AnimationLibrary_qxgyb")
+speed_scale = 4.0
+
+[node name="Bound" type="ColorRect" parent="." unique_id=2072611552]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(1, 1, 1, 0)
+
+[connection signal="mouse_entered" from="Bound" to="." method="bound_mouse_entered"]
+[connection signal="mouse_exited" from="Bound" to="." method="bound_mouse_exited"]

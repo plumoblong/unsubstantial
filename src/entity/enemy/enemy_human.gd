@@ -8,7 +8,6 @@ class_name EnemyHuman
 @onready var shoot_component : ShootComponent = $ShootComponent
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
 @onready var agent : NavigationAgent3D = $NavigationAgent3D
-@onready var bar_3d : Node = $"3DBar"
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
@@ -18,7 +17,7 @@ var y_boundary : float
 
 func _ready() -> void:
 	enemy.setup(essence_component)
-	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 16.0)
+	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)), 1.0)
 	shoot_component.config.fire_rate = randf_range(1.0, 1.25)
 	shoot_component.config.size_mult = randf_range(0.95, 1.2)
 	shoot_component.config.damage = enemy.damage
@@ -40,8 +39,6 @@ func _physics_process(delta : float) -> void:
 	if global_position.y <= y_boundary:
 		essence_component.die()
 	
-	bar_3d.from_value = essence_component.ratio
-	
 	# Update components
 	var on_floor : bool = is_on_floor()
 	movement_component.on_floor = on_floor
@@ -58,7 +55,7 @@ func _physics_process(delta : float) -> void:
 	if chase_component.attacking and player_can_control:
 		enemy.shoot_to_player(shoot_component, 1.5, 0.5)
 	
-	chase_component.update(_G.player.target.get_pos_multiplied(0.3 + enemy.random_factor), movement_component, agent)
+	chase_component.update(delta, _G.player.target.get_pos_multiplied(0.3 + enemy.random_factor), movement_component, agent)
 
 func query_area_entered(area : Area3D) -> void:
 	enemy.handle_query(area, essence_component, knockback_component)

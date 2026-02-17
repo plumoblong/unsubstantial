@@ -8,7 +8,6 @@ class_name EnemyMelee
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
 @onready var agent : NavigationAgent3D = $NavigationAgent3D
 @onready var enemy : EnemyComponent = $EnemyComponent
-@onready var bar_3d : Node = $"3DBar"
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
@@ -22,7 +21,7 @@ var target_pos : Vector3
 
 func _ready() -> void:
 	enemy.setup(essence_component)
-	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 16.0)
+	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 1.0)
 	dash_component.cooldown = 1.5
 	dash_query.damage = enemy.damage
 	light.light_color = enemy.color
@@ -47,14 +46,12 @@ func _physics_process(delta : float) -> void:
 	if player_can_control and dash_component.can_dash and chase_component.attacking:
 		dash_component.dash(movement_component, global_position.direction_to(target_pos))
 	
-	chase_component.update(target_pos, movement_component, agent)
+	chase_component.update(delta, target_pos, movement_component, agent)
 	
 	# Update chase min_distance based on dash state
-	var can_dash : bool = dash_component.can_dash
-	chase_component.min_distance = 0.0 if dash_component.dashing else (5.0 if can_dash else 12.0)
+	chase_component.min_distance = 0.0 if dash_component.can_dash or dash_component.dashing else 8.0
 	
 	dash_hitbox.disabled = not dash_component.dashing
-	bar_3d.from_value = essence_component.ratio
 	
 	# Update components
 	movement_component.on_floor = is_on_floor()
@@ -74,6 +71,7 @@ func query_area_entered(area : Area3D) -> void:
 func dashed() -> void:
 	shoot_sfx.play()
 
-func dash_query_body_entered(body : Player) -> void:
+func dash_query_body_entered(body : Node3D) -> void:
+	if body is not Player: return
 	knockback_component.knock(_G.player.global_position, 20)
 	movement_component.speed *= 0.8

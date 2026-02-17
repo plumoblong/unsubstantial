@@ -40,11 +40,13 @@ var speed_bonus : float = 1.0
 var noclip : bool = false
 var auto_bhop : bool = false
 
-# Cached references
 var _player : Player
 var _player_velocity : Vector3
 var _is_dashing : bool
 var _is_alive : bool
+
+var _knockback_velocity : Vector3 = Vector3.ZERO
+var _knockback_decay : float = 10.0
 
 signal just_landed
 
@@ -68,14 +70,19 @@ func update(delta : float) -> void:
 	if not _is_alive:
 		_player.velocity = Vector3.ZERO
 		return
-	
-	# Input handling
 	input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	var is_on_floor : bool = _player.is_on_floor()
 	moving = lerpf(moving, _player_velocity.length() / walk_speed * float(is_on_floor and not _is_dashing), 0.1)
 	
 	if not _is_dashing:
 		wish_dir = _player.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+	
+	# Apply knockback (always applied, decays over time)
+	if _knockback_velocity.length() > 0.01:
+		_player_velocity += _knockback_velocity
+		_knockback_velocity = _knockback_velocity.lerp(Vector3.ZERO, _knockback_decay * delta)
+	else:
+		_knockback_velocity = Vector3.ZERO
 	
 	if noclip:
 		_handle_noclip()
@@ -186,17 +193,30 @@ func is_surface_too_steep(normal : Vector3) -> bool:
 
 func handle_jump(delta : float, speed : float = jump_velocity) -> void:
 	if not enabled: return
-	
 	jump_sfx.pitch_scale = randf_range(0.9, 1.1)
 	var act_speed : float = speed / Engine.time_scale
-	
 	if _player.is_on_floor():
-		_player_velocity += _player.get_floor_normal() * act_speed
+		var floor_normal : Vector3 = _player.get_floor_normal()
+		var jump_direction : Vector3 = floor_normal.normalized()
+		_player_velocity += jump_direction * act_speed
+		var horizontal_influence : float = 1.0 - floor_normal.dot(Vector3.UP)
+		if horizontal_influence > 0.1:
+			var slope_push : Vector3 = Vector3(floor_normal.x, 0, floor_normal.z).normalized()
+			_player_velocity += slope_push * act_speed * 0.3 * horizontal_influence
 	else:
 		if _player_velocity.y > speed and not _is_dashing:
 			_player_velocity.y += act_speed
 		else:
 			_player_velocity.y = act_speed
-	
 	can_jump = false
 	jump_sfx.play()
+
+func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:
+	if not enabled: return
+	var knockback_dir : Vector3 = direction.normalized()
+	const Y_MULT : Vector3 = Vector3(1.0, 0.4, 1.0)
+	if _player.is_on_floor() and lift_off_ground:
+		var up_influence : float = 0.5
+		knockback_dir = (knockback_dir + Vector3.UP * up_influence).normalized()
+	_knockback_velocity = knockback_dir * power * Y_MULT
+	can_jump = false

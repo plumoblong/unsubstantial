@@ -36,11 +36,11 @@ func _process(_delta: float) -> void:
 	if chosen_stat == null: return
 	
 	$Rarity.frame = chosen_modulate.rarity + (int(_G.config.ui_dark_mode) * 4)
-	info.text = chosen_modulate.get_description(chosen_stat.stat_name)
+	info.text = chosen_modulate.get_description()
 	stat_icon.use_parent_material = _G.config.ui_dark_mode
 	if hovered:
 		if Input.is_action_just_pressed("ui_press"):
-			_G.player.stats.add_stat(chosen_modulate)
+			_G.player.stats.add_stat(chosen_modulate, chosen_stat.image)
 			_G.current_run.crystals_collected += 1
 			print(_G.current_run.items_collected)
 			_G.game.crystal_choose.end_choose()

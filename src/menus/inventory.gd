@@ -1,0 +1,65 @@
+extends Node2D
+class_name InventoryUI
+
+const ICON_SCENE : PackedScene = preload("res://prefab/menus/shard_icon.tscn")
+const ICON_SIZE : int = 32
+var spacing : Vector2i = Vector2i(12, 6)
+var columns : int = 5
+var rows : int = 3
+
+@onready var icon_holder : Node2D = $IconHolder
+@onready var description : RichTextLabel = $Description
+@onready var empty_info : RichTextLabel = $Empty
+@onready var rarity : Sprite2D = $Rarity
+@onready var arrow_right : TextureButton = $ArrowRight
+@onready var arrow_left : TextureButton = $ArrowLeft
+
+var current_description : String = "? ? ?"
+var current_page : int = 0
+var aviable_pages : int = 0
+
+func create_shard_grid() -> void:
+	if _G.player.stats.added_stats.size() == 0: return
+	var grid_width : int = columns * ICON_SIZE + (columns - 1) * spacing.x
+	var grid_height : int = rows * ICON_SIZE + (rows - 1) * spacing.y
+	var start_x : float = -grid_width / 2.0 + ICON_SIZE / 2.0
+	var start_y : float = -grid_height / 2.0 + ICON_SIZE / 2.0
+	var icons_per_page : int = columns * rows
+	
+	for i: int in range(_G.player.stats.added_stats.size()):
+		var page : int = i / icons_per_page
+		var index_in_page : int = i % icons_per_page
+		var col : int = index_in_page % columns
+		var row : int = index_in_page / columns
+		
+		var shard_icon : ShardIcon = ICON_SCENE.instantiate()
+		var page_offset : float = page * 480.0
+		shard_icon.position = Vector2(start_x + col * (ICON_SIZE + spacing.x) + page_offset, start_y + row * (ICON_SIZE + spacing.y))
+		var stat : Array = _G.player.stats.added_stats[i]
+		
+		icon_holder.add_child(shard_icon)
+		shard_icon.initialize(stat[0], stat[1])
+
+func delete_shard_grid() -> void:
+	if icon_holder.get_child_count() == 0: return
+	for i : ShardIcon in icon_holder.get_children():
+		i.queue_free()
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("escape"):
+		delete_shard_grid()
+	description.text = current_description
+	empty_info.visible = _G.player.stats.added_stats.size() == 0
+	description.visible = _G.player.stats.added_stats.size() != 0
+	
+	aviable_pages =  icon_holder.get_child_count() / 15
+	arrow_left.visible = current_page != 0
+	arrow_right.visible = current_page != aviable_pages
+	icon_holder.position.x = lerpf(icon_holder.position.x, 240.0 - (480.0 * current_page), 0.05)
+	$Label.text = str(current_page) + " " + str(aviable_pages)
+
+func arrow_right_pressed() -> void:
+	current_page += 1
+
+func arrow_left_pressed() -> void:
+	current_page -= 1

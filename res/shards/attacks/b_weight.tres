@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_8ajnq"]
 script = ExtResource("1_8ajnq")
+stat_name = "Shot Weight"
 statistic = "fall_speed"
 bullet_set = true
 operator = 2
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_5wqml"]
 script = ExtResource("1_8ajnq")
+stat_name = "Shot Weight"
 statistic = "fall_speed"
 bullet_set = true
 operator = 2
@@ -23,6 +25,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_rkfxs"]
 script = ExtResource("1_8ajnq")
+stat_name = "Shot Weight"
 statistic = "fall_speed"
 bullet_set = true
 operator = 2
@@ -32,6 +35,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_nwf23"]
 script = ExtResource("1_8ajnq")
+stat_name = "Shot Weight"
 statistic = "fall_speed"
 bullet_set = true
 operator = 2

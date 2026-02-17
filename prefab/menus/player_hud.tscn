@@ -572,6 +572,7 @@ offset = Vector2(0, -12)
 
 [node name="Essence" type="RichTextLabel" parent="Info/EssenceIcon" unique_id=1405330743]
 use_parent_material = true
+clip_contents = false
 offset_left = 12.0
 offset_top = -11.0
 offset_right = 75.0
@@ -582,6 +583,8 @@ theme_override_font_sizes/normal_font_size = 6
 theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
 text = "[b]100[/b]esc"
+scroll_active = false
+autowrap_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="CrystalIcon" type="AnimatedSprite2D" parent="Info" unique_id=1535087682]

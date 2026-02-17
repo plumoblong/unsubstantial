@@ -20,13 +20,10 @@ func _ready() -> void:
 
 func shoot(direction : Vector3 = Vector3.ZERO, origin : Vector3 = Vector3.ZERO) -> void:
 	if not enabled or not can_shoot: return
-	
 	if origin == Vector3.ZERO:
 		origin = parent.global_position
-	
 	reset()
 	shooted.emit()
-	
 	if shoot_delay > 0.0:
 		await tree.create_timer(shoot_delay).timeout
 	
@@ -35,6 +32,10 @@ func shoot(direction : Vector3 = Vector3.ZERO, origin : Vector3 = Vector3.ZERO) 
 	var shot_delay : float = (shoot_delay / float(shot_count)) * 0.5
 	
 	for i : int in range(shot_count):
+		var innacuracy_vector : Vector3 = Vector3(
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0),
+		randf_range(-1.0, 1.0)).normalized() * config.inaccuracy
 		var bullet : Bullet = config.bullet_scene.instantiate()
 		
 		# Determine crit status
@@ -42,7 +43,7 @@ func shoot(direction : Vector3 = Vector3.ZERO, origin : Vector3 = Vector3.ZERO) 
 		
 		bullet.config = config
 		bullet.global_position = origin
-		bullet.direction = angles[i]
+		bullet.direction = angles[i] + innacuracy_vector
 		
 		if _G.debug_mode:
 			_T.say(bullet.name + " went towards: " + _G.vector_to_string(angles[i]) + ".\nInput Direction: " + _G.vector_to_string(direction))

@@ -9,11 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="7_2cd0i"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="8_hrcbw"]
 [ext_resource type="Texture2D" uid="uid://c8qc7w1f8cte2" path="res://images/entity/tank.png" id="9_s7e5n"]
-[ext_resource type="PackedScene" uid="uid://cbeov66ersklw" path="res://prefab/entity/3d_bar.tscn" id="10_bmaxk"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="11_ehkvo"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="12_xq50c"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="13_y5ngk"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_snofy"]
+[ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="15_rkk6f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_asf4w"]
 radius = 0.6
@@ -24,8 +24,9 @@ script = ExtResource("8_hrcbw")
 size_mult = 2.0
 fire_rate = 0.75
 shots = 2
+inaccuracy = 0.2
 spread_angle = 20.0
-knockback = 32.0
+knockback = 3.0
 bounciness = 1.1
 init_speed = 36.0
 fall_speed = 0.2
@@ -60,14 +61,14 @@ shape = SubResource("CapsuleShape3D_asf4w")
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=466537468]
 script = ExtResource("2_y5ngk")
-y_multiplier = 1.0
 
-[node name="ChaseComponent" type="Node" parent="." unique_id=106599417 node_paths=PackedStringArray("movebackhelper")]
+[node name="ChaseComponent" type="Node" parent="." unique_id=106599417 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_snofy")
-movebackhelper = NodePath("../MoveBackHelper")
+movehelper = NodePath("../MoveBackHelper")
 agro_distance = 30.0
 attack_distance = 25.0
-min_distance = 15.0
+min_distance = 2.0
+strafe_distance = 10.0
 y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="." unique_id=445065449]
@@ -80,6 +81,10 @@ script = ExtResource("5_yg07u")
 set_max_essence_on_ready = false
 
 [node name="ShootComponent" type="Node" parent="." unique_id=376065956]
+script = ExtResource("6_wl17c")
+config = SubResource("Resource_y5ngk")
+
+[node name="ShootComponent2" type="Node" parent="." unique_id=1627967609]
 script = ExtResource("6_wl17c")
 config = SubResource("Resource_y5ngk")
 
@@ -109,9 +114,6 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("9_s7e5n")
 
-[node name="3DBar" parent="." unique_id=411131922 instance=ExtResource("10_bmaxk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0)
-
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=774407221]
 stream = ExtResource("11_ehkvo")
 bus = &"SFX1"
@@ -126,13 +128,10 @@ attenuation_filter_cutoff_hz = 20500.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1291933, 0)
 esc = NodePath("../EssenceComponent")
 
-[node name="MoveBackHelper" type="Node3D" parent="." unique_id=489450885]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-
-[node name="Node" type="Node3D" parent="MoveBackHelper" unique_id=1608609056]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+[node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("15_rkk6f")]
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
 [connection signal="shooted" from="ShootComponent" to="." method="shoot_component_shooted"]
+[connection signal="shooted" from="ShootComponent2" to="." method="shoot_component_shooted"]
 [connection signal="area_entered" from="Query" to="." method="query_area_entered"]

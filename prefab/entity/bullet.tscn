@@ -27,12 +27,14 @@ point_count = 2
 metadata/_snap_enabled = true
 metadata/_snap_count = 16
 
-[sub_resource type="CurveTexture" id="CurveTexture_dg1jc"]
+[sub_resource type="CurveTexture" id="CurveTexture_h0xjc"]
 curve = SubResource("Curve_uh2de")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhh02"]
 gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_dg1jc")
+scale_min = 1.1999999
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_h0xjc")
 color_ramp = SubResource("GradientTexture1D_vpea4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0xjc"]
@@ -66,6 +68,9 @@ point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_i15fl"]
 curve = SubResource("Curve_r3xjr")
+
+[sub_resource type="CurveTexture" id="CurveTexture_dg1jc"]
+curve = SubResource("Curve_uh2de")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2u5t"]
 emission_shape = 1
@@ -236,6 +241,7 @@ texture = ExtResource("1_affj2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1354041273]
 shape = SubResource("SphereShape3D_6aqa8")
+disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=888833661]
 light_volumetric_fog_energy = 0.1
@@ -258,8 +264,8 @@ shape = SubResource("SphereShape3D_nhh02")
 debug_color = Color(0, 1, 0.966667, 0.25098)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1253749915]
-amount = 32
-speed_scale = 1.5
+amount = 64
+lifetime = 0.5
 visibility_aabb = AABB(-8, -8, -8, 16, 16, 16)
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_nhh02")

@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://ruui4a3p4otb"]
 
 [ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="1_ekk7n"]
+[ext_resource type="Script" uid="uid://cigfi3sa53ylk" path="res://src/menus/inventory.gd" id="2_7vwyn"]
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="2_jtats"]
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_f7gt8"]
-[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="5_7vwyn"]
+[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="5_errr7"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="5_onvrc"]
 [ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="6_x7mk6"]
+[ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="7_onvrc"]
+[ext_resource type="Texture2D" uid="uid://o8usoxch28pm" path="res://images/ui/arrow.png" id="9_ekk7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4gl7j"]
 shader = ExtResource("2_jtats")
@@ -12,14 +16,17 @@ shader_parameter/direction = Vector2(-1, -1)
 shader_parameter/modulate = Color(0, 0, 0, 1)
 shader_parameter/self_modulate = Color(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vwyn"]
-shader = ExtResource("2_jtats")
-shader_parameter/direction = Vector2(-1, -1)
-shader_parameter/modulate = Color(0, 0, 0, 1)
-shader_parameter/self_modulate = Color(1, 1, 1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtats"]
+atlas = ExtResource("9_ekk7n")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7gt8"]
+atlas = ExtResource("9_ekk7n")
+region = Rect2(16, 0, 16, 32)
 
 [node name="Statistics" type="Node2D" unique_id=59219854]
 material = ExtResource("1_ekk7n")
+script = ExtResource("2_7vwyn")
 
 [node name="Header" type="RichTextLabel" parent="." unique_id=279976837]
 material = SubResource("ShaderMaterial_4gl7j")
@@ -30,36 +37,79 @@ offset_bottom = 38.0
 theme_override_fonts/normal_font = ExtResource("3_f7gt8")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][wave]Statistics"
+text = "[wave freq=100]Inventory"
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="." unique_id=216098572]
+material = SubResource("ShaderMaterial_4gl7j")
+clip_contents = false
+offset_top = 196.0
+offset_right = 480.0
+offset_bottom = 234.0
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("5_onvrc")
+theme_override_fonts/bold_font = ExtResource("5_errr7")
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "[b]+10% Attack Speed[/b]
+110% -> 120%"
+horizontal_alignment = 1
+
+[node name="Empty" type="RichTextLabel" parent="." unique_id=1214957393]
+material = SubResource("ShaderMaterial_4gl7j")
+clip_contents = false
+offset_right = 480.0
+offset_bottom = 270.0
+theme_override_fonts/normal_font = ExtResource("5_errr7")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Nothing here yet."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1309144298]
-visible = false
 position = Vector2(4, 4)
 texture = ExtResource("6_x7mk6")
 centered = false
 
-[node name="Stats" type="RichTextLabel" parent="." unique_id=957326127]
-material = SubResource("ShaderMaterial_7vwyn")
-clip_contents = false
-offset_left = 128.0
-offset_right = 352.0
-offset_bottom = 270.0
-mouse_filter = 2
-theme_override_constants/line_separation = 0
-theme_override_constants/paragraph_separation = 2
-theme_override_fonts/normal_font = ExtResource("5_7vwyn")
-theme_override_font_sizes/normal_font_size = 6
-text = "DAMAGE 50
-CRIT-CHANCE 1%
-ATTACK-SPEED 1.00
-MOVE-SPEED 20m/s
-MAX-ESSENCE 500
-DEFENSE 10
-LUCK 0
+[node name="Rarity" type="Sprite2D" parent="." unique_id=818175140]
+use_parent_material = true
+position = Vector2(240, 231)
+texture = ExtResource("7_onvrc")
+vframes = 12
+frame = 8
 
+[node name="IconHolder" type="Node2D" parent="." unique_id=385432230]
+position = Vector2(240, 111)
 
-"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ArrowRight" type="TextureButton" parent="." unique_id=1773223174]
+offset_left = 392.0
+offset_top = 92.0
+offset_right = 432.0
+offset_bottom = 132.0
+texture_normal = SubResource("AtlasTexture_jtats")
+texture_pressed = SubResource("AtlasTexture_f7gt8")
+texture_hover = SubResource("AtlasTexture_f7gt8")
+stretch_mode = 3
+
+[node name="ArrowLeft" type="TextureButton" parent="." unique_id=1193770629]
+offset_left = 48.0
+offset_top = 92.0
+offset_right = 88.0
+offset_bottom = 132.0
+texture_normal = SubResource("AtlasTexture_jtats")
+texture_pressed = SubResource("AtlasTexture_f7gt8")
+texture_hover = SubResource("AtlasTexture_f7gt8")
+stretch_mode = 3
+flip_h = true
+
+[node name="Label" type="Label" parent="." unique_id=335607738]
+visible = false
+offset_left = 88.0
+offset_top = 217.0
+offset_right = 128.0
+offset_bottom = 227.0
+
+[connection signal="pressed" from="ArrowRight" to="." method="arrow_right_pressed"]
+[connection signal="pressed" from="ArrowLeft" to="." method="arrow_left_pressed"]

@@ -25,6 +25,8 @@ class_name EnemyComponent
 @export var ent_max : int = 3
 @export var ent_min : int = 0
 @export var ent_count_as_enemy : bool = true
+@export var other_enemy_damage_taken_mult : float = 0.1
+@export var other_enemy_knockback_taken_mult : float = 0.75
 
 var ent_amount : int
 var ent_scene : PackedScene
@@ -71,16 +73,18 @@ func handle_fracture(amount : int, i_time : float, mov : MovementComponent, ligh
 
 func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackComponent) -> void:
 	if area.get_parent() == get_parent(): return
-	if area is Hazard:
-		if area.damage < 1: return
-		if not area.parent is Player: return
-		if sprite.modulate != Color.WHITE: 
-			esc.fracture(area.damage, area.crit, area.stun_time)
-			#_G.game.wait()
-			if area.get_parent() is Player: area.get_parent().hud.hitmark()
-			knock.knock(area.get_parent().global_position, area.knockback_strength, area.knockback_y_strength)
-			if area is Bullet: area.hit()
-
+	if not area is Hazard: return
+	if area.damage < 1: return
+	if sprite.modulate != Color.WHITE: 
+		var damage_mult : float = 1.0 if area.parent is Player else other_enemy_damage_taken_mult
+		var knock_mult : float = 1.0 if area.parent is Player else other_enemy_knockback_taken_mult
+		esc.fracture(area.damage * damage_mult, area.crit, area.stun_time)
+		var knock_pos : Vector3 = area.parent.global_position if area.knockback_from_parent_pos else area.global_position
+		knock.knock(knock_pos, area.knockback_strength * knock_mult)
+		if area is Bullet: area.hit()
+		if area.parent is Player: _G.player.hud.hitmark()
+		
+		
 func handle_spawn_ent() -> void:
 	if not spawn_ent_on_death: return
 	var s = ent_scene.instantiate()

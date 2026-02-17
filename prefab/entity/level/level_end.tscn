@@ -219,7 +219,7 @@ shape = SubResource("ConcavePolygonShape3D_y1vwj")
 
 [node name="Animation" type="AnimationPlayer" parent="." unique_id=60272618]
 libraries/ = SubResource("AnimationLibrary_madfn")
-speed_scale = 1.75
+speed_scale = 2.5
 
 [node name="omni_light_3d" type="OmniLight3D" parent="." unique_id=1536693128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.414258, 0.5419792)

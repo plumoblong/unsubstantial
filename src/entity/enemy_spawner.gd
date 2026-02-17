@@ -10,7 +10,7 @@ class_name EnemySpawner
 }
 
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 5
+const ENEMY_CAP : int = 8
 const ENEMY_PATH_PREFIX : String = "res://prefab/entity/enemy/"
 const ENEMY_PATH_SUFFIX : String = ".tscn"
 
@@ -76,8 +76,6 @@ func spawn() -> void:
 		spawned = true
 
 func _physics_process(_delta : float) -> void:
-	if Engine.get_physics_frames() % 10 != 0: return
-	
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
 	if distance_to_player < distance_to_spawn:
 		raycast.target_position = global_position.direction_to(_G.player.global_position).normalized() * distance_to_player

@@ -34,8 +34,10 @@ func _ready() -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	set_binds()
 	await get_tree().create_timer(0.25).timeout
 	start()
+	_T.start()
 
 func start() -> void:
 	_T.say("[center]unsubstantial Started.[/center]", Color.MAGENTA)
@@ -46,3 +48,9 @@ func start() -> void:
 	_G.tween($AnimatedSprite2D, "modulate", Color.BLACK, 1.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	await get_tree().create_timer(2.5).timeout
 	_G.change_scene("res://scene/menu.tscn")
+	
+func set_binds() -> void:
+	for i in _G.config.controls.bind:
+		InputMap.action_erase_events(i)
+		InputMap.action_add_event(i, _G.string_to_input_event(_G.config.controls.bind[i]))
+		_T.say("Binds set: " + i + ": " + str(_G.config.controls.bind[i]))

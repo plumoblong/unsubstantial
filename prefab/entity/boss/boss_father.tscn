@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="6_nch6a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
-radius = 0.881144
+radius = 2.0561523
 height = 6.94789
 
 [sub_resource type="Resource" id="Resource_t7657"]

@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_8ajnq"]
 script = ExtResource("1_rdouf")
+stat_name = "Shot Bounciness"
 statistic = "bounciness"
 bullet_set = true
 value = 0.2
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_rdouf"]
 script = ExtResource("1_rdouf")
+stat_name = "Shot Bounciness"
 statistic = "bounciness"
 bullet_set = true
 value = 0.5

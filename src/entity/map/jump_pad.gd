@@ -24,6 +24,7 @@ func body_entered(body : CharacterBody3D) -> void:
 			body.movement_component.jump(speed)
 			$AudioStreamPlayer3D.play()
 			await get_tree().create_timer(0.1).timeout
+			if body == null: return
 			body.movement_component.is_using_force = false
 		else:
 			return

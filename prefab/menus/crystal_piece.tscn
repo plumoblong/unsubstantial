@@ -23,14 +23,6 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.1)
 metadata/_snap_enabled = true
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2gp0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lp214"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqquj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_deuxg"]
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48dtb"]
 blend_mode = 1
 
@@ -128,6 +120,7 @@ _data = {
 [node name="CrystalPiece1" type="Node2D" unique_id=687883265]
 material = SubResource("CanvasItemMaterial_q61hg")
 script = ExtResource("1_squgq")
+first = null
 
 [node name="Glow2" type="Sprite2D" parent="." unique_id=418675845]
 modulate = Color(0.26543766, 0.26543766, 0.26543766, 1)
@@ -137,18 +130,14 @@ position = Vector2(-1.9073486e-06, 0.83333576)
 scale = Vector2(2.5, 2.5)
 texture = SubResource("GradientTexture2D_h2gp0")
 
-[node name="Bound" type="Button" parent="." unique_id=913707903]
+[node name="Bound" type="ColorRect" parent="." unique_id=737609975]
 offset_left = -32.0
 offset_top = -64.0
 offset_right = 32.0
 offset_bottom = 64.0
 focus_mode = 1
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h2gp0")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_lp214")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_lqquj")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_deuxg")
-disabled = true
+color = Color(1, 1, 1, 0)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=375915920]
 use_parent_material = true
@@ -218,7 +207,7 @@ texture = ExtResource("4_xcjxr")
 use_parent_material = true
 position = Vector2(0, 32)
 texture = ExtResource("6_rnqqe")
-vframes = 8
+vframes = 12
 
 [node name="Anim" type="AnimationPlayer" parent="." unique_id=2093231405]
 libraries/ = SubResource("AnimationLibrary_qcpl0")

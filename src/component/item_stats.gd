@@ -5,13 +5,13 @@ class_name ItemStats
 
 # These are the default stats for the player. They will be modified by items and shrines.
 
-var added_stats : Array[Modulate]
+var added_stats : Array[Array]
 
 #only affects choosing the crystal shards
 var luck : int = 0
 var choices : int = 2
 
-var damage : int = 40
+var damage : int = 50
 var damage_mult : float = 1.0
 var dash_damage_mult : float = 1.25
 var bullet_damage_mult : float = 1.0
@@ -48,9 +48,9 @@ var actual_damage : int
 var actual_crit : float
 var actual_atkspd : float
 
-func add_stat(modulate : Modulate) -> void:
-	added_stats.push_front(modulate)
+func add_stat(modulate : Modulate, stat_texture : Texture) -> void:
 	modulate.append(self)
+	added_stats.push_back([modulate, stat_texture])
 
 func update() -> void:
 	
@@ -60,7 +60,7 @@ func update() -> void:
 	
 	bullet.damage = (actual_damage * bullet_damage_mult) / (1 if bullet.shots <= 1 else int(float(bullet.shots) * 0.5))
 	bullet.fire_rate = bullet_atkspd / actual_atkspd
-	bullet.knockback = 24.0 * knockback
+	bullet.knockback = 2.0 * knockback
 	bullet.spread_angle = bullet.shots * 5
 	
 	p.shoot_component.config = bullet
@@ -69,14 +69,13 @@ func update() -> void:
 	#dash_hit.damage = int(float(actual_damage) * dash_damage_mult)
 	p.dash_component.dash_speed = 96.0 * dash_speed * (speed / 20.0)
 	p.dash_component.cooldown = maxf(dash_atkspd / actual_atkspd, 0.75)
-	p.get_node("DashQuery").knockback_strength = 64.0 * knockback
-	bullet.knockback = 24.0 * knockback
+	p.get_node("DashQuery").knockback_strength = 6.0 * knockback
 	
 	p.movement_component.walk_speed = speed
 	
 	p.essence_component.heal_multiplier = esc_mult
 	p.essence_component.max_essence = esc_max
-	p.essence_component.defense = defense
+	p.essence_component.defense = defense * (1 + (float(p.god_mode) * 999999.0))
 
 	var score_additive : int = (_G.current_run.kills * 100) + (_G.current_run.bosses_slained * 2000) + (_G.current_run.times_looped * 5000) + (_G.current_run.items_collected.times_bought * 200)
 	var score_substract : int = (_G.current_run.hits_taken * 50)

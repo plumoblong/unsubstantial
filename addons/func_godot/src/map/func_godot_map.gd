@@ -28,7 +28,7 @@ signal build_complete
 
 @export_category("Map")
 ## Local path to MAP or VMF file to build a scene from.
-@export_file("*.map","*.vmf") var local_map_file: String = ""
+@export_file_path("*.map","*.vmf") var local_map_file: String = ""
 
 ## Global path to MAP or VMF file to build a scene from. Overrides [member FuncGodotMap.local_map_file].
 @export_global_file("*.map","*.vmf") var global_map_file: String = ""

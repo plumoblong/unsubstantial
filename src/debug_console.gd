@@ -19,7 +19,11 @@ var history_index : int = -1
 
 var _is_console_active : bool = false
 
-func _ready() -> void:
+#console command variables
+
+var _c_print_to_chat : bool = false
+
+func start() -> void:
 	# Start with console hidden offscreen
 	if console_panel:
 		console_panel.position.y = SLIDE_OFFSET
@@ -29,7 +33,7 @@ func _ready() -> void:
 	else:
 		say("\nClient's TUX is disabled, good for them.")
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not _G.config.tux: return
 	
 	if event.is_action_pressed("console"):
@@ -73,7 +77,7 @@ func show_console() -> void:
 	_tween.set_trans(Tween.TRANS_CUBIC)
 	
 	if console_panel:
-		_tween.tween_property(console_panel, "position:y", 0.0, SLIDE_DURATION).from(SLIDE_OFFSET)
+		_tween.tween_property(console_panel, "position:y", 0.0, SLIDE_DURATION * Engine.time_scale).from(SLIDE_OFFSET)
 	
 	# Grab focus after animation starts
 	await get_tree().create_timer(0.05).timeout
@@ -90,13 +94,9 @@ func hide_console() -> void:
 	_tween.set_trans(Tween.TRANS_CUBIC)
 	
 	if console_panel:
-		_tween.tween_property(console_panel, "position:y", SLIDE_OFFSET, SLIDE_DURATION)
+		_tween.tween_property(console_panel, "position:y", SLIDE_OFFSET, SLIDE_DURATION * Engine.time_scale)
 	await _tween.finished
 	hide()
-
-func _process(_delta: float) -> void:
-	if _G.show_fps and has_node("Shadow"):
-		$Shadow.text = output.text
 
 func parse_command(text: String) -> Dictionary:
 	var result = {
@@ -213,6 +213,8 @@ func execute_command(cmd: String, args: Array) -> void:
 		"debug_draw":
 			var id = int(args[0]) if args.size() > 0 else 0
 			debug_draw(id)
+		"print_to_chat":
+			_c_print_to_chat = not _c_print_to_chat
 		_:
 			say("Unknown command: " + cmd, Color.RED)
 			say("Type 'help' for a list of commands.")
@@ -223,6 +225,9 @@ func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) 
 		return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
 	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n"
+	if not _validate_game(): return
+	if not _c_print_to_chat: return
+	_G.game.chat.add_message("TUX: " + str(log))
 
 func help(page : int = -1) -> void:
 	match page:
@@ -392,6 +397,5 @@ func _validate_player() -> bool:
 
 func _validate_game() -> bool:
 	if _G.game == null or not _G.game.is_inside_tree():
-		say("Game object not found. Must be in game.", Color.RED)
 		return false
 	return true

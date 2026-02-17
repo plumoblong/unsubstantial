@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_c2qt3"]
 script = ExtResource("1_c2qt3")
+stat_name = "Attack Speed"
 statistic = "attack_speed"
 operator = 2
 value = 1.1
@@ -13,6 +14,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_dbqwc"]
 script = ExtResource("1_c2qt3")
+stat_name = "Attack Speed"
 statistic = "attack_speed"
 operator = 2
 value = 1.15
@@ -21,6 +23,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_20r62"]
 script = ExtResource("1_c2qt3")
+stat_name = "Attack Speed"
 statistic = "attack_speed"
 operator = 2
 value = 1.2
@@ -29,6 +32,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_e5gxp"]
 script = ExtResource("1_c2qt3")
+stat_name = "Attack Speed"
 statistic = "attack_speed"
 operator = 2
 value = 1.3

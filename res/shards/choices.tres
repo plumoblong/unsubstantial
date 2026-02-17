@@ -6,6 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_sfver"]
 script = ExtResource("1_2ygss")
+stat_name = "More Choices"
 statistic = "choices"
 rarity = 3
 dont_number_stat = true

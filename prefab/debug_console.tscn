@@ -32,23 +32,6 @@ offset_right = 480.0
 offset_bottom = 222.0
 color = Color(0, 0, 0, 0.757)
 
-[node name="Shadow" type="RichTextLabel" parent="ConsolePanel" unique_id=210017629]
-visible = false
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 480.0
-offset_bottom = 93.0
-theme_override_constants/line_separation = 1
-theme_override_fonts/normal_font = ExtResource("2_csl18")
-theme_override_font_sizes/normal_font_size = 6
-bbcode_enabled = true
-text = "[color=00ff00]TUX Loaded![/color]"
-scroll_active = false
-scroll_following = true
-vertical_alignment = 2
-
 [node name="Output" type="RichTextLabel" parent="ConsolePanel" unique_id=439356205]
 layout_mode = 0
 offset_left = 2.0
