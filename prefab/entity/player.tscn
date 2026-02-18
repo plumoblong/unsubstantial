@@ -347,7 +347,7 @@ omni_range = 15.0
 
 [node name="ShootComponent" type="Node" parent="." unique_id=108388983]
 script = ExtResource("3_lq4sc")
-shoot_delay = 0.1
+shoot_delay = 0.04
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1545350429 node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
 script = ExtResource("6_qqhji")

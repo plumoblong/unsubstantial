@@ -116,7 +116,7 @@ func jump(amt : float = jump_speed) -> void:
 func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:
 	if not enabled or not _parent: return
 	var knockback_dir : Vector3 = direction.normalized()
-	const Y_MULT : Vector3 = Vector3(1.0, 0.4, 1.0)
+	const Y_MULT : Vector3 = Vector3(1.0, 0.25, 1.0)
 	if _parent.is_on_floor() and lift_off_ground:
 		var up_influence : float = 0.5
 		knockback_dir = (knockback_dir + Vector3.UP * up_influence).normalized()

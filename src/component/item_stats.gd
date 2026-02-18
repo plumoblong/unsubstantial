@@ -76,6 +76,8 @@ func update() -> void:
 	p.essence_component.heal_multiplier = esc_mult
 	p.essence_component.max_essence = esc_max
 	p.essence_component.defense = defense * (1 + (float(p.god_mode) * 999999.0))
+	
+	p.knock_component.multiplier = 2.0 / (defense / 10.0)
 
 	var score_additive : int = (_G.current_run.kills * 100) + (_G.current_run.bosses_slained * 2000) + (_G.current_run.times_looped * 5000) + (_G.current_run.items_collected.times_bought * 200)
 	var score_substract : int = (_G.current_run.hits_taken * 50)

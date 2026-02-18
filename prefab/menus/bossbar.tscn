@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bkdignk3renla" path="res://src/menus/bossbar.gd" id="1_usf1d"]
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="3_gt3w2"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="4_a30yq"]
 [ext_resource type="Texture2D" uid="uid://bjj2fdr7mh61t" path="res://images/ui/progress_bar_big_solid.png" id="4_oh8v5"]
-[ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="4_usf1d"]
 [ext_resource type="Texture2D" uid="uid://v1y1utrw8nkd" path="res://images/entity/indicator/boss.png" id="5_a30yq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2udb0"]
 shader = ExtResource("3_gt3w2")
 shader_parameter/modulate = Color(0.695568, 0, 0.111848, 1)
-shader_parameter/amount = 0.5
+shader_parameter/amount = 0.499999988824
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
 
@@ -25,43 +25,34 @@ script = ExtResource("1_usf1d")
 
 [node name="Bar" type="NinePatchRect" parent="." unique_id=1980416354]
 material = SubResource("ShaderMaterial_2udb0")
-offset_left = 116.0
-offset_top = 43.0
-offset_right = 312.0
-offset_bottom = 55.0
+offset_left = 142.0
+offset_top = 223.0
+offset_right = 337.99988
+offset_bottom = 235.0
 texture = ExtResource("4_oh8v5")
 patch_margin_left = 5
 patch_margin_right = 5
 
 [node name="Name" type="Label" parent="." unique_id=1784698432]
 material = SubResource("ShaderMaterial_a30yq")
-offset_top = 37.0
-offset_right = 432.0
-offset_bottom = 42.0
-theme_override_font_sizes/font_size = 8
-text = "THE FATHER"
-horizontal_alignment = 1
-uppercase = true
-
-[node name="Health" type="Label" parent="." unique_id=1500463308]
-material = SubResource("ShaderMaterial_a30yq")
-offset_top = 44.0
-offset_right = 432.0
-offset_bottom = 54.0
-theme_override_fonts/font = ExtResource("4_usf1d")
-theme_override_font_sizes/font_size = 8
-text = "10000"
+offset_top = 213.0
+offset_right = 480.0
+offset_bottom = 221.0
+theme_override_fonts/font = ExtResource("4_a30yq")
+theme_override_font_sizes/font_size = 6
+text = "Boss"
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1027492476]
 material = SubResource("ShaderMaterial_a30yq")
-position = Vector2(216, 56)
+position = Vector2(240, 238)
 texture = ExtResource("5_a30yq")
 centered = false
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=172126332]
 material = SubResource("ShaderMaterial_a30yq")
-position = Vector2(178, 56)
+position = Vector2(240, 238)
 texture = ExtResource("5_a30yq")
 centered = false
+offset = Vector2(-64, 0)
 flip_h = true

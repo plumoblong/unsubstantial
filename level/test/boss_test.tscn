@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="1_yrdo3"]
 [ext_resource type="Texture2D" uid="uid://c8wlyltv1118n" path="res://textures/world/yahermis.png" id="2_3kk46"]
 [ext_resource type="Texture2D" uid="uid://dp0dmo5a5nrtx" path="res://textures/world/emernem.jpg" id="4_t043d"]
-[ext_resource type="PackedScene" uid="uid://xgw0svibvib5" path="res://prefab/entity/boss/boss_father.tscn" id="6_x0ppa"]
+[ext_resource type="PackedScene" uid="uid://xgw0svibvib5" path="res://prefab/entity/enemy/boss/father.tscn" id="6_x0ppa"]
 [ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="7_hxti8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7ggm"]

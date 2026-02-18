@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://xgw0svibvib5"]
 
-[ext_resource type="Texture2D" uid="uid://c2c36kjopukcv" path="res://images/entity/boss/father.png" id="1_d8b1m"]
-[ext_resource type="Script" uid="uid://fcqb71ftxksj" path="res://src/entity/boss/father.gd" id="1_nx0w2"]
-[ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="4_qr5my"]
-[ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="4_uer0e"]
-[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="5_3jl46"]
-[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="6_nch6a"]
+[ext_resource type="Script" uid="uid://fcqb71ftxksj" path="res://src/entity/boss/father.gd" id="1_gmp5e"]
+[ext_resource type="Texture2D" uid="uid://c2c36kjopukcv" path="res://images/entity/boss/father.png" id="2_gxmgp"]
+[ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="3_tf6da"]
+[ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="4_frkph"]
+[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="5_o3ujd"]
+[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="6_gbp8n"]
+[ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="7_72ee0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
 radius = 2.0561523
 height = 6.94789
 
 [sub_resource type="Resource" id="Resource_t7657"]
-script = ExtResource("6_nch6a")
+script = ExtResource("6_gbp8n")
 damage = 300
 fire_rate = 40.0
 homing_on_player = true
@@ -23,7 +24,7 @@ parried_speed_multiplier = 1.5
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1021826300]
-script = ExtResource("1_nx0w2")
+script = ExtResource("1_gmp5e")
 healthbar_name = "Father"
 healthbar_color = Color(0.733333, 0.435294, 0.552941, 1)
 healthbar_description = "Royal Guard"
@@ -36,7 +37,7 @@ modulate = Color(0.91669, 0.204707, 0.569534, 1)
 pixel_size = 0.05
 billboard = 1
 texture_filter = 0
-texture = ExtResource("1_d8b1m")
+texture = ExtResource("2_gxmgp")
 hframes = 2
 
 [node name="Crown" type="Sprite3D" parent="." unique_id=1345565727]
@@ -44,7 +45,7 @@ modulate = Color(0.721077, 0.721077, 0.721077, 1)
 pixel_size = 0.05
 billboard = 1
 texture_filter = 0
-texture = ExtResource("1_d8b1m")
+texture = ExtResource("2_gxmgp")
 hframes = 2
 frame = 1
 
@@ -55,13 +56,25 @@ light_volumetric_fog_energy = 0.0
 omni_range = 16.6883
 
 [node name="EssenceComponent" type="Node" parent="." unique_id=1410805633]
-script = ExtResource("4_uer0e")
+script = ExtResource("3_tf6da")
 start_essence = 2500
 max_essence = 2500
 die_threshold = 50
 metadata/_custom_type_script = "uid://dvrmix7xqorev"
 
 [node name="ShootComponent" type="Node" parent="." unique_id=964248474]
-script = ExtResource("4_qr5my")
+script = ExtResource("4_frkph")
 config = SubResource("Resource_t7657")
 metadata/_custom_type_script = "uid://dtqit2g6rb6yy"
+
+[node name="EnemyComponent" type="Node" parent="." unique_id=592160326]
+script = ExtResource("7_72ee0")
+essence = 1500.0
+on_hit_velocity_loss = 1.0
+xp_payout = 50
+xp_radius = 6.0
+randomize_scale = 0.0
+spawn_ent_on_death = true
+ent_max = 5
+ent_min = 3
+metadata/_custom_type_script = "uid://tlvl68soe85"

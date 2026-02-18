@@ -5,7 +5,7 @@ class_name BossFather
 @onready var essence_component : EssenceComponent = get_node("EssenceComponent")
 
 func _ready() -> void:
-	$Body.modulate = _G.hsv_to_rgb(randf_range(0.8, 0.94), 0.78, 0.68)
+	$Body.modulate = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
 	$OmniLight3D.light_color = $Body.modulate
 
 func _physics_process(delta: float) -> void:
