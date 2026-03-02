@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="5_o3ujd"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="6_gbp8n"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="7_72ee0"]
+[ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="8_gxmgp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
-radius = 2.0561523
-height = 6.94789
+radius = 2.8886719
+height = 12.194492
 
 [sub_resource type="Resource" id="Resource_t7657"]
 script = ExtResource("6_gbp8n")
@@ -30,19 +31,19 @@ healthbar_color = Color(0.733333, 0.435294, 0.552941, 1)
 healthbar_description = "Royal Guard"
 
 [node name="CSGBox3D" type="CollisionShape3D" parent="." unique_id=1389474457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69783235, 0)
 shape = SubResource("CapsuleShape3D_nx0w2")
 
 [node name="Body" type="Sprite3D" parent="." unique_id=601717314]
 modulate = Color(0.91669, 0.204707, 0.569534, 1)
-pixel_size = 0.05
+pixel_size = 0.07
 billboard = 1
 texture_filter = 0
 texture = ExtResource("2_gxmgp")
 hframes = 2
 
 [node name="Crown" type="Sprite3D" parent="." unique_id=1345565727]
-modulate = Color(0.721077, 0.721077, 0.721077, 1)
-pixel_size = 0.05
+pixel_size = 0.07
 billboard = 1
 texture_filter = 0
 texture = ExtResource("2_gxmgp")
@@ -78,3 +79,6 @@ spawn_ent_on_death = true
 ent_max = 5
 ent_min = 3
 metadata/_custom_type_script = "uid://tlvl68soe85"
+
+[node name="Player" parent="." unique_id=1499817254 instance=ExtResource("8_gxmgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, -3, -4.4313345)

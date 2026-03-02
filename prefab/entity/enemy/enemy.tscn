@@ -23,7 +23,6 @@ damage = 100
 inaccuracy = 0.05
 init_speed = 32.0
 life_time = 1.2
-can_parry = false
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]

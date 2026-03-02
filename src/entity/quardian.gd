@@ -29,24 +29,18 @@ func essence_component_fractured(amount : int, i_time : float) -> void:
 	enemy.handle_fracture(amount, i_time, movement_component, light)
 
 func _physics_process(delta : float) -> void:
-	agent.debug_enabled = _G.debug_mode
 	
-	# Cache frequently used values
-	player_can_control = _G.player.can_control
-	y_boundary = _G.game.chapter.current.y_boundary
-	
-	if global_position.y <= y_boundary:
+	if global_position.y <= _G.game.chapter.current.y_boundary:
 		essence_component.die()
 	
 	# Update components
-	movement_component.on_floor = is_on_floor()
 	movement_component.update(delta, is_on_ceiling_only())
 	essence_component.update()
-	movement_component.enabled = player_can_control
-	chase_component.enabled = player_can_control
+	movement_component.enabled = _G.player.can_control
+	chase_component.enabled = _G.player.can_control
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)
 	
-	velocity = movement_component.vel * float(player_can_control)
+	velocity = movement_component.vel * float(_G.player.can_control)
 	move_and_slide()
 	
 	if chase_component.attacking and player_can_control:

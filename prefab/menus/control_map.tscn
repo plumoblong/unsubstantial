@@ -46,6 +46,7 @@ unicode = 101
 script = ExtResource("1_eo31k")
 
 [node name="Page1" type="Node2D" parent="." unique_id=978600546]
+position = Vector2(-240, -135)
 
 [node name="Walk" parent="Page1" unique_id=1840005386 instance=ExtResource("3_jgrtl")]
 offset_top = 80.0

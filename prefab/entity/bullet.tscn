@@ -226,7 +226,6 @@ collision_priority = 2.0
 input_capture_on_drag = true
 script = ExtResource("1_5oqnd")
 knockback_strength = 24.0
-knockback_y_strength = 0.35
 stun_time = 0.1
 die_reason = "You Got Shot!"
 

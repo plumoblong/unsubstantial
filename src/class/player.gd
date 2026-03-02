@@ -50,7 +50,7 @@ func _input(event : InputEvent) -> void:
 		rotate_y(-event.screen_relative.x * sensitivity)
 		camera.head.rotate_x(-event.screen_relative.y * sensitivity)
 		camera.head.rotation_degrees.x = clampf(camera.head.rotation_degrees.x, -90.0, 90.0)
-
+		
 func debug_camera() -> void:
 	camera.current = not camera.current
 	death_camera.current = not camera.current
@@ -80,7 +80,7 @@ func _update_camera_settings() -> void:
 	death_camera.fov = _G.config.fov - player_death_anim.cam_offset
 	camera.mbcam.current = _G.config.video.motion_blur
 	mblur.visible = _G.config.video.motion_blur
-	camera.mbcam.get_parent().debug_draw = get_viewport().debug_draw
+	#camera.mbcam.get_parent().debug_draw = get_viewport().debug_draw
 	camera.mbcam.get_parent().scaling_3d_scale = get_viewport().scaling_3d_scale
 	
 	if _last_low_quality != _G.config.video.low:
@@ -91,7 +91,8 @@ func _update_camera_settings() -> void:
 			camera.far = 2048.0
 			camera.mbcam.far = 1028.0
 		_last_low_quality = _G.config.video.low
-
+	mblur.size = _R.get_screen_size()
+	camera.mbcam.get_parent().size = _R.get_screen_size()
 func _update_hud() -> void:
 	if hud_eye.animation == "open":
 		hud_eye.show()
@@ -102,7 +103,10 @@ func _update_hud() -> void:
 			hud_weapon.visible = not hud_weapon.visible
 	else:
 		hud_weapon.visible = false
-
+		
+	if hud.visible:
+		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving * 0.667)
+		
 func _handle_debug_input() -> void:
 	if Input.is_action_just_pressed("f4") and not Input.is_key_pressed(KEY_ALT):
 		camera.screenshot()
@@ -110,7 +114,6 @@ func _handle_debug_input() -> void:
 func _physics_process(delta : float) -> void:
 	stats.update()
 	camera.update(-movement_component.input_dir.x)
-	dash_component.update()
 	essence_component.update()
 	
 	hitbox.disabled = movement_component.noclip
@@ -136,8 +139,7 @@ func _process_player_movement(delta : float) -> void:
 	movement_component.update(delta)
 	camera.viewbob_amount = movement_component.moving * 0.5
 	
-	if hud.visible:
-		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving * 0.667)
+	
 	
 	camera.anim.speed_scale = velocity.length() * 0.04
 	
@@ -151,7 +153,7 @@ func _process_player_movement(delta : float) -> void:
 func _process_player_actions() -> void:
 	if not movement_component.noclip:
 		if Input.is_action_pressed("shoot") and not dash_component.dashing:
-			shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position - Vector3(0.0, 0.2, 0.0))
+			shoot_component.shoot(-camera.head.global_transform.basis.z, global_position + Vector3(0.0, 1.525, 0.0))
 		elif Input.is_action_just_pressed("dash"):
 			dash_component.dash(movement_component)
 	else:
@@ -264,7 +266,7 @@ func dash_component_can_dash_now() -> void:
 	hud_eye.play("open")
 
 func update_motionblur() -> void:
-	const SMOOTHING : float = 0.9
+	const SMOOTHING : float = 0.95
 	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING)
 	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z, camera.tilt, SMOOTHING)
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x, camera.global_rotation.x, SMOOTHING)

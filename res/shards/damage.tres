@@ -4,53 +4,21 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_xe6bi"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_v2jpd"]
 
-[sub_resource type="Resource" id="Resource_xe6bi"]
-script = ExtResource("1_xe6bi")
-value = 10.0
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_v2jpd"]
 script = ExtResource("1_xe6bi")
-operator = 2
-value = 1.1
+value = 10.0
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_m1m7g"]
 script = ExtResource("1_xe6bi")
-value = 15.0
-rarity = 1
+value = 20.0
+rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_wd373"]
 script = ExtResource("1_xe6bi")
-operator = 2
-value = 1.2
-rarity = 1
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_a4r87"]
-script = ExtResource("1_xe6bi")
-value = 25.0
-rarity = 2
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_c2u78"]
-script = ExtResource("1_xe6bi")
-operator = 2
-value = 1.35
-rarity = 2
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_bqqxf"]
-script = ExtResource("1_xe6bi")
-operator = 2
-value = 1.75
-rarity = 3
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_kh3nr"]
-script = ExtResource("1_xe6bi")
-value = 60.0
+value = 40.0
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -58,15 +26,11 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_v2jpd")
 stat_name = "Damage"
 image = ExtResource("1_v2jpd")
+weight = 0.8
 shop_cost = 200
 modulates = Dictionary[ExtResource("1_xe6bi"), int]({
-SubResource("Resource_xe6bi"): 9,
 SubResource("Resource_v2jpd"): 10,
-SubResource("Resource_m1m7g"): 7,
-SubResource("Resource_wd373"): 5,
-SubResource("Resource_a4r87"): 4,
-SubResource("Resource_c2u78"): 2,
-SubResource("Resource_bqqxf"): 1,
-SubResource("Resource_kh3nr"): 1
+SubResource("Resource_m1m7g"): 5,
+SubResource("Resource_wd373"): 1
 })
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

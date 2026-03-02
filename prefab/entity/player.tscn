@@ -25,8 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://bg5h3h2stwvqw" path="res://sfx/player/jump.wav" id="38_jdfku"]
 [ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://prefab/entity/player_target.tscn" id="41_jdfku"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uadq4"]
-radius = 0.6
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_62pul"]
+height = 1.7
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbo8y"]
 transparency = 1
@@ -199,7 +199,7 @@ radius = 0.5444336
 height = 1.9284668
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
-radius = 1.0
+radius = 1.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8t5r2"]
 radius = 0.15
@@ -272,11 +272,13 @@ orientation = 2
 
 [node name="Player" type="CharacterBody3D" unique_id=1499817254]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
+collision_priority = 2.0
+floor_constant_speed = true
 script = ExtResource("1_colme")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=182380019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_uadq4")
+shape = SubResource("CylinderShape3D_62pul")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="DeathCamera" type="Camera3D" parent="." unique_id=1251413674]
@@ -284,7 +286,7 @@ transform = Transform3D(1, 0, 0, 0, 0.947423, 0.319985, 0, -0.319985, 0.947423, 
 current = true
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=294872625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2155579, 0.4072353)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.74846e-07)
 visible = false
 material_override = SubResource("StandardMaterial3D_dbo8y")
 pixel_size = 0.03
@@ -297,7 +299,6 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1.825, 0
 
 [node name="SubViewport" type="SubViewport" parent="Head" unique_id=403614849]
 handle_input_locally = false
-use_debanding = true
 use_occlusion_culling = true
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
@@ -309,9 +310,7 @@ positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
 oversampling = false
-size = Vector2i(480, 270)
 render_target_clear_mode = 1
-render_target_update_mode = 4
 
 [node name="MotionBlurCam" type="Camera3D" parent="Head/SubViewport" unique_id=1507912389]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 1.825, 0)

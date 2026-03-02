@@ -11,25 +11,20 @@ var description_text : String = ". . ."
 
 var last_pool : Dictionary[StatShard, int] = {}
 
-func create_crystals(amount : int = 2) -> void:
-	var crystal_spacing : float
+func create_crystals(amount: int = 2) -> void:
+	var crystal_spacing: float = 0.0
 	if amount > 1:
-		var total_card_width : float = amount * crystal_width
-		var total_gap_space : float = (480 - (margin * 2)) - total_card_width
+		var total_card_width: float = amount * crystal_width
+		var total_gap_space: float = (480 - (margin * 2.0)) - total_card_width
 		crystal_spacing = total_gap_space / (amount - 1)
-	else:
-		crystal_spacing = 0.0
-	
-	var total_width = (amount * crystal_width) + ((amount - 1) * crystal_spacing)
-	var start_x : float = 240.0 - (total_width / 2.0) + (crystal_width / 2.0)
-	for i : int in range(amount):
-		var crystal : CrystalPiece = CRYSTAL_PIECE_SCENE.instantiate()
+	var total_width: float = (amount * crystal_width) + ((amount - 1) * crystal_spacing)
+	var start_x: float = -(total_width / 2.0) + (crystal_width / 2.0)
+	for i: int in range(amount):
+		var crystal: CrystalPiece = CRYSTAL_PIECE_SCENE.instantiate()
 		crystals.add_child(crystal)
 		crystal.name = "CrystalPiece" + str(i)
-		#crystal.sprite.frame = i * 2
-		#crystal.sprite.play()
-		var x_pos = start_x + (i * (crystal_width + crystal_spacing))
-		crystal.global_position = Vector2(x_pos, 135.0)
+		crystal.position = Vector2(start_x + i * (crystal_width + crystal_spacing), 0.0)
+
 
 func start_choose(pool : StatShardPool) -> void:
 	_G.game.in_any_menu = true
@@ -58,4 +53,11 @@ func _process(_delta: float) -> void:
 	$Text2.text = description_text
 	$Text2/Shadow.text = description_text
 	$Text2/Shadow2.text = description_text
-	$DarkMode.visible = _G.config.ui_dark_mode
+	_update_positions()
+
+func _update_positions() -> void:
+	$Text.size.x = _R.get_screen_size().x
+	$Text.size.y = _R.get_screen_size().y / 4.0
+	$Text/Shadow.size = $Text.size
+	$Text/Shadow2.size = $Text.size
+	$Crystals.position = _R.get_center()

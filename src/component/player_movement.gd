@@ -92,6 +92,7 @@ func update(delta : float) -> void:
 		
 		if is_on_floor:
 			_handle_floor_logic(delta)
+			dash.allow_dash()
 		else:
 			can_jump = false
 			if not _is_dashing:

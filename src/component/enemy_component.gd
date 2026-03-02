@@ -55,9 +55,8 @@ func setup(esc : EssenceComponent) -> void:
 	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
 	if not use_difficulty_factor: return
 	damage *= _G.game.enemy_multiplier
-	esc.essence *= get_difficulty_factor(0.75)
-	esc.max_essence *= get_difficulty_factor(0.75)
-	esc.die_threshold *= get_difficulty_factor(0.75)
+	esc.essence *= _G.game.enemy_multiplier
+	esc.max_essence *= _G.game.enemy_multiplier
 	#get_parent().scale *= clamp(get_difficulty_factor(0.05), 1.0, 1.5)
 	
 func handle_fracture(amount : int, i_time : float, mov : MovementComponent, light : Light3D) -> void:
@@ -78,9 +77,9 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 	if sprite.modulate != Color.WHITE: 
 		var damage_mult : float = 1.0 if area.parent is Player else other_enemy_damage_taken_mult
 		var knock_mult : float = 1.0 if area.parent is Player else other_enemy_knockback_taken_mult
-		esc.fracture(area.damage * damage_mult, area.crit, area.stun_time)
+		if damage_mult != 0.0: esc.fracture(area.damage * damage_mult, area.crit, area.stun_time)
 		var knock_pos : Vector3 = area.parent.global_position if area.knockback_from_parent_pos else area.global_position
-		knock.knock(knock_pos, area.knockback_strength * knock_mult)
+		if knock_mult != 0.0: knock.knock(knock_pos, area.knockback_strength * knock_mult)
 		if area is Bullet: area.hit()
 		if area.parent is Player: _G.player.hud.hitmark()
 		

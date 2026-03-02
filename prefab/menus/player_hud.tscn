@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cru3sdh5htat8" path="res://images/crosshair.png" id="5_s826l"]
 [ext_resource type="Texture2D" uid="uid://bl6ej2u7pm50f" path="res://images/hit_marker.png" id="6_2ogxy"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="7_w4dv1"]
-[ext_resource type="Texture2D" uid="uid://bneeav7fi82mh" path="res://images/ui/stat_icons.png" id="8_4qm2a"]
 [ext_resource type="AudioStream" uid="uid://cn7wx3s2dhvjm" path="res://sfx/hit_marker.wav" id="9_u1awl"]
 [ext_resource type="Texture2D" uid="uid://c7nvymmhd51qv" path="res://images/ui/player/eye.png" id="16_nu6og"]
 [ext_resource type="Texture2D" uid="uid://lddvwgprmmpl" path="res://images/null.png" id="17_l7j4h"]
@@ -21,21 +20,6 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.6
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xed6q"]
-blend_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_f5we3"]
-offsets = PackedFloat32Array(0.624114, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.862)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_m21cj"]
-gradient = SubResource("Gradient_f5we3")
-width = 480
-height = 270
-fill = 1
-fill_from = Vector2(0.499332, 0.504813)
-fill_to = Vector2(1, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ju7jx"]
 blend_mode = 1
@@ -317,15 +301,6 @@ animations = [{
 material = SubResource("ShaderMaterial_ma48x")
 script = ExtResource("2_j5rt0")
 
-[node name="Vignette" type="TextureRect" parent="." unique_id=1473640428]
-material = SubResource("CanvasItemMaterial_xed6q")
-offset_left = -48.0
-offset_top = -40.0
-offset_right = 528.0
-offset_bottom = 320.0
-texture = SubResource("GradientTexture2D_m21cj")
-expand_mode = 1
-
 [node name="Weapon" type="AnimatedSprite2D" parent="." unique_id=1017758244]
 material = SubResource("CanvasItemMaterial_ju7jx")
 position = Vector2(240, 270)
@@ -338,13 +313,12 @@ material = SubResource("ShaderMaterial_xed6q")
 
 [node name="Key1" type="Sprite2D" parent="MovementInfo" unique_id=766332505]
 use_parent_material = true
-position = Vector2(241, 135)
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 
 [node name="Key2" type="Sprite2D" parent="MovementInfo" unique_id=1609316059]
 use_parent_material = true
-position = Vector2(240, 134)
+position = Vector2(-1, -1)
 rotation = 1.57079
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
@@ -352,7 +326,7 @@ flip_h = true
 
 [node name="Key3" type="Sprite2D" parent="MovementInfo" unique_id=573773613]
 use_parent_material = true
-position = Vector2(241, 134)
+position = Vector2(0, -1)
 rotation = 3.14159
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
@@ -360,22 +334,23 @@ flip_h = true
 
 [node name="Key5" type="Sprite2D" parent="MovementInfo" unique_id=329520189]
 use_parent_material = true
-position = Vector2(233, 148)
+position = Vector2(-8, 13)
 texture = ExtResource("5_j5rt0")
 centered = false
 
 [node name="Key4" type="Sprite2D" parent="MovementInfo" unique_id=1745620923]
 use_parent_material = true
-position = Vector2(241, 134)
+position = Vector2(0, -1)
 rotation = 4.71238
 texture = ExtResource("4_sf2du")
 offset = Vector2(0, -8)
 
 [node name="Label" type="Label" parent="MovementInfo" unique_id=1463697322]
 use_parent_material = true
-offset_top = 101.0
-offset_right = 480.0
-offset_bottom = 114.0
+offset_left = -241.0
+offset_top = -34.0
+offset_right = 239.0
+offset_bottom = -21.0
 theme_override_font_sizes/font_size = 8
 text = "0.0
 SPEED"
@@ -384,9 +359,10 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="MovementInfo" unique_id=960164862]
 use_parent_material = true
-offset_top = 59.0
-offset_right = 480.0
-offset_bottom = 72.0
+offset_left = -241.0
+offset_top = -76.0
+offset_right = 239.0
+offset_bottom = -63.0
 theme_override_font_sizes/font_size = 8
 text = "0.0
 SPEED"
@@ -397,6 +373,7 @@ vertical_alignment = 1
 position = Vector2(2, 21)
 
 [node name="Crosshair" type="Sprite2D" parent="." unique_id=1881976011]
+visible = false
 material = SubResource("ShaderMaterial_xed6q")
 position = Vector2(241, 135)
 texture = ExtResource("5_s826l")
@@ -447,122 +424,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Extra" type="Node2D" parent="." unique_id=1447704519]
-use_parent_material = true
-
-[node name="Stats" type="Node2D" parent="Extra" unique_id=1505996271]
-visible = false
-use_parent_material = true
-position = Vector2(9, 103)
-
-[node name="Damage" type="Label" parent="Extra/Stats" unique_id=1610421580]
-use_parent_material = true
-offset_right = 40.0
-offset_bottom = 10.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D" type="Sprite2D" parent="Extra/Stats/Damage" unique_id=313814852]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-
-[node name="Speed" type="Label" parent="Extra/Stats" unique_id=1584918117]
-use_parent_material = true
-offset_top = 7.0
-offset_right = 40.0
-offset_bottom = 17.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Speed" unique_id=133065556]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-frame = 1
-
-[node name="Jump" type="Label" parent="Extra/Stats" unique_id=1793147996]
-use_parent_material = true
-offset_top = 14.0
-offset_right = 40.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Jump" unique_id=104914894]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-frame = 2
-
-[node name="Firerate" type="Label" parent="Extra/Stats" unique_id=2022125826]
-use_parent_material = true
-offset_top = 21.0
-offset_right = 40.0
-offset_bottom = 31.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Firerate" unique_id=586974314]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-frame = 3
-
-[node name="Dashrate" type="Label" parent="Extra/Stats" unique_id=1666129628]
-use_parent_material = true
-offset_top = 28.0
-offset_right = 57.0
-offset_bottom = 38.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Dashrate" unique_id=1891212203]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-frame = 4
-
-[node name="Special" type="Label" parent="Extra/Stats" unique_id=1059450237]
-use_parent_material = true
-offset_top = 35.0
-offset_right = 57.0
-offset_bottom = 45.0
-theme_override_font_sizes/font_size = 8
-text = "100%"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Extra/Stats/Special" unique_id=29854552]
-use_parent_material = true
-position = Vector2(-5, 2)
-texture = ExtResource("8_4qm2a")
-hframes = 6
-frame = 5
-
 [node name="HitmarkerSFX" type="AudioStreamPlayer" parent="." unique_id=1709177967]
 stream = ExtResource("9_u1awl")
 bus = &"SFX2"
 
 [node name="Eye" type="AnimatedSprite2D" parent="." unique_id=1440863849]
 use_parent_material = true
-position = Vector2(240, 40)
+position = Vector2(240, 16)
 sprite_frames = SubResource("SpriteFrames_m62ne")
-animation = &"open"
 autoplay = "default"
-frame = 3
-frame_progress = 1.0
 
 [node name="Info" type="Node2D" parent="." unique_id=211372391]
 material = SubResource("ShaderMaterial_4chq7")
-position = Vector2(0, 262)
+position = Vector2(16, 254)
 
 [node name="EssenceIcon" type="AnimatedSprite2D" parent="Info" unique_id=687641502]
 use_parent_material = true
-position = Vector2(14, -4)
 sprite_frames = SubResource("SpriteFrames_feq3x")
 autoplay = "default"
 frame_progress = 0.01827133
@@ -589,7 +466,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CrystalIcon" type="AnimatedSprite2D" parent="Info" unique_id=1535087682]
 use_parent_material = true
-position = Vector2(14, -16)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_n17tt")
 autoplay = "default"
 frame_progress = 0.7936811

@@ -5,7 +5,6 @@
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="3_lijvd"]
 [ext_resource type="PackedScene" uid="uid://dqrpg8nr6annb" path="res://prefab/menus/bool_button.tscn" id="5_eyrc5"]
 [ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="5_v4hhl"]
-[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="6_kmcfh"]
 [ext_resource type="PackedScene" uid="uid://bc7dcywxs75yw" path="res://prefab/menus/slider.tscn" id="6_nmvj6"]
 [ext_resource type="Material" uid="uid://dhxpkbn67dwdu" path="res://src/shader/text_shader.tres" id="7_eyqsm"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="9_ohru1"]
@@ -27,17 +26,6 @@ shader_parameter/self_modulate = Color(1, 1, 1, 1)
 material = SubResource("ShaderMaterial_02tst")
 script = ExtResource("1_ttx3v")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=396414642]
-visible = false
-offset_right = 480.0
-offset_bottom = 272.0
-color = Color(0.122005, 0.000197216, 0.237584, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=109292217]
-position = Vector2(4, 4)
-texture = ExtResource("6_kmcfh")
-centered = false
-
 [node name="Header" type="RichTextLabel" parent="." unique_id=1177397511]
 material = SubResource("ShaderMaterial_tlcco")
 clip_contents = false
@@ -51,15 +39,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Node2D" type="Node2D" parent="." unique_id=38330477]
-visible = false
 use_parent_material = true
-position = Vector2(0, 32)
+position = Vector2(240, 134)
 
 [node name="GeneralButton" parent="Node2D" unique_id=113284087 instance=ExtResource("5_v4hhl")]
 use_parent_material = true
-offset_top = 64.0
-offset_right = 480.0
-offset_bottom = 80.0
+offset_left = -240.0
+offset_top = -30.0
+offset_right = 240.0
+offset_bottom = -14.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "General"
@@ -67,9 +55,10 @@ alignment = 1
 
 [node name="GRAPHICS" parent="Node2D" unique_id=1920511860 instance=ExtResource("5_v4hhl")]
 use_parent_material = true
-offset_top = 80.0
-offset_right = 480.0
-offset_bottom = 96.0
+offset_left = -240.0
+offset_top = -14.0
+offset_right = 240.0
+offset_bottom = 2.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Graphics"
@@ -77,9 +66,10 @@ alignment = 1
 
 [node name="Audio" parent="Node2D" unique_id=536285109 instance=ExtResource("5_v4hhl")]
 use_parent_material = true
-offset_top = 96.0
-offset_right = 480.0
-offset_bottom = 112.0
+offset_left = -240.0
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 18.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Audio"
@@ -87,9 +77,10 @@ alignment = 1
 
 [node name="Other" parent="Node2D" unique_id=823722734 instance=ExtResource("5_v4hhl")]
 use_parent_material = true
-offset_top = 112.0
-offset_right = 480.0
-offset_bottom = 125.0
+offset_left = -240.0
+offset_top = 18.0
+offset_right = 240.0
+offset_bottom = 31.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Controls"
@@ -97,15 +88,15 @@ alignment = 1
 
 [node name="Screen1" type="Node2D" parent="." unique_id=1892524339]
 visible = false
-position = Vector2(0, 32)
+position = Vector2(240, 134)
 
 [node name="ViewBob" parent="Screen1" unique_id=1440340479 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 192.0
-offset_top = 112.0
-offset_right = 288.0
-offset_bottom = 128.0
+offset_left = -48.0
+offset_top = 5.0
+offset_right = 48.0
+offset_bottom = 21.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -115,10 +106,10 @@ alignment = 1
 [node name="Fullscreen" parent="Screen1" unique_id=1837033235 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 192.0
-offset_top = 64.0
-offset_right = 288.0
-offset_bottom = 80.0
+offset_left = -48.0
+offset_top = -43.0
+offset_right = 48.0
+offset_bottom = -27.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -127,40 +118,44 @@ alignment = 1
 
 [node name="FOVText" type="Label" parent="Screen1" unique_id=935809185]
 material = ExtResource("7_eyqsm")
-offset_top = 136.0
-offset_right = 480.0
-offset_bottom = 146.0
+offset_left = -240.0
+offset_top = 29.0
+offset_right = 240.0
+offset_bottom = 39.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "FIELD  OF VIEW:   90"
 horizontal_alignment = 1
 
 [node name="FOV" parent="Screen1" unique_id=19190710 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 144.0
-offset_right = 284.0
-offset_bottom = 160.0
+offset_left = -44.0
+offset_top = 37.0
+offset_right = 44.0
+offset_bottom = 53.0
 step = 1.0
 
 [node name="Res" parent="Screen1" unique_id=545291597 instance=ExtResource("5_v4hhl")]
 use_parent_material = true
-offset_top = 88.0
-offset_right = 480.0
-offset_bottom = 101.0
+offset_left = -240.0
+offset_top = -19.0
+offset_right = 240.0
+offset_bottom = -6.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Resolution"
 alignment = 1
 
 [node name="Screen4" type="Node2D" parent="." unique_id=231856507]
-position = Vector2(0, 32)
+visible = false
+position = Vector2(240, 134)
 
 [node name="LowMode" parent="Screen4" unique_id=1106225561 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 248.0
-offset_top = 88.0
-offset_right = 344.0
+offset_left = 8.0
+offset_top = 0.0
+offset_right = 104.0
+offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Low Quality"
@@ -169,9 +164,10 @@ alignment = 1
 [node name="Vsync" parent="Screen4" unique_id=769327596 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 136.0
-offset_top = 88.0
-offset_right = 232.0
+offset_left = -104.0
+offset_top = 0.0
+offset_right = -8.0
+offset_bottom = 16.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -181,10 +177,10 @@ alignment = 1
 [node name="UIDarkMode" parent="Screen4" unique_id=37764508 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 136.0
-offset_top = 104.0
-offset_right = 232.0
-offset_bottom = 120.0
+offset_left = -104.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = 32.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 button_pressed = true
@@ -194,10 +190,10 @@ alignment = 1
 [node name="MotionBlur" parent="Screen4" unique_id=425891257 instance=ExtResource("5_eyrc5")]
 material = ExtResource("7_eyqsm")
 use_parent_material = false
-offset_left = 248.0
-offset_top = 104.0
-offset_right = 344.0
-offset_bottom = 120.0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 104.0
+offset_bottom = 32.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Motion Blur"
@@ -205,19 +201,20 @@ alignment = 1
 
 [node name="ExposureText" type="Label" parent="Screen4" unique_id=395113278]
 material = ExtResource("7_eyqsm")
-offset_top = 56.0
-offset_right = 480.0
-offset_bottom = 66.0
+offset_left = -240.0
+offset_top = -32.0
+offset_right = 240.0
+offset_bottom = -22.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "BRIGHTNESS: 50%"
 horizontal_alignment = 1
 
 [node name="Exposure" parent="Screen4" unique_id=1823811648 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 67.0
-offset_right = 284.0
-offset_bottom = 83.0
+offset_left = -44.0
+offset_top = -21.0
+offset_right = 44.0
+offset_bottom = -5.0
 min_value = 0.7
 max_value = 1.5
 step = 0.05
@@ -226,23 +223,24 @@ value = 1.0
 [node name="Screen2" type="Node2D" parent="." unique_id=947539237]
 visible = false
 use_parent_material = true
-position = Vector2(0, 32)
+position = Vector2(240, 134)
 
 [node name="VolumeText" type="Label" parent="Screen2" unique_id=1253249741]
 use_parent_material = true
-offset_top = 80.0
-offset_right = 480.0
-offset_bottom = 90.0
+offset_left = -240.0
+offset_top = -40.0
+offset_right = 240.0
+offset_bottom = -30.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "VOLUME:   100%"
 horizontal_alignment = 1
 
 [node name="Volume" parent="Screen2" unique_id=1648536466 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 88.0
-offset_right = 284.0
-offset_bottom = 104.0
+offset_left = -44.0
+offset_top = -32.0
+offset_right = 44.0
+offset_bottom = -16.0
 min_value = 0.0
 max_value = 1.0
 step = 0.01
@@ -250,9 +248,10 @@ value = 1.0
 
 [node name="SFXText" type="Label" parent="Screen2" unique_id=1983149291]
 use_parent_material = true
-offset_top = 108.0
-offset_right = 480.0
-offset_bottom = 118.0
+offset_left = -240.0
+offset_top = -12.0
+offset_right = 240.0
+offset_bottom = -2.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "SFX:   100%"
@@ -260,10 +259,10 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="SFX" parent="Screen2" unique_id=992462718 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 116.0
-offset_right = 284.0
-offset_bottom = 132.0
+offset_left = -44.0
+offset_top = -4.0
+offset_right = 44.0
+offset_bottom = 12.0
 min_value = 0.0
 max_value = 1.0
 step = 0.01
@@ -271,9 +270,10 @@ value = 1.0
 
 [node name="MusicText" type="Label" parent="Screen2" unique_id=1138566845]
 use_parent_material = true
-offset_top = 136.0
-offset_right = 480.0
-offset_bottom = 146.0
+offset_left = -240.0
+offset_top = 16.0
+offset_right = 240.0
+offset_bottom = 26.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "MUSIC:   75%"
@@ -281,10 +281,10 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Music" parent="Screen2" unique_id=441556838 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 144.0
-offset_right = 284.0
-offset_bottom = 160.0
+offset_left = -44.0
+offset_top = 24.0
+offset_right = 44.0
+offset_bottom = 40.0
 min_value = 0.0
 max_value = 1.0
 step = 0.01
@@ -292,22 +292,24 @@ value = 0.75
 
 [node name="Screen3" parent="." unique_id=1687954974 instance=ExtResource("10_2cury")]
 visible = false
+position = Vector2(240, 134)
 
 [node name="SensText" type="Label" parent="Screen3" unique_id=1278352151]
 material = ExtResource("7_eyqsm")
-offset_top = 188.0
-offset_right = 480.0
-offset_bottom = 198.0
+offset_left = -240.0
+offset_top = 67.0
+offset_right = 240.0
+offset_bottom = 77.0
 theme_override_fonts/font = ExtResource("9_ohru1")
 theme_override_font_sizes/font_size = 6
 text = "Mouse Sensitivity:   50%"
 horizontal_alignment = 1
 
 [node name="Sens" parent="Screen3" unique_id=1262299875 instance=ExtResource("6_nmvj6")]
-offset_left = 196.0
-offset_top = 196.0
-offset_right = 284.0
-offset_bottom = 212.0
+offset_left = -44.0
+offset_top = 75.0
+offset_right = 44.0
+offset_bottom = 91.0
 min_value = 0.0
 max_value = 1.0
 step = 0.01

@@ -50,6 +50,8 @@ movement_component = NodePath("../MovementComponent")
 [node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_k6xin")
 movehelper = NodePath("../MoveBackHelper")
+agro_distance = 15.0
+attack_distance = 5.0
 min_distance = 0.5
 strafe_enabled = false
 y_distance = 12.0
@@ -68,12 +70,13 @@ set_max_essence_on_ready = false
 [node name="EnemyComponent" type="Node" parent="." unique_id=539105117 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_w77qk")
 hit_sfx = NodePath("../HitSFX")
-essence = 150.0
-damage = 75.0
+essence_death_threshold = 25.0
 on_hit_velocity_loss = 1.0
 xp_payout = 1
 xp_radius = 0.0
 randomize_scale = 1.3
+other_enemy_damage_taken_mult = 0.0
+other_enemy_knockback_taken_mult = 1.5
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
 [node name="Query" type="Area3D" parent="." unique_id=113299010]
@@ -106,7 +109,9 @@ bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
 [node name="MapHazardCast" parent="." unique_id=2066686662 node_paths=PackedStringArray("esc") instance=ExtResource("14_kgpnm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5607906, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.68581426, 0)
+target_position = Vector3(0, -0.6, 0)
+hit_from_inside = true
 esc = NodePath("../EssenceComponent")
 
 [node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("13_ienij")]

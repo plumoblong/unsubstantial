@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fmdujehtwi3h"
-path="res://.godot/imported/poison.png-f3ce77c79f00f61b906f79f35c6f910e.ctex"
+uid="uid://b1t3hdjddqifp"
+path="res://.godot/imported/hand.png-7808abe683e9f1d3013a28e413001410.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/pbr/poison.png"
-dest_files=["res://.godot/imported/poison.png-f3ce77c79f00f61b906f79f35c6f910e.ctex"]
+source_file="res://images/environment/hand.png"
+dest_files=["res://.godot/imported/hand.png-7808abe683e9f1d3013a28e413001410.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7nk8v32g1d8f"
-path="res://.godot/imported/ac_tile_floor.png-d61b0638411586636ba9b34993c7183a.ctex"
+uid="uid://ubfowv062e71"
+path="res://.godot/imported/displacement_tile_floor.png-b1468a3c8400f8a764f62cc50cbaa7cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/pbr/ac_tile_floor.png"
-dest_files=["res://.godot/imported/ac_tile_floor.png-d61b0638411586636ba9b34993c7183a.ctex"]
+source_file="res://material/pbr/displacement_tile_floor.png"
+dest_files=["res://.godot/imported/displacement_tile_floor.png-b1468a3c8400f8a764f62cc50cbaa7cb.ctex"]
 
 [params]
 

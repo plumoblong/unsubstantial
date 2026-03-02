@@ -65,6 +65,15 @@ func toggle_console() -> void:
 	else:
 		hide_console()
 
+func _process(_delta: float) -> void:
+	if not visible: return
+	$ConsolePanel/Output.size.x = _R.get_screen_size().x - 4
+	$ConsolePanel/Output.size.y = _R.get_screen_size().y - 64
+	$ConsolePanel/ColorRect.size.y = _R.get_screen_size().y - 48
+	$ConsolePanel/ColorRect.size.x = _R.get_screen_size().x
+	$ConsolePanel/Label.position.y = _R.get_screen_size().y - 58
+	$ConsolePanel/Input.position.y = _R.get_screen_size().y - 58
+	
 func show_console() -> void:
 	show()
 	
@@ -211,8 +220,11 @@ func execute_command(cmd: String, args: Array) -> void:
 		"dark":
 			dark()
 		"debug_draw":
-			var id = int(args[0]) if args.size() > 0 else 0
+			var id : int = int(args[0]) if args.size() > 0 else 0
 			debug_draw(id)
+		"viewscale":
+			var scale : float = float(args[0]) if args.size() > 0 else 1.0
+			get_tree().root.content_scale_factor = scale
 		"print_to_chat":
 			_c_print_to_chat = not _c_print_to_chat
 		_:

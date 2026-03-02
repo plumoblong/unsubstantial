@@ -1,8 +1,32 @@
 [gd_scene format=3 uid="uid://cuhflxnivbv2b"]
 
 [ext_resource type="Script" uid="uid://ct8drvl8xm65b" path="res://src/start.gd" id="1_qm06k"]
+[ext_resource type="FontFile" uid="uid://dnqmv4byfdrem" path="res://font/Perfect DOS VGA 437.ttf" id="2_bhewb"]
 [ext_resource type="Texture2D" uid="uid://ccfsssvwowu35" path="res://images/plumoblong_3d.png" id="2_xmel7"]
 [ext_resource type="AudioStream" uid="uid://dxy2fiq02be1y" path="res://sfx/plumoblong.wav" id="3_bhewb"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bnuxd"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_srnb1"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.004781421, 0.5664384, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.14026088, 0.14026088, 0.14026088, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7xr4q"]
+gradient = SubResource("Gradient_srnb1")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w484r"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bhewb"]
+blend_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnuxd"]
 atlas = ExtResource("2_xmel7")
@@ -142,16 +166,43 @@ animations = [{
 [node name="Start" type="Node2D" unique_id=1783723985]
 script = ExtResource("1_qm06k")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=504503035]
+modulate = Color(0.5998733, 0.59987336, 0.5998734, 1)
+material = SubResource("CanvasItemMaterial_bnuxd")
+position = Vector2(0, 89.5)
+scale = Vector2(0.625, 0.111328125)
+texture = SubResource("GradientTexture2D_7xr4q")
+
 [node name="Label" type="Label" parent="." unique_id=465046258]
+modulate = Color(0.58371854, 0.5837186, 0.58371836, 1)
+material = SubResource("CanvasItemMaterial_w484r")
+offset_left = -240.0
+offset_top = 41.0
+offset_right = 240.0
+offset_bottom = 135.0
+theme_override_fonts/font = ExtResource("2_bhewb")
+theme_override_font_sizes/font_size = 16
+text = "splash text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Label" unique_id=1914997536]
 modulate = Color(0.34375, 0.34375, 0.34375, 1)
-offset_right = 432.0
-offset_bottom = 244.0
-theme_override_font_sizes/font_size = 8
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 481.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("2_bhewb")
+theme_override_font_sizes/font_size = 16
+text = "splash text"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=891919791]
-position = Vector2(240, 135)
+material = SubResource("CanvasItemMaterial_bhewb")
 sprite_frames = SubResource("SpriteFrames_hf7vm")
 frame = 24
 frame_progress = 1.0
@@ -160,3 +211,20 @@ frame_progress = 1.0
 stream = ExtResource("3_bhewb")
 volume_db = -10.0
 bus = &"SFX1"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=17916220]
+z_index = 5
+offset_left = -240.0
+offset_top = 64.0
+offset_right = 240.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1755062352]
+z_index = 5
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
+color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true

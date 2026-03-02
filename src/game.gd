@@ -76,10 +76,11 @@ func _process(_delta : float) -> void:
 	_handle_input()
 	_update_pause_state()
 	_update_player_control()
+	anim_fix_color.size = _R.get_screen_size()
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus
+	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus)
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier)
 	in_ether = chapter.current == chapter.all[0]
 
@@ -212,6 +213,7 @@ func end_level(loop : bool = false) -> void:
 	level_changing.emit()
 	
 	anim_fix_color.color = _G.get_color_darkmode(true, 0.0)
+	
 	_G.tween(anim_fix_color, "color", _G.get_color_darkmode(true, 1.0), 0.5)
 	
 	switch_chapters()

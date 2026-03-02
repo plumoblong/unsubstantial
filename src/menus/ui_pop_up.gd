@@ -14,7 +14,6 @@ func _ready() -> void:
 	material = new_mat
 	material.set_shader_parameter("modulate", color)
 	material.set_shader_parameter("amount", invert_amount)
-	
 
 func _process(delta: float) -> void:
 	progress += delta

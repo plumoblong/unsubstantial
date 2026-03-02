@@ -32,6 +32,9 @@ func _process(delta : float) -> void:
 			_G.flare_screen()
 	
 	$Camera3D.fov = _G.config.fov
+	update_positions()
+func update_positions() -> void:
+	$Main/Meta.global_position = _R.get_bottom_right(true)
 
 func _on_start_pressed() -> void:
 	_G.starting_level = ""

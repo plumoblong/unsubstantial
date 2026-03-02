@@ -10,7 +10,7 @@ class_name EnemySpawner
 }
 
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 8
+const ENEMY_CAP : int = 6
 const ENEMY_PATH_PREFIX : String = "res://prefab/entity/enemy/"
 const ENEMY_PATH_SUFFIX : String = ".tscn"
 
@@ -45,6 +45,7 @@ func _func_godot_build_complete() -> void:
 func spawn() -> void:
 	if _G.game.enemies_disabled or spawned: return
 	if _G.game.enemies.get_child_count() >= ENEMY_CAP: return
+	if raycast.is_colliding(): return
 	
 	if spawn_delay > 0.0:
 		await get_tree().create_timer(spawn_delay).timeout
@@ -77,10 +78,10 @@ func spawn() -> void:
 
 func _physics_process(_delta : float) -> void:
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
+	
 	if distance_to_player < distance_to_spawn:
-		raycast.target_position = global_position.direction_to(_G.player.global_position).normalized() * distance_to_player
-		if not raycast.is_colliding():
-			spawn()
+		raycast.target_position = global_position.direction_to(_G.player.global_position) * (distance_to_player - 1.0) * Vector3(-1.0, 1.0, -1.0)
+		spawn()
 
 func create_anim() -> void:
 	var anim : Node = SPAWN_ANIM.instantiate()

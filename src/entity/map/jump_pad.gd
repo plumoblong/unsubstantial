@@ -13,6 +13,9 @@ func _func_godot_build_complete() -> void:
 		speed = func_godot_properties["power"]
 		
 func body_entered(body : CharacterBody3D) -> void:
+	if body.has_node("DashComponent"):
+		if not body.get_node("DashComponent").can_dash or not body.get_node("DashComponent").can_reset:
+			body.get_node("DashComponent").allow_dash(false)
 	if body is Player:
 		$AudioStreamPlayer3D.play()
 		body.velocity.y = 0.0

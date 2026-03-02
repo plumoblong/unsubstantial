@@ -97,7 +97,7 @@ func _process(_delta : float) -> void:
 			_update_controls_screen()
 		4:
 			_update_graphics_screen()
-
+	_update_positions()
 func _update_general_screen() -> void:
 	header.text = HEADER_GENERAL
 	s1_fov_text.text = FOV_TEXT + str(int(s1_fov.value))
@@ -123,6 +123,11 @@ func _update_audio_screen() -> void:
 	_G.config.sound.master = s2_volume.value
 	_G.config.sound.sfx = s2_sfx.value
 	_G.config.sound.music = s2_music.value
+
+	AudioServer.set_bus_volume_db(0, linear_to_db(_G.config.sound.master))
+	AudioServer.set_bus_volume_db(1, linear_to_db(_G.config.sound.music))
+	AudioServer.set_bus_volume_db(2, linear_to_db(_G.config.sound.sfx))
+	AudioServer.set_bus_volume_db(3, linear_to_db(_G.config.sound.sfx))
 
 func _update_controls_screen() -> void:
 	header.text = HEADER_CONTROLS
@@ -168,3 +173,11 @@ func vsync_toggled(a : bool) -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		
+func _update_positions() -> void:
+	header.position = _R.get_left_center(true) - Vector2i(0, 70)
+	header.size.x = _R.get_screen_size().x
+	node2d.position = _R.get_center()
+	screen1.position = _R.get_center()
+	screen2.position = _R.get_center()
+	screen3.position = _R.get_center()
+	screen4.position = _R.get_center()

@@ -1,17 +1,19 @@
 extends Component
 class_name ItemStats
 
+const PLAYER_BULLET_DEFAULT : BulletSettings = preload("res://res/bullet_cfg/player_default.tres")
+
 @onready var p : Player = get_parent()
 
 # These are the default stats for the player. They will be modified by items and shrines.
 
 var added_stats : Array[Array]
 
-#only affects choosing the crystal shards
 var luck : int = 0
+#only affects choosing the crystal shards
 var choices : int = 2
 
-var damage : int = 50
+var damage : int = 60
 var damage_mult : float = 1.0
 var dash_damage_mult : float = 1.25
 var bullet_damage_mult : float = 1.0
@@ -24,7 +26,7 @@ var crit_mult : float = 1.0
 var attack_speed : float = 1.0
 var attack_speed_mult : float = 1.0
 var bullet_atkspd : float = 0.85
-var dash_atkspd : float = 1.3
+var dash_atkspd : float = 1.25
 
 var size : float = 1.0
 
@@ -47,6 +49,9 @@ var defense : float = 10.0
 var actual_damage : int
 var actual_crit : float
 var actual_atkspd : float
+
+func _ready() -> void:
+	bullet = PLAYER_BULLET_DEFAULT.duplicate()
 
 func add_stat(modulate : Modulate, stat_texture : Texture) -> void:
 	modulate.append(self)

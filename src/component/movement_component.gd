@@ -14,7 +14,6 @@ var can_jump : bool = false
 var friction : float = 0.0
 var direction : Vector3 = Vector3.ZERO
 var vel : Vector3
-var on_floor : bool = false
 var moving : float = 0.0
 var actual_speed : float = 0.0
 var is_using_force : bool = false
@@ -50,7 +49,7 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 		_knockback_velocity = _knockback_velocity.lerp(Vector3.ZERO, _knockback_decay * delta)
 	else:
 		_knockback_velocity = Vector3.ZERO
-	if not on_floor:
+	if not _parent.is_on_floor():
 		vel.y -= fall_speed * delta
 		friction = air_friction
 		can_jump = false
@@ -61,7 +60,7 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 		can_jump = true
 	var has_direction : bool = direction.length_squared() > 0.0001 # Optimized check
 	if has_direction:
-		if on_floor:
+		if _parent.is_on_floor():
 			moving = lerpf(moving, 1.0, friction_double)
 			# Optimized: Combined threshold checks
 			actual_speed = move_toward(actual_speed, speed_threshold, 

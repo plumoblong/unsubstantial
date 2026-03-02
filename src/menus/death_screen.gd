@@ -5,15 +5,15 @@ var can_reset : bool = false
 func _ready() -> void:
 	#_G.save.can_continue = false
 	_G.change_discord_rpc(false, "Game Over", str(_G.current_run.score) + " Score", "", "")
-	$DarkMode.visible = _G.config.ui_dark_mode
+	$Node2D/DarkMode.visible = _G.config.ui_dark_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	$Reason.text = _G.current_run.die_reason
-	$Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.crystals_collected)
-	$Score.text = "Score: " + str(_G.current_run.score)
-	$Score2.text = "High Score: " + str(int(_G.save.high_score))
+	$Node2D/Reason.text = _G.current_run.die_reason
+	$Node2D/Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.crystals_collected)
+	$Node2D/Score.text = "Score: " + str(_G.current_run.score)
+	$Node2D/Score2.text = "High Score: " + str(int(_G.save.high_score))
 	await get_tree().create_timer(1.0).timeout
-	$Restart.show()
-	$Menu.show()
+	$Node2D/Restart.show()
+	$Node2D/Menu.show()
 	can_reset = true
 
 func play_again() -> void:
@@ -22,6 +22,7 @@ func play_again() -> void:
 	_G.change_scene("res://scene/game.tscn")
 
 func _process(_delta : float) -> void:
+	$Node2D.position = _R.get_center()
 	if Input.is_action_just_pressed("jump"):
 		play_again()
 

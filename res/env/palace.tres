@@ -1,35 +1,9 @@
 [gd_resource type="Environment" format=3 uid="uid://dspdyqrgm5xt3"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_coocs"]
-noise_type = 4
-frequency = 0.1181
-fractal_lacunarity = 2.955
-fractal_gain = 0.33
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gg0b2"]
-width = 128
-height = 128
-generate_mipmaps = false
-noise = SubResource("FastNoiseLite_coocs")
-seamless = true
-as_normal_map = true
-seamless_blend_skirt = 1.0
-bump_strength = 3.7
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e32bo"]
-sky_top_color = Color(0.057512, 0.436639, 0.195319, 1)
-sky_horizon_color = Color(0, 0, 0, 1)
-sky_curve = 0.23537566
-sky_energy_multiplier = 0.9
-sky_cover = SubResource("NoiseTexture2D_gg0b2")
-sky_cover_modulate = Color(0.27420634, 0.27420634, 0.27420634, 1)
-ground_bottom_color = Color(0.427588, 0, 0.293102, 1)
-ground_horizon_color = Color(0.0071105557, 0.099722005, 0.2479003, 1)
-ground_curve = 0.26908687
-use_debanding = false
+[ext_resource type="Material" uid="uid://b4g8y6g4a3kmv" path="res://res/env/palace_sky.tres" id="1_gg0b2"]
 
 [sub_resource type="Sky" id="Sky_t78c5"]
-sky_material = SubResource("ProceduralSkyMaterial_e32bo")
+sky_material = ExtResource("1_gg0b2")
 
 [resource]
 background_mode = 2

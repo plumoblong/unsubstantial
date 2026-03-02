@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_f7gt8"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="5_errr7"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="5_onvrc"]
-[ext_resource type="Texture2D" uid="uid://blevds686g1l5" path="res://images/ui/go_back.png" id="6_x7mk6"]
 [ext_resource type="Texture2D" uid="uid://h7drvj3yjp72" path="res://images/item/rarity.png" id="7_onvrc"]
 [ext_resource type="Texture2D" uid="uid://o8usoxch28pm" path="res://images/ui/arrow.png" id="9_ekk7n"]
 
@@ -31,21 +30,23 @@ script = ExtResource("2_7vwyn")
 [node name="Header" type="RichTextLabel" parent="." unique_id=279976837]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
-offset_top = 28.0
-offset_right = 480.0
-offset_bottom = 38.0
+offset_left = -240.0
+offset_top = -107.0
+offset_right = 240.0
+offset_bottom = -97.0
 theme_override_fonts/normal_font = ExtResource("3_f7gt8")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[wave freq=100]Inventory"
+text = "Inventory"
 horizontal_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="." unique_id=216098572]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
-offset_top = 196.0
-offset_right = 480.0
-offset_bottom = 234.0
+offset_left = -240.0
+offset_top = 61.0
+offset_right = 240.0
+offset_bottom = 99.0
 theme_override_constants/line_separation = 5
 theme_override_fonts/normal_font = ExtResource("5_onvrc")
 theme_override_fonts/bold_font = ExtResource("5_errr7")
@@ -59,8 +60,10 @@ horizontal_alignment = 1
 [node name="Empty" type="RichTextLabel" parent="." unique_id=1214957393]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
-offset_right = 480.0
-offset_bottom = 270.0
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
 theme_override_fonts/normal_font = ExtResource("5_errr7")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
@@ -68,36 +71,31 @@ text = "Nothing here yet."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1309144298]
-position = Vector2(4, 4)
-texture = ExtResource("6_x7mk6")
-centered = false
-
 [node name="Rarity" type="Sprite2D" parent="." unique_id=818175140]
 use_parent_material = true
-position = Vector2(240, 231)
+position = Vector2(0, 96)
 texture = ExtResource("7_onvrc")
 vframes = 12
 frame = 8
 
 [node name="IconHolder" type="Node2D" parent="." unique_id=385432230]
-position = Vector2(240, 111)
+position = Vector2(-240, -135)
 
 [node name="ArrowRight" type="TextureButton" parent="." unique_id=1773223174]
-offset_left = 392.0
-offset_top = 92.0
-offset_right = 432.0
-offset_bottom = 132.0
+offset_left = 152.0
+offset_top = -43.0
+offset_right = 192.0
+offset_bottom = -3.0
 texture_normal = SubResource("AtlasTexture_jtats")
 texture_pressed = SubResource("AtlasTexture_f7gt8")
 texture_hover = SubResource("AtlasTexture_f7gt8")
 stretch_mode = 3
 
 [node name="ArrowLeft" type="TextureButton" parent="." unique_id=1193770629]
-offset_left = 48.0
-offset_top = 92.0
-offset_right = 88.0
-offset_bottom = 132.0
+offset_left = -192.0
+offset_top = -43.0
+offset_right = -152.0
+offset_bottom = -3.0
 texture_normal = SubResource("AtlasTexture_jtats")
 texture_pressed = SubResource("AtlasTexture_f7gt8")
 texture_hover = SubResource("AtlasTexture_f7gt8")

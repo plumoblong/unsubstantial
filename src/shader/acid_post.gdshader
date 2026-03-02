@@ -13,6 +13,12 @@ uniform float power : hint_range(0.0, 1.0, 0.01) = 1.0;
 
 uniform float bit_depth : hint_range(1.0, 32.0, 0.25);
 
+// FUN
+
+//float fun_get_pixel_brightness(vec3 col) {
+	//return (col.r + col.g + col.b) / 3.0;
+//}
+
 vec3 gamma_correct (vec3 val) {
 	vec3 color;
     color.rgb = pow(val.rgb, vec3(1.0 / gamma));
@@ -105,5 +111,6 @@ void fragment(){
 	}
 
 	COLOR.rgb = gamma_correct(final_color);
-	COLOR.a = 1.0;
+	COLOR.a = init_tex.a;
 }
+

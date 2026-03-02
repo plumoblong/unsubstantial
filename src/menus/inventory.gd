@@ -55,9 +55,9 @@ func _process(_delta: float) -> void:
 	aviable_pages =  icon_holder.get_child_count() / 15
 	arrow_left.visible = current_page != 0
 	arrow_right.visible = current_page != aviable_pages
-	icon_holder.position.x = lerpf(icon_holder.position.x, 240.0 - (480.0 * current_page), 0.05)
+	icon_holder.position.x = lerpf(icon_holder.position.x, _R.get_top_left(true).x - (480.0 * current_page), 0.05)
+	icon_holder.position.y = _R.get_top_left(true).y - 24
 	$Label.text = str(current_page) + " " + str(aviable_pages)
-
 func arrow_right_pressed() -> void:
 	current_page += 1
 

@@ -9,9 +9,11 @@ var easing : Tween.EaseType = Tween.EASE_IN_OUT
 var transition : Tween.TransitionType = Tween.TRANS_LINEAR
 
 var life_time : float = 0.0
+	
 
 func fade() -> void:
 	show()
+	size = _R.get_screen_size()
 	color = start_color
 	#fade_out = time / 5.0
 	await get_tree().create_timer(time, false, true, true).timeout

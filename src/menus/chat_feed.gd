@@ -6,7 +6,6 @@ class_name ChatFeed
 
 const MAX_MESSAGES : int = 5
 const LABEL : PackedScene = preload("res://prefab/menus/chat_text.tscn")
-const LABEL_WIDTH : float = 270.0
 
 var message_history : Array = []
 
@@ -20,7 +19,6 @@ func _show_message(text : String, color : Color = Color.WHITE) -> void:
 	var label : Node = LABEL.instantiate()
 	label.text = text
 	label.color = color
-	label.size.x = LABEL_WIDTH
 	message_container.add_child(label)
 	
 	if message_container.get_child_count() > MAX_MESSAGES:

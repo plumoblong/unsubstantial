@@ -1,8 +1,25 @@
 extends Node2D
 
+const SPLASH_TEXT_PATH : String = "res://splash.txt"
+
+func _parse_splash_file() -> Array[String]:
+	var lines: Array[String] = []
+	var file := FileAccess.open(SPLASH_TEXT_PATH, FileAccess.READ)
+	
+	while not file.eof_reached():
+		var line := file.get_line()
+		lines.append(line)
+	
+	file.close()
+	return lines
+	
+func generate_splash() -> String:
+	var lines : Array[String] = _parse_splash_file()
+	return lines[randi() % lines.size()]
+
 func _ready() -> void:
 
-	$AnimatedSprite2D.modulate = Color.BLACK
+	$ColorRect.color = Color.BLACK
 	
 	var dir := DirAccess.open("user://")
 	dir.make_dir("custom_maps")
@@ -35,18 +52,24 @@ func _ready() -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	set_binds()
+	_G._setup_audio_buses()
 	await get_tree().create_timer(0.25).timeout
 	start()
 	_T.start()
 
 func start() -> void:
 	_T.say("[center]unsubstantial Started.[/center]", Color.MAGENTA)
-	$AnimatedSprite2D.modulate = Color.WHITE
+	$Label.text = generate_splash()
+	$Label/Label2.text = $Label.text
+	
+	$ColorRect.color = Color(0.0, 0.0, 0.0, 0.0)
 	$AnimatedSprite2D.play("default")
 	$AudioStreamPlayer.play()
-	await get_tree().create_timer(3.0).timeout
-	_G.tween($AnimatedSprite2D, "modulate", Color.BLACK, 1.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(1.0).timeout
+	_G.tween($ColorRect2, "color", Color.BLACK, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	await get_tree().create_timer(2.0).timeout
+	_G.tween($ColorRect, "color", Color.BLACK, 1.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	await get_tree().create_timer(2.0).timeout
 	_G.change_scene("res://scene/menu.tscn")
 	
 func set_binds() -> void:
@@ -54,3 +77,7 @@ func set_binds() -> void:
 		InputMap.action_erase_events(i)
 		InputMap.action_add_event(i, _G.string_to_input_event(_G.config.controls.bind[i]))
 		_T.say("Binds set: " + i + ": " + str(_G.config.controls.bind[i]))
+
+func _process(delta: float) -> void:
+	position = _R.get_center()
+	

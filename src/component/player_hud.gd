@@ -9,6 +9,8 @@ class_name PlayerHUD
 @onready var info_score : RichTextLabel = $Info/Score
 @onready var info_essence : RichTextLabel = $Info/EssenceIcon/Essence
 @onready var info_crystal : RichTextLabel = $Info/CrystalIcon/Crystal
+@onready var info : Node2D = $Info
+@onready var eye : AnimatedSprite2D = $Eye
 @onready var interaction_tooltip : Control = $InteractionTooltip
 @onready var interaction_description : RichTextLabel = $InteractionTooltip/Description
 @onready var debug_panel : Node2D = $Debug
@@ -28,7 +30,8 @@ class_name PlayerHUD
 var hitmarker_alpha : float = 0.0
 
 var hand_hidden : bool = false
-var punchhand_hidden : bool = true
+var hand_offset : int = 0
+
 var crosshair_tween_active : bool = false
 var show_movement_info : bool = false
 var show_movement_var : bool = false
@@ -74,7 +77,6 @@ func update(viewbob : Vector2, spd : float) -> void:
 	weapon.offset.x = (viewbob.x * 24) * spd
 	weapon.offset.y = ((viewbob.y * 32) * spd) + (clamp(player_camera.height_offset * 0.5, -1.0, 2.0) * 32.0)
 	
-	vignette.modulate.a = player_movement.speed_bonus - 0.9
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	info_score.text = BOLD_START + str(int(round(score_lerp))) + BOLD_END + PTS_SUFFIX
 	
@@ -100,7 +102,20 @@ func update(viewbob : Vector2, spd : float) -> void:
 	movement_keys[2].visible = Input.is_action_pressed("down")
 	movement_keys[3].visible = Input.is_action_pressed("left")
 	movement_keys[4].visible = Input.is_action_pressed("jump")
+	
+	_update_positions()
 
+func _update_positions() -> void:
+	movement_info.position = _R.get_center()
+	interaction_tooltip.position = _R.get_bottom_left(true, 0, 159)
+	interaction_tooltip.size.x = _R.get_screen_size().x
+	interaction_description.size.x = _R.get_screen_size().x
+	info.position = _R.get_bottom_left(false, 4, 4)
+	weapon.position = _R.get_bottom_center(true) + Vector2i(0, hand_offset)
+	
+	weapon.scale = Vector2.ONE * _R.get_aspect_coefficient()
+	eye.position = _R.get_top_center(false, 16)
+	
 func hitmark() -> void:
 	if last_hitmarker_tween:
 		last_hitmarker_tween.kill()
@@ -112,11 +127,11 @@ func hitmark() -> void:
 
 func hide_hand(speed : float = 0.25) -> void:
 	hand_hidden = true
-	_G.tween(weapon, "position", Vector2(weapon.position.x, 336.0), speed, Tween.TRANS_SINE)
+	_G.tween(self, "hand_offset", 128, speed, Tween.TRANS_SINE)
 	await get_tree().create_timer(speed).timeout
 	weapon.visible = false
 
 func show_hand(speed : float = 0.25) -> void:
 	hand_hidden = false
 	weapon.visible = true
-	_G.tween(weapon, "position", Vector2(weapon.position.x, 256.0), speed * player_stats.bullet.fire_rate * player_stats.bullet.fire_rate_mult, Tween.TRANS_SINE)
+	_G.tween(self, "hand_offset", -16, speed * player_stats.bullet.fire_rate * player_stats.bullet.fire_rate_mult, Tween.TRANS_SINE)

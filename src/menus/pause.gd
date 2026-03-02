@@ -7,7 +7,7 @@ extends Node2D
 @onready var chapter_info : RichTextLabel = $Main/ChapterInfo
 @onready var restart_button : Button = $Main/Restart
 @onready var stats_label : RichTextLabel = $Statistics/Stats
-
+@onready var background : ColorRect = $BackGround
 # Cached references
 var player_stats : ItemStats
 var player_essence : EssenceComponent
@@ -47,7 +47,7 @@ func _process(_delta : float) -> void:
 		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + CHAPTER_PREFIX + str(current_chapter.id) + STAGE_PREFIX + str(_G.game.stage)
 	
 	restart_button.disabled = _G.game.in_ether
-
+	_update_positions()
 #func _update_statistics() -> void:
 	#
 
@@ -72,3 +72,8 @@ func rest_yes_pressed() -> void:
 
 func rest_no_pressed() -> void:
 	screen = 0
+
+func _update_positions() -> void:
+	background.size = _R.get_screen_size()
+	main_screen.position = _R.get_center()
+	statistics_screen.position = _R.get_center()

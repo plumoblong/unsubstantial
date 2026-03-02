@@ -15,7 +15,7 @@ shader_parameter/enable_filter = true
 shader_parameter/speed = 12.0
 shader_parameter/dither_size = 3.4999997429519993
 shader_parameter/power = 0.1499999966472
-shader_parameter/bit_depth = 8.0
+shader_parameter/bit_depth = 12.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7k62m"]
 shader = ExtResource("2_s7tmd")
@@ -42,7 +42,7 @@ centered = false
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 0)
 
 [node name="Shader" type="ColorRect" parent="." unique_id=947613574]
 material = SubResource("ShaderMaterial_bsn0b")
@@ -61,6 +61,7 @@ theme_override_font_sizes/font_size = 8
 text = "2137 FPS"
 
 [node name="Version" type="Label" parent="." unique_id=133672967]
+visible = false
 modulate = Color(1, 1, 1, 0.180392)
 offset_left = 437.0
 offset_top = 1.0

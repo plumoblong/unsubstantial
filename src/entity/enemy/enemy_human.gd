@@ -40,9 +40,6 @@ func _physics_process(delta : float) -> void:
 		essence_component.die()
 	
 	# Update components
-	var on_floor : bool = is_on_floor()
-	movement_component.on_floor = on_floor
-	movement_component.can_jump = on_floor
 	movement_component.update(delta, is_on_ceiling_only())
 	essence_component.update()
 	movement_component.enabled = player_can_control

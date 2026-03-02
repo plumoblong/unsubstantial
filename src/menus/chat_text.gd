@@ -15,11 +15,13 @@ func _ready() -> void:
 	shader_mat.set_shader_parameter("modulate", color)
 	material = shader_mat
 	
+	
+	
 	await get_tree().create_timer(FADE_DELAY, true, false, true).timeout
 	_G.tween(self, "alpha", 0.0, FADE_TIME)
 
 func _process(_delta : float) -> void:
 	shader_mat.set_shader_parameter("alpha", alpha)
-	
+	size.x = _R.get_screen_size().x
 	if alpha <= 0.0:
 		queue_free()

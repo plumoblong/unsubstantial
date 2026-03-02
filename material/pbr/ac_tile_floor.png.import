@@ -2,26 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8wlyltv1118n"
-path="res://.godot/imported/yahermis.png-09ec523c444b5ed5c8784641d25e5aa9.ctex"
+uid="uid://7nk8v32g1d8f"
+path="res://.godot/imported/ac_tile_floor.png-bd9654374a70af6e2c327abcc68f25bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/world/yahermis.png"
-dest_files=["res://.godot/imported/yahermis.png-09ec523c444b5ed5c8784641d25e5aa9.ctex"]
+source_file="res://material/pbr/ac_tile_floor.png"
+dest_files=["res://.godot/imported/ac_tile_floor.png-bd9654374a70af6e2c327abcc68f25bf.ctex"]
 
 [params]
 
 compress/mode=3
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.94
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

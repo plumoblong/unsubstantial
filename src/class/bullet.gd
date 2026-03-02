@@ -22,7 +22,7 @@ var active : bool = true
 var disable_seek : bool = false
 var can_attack_parent : bool = false
 
-var target : CharacterBody3D
+var target : Node3D
 
 const BASE_SIZE : float = 0.5
 const SIZE_CLAMP_MIN : float = 34.0
@@ -44,7 +44,6 @@ func _physics_process(delta: float) -> void:
 	static_sfx.volume_linear = float(_G.player.can_control)
 	if not active or not _G.player.can_control:
 		return
-	_apply_gravity()
 	_update_movement(delta)
 
 func _setup_damage() -> void:
@@ -72,20 +71,20 @@ func _setup_visuals() -> void:
 func _setup_homing() -> void:
 	if config.homing > 0.0:
 		$Seeker/Hitbox.shape.radius = config.homing * 2.5
-		if config.homing_on_player:
-			target = _G.player
+	elif config.homing_on_player:
+		target = _G.player.target
 	else:
 		$Seeker/Hitbox.disabled = true
 
 func _setup_audio() -> void:
 	static_sfx.play()
-	static_sfx.pitch_scale = randf_range(1.40, 1.75) * config.init_speed / 48.0
+	static_sfx.pitch_scale = clampf(randf_range(1.40, 1.75) * config.init_speed / 48.0, randf_range(1.14, 1.25), 2.4)
 
 func _setup_scale() -> void:
 	var clamped_damage: float = clampf(damage, SIZE_CLAMP_MIN, SIZE_CLAMP_MAX)
 	var size: float = BASE_SIZE + clampf(clamped_damage / SIZE_DIVISOR, 0.0, 3.0)
 	
-	collision_shape.shape.radius = clampf(size * 0.3, 0.1, 1.0)
+	collision_shape.shape.radius = clampf(size * 0.5, 0.1, 2.0)
 	scale = Vector3.ONE * size * config.size_mult
 	config.bounciness = clampf(config.bounciness, 0.0, 1.75)
 
@@ -93,12 +92,10 @@ func _start_lifetime() -> void:
 	$Timer.start(config.life_time)
 	collision_shape.disabled = false
 
-func _apply_gravity() -> void:
-	world_velocity.y -= config.fall_speed
-
 func _update_movement(delta: float) -> void:
+	world_velocity.y -= config.fall_speed
 	velocity = world_velocity + _calculate_steering() * speed
-	position += velocity * delta
+	position += velocity * delta * config.acceleration
 	raycast.target_position = velocity
 
 func _calculate_steering() -> Vector3:
@@ -143,10 +140,10 @@ func _handle_pierce() -> void:
 	destroy_object_init(config.destroy_object, config.destroy_object_properties)
 	disable_seek = true
 	pierces_left -= 1
-	collision_shape.disabled = true
+	#collision_shape.disabled = true
 	target = null
-	await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME / 1000.0).timeout
-	collision_shape.disabled = false
+	#await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME / 1000.0).timeout
+	#collision_shape.disabled = false
 
 func handle_destroy(body: Node3D) -> void:
 	if config.spectral: return

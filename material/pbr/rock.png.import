@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdlr1w8tf8va"
-path="res://.godot/imported/tile_floor.png-b945564fb28060cd62367483f98ec2e2.ctex"
+uid="uid://b731l3tp5nxrc"
+path="res://.godot/imported/rock.png-5c7671be71516637a9baeb18722be912.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/pbr/tile_floor.png"
-dest_files=["res://.godot/imported/tile_floor.png-b945564fb28060cd62367483f98ec2e2.ctex"]
+source_file="res://material/pbr/rock.png"
+dest_files=["res://.godot/imported/rock.png-5c7671be71516637a9baeb18722be912.ctex"]
 
 [params]
 
 compress/mode=3
 compress/high_quality=false
-compress/lossy_quality=0.94
+compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
@@ -25,8 +25,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://textures/normal/tile_floor.png"
+roughness/mode=0
+roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

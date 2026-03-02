@@ -39,9 +39,10 @@ class_name BulletSettings
 @export var init_speed : float = 48.0
 @export var fall_speed : float = 0.1
 @export var life_time : float = 1.0
+@export var acceleration : float = 1.0
 
 @export_subgroup("parrying")
-@export var can_parry : bool = true
+@export var can_parry : bool = false
 @export var parried_speed_multiplier : float = 0.75 
 
 @export_subgroup("depracated. use if you want to set the position manually")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ubfowv062e71"
-path="res://.godot/imported/displacement_tile_floor.png-b648ee37e26bb3ff8e441bd2f04c3a04.ctex"
+uid="uid://b6vlg05m2huws"
+path="res://.godot/imported/bricks.png-80b16252bd514da0e0d8d02020113019.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/pbr/displacement_tile_floor.png"
-dest_files=["res://.godot/imported/displacement_tile_floor.png-b648ee37e26bb3ff8e441bd2f04c3a04.ctex"]
+source_file="res://material/pbr/bricks.png"
+dest_files=["res://.godot/imported/bricks.png-80b16252bd514da0e0d8d02020113019.ctex"]
 
 [params]
 
@@ -25,8 +25,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://textures/normal/bricks.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

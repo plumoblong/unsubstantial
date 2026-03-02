@@ -143,8 +143,8 @@ func _process(delta : float) -> void:
 	_handle_input()
 	_update_ui(delta)
 	_update_window_size()
-	_setup_audio_buses()
-	
+	shader_rect.size = _R.get_screen_size()
+	flare_rect.size = _R.get_screen_size()
 	Engine.time_scale = time_scale[0] * time_scale[1]
 
 func _handle_input() -> void:
@@ -161,21 +161,21 @@ func _update_ui(delta : float = 0.0) -> void:
 	
 	if show_fps:
 		if Engine.get_physics_frames() % 30 == 0:
-			fps_label.text = str(int(1/delta) * Engine.time_scale) + " FPS\n" + str(float(delta * 1000.0)) + "ms"
+			fps_label.text = str(int(1/delta) * Engine.time_scale) + " FPS\n" + str(float(delta * 1000.0)) + "ms\nRES: " + str(_R.get_screen_size()) + "\nW: " + str(_cached_window.size) + "\nASP: " + str(_R.get_screen_aspect())
 		
 func _update_window_size() -> void:
-	if not config.fullscreen:
-		var screen_size := DisplayServer.screen_get_size(0)
-		var clean_res := Vector2i(snappedi(screen_size.x, 480), snappedi(screen_size.x, 270))
-		var min_size := Vector2i(480, 270)
-		var new_size := clamp(min_size * int(config.resolution), min_size, clean_res)
+	if config.fullscreen or Engine.is_embedded_in_editor(): return
+	var screen_size := DisplayServer.screen_get_size(0)
+	var clean_res := Vector2i(snappedi(screen_size.x, 480), snappedi(screen_size.x, 270))
+	var min_size := Vector2i(480, 270)
+	var new_size := clamp(min_size * int(config.resolution), min_size, clean_res)
+	
+	if _cached_window.size != new_size:
+		_cached_window.size = new_size
+		_cached_window.move_to_center()
+	
+	config.resolution = clampi(config.resolution, 1, clean_res.x / 480.0)
 		
-		if _cached_window.size != new_size:
-			_cached_window.size = new_size
-			_cached_window.move_to_center()
-		
-		config.resolution = clampi(config.resolution, 1, clean_res.x / 480.0)
-
 func get_resolution() -> float:
 	if not config.fullscreen: 
 		return config.resolution
@@ -409,3 +409,4 @@ func _get_vector2(text: String, key: String) -> Vector2:
 	vec_str = vec_str.replace("(", "").replace(")", "")
 	var parts = vec_str.split(",")
 	return Vector2(float(parts[0]), float(parts[1]))
+	

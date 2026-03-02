@@ -54,10 +54,11 @@ func _physics_process(delta : float) -> void:
 	dash_hitbox.disabled = not dash_component.dashing
 	
 	# Update components
-	movement_component.on_floor = is_on_floor()
+	if is_on_floor():
+		dash_component.allow_dash(true)
+		
 	movement_component.update(delta, is_on_ceiling_only())
 	essence_component.update()
-	dash_component.update()
 	movement_component.enabled = player_can_control
 	chase_component.enabled = player_can_control
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)

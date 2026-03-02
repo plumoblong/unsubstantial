@@ -88,7 +88,7 @@ func screenshot() -> void:
 	_G.game.chat.hide()
 	await RenderingServer.frame_post_draw
 	var image : Image = get_viewport().get_texture().get_image()
-	image.resize(1920, 1080, Image.INTERPOLATE_NEAREST)
+	image.resize(_R.get_screen_size().x * 2, _R.get_screen_size().x * 2, Image.INTERPOLATE_NEAREST)
 	ss_count += 1
 	var date : Dictionary = Time.get_datetime_dict_from_system(false)
 	var date_string : String = str(date.year) + "_" + str(date.month) + "_" + str(date.day) + "_" + str(date.hour) + "-" + str(date.minute) + "-" + str(date.second)
