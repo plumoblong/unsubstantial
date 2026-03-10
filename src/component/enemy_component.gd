@@ -105,8 +105,9 @@ func handle_death() -> void:
 	get_parent().queue_free.call_deferred()
 
 func shoot_to_player(shoot_component : ShootComponent, target_mult : float = 1.5, y_offset : float = 0.2) -> void:
-	shoot_component.shoot(get_parent().global_position.direction_to(_G.player.target.get_pos_multiplied(target_mult + random_factor) \
-	+ Vector3(0.0, 0.15 + (random_factor * 0.2), 0.0)), get_parent().global_position + Vector3(0.0, y_offset, 0.0))
+	var spawn_pos : Vector3 = get_parent().global_position + Vector3(0.0, y_offset, 0.0) if not shoot_component.visual_bullet else shoot_component.visual_bullet.global_position
+	shoot_component.shoot(spawn_pos.direction_to(_G.player.target.get_pos_multiplied(target_mult + random_factor) \
+	+ Vector3(0.0, 0.15 + (random_factor * 0.2), 0.0)), spawn_pos)
 
 func get_difficulty_factor(mult : float = 1.0) -> float:
 	return 1.0 + ((_G.game.enemy_multiplier - 1.0) * mult)

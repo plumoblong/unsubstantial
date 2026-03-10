@@ -11,8 +11,8 @@ void fragment(){
 
 	vec4 color = vec4(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, texture(TEXTURE, UV).a);
 	if (grayscale) {
-		float cmax = max(color.r, max(color.g, color.b));
-		float cmin = min(color.r, min(color.g, color.b));
+		float cmax = max(color.b, max(color.r, color.b));
+		float cmin = min(color.b, min(color.g, color.b));
 		float delta = cmax - cmin;
 		COLOR = vec4(cmax > 0.0 ? color.rgb * ((1.0 - cmax) / cmax) : vec3(1.0 - cmax), 1.0) * modulate;
 	} else {

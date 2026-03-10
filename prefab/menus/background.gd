@@ -1,6 +1,6 @@
 extends Node2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$ColorRect.size = _R.get_screen_size()
 	$Sprite2D.size = _R.get_screen_size()
 	$TextureRect.size = _R.get_screen_size()

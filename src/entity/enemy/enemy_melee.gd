@@ -6,7 +6,7 @@ class_name EnemyMelee
 @onready var essence_component : EssenceComponent = $EssenceComponent
 @onready var dash_component : DashComponent = $DashComponent
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
-@onready var agent : NavigationAgent3D = $NavigationAgent3D
+@onready var agent : NavigationAgent3D = $GroundEnemyNav
 @onready var enemy : EnemyComponent = $EnemyComponent
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX

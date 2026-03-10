@@ -5,7 +5,6 @@ var can_reset : bool = false
 func _ready() -> void:
 	#_G.save.can_continue = false
 	_G.change_discord_rpc(false, "Game Over", str(_G.current_run.score) + " Score", "", "")
-	$Node2D/DarkMode.visible = _G.config.ui_dark_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$Node2D/Reason.text = _G.current_run.die_reason
 	$Node2D/Stats.text = "Enemies killed:   " + str(_G.current_run.kills) + "\nTook damage:   " + str(_G.current_run.hits_taken) + " times\nShattered crystals collected:   " + str(_G.current_run.crystals_collected)

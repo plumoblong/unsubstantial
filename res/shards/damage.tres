@@ -26,7 +26,6 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_v2jpd")
 stat_name = "Damage"
 image = ExtResource("1_v2jpd")
-weight = 0.8
 shop_cost = 200
 modulates = Dictionary[ExtResource("1_xe6bi"), int]({
 SubResource("Resource_v2jpd"): 10,

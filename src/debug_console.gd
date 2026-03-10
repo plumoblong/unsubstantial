@@ -31,7 +31,24 @@ func start() -> void:
 	if _G.config.tux:
 		say("\nWelcome to TUX!\nType help or help <page> for more information.")
 	else:
-		say("\nClient's TUX is disabled, good for them.")
+		say("\nClient's TUX is disabled.")
+	var user_args = OS.get_cmdline_args()
+	
+	say("\nRun Arguments" + str(user_args))
+	
+	var i = 0
+	while i < user_args.size():
+		var arg = user_args[i]
+		if arg.begins_with("--"):
+			var cmd = arg.trim_prefix("--")
+			var args = []
+			# Collect following values that aren't flags
+			while i + 1 < user_args.size() and not user_args[i + 1].begins_with("--"):
+				i += 1
+				args.append(user_args[i])
+			say("Auto-executing: " + cmd + " " + " ".join(args), Color.GRAY)
+			execute_command(cmd, args)
+		i += 1
 
 func _input(event: InputEvent) -> void:
 	if not _G.config.tux: return
@@ -181,7 +198,7 @@ func execute_command(cmd: String, args: Array) -> void:
 		"timescale":
 			var scale = float(args[0]) if args.size() > 0 else 1.0
 			timescale(scale)
-		"scene":
+		"change_scene":
 			var path = args[0] if args.size() > 0 else ""
 			scene(path)
 		"clear":

@@ -5,11 +5,10 @@ class_name ViewportManager
 # MEANT FOR HUDS AND UI, SO THEY ARE IN THE CORRECT POSITIONS
 
 var margin: int = 8  # in pixels
-var base_resolution : Vector2i = Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
+const base_resolution : Vector2i = Vector2i(480, 270)
 
 # Cached viewport size
 var _viewport_size: Vector2i = Vector2i.ZERO
-
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(_on_viewport_size_changed)

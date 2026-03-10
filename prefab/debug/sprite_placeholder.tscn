@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://fvvh000xgtpk"]
+
+[ext_resource type="Texture2D" uid="uid://blgn3y70to4gj" path="res://placeholder.png" id="1_0q6vs"]
+
+[node name="SpritePlaceholder" type="Sprite3D" unique_id=1805567313]
+top_level = true
+pixel_size = 0.06
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("1_0q6vs")

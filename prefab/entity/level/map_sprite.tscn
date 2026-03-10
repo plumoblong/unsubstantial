@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://pdb2lcm60pwk"]
+
+[ext_resource type="Script" uid="uid://dlcqgvpg0uf1r" path="res://src/entity/map/map_sprite.gd" id="1_rvjht"]
+
+[node name="MapSprite" type="Sprite3D" unique_id=14201786]
+script = ExtResource("1_rvjht")

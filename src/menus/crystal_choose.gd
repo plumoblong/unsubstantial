@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name CrystalChoose
 
 const CRYSTAL_PIECE_SCENE : PackedScene = preload("res://prefab/menus/crystal_piece.tscn")
-var crystal_width : float = 128.0
+
 var margin : float = 64.0
 
 @onready var crystals : Node2D = get_node("Crystals")
@@ -13,9 +13,10 @@ var last_pool : Dictionary[StatShard, int] = {}
 
 func create_crystals(amount: int = 2) -> void:
 	var crystal_spacing: float = 0.0
+	var crystal_width : float = 128.0  * _R.get_aspect_coefficient()
 	if amount > 1:
-		var total_card_width: float = amount * crystal_width
-		var total_gap_space: float = (480 - (margin * 2.0)) - total_card_width
+		var total_crystal_width: float = amount * crystal_width
+		var total_gap_space: float = (_R.get_screen_size().x - (margin * 2.0)) - total_crystal_width
 		crystal_spacing = total_gap_space / (amount - 1)
 	var total_width: float = (amount * crystal_width) + ((amount - 1) * crystal_spacing)
 	var start_x: float = -(total_width / 2.0) + (crystal_width / 2.0)
@@ -24,7 +25,6 @@ func create_crystals(amount: int = 2) -> void:
 		crystals.add_child(crystal)
 		crystal.name = "CrystalPiece" + str(i)
 		crystal.position = Vector2(start_x + i * (crystal_width + crystal_spacing), 0.0)
-
 
 func start_choose(pool : StatShardPool) -> void:
 	_G.game.in_any_menu = true
@@ -50,6 +50,7 @@ func end_choose() -> void:
 	_G.game.in_any_menu = false
 	
 func _process(_delta: float) -> void:
+	if not _G.game.in_any_menu: return
 	$Text2.text = description_text
 	$Text2/Shadow.text = description_text
 	$Text2/Shadow2.text = description_text

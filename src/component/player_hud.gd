@@ -3,8 +3,6 @@ class_name PlayerHUD
 
 @onready var crosshair : Node2D = $Crosshair
 @onready var hitmarker : Sprite2D = $Hitmarker
-@onready var weapon : Node = $Weapon
-@onready var vignette : Node = $Vignette
 @onready var movement_info : Node = $MovementInfo
 @onready var info_score : RichTextLabel = $Info/Score
 @onready var info_essence : RichTextLabel = $Info/EssenceIcon/Essence
@@ -73,10 +71,6 @@ func update(viewbob : Vector2, spd : float) -> void:
 	if player == null: return
 	hitmarker.material.set_shader_parameter("alpha", hitmarker_alpha)
 	movement_info.visible = show_movement_info
-	weapon.modulate = player_stats.bullet.color
-	weapon.offset.x = (viewbob.x * 24) * spd
-	weapon.offset.y = ((viewbob.y * 32) * spd) + (clamp(player_camera.height_offset * 0.5, -1.0, 2.0) * 32.0)
-	
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	info_score.text = BOLD_START + str(int(round(score_lerp))) + BOLD_END + PTS_SUFFIX
 	
@@ -110,10 +104,8 @@ func _update_positions() -> void:
 	interaction_tooltip.position = _R.get_bottom_left(true, 0, 159)
 	interaction_tooltip.size.x = _R.get_screen_size().x
 	interaction_description.size.x = _R.get_screen_size().x
+	crosshair.position = _R.get_center()
 	info.position = _R.get_bottom_left(false, 4, 4)
-	weapon.position = _R.get_bottom_center(true) + Vector2i(0, hand_offset)
-	
-	weapon.scale = Vector2.ONE * _R.get_aspect_coefficient()
 	eye.position = _R.get_top_center(false, 16)
 	
 func hitmark() -> void:
@@ -125,13 +117,18 @@ func hitmark() -> void:
 	hitmarker_sfx.play()
 	last_hitmarker_tween = _G.tween(self, "hitmarker_alpha", 0, 0.7 / player_stats.actual_atkspd)
 
-func hide_hand(speed : float = 0.25) -> void:
-	hand_hidden = true
-	_G.tween(self, "hand_offset", 128, speed, Tween.TRANS_SINE)
-	await get_tree().create_timer(speed).timeout
-	weapon.visible = false
+#func hide_hand(speed : float = 0.25) -> void:
+	#hand_hidden = true
+	#_G.tween(self, "hand_offset", 128, speed, Tween.TRANS_SINE)
+	#await get_tree().create_timer(speed).timeout
+	#weapon.visible = false
+#
+#func show_hand(speed : float = 0.25) -> void:
+	#hand_hidden = false
+	#weapon.visible = true
+	#_G.tween(self, "hand_offset", -16, speed * player_stats.bullet.fire_rate * player_stats.bullet.fire_rate_mult, Tween.TRANS_SINE)
 
-func show_hand(speed : float = 0.25) -> void:
-	hand_hidden = false
-	weapon.visible = true
-	_G.tween(self, "hand_offset", -16, speed * player_stats.bullet.fire_rate * player_stats.bullet.fire_rate_mult, Tween.TRANS_SINE)
+
+func eye_animation_finished() -> void:
+	if eye.animation == "open":
+		eye.play("default")

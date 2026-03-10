@@ -16,11 +16,9 @@ general/accessibility_support=2
 
 config/name="unsubstantial"
 run/main_scene="uid://cuhflxnivbv2b"
-run/enable_alt_space_menu=true
 config/use_custom_user_dir=true
 config/custom_user_dir_name=".unsubstantial"
 config/features=PackedStringArray("4.6", "Forward Plus")
-run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
@@ -31,6 +29,7 @@ config/icon="res://icon.svg"
 [audio]
 
 buses/default_bus_layout="uid://th2mssiikuvl"
+driver/output_latency=32
 
 [autoload]
 
@@ -57,7 +56,7 @@ shapes/collision/draw_2d_outlines=false
 window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/resizable=false
-window/size/borderless=true
+window/size/minimize_disabled=true
 window/size/maximize_disabled=true
 window/size/window_width_override=960
 window/size/window_height_override=540
@@ -87,7 +86,9 @@ Enemy=""
 
 [gui]
 
+fonts/dynamic_fonts/use_oversampling=false
 theme/default_font_antialiasing=0
+theme/default_font_hinting=0
 theme/lcd_subpixel_layout=0
 theme/custom_font="uid://b25yuro7twaf1"
 
@@ -307,13 +308,12 @@ toggle_fb={
 
 [navigation]
 
-pathfinding/max_threads=-1
+world/map_use_async_iterations=false
 
 [physics]
 
-3d/run_on_separate_thread=true
-common/max_physics_steps_per_frame=4
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/velocity_steps=5
 common/physics_interpolation=true
 common/enable_object_picking=false
 jolt_physics_3d/simulation/areas_detect_static_bodies=true
@@ -322,6 +322,9 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method.mobile="forward_plus"
+driver/threads/thread_model=2
+textures/vram_compression/compress_with_gpu=false
+lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
 shading/overrides/force_lambert_over_burley=true
@@ -329,12 +332,16 @@ textures/default_filters/use_nearest_mipmap_filter=true
 environment/ssao/quality=0
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=0
+textures/light_projectors/filter=0
+occlusion_culling/occlusion_rays_per_thread=128
 environment/glow/upscale_mode=0
 environment/subsurface_scattering/subsurface_scattering_quality=0
 environment/volumetric_fog/volume_size=32
+environment/volumetric_fog/volume_depth=32
 environment/volumetric_fog/use_filter=0
 environment/defaults/default_clear_color=Color(0, 0, 0, 0)
 occlusion_culling/use_occlusion_culling=true
+lights_and_shadows/positional_shadow/atlas_size=2048
 lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=0
 lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=0
 lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=0

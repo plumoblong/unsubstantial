@@ -6,7 +6,7 @@ class_name EnemySmall
 @onready var chase_component : ChaseComponent = $ChaseComponent
 @onready var essence_component : EssenceComponent = $EssenceComponent
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
-@onready var agent : NavigationAgent3D = $NavigationAgent3D
+@onready var agent : NavigationAgent3D = $GroundEnemyNav
 @onready var query : Area3D = $Query
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX

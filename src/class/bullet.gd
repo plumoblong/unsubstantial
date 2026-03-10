@@ -32,6 +32,7 @@ const PIERCE_HITBOX_ACTIVATE_TIME : float = 32.0
 
 func _ready() -> void:
 	pierces_left = config.pierces
+	
 	_setup_damage()
 	_setup_speed()
 	_setup_visuals()
@@ -39,13 +40,15 @@ func _ready() -> void:
 	_setup_audio()
 	_setup_scale()
 	_start_lifetime()
+	
+	
 
 func _physics_process(delta: float) -> void:
 	static_sfx.volume_linear = float(_G.player.can_control)
 	if not active or not _G.player.can_control:
 		return
 	_update_movement(delta)
-
+	
 func _setup_damage() -> void:
 	damage = config.damage * (2.0 if crit else 1.0)
 	knockback_strength = config.knockback
@@ -55,7 +58,6 @@ func _setup_speed() -> void:
 	speed = config.init_speed
 	if parent is Player:
 		speed += parent.velocity.length() * 0.75
-
 func _setup_visuals() -> void:
 	if config.sprite_override:
 		sprite.texture = config.sprite_override
@@ -81,6 +83,7 @@ func _setup_audio() -> void:
 	static_sfx.pitch_scale = clampf(randf_range(1.40, 1.75) * config.init_speed / 48.0, randf_range(1.14, 1.25), 2.4)
 
 func _setup_scale() -> void:
+	sprite.pixel_size = 0.02
 	var clamped_damage: float = clampf(damage, SIZE_CLAMP_MIN, SIZE_CLAMP_MAX)
 	var size: float = BASE_SIZE + clampf(clamped_damage / SIZE_DIVISOR, 0.0, 3.0)
 	
@@ -97,6 +100,7 @@ func _update_movement(delta: float) -> void:
 	velocity = world_velocity + _calculate_steering() * speed
 	position += velocity * delta * config.acceleration
 	raycast.target_position = velocity
+	_G.create_3d_placeholder(position, Color.WHITE, 0.1)
 
 func _calculate_steering() -> Vector3:
 	if config.homing_on_player: return _seek_player()

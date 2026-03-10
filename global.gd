@@ -78,6 +78,7 @@ var in_close_menu : bool = false
 
 const FLARE_FILE : PackedScene = preload("res://prefab/flare.tscn")
 const UIPOP_FILE : PackedScene = preload("res://prefab/menus/ui_pop_up.tscn")
+const PH3D : PackedScene = preload("res://prefab/debug/sprite_placeholder.tscn")
 
 var lowpass_enabled : bool = false
 var time_scale : Array[float] = [1.0, 1.0]
@@ -410,3 +411,10 @@ func _get_vector2(text: String, key: String) -> Vector2:
 	var parts = vec_str.split(",")
 	return Vector2(float(parts[0]), float(parts[1]))
 	
+func create_3d_placeholder(position : Vector3 = Vector3.ZERO, color : Color = Color.WHITE, scale : float = 1.0) -> void:
+	if not debug_mode: return
+	var p : Sprite3D = PH3D.instantiate()
+	p.global_position = position
+	p.pixel_size = 0.06 * scale
+	p.modulate = color
+	get_tree().current_scene.add_child(p)

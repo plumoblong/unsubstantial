@@ -16,7 +16,6 @@ class_name Player
 @onready var death_camera : Camera3D = $DeathCamera
 @onready var player_death_anim : Node3D = $PlayerDeathAnim
 @onready var hud_eye : AnimatedSprite2D = $HUD/Eye
-@onready var hud_weapon : AnimatedSprite2D = $HUD/Weapon
 @onready var shoot_sfx : AudioStreamPlayer = $ShootSFX
 @onready var hit_sfx : AudioStreamPlayer = $HitSFX
 @onready var dash_sfx : AudioStreamPlayer = $DashSFX
@@ -50,7 +49,7 @@ func _input(event : InputEvent) -> void:
 		rotate_y(-event.screen_relative.x * sensitivity)
 		camera.head.rotate_x(-event.screen_relative.y * sensitivity)
 		camera.head.rotation_degrees.x = clampf(camera.head.rotation_degrees.x, -90.0, 90.0)
-		
+
 func debug_camera() -> void:
 	camera.current = not camera.current
 	death_camera.current = not camera.current
@@ -62,9 +61,11 @@ func death_anim() -> void:
 	death_camera.current = true
 	player_death_anim.show()
 	player_death_anim.play()
-	hud.visible = false
+	hud.hide()
+	shoot_component.visual_bullet.hide()
 
 func _process(_delta : float) -> void:
+	
 	_update_input_mode()
 	_update_camera_settings()
 	_update_hud()
@@ -96,16 +97,8 @@ func _update_camera_settings() -> void:
 func _update_hud() -> void:
 	if hud_eye.animation == "open":
 		hud_eye.show()
-	
-	if shoot_component.enabled:
-		hud_weapon.visible = immune or not immune
-		if immune:
-			hud_weapon.visible = not hud_weapon.visible
-	else:
-		hud_weapon.visible = false
-		
 	if hud.visible:
-		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving * 0.667)
+		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving)
 		
 func _handle_debug_input() -> void:
 	if Input.is_action_just_pressed("f4") and not Input.is_key_pressed(KEY_ALT):
@@ -138,9 +131,7 @@ func _physics_process(delta : float) -> void:
 func _process_player_movement(delta : float) -> void:
 	movement_component.update(delta)
 	camera.viewbob_amount = movement_component.moving * 0.5
-	
-	
-	
+
 	camera.anim.speed_scale = velocity.length() * 0.04
 	
 	if not movement_component.noclip and global_position.y < _G.game.chapter.current.y_boundary:
@@ -151,14 +142,15 @@ func _process_player_movement(delta : float) -> void:
 	fast_particle.emitting = velocity.length() >= movement_component.walk_speed * 1.55
 
 func _process_player_actions() -> void:
+	var bullet_spawn_pos : Vector3 = shoot_component.visual_bullet.sprite.global_position
 	if not movement_component.noclip:
 		if Input.is_action_pressed("shoot") and not dash_component.dashing:
-			shoot_component.shoot(-camera.head.global_transform.basis.z, global_position + Vector3(0.0, 1.525, 0.0))
+			shoot_component.shoot(-camera.head.global_transform.basis.z, bullet_spawn_pos)
 		elif Input.is_action_just_pressed("dash"):
 			dash_component.dash(movement_component)
 	else:
 		if Input.is_action_pressed("interact"):
-			shoot_component.shoot(-camera.head.global_transform.basis.z, camera.head.global_position - Vector3(0.0, 0.2, 0.0))
+			shoot_component.shoot(-camera.head.global_transform.basis.z, bullet_spawn_pos)
 
 func _process_player_input() -> void:
 	if Input.is_action_just_pressed("f2") and essence_component.alive:
@@ -182,8 +174,8 @@ func query_area_entered(area : Area3D) -> void:
 		start_immunity()
 
 func shooted() -> void:
-	hud.hide_hand(stats.bullet_atkspd / stats.actual_atkspd * 0.25)
-	await get_tree().create_timer(shoot_component.shoot_delay * stats.bullet_atkspd / stats.actual_atkspd).timeout
+	#hud.hide_hand(stats.bullet_atkspd / stats.actual_atkspd * 0.25)
+	#await get_tree().create_timer(shoot_component.shoot_delay * stats.bullet_atkspd / stats.actual_atkspd).timeout
 	shoot_sfx.pitch_scale = randf_range(1.80, 2.20) - (stats.bullet_atkspd / stats.actual_atkspd)
 	shoot_sfx.play()
 
@@ -198,7 +190,6 @@ func _on_essence_component_died(_combo : bool) -> void:
 	_G.change_scene("res://scene/gameover.tscn", Color.BLACK, 0.75, 1.0, false)
 
 func dash_component_dashed() -> void:
-	hud.hide_hand(stats.dash_atkspd / stats.actual_atkspd * 0.15)
 	hud_eye.play("close")
 	_G.tween(camera, "multiplier", 0.0, 0.2)
 	
@@ -223,8 +214,6 @@ func dash_component_dashed() -> void:
 	
 	await get_tree().create_timer(0.4 * stats.dash_atkspd / (1 + stats.attack_speed)).timeout
 	_G.tween(camera, "multiplier", 1.0, 0.2)
-	hud.show_hand()
-
 func essence_component_gained(amount : int) -> void:
 	if not hud.visible:
 		return
@@ -246,10 +235,6 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 		_G.current_run.hits_taken += 1
 		dash_component.can_reset = true
 		movement_component.speed_bonus *= 0.5
-		
-
-func shoot_component_reseted() -> void:
-	hud.show_hand()
 
 func start_immunity(time : float = 1.0) -> void:
 	immune = true

@@ -13,7 +13,6 @@ func _ready() -> void:
 	$Theme.stream = _G.choose_from_chance(songs)
 	$Theme.play()
 	_G.change_discord_rpc(true, "In Main Menu", "", "", "")
-	
 func _process(delta : float) -> void:
 	if Input.is_action_just_pressed("f2"):
 		all_visible = not all_visible
@@ -32,8 +31,8 @@ func _process(delta : float) -> void:
 			_G.flare_screen()
 	
 	$Camera3D.fov = _G.config.fov
-	update_positions()
-func update_positions() -> void:
+	_update_positions()
+func _update_positions() -> void:
 	$Main/Meta.global_position = _R.get_bottom_right(true)
 
 func _on_start_pressed() -> void:

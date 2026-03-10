@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://1g5k6hjkl8sb"]
+
+[node name="GroundEnemyNav" type="NavigationAgent3D" unique_id=1759187115]
+debug_use_custom = true
+debug_path_custom_point_size = 1.0

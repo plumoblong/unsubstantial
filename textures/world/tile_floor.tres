@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://bhxd3sfg8q482"]
 
 [ext_resource type="Texture2D" uid="uid://de3rpppflqc3h" path="res://textures/world/tile_floor.png" id="1_7oe1u"]
-[ext_resource type="Texture2D" uid="uid://7nk8v32g1d8f" path="res://textures/pbr/ac_tile_floor.png" id="2_axlsg"]
-[ext_resource type="Texture2D" uid="uid://btdlr1w8tf8va" path="res://textures/pbr/tile_floor.png" id="3_ecfct"]
+[ext_resource type="Texture2D" uid="uid://7nk8v32g1d8f" path="res://material/pbr/ac_tile_floor.png" id="2_axlsg"]
+[ext_resource type="Texture2D" uid="uid://btdlr1w8tf8va" path="res://material/pbr/tile_floor.png" id="3_ecfct"]
 
 [resource]
 albedo_texture = ExtResource("1_7oe1u")

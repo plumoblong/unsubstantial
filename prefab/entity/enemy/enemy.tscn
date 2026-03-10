@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1mpyff3hn02u" path="res://src/entity/enemy/enemy_human.gd" id="1_mxx8l"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_mxx8l"]
+[ext_resource type="PackedScene" uid="uid://1g5k6hjkl8sb" path="res://prefab/entity/config/ground_enemy_nav.tscn" id="2_suopw"]
 [ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_suopw"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_qi521"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="5_ksaek"]
@@ -14,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="13_x2dfq"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_mxx8l"]
 [ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="15_suopw"]
+[ext_resource type="PackedScene" uid="uid://b6mvsyko7mqr3" path="res://prefab/animation/visual_bullet.tscn" id="16_qi521"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c3pg5"]
 
@@ -40,9 +42,7 @@ light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 15.0
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=25895295]
-debug_use_custom = true
-debug_path_custom_point_size = 1.0
+[node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_suopw")]
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=615142835]
 shape = SubResource("CapsuleShape3D_c3pg5")
@@ -57,7 +57,6 @@ movehelper = NodePath("../MoveBackHelper")
 agro_distance = 25.0
 attack_distance = 17.0
 min_distance = 6.0
-strafe_distance = 10.0
 y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1374337443]
@@ -70,9 +69,10 @@ floor_friction = 0.08
 script = ExtResource("5_ksaek")
 set_max_essence_on_ready = false
 
-[node name="ShootComponent" type="Node" parent="." unique_id=1813057205]
+[node name="ShootComponent" type="Node" parent="." unique_id=1813057205 node_paths=PackedStringArray("visual_bullet")]
 script = ExtResource("6_qqoev")
 config = SubResource("Resource_necmj")
+visual_bullet = NodePath("../Node3D/VisualBullet")
 
 [node name="EnemyComponent" type="Node" parent="." unique_id=759804664 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_02b0y")
@@ -111,6 +111,12 @@ esc = NodePath("../EssenceComponent")
 
 [node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("15_suopw")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=169436045]
+
+[node name="VisualBullet" parent="Node3D" unique_id=1261046222 node_paths=PackedStringArray("shoot_component") instance=ExtResource("16_qi521")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shoot_component = NodePath("../../ShootComponent")
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://duxyfg6i08iui"]
 
 [ext_resource type="Script" uid="uid://d228tte3rosor" path="res://src/entity/enemy/enemy_melee.gd" id="1_0s5mw"]
+[ext_resource type="PackedScene" uid="uid://1g5k6hjkl8sb" path="res://prefab/entity/config/ground_enemy_nav.tscn" id="2_a7qjk"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_ei8lu"]
 [ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_olih5"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_5hjl1"]
@@ -35,11 +36,7 @@ light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 15.0
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1699626764]
-simplify_path = true
-simplify_epsilon = 0.5
-debug_use_custom = true
-debug_path_custom_point_size = 1.0
+[node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_a7qjk")]
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=210431166]
 shape = SubResource("CapsuleShape3D_c3pg5")

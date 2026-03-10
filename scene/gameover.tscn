@@ -134,5 +134,6 @@ bus = &"Music"
 [connection signal="pressed" from="Node2D/Restart" to="." method="button_pressed"]
 [connection signal="pressed" from="Node2D/Menu" to="." method="menu_pressed"]
 
+[editable path="Background"]
 [editable path="Node2D/Restart"]
 [editable path="Node2D/Menu"]

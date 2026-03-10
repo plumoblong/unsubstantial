@@ -120,13 +120,11 @@ _data = {
 [node name="CrystalPiece1" type="Node2D" unique_id=687883265]
 material = SubResource("CanvasItemMaterial_q61hg")
 script = ExtResource("1_squgq")
-first = null
 
 [node name="Glow2" type="Sprite2D" parent="." unique_id=418675845]
 modulate = Color(0.26543766, 0.26543766, 0.26543766, 1)
 material = SubResource("CanvasItemMaterial_qcpl0")
 use_parent_material = true
-position = Vector2(-1.9073486e-06, 0.83333576)
 scale = Vector2(2.5, 2.5)
 texture = SubResource("GradientTexture2D_h2gp0")
 
@@ -137,7 +135,7 @@ offset_right = 32.0
 offset_bottom = 64.0
 focus_mode = 1
 mouse_default_cursor_shape = 2
-color = Color(1, 1, 1, 0)
+color = Color(0.97, 0, 0.01616642, 0)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=375915920]
 use_parent_material = true

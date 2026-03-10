@@ -47,6 +47,7 @@ func _process(_delta: float) -> void:
 	
 	$Info/Shadow.text = info.text
 	$Info/Shadow2.text = info.text
+	_update_positions()
 
 func mouse_entered() -> void:
 	if enabled:
@@ -57,3 +58,9 @@ func mouse_entered() -> void:
 func mouse_exited() -> void:
 	hovered = false
 	anim.play("hover_out")
+
+func _update_positions() -> void:
+	$Glow2.scale = Vector2(2.5, 2.5) * _R.get_aspect_coefficient()
+	$Sprite.scale = Vector2.ONE * _R.get_aspect_coefficient()
+	$Bound.size = Vector2i(96, 192) * _R.get_aspect_coefficient()
+	$Bound.position = -$Bound.size / 3

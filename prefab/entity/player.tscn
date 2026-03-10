@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="3_lq4sc"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="5_gk4kr"]
 [ext_resource type="Script" uid="uid://c3klywbeud1cv" path="res://src/component/dash_component.gd" id="6_4p10s"]
+[ext_resource type="PackedScene" uid="uid://b6mvsyko7mqr3" path="res://prefab/animation/visual_bullet.tscn" id="6_dbo8y"]
 [ext_resource type="Script" uid="uid://b5n35qhjsmsh6" path="res://src/component/player_movement.gd" id="6_qqhji"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_d7qgd"]
 [ext_resource type="Texture2D" uid="uid://o6jkecl40tjq" path="res://images/entity/player.png" id="7_j4gl1"]
@@ -25,8 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://bg5h3h2stwvqw" path="res://sfx/player/jump.wav" id="38_jdfku"]
 [ext_resource type="PackedScene" uid="uid://e0fqyaaa5i4h" path="res://prefab/entity/player_target.tscn" id="41_jdfku"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_62pul"]
-height = 1.7
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dbo8y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbo8y"]
 transparency = 1
@@ -194,9 +194,7 @@ _data = {
 &"viewbob": SubResource("Animation_lr1bw")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yih3o"]
-radius = 0.5444336
-height = 1.9284668
+[sub_resource type="SphereShape3D" id="SphereShape3D_yih3o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
 radius = 1.25
@@ -270,6 +268,11 @@ distance_fade_max_distance = 3.0
 material = SubResource("StandardMaterial3D_blxug")
 orientation = 2
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dbo8y"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D" unique_id=1499817254]
 transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
 collision_priority = 2.0
@@ -278,7 +281,7 @@ script = ExtResource("1_colme")
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=182380019]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CylinderShape3D_62pul")
+shape = SubResource("CapsuleShape3D_dbo8y")
 debug_color = Color(1, 0, 0, 1)
 
 [node name="DeathCamera" type="Camera3D" parent="." unique_id=1251413674]
@@ -331,12 +334,20 @@ frame = 12
 frame_progress = 1.0
 
 [node name="Camera" type="Camera3D" parent="Head" unique_id=984251525]
-doppler_tracking = 1
+physics_interpolation_mode = 1
+doppler_tracking = 2
 current = true
+size = 16.005
 script = ExtResource("2_t4gyb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera" unique_id=1693941162]
 libraries/ = SubResource("AnimationLibrary_ic3gn")
+
+[node name="VisualBullet" parent="Head" unique_id=1261046222 node_paths=PackedStringArray("shoot_component") instance=ExtResource("6_dbo8y")]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, -1.4210855e-14, 0, 1.4210855e-14, 0.99999976, 0, -0.5, -0.8)
+shoot_component = NodePath("../../ShootComponent")
+no_depth_test = true
+auto_rotate = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1572910204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48258, 0)
@@ -344,9 +355,13 @@ light_energy = 0.7
 light_volumetric_fog_energy = 0.0
 omni_range = 15.0
 
-[node name="ShootComponent" type="Node" parent="." unique_id=108388983]
+[node name="ShootComponent" type="Node" parent="." unique_id=108388983 node_paths=PackedStringArray("visual_bullet")]
+process_thread_group = 2
+process_thread_group_order = 0
+process_thread_messages = 0
 script = ExtResource("3_lq4sc")
-shoot_delay = 0.04
+config = ExtResource("11_62pul")
+visual_bullet = NodePath("../Head/VisualBullet")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1545350429 node_paths=PackedStringArray("hitbox", "dash", "land_sfx", "jump_sfx", "jump_buffer_timer")]
 script = ExtResource("6_qqhji")
@@ -383,7 +398,7 @@ collision_mask = 810
 
 [node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=881845703]
 transform = Transform3D(1, 0, 0, 0, 0.9999572, -0.009250113, 0, 0.009250113, 0.9999572, 0, 0.0050047636, 4.6295747e-05)
-shape = SubResource("CapsuleShape3D_yih3o")
+shape = SubResource("SphereShape3D_yih3o")
 debug_color = Color(1, 0, 0.8666668, 0.7647059)
 debug_fill = false
 
@@ -493,7 +508,9 @@ visible = false
 [node name="MapHazardCast" parent="." unique_id=80243204 node_paths=PackedStringArray("esc") instance=ExtResource("27_yih3o")]
 esc = NodePath("../EssenceComponent")
 
-[connection signal="reseted" from="ShootComponent" to="." method="shoot_component_reseted"]
+[node name="MultiplayerSpawner" type="MultiplayerSynchronizer" parent="." unique_id=1700752247]
+replication_config = SubResource("SceneReplicationConfig_dbo8y")
+
 [connection signal="shooted" from="ShootComponent" to="." method="shooted"]
 [connection signal="died" from="EssenceComponent" to="." method="_on_essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
@@ -501,6 +518,3 @@ esc = NodePath("../EssenceComponent")
 [connection signal="can_dash_now" from="DashComponent" to="." method="dash_component_can_dash_now"]
 [connection signal="dashed" from="DashComponent" to="." method="dash_component_dashed"]
 [connection signal="area_entered" from="Query" to="." method="query_area_entered"]
-[connection signal="animation_finished" from="HUD/Eye" to="." method="eye_animation_finished"]
-
-[editable path="HUD"]

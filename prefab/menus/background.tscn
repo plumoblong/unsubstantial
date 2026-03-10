@@ -50,7 +50,7 @@ blend_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_k0qtg"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.25, 0.75, 1)
+offsets = PackedFloat32Array(0, 0.15, 0.85, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.0550269, 0.0550269, 0.0550269, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1dabs"]
@@ -112,7 +112,6 @@ texture = ExtResource("3_dn2ag")
 stretch_mode = 1
 
 [node name="DarkMode" type="ColorRect" parent="." unique_id=1906414989]
-visible = false
 z_index = 1024
 z_as_relative = false
 texture_repeat = 2

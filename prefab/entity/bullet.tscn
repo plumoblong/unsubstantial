@@ -17,27 +17,25 @@ radius = 0.3
 interpolation_mode = 2
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vpea4"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h0xjc"]
 gradient = SubResource("Gradient_vqshh")
 width = 16
 
 [sub_resource type="Curve" id="Curve_uh2de"]
-_data = [Vector2(0, 1), 0.0, -2.64529, 0, 0, Vector2(1, 0), -1.12529, 0.0, 0, 0]
+_data = [Vector2(0.375, 1), 0.0, -0.154703, 0, 0, Vector2(1, 0), -1.12529, 0.0, 0, 0]
 point_count = 2
 metadata/_snap_enabled = true
 metadata/_snap_count = 16
 
-[sub_resource type="CurveTexture" id="CurveTexture_h0xjc"]
+[sub_resource type="CurveTexture" id="CurveTexture_nanj5"]
 curve = SubResource("Curve_uh2de")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhh02"]
 gravity = Vector3(0, 0, 0)
-scale_min = 1.1999999
-scale_max = 1.1999999
-scale_curve = SubResource("CurveTexture_h0xjc")
-color_ramp = SubResource("GradientTexture1D_vpea4")
+scale_curve = SubResource("CurveTexture_nanj5")
+color_ramp = SubResource("GradientTexture1D_h0xjc")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0xjc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upcm7"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
@@ -55,8 +53,8 @@ point_size = 8.0
 distance_fade_mode = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nanj5"]
-material = SubResource("StandardMaterial3D_h0xjc")
-size = Vector2(0.4, 0.4)
+material = SubResource("StandardMaterial3D_upcm7")
+size = Vector2(0.3, 0.3)
 orientation = 2
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6054f"]
@@ -230,8 +228,6 @@ stun_time = 0.1
 die_reason = "You Got Shot!"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1481290390]
-visibility_range_begin = 2.0
-visibility_range_begin_margin = 0.5
 pixel_size = 0.03
 billboard = 1
 no_depth_test = true

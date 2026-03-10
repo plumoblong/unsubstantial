@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cgbt6cm5sfcfn"]
 
 [ext_resource type="Script" uid="uid://cr0g5n61n16g5" path="res://src/entity/enemy/enemy_small.gd" id="1_dwdt7"]
+[ext_resource type="PackedScene" uid="uid://1g5k6hjkl8sb" path="res://prefab/entity/config/ground_enemy_nav.tscn" id="2_ienij"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="2_o8h2q"]
 [ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_k6xin"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_0dpl7"]
@@ -33,11 +34,7 @@ light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 10.0
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=774373814]
-simplify_path = true
-simplify_epsilon = 1.0
-debug_use_custom = true
-debug_path_custom_point_size = 1.0
+[node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_ienij")]
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=650559289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09667969, 0)
@@ -53,7 +50,6 @@ movehelper = NodePath("../MoveBackHelper")
 agro_distance = 15.0
 attack_distance = 5.0
 min_distance = 0.5
-strafe_enabled = false
 y_distance = 12.0
 
 [node name="MovementComponent" type="Node" parent="." unique_id=259630483]

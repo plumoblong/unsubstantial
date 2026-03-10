@@ -7,7 +7,7 @@ class_name EnemyTriple
 @onready var essence_component : EssenceComponent = $EssenceComponent
 @onready var shoot_component : ShootComponent = $ShootComponent
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
-@onready var agent : NavigationAgent3D = $NavigationAgent3D
+@onready var agent : NavigationAgent3D = $GroundEnemyNav
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
