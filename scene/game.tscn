@@ -48,8 +48,7 @@ bus = &"Music"
 
 [node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
 script = ExtResource("33_d218c")
-current = ExtResource("36_x3x2e")
-all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e")])
+all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e")])
 
 [node name="Enemies" type="Node" parent="." unique_id=1809856368]
 

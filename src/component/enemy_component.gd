@@ -35,7 +35,7 @@ var ent_scene : PackedScene
 var random_factor : float = 0.0
 var time_spawned : float 
 
-func setup(esc : EssenceComponent) -> void:
+func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 	esc.enabled = false
 	if spawn_ent_on_death: 
 		ent_scene = load(ent_path)
@@ -47,7 +47,7 @@ func setup(esc : EssenceComponent) -> void:
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
 	color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
-	pulse(Color(1.25, 1.25, 1.25, 0.0), 0.5, 0.5, Color(1.25, 1.25, 1.25, 1.0), Tween.TRANS_SINE)
+	pulse(Color(1.25, 1.25, 1.25, 0.0), chase.concious_gain_time * 0.75, chase.concious_gain_time * 0.5, Color(1.25, 1.25, 1.25, 1.0), Tween.TRANS_SINE)
 	esc.max_essence = essence
 	esc.essence = essence
 	esc.die_threshold = essence_death_threshold
@@ -95,7 +95,7 @@ func handle_spawn_ent() -> void:
 
 func handle_death() -> void:
 	for i : int in range(ent_amount): handle_spawn_ent()
-	_G.game.create_ghost(get_parent().global_position, sprite.texture, sprite.pixel_size * get_parent().scale.y)
+	_G.game.create_ghost(sprite.global_position, sprite.texture, sprite.pixel_size * get_parent().scale.y)
 	_G.current_run.kills += 1
 	_G.game.enemies_killed += 1
 	_G.game.create_xporb(get_parent().global_position, xp_payout, xp_radius)

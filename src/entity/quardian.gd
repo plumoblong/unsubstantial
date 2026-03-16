@@ -12,11 +12,10 @@ class_name EnemyGuard
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
 
-var player_can_control : bool
 var y_boundary : float
 
 func _ready() -> void:
-	enemy.setup(essence_component)
+	enemy.setup(essence_component, chase_component)
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 2.0)
 	shoot_component.config.fire_rate = randf_range(1.15, 1.3)
 	shoot_component.config.damage = enemy.damage
@@ -39,15 +38,12 @@ func _physics_process(delta : float) -> void:
 	movement_component.enabled = _G.player.can_control
 	chase_component.enabled = _G.player.can_control
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)
-	
+	chase_component.update(_G.player.target.get_pos_multiplied(2.3), movement_component, agent)
+	if chase_component.attacking and _G.player.can_control:
+		enemy.shoot_to_player(shoot_component, 0.8, 0.9)
 	velocity = movement_component.vel * float(_G.player.can_control)
 	move_and_slide()
 	
-	if chase_component.attacking and player_can_control:
-		enemy.shoot_to_player(shoot_component, 0.8, 0.9)
-		_T.say("nigger")
-	
-	chase_component.update(_G.player.target.get_pos_multiplied(2.3), movement_component, agent)
 
 func query_area_entered(area : Area3D) -> void:
 	enemy.handle_query(area, essence_component, knockback_component)

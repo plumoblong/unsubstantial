@@ -23,7 +23,8 @@ height = 3.2
 
 [sub_resource type="Resource" id="Resource_y5ngk"]
 script = ExtResource("8_hrcbw")
-size_mult = 2.0
+size_mult = 1.5
+fire_rate = 1.2
 shots = 2
 inaccuracy = 0.2
 spread_angle = 20.0
@@ -55,14 +56,15 @@ shape = SubResource("CapsuleShape3D_asf4w")
 
 [node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_rkk6f")]
 
-[node name="KnockbackComponent" type="Node" parent="." unique_id=466537468]
+[node name="KnockbackComponent" type="Node" parent="." unique_id=466537468 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_y5ngk")
+movement_component = NodePath("../MovementComponent")
 
 [node name="ChaseComponent" type="Node" parent="." unique_id=106599417 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_snofy")
 movehelper = NodePath("../MoveBackHelper")
-min_distance = 2.0
-y_distance = 12.0
+agro_distance = 24.0
+attack_distance = 16.0
 
 [node name="MovementComponent" type="Node" parent="." unique_id=445065449]
 script = ExtResource("4_rkk6f")
@@ -82,11 +84,10 @@ visual_bullet = NodePath("../Node3D/VisualBullet")
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
 nav_agent = NodePath("../GroundEnemyNav")
-essence = 250.0
+essence = 300.0
 essence_death_threshold = 30.0
-damage = 75.0
 on_hit_velocity_loss = 0.9
-xp_payout = 8
+xp_payout = 10
 metadata/_custom_type_script = "uid://tlvl68soe85"
 
 [node name="Query" type="Area3D" parent="." unique_id=940736836]

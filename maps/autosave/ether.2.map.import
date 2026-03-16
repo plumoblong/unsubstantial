@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://btms7cn32u1es"
+path="res://.godot/imported/ether.2.map-4ef0d4715c376b19e659d96c5c07ded3.tres"
+
+[deps]
+
+source_file="res://maps/autosave/ether.2.map"
+dest_files=["res://.godot/imported/ether.2.map-4ef0d4715c376b19e659d96c5c07ded3.tres"]
+
+[params]
+

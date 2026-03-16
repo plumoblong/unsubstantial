@@ -44,6 +44,7 @@ _data = {
 script = ExtResource("1_oko88")
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=1511761162]
+top_level = true
 sorting_offset = 5.0
 visibility_range_begin = 1.0
 visibility_range_begin_margin = 0.5

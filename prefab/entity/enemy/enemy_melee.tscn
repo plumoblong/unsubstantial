@@ -64,9 +64,9 @@ script = ExtResource("5_57pmb")
 
 [node name="DashComponent" type="Node" parent="." unique_id=1720225600 node_paths=PackedStringArray("knock_component")]
 script = ExtResource("6_ei8lu")
-dash_speed = 3.0
+dash_speed = 3.5
 dash_time = 0.3
-cooldown = 1.8
+cooldown = 1.5
 end_velocity_multiplier = 0.75
 knock_component = NodePath("../KnockbackComponent")
 metadata/_custom_type_script = "uid://c3klywbeud1cv"

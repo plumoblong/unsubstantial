@@ -16,7 +16,7 @@ var player_can_control : bool
 var y_boundary : float
 
 func _ready() -> void:
-	enemy.setup(essence_component)
+	enemy.setup(essence_component, chase_component)
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 0.4)
 	query.damage = enemy.damage
 	light.light_color = enemy.color

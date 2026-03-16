@@ -65,9 +65,9 @@ func _initialize_seed() -> void:
 
 func _setup_starting_level() -> void:
 	if _G.starting_level == "":
-		change_map_autobuild("res://maps/ether.map")
+		chapter.current = chapter.all[0]
+		_load_next_map()
 	else:
-		chapter.current = chapter.all[1]
 		change_map(_G.starting_level)
 	
 
@@ -260,10 +260,7 @@ func timer_timeout() -> void:
 	_G.player.camera.screenshot()
 
 func switch_chapters() -> void:
-	match actual_stage:
-		0:
-			chapter.current = chapter.all[1]
-			stage = 0
+	chapter.current = chapter.all[actual_stage - 1]
 
 func update_rpc(update_timestamp : bool = false) -> void:
 	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)

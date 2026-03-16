@@ -19,7 +19,7 @@ const Y_DEATH_BOUNDARY : float = -20.0
 var target_pos : Vector3
 
 func _ready() -> void:
-	enemy.setup(essence_component)
+	enemy.setup(essence_component, chase_component)
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 1.0)
 	dash_query.damage = enemy.damage
 	light.light_color = enemy.color
@@ -34,7 +34,7 @@ func _physics_process(delta : float) -> void:
 	agent.debug_enabled = _G.debug_mode
 	
 	# Cache frequently used values
-	target_pos = _G.player.target.get_pos_multiplied(enemy.random_factor)
+	target_pos = _G.player.target.get_pos_multiplied(0.5 + enemy.random_factor)
 	
 	if global_position.y <= Y_DEATH_BOUNDARY:
 		essence_component.die()

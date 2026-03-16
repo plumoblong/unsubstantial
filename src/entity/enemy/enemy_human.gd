@@ -16,7 +16,7 @@ var player_can_control : bool
 var y_boundary : float
 
 func _ready() -> void:
-	enemy.setup(essence_component)
+	enemy.setup(essence_component, chase_component)
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)), 1.0)
 	shoot_component.config.fire_rate = randf_range(1.0, 1.25)
 	shoot_component.config.size_mult = randf_range(0.95, 1.2)

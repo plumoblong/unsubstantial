@@ -22,14 +22,10 @@ var _config : BulletSettings
 
 const BOUNCINESS_SPEED : float = 4.0
 
-var can_setup : bool = false
-
 func _ready() -> void:
-	can_setup = true
-	
+	show_anim()
 
 func setup(config : BulletSettings) -> void:
-	can_setup = true
 	shoot_component.shooted.connect(shooted)
 	_config = config
 
@@ -66,12 +62,6 @@ func _setup_scale() -> void:
 	
 func _physics_process(delta: float) -> void:
 	_update_animation(delta)
-	if not can_setup: return
-	sprite.no_depth_test = no_depth_test
-	sprite.top_level = true
-	_setup_animation()
-	_setup_texture()
-	_setup_scale()
 
 func shooted() -> void:
 	hide_anim()
