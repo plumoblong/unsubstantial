@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bj6vb0fg0oo6d" path="res://src/entity/shrine_time.gd" id="1_p8h3h"]
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="2_i0tsy"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="3_1crha"]
-[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://textures/pbr/bricks.png" id="4_p2fcv"]
+[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://material/pbr/bricks.png" id="4_p2fcv"]
 [ext_resource type="Texture2D" uid="uid://byajtgympq7cq" path="res://images/clock.png" id="5_ge0id"]
 
 [sub_resource type="Gradient" id="Gradient_lw7qi"]

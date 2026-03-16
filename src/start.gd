@@ -58,17 +58,13 @@ func _ready() -> void:
 	_T.start()
 
 func start() -> void:
-	_T.say("[center]unsubstantial Started.[/center]", Color.MAGENTA)
-	$Label.text = generate_splash()
-	$Label/Label2.text = $Label.text
-	
+	get_window().title = "unsubstantial " + _G.VERSION + ": " + generate_splash()
 	$ColorRect.color = Color(0.0, 0.0, 0.0, 0.0)
 	$AnimatedSprite2D.play("default")
 	$AudioStreamPlayer.play()
-	await get_tree().create_timer(1.0).timeout
-	_G.tween($ColorRect2, "color", Color.BLACK, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	await get_tree().create_timer(2.0).timeout
 	_G.tween($ColorRect, "color", Color.BLACK, 1.25, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	
 	await get_tree().create_timer(2.0).timeout
 	_G.change_scene("res://scene/menu.tscn")
 	

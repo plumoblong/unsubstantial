@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://d0i32cxmg3vfq"]
 
 [ext_resource type="Texture2D" uid="uid://b6r8llwchny4p" path="res://textures/world/bricks.png" id="1_l8ojs"]
-[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://textures/pbr/bricks.png" id="2_fxc7k"]
+[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://material/pbr/bricks.png" id="2_fxc7k"]
 
 [sub_resource type="Shader" id="Shader_fxc7k"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.5.1.stable's StandardMaterial3D.

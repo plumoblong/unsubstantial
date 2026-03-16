@@ -126,10 +126,9 @@ esc = NodePath("../EssenceComponent")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=1523390755]
 
-[node name="VisualBullet" parent="Node3D" unique_id=1261046222 node_paths=PackedStringArray("shoot_component", "velocity_object") instance=ExtResource("16_unauf")]
+[node name="VisualBullet" parent="Node3D" unique_id=1261046222 node_paths=PackedStringArray("shoot_component") instance=ExtResource("16_unauf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shoot_component = NodePath("../../ShootComponent")
-velocity_object = NodePath("../..")
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

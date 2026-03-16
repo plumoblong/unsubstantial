@@ -1,13 +1,10 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://dropeln5q4lkb"]
 
-[ext_resource type="Texture2D" uid="uid://gvw3bceksen1" path="res://textures/world/clouds.png" id="1_0535o"]
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ojx2"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_axlsg"]
 
 [resource]
-albedo_texture = ExtResource("1_0535o")
 metallic_specular = 0.0
 roughness = 0.7
 emission = Color(0, 0, 0.329412, 1)

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://dyimujolitkcg"]
+
+[ext_resource type="PackedScene" uid="uid://ds8ww7erhivlk" path="res://prefab/level/text_sign.tscn" id="1_0c83l"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_8uy8w"]
+
+[resource]
+script = ExtResource("1_8uy8w")
+scene_file = ExtResource("1_0c83l")
+classname = "text"
+description = "3D text for info"
+class_properties = {
+"scale": 1.0,
+"text": "Lorem Ipsum"
+}
+meta_properties = {
+"color": Color(0.3360004, 0.62911344, 3.85046e-07, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+metadata/_custom_type_script = "uid://cxsqwtsqd8w33"

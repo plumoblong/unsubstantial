@@ -9,6 +9,7 @@ var start_position : Vector3
 @export var min_distance : float = 5.0
 @export var y_distance : float = 3.0
 @export var update_rate : int = 4
+@export var concious_gain_time : float = 0.5
 
 var target_distance : float
 var target_direction : Vector3
@@ -23,11 +24,11 @@ var parent : Node3D
 func _ready() -> void:
 	parent = get_parent()
 	start_position = parent.global_position
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(concious_gain_time).timeout
 	concious = true
 
-func update(delta, target_position : Vector3, movement_component : MovementComponent, agent : NavigationAgent3D) -> void:
-	if Engine.get_physics_frames() % update_rate == 0: return
+func update(target_position : Vector3, movement_component : MovementComponent, agent : NavigationAgent3D) -> void:
+	if Engine.get_physics_frames() % update_rate == 0 or _G.game.enemies_disabled: return
 	var parent_pos : Vector3 = parent.global_position
 	target_distance = parent_pos.distance_to(target_position)
 	target_direction = parent_pos.direction_to(target_position)

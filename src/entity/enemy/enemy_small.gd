@@ -25,7 +25,7 @@ func essence_component_died(combo : bool) -> void:
 	enemy.handle_death()
 
 func essence_component_fractured(amount : int, i_time : float) -> void:
-	enemy.handle_fracture(amount, i_time, movement_component, light)
+	enemy.handle_fracture(amount, i_time, movement_component)
 
 func _physics_process(delta : float) -> void:
 	agent.debug_enabled = _G.debug_mode
@@ -44,7 +44,7 @@ func _physics_process(delta : float) -> void:
 	movement_component.can_jump = is_on_floor()
 	chase_component.enabled = player_can_control
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)
-	chase_component.update(delta, _G.player.global_position, movement_component, agent)
+	chase_component.update(_G.player.global_position, movement_component, agent)
 	
 	velocity = movement_component.vel * float(player_can_control)
 	

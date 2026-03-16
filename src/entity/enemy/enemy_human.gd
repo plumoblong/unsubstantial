@@ -27,7 +27,7 @@ func essence_component_died(combo : bool) -> void:
 	enemy.handle_death()
 
 func essence_component_fractured(amount : int, i_time : float) -> void:
-	enemy.handle_fracture(amount, i_time, movement_component, light)
+	enemy.handle_fracture(amount, i_time, movement_component)
 
 func _physics_process(delta : float) -> void:
 	agent.debug_enabled = _G.debug_mode
@@ -52,7 +52,7 @@ func _physics_process(delta : float) -> void:
 	if chase_component.attacking and player_can_control:
 		enemy.shoot_to_player(shoot_component, 1.5, 0.5)
 	
-	chase_component.update(delta, _G.player.target.get_pos_multiplied(0.3 + enemy.random_factor), movement_component, agent)
+	chase_component.update(_G.player.target.get_pos_multiplied(0.3 + enemy.random_factor), movement_component, agent)
 
 func query_area_entered(area : Area3D) -> void:
 	enemy.handle_query(area, essence_component, knockback_component)

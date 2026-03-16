@@ -50,13 +50,43 @@
 }
 // entity 5
 {
+"classname" "ent_spawn"
+"origin" "984 8 8"
+"enemy" "enemy_melee"
+}
+// entity 6
+{
+"classname" "ent_spawn"
+"origin" "1048 -56 8"
+"enemy" "enemy_melee"
+}
+// entity 7
+{
+"classname" "ent_spawn"
+"origin" "1048 72 8"
+"enemy" "enemy_melee"
+}
+// entity 8
+{
+"classname" "ent_spawn"
+"origin" "1128 -136 8"
+"enemy" "enemy_melee"
+}
+// entity 9
+{
+"classname" "ent_spawn"
+"origin" "1144 136 8"
+"enemy" "enemy_melee"
+}
+// entity 10
+{
 "classname" "func_group"
 "_tb_type" "_tb_layer"
 "_tb_name" "Walls"
 "_tb_id" "1"
 "_tb_layer_sort_index" "0"
 }
-// entity 6
+// entity 11
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -70,7 +100,7 @@
 ( 952 480 560 ) ( 952 112 -16 ) ( 952 112 560 ) world/player_essence [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 7
+// entity 12
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -84,7 +114,7 @@
 ( 952 -112 560 ) ( 952 -480 -16 ) ( 952 -480 560 ) world/player_essence [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 8
+// entity 13
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -98,7 +128,7 @@
 ( 1400 256 560 ) ( 1400 224 -16 ) ( 1400 224 560 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 9
+// entity 14
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -112,7 +142,7 @@
 ( 1400 -224 560 ) ( 1400 -256 -16 ) ( 1400 -256 560 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 10
+// entity 15
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -126,7 +156,7 @@
 ( 1432 224 560 ) ( 1432 -224 -16 ) ( 1432 -224 560 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 11
+// entity 16
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -140,7 +170,7 @@
 ( -336 80 560 ) ( -336 -80 288 ) ( -336 -80 560 ) world/player_essence [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 270 1 1
 }
 }
-// entity 12
+// entity 17
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -154,7 +184,7 @@
 ( -336 -80 560 ) ( -336 -480 -16 ) ( -336 -480 560 ) world/player_essence [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 13
+// entity 18
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -168,7 +198,7 @@
 ( -952 224 208 ) ( -952 -224 -16 ) ( -952 -224 208 ) world/player_essence [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 14
+// entity 19
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -182,7 +212,7 @@
 ( -952 -256 -16 ) ( -952 -256 560 ) ( -952 -224 560 ) special/skip [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 15
+// entity 20
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -196,7 +226,7 @@
 ( -1400 -224 -16 ) ( -1400 -224 560 ) ( -1400 224 560 ) world/player_essence [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 16
+// entity 21
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -210,7 +240,7 @@
 ( -952 224 -16 ) ( -952 224 560 ) ( -952 256 560 ) special/skip [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 17
+// entity 22
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -224,14 +254,14 @@
 ( -336 480 560 ) ( -336 80 -16 ) ( -336 80 560 ) world/player_essence [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 18
+// entity 23
 {
 "classname" "level_end"
 "origin" "1184 0 0"
 "angle" "180"
 "_tb_layer" "1"
 }
-// entity 19
+// entity 24
 {
 "classname" "map_opt"
 "origin" "0 0 52"
@@ -241,7 +271,7 @@
 "angle" "180"
 "_tb_layer" "1"
 }
-// entity 20
+// entity 25
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -255,7 +285,7 @@
 ( 336 688 560 ) ( 336 320 -16 ) ( 336 320 560 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 21
+// entity 26
 {
 "classname" "func_geo"
 "_tb_layer" "1"
@@ -269,7 +299,7 @@
 ( 336 -320 560 ) ( 336 -688 -16 ) ( 336 -688 560 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
 }
 }
-// entity 22
+// entity 27
 {
 "classname" "func_geo"
 "_tb_layer" "1"

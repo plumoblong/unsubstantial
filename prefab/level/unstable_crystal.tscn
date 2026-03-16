@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="4_44crx"]
 [ext_resource type="Texture2D" uid="uid://klhro6n8kkd" path="res://images/rotating_diamond.png" id="5_kcwi5"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="5_prynk"]
-[ext_resource type="Texture2D" uid="uid://38dfeuetui5x" path="res://textures/pbr/pillar.png" id="6_6nmy1"]
+[ext_resource type="Texture2D" uid="uid://38dfeuetui5x" path="res://material/pbr/pillar.png" id="6_6nmy1"]
 
 [sub_resource type="Curve" id="Curve_ynk6r"]
 _data = [Vector2(0, 0), 0.0, 15.040538, 0, 0, Vector2(0.17731419, 1), 1.8524764, 1.8524764, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

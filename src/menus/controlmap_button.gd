@@ -45,13 +45,13 @@ func _process(_delta : float) -> void:
 		disabled = false
 	
 	# Update key string
-	key_string = str(InputMap.action_get_events(action_name)[0].as_text())
+	key_string = _G.input_text_to_event("<" + action_name.to_upper() + ">")
 
 func _unhandled_input(event : InputEvent) -> void:
 	if capturing and event.is_pressed():
 		if event is InputEventKey:
 			_add_bind(event)
-		elif event is InputEventMouseButton:
+		if event is InputEventMouseButton:
 			event.double_click = false
 			_add_bind(event)
 			

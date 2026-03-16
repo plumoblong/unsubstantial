@@ -24,7 +24,6 @@ height = 3.2
 [sub_resource type="Resource" id="Resource_y5ngk"]
 script = ExtResource("8_hrcbw")
 size_mult = 2.0
-fire_rate = 0.75
 shots = 2
 inaccuracy = 0.2
 spread_angle = 20.0
@@ -33,7 +32,6 @@ bounciness = 1.1
 init_speed = 36.0
 fall_speed = 0.2
 life_time = 2.0
-parried_speed_multiplier = 1.25
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x505i"]
@@ -63,8 +61,6 @@ script = ExtResource("2_y5ngk")
 [node name="ChaseComponent" type="Node" parent="." unique_id=106599417 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_snofy")
 movehelper = NodePath("../MoveBackHelper")
-agro_distance = 30.0
-attack_distance = 25.0
 min_distance = 2.0
 y_distance = 12.0
 
@@ -82,9 +78,10 @@ script = ExtResource("6_wl17c")
 config = SubResource("Resource_y5ngk")
 visual_bullet = NodePath("../Node3D/VisualBullet")
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=506237839 node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=1250397561 node_paths=PackedStringArray("hit_sfx", "nav_agent")]
 script = ExtResource("13_y5ngk")
 hit_sfx = NodePath("../HitSFX")
+nav_agent = NodePath("../GroundEnemyNav")
 essence = 250.0
 essence_death_threshold = 30.0
 damage = 75.0
@@ -127,10 +124,9 @@ esc = NodePath("../EssenceComponent")
 [node name="Node3D" type="Node3D" parent="." unique_id=838399603]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="VisualBullet" parent="Node3D" unique_id=1261046222 node_paths=PackedStringArray("shoot_component", "velocity_object") instance=ExtResource("16_yg07u")]
+[node name="VisualBullet" parent="Node3D" unique_id=1261046222 node_paths=PackedStringArray("shoot_component") instance=ExtResource("16_yg07u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shoot_component = NodePath("../../ShootComponent")
-velocity_object = NodePath("../..")
 
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]

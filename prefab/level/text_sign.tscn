@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ds8ww7erhivlk"]
+
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="1_7tjft"]
+[ext_resource type="Script" uid="uid://dj7ke8somyj4i" path="res://src/trenchbroom/text_sign.gd" id="1_41no4"]
+
+[node name="TextSign" type="Label3D" unique_id=1582568912]
+pixel_size = 0.015
+billboard = 1
+double_sided = false
+texture_filter = 2
+text = "Press Space to jump!"
+font = ExtResource("1_7tjft")
+font_size = 16
+outline_size = 0
+vertical_alignment = 2
+script = ExtResource("1_41no4")

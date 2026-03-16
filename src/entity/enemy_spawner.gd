@@ -36,14 +36,14 @@ func _func_godot_build_complete() -> void:
 	# Cache properties
 	is_one_shot = func_godot_properties["one_shot"]
 	is_counted_enemy = func_godot_properties["counted_enemy"]
-	spawn_delay = func_godot_properties["spawn_delay"]
+	spawn_delay = func_godot_properties["spawn_delay"] if func_godot_properties["spawn_delay"] != 0.0 else randf_range(0.0, 0.75)
 	enemy_name = func_godot_properties["enemy"]
 	
 	# Preload enemy resource
 	enemy_res = load(ENEMY_PATH_PREFIX + enemy_name + ENEMY_PATH_SUFFIX)
 
 func spawn() -> void:
-	if _G.game.enemies_disabled or spawned: return
+	if spawned: return
 	if _G.game.enemies.get_child_count() >= ENEMY_CAP: return
 	if raycast.is_colliding(): return
 	

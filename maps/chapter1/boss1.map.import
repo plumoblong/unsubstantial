@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://b2x0uf3a5ctf8"
+path="res://.godot/imported/boss1.map-55f4aaae591ff8b095c5ab6f69b8d434.tres"
+
+[deps]
+
+source_file="res://maps/chapter1/boss1.map"
+dest_files=["res://.godot/imported/boss1.map-55f4aaae591ff8b095c5ab6f69b8d434.tres"]
+
+[params]
+

@@ -56,6 +56,7 @@ shapes/collision/draw_2d_outlines=false
 window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/resizable=false
+window/size/sharp_corners=true
 window/size/minimize_disabled=true
 window/size/maximize_disabled=true
 window/size/window_width_override=960
@@ -312,6 +313,8 @@ world/map_use_async_iterations=false
 
 [physics]
 
+common/max_physics_steps_per_frame=1
+common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/velocity_steps=5
 common/physics_interpolation=true

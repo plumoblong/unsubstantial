@@ -83,6 +83,8 @@ const PH3D : PackedScene = preload("res://prefab/debug/sprite_placeholder.tscn")
 var lowpass_enabled : bool = false
 var time_scale : Array[float] = [1.0, 1.0]
 
+var _tweens: Dictionary[Object, Dictionary] = {}  # Object -> Dictionary (property -> Tween)
+
 @onready var version_label: Label = $Version
 @onready var fps_label: Label = $FPS
 @onready var debug_node: Node2D = $Debug
@@ -214,11 +216,22 @@ func change_window_size(size : int) -> void:
 	_cached_window.move_to_center()
 
 @warning_ignore("untyped_declaration")
-func tween(node : Object, property : String, value, length : float = 1.0, trans : int = Tween.TRANS_LINEAR, easing : int = Tween.EASE_IN_OUT) -> Tween:
+
+
+func tween(node: Object, property: String, value: Variant, length: float = 1.0, trans: int = Tween.TRANS_LINEAR, easing: int = Tween.EASE_IN_OUT) -> Tween:
+	if _tweens.has(node) and _tweens[node].has(property):
+		var old: Tween = _tweens[node][property]
+		if old and old.is_running():
+			old.kill()
+	
 	var t := get_tree().create_tween()
 	t.set_trans(trans)
 	t.set_ease(easing)
 	t.tween_property(node, property, value, length)
+	
+	if not _tweens.has(node):
+		_tweens[node] = {}
+	_tweens[node][property] = t
 	return t
 
 func change_fullscreen() -> void:
@@ -376,7 +389,7 @@ func string_to_input_event(text: String) -> InputEvent:
 		event.pressed = "pressed=true" in text
 		event.position = _get_vector2(text, "position")
 		event.button_mask = _get_int(text, "button_mask")
-		event.double_click = "double_click=false" in text
+		event.double_click = "double_click=true" in text
 		return event
 	
 	if "InputEventKey" in text:
@@ -384,7 +397,7 @@ func string_to_input_event(text: String) -> InputEvent:
 		event.keycode = _get_int(text, "keycode")
 		event.pressed = "pressed=true" in text
 		event.echo = "echo=true" in text
-		event.physical_keycode = "physical=true" in text
+		event.physical_keycode = _get_int(text, "physical_keycode")
 		return event
 	
 	return null
@@ -418,3 +431,54 @@ func create_3d_placeholder(position : Vector3 = Vector3.ZERO, color : Color = Co
 	p.pixel_size = 0.06 * scale
 	p.modulate = color
 	get_tree().current_scene.add_child(p)
+	
+func input_text_to_event(input: String = "Press <JUMP> to jump!") -> String:
+	# Regex to find all patterns
+	var regex : RegEx = RegEx.new()
+	regex.compile("<([A-Z0-9_]+)>")
+	
+	var result : String = input
+	
+	for match in regex.search_all(input):
+		var placeholder : String = match.get_string(0)  # e.g. "<JUMP>"
+		var action_suffix : String = match.get_string(1)  # e.g. "JUMP"
+		
+		# Convert KEY_JUMP -> key_jump (Godot action names are typically lowercase)
+		var action_name : String = action_suffix.to_lower()
+		
+		if InputMap.has_action(action_name):
+			var events : Array[InputEvent] = InputMap.action_get_events(action_name)
+			if events.size() > 0:
+				var key_label : String
+				if events[0] is InputEventMouseButton:
+					key_label = _shorten_mousebutton(events[0].as_text())
+				else: 
+					key_label = events[0].as_text()
+				result = result.replace(placeholder, key_label)
+			else:
+				result = result.replace(placeholder, "Unbound")
+		else:
+			result = result.replace(placeholder, "UNKNOWN")
+	
+	return result
+
+func _shorten_mousebutton(input : String) -> String:
+	var result : String = input
+	match input:
+		"Left Mouse Button":
+			result = "LMB"
+		"Right Mouse Button":
+			result = "RMB"
+		"Middle Mouse Button":
+			result = "Mouse 3"
+		"Mouse Wheel Down":
+			result = "Scroll Down"
+		"Mouse Wheel Up":
+			result = "Scroll Up"
+		"Mouse Thumb Button 1":
+			result = "Mouse 4"
+		"Mouse Thumb Button 2":
+			result = "Mouse 5"
+		_:
+			result = input
+	return result

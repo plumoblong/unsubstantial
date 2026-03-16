@@ -8,7 +8,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath(".:scale_mult")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -24,12 +24,12 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath(".:scale_mult")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.03333336, 0.2),
-"transitions": PackedFloat32Array(-2, 1),
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
 }
@@ -44,7 +44,6 @@ _data = {
 script = ExtResource("1_oko88")
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=1511761162]
-top_level = true
 sorting_offset = 5.0
 visibility_range_begin = 1.0
 visibility_range_begin_margin = 0.5

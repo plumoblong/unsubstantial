@@ -35,7 +35,7 @@ func query_area_entered(area : Area3D) -> void:
 		if sprite.modulate != Color.WHITE: 
 			esc.fracture(area.damage, area.crit)
 			if area.get_parent() is Player: area.get_parent().hud.hitmark()
-			knock.knock(area.get_parent().global_position, area.knockback_strength, area.knockback_y_strength)
+			knock.knock(area.get_parent().global_position, area.knockback_strength)
 			if area is Bullet: area.hit()
 
 func essence_component_fractured(amount : int) -> void:

@@ -119,6 +119,8 @@ func _seek_player() -> Vector3:
 func imma_bounce() -> void:
 	if not raycast.is_colliding():
 		direction = -direction
+		speed *= config.bounciness
+		world_velocity.y *= 0.5
 	else:
 		var normal: Vector3 = raycast.get_collision_normal()
 		direction = _reflect_vector(direction, normal)
@@ -132,13 +134,15 @@ func _reflect_vector(vector: Vector3, normal: Vector3) -> Vector3:
 
 func hit() -> void:
 	if not active: return
-	
 	impact_sfx.play()
-	
-	if config.pierces > 0:
-		_handle_pierce()
+	if config.pierces > 0 or config.bounciness > 0.0:
+		if config.pierces > 0:
+			_handle_pierce()
+		if config.bounciness > 0.0:
+			imma_bounce()
 	else:
 		despawn()
+		
 
 func _handle_pierce() -> void:
 	destroy_object_init(config.destroy_object, config.destroy_object_properties)
@@ -149,9 +153,9 @@ func _handle_pierce() -> void:
 	#await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME / 1000.0).timeout
 	#collision_shape.disabled = false
 
-func handle_destroy(body: Node3D) -> void:
+func handle_destroy() -> void:
 	if config.spectral: return
-	if config.bounciness != 0.0:
+	if config.bounciness > 0.0:
 		imma_bounce()
 	else:
 		despawn()
@@ -181,7 +185,7 @@ func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 
 func body_entered(body: Node3D) -> void:
 	if body is StaticBody3D:
-		handle_destroy(body)
+		handle_destroy()
 
 func seeker_body_entered(body: Node3D) -> void:
 	if body is not CharacterBody3D or config.homing_on_player:

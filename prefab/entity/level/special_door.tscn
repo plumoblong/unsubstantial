@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqhd3kqev377"]
 
 [ext_resource type="Script" uid="uid://bp26va58prd7w" path="res://src/entity/special_door.gd" id="1_6au0t"]
-[ext_resource type="Texture2D" uid="uid://drbe0oicayb5l" path="res://textures/pbr/box.png" id="1_xqh1w"]
+[ext_resource type="Texture2D" uid="uid://drbe0oicayb5l" path="res://material/pbr/box.png" id="1_xqh1w"]
 [ext_resource type="Material" uid="uid://djs0htkjng54b" path="res://material/white.tres" id="2_l82y4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34yd5"]

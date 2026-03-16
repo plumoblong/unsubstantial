@@ -58,11 +58,9 @@ shape = SubResource("CapsuleShape3D_asf4w")
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1664198255]
 script = ExtResource("2_cqcwn")
-y_multiplier = 1.0
 
-[node name="ChaseComponent" type="Node" parent="." unique_id=1076414689 node_paths=PackedStringArray("movebackhelper")]
+[node name="ChaseComponent" type="Node" parent="." unique_id=1076414689]
 script = ExtResource("3_xvw1s")
-movebackhelper = NodePath("../MoveBackHelper")
 agro_distance = 25.0
 attack_distance = 17.0
 min_distance = 10.0

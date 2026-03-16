@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://h5dvk7jgd8l6" path="res://src/entity/map/shrine_essence.gd" id="1_fcnju"]
 [ext_resource type="Texture2D" uid="uid://t4dr1lrnw325" path="res://textures/world/essence2.png" id="2_3c0pd"]
 [ext_resource type="Texture2D" uid="uid://bwroblawsvlv1" path="res://textures/world/poison.png" id="3_yuix0"]
-[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://textures/pbr/bricks.png" id="4_5e53h"]
+[ext_resource type="Texture2D" uid="uid://b6vlg05m2huws" path="res://material/pbr/bricks.png" id="4_5e53h"]
 [ext_resource type="Texture2D" uid="uid://dim0sfgksysnb" path="res://images/entity/shrine.png" id="5_cjbp1"]
 [ext_resource type="FontFile" uid="uid://c5kld6aoka722" path="res://font/nokiafc22.ttf" id="6_5ernt"]
 

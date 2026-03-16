@@ -2,6 +2,7 @@ extends Component
 class_name EnemyComponent
 
 @onready var sprite : Sprite3D = get_parent().get_node("Sprite3D")
+@onready var light : OmniLight3D = get_parent().get_node("OmniLight3D")
 
 @export var hit_sfx : AudioStreamPlayer3D
 @export var nav_agent : NavigationAgent3D
@@ -46,11 +47,10 @@ func setup(esc : EssenceComponent) -> void:
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
 	color = Color.from_hsv(randf_range(0.00, 1.00), randf_range(0.5, 1.0), randf_range(0.6, 1.0))
-	
+	pulse(Color(1.25, 1.25, 1.25, 0.0), 0.5, 0.5, Color(1.25, 1.25, 1.25, 1.0), Tween.TRANS_SINE)
 	esc.max_essence = essence
 	esc.essence = essence
 	esc.die_threshold = essence_death_threshold
-	sprite.modulate = color
 	esc.enabled = true
 	_T.say(str(get_parent()) + " initialized enemy setup.", Color.YELLOW, true)
 	if not use_difficulty_factor: return
@@ -59,14 +59,10 @@ func setup(esc : EssenceComponent) -> void:
 	esc.max_essence *= _G.game.enemy_multiplier
 	#get_parent().scale *= clamp(get_difficulty_factor(0.05), 1.0, 1.5)
 	
-func handle_fracture(amount : int, i_time : float, mov : MovementComponent, light : Light3D) -> void:
+func handle_fracture(amount : int, i_time : float, mov : MovementComponent) -> void:
 	if mov is MovementComponent:
 		mov.vel *= on_hit_velocity_loss
-	sprite.modulate = Color.WHITE
-	#_G.game.create_popup_text(global_position, str(amount), _G.player.stats.bullet.color, crit)
-	_G.tween(sprite, "modulate", color, 0.25)
-	_G.tween(light, "light_color", color, i_time)
-	#_G.tween(essence_component, "defense", 1.0, i_time)
+	pulse(Color.WHITE, 0.25, i_time * 10.0)
 	hit_sfx.pitch_scale = randf_range(0.9, 1.15)
 	hit_sfx.play()
 
@@ -80,7 +76,8 @@ func handle_query(area : Area3D, esc : EssenceComponent, knock : KnockbackCompon
 		if damage_mult != 0.0: esc.fracture(area.damage * damage_mult, area.crit, area.stun_time)
 		var knock_pos : Vector3 = area.parent.global_position if area.knockback_from_parent_pos else area.global_position
 		if knock_mult != 0.0: knock.knock(knock_pos, area.knockback_strength * knock_mult)
-		if area is Bullet: area.hit()
+		if area is Bullet: 
+			area.hit()
 		if area.parent is Player: _G.player.hud.hitmark()
 		
 		
@@ -111,3 +108,9 @@ func shoot_to_player(shoot_component : ShootComponent, target_mult : float = 1.5
 
 func get_difficulty_factor(mult : float = 1.0) -> float:
 	return 1.0 + ((_G.game.enemy_multiplier - 1.0) * mult)
+
+func pulse(pulse_color : Color = Color.WHITE, sprite_time : float = 0.25, light_time : float = 0.2, mult_color : Color = Color.WHITE, trans : Tween.TransitionType = Tween.TRANS_CIRC) -> void:
+	sprite.modulate = pulse_color * mult_color
+	light.light_color = pulse_color * mult_color
+	_G.tween(sprite, "modulate", color, sprite_time, Tween.TRANS_CIRC, Tween.EASE_IN)
+	_G.tween(light, "light_color", color, light_time, Tween.TRANS_CIRC, Tween.EASE_IN)

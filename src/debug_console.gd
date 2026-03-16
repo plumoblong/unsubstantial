@@ -242,6 +242,9 @@ func execute_command(cmd: String, args: Array) -> void:
 		"viewscale":
 			var scale : float = float(args[0]) if args.size() > 0 else 1.0
 			get_tree().root.content_scale_factor = scale
+		"spawn_enemy":
+			var enemy : String = "res://prefab/entity/enemy/" + str(args[0] + ".tscn")
+			
 		"print_to_chat":
 			_c_print_to_chat = not _c_print_to_chat
 		_:
@@ -257,6 +260,14 @@ func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) 
 	if not _validate_game(): return
 	if not _c_print_to_chat: return
 	_G.game.chat.add_message("TUX: " + str(log))
+
+func set_stat(value, stat : StringName = "actual_atkspd") -> void:
+	if not _validate_game(): return
+	if not _validate_player(): return
+	
+	_G.player.stats.set(stat, value)
+	
+	say("Set stat " + stat + " to " + str(_G.player.get(stat)))
 
 func help(page : int = -1) -> void:
 	match page:

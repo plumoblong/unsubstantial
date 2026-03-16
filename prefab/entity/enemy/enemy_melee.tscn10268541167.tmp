@@ -49,9 +49,7 @@ movement_component = NodePath("../MovementComponent")
 script = ExtResource("3_olih5")
 movehelper = NodePath("../MoveBackHelper")
 agro_distance = 30.0
-attack_distance = 12.0
 min_distance = 0.0
-concious_gain_time = 1.5
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1193077039]
 script = ExtResource("4_5hjl1")
@@ -64,10 +62,10 @@ script = ExtResource("5_57pmb")
 
 [node name="DashComponent" type="Node" parent="." unique_id=1720225600 node_paths=PackedStringArray("knock_component")]
 script = ExtResource("6_ei8lu")
-dash_speed = 3.0
-dash_time = 0.3
-cooldown = 1.8
-end_velocity_multiplier = 0.75
+dash_speed = 6.0
+cooldown = 1.6
+delay = 0.3
+end_velocity_multiplier = 1.0
 knock_component = NodePath("../KnockbackComponent")
 metadata/_custom_type_script = "uid://c3klywbeud1cv"
 
@@ -76,7 +74,6 @@ script = ExtResource("7_awu5q")
 hit_sfx = NodePath("../HitSFX")
 essence = 150.0
 essence_death_threshold = 20.0
-damage = 75.0
 on_hit_velocity_loss = 0.75
 metadata/_custom_type_script = "uid://tlvl68soe85"
 
@@ -85,7 +82,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("7_ei8lu")
 damage = 200
-knockback_strength = 5.0
+knockback_strength = 3.0
 die_reason = "You got punched too hard"
 
 [node name="Hitbox" type="CollisionShape3D" parent="DashQuery" unique_id=1195568939]

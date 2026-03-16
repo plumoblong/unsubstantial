@@ -5,10 +5,10 @@ class_name DashComponent
 @export var dash_time : float = 1.0
 @export var cooldown : float = 1.25
 @export var jump_height : float = 0.25
-@export var dash_time_tresh : float = 4.0
 @export var auto_reset : bool = true
 @export var delay : float = 0.0
 @export var end_velocity_multiplier : float = 0.4
+@export var knock_component : KnockbackComponent
 
 var can_dash : bool = true
 var dashing : bool = false
@@ -53,22 +53,13 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 		_dash_player_component(mc)
 
 func _dash_movement_component(mc : MovementComponent, direction : Vector3) -> void:
-	mc.friction = mc.floor_friction * 3.0
-	var old_speed : float = mc.speed
-	mc.speed = dash_speed
-	
-	if direction == Vector3.ZERO:
-		mc.direction = -parent.transform.basis.z
-	else:
-		mc.direction = direction
-	
-	if not parent.is_on_floor():
-		mc.vel.y = mc.jump_speed * jump_height
-	
-	await tree.create_timer(dash_time / 10.0).timeout
+	dashing = true
+	await tree.create_timer(delay).timeout
+	mc.vel = Vector3.ZERO
+	knock_component.knock(parent.global_position - direction, dash_speed)
+	mc.vel *= end_velocity_multiplier
 	just_dashed = false
-	mc.speed = old_speed
-	await tree.create_timer(dash_time / dash_time_tresh).timeout
+	await tree.create_timer(dash_time - delay).timeout
 	dashing = false
 
 func _dash_player_component(mc : PlayerMoveComponent) -> void:
