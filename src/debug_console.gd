@@ -25,6 +25,7 @@ var _c_print_to_chat : bool = false
 
 func start() -> void:
 	# Start with console hidden offscreen
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	if console_panel:
 		console_panel.position.y = SLIDE_OFFSET
 	hide()
@@ -93,6 +94,7 @@ func _process(_delta: float) -> void:
 	
 func show_console() -> void:
 	show()
+	get_tree().paused = true
 	
 	# Kill any existing tween
 	if _tween and _tween.is_valid():
@@ -112,6 +114,7 @@ func show_console() -> void:
 func hide_console() -> void:
 	input.release_focus()
 	input.text = ""
+	get_tree().paused = false
 	if _tween and _tween.is_valid():
 		_tween.kill()
 	

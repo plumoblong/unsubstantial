@@ -56,7 +56,7 @@ func _physics_process(delta : float) -> void:
 	hit_sfx.pitch_scale = clamp(hit_sfx.pitch_scale, 1.0, 1.5)
 	
 	velocity = movement_component.vel * float(_G.player.can_control)
-	if _G.player.can_control and _G.player.is_on_floor() and chase_component.attacking:
+	if _G.player.can_control and chase_component.attacking:
 		if dash_component.can_dash and not dash_component.dashing:
 			dash_component.dash(movement_component, global_position.direction_to(target_pos))
 			shoot_sfx.play()

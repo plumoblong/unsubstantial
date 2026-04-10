@@ -225,6 +225,7 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 	_G.flare_screen(Color(1.0, 0.0, 0.0, 0.7), Color.TRANSPARENT, time)
 	
 	if amount > 5:
+		
 		hit_sfx.pitch_scale = randf_range(0.95, 1.05)
 		hit_sfx.play()
 		camera.tween_camera_fov(15.0, 0.5)
@@ -253,7 +254,7 @@ func dash_component_can_dash_now() -> void:
 func update_motionblur() -> void:
 	const SMOOTHING : float = 0.95
 	camera.mbcam.fov = lerpf(camera.mbcam.fov, camera.fov, SMOOTHING)
-	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z, camera.tilt, SMOOTHING)
+	camera.mbcam.rotation_degrees.z = lerpf(camera.mbcam.rotation_degrees.z, camera.rotation_degrees.z, SMOOTHING)
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x, camera.global_rotation.x, SMOOTHING)
 	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y, camera.global_rotation.y, SMOOTHING)
 	camera.mbcam.global_position = lerp(camera.mbcam.global_position, camera.global_position, SMOOTHING)

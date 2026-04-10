@@ -1,60 +1,90 @@
 [gd_scene format=3 uid="uid://xgw0svibvib5"]
 
 [ext_resource type="Script" uid="uid://fcqb71ftxksj" path="res://src/entity/boss/father.gd" id="1_gmp5e"]
+[ext_resource type="PackedScene" uid="uid://1g5k6hjkl8sb" path="res://prefab/entity/config/ground_enemy_nav.tscn" id="2_gbp8n"]
 [ext_resource type="Texture2D" uid="uid://c2c36kjopukcv" path="res://images/entity/boss/father.png" id="2_gxmgp"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="3_tf6da"]
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="4_frkph"]
-[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="5_o3ujd"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="6_gbp8n"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="7_72ee0"]
-[ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="8_gxmgp"]
+[ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="9_72ee0"]
+[ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="10_hv0l1"]
+[ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="10_wlgmv"]
+[ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="11_jq1by"]
+[ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="11_wlgmv"]
+[ext_resource type="PackedScene" uid="uid://b6mvsyko7mqr3" path="res://prefab/animation/visual_bullet.tscn" id="12_jq1by"]
+[ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="13_wlgmv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
-radius = 2.8886719
-height = 12.194492
+radius = 2.0
+height = 11.0
 
-[sub_resource type="Resource" id="Resource_t7657"]
+[sub_resource type="Resource" id="Resource_hv0l1"]
 script = ExtResource("6_gbp8n")
-damage = 300
-fire_rate = 40.0
-homing_on_player = true
-init_speed = 16.0
-fall_speed = 0.0
-life_time = 40.0
-parried_speed_multiplier = 1.5
+size_mult = 2.0
+fire_rate = 1.5
 metadata/_custom_type_script = "uid://0l4omg7gk8m8"
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=1021826300]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gbp8n"]
+radius = 3.0
+height = 11.0
+
+[node name="Father" type="CharacterBody3D" unique_id=1021826300]
+collision_layer = 4
+collision_mask = 4
+slide_on_ceiling = false
 script = ExtResource("1_gmp5e")
 healthbar_name = "Father"
-healthbar_color = Color(0.733333, 0.435294, 0.552941, 1)
 healthbar_description = "Royal Guard"
+phases = Dictionary[String, int]({
+"dash": 8,
+"nothing": 4,
+"shoot": 8,
+"stomp": 2
+})
+phase_times = Dictionary[String, float]({
+"dash": 7.0,
+"nothing": 1.5,
+"shoot": 5.0,
+"stomp": 3.0
+})
 
-[node name="CSGBox3D" type="CollisionShape3D" parent="." unique_id=1389474457]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.69783235, 0)
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=901221696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 4.0
+light_volumetric_fog_energy = 0.0
+omni_range = 15.0
+
+[node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_gbp8n")]
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=1389474457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
 shape = SubResource("CapsuleShape3D_nx0w2")
 
-[node name="Body" type="Sprite3D" parent="." unique_id=601717314]
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=601717314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+flip_h = true
 modulate = Color(0.91669, 0.204707, 0.569534, 1)
 pixel_size = 0.07
-billboard = 1
 texture_filter = 0
 texture = ExtResource("2_gxmgp")
 hframes = 2
 
 [node name="Crown" type="Sprite3D" parent="." unique_id=1345565727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+flip_h = true
 pixel_size = 0.07
-billboard = 1
 texture_filter = 0
 texture = ExtResource("2_gxmgp")
 hframes = 2
 frame = 1
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=901221696]
-light_color = Color(1, 0, 0, 1)
-light_energy = 4.0
-light_volumetric_fog_energy = 0.0
-omni_range = 16.6883
+[node name="ShootComponent" type="Node" parent="." unique_id=964248474 node_paths=PackedStringArray("visual_bullet")]
+script = ExtResource("4_frkph")
+config = SubResource("Resource_hv0l1")
+visual_bullet = NodePath("../VisualBullet")
+metadata/_custom_type_script = "uid://dtqit2g6rb6yy"
 
 [node name="EssenceComponent" type="Node" parent="." unique_id=1410805633]
 script = ExtResource("3_tf6da")
@@ -63,22 +93,76 @@ max_essence = 2500
 die_threshold = 50
 metadata/_custom_type_script = "uid://dvrmix7xqorev"
 
-[node name="ShootComponent" type="Node" parent="." unique_id=964248474]
-script = ExtResource("4_frkph")
-config = SubResource("Resource_t7657")
-metadata/_custom_type_script = "uid://dtqit2g6rb6yy"
+[node name="KnockbackComponent" type="Node" parent="." unique_id=1788303977 node_paths=PackedStringArray("movement_component")]
+script = ExtResource("10_wlgmv")
+movement_component = NodePath("../MovementComponent")
+multiplier = 0.75
+metadata/_custom_type_script = "uid://baw7jrp64qlgb"
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=592160326]
+[node name="MovementComponent" type="Node" parent="." unique_id=673285839]
+script = ExtResource("11_jq1by")
+speed = 20.0
+speed_up = 3.0
+metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
+
+[node name="ChaseComponent" type="Node" parent="." unique_id=2146846342 node_paths=PackedStringArray("movehelper")]
+script = ExtResource("9_72ee0")
+movehelper = NodePath("../MoveBackHelper")
+agro_distance = 100.0
+attack_distance = 100.0
+min_distance = 16.0
+update_rate = 2
+concious_gain_time = 2.0
+
+[node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("7_72ee0")
-essence = 1500.0
-on_hit_velocity_loss = 1.0
-xp_payout = 50
-xp_radius = 6.0
-randomize_scale = 0.0
+hit_sfx = NodePath("../HitSFX")
+essence = 2000.0
+essence_death_threshold = 50.0
+on_hit_velocity_loss = 0.1
+xp_payout = 25
+xp_radius = 5.0
+randomize_scale = 1.0
 spawn_ent_on_death = true
-ent_max = 5
+ent_paths = Array[String](["res://prefab/entity/enemy/enemy.tscn", "res://prefab/entity/enemy/enemy_melee.tscn", "res://prefab/entity/enemy/guardian.tscn"])
+ent_spawn_radius = 5.0
+ent_max = 4
 ent_min = 3
+ent_count_as_enemy = false
+ent_spawn_offset = Vector3(0, 1, 0)
 metadata/_custom_type_script = "uid://tlvl68soe85"
 
-[node name="Player" parent="." unique_id=1499817254 instance=ExtResource("8_gxmgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, -3, -4.4313345)
+[node name="MoveBackHelper" parent="." unique_id=984334338 instance=ExtResource("10_hv0l1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+
+[node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=2146774221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+stream = ExtResource("13_wlgmv")
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="." unique_id=330525391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+stream = ExtResource("11_wlgmv")
+bus = &"SFX1"
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="VisualBullet" parent="." unique_id=1261046222 node_paths=PackedStringArray("shoot_component") instance=ExtResource("12_jq1by")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, -1.5)
+shoot_component = NodePath("../ShootComponent")
+
+[node name="Query" type="Area3D" parent="." unique_id=945758367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6, 0)
+collision_layer = 6
+collision_mask = 6
+
+[node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=1406519884]
+shape = SubResource("CapsuleShape3D_gbp8n")
+
+[node name="BossTimer" type="Timer" parent="." unique_id=820409056]
+process_callback = 0
+wait_time = 10.0
+
+[connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
+[connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
+[connection signal="area_entered" from="Query" to="." method="query_area_entered"]

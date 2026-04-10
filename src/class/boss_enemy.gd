@@ -1,23 +1,43 @@
 extends CharacterBody3D
 class_name BossEnemy
 
+@onready var essence_component : EssenceComponent = $EssenceComponent
+@onready var timer : Timer = $BossTimer
+
 @export var healthbar_enabled : bool = true
 @export var healthbar_name : String = "Boss"
-@export var healthbar_color : Color = Color.RED
 @export var healthbar_description : String = "yes"
 
-@export var phases : int = 2
-var phase : int = 0
+var healthbar : BossBar
+
+@export var phases : Dictionary[String, int]
+@export var phase_times : Dictionary[String, float]
+var current_phase : String
 
 const HB_FILE = preload("res://prefab/menus/bossbar.tscn")
 
-signal phase_changed
 signal boss_defeated
+signal phase_changed
 
-func _ready() -> void:
+func boss_setup() -> void:
+	
+	timer.timeout.connect(_change_phase)
+	essence_component.died.connect(_boss_defeated)
+	
+	_change_phase()
+	
 	if healthbar_enabled:
-		var hb = HB_FILE.instantiate()
-		
+		var hb : BossBar = HB_FILE.instantiate()
+		healthbar = hb
 		add_child(hb)
-		hb.name = healthbar_name
-		hb.color = healthbar_color
+		healthbar.esc = essence_component
+		healthbar.boss_name = healthbar_name
+
+func _change_phase() -> void:
+	current_phase = _G.choose_from_chance(phases)
+	timer.start(phase_times[current_phase])
+	_T.say(name + " has changed phase to " + current_phase)
+	phase_changed.emit()
+
+func _boss_defeated() -> void:
+	boss_defeated.emit()

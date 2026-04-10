@@ -2,8 +2,6 @@ shader_type canvas_item;
 
 uniform vec2 motion = vec2(0.0);
 uniform float gamma : hint_range(0.0, 2.0, 0.05) = 1.0;
-// uniform bool use_sample_texture = false;
-uniform bool enable_filter = true;
 uniform sampler2D screen_texture : hint_screen_texture, repeat_enable, filter_nearest;
 uniform float speed : hint_range(0.0, 256.0, 4.0) = 32;
 //uniform float alpha : hint_range(1.0, 100.0, 0.5) = 2.0;
@@ -96,19 +94,15 @@ void fragment(){
 	vec4 init_tex = texture(screen_texture, SCREEN_UV);
 	vec3 final_color;
 
-	if (enable_filter) {
-		vec2 screen_pos = SCREEN_UV / SCREEN_PIXEL_SIZE;
-		float dither = dither_pattern(screen_pos);
-		// Posterize in one operation per channel
-		vec3 scaled = init_tex.rgb * bit_depth;
-		vec3 posterized = clamp(floor(scaled + (dither) * (dither_size / bit_depth)), 0.0, bit_depth) / bit_depth;
-		float time_offset = TIME * speed * 0.015625; // 1/64 precomputed
-		vec3 tex = rgb_to_hsv(posterized);
-		tex.x += mod(posterized.b, 1.0) + time_offset;
-		final_color = mix(posterized, hsv_to_rgb(tex), power);
-	} else {
-		final_color = init_tex.rgb;
-	}
+	vec2 screen_pos = SCREEN_UV / SCREEN_PIXEL_SIZE;
+	float dither = dither_pattern(screen_pos);
+	// Posterize in one operation per channel
+	vec3 scaled = init_tex.rgb * bit_depth;
+	vec3 posterized = clamp(floor(scaled + (dither) * (dither_size / bit_depth)), 0.0, bit_depth) / bit_depth;
+	float time_offset = ( TIME * speed ) * 0.01;  
+	vec3 tex = rgb_to_hsv(posterized);
+	tex.x = mod(tex.x + time_offset, 1.0);
+	final_color = mix(posterized, hsv_to_rgb(tex), power);
 
 	COLOR.rgb = gamma_correct(final_color);
 	COLOR.a = init_tex.a;

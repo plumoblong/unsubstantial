@@ -17,7 +17,7 @@ use_auto_build = true
 
 [node name="Builder" type="Node3D" parent="." unique_id=301340131]
 script = ExtResource("2_tyebk")
-local_map_file = "res://maps/chapter1/map3.map"
+local_map_file = "res://maps/special/treasure1.map"
 map_settings = ExtResource("3_tldyv")
 build_flags = 2
 

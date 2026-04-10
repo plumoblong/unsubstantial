@@ -1,8 +1,6 @@
 extends Resource
 class_name BulletSettings
 
-@export var bullet_scene : PackedScene = preload("res://prefab/entity/bullet.tscn")
-@export_subgroup("cosmetic")
 @export var color : Color = Color.WHITE
 @export var sprite_override : Texture2D
 @export var size_mult : float = 1.0
@@ -39,7 +37,20 @@ class_name BulletSettings
 @export var init_speed : float = 48.0
 @export var fall_speed : float = 0.1
 @export var life_time : float = 1.0
-@export var acceleration : float = 1.0
+## 0.0 = constant speed. Positive values speed the bullet up over its lifetime,
+## negative values slow it down. Final speed at end of lifetime = init_speed * acceleration.
+## Example: 2.0 means the bullet ends at 2x its starting speed.
+@export var acceleration : float = 0.0
+
+@export_subgroup("splitshot")
+## How many bullets to spawn when this bullet despawns. 0 = disabled.
+@export var split_count : int = 0
+## Spread angle (degrees) of the split bullets around the original direction.
+@export var split_spread_angle : float = 180.0
+## Speed multiplier applied to each split bullet. Values < 1.0 make them slower.
+@export var split_speed_mult : float = 0.5
+## Size multiplier applied to each split bullet. Values < 1.0 make them smaller.
+@export var split_size_mult : float = 0.5
 
 @export_subgroup("parrying")
 @export var can_parry : bool = false

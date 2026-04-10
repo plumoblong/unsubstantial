@@ -313,8 +313,6 @@ world/map_use_async_iterations=false
 
 [physics]
 
-common/max_physics_steps_per_frame=1
-common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 jolt_physics_3d/simulation/velocity_steps=5
 common/physics_interpolation=true
@@ -324,6 +322,7 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
 renderer/rendering_method.mobile="forward_plus"
 driver/threads/thread_model=2
 textures/vram_compression/compress_with_gpu=false

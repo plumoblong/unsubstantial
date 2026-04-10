@@ -24,9 +24,8 @@ height = 1.6
 radial_segments = 10
 rings = 7
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_l1517"]
-height = 0.8083008
-radius = 2.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_ufoik"]
+radius = 2.5
 
 [sub_resource type="Curve" id="Curve_hoba1"]
 
@@ -66,8 +65,7 @@ script = ExtResource("1_j5obp")
 mesh = SubResource("SphereMesh_3u3rx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1465239699]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4041504, 0)
-shape = SubResource("CylinderShape3D_l1517")
+shape = SubResource("SphereShape3D_ufoik")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=958276863]
 amount = 32

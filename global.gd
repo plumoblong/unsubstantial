@@ -69,7 +69,7 @@ var player : Player
 var game : Game
 
 var time : float = 0.0
-var starting_level : String = "res://level/test/dengeon_test.tscn"
+var starting_level : String = "res://maps/chapter1/boss1.map"
 
 var CONFIG_PATH : String = "user://config_v" + str(CONFIG_VERSION) + ".json" 
 var SAVE_PATH : String = "user://save.json" 
@@ -236,7 +236,7 @@ func tween(node: Object, property: String, value: Variant, length: float = 1.0, 
 
 func change_fullscreen() -> void:
 	if _cached_window.mode == Window.MODE_WINDOWED:
-		_cached_window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		_cached_window.mode = Window.MODE_FULLSCREEN
 		config.fullscreen = true
 	else:
 		_cached_window.mode = Window.MODE_WINDOWED

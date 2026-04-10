@@ -298,7 +298,7 @@ texture_filter = 0
 texture = ExtResource("7_j4gl1")
 
 [node name="Head" type="Node3D" parent="." unique_id=1482572399]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1.825, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, -1.7484598e-07, 0, 1.7484598e-07, 0.99999994, 0, 0, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Head" unique_id=403614849]
 handle_input_locally = false
@@ -389,7 +389,6 @@ script = ExtResource("6_4p10s")
 dash_time = 0.1
 cooldown = 1.1
 jump_height = 0.8
-dash_time_tresh = 8.0
 
 [node name="Query" type="Area3D" parent="." unique_id=1874605582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

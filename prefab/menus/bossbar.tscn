@@ -8,7 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2udb0"]
 shader = ExtResource("3_gt3w2")
-shader_parameter/modulate = Color(0.695568, 0, 0.111848, 1)
+shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.499999988824
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
@@ -20,38 +20,42 @@ shader_parameter/amount = 0.52
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
 
-[node name="Bossbar" type="Node2D" unique_id=67375352]
+[node name="Node2D" type="Node2D" unique_id=997623029]
 script = ExtResource("1_usf1d")
 
-[node name="Bar" type="NinePatchRect" parent="." unique_id=1980416354]
+[node name="Bossbar" type="Node2D" parent="." unique_id=67375352]
+position = Vector2(240, 135)
+
+[node name="Bar" type="NinePatchRect" parent="Bossbar" unique_id=1980416354]
 material = SubResource("ShaderMaterial_2udb0")
-offset_left = 142.0
-offset_top = 223.0
-offset_right = 337.99988
-offset_bottom = 235.0
+offset_left = -98.0
+offset_top = -85.0
+offset_right = 97.99988
+offset_bottom = -73.0
 texture = ExtResource("4_oh8v5")
 patch_margin_left = 5
 patch_margin_right = 5
 
-[node name="Name" type="Label" parent="." unique_id=1784698432]
+[node name="Name" type="Label" parent="Bossbar" unique_id=1784698432]
 material = SubResource("ShaderMaterial_a30yq")
-offset_top = 213.0
-offset_right = 480.0
-offset_bottom = 221.0
+offset_left = -240.0
+offset_top = -95.0
+offset_right = 240.0
+offset_bottom = -87.0
 theme_override_fonts/font = ExtResource("4_a30yq")
 theme_override_font_sizes/font_size = 6
 text = "Boss"
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1027492476]
+[node name="Sprite2D" type="Sprite2D" parent="Bossbar" unique_id=1027492476]
 material = SubResource("ShaderMaterial_a30yq")
-position = Vector2(240, 238)
+position = Vector2(0, -70)
 texture = ExtResource("5_a30yq")
 centered = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=172126332]
+[node name="Sprite2D2" type="Sprite2D" parent="Bossbar" unique_id=172126332]
 material = SubResource("ShaderMaterial_a30yq")
-position = Vector2(240, 238)
+position = Vector2(0, -70)
 texture = ExtResource("5_a30yq")
 centered = false
 offset = Vector2(-64, 0)

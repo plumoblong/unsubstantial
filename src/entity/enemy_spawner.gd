@@ -7,10 +7,11 @@ class_name EnemySpawner
 	"distance_to_spawn" = 25.0,
 	"enemy" = "enemy",
 	"spawn_delay" = 0.0,
+	"override_spawn_condition" = 0,
 }
 
 const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 6
+const ENEMY_CAP : int = 12
 const ENEMY_PATH_PREFIX : String = "res://prefab/entity/enemy/"
 const ENEMY_PATH_SUFFIX : String = ".tscn"
 
@@ -77,6 +78,7 @@ func spawn() -> void:
 		spawned = true
 
 func _physics_process(_delta : float) -> void:
+	if func_godot_properties["override_spawn_condition"]: return
 	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
 	
 	if distance_to_player < distance_to_spawn:

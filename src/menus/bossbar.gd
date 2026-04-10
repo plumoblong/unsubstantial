@@ -4,10 +4,23 @@ class_name BossBar
 @export var boss_name : String = "Boss"
 @export var description : String = "Enemy but special."
 @export var color : Color = Color.RED
-@export var esc : EssenceComponent
 
-func _physics_process(delta : float) -> void:
-	$Name.text = boss_name
-	$Bar.size.x = lerp($Bar.size.x, esc.ratio * 196.0, 0.2)
-	$Bar.position.x = 240.0 - $Bar.size.x / 2.0
-	$Health.text = str(esc.essence)
+var esc : EssenceComponent
+
+@onready var name_label : Label = $Bossbar/Name
+@onready var bar : NinePatchRect = $Bossbar/Bar
+@onready var bossbar : Node2D = $Bossbar
+
+func update(color : Color) -> void:
+	if not esc: return
+	if bossbar == null: return
+	if bar == null: return
+	if name_label == null: return
+	bossbar.position = _R.get_center()
+	name_label.text = boss_name
+	bar.size.x = lerp(bar.size.x, esc.ratio * 196.0, 0.2)
+	if bar.material == null: return
+	bar.material.set_shader_parameter("modulate", color)
+	if esc.ratio <= 0.0 or not _G.player.essence_component.alive:
+		hide()
+ 

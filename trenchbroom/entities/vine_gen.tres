@@ -9,6 +9,7 @@ scene_file = ExtResource("1_d0dc6")
 classname = "vine_gen"
 description = "generates random hanging vines on the height of the entity"
 class_properties = {
+&"flip": 0,
 &"radius": 15.0
 }
 meta_properties = {

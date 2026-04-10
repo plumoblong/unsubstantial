@@ -1,5 +1,6 @@
 extends Component
 class_name ShootComponent
+
 @export var config: BulletSettings
 @export var crit_chance: float = 0.0
 @export var visual_bullet: VisualBullet
@@ -28,7 +29,7 @@ func shoot(direction: Vector3 = Vector3.ZERO, origin: Vector3 = Vector3.ZERO) ->
 	var angles: Array = get_bullet_angles(direction, config.spread_angle, shot_count)
 	var inaccuracy: float = config.inaccuracy
 
-	var first_bullet: Bullet = config.bullet_scene.instantiate()
+	var first_bullet: Bullet = _G.game.BULLET_SCENE.instantiate()
 	first_bullet.crit = randf_range(0.0, 100.0) < crit_chance
 	first_bullet.config = config
 	
@@ -37,7 +38,7 @@ func shoot(direction: Vector3 = Vector3.ZERO, origin: Vector3 = Vector3.ZERO) ->
 	first_bullet.global_position = origin
 
 	for i: int in range(1, shot_count):
-		var bullet: Bullet = config.bullet_scene.instantiate()
+		var bullet: Bullet = _G.game.BULLET_SCENE.instantiate()
 		bullet.crit = randf_range(0.0, 100.0) < crit_chance
 		bullet.config = config
 		bullet.direction = angles[i] + Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * inaccuracy

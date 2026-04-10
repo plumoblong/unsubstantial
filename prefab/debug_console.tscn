@@ -17,6 +17,7 @@ shader_parameter/self_modulate = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ldr6d"]
 
 [node name="DebugConsole" type="CanvasLayer" unique_id=1454306381]
+process_mode = 3
 layer = 9
 script = ExtResource("1_7bfnr")
 

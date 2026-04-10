@@ -23,11 +23,10 @@ height = 3.2
 
 [sub_resource type="Resource" id="Resource_y5ngk"]
 script = ExtResource("8_hrcbw")
-size_mult = 1.5
-fire_rate = 1.2
+size_mult = 1.25
+fire_rate = 1.6
 shots = 2
 inaccuracy = 0.2
-spread_angle = 20.0
 knockback = 3.0
 bounciness = 1.1
 init_speed = 36.0

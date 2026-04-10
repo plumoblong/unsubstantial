@@ -4,11 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
-[ext_resource type="AudioStream" uid="uid://b20cwcimf3pqt" path="res://music/level/key.ogg" id="8_400sm"]
-[ext_resource type="AudioStream" uid="uid://d1c688sodgbo1" path="res://music/level/respawn.ogg" id="9_lip20"]
-[ext_resource type="AudioStream" uid="uid://mabafblxpkit" path="res://music/level/core.ogg" id="10_efr1a"]
-[ext_resource type="AudioStream" uid="uid://j31om87u5v2c" path="res://music/level/fractal.ogg" id="11_x3x2e"]
-[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="16_ux4dc"]
+[ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="13_ve786"]
+[ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="15_0lu6w"]
+[ext_resource type="Texture2D" uid="uid://btnjop7peo7e0" path="res://images/entity/human_small.png" id="17_i6gbm"]
 [ext_resource type="Script" uid="uid://qtuj5slhqqp6" path="res://src/component/chapter_manager.gd" id="33_d218c"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="35_efr1a"]
 [ext_resource type="Resource" uid="uid://cgx52g0t14tml" path="res://res/chapter/ether.tres" id="36_x3x2e"]
@@ -16,14 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://cp3ooy8su1hye" path="res://prefab/menus/chat_feed.tscn" id="40_imfdu"]
 [ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="42_lip20"]
 
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_xvte5"]
-shuffle = true
-fade_time = 0.25
-stream_count = 4
-stream_0 = ExtResource("8_400sm")
-stream_1 = ExtResource("9_lip20")
-stream_2 = ExtResource("10_efr1a")
-stream_3 = ExtResource("11_x3x2e")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i6gbm"]
+shader = ExtResource("15_0lu6w")
+shader_parameter/modulate = Color(1, 1, 1, 1)
+shader_parameter/amount = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/grayscale = false
 
 [node name="Game" type="Node3D" unique_id=449548246]
 script = ExtResource("1_uu38s")
@@ -41,9 +37,6 @@ visible = false
 layer = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2010867329]
-stream = SubResource("AudioStreamPlaylist_xvte5")
-volume_db = -80.0
-autoplay = true
 bus = &"Music"
 
 [node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
@@ -51,16 +44,6 @@ script = ExtResource("33_d218c")
 all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e")])
 
 [node name="Enemies" type="Node" parent="." unique_id=1809856368]
-
-[node name="Label" type="Label" parent="." unique_id=1724005951]
-visible = false
-offset_left = 10.0
-offset_top = 222.0
-offset_right = 50.0
-offset_bottom = 232.0
-theme_override_fonts/font = ExtResource("16_ux4dc")
-theme_override_font_sizes/font_size = 6
-text = "gfdf"
 
 [node name="ChatFeed" parent="." unique_id=1286036292 instance=ExtResource("40_imfdu")]
 
@@ -83,6 +66,22 @@ layer = 4
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
+
+[node name="Label" type="Label" parent="AnimFix" unique_id=1724005951]
+material = SubResource("ShaderMaterial_i6gbm")
+offset_left = 1.0
+offset_top = 144.0
+offset_right = 120.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("13_ve786")
+theme_override_font_sizes/font_size = 8
+text = "gfdf"
+uppercase = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimFix" unique_id=429422837]
+position = Vector2(447, 1)
+texture = ExtResource("17_i6gbm")
+centered = false
 
 [node name="Timer" type="Timer" parent="." unique_id=1500097401]
 wait_time = 20.0

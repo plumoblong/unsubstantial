@@ -72,7 +72,7 @@ func update(delta : float) -> void:
 		return
 	input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	var is_on_floor : bool = _player.is_on_floor()
-	moving = lerpf(moving, _player_velocity.length() / walk_speed * float(is_on_floor and not _is_dashing), 0.1)
+	moving = lerpf(moving, (_player_velocity.length() / walk_speed) * float(is_on_floor and not _is_dashing), 0.1)
 	
 	if not _is_dashing:
 		wish_dir = _player.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
@@ -192,10 +192,10 @@ func is_surface_too_steep(normal : Vector3) -> bool:
 	var max_slope_ang_dot : float = Vector3.UP.rotated(Vector3(1.0, 0.0, 0.0), _player.floor_max_angle).dot(Vector3.UP)
 	return normal.dot(Vector3.UP) < max_slope_ang_dot
 
-func handle_jump(delta : float, speed : float = jump_velocity) -> void:
+func handle_jump(delta : float, speed : float = jump_velocity) 	-> void:
 	if not enabled: return
 	jump_sfx.pitch_scale = randf_range(0.9, 1.1)
-	var act_speed : float = speed / Engine.time_scale
+	var act_speed : float = speed
 	if _player.is_on_floor():
 		var floor_normal : Vector3 = _player.get_floor_normal()
 		var jump_direction : Vector3 = floor_normal.normalized()

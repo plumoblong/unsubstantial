@@ -11,9 +11,8 @@ class_name PlayerCamera
 @export var fov_offsets : Vector3 = Vector3(0.0, 0.0, 0.0)
 @export var viewbob_x : float = 0.0
 @export var viewbob_y : float = 0.0
-@export var tilt : float = 0.0
 
-@export var viewbob_amount : float = 1.0
+var viewbob_amount : float = 1.0
 @export var tilt_amount : float = 9.0
 @export var multiplier : float = 1.0
 @export var motion_blur_offset : float = 1.25
@@ -46,20 +45,24 @@ func _ready() -> void:
 func update(t : float) -> void:
 	#h_offset = viewbob_x * viewbob_amount
 	#anim.speed_scale = player.velocity.length() / player.stats.speed
-	var vb = viewbob_amount * float(_G.config.view_bob)
-	fov_offsets.z = vb  * 15.0 * multiplier
-	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * vb 
-	bob_offset = viewbob_y * vb * multiplier
-	height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
-	var tilt_limit : float = -player.global_transform.basis.z.dot(-head.global_transform.basis.z)
+	fov_offsets.z = viewbob_amount * 15.0 * multiplier
+	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * viewbob_amount
+	if _G.config.view_bob:
+		bob_offset = viewbob_y * viewbob_amount * multiplier
+		height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
+		head.position.y = head_base_height+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset
+		rotation_degrees.z = _update_tilt(t)
+	else:	
+		head.position.y = head_base_height
+		rotation_degrees.z = 0.0
+	
+func _update_tilt(t : float) -> float:
+	var tilt : float = 0.0
 	if player.is_on_floor():
 		tilt = lerpf(tilt, t * tilt_amount, TILT_LERP)
 	else:
 		tilt = lerpf(tilt, 0.0, TILT_LERP)
-	head.position.y = head_base_height+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset
-	rotation_degrees.z = tilt
-	
-	
+	return tilt
 	
 func tween_camera_fov(amount : float = 20.0, time : float = 1.0) -> void:
 	_G.tween(self, "fov_offsets", Vector3(amount, fov_offsets.y, fov_offsets.z), time / 10.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -96,6 +99,3 @@ func screenshot() -> void:
 	image.save_png(image_path)
 	_G.game.chat.add_message("Saved screenshot as capture_" + date_string + ".png", Color.DEEP_PINK)
 	_G.game.chat.show()
-
-#func motion_blur_update() -> void:
-	#mbcam.get_parent().

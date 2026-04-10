@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dxlihejdlsylf"
+path="res://.godot/imported/boss1.2.map-4ff36feb9d86a55cb09c1f735b3ca061.tres"
+
+[deps]
+
+source_file="res://maps/chapter1/autosave/boss1.2.map"
+dest_files=["res://.godot/imported/boss1.2.map-4ff36feb9d86a55cb09c1f735b3ca061.tres"]
+
+[params]
+

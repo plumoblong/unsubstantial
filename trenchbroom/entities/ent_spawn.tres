@@ -7,14 +7,13 @@
 script = ExtResource("2_b5xmi")
 scene_file = ExtResource("1_v1rw3")
 classname = "ent_spawn"
-description = "Used for spawning enemies
-
-Aviable enemies: enemy, enemy_melee, enemy_eye"
+description = "Used for spawning enemies"
 class_properties = {
 &"counted_enemy": 1,
 &"distance_to_spawn": 30.0,
 &"enemy": "enemy",
 &"one_shot": 1,
+&"override_spawn_condition": 0,
 &"spawn_delay": 0.0
 }
 meta_properties = {

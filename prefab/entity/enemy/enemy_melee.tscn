@@ -78,6 +78,7 @@ essence = 150.0
 essence_death_threshold = 20.0
 damage = 75.0
 on_hit_velocity_loss = 0.75
+xp_payout = 5
 metadata/_custom_type_script = "uid://tlvl68soe85"
 
 [node name="DashQuery" type="Area3D" parent="." unique_id=124948032]

@@ -6,19 +6,34 @@
 [ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="4_308nd"]
 
 [sub_resource type="Curve" id="Curve_rko62"]
-_data = [Vector2(0, 0), 0.0, 25.1396, 0, 0, Vector2(0.0625, 0.625), 3.45663, 1.76241, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.8125, 0.75), -1.70505, -1.70505, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
+_data = [Vector2(0.5138191, 1), -1.70505, 0.64267147, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 metadata/_snap_count = 64
 
 [sub_resource type="CurveTexture" id="CurveTexture_uss2g"]
 curve = SubResource("Curve_rko62")
 
+[sub_resource type="Curve" id="Curve_308nd"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.0012562796, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t6p2w"]
+curve = SubResource("Curve_308nd")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t6p2w"]
+velocity_pivot = Vector3(0, 0, 0.025)
 spread = 180.0
 initial_velocity_min = 1.0
-initial_velocity_max = 2.0
-gravity = Vector3(0, -0.5, 0)
-scale_max = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.0000021
+linear_accel_max = -2.0000021
+tangential_accel_min = 1.9999977
+tangential_accel_max = 1.9999977
+tangential_accel_curve = SubResource("CurveTexture_t6p2w")
+scale_min = 1.5
+scale_max = 2.5
 scale_curve = SubResource("CurveTexture_uss2g")
 
 [node name="Ghost" type="Sprite3D" unique_id=702704374]
@@ -41,7 +56,7 @@ emitting = false
 amount = 32
 lifetime = 1.5
 one_shot = true
-speed_scale = 2.0
+speed_scale = 1.25
 explosiveness = 0.88
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_t6p2w")

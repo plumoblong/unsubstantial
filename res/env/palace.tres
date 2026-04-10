@@ -4,16 +4,19 @@
 
 [sub_resource type="Sky" id="Sky_t78c5"]
 sky_material = ExtResource("1_gg0b2")
+process_mode = 3
+radiance_size = 0
 
 [resource]
 background_mode = 2
 sky = SubResource("Sky_t78c5")
 ambient_light_source = 2
-ambient_light_color = Color(0.22159421, 0.13071378, 0.21090238, 1)
+ambient_light_color = Color(0.14651752, 0.16577548, 0.21938142, 1)
 ambient_light_sky_contribution = 0.13
 ambient_light_energy = 0.9
 reflected_light_source = 2
 tonemap_mode = 3
+tonemap_exposure = 1.2
 tonemap_white = 5.0
 ssao_radius = 0.66
 ssao_intensity = 16.0

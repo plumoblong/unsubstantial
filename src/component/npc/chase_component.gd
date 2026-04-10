@@ -46,4 +46,4 @@ func update(target_position : Vector3, movement_component : MovementComponent, a
 	
 	agent_position = parent_pos.direction_to(agent.get_next_path_position())
 	
-	movement_component.direction = agent_position
+	movement_component.direction = agent_position if enabled else Vector3.ZERO

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://fvvh000xgtpk"]
 
 [ext_resource type="Texture2D" uid="uid://blgn3y70to4gj" path="res://placeholder.png" id="1_0q6vs"]
+[ext_resource type="Script" uid="uid://cynw10efwlwg5" path="res://src/sprite_placeholder.gd" id="2_ntpcj"]
 
 [node name="SpritePlaceholder" type="Sprite3D" unique_id=1805567313]
 top_level = true
@@ -9,3 +10,12 @@ billboard = 1
 no_depth_test = true
 texture_filter = 0
 texture = ExtResource("1_0q6vs")
+script = ExtResource("2_ntpcj")
+
+[node name="Timer" type="Timer" parent="." unique_id=121390691]
+wait_time = 60.0
+one_shot = true
+autostart = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="Timer" to="." method="timer_timeout"]

@@ -23,6 +23,7 @@ var _knockback_velocity : Vector3 = Vector3.ZERO
 var _knockback_decay : float = 7.0
 
 signal jumped
+signal just_landed
 
 # Cached calculations
 var speed_threshold : float
@@ -38,9 +39,9 @@ func _ready() -> void:
 	assert(_parent != null, "MovementComponent parent must be a CharacterBody3D")
 
 func _update_cached_values() -> void:
-	speed_threshold = speed - (speed / 6.0)
+	speed_threshold = speed - (speed * 0.2)
 	friction_double = floor_friction * 2.0
-	friction_half = floor_friction / 2.0
+	friction_half = floor_friction * 0.5
 
 func update(delta : float, on_ceiling : bool = false) -> void:
 	if not enabled: return
@@ -96,10 +97,12 @@ func update_flying(delta : float) -> void:
 		vel.z = lerpf(vel.z, 0.0, air_friction)
 		vel.y = lerpf(vel.y, 0.0, air_friction)
 
-func jump(amt : float = jump_speed) -> void:
+func jump(amount : float = 0.0) -> void:
+	print(can_jump, enabled)
 	if not enabled or not can_jump: return
 	can_jump = false
-	if _parent and _parent.is_on_floor():
+	var amt : float = jump_speed if amount == 0.0 else amount
+	if _parent.is_on_floor():
 		var floor_normal : Vector3 = _parent.get_floor_normal()
 		var jump_direction : Vector3 = floor_normal.normalized()
 		vel += jump_direction * amt
@@ -109,7 +112,7 @@ func jump(amt : float = jump_speed) -> void:
 			vel += slope_push * amt * 0.3 * horizontal_influence
 	else:
 		vel.y = amt
-	
+	print("yes i try to jump", can_jump)
 	jumped.emit()
 
 func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:

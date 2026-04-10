@@ -11,9 +11,10 @@ class_name Game
 @onready var music_player : AudioStreamPlayer = $Music
 @onready var ambience_player : AudioStreamPlayer3D = $Ambience
 @onready var anim_fix_color : ColorRect = $AnimFix/Color
-@onready var difficulty_label : Label = $Label
+@onready var difficulty_label : Label = $AnimFix/Label
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
+const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
 
 var next_level : String
 var time_pause : bool = false
@@ -77,12 +78,15 @@ func _process(_delta : float) -> void:
 	_update_pause_state()
 	_update_player_control()
 	anim_fix_color.size = _R.get_screen_size()
-
+	difficulty_label.visible = _G.show_fps
+	if Engine.get_physics_frames() % 5 == 0:
+		$AnimFix/Sprite2D.modulate = get_chapter_color()
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
 	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus)
-	difficulty_label.text = "Difficulty: " + str(enemy_multiplier)
+	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
+	$AnimFix/Sprite2D.visible = _G.show_fps
 
 func _handle_input() -> void:
 	if ending_level or in_any_menu:
@@ -133,7 +137,7 @@ func change_map(map_file_path : String) -> void:
 	if in_ether:
 		in_ether = false
 		chapter.current = chapter.all[1]
-	
+
 	var map_instance : Node = map_file.instantiate()
 	map_instance.name = "Map"
 	current_level = map_file_path
@@ -168,13 +172,17 @@ func mute_music(time : float = 1.0) -> void:
 func unmute_music(time : float = 1.0) -> void:
 	_G.tween(music_player, "volume_db", linear_to_db(1.0), time, 0, 0)
 
-func create_ghost(pos : Vector3, texture : Texture2D, pixel_size : float = 0.03) -> void:
+func create_ghost(pos : Vector3, texture : Texture2D, pixel_size : float = 0.03, frames : Array[int] = [0, 1, 1], time : float = 1.5) -> void:
 	var gres : PackedScene = load("res://prefab/entity/ghost.tscn")
 	var ghost : Ghost = gres.instantiate()
+	ghost.lifetime = time
 	ghost.global_position = pos
 	ghost.sprite = texture
+	ghost.frame = frames[0]
+	ghost.hframes = frames[1]
+	ghost.vframes = frames[2]
 	ghost.pixel_size = pixel_size
-	add_child(ghost)
+	add_child.call_deferred(ghost)
 
 func create_decal(pos : Vector3, life_time : float = 10.0, color : Color = Color.WHITE, damage : int = 0) -> void:
 	var dres : PackedScene = load("res://prefab/entity/decal.tscn")
@@ -183,7 +191,7 @@ func create_decal(pos : Vector3, life_time : float = 10.0, color : Color = Color
 	dec.color = color
 	dec.global_position = pos
 	dec.damage = damage
-	add_child(dec)
+	add_child.call_deferred(dec)
 
 func create_popup_text(pos : Vector3, text : String = "kupsztal", color : Color = Color.WHITE, crit : bool = false) -> void:
 	return
@@ -194,7 +202,7 @@ func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.
 	for i in range(amount):
 		var obj : Node3D = res.instantiate()
 		if get_tree() != null:
-			await get_tree().create_timer(0.0 + i / 50.0).timeout
+			await get_tree().create_timer(0.025).timeout
 		
 		add_child(obj)
 		var offset := Vector3(
@@ -215,12 +223,13 @@ func end_level(loop : bool = false) -> void:
 	anim_fix_color.color = _G.get_color_darkmode(true, 0.0)
 	
 	_G.tween(anim_fix_color, "color", _G.get_color_darkmode(true, 1.0), 0.5)
+
+	await get_tree().create_timer(0.75).timeout
 	
-	switch_chapters()
+	
 	stage += 1
 	actual_stage += 1
-	
-	await get_tree().create_timer(0.75).timeout
+	switch_chapters()
 	
 	_clear_enemies()
 	_load_next_map()
@@ -239,10 +248,11 @@ func _load_next_map() -> void:
 		randf_range(-ambience_pos.y, ambience_pos.y),
 		randf_range(-ambience_pos.z, ambience_pos.z)
 	)
+	if chapter.current.ambience_streams.is_empty(): return
 	ambience_player.stream = chapter.current.ambience_streams.pick_random()
 	ambience_player.play()
 
-func wait(time : float = 0.07) -> void:
+func wait(time : float = 0.05) -> void:
 	time_scale = 0.0
 	await get_tree().create_timer(time, true, false, true).timeout
 	time_scale = 1.0
@@ -260,7 +270,15 @@ func timer_timeout() -> void:
 	_G.player.camera.screenshot()
 
 func switch_chapters() -> void:
-	chapter.current = chapter.all[actual_stage - 1]
+	chapter.current = chapter.all[clampi(actual_stage, 0, chapter.all.size() - 1)]
+
+func get_chapter_color() -> Color:
+	var h : float = randf_range(chapter.current.color_hue_range.x, chapter.current.color_hue_range.y)
+	var s : float = randf_range(chapter.current.color_saturation_range.x, chapter.current.color_saturation_range.y)
+	var v : float = randf_range(chapter.current.color_value_range.x, chapter.current.color_value_range.y)
+	var a : float = randf_range(chapter.current.color_alpha_range.x, chapter.current.color_alpha_range.y)
+	
+	return Color.from_hsv(h, s, v, a)
 
 func update_rpc(update_timestamp : bool = false) -> void:
 	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)

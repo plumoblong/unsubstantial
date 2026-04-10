@@ -10,9 +10,8 @@ class_name EnemyGuardMelee
 @onready var enemy : EnemyComponent = get_node("EnemyComponent")
 
 func _ready() -> void:
-	enemy.setup(essence_component)
+	enemy.setup(essence_component, chase_component)
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 16.0)
-	shoot_component.config.fire_rate = randf_range(1.15, 1.3)
 	shoot_component.config.damage = enemy.damage
 	$OmniLight3D.light_color = enemy.color
 	
@@ -20,7 +19,7 @@ func essence_component_died(combo : bool) -> void:
 	enemy.handle_death()
 	
 func essence_component_fractured(amount : int, i_time : float) -> void:
-	enemy.handle_fracture(amount, i_time, movement_component, $OmniLight3D)
+	enemy.handle_fracture(amount, i_time, movement_component)
 	
 func _physics_process(delta : float) -> void:
 	# Add the gravity.

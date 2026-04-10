@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://devutavlvycu"
+path="res://.godot/imported/treasure1.1.map-72321555b97c5c321beefc67caf1b726.tres"
+
+[deps]
+
+source_file="res://maps/special/autosave/treasure1.1.map"
+dest_files=["res://.godot/imported/treasure1.1.map-72321555b97c5c321beefc67caf1b726.tres"]
+
+[params]
+

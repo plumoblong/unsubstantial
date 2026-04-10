@@ -19,20 +19,24 @@ var speed : float
 var pierces_left : int
 
 var active : bool = true
-var disable_seek : bool = false
+var disable_seek : bool = true
 var can_attack_parent : bool = false
 
 var target : Node3D
+
+# Cached base speed after _setup_speed(), used as the anchor for acceleration math.
+var _base_speed : float
 
 const BASE_SIZE : float = 0.5
 const SIZE_CLAMP_MIN : float = 34.0
 const SIZE_CLAMP_MAX : float = 1000.0
 const SIZE_DIVISOR : float = 400.0
-const PIERCE_HITBOX_ACTIVATE_TIME : float = 32.0
+const PIERCE_HITBOX_ACTIVATE_TIME : float = 0.06
+const HOMING_ACTIVATE_TIME : float = 0.1
+const HOMING_REACH_DISTANCE : float = 0.2
 
 func _ready() -> void:
 	pierces_left = config.pierces
-	
 	_setup_damage()
 	_setup_speed()
 	_setup_visuals()
@@ -40,13 +44,14 @@ func _ready() -> void:
 	_setup_audio()
 	_setup_scale()
 	_start_lifetime()
-	
-	
+	await get_tree().create_timer(stun_time).timeout
+	disable_seek = false
 
 func _physics_process(delta: float) -> void:
 	static_sfx.volume_linear = float(_G.player.can_control)
 	if not active or not _G.player.can_control:
 		return
+	_update_speed_from_lifetime()
 	_update_movement(delta)
 	
 func _setup_damage() -> void:
@@ -58,6 +63,8 @@ func _setup_speed() -> void:
 	speed = config.init_speed
 	if parent is Player:
 		speed += parent.velocity.length() * 0.75
+	_base_speed = speed
+
 func _setup_visuals() -> void:
 	if config.sprite_override:
 		sprite.texture = config.sprite_override
@@ -95,10 +102,22 @@ func _start_lifetime() -> void:
 	$Timer.start(config.life_time)
 	collision_shape.disabled = false
 
+# Recalculates speed each frame based on how far through the bullet's lifetime we are.
+# At t=0 (just spawned): speed = _base_speed
+# At t=1 (about to expire): speed = _base_speed * config.acceleration
+# acceleration == 0.0 means constant speed (lerp target is also _base_speed * 1.0,
+# but we special-case it to skip the math entirely).
+func _update_speed_from_lifetime() -> void:
+	if config.acceleration == 0.0:
+		return
+	var timer: Timer = $Timer
+	var lifetime_progress: float = 1.0 - (timer.time_left / config.life_time)
+	speed = maxf(2.0, lerp(_base_speed, _base_speed * config.acceleration, lifetime_progress))
+
 func _update_movement(delta: float) -> void:
 	world_velocity.y -= config.fall_speed
 	velocity = world_velocity + _calculate_steering() * speed
-	position += velocity * delta * config.acceleration
+	position += velocity * delta
 	raycast.target_position = velocity
 	_G.create_3d_placeholder(position, Color.WHITE, 0.1)
 
@@ -108,13 +127,20 @@ func _calculate_steering() -> Vector3:
 	return direction if direction != Vector3.ZERO else -transform.basis.z
 
 func _seek_target() -> Vector3:
+	if global_position.distance_to(target.global_position) < HOMING_REACH_DISTANCE:
+		target = null
+		return direction if direction != Vector3.ZERO else -transform.basis.z
 	var desired: Vector3 = (target.global_position - global_position).normalized() * speed
 	return lerp(velocity, desired, config.homing_interlpolation).normalized()
 
 func _seek_player() -> Vector3:
 	var player_head: Vector3 = _G.player.global_position + Vector3(0.0, 1.1, 0.0)
+	if global_position.distance_to(player_head) < HOMING_REACH_DISTANCE:
+		config.homing_on_player = false
+		return direction if direction != Vector3.ZERO else -transform.basis.z
 	var desired: Vector3 = (player_head - global_position).normalized() * speed
 	return lerp(velocity, desired, config.homing_interlpolation).normalized()
+
 
 func imma_bounce() -> void:
 	if not raycast.is_colliding():
@@ -135,14 +161,13 @@ func _reflect_vector(vector: Vector3, normal: Vector3) -> Vector3:
 func hit() -> void:
 	if not active: return
 	impact_sfx.play()
-	if config.pierces > 0 or config.bounciness > 0.0:
-		if config.pierces > 0:
-			_handle_pierce()
+	if config.pierces > 0:
+		_handle_pierce()
 		if config.bounciness > 0.0:
 			imma_bounce()
 	else:
-		despawn()
 		
+		despawn()
 
 func _handle_pierce() -> void:
 	destroy_object_init(config.destroy_object, config.destroy_object_properties)
@@ -150,8 +175,8 @@ func _handle_pierce() -> void:
 	pierces_left -= 1
 	#collision_shape.disabled = true
 	target = null
-	#await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME / 1000.0).timeout
-	#collision_shape.disabled = false
+	await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME).timeout
+	disable_seek = false
 
 func handle_destroy() -> void:
 	if config.spectral: return
@@ -173,6 +198,36 @@ func despawn(destroy: bool = true) -> void:
 	
 	if destroy:
 		destroy_object_init(config.destroy_object, config.destroy_object_properties)
+	
+	_spawn_split_bullets()
+
+func _spawn_split_bullets() -> void:
+	if config.split_count <= 0:
+		return
+	
+	var split_config: BulletSettings = config.duplicate(true)
+	split_config.split_count = 0
+	split_config.size_mult *= config.split_size_mult
+	
+	var base_dir: Vector3 = direction if direction != Vector3.ZERO else -transform.basis.z
+	
+	for i in config.split_count:
+		var bullet: Node3D = _G.game.BULLET_SCENE.instantiate()
+		
+		var t: float = 0.5 if config.split_count == 1 else float(i) / float(config.split_count - 1)
+		var angle_offset: float = deg_to_rad(lerp(-config.split_spread_angle * 0.5, config.split_spread_angle * 0.5, t))
+		
+		var split_dir: Vector3 = base_dir.rotated(Vector3.UP, angle_offset).normalized()
+		
+		bullet.config = split_config
+		bullet.direction = split_dir
+		bullet.crit = crit
+		bullet.parent = parent
+		bullet.global_position = global_position
+		
+		split_config.init_speed = speed * config.split_speed_mult
+		
+		get_tree().current_scene.add_child(bullet)
 
 func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 	if not config.destroy_object_enabled or scene == null:
@@ -214,6 +269,3 @@ func animation_player_animation_finished(anim_name: String) -> void:
 
 func timer_timeout() -> void:
 	despawn(false)
-
-func seek() -> Vector3:
-	return _calculate_steering()

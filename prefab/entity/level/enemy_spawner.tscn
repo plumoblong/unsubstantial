@@ -27,13 +27,6 @@ animations = [{
 
 [node name="EnemySpawner" type="Node3D" unique_id=741114850]
 script = ExtResource("1_nmctl")
-func_godot_properties = {
-&"counted_enemy": 1,
-&"distance_to_spawn": 30.0,
-&"enemy": "enemy",
-&"one_shot": 1,
-&"spawn_delay": 0.0
-}
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=815739422]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
