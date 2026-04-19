@@ -35,7 +35,6 @@ driver/output_latency=32
 
 _G="*res://global.tscn"
 _T="*res://prefab/debug_console.tscn"
-DiscordRPCLoader="*uid://dky4kpbtgswgb"
 _R="*uid://dir5ntdykoo6s"
 
 [debug]
@@ -74,7 +73,7 @@ naming/script_name_casing=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg", "res://addons/func_godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 
 [func_godot]
 

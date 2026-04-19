@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://ikigflbn67te"]
 
 [ext_resource type="PackedScene" uid="uid://c1kco3e5xtrfq" path="res://prefab/entity/level/palm_tree.tscn" id="1_plrnr"]
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_r408e"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_r408e"]
 
 [resource]
@@ -10,8 +11,8 @@ classname = "palm_tree"
 description = "Palm Tree
 
 produces dim light"
-meta_properties = {
+meta_properties = Dictionary[String, Variant]({
 "color": Color(0.768627, 0.768627, 1, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
-}
+})
 metadata/_custom_type_script = "uid://rwwodvddu15o"

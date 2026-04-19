@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://domsr8e47ekgi"]
 
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_awesn"]
 [ext_resource type="PackedScene" uid="uid://dlgqehmfwh6eh" path="res://prefab/entity/level/light.tscn" id="1_eg8iq"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_qjm0o"]
 
@@ -7,14 +8,13 @@
 script = ExtResource("1_qjm0o")
 scene_file = ExtResource("1_eg8iq")
 classname = "light"
-class_properties = {
-&"color": Color(1, 1, 1, 1),
-&"energy": 1.25,
-&"mesh_visible": 1,
-&"range": 35.0
-}
-meta_properties = {
+class_properties = Dictionary[String, Variant]({
+"color": Color(1, 1, 1, 1),
+"energy": 1.25,
+"mesh_visible": 1,
+"range": 35.0
+})
+meta_properties = Dictionary[String, Variant]({
 "color": Color(1, 1, 1, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
-}
-metadata/_custom_type_script = "uid://rwwodvddu15o"
+})

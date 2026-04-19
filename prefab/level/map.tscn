@@ -20,6 +20,7 @@ script = ExtResource("2_tyebk")
 local_map_file = "res://maps/special/treasure1.map"
 map_settings = ExtResource("3_tldyv")
 build_flags = 2
+hyperplane_size = null
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=149731145]
 

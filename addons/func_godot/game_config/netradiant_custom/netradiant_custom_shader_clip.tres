@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_cuylw")
-texture_path = "textures/special/clip"
+texture_path = "textures/clip"

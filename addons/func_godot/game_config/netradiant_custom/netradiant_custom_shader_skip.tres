@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_4ja6h")
-texture_path = "textures/special/skip"
+texture_path = "textures/skip"

@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_ah2cp")
-texture_path = "textures/special/origin"
+texture_path = "textures/origin"

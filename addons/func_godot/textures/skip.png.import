@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csl0e2px0cwc1"
-path="res://.godot/imported/Logo_V2_No_Bg.png-ed667fb599fe1e17ebcfc361ff7c9c93.ctex"
+uid="uid://bk5oo263y3u7w"
+path="res://.godot/imported/skip.png-b8ce29eeb9f4be76c300a81fd41322fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/discord-rpc-gd/Logo_V2_No_Bg.png"
-dest_files=["res://.godot/imported/Logo_V2_No_Bg.png-ed667fb599fe1e17ebcfc361ff7c9c93.ctex"]
+source_file="res://addons/func_godot/textures/skip.png"
+dest_files=["res://.godot/imported/skip.png-b8ce29eeb9f4be76c300a81fd41322fa.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

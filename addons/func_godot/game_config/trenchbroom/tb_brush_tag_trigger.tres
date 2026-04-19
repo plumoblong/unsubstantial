@@ -7,4 +7,4 @@ script = ExtResource("1_msqpk")
 tag_name = "Trigger"
 tag_match_type = 1
 tag_pattern = "trigger*"
-texture_name = "special/trigger"
+texture_name = "trigger"

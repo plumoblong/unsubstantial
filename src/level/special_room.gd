@@ -23,6 +23,9 @@ enum ROOM_TYPE {
 	SHRINE,
 }
 
+func _enter_tree() -> void:
+	_G.game.current_map.map_builder.build_complete.connect(map_build_complete)
+
 func _pick_special_room() -> ROOM_TYPE:
 	var types : Array[ROOM_TYPE]
 	
@@ -50,7 +53,8 @@ func _pick_room_map() -> void:
 			map = TREASURE_MAPS.pick_random()
 	builder.local_map_file = map
 
-func _func_godot_build_complete() -> void:
+func map_build_complete() -> void:
 	_pick_room_map()
-	builder.build() 
+	_T.say(builder.local_map_file)
+	#builder.build() 
 	#bake_navigation_mesh()

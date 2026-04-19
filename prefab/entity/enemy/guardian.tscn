@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="4_rkk6f"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="5_yg07u"]
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="6_wl17c"]
-[ext_resource type="PackedScene" uid="uid://b47uxbakyj2nq" path="res://prefab/entity/bullet.tscn" id="7_2cd0i"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="8_hrcbw"]
 [ext_resource type="Texture2D" uid="uid://c8qc7w1f8cte2" path="res://images/entity/tank.png" id="9_s7e5n"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="11_ehkvo"]

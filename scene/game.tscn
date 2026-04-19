@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bpwhvorsucmn5"]
 
 [ext_resource type="Script" uid="uid://dr4it7887glkj" path="res://src/game.gd" id="1_uu38s"]
+[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="2_81276"]
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
@@ -24,7 +25,9 @@ shader_parameter/grayscale = false
 [node name="Game" type="Node3D" unique_id=449548246]
 script = ExtResource("1_uu38s")
 
-[node name="Map" type="Node3D" parent="." unique_id=1555837574]
+[node name="Map" type="NavigationRegion3D" parent="." unique_id=1561911892]
+script = ExtResource("2_81276")
+metadata/_custom_type_script = "uid://bpovxoefw8wu3"
 
 [node name="Player" parent="." unique_id=477399054 instance=ExtResource("3_2026n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

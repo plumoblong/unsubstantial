@@ -1,7 +1,7 @@
 extends Node3D
 class_name Game
 
-@onready var current_map : Node3D = $Map
+@onready var current_map : Map = $Map
 @onready var enemies : Node = $Enemies
 @onready var pause_screen : Node2D = $Pause/Node2D
 @onready var chapter : ChapterManager = $ChapterManager

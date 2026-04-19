@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://btgfy7fj51osd"]
 
 [ext_resource type="PackedScene" uid="uid://8njpgustr126" path="res://prefab/level/vine_generator.tscn" id="1_d0dc6"]
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_hgbxa"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_hgbxa"]
 
 [resource]
@@ -8,11 +9,11 @@ script = ExtResource("2_hgbxa")
 scene_file = ExtResource("1_d0dc6")
 classname = "vine_gen"
 description = "generates random hanging vines on the height of the entity"
-class_properties = {
-&"flip": 0,
-&"radius": 15.0
-}
-meta_properties = {
+class_properties = Dictionary[String, Variant]({
+"flip": 0,
+"radius": 15.0
+})
+meta_properties = Dictionary[String, Variant]({
 "color": Color(0.768627, 0.768627, 1, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
-}
+})

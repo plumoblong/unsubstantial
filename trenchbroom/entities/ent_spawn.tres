@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://djhhounr3qago"]
 
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_b5xmi"]
 [ext_resource type="PackedScene" uid="uid://cv7q6vgmketme" path="res://prefab/entity/level/enemy_spawner.tscn" id="1_v1rw3"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_b5xmi"]
 
@@ -8,15 +9,15 @@ script = ExtResource("2_b5xmi")
 scene_file = ExtResource("1_v1rw3")
 classname = "ent_spawn"
 description = "Used for spawning enemies"
-class_properties = {
-&"counted_enemy": 1,
-&"distance_to_spawn": 30.0,
-&"enemy": "enemy",
-&"one_shot": 1,
-&"override_spawn_condition": 0,
-&"spawn_delay": 0.0
-}
-meta_properties = {
+class_properties = Dictionary[String, Variant]({
+"counted_enemy": 1,
+"distance_to_spawn": 30.0,
+"enemy": "enemy",
+"one_shot": 1,
+"override_spawn_condition": 0,
+"spawn_delay": 0.0
+})
+meta_properties = Dictionary[String, Variant]({
 "color": Color(1, 0, 0, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
-}
+})

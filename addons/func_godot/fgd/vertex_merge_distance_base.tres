@@ -6,10 +6,11 @@
 script = ExtResource("1_h3atm")
 classname = "VertexMergeDistance"
 description = "Adjustable value to snap vertices to on map build. This can reduce instances of seams between polygons."
-class_properties = {
-"_vertex_merge_distance": 0.008
-}
-class_property_descriptions = {
+class_properties = Dictionary[String, Variant]({
+"_vertex_merge_distance": 0.03125
+})
+class_property_descriptions = Dictionary[String, Variant]({
 "_vertex_merge_distance": "Adjustable value to snap vertices to on map build. This can reduce instances of seams between polygons."
-}
+})
+meta_properties = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://ck575aqs1sbrb"

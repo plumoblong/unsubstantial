@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://djcrmgap53ew0"]
 
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_3gyy1"]
 [ext_resource type="PackedScene" uid="uid://djvampg2b0v17" path="res://prefab/level/unstable_crystal.tscn" id="1_yaidi"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_3gyy1"]
 
@@ -7,6 +8,6 @@
 script = ExtResource("2_3gyy1")
 scene_file = ExtResource("1_yaidi")
 classname = "shrine_crystal"
-class_properties = {
-&"pool_id": -1
-}
+class_properties = Dictionary[String, Variant]({
+"pool_id": -1
+})

@@ -2,13 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://ejc57i5gkl1c" path="res://prefab/level/rising_poison.tscn" id="1_1q7n6"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_3dnr0"]
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_7nrs8"]
 
 [resource]
 script = ExtResource("1_3dnr0")
 scene_file = ExtResource("1_1q7n6")
 classname = "rising_poison"
-class_properties = {
+class_properties = Dictionary[String, Variant]({
 "end_y": 100.0,
 "speed": 0.5
-}
+})
 metadata/_custom_type_script = "uid://cxsqwtsqd8w33"

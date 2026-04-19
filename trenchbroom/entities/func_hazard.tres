@@ -12,10 +12,10 @@ collision_mask = 7
 script_class = ExtResource("2_qs3jq")
 classname = "func_hazard"
 description = "Hurts an EssenceComponent entity when standing on it"
-class_properties = {
+class_properties = Dictionary[String, Variant]({
 "cooldown": 20,
 "damage": 50,
 "die_reason": "You succumbed to the poison."
-}
+})
 node_class = "StaticBody3D"
 metadata/_custom_type_script = "uid://5cow84q03m6a"

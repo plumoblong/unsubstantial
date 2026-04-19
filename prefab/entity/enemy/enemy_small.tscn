@@ -71,8 +71,6 @@ on_hit_velocity_loss = 1.0
 xp_payout = 1
 xp_radius = 0.0
 randomize_scale = 1.3
-other_enemy_damage_taken_mult = 0.0
-other_enemy_knockback_taken_mult = 1.5
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
 [node name="Query" type="Area3D" parent="." unique_id=113299010]

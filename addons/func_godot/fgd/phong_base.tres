@@ -6,14 +6,15 @@
 script = ExtResource("1_04y3n")
 classname = "Phong"
 description = "Phong shading options for SolidClass geometry."
-class_properties = {
+class_properties = Dictionary[String, Variant]({
 "_phong": {
 "Disabled": 0,
 "Smooth shading": 1
 },
 "_phong_angle": 89.0
-}
-class_property_descriptions = {
+})
+class_property_descriptions = Dictionary[String, Variant]({
 "_phong": ["Phong shading", 0],
 "_phong_angle": "Phong smoothing angle"
-}
+})
+meta_properties = Dictionary[String, Variant]({})

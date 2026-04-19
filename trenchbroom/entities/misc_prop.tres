@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://c1k2lotbx3g2d"]
 
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_k4knm"]
 [ext_resource type="PackedScene" uid="uid://bn3h3txykvk22" path="res://prefab/level/prop_spawner.tscn" id="1_okdct"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_k4knm"]
 
@@ -8,15 +9,15 @@ script = ExtResource("2_k4knm")
 scene_file = ExtResource("1_okdct")
 classname = "misc_prop"
 description = "Used for spawning misc objects"
-class_properties = {
+class_properties = Dictionary[String, Variant]({
 "prop_name": "",
 "scale": Vector3(1, 1, 1)
-}
-class_property_descriptions = {
+})
+class_property_descriptions = Dictionary[String, Variant]({
 "prop_name": "Prop object's scene file name",
 "scale": "Created prop's scale"
-}
-meta_properties = {
+})
+meta_properties = Dictionary[String, Variant]({
 "color": Color(1, 1, 0, 1),
 "size": AABB(-8, -8, -8, 8, 8, 8)
-}
+})
