@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://cf5dvsor4652o"
+path="res://.godot/imported/treasure1.3.map-f10927f84a5ba8d5b262997c789a6af6.tres"
+
+[deps]
+
+source_file="res://maps/special/autosave/treasure1.3.map"
+dest_files=["res://.godot/imported/treasure1.3.map-f10927f84a5ba8d5b262997c789a6af6.tres"]
+
+[params]
+

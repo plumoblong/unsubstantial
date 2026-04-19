@@ -183,3 +183,8 @@
 ( 192 -192 752 ) ( 192 192 752 ) ( 192 192 224 ) special/skip [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 }
+// entity 11
+{
+"classname" "special_room"
+"origin" "-416 544 496"
+}

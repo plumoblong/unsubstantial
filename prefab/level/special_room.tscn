@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bmxg2bl4es13d"]
+
+[ext_resource type="Script" uid="uid://b0kthfb5ei3gy" path="res://src/level/special_room.gd" id="1_ucg2b"]
+[ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_0rfpj"]
+[ext_resource type="Resource" uid="uid://c07h8g5oxasgv" path="res://trenchbroom/unsubstantial_map_settings.tres" id="2_mor7h"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_kutq6"]
+vertices = PackedVector3Array(-14.25, 0.5, -234.103, -14.25, 0.5, 14.397, 14.25, 0.5, 14.397, 14.25, 0.5, -234.103)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+sample_partition_type = 1
+geometry_parsed_geometry_type = 1
+filter_ledge_spans = true
+filter_baking_aabb = AABB(0, 0, 0, 0, 5, 0)
+
+[node name="SpecialRoom" type="NavigationRegion3D" unique_id=428993991]
+navigation_mesh = SubResource("NavigationMesh_kutq6")
+script = ExtResource("1_ucg2b")
+
+[node name="Builder" type="Node3D" parent="." unique_id=1704718414]
+script = ExtResource("2_0rfpj")
+map_settings = ExtResource("2_mor7h")
+build_flags = 2
+metadata/_custom_type_script = "uid://cwu5cf7a0awcd"

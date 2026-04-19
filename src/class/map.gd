@@ -29,7 +29,7 @@ func build(file_path : String) -> void:
 	
 func map_build_complete() -> void:
 	if bake_navmesh:
-		bake_navigation_mesh()
+		bake_navigation_mesh(true)
 
 func map_build_failed() -> void:
 	_T.say("Map failed to build. Check the log for more information", Color.RED)
