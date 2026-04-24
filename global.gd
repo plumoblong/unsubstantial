@@ -80,6 +80,8 @@ const FLARE_FILE : PackedScene = preload("res://prefab/flare.tscn")
 const UIPOP_FILE : PackedScene = preload("res://prefab/menus/ui_pop_up.tscn")
 const PH3D : PackedScene = preload("res://prefab/debug/sprite_placeholder.tscn")
 
+const MAP_SETTINGS : FuncGodotMapSettings = preload("res://trenchbroom/unsubstantial_map_settings.tres")
+
 var lowpass_enabled : bool = false
 var time_scale : Array[float] = [1.0, 1.0]
 
@@ -115,7 +117,7 @@ func _ready() -> void:
 
 func _setup_discord_rpc() -> void:
 	if OS.has_feature("web"): return
-	DiscordRPC.app_id = 1316162745384702043
+	#DiscordRPC.app_id = 1316162745384702043
 	
 func _setup_audio_buses() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(config.sound.master))
@@ -125,14 +127,14 @@ func _setup_audio_buses() -> void:
 	
 func change_discord_rpc(update_timestamp : bool = true, details : String = "Chapter 1 Stage 2", state = "5 Shards", small_image : String = "chapter_icon0", small_image_text : String = "The Ether", large_image : String = "poison", large_image_text : String = "plumoblong.github.io", ) -> void:
 	if OS.has_feature("web"): return
-	DiscordRPC.details = details
-	DiscordRPC.state = state
-	DiscordRPC.large_image = large_image
-	DiscordRPC.large_image_text = large_image_text
-	DiscordRPC.small_image = small_image
-	DiscordRPC.small_image_text = small_image_text
-	if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
-	DiscordRPC.refresh()
+	#DiscordRPC.details = details
+	#DiscordRPC.state = state
+	#DiscordRPC.large_image = large_image
+	#DiscordRPC.large_image_text = large_image_text
+	#DiscordRPC.small_image = small_image
+	#DiscordRPC.small_image_text = small_image_text
+	#if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
+	#DiscordRPC.refresh()
 	
 func _process(delta : float) -> void:
 	time += delta
@@ -365,12 +367,10 @@ func set_shaderparam_once(material : ShaderMaterial, parameter : StringName, val
 	material.set_shader_parameter(parameter, value)
 
 func get_color_darkmode(white : bool = true, alpha : float = 1.0) -> Color:
-	var base_color := Color.WHITE if (white == config.ui_dark_mode) else Color.BLACK
+	var base_color : Color = Color.WHITE if (white == config.ui_dark_mode) else Color.BLACK
 	return base_color * Color(1, 1, 1, alpha)
 
 func return_input_binds_to_dict() -> Dictionary:
-	#TODO: Loop through are supported bindable InputMap actions and return their input values to a Dictionary.
-	#      Meant to be used for saving the input binds into config.json
 	return {
 		"up" = InputMap.action_get_events("up")[0],
 		"down" = InputMap.action_get_events("down")[0],
@@ -470,15 +470,15 @@ func _shorten_mousebutton(input : String) -> String:
 		"Right Mouse Button":
 			result = "RMB"
 		"Middle Mouse Button":
-			result = "Mouse 3"
+			result = "M3"
 		"Mouse Wheel Down":
 			result = "Scroll Down"
 		"Mouse Wheel Up":
 			result = "Scroll Up"
 		"Mouse Thumb Button 1":
-			result = "Mouse 4"
+			result = "M4"
 		"Mouse Thumb Button 2":
-			result = "Mouse 5"
+			result = "M5"
 		_:
 			result = input
 	return result

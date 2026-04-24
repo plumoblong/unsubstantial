@@ -55,8 +55,8 @@ const BOLD_START : String = "[b]"
 const BOLD_END : String = "[/b]"
 const PTS_SUFFIX : String = " pts"
 const ESC_SUFFIX : String = "esc"
-const SHARD_SINGULAR : String = "shard"
-const SHARDS_PLURAL : String = "shards"
+const SHARD_SINGULAR : String = "soul"
+const SHARDS_PLURAL : String = "souls"
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
@@ -76,9 +76,9 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
 	
-	var crystals : int = _G.current_run.crystals_collected
-	info_crystal.text = BOLD_START + str(crystals) + BOLD_END + (SHARD_SINGULAR if crystals == 1 else SHARDS_PLURAL)
-	
+	var money : int = player.money
+	info_crystal.text = str(money) + "soul"
+		
 	interaction_tooltip.visible = player.can_interact
 	interaction_tooltip.text = interact_tooltip
 	interaction_description.text = interact_description

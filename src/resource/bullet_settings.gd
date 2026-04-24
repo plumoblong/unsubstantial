@@ -21,7 +21,7 @@ class_name BulletSettings
 @export var pierces : int = 0
 @export var homing : float = 0.0
 @export var homing_on_player : bool = false
-@export var homing_interlpolation : float = 0.75
+#@export var homing_interlpolation : float = 0.75
 @export var bounciness : float = 0.0
 @export var spectral : bool = false
 @export var stun : float = 0.1

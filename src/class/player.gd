@@ -39,6 +39,8 @@ var fullbright : bool = false
 var _mouse_sensitivity : float = 0.005
 var _last_low_quality : bool = false
 
+var money : int = 0
+
 func _enter_tree() -> void:
 	can_control = true
 	_G.player = self
@@ -218,7 +220,7 @@ func essence_component_gained(amount : int) -> void:
 	if not hud.visible:
 		return
 	
-	_G.create_ui_popup("+" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position)
+	#_G.create_ui_popup("+" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position)
 
 func essence_component_fractured(amount : int, _crit : bool) -> void:
 	var time := clampf(amount / float(essence_component.max_essence), 0.25, 1.25)
@@ -230,8 +232,8 @@ func essence_component_fractured(amount : int, _crit : bool) -> void:
 		hit_sfx.play()
 		camera.tween_camera_fov(15.0, 0.5)
 		
-		if hud.visible:
-			_G.create_ui_popup("-" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position - Vector2(12.0, 0.0), Vector2.UP, Color.RED)
+		#if hud.visible:
+			#_G.create_ui_popup("-" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position - Vector2(12.0, 0.0), Vector2.UP, Color.RED)
 		
 		_G.current_run.hits_taken += 1
 		dash_component.can_reset = true

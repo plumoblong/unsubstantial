@@ -129,10 +129,10 @@ scale = Vector2(2.5, 2.5)
 texture = SubResource("GradientTexture2D_h2gp0")
 
 [node name="Bound" type="ColorRect" parent="." unique_id=737609975]
-offset_left = -32.0
-offset_top = -64.0
-offset_right = 32.0
-offset_bottom = 64.0
+offset_left = -30.0
+offset_top = -58.0
+offset_right = 27.0
+offset_bottom = 58.0
 focus_mode = 1
 mouse_default_cursor_shape = 2
 color = Color(0.97, 0, 0.01616642, 0)
@@ -205,7 +205,7 @@ texture = ExtResource("4_xcjxr")
 use_parent_material = true
 position = Vector2(0, 32)
 texture = ExtResource("6_rnqqe")
-vframes = 12
+vframes = 15
 
 [node name="Anim" type="AnimationPlayer" parent="." unique_id=2093231405]
 libraries/ = SubResource("AnimationLibrary_qcpl0")

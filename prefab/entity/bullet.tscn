@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpwtp01tp3tkl" path="res://src/class/bullet.gd" id="1_5oqnd"]
 [ext_resource type="Texture2D" uid="uid://cf5c1ljmst3lm" path="res://images/bullet.png" id="1_affj2"]
+[ext_resource type="PlaneMesh" uid="uid://6rlb33ae8e1r" path="res://res/particle/particle_drawpass_sparkle1.tres" id="3_nanj5"]
 [ext_resource type="AudioStream" uid="uid://njrmv138vj1j" path="res://sfx/bullet_sound.wav" id="4_34tb2"]
 [ext_resource type="Texture2D" uid="uid://75bfio0kx2i" path="res://images/sparkle_small.png" id="4_pflwx"]
 [ext_resource type="AudioStream" uid="uid://dd4jm1igw4a1w" path="res://sfx/bullet_impact.wav" id="5_h0xjc"]
@@ -56,6 +57,12 @@ distance_fade_mode = 1
 material = SubResource("StandardMaterial3D_upcm7")
 size = Vector2(0.3, 0.3)
 orientation = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_upcm7"]
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_nanj5")
+color_ramp = SubResource("GradientTexture1D_h0xjc")
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6054f"]
 gradient = SubResource("Gradient_vqshh")
@@ -265,6 +272,14 @@ visibility_aabb = AABB(-8, -8, -8, 16, 16, 16)
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_nhh02")
 draw_pass_1 = SubResource("PlaneMesh_nanj5")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." unique_id=1496014460]
+amount = 32
+lifetime = 2.0
+visibility_aabb = AABB(-8, -8, -8, 16, 16, 16)
+draw_order = 3
+process_material = SubResource("ParticleProcessMaterial_upcm7")
+draw_pass_1 = ExtResource("3_nanj5")
 
 [node name="Impact" type="GPUParticles3D" parent="." unique_id=592600225]
 emitting = false

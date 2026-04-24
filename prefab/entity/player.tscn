@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="14_m35d1"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="16_38g7u"]
 [ext_resource type="PackedScene" uid="uid://bnfk1f1uvunre" path="res://prefab/menus/player_hud.tscn" id="17_dbo8y"]
+[ext_resource type="AudioStream" uid="uid://drjiu61us1ees" path="res://sfx/coin_pickup.wav" id="23_uadq4"]
 [ext_resource type="PackedScene" uid="uid://du62gvfekrgth" path="res://prefab/animation/player_death_anim.tscn" id="26_uadq4"]
 [ext_resource type="AudioStream" uid="uid://b5oil2dujs8sd" path="res://sfx/xp_pickup.wav" id="27_cwgh7"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="27_yih3o"]
@@ -195,6 +196,7 @@ _data = {
 }
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yih3o"]
+radius = 0.36707488
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
 radius = 1.25
@@ -383,6 +385,7 @@ movement_component = NodePath("../PlayerMovement")
 [node name="ItemStats" type="Node" parent="." unique_id=405505347]
 script = ExtResource("9_m21cj")
 bullet = ExtResource("11_62pul")
+enabled = null
 
 [node name="DashComponent" type="Node" parent="." unique_id=1322946939]
 script = ExtResource("6_4p10s")
@@ -487,6 +490,11 @@ bus = &"SFX1"
 stream = ExtResource("27_cwgh7")
 volume_db = 6.0
 max_polyphony = 3
+bus = &"SFX1"
+
+[node name="CoinPickupSFX" type="AudioStreamPlayer" parent="." unique_id=2038201462]
+stream = ExtResource("23_uadq4")
+volume_db = -12.0
 bus = &"SFX1"
 
 [node name="JumpBufferTimer" type="Timer" parent="." unique_id=621087226]

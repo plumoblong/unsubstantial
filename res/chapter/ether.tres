@@ -1,11 +1,9 @@
 [gd_resource type="Resource" script_class="Chapter" format=3 uid="uid://cgx52g0t14tml"]
 
-[ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="1_auwgg"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_p7rvb"]
 
 [resource]
 script = ExtResource("1_p7rvb")
-environment = ExtResource("1_auwgg")
 maps = Array[String](["ether/map1"])
 map_fallback = "ether"
 color_hue_range = Vector2(0.66, 0.7)

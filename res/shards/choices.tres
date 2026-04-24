@@ -4,11 +4,20 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_2ygss"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_2o1r5"]
 
-[sub_resource type="Resource" id="Resource_sfver"]
+[sub_resource type="Resource" id="Resource_2o1r5"]
 script = ExtResource("1_2ygss")
 stat_name = "More Choices"
 statistic = "choices"
 rarity = 3
+dont_number_stat = true
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_lyu2x"]
+script = ExtResource("1_2ygss")
+stat_name = "Even More Choice"
+statistic = "choices"
+value = 2.0
+rarity = 4
 dont_number_stat = true
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -18,7 +27,6 @@ stat_name = "More Choices"
 image = ExtResource("1_2o1r5")
 weight = 0.2
 shop_cost = 300
-modulates = Dictionary[ExtResource("1_2ygss"), int]({
-SubResource("Resource_sfver"): 1
-})
+legendary_modulates = Array[ExtResource("1_2ygss")]([SubResource("Resource_2o1r5")])
+mythical_modulates = Array[ExtResource("1_2ygss")]([SubResource("Resource_lyu2x")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

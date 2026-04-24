@@ -4,51 +4,58 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_sfver"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_2t7kl"]
 
-[sub_resource type="Resource" id="Resource_sfver"]
+[sub_resource type="Resource" id="Resource_2t7kl"]
 script = ExtResource("1_sfver")
-stat_name = "Movement"
+stat_name = "Agility"
 statistic = "speed"
 operator = 2
 value = 1.05
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_2t7kl"]
-script = ExtResource("1_sfver")
-stat_name = "Movement"
-statistic = "speed"
-operator = 2
-value = 1.1
-rarity = 1
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_h05d7"]
 script = ExtResource("1_sfver")
-stat_name = "Movement"
+stat_name = "Agility"
+statistic = "speed"
+operator = 2
+value = 1.25
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_lm05e"]
+script = ExtResource("1_sfver")
+stat_name = "Agility"
+statistic = "speed"
+operator = 2
+value = 1.5
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_hwipw"]
+script = ExtResource("1_sfver")
+stat_name = "Agility"
 statistic = "speed"
 operator = 2
 value = 1.15
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_lm05e"]
+[sub_resource type="Resource" id="Resource_jp5oy"]
 script = ExtResource("1_sfver")
-stat_name = "Movement"
+stat_name = "Agility"
 statistic = "speed"
 operator = 2
-value = 1.2
-rarity = 3
+value = 1.1
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_2t7kl")
-stat_name = "Movement"
+stat_name = "Agility"
 image = ExtResource("1_2t7kl")
-weight = 0.5
-shop_cost = 200
-modulates = Dictionary[ExtResource("1_sfver"), int]({
-SubResource("Resource_sfver"): 15,
-SubResource("Resource_2t7kl"): 7,
-SubResource("Resource_h05d7"): 3,
-SubResource("Resource_lm05e"): 1
-})
+shop_cost = 50
+common_modulates = Array[ExtResource("1_sfver")]([SubResource("Resource_2t7kl")])
+uncommon_modulates = Array[ExtResource("1_sfver")]([SubResource("Resource_jp5oy")])
+rare_modulates = Array[ExtResource("1_sfver")]([SubResource("Resource_hwipw")])
+legendary_modulates = Array[ExtResource("1_sfver")]([SubResource("Resource_h05d7")])
+mythical_modulates = Array[ExtResource("1_sfver")]([SubResource("Resource_lm05e")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

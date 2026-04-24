@@ -4,55 +4,63 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_v8llm"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_mkqwt"]
 
-[sub_resource type="Resource" id="Resource_0631i"]
-script = ExtResource("1_v8llm")
-stat_name = "Shot Speed"
-statistic = "init_speed"
-bullet_set = true
-operator = 2
-value = 1.05
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_s0w6h"]
+[sub_resource type="Resource" id="Resource_mkqwt"]
 script = ExtResource("1_v8llm")
 stat_name = "Shot Speed"
 statistic = "init_speed"
 bullet_set = true
 operator = 2
 value = 1.1
-rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_8up4n"]
+[sub_resource type="Resource" id="Resource_c6l23"]
 script = ExtResource("1_v8llm")
 stat_name = "Shot Speed"
 statistic = "init_speed"
 bullet_set = true
 operator = 2
-value = 1.15
-rarity = 2
+value = 1.5
+rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_1gme3"]
+[sub_resource type="Resource" id="Resource_3coj6"]
+script = ExtResource("1_v8llm")
+stat_name = "Shot Speed"
+statistic = "init_speed"
+bullet_set = true
+operator = 2
+value = 2.0
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_uskxk"]
 script = ExtResource("1_v8llm")
 stat_name = "Shot Speed"
 statistic = "init_speed"
 bullet_set = true
 operator = 2
 value = 1.25
-rarity = 3
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_i32us"]
+script = ExtResource("1_v8llm")
+stat_name = "Shot Speed"
+statistic = "init_speed"
+bullet_set = true
+operator = 2
+value = 1.15
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_mkqwt")
 stat_name = "Shot Speed"
 image = ExtResource("1_mkqwt")
-weight = 0.9
-shop_cost = 150
-modulates = Dictionary[ExtResource("1_v8llm"), int]({
-SubResource("Resource_0631i"): 10,
-SubResource("Resource_s0w6h"): 7,
-SubResource("Resource_8up4n"): 4,
-SubResource("Resource_1gme3"): 1
-})
+weight = 0.5
+common_modulates = Array[ExtResource("1_v8llm")]([SubResource("Resource_mkqwt")])
+uncommon_modulates = Array[ExtResource("1_v8llm")]([SubResource("Resource_i32us")])
+rare_modulates = Array[ExtResource("1_v8llm")]([SubResource("Resource_uskxk")])
+legendary_modulates = Array[ExtResource("1_v8llm")]([SubResource("Resource_c6l23")])
+mythical_modulates = Array[ExtResource("1_v8llm")]([SubResource("Resource_3coj6")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

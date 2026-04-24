@@ -9,8 +9,8 @@
 script = ExtResource("2_8o081")
 build_occlusion = true
 collision_shape_type = 2
-collision_layer = 7
-collision_mask = 7
+collision_layer = 13311
+collision_mask = 13311
 classname = "func_geo"
 description = "Static collidable geometry. Builds a StaticBody3D with a MeshInstance3D, a single concave CollisionShape3D, and an OccluderInstance3D."
 base_classes = Array[Resource]([ExtResource("1_5mwee"), ExtResource("2_bp8pb"), ExtResource("3_xnsya")])

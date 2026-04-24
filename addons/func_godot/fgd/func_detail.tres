@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("1_0fsmp")
+render_layers = 7
 collision_shape_type = 2
 collision_layer = 7
 collision_mask = 0

@@ -259,7 +259,7 @@ func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) 
 	if not _G.debug_mode and debug_only: 
 		return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
-	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n"
+	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n\n"
 	if not _validate_game(): return
 	if not _c_print_to_chat: return
 	_G.game.chat.add_message("TUX: " + str(log))

@@ -30,3 +30,4 @@ script = ExtResource("1_o81sr")
 fgd_name = "unsubstantial"
 base_fgd_files = Array[Resource]([ExtResource("1_xpdw1")])
 entity_definitions = Array[Resource]([ExtResource("2_jgobn"), ExtResource("3_v6y47"), ExtResource("3_apqds"), ExtResource("4_r88dl"), ExtResource("5_jbgg2"), ExtResource("6_1wc58"), ExtResource("7_6ld5u"), ExtResource("9_5hxfm"), ExtResource("3_xoddu"), ExtResource("10_apqds"), ExtResource("11_r88dl"), ExtResource("12_jbgg2"), ExtResource("14_6ld5u"), ExtResource("15_opjd3"), ExtResource("15_5hxfm"), ExtResource("17_o8ohx"), ExtResource("18_f7rqf"), ExtResource("19_ql0er"), ExtResource("20_e2a35"), ExtResource("21_e2a35"), ExtResource("22_svo3p"), ExtResource("23_ybx74")])
+generate_model_point_class_models = false

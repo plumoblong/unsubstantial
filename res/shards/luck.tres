@@ -4,38 +4,71 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_vjut8"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_0pnmv"]
 
-[sub_resource type="Resource" id="Resource_vjut8"]
-script = ExtResource("1_vjut8")
-stat_name = "Luck"
-statistic = "luck"
-rarity = 1
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_0pnmv"]
 script = ExtResource("1_vjut8")
 stat_name = "Luck"
 statistic = "luck"
-value = 3.0
-rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_a6i3f"]
 script = ExtResource("1_vjut8")
 stat_name = "Luck"
 statistic = "luck"
-value = 5.0
+operator = 2
+value = 1.5
 rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_bbw0p"]
+script = ExtResource("1_vjut8")
+stat_name = "Luck"
+statistic = "luck"
+value = 7.0
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_jrqbq"]
+script = ExtResource("1_vjut8")
+stat_name = "Luck"
+statistic = "luck"
+operator = 2
+value = 2.0
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_0fu6n"]
+script = ExtResource("1_vjut8")
+stat_name = "Luck"
+statistic = "luck"
+value = 15.0
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_5hyrw"]
+script = ExtResource("1_vjut8")
+stat_name = "Luck"
+statistic = "luck"
+value = 5.0
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_iypp7"]
+script = ExtResource("1_vjut8")
+stat_name = "Luck"
+statistic = "luck"
+value = 3.0
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_0pnmv")
 stat_name = "Luck"
 image = ExtResource("1_0pnmv")
-weight = 0.75
-shop_cost = 150
-modulates = Dictionary[ExtResource("1_vjut8"), int]({
-SubResource("Resource_vjut8"): 20,
-SubResource("Resource_0pnmv"): 7,
-SubResource("Resource_a6i3f"): 2
-})
+weight = 0.5
+shop_cost = 50
+common_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_0pnmv")])
+uncommon_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_iypp7")])
+rare_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_5hyrw")])
+legendary_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_a6i3f"), SubResource("Resource_bbw0p")])
+mythical_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_jrqbq"), SubResource("Resource_0fu6n")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

@@ -65,7 +65,7 @@ func exit_pressed() -> void:
 
 func statistics_pressed() -> void:
 	screen = 2
-	statistics_screen.create_shard_grid()
+	statistics_screen.on_open()
 
 func rest_yes_pressed() -> void:
 	_G.change_scene("res://scene/game.tscn")

@@ -4,24 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://cxiqbl6vedio2" path="res://images/item/shard/b_homing.png" id="1_er02h"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_er02h"]
 
-[sub_resource type="Resource" id="Resource_0631i"]
+[sub_resource type="Resource" id="Resource_er02h"]
 script = ExtResource("1_738qq")
 stat_name = "Shot Homing"
 statistic = "homing"
 bullet_set = true
-rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_s0w6h"]
-script = ExtResource("1_738qq")
-stat_name = "Shot Homing"
-statistic = "homing"
-bullet_set = true
-value = 2.5
-rarity = 2
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_8up4n"]
+[sub_resource type="Resource" id="Resource_w0mc3"]
 script = ExtResource("1_738qq")
 stat_name = "Shot Homing"
 statistic = "homing"
@@ -30,15 +20,42 @@ value = 5.0
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
+[sub_resource type="Resource" id="Resource_6fh20"]
+script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
+statistic = "homing"
+bullet_set = true
+operator = 2
+value = 2.5
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_uu0wk"]
+script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
+statistic = "homing"
+bullet_set = true
+value = 3.0
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_4j6c6"]
+script = ExtResource("1_738qq")
+stat_name = "Shot Homing"
+statistic = "homing"
+bullet_set = true
+value = 2.0
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
 [resource]
 script = ExtResource("2_er02h")
 stat_name = "Shot Homing"
 image = ExtResource("1_er02h")
-weight = 0.75
-shop_cost = 200
-modulates = Dictionary[ExtResource("1_738qq"), int]({
-SubResource("Resource_0631i"): 10,
-SubResource("Resource_s0w6h"): 5,
-SubResource("Resource_8up4n"): 1
-})
+weight = 0.5
+common_modulates = Array[ExtResource("1_738qq")]([SubResource("Resource_er02h")])
+uncommon_modulates = Array[ExtResource("1_738qq")]([SubResource("Resource_4j6c6")])
+rare_modulates = Array[ExtResource("1_738qq")]([SubResource("Resource_uu0wk")])
+legendary_modulates = Array[ExtResource("1_738qq")]([SubResource("Resource_w0mc3")])
+mythical_modulates = Array[ExtResource("1_738qq")]([SubResource("Resource_6fh20")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

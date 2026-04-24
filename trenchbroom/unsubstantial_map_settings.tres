@@ -35,7 +35,6 @@ texture_filter = 0
 script = ExtResource("3_k6if4")
 inverse_scale_factor = 16.0
 entity_fgd = ExtResource("2_sveto")
-use_groups_hierarchy = true
 texture_file_extensions = Array[String](["png"])
 clip_texture = "special/clip"
 skip_texture = "special/skip"

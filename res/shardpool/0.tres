@@ -17,5 +17,6 @@
 
 [resource]
 script = ExtResource("1_bd3yc")
+common_weight = 8.0
 shards = Array[ExtResource("2_c4ffe")]([ExtResource("3_fmmun"), ExtResource("4_k5btp"), ExtResource("5_u2363"), ExtResource("6_f37cl"), ExtResource("7_5njd1"), ExtResource("8_5uv8r"), ExtResource("9_c0tc1"), ExtResource("10_0mt2x"), ExtResource("11_c0tc1"), ExtResource("12_0mt2x"), ExtResource("13_0mt2x"), ExtResource("14_82yjd")])
 metadata/_custom_type_script = "uid://bgbbtgjetypx6"

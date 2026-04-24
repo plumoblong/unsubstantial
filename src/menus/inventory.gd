@@ -17,6 +17,54 @@ var rows : int = 3
 var current_description : String = "? ? ?"
 var current_page : int = 0
 var aviable_pages : int = 0
+## Snapshot of added_stats taken when the inventory is opened.
+var _known_stats : Array = []
+
+func on_open() -> void:
+	_known_stats = _G.player.stats.added_stats.duplicate()
+	create_shard_grid()
+
+
+func on_close() -> void:
+	_add_new_shards()
+
+
+func _add_new_shards() -> void:
+	var known_count : int = _known_stats.size()
+	var all_stats   : Array = _G.player.stats.added_stats
+	if all_stats.size() == known_count:
+		return
+	
+	for i : int in range(known_count, all_stats.size()):
+		_create_icon_at(i)
+	
+	_known_stats = all_stats.duplicate()
+
+
+func _create_icon_at(i: int) -> void:
+	if i < icon_holder.get_child_count():
+		return
+
+	var icons_per_page : int = columns * rows
+	var grid_width  : int = columns * ICON_SIZE + (columns - 1) * spacing.x
+	var grid_height : int = rows    * ICON_SIZE + (rows    - 1) * spacing.y
+	var start_x : float = -grid_width  / 2.0 + ICON_SIZE / 2.0
+	var start_y : float = -grid_height / 2.0 + ICON_SIZE / 2.0
+
+	var page          : int = i / icons_per_page
+	var index_in_page : int = i % icons_per_page
+	var col           : int = index_in_page % columns
+	var row           : int = index_in_page / columns
+
+	var shard_icon : ShardIcon = ICON_SCENE.instantiate()
+	shard_icon.position = Vector2(
+		start_x + col * (ICON_SIZE + spacing.x) + page * 480.0,
+		start_y + row * (ICON_SIZE + spacing.y)
+	)
+	icon_holder.add_child(shard_icon)
+	var stat : Array = _G.player.stats.added_stats[i]
+	shard_icon.initialize(stat[0], stat[1])
+
 
 func create_shard_grid() -> void:
 	if _G.player.stats.added_stats.size() == 0: return
@@ -27,18 +75,7 @@ func create_shard_grid() -> void:
 	var icons_per_page : int = columns * rows
 	
 	for i: int in range(_G.player.stats.added_stats.size()):
-		var page : int = i / icons_per_page
-		var index_in_page : int = i % icons_per_page
-		var col : int = index_in_page % columns
-		var row : int = index_in_page / columns
-		
-		var shard_icon : ShardIcon = ICON_SCENE.instantiate()
-		var page_offset : float = page * 480.0
-		shard_icon.position = Vector2(start_x + col * (ICON_SIZE + spacing.x) + page_offset, start_y + row * (ICON_SIZE + spacing.y))
-		var stat : Array = _G.player.stats.added_stats[i]
-		
-		icon_holder.add_child(shard_icon)
-		shard_icon.initialize(stat[0], stat[1])
+		_create_icon_at(i)
 
 func delete_shard_grid() -> void:
 	if icon_holder.get_child_count() == 0: return
@@ -47,7 +84,7 @@ func delete_shard_grid() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
-		delete_shard_grid()
+		on_close()
 	description.text = current_description
 	empty_info.visible = _G.player.stats.added_stats.size() == 0
 	description.visible = _G.player.stats.added_stats.size() != 0

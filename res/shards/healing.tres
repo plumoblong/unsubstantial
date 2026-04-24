@@ -4,30 +4,12 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_fsnt1"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_3rk07"]
 
-[sub_resource type="Resource" id="Resource_sfver"]
-script = ExtResource("1_fsnt1")
-stat_name = "Healing"
-statistic = "esc_mult"
-operator = 2
-value = 1.05
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
-[sub_resource type="Resource" id="Resource_fsnt1"]
-script = ExtResource("1_fsnt1")
-stat_name = "Healing"
-statistic = "esc_mult"
-operator = 2
-value = 1.1
-rarity = 1
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_3rk07"]
 script = ExtResource("1_fsnt1")
 stat_name = "Healing"
 statistic = "esc_mult"
 operator = 2
-value = 1.25
-rarity = 2
+value = 1.1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_r8t22"]
@@ -35,18 +17,45 @@ script = ExtResource("1_fsnt1")
 stat_name = "Healing"
 statistic = "esc_mult"
 operator = 2
-value = 1.5
+value = 1.75
 rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_vj0so"]
+script = ExtResource("1_fsnt1")
+stat_name = "Healing"
+statistic = "esc_mult"
+operator = 2
+value = 2.5
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_d568f"]
+script = ExtResource("1_fsnt1")
+stat_name = "Healing"
+statistic = "esc_mult"
+operator = 2
+value = 1.5
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_16wyp"]
+script = ExtResource("1_fsnt1")
+stat_name = "Healing"
+statistic = "esc_mult"
+operator = 2
+value = 1.2
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_3rk07")
 stat_name = "Healing"
 image = ExtResource("1_3rk07")
-modulates = Dictionary[ExtResource("1_fsnt1"), int]({
-SubResource("Resource_sfver"): 12,
-SubResource("Resource_fsnt1"): 8,
-SubResource("Resource_3rk07"): 5,
-SubResource("Resource_r8t22"): 2
-})
+shop_cost = 35
+common_modulates = Array[ExtResource("1_fsnt1")]([SubResource("Resource_3rk07")])
+uncommon_modulates = Array[ExtResource("1_fsnt1")]([SubResource("Resource_16wyp")])
+rare_modulates = Array[ExtResource("1_fsnt1")]([SubResource("Resource_d568f")])
+legendary_modulates = Array[ExtResource("1_fsnt1")]([SubResource("Resource_r8t22")])
+mythical_modulates = Array[ExtResource("1_fsnt1")]([SubResource("Resource_vj0so")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

@@ -20,7 +20,7 @@ var scale_factor: float = 0.03125
 		scale_factor = 1.0 / value
 
 ## [FuncGodotFGDFile] that translates map file classnames into Godot nodes and packed scenes.
-@export var entity_fgd: FuncGodotFGDFile = preload("res://addons/func_godot/fgd/func_godot_fgd.tres")
+@export var entity_fgd: FuncGodotFGDFile = load("res://addons/func_godot/fgd/func_godot_fgd.tres")
 
 ## If true, will organize [SceneTree] using TrenchBroom Layers and Groups or Hammer Visgroups. Groups will be generated as [Node3D] nodes. 
 ## All non-entity structural brushes will be moved out of their groups and merged into the `Worldspawn` entity.

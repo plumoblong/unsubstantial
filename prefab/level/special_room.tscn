@@ -2,19 +2,23 @@
 
 [ext_resource type="Script" uid="uid://b0kthfb5ei3gy" path="res://src/level/special_room.gd" id="1_ucg2b"]
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_0rfpj"]
-[ext_resource type="Resource" uid="uid://c07h8g5oxasgv" path="res://trenchbroom/unsubstantial_map_settings.tres" id="2_mor7h"]
+[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_0rfpj"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_kutq6"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_0rfpj"]
 sample_partition_type = 1
 geometry_parsed_geometry_type = 1
 filter_ledge_spans = true
 filter_baking_aabb = AABB(0, 0, 0, 0, 5, 0)
 
 [node name="SpecialRoom" type="NavigationRegion3D" unique_id=428993991]
-navigation_mesh = SubResource("NavigationMesh_kutq6")
+navigation_mesh = SubResource("NavigationMesh_0rfpj")
 script = ExtResource("1_ucg2b")
 
-[node name="Builder" type="Node3D" parent="." unique_id=1704718414]
+[node name="Builder" type="Node3D" parent="." unique_id=556427951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("2_0rfpj")
-map_settings = ExtResource("2_mor7h")
+map_settings = ExtResource("3_0rfpj")
+build_flags = 2
 metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
+
+[connection signal="ready" from="Builder" to="." method="builder_ready"]

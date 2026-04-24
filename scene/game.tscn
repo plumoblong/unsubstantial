@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://bpwhvorsucmn5"]
 
 [ext_resource type="Script" uid="uid://dr4it7887glkj" path="res://src/game.gd" id="1_uu38s"]
-[ext_resource type="Script" uid="uid://bpovxoefw8wu3" path="res://src/class/map.gd" id="2_81276"]
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
+[ext_resource type="Resource" uid="uid://c7vt6mx0osl47" path="res://res/chapter/palace.tres" id="8_ve786"]
+[ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="11_i6gbm"]
+[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="12_ux4dc"]
 [ext_resource type="FontFile" uid="uid://b25yuro7twaf1" path="res://font/3x5.ttf" id="13_ve786"]
 [ext_resource type="Shader" uid="uid://o6634m3p3twg" path="res://src/shader/invert.gdshader" id="15_0lu6w"]
+[ext_resource type="Script" uid="uid://c6gvuwex5hhu1" path="res://src/component/shard_picker_component.gd" id="16_0lu6w"]
 [ext_resource type="Texture2D" uid="uid://btnjop7peo7e0" path="res://images/entity/human_small.png" id="17_i6gbm"]
 [ext_resource type="Script" uid="uid://qtuj5slhqqp6" path="res://src/component/chapter_manager.gd" id="33_d218c"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="35_efr1a"]
 [ext_resource type="Resource" uid="uid://cgx52g0t14tml" path="res://res/chapter/ether.tres" id="36_x3x2e"]
-[ext_resource type="Resource" uid="uid://c7vt6mx0osl47" path="res://res/chapter/palace.tres" id="37_c3n0e"]
 [ext_resource type="PackedScene" uid="uid://cp3ooy8su1hye" path="res://prefab/menus/chat_feed.tscn" id="40_imfdu"]
 [ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="42_lip20"]
 
@@ -23,11 +25,11 @@ shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
 
 [node name="Game" type="Node3D" unique_id=449548246]
+process_priority = 2
+process_physics_priority = 2
 script = ExtResource("1_uu38s")
 
-[node name="Map" type="NavigationRegion3D" parent="." unique_id=1561911892]
-script = ExtResource("2_81276")
-metadata/_custom_type_script = "uid://bpovxoefw8wu3"
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=764388140]
 
 [node name="Player" parent="." unique_id=477399054 instance=ExtResource("3_2026n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -42,9 +44,13 @@ layer = 2
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2010867329]
 bus = &"Music"
 
+[node name="ShardPicker" type="Node" parent="." unique_id=485459492]
+script = ExtResource("16_0lu6w")
+
 [node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
 script = ExtResource("33_d218c")
-all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e"), ExtResource("37_c3n0e")])
+all = Array[ExtResource("35_efr1a")]([ExtResource("36_x3x2e"), ExtResource("8_ve786")])
+environments = Array[Environment]([ExtResource("11_i6gbm"), ExtResource("12_ux4dc")])
 
 [node name="Enemies" type="Node" parent="." unique_id=1809856368]
 

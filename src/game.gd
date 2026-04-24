@@ -1,7 +1,8 @@
 extends Node3D
 class_name Game
 
-@onready var current_map : Map = $Map
+var current_map : Map
+@onready var map_bulder : FuncGodotMap = $Map/Builder
 @onready var enemies : Node = $Enemies
 @onready var pause_screen : Node2D = $Pause/Node2D
 @onready var chapter : ChapterManager = $ChapterManager
@@ -12,6 +13,8 @@ class_name Game
 @onready var ambience_player : AudioStreamPlayer3D = $Ambience
 @onready var anim_fix_color : ColorRect = $AnimFix/Color
 @onready var difficulty_label : Label = $AnimFix/Label
+@onready var world_env : WorldEnvironment = $Environment
+@onready var shard_picker : ShardPickerComponent = $ShardPicker
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
@@ -42,14 +45,16 @@ var difficulty_bonus : float = 1.0
 var enemies_killed : int = 0
 
 signal level_changing
+signal map_built
 
 func _ready() -> void:
 	_G.game = self
 	_G.save.can_continue = false
 	_reset_run_stats()
 	_initialize_seed()
-	_setup_starting_level()
+	
 	pause_node.hide()
+	_setup_starting_level()
 
 func _reset_run_stats() -> void:
 	_G.current_run.kills = 0
@@ -81,12 +86,16 @@ func _process(_delta : float) -> void:
 	difficulty_label.visible = _G.show_fps
 	if Engine.get_physics_frames() % 5 == 0:
 		$AnimFix/Sprite2D.modulate = get_chapter_color()
+
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus)
+	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.1) * difficulty_bonus)
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
 	$AnimFix/Sprite2D.visible = _G.show_fps
+
+func set_env(id : int) -> void:
+	world_env.set_environment(chapter.environments[id])
 
 func _handle_input() -> void:
 	if ending_level or in_any_menu:
@@ -102,13 +111,12 @@ func _handle_input() -> void:
 		elif Input.is_action_just_pressed("inventory"):
 			pause_node.visible = true
 			pause_screen.show()
-			pause_screen.screen = 2
-			pause_screen.statistics_screen.create_shard_grid()
+			pause_screen.statistics_pressed()
 	elif pause_screen.screen == 2:
 		if Input.is_action_just_pressed("inventory"):
 			pause_screen.show()
-			pause_screen.statistics_screen.delete_shard_grid()
 			pause_screen.screen = 0
+			pause_screen.statistics_screen.on_close()
 
 func _update_pause_state() -> void:
 	if pause_node.visible:
@@ -156,13 +164,12 @@ func change_map_autobuild(map_file_path : String) -> void:
 		return
 	
 	enemies_killed = 0
-	current_map.queue_free()
+	if current_map != null: current_map.queue_free()
 	
 	var map_instance : Map = MAP_SCENE.instantiate()
 	map_instance.name = "Map"
-	current_map = map_instance
-	add_child(current_map)
-	current_map.build(map_file_path)
+	add_child(map_instance)
+	map_instance.build(map_file_path)
 	
 	_reset_player_state()
 
@@ -258,6 +265,7 @@ func wait(time : float = 0.05) -> void:
 	time_scale = 1.0
 
 func map_build_complete() -> void:
+	anim_fix_color.show()
 	anim_fix_color.color = _G.get_color_darkmode(true, 1.0)
 	_G.tween(anim_fix_color, "color", _G.get_color_darkmode(true, 0.0), 0.5)
 	ending_level = false
@@ -270,8 +278,11 @@ func timer_timeout() -> void:
 	_G.player.camera.screenshot()
 
 func switch_chapters() -> void:
-	chapter.current = chapter.all[clampi(actual_stage, 0, chapter.all.size() - 1)]
-
+	var next_chapter : Chapter = chapter.get_chapter_for_stage(actual_stage)
+	if next_chapter != chapter.current:
+		chapter.available_maps.clear()
+	chapter.current = next_chapter
+ 
 func get_chapter_color() -> Color:
 	var h : float = randf_range(chapter.current.color_hue_range.x, chapter.current.color_hue_range.y)
 	var s : float = randf_range(chapter.current.color_saturation_range.x, chapter.current.color_saturation_range.y)
@@ -279,7 +290,7 @@ func get_chapter_color() -> Color:
 	var a : float = randf_range(chapter.current.color_alpha_range.x, chapter.current.color_alpha_range.y)
 	
 	return Color.from_hsv(h, s, v, a)
-
+ 
 func update_rpc(update_timestamp : bool = false) -> void:
 	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)
 	var rpc_state : String = current_map_path

@@ -42,7 +42,7 @@ var esc_max : int = 300
 var esc_mult : float = 1.0
 var esc_decay : float = 5.0
 
-var crosshair_width : float = 1.0
+var money_mult : float = 1.0
 
 var defense : float = 10.0
 
@@ -50,12 +50,14 @@ var actual_damage : int
 var actual_crit : float
 var actual_atkspd : float
 
+
+
 func _ready() -> void:
 	bullet = PLAYER_BULLET_DEFAULT.duplicate()
 	
 
 func add_stat(modulate : Modulate, stat_texture : Texture) -> void:
-	modulate.append(self)
+	modulate.append()
 	added_stats.push_back([modulate, stat_texture])
 
 func update() -> void:

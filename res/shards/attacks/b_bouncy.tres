@@ -4,31 +4,48 @@
 [ext_resource type="Texture2D" uid="uid://xoljo5n262xn" path="res://images/item/shard/b_bouncy.png" id="1_x2j2h"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_x2j2h"]
 
-[sub_resource type="Resource" id="Resource_8ajnq"]
+[sub_resource type="Resource" id="Resource_x2j2h"]
 script = ExtResource("1_rdouf")
 stat_name = "Shot Bounciness"
 statistic = "bounciness"
 bullet_set = true
-value = 0.2
-rarity = 2
+rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_rdouf"]
+[sub_resource type="Resource" id="Resource_edwtg"]
+script = ExtResource("1_rdouf")
+stat_name = "Shot Bounciness"
+statistic = "bounciness"
+bullet_set = true
+operator = 2
+value = 1.5
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_sesfk"]
 script = ExtResource("1_rdouf")
 stat_name = "Shot Bounciness"
 statistic = "bounciness"
 bullet_set = true
 value = 0.5
-rarity = 3
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_7hkc2"]
+script = ExtResource("1_rdouf")
+stat_name = "Shot Bounciness"
+statistic = "bounciness"
+bullet_set = true
+value = 0.25
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_x2j2h")
 stat_name = "Shot Bounciness"
 image = ExtResource("1_x2j2h")
-shop_cost = 200
-modulates = Dictionary[ExtResource("1_rdouf"), int]({
-SubResource("Resource_8ajnq"): 3,
-SubResource("Resource_rdouf"): 1
-})
+uncommon_modulates = Array[ExtResource("1_rdouf")]([SubResource("Resource_7hkc2")])
+rare_modulates = Array[ExtResource("1_rdouf")]([SubResource("Resource_sesfk")])
+legendary_modulates = Array[ExtResource("1_rdouf")]([SubResource("Resource_x2j2h")])
+mythical_modulates = Array[ExtResource("1_rdouf")]([SubResource("Resource_edwtg")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

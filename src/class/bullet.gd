@@ -23,10 +23,11 @@ var disable_seek : bool = true
 var can_attack_parent : bool = false
 
 var target : Node3D
+var target_blacklist : Array[Node3D]
+const BLACKLIST_LIMIT : int = 5
 
 # Cached base speed after _setup_speed(), used as the anchor for acceleration math.
 var _base_speed : float
-
 const BASE_SIZE : float = 0.5
 const SIZE_CLAMP_MIN : float = 34.0
 const SIZE_CLAMP_MAX : float = 1000.0
@@ -34,6 +35,7 @@ const SIZE_DIVISOR : float = 400.0
 const PIERCE_HITBOX_ACTIVATE_TIME : float = 0.06
 const HOMING_ACTIVATE_TIME : float = 0.1
 const HOMING_REACH_DISTANCE : float = 0.2
+const HOMING_INTERPOLATION : float = 0.35
 
 func _ready() -> void:
 	pierces_left = config.pierces
@@ -123,7 +125,8 @@ func _update_movement(delta: float) -> void:
 
 func _calculate_steering() -> Vector3:
 	if config.homing_on_player: return _seek_player()
-	if target and not disable_seek: return _seek_target()
+	if target and not disable_seek: 
+		return _seek_target()
 	return direction if direction != Vector3.ZERO else -transform.basis.z
 
 func _seek_target() -> Vector3:
@@ -131,7 +134,7 @@ func _seek_target() -> Vector3:
 		target = null
 		return direction if direction != Vector3.ZERO else -transform.basis.z
 	var desired: Vector3 = (target.global_position - global_position).normalized() * speed
-	return lerp(velocity, desired, config.homing_interlpolation).normalized()
+	return lerp(velocity, desired, HOMING_INTERPOLATION).normalized()
 
 func _seek_player() -> Vector3:
 	var player_head: Vector3 = _G.player.global_position + Vector3(0.0, 1.1, 0.0)
@@ -139,7 +142,7 @@ func _seek_player() -> Vector3:
 		config.homing_on_player = false
 		return direction if direction != Vector3.ZERO else -transform.basis.z
 	var desired: Vector3 = (player_head - global_position).normalized() * speed
-	return lerp(velocity, desired, config.homing_interlpolation).normalized()
+	return lerp(velocity, desired, HOMING_INTERPOLATION).normalized()
 
 
 func imma_bounce() -> void:
@@ -243,13 +246,21 @@ func body_entered(body: Node3D) -> void:
 		handle_destroy()
 
 func seeker_body_entered(body: Node3D) -> void:
-	if body is not CharacterBody3D or config.homing_on_player:
-		return
-	
-	if body != target and body != get_parent():
+	if body is not CharacterBody3D or config.homing_on_player: return
+	if body in target_blacklist: return
+	if target == null and body != get_parent():
 		target = body
+		
+		target_blacklist.append(target)
+		_T.say( "[ " + name + " ]: " + str(body) + " added to target_blacklist.", Color.WHITE, false)
+		_T.say("[ " + name + " ].target_blacklist: " + str(target_blacklist), Color.WHITE, false)
+	
 
-func seeker_body_exited(_body: Node3D) -> void:
+func seeker_body_exited(body: Node3D) -> void:
+	if body in target_blacklist and target == body:
+		target_blacklist.pop_back()
+		target = null
+		_T.say( "[ " + name + " ]: " + str(body) + " removed from target_blacklist.", Color.WHITE, false)
 	speed *= 1.1
 
 func parry_seeker_area_entered(area: Area3D) -> void:

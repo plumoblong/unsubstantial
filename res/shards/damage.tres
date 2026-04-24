@@ -6,30 +6,69 @@
 
 [sub_resource type="Resource" id="Resource_v2jpd"]
 script = ExtResource("1_xe6bi")
-value = 10.0
-rarity = 1
+value = 5.0
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_m1m7g"]
 script = ExtResource("1_xe6bi")
-value = 20.0
-rarity = 2
+operator = 2
+value = 1.1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_wd373"]
 script = ExtResource("1_xe6bi")
-value = 40.0
+value = 50.0
 rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_a4r87"]
+script = ExtResource("1_xe6bi")
+operator = 2
+value = 1.5
+rarity = 3
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_c2u78"]
+script = ExtResource("1_xe6bi")
+operator = 2
+value = 2.0
+rarity = 4
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_bqqxf"]
+script = ExtResource("1_xe6bi")
+value = 35.0
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_kh3nr"]
+script = ExtResource("1_xe6bi")
+operator = 2
+value = 1.3
+rarity = 2
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_4rmbp"]
+script = ExtResource("1_xe6bi")
+value = 15.0
+rarity = 1
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_beagb"]
+script = ExtResource("1_xe6bi")
+operator = 2
+value = 1.2
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
 script = ExtResource("2_v2jpd")
 stat_name = "Damage"
 image = ExtResource("1_v2jpd")
-shop_cost = 200
-modulates = Dictionary[ExtResource("1_xe6bi"), int]({
-SubResource("Resource_v2jpd"): 10,
-SubResource("Resource_m1m7g"): 5,
-SubResource("Resource_wd373"): 1
-})
+shop_cost = 50
+common_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_v2jpd"), SubResource("Resource_m1m7g")])
+uncommon_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_4rmbp"), SubResource("Resource_beagb")])
+rare_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_bqqxf"), SubResource("Resource_kh3nr")])
+legendary_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_wd373"), SubResource("Resource_a4r87")])
+mythical_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_c2u78")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

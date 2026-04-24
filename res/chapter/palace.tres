@@ -2,21 +2,19 @@
 
 [ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="1_bd46r"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_idgru"]
-[ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="2_vp0qd"]
 
 [resource]
 script = ExtResource("1_idgru")
 chapter_name = "The Palace"
 description = "One of Many"
 id = 1
-environment = ExtResource("2_vp0qd")
+stage_start = 1
 maps = Array[String](["chapter1/map4", "chapter1/map3", "chapter1/map2", "chapter1/map1"])
-boss_maps = Array[String](["chapter1/boss1"])
 map_fallback = "chapter1/map1"
-remove_maps_from_pool = false
-y_boundary = -16.0
+boss_stage = 5
+boss_maps = Array[String](["chapter1/boss1"])
 ambience_streams = Array[AudioStream]([ExtResource("1_bd46r")])
-color_hue_range = Vector2(0.7, 1)
+color_hue_range = Vector2(0.444, 1)
 color_saturation_range = Vector2(0.75, 0.9)
 color_value_range = Vector2(0.7, 1)
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

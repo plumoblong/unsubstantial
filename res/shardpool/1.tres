@@ -14,6 +14,6 @@
 script = ExtResource("1_3i8bt")
 pool_id = 1
 pool_name = "Attrubute Shard Pool"
-pool_crystal_color = Color(1, 0.3706619, 0.50977874, 1)
+pool_crystal_color = Color(0.57720196, 1, 0.98260826, 1)
 shards = Array[ExtResource("2_i5emq")]([ExtResource("3_duttb"), ExtResource("4_lakv2"), ExtResource("5_3i8bt"), ExtResource("6_i5emq"), ExtResource("8_68l5r"), ExtResource("8_duttb"), ExtResource("7_mr35i")])
 metadata/_custom_type_script = "uid://bgbbtgjetypx6"

@@ -16,9 +16,15 @@ func _physics_process(delta : float) -> void:
 	if _G.player.can_control:
 		global_position += direction * speed * delta
 
-func body_entered(body : Node3D) -> void:
+func body_entered(body : Player) -> void:
 	if body is not Player: return
-	body.essence_component.gain(10.0 * heal_amount * body.essence_component.heal_multiplier)
-	queue_free.call_deferred()
-	body.get_node("XPPickupSFX").pitch_scale = randf_range(0.85, 1.15)
-	body.get_node("XPPickupSFX").play()
+	if body.essence_component.ratio < 1.0:
+		body.essence_component.gain(10.0 * heal_amount * body.essence_component.heal_multiplier)
+		queue_free.call_deferred()
+		body.get_node("XPPickupSFX").pitch_scale = randf_range(0.85, 1.15)
+		body.get_node("XPPickupSFX").play()
+	else:
+		body.money += heal_amount * body.stats.money_mult
+		queue_free.call_deferred()
+		body.get_node("CoinPickupSFX").pitch_scale = randf_range(0.75, 1.00) + clampf(body.money * 0.001, 0.0, 0.5)
+		body.get_node("CoinPickupSFX").play()

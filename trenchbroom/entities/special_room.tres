@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://b2lhpqq3curjp"]
 
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_a2108"]
 [ext_resource type="PackedScene" uid="uid://bmxg2bl4es13d" path="res://prefab/level/special_room.tscn" id="1_pa6i5"]
 [ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="2_a2108"]
 
@@ -8,13 +9,10 @@ script = ExtResource("2_a2108")
 scene_file = ExtResource("1_pa6i5")
 classname = "special_room"
 description = "a randomly chosen 384x384 units sized room"
-class_properties = {
-"allow_challenge": false,
-"allow_shop": false,
-"allow_shrine": false,
-"allow_treasure": true
-}
-meta_properties = {
+class_properties = Dictionary[String, Variant]({
+"maps": "treasure1;treasure2;"
+})
+meta_properties = Dictionary[String, Variant]({
 "color": Color(1, 0.53333336, 0, 1),
-"size": AABB(-192, -192, 0, 192, 192, 16)
-}
+"size": AABB(-192, -192, -8, 192, 192, 8)
+})

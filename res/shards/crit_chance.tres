@@ -4,22 +4,27 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_xaaji"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_vyk3q"]
 
-[sub_resource type="Resource" id="Resource_sfver"]
+[sub_resource type="Resource" id="Resource_vyk3q"]
 script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
-value = 2.0
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_2t7kl"]
+[sub_resource type="Resource" id="Resource_o1nyp"]
 script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
-value = 5.0
-rarity = 1
+value = 25.0
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_h05d7"]
+[sub_resource type="Resource" id="Resource_vp0pg"]
+script = ExtResource("1_xaaji")
+stat_name = "Crit Chance"
+statistic = "crit_chance"
+value = 50.0
+metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
+
+[sub_resource type="Resource" id="Resource_efkl8"]
 script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
@@ -27,12 +32,12 @@ value = 10.0
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
-[sub_resource type="Resource" id="Resource_lm05e"]
+[sub_resource type="Resource" id="Resource_spu2w"]
 script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
-value = 20.0
-rarity = 3
+value = 5.0
+rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [resource]
@@ -40,11 +45,10 @@ script = ExtResource("2_vyk3q")
 stat_name = "Crit Chance"
 image = ExtResource("1_vyk3q")
 weight = 0.5
-shop_cost = 250
-modulates = Dictionary[ExtResource("1_xaaji"), int]({
-SubResource("Resource_sfver"): 12,
-SubResource("Resource_2t7kl"): 6,
-SubResource("Resource_h05d7"): 3,
-SubResource("Resource_lm05e"): 1
-})
+shop_cost = 20
+common_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_vyk3q")])
+uncommon_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_spu2w")])
+rare_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_efkl8")])
+legendary_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_o1nyp")])
+mythical_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_vp0pg")])
 metadata/_custom_type_script = "uid://yu3n1cklhslt"

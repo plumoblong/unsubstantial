@@ -27,9 +27,9 @@ db = 1
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_4ctud"]
 resource_name = "Reverb"
 predelay_msec = 100.0
-room_size = 0.5
+room_size = 0.38
 spread = 0.74
-hipass = 0.1
+hipass = 0.35
 wet = 0.15
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_3fsuv"]
