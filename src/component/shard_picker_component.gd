@@ -5,13 +5,22 @@ class_name ShardPickerComponent
 #properties for shard icon type stuff, or displaying the raritiess
 
 const RARITY_COLOR : Array[Color] = [
-	Color("ffc050ff"),
-	Color("29b6ccff"),
-	Color("c24fc2ff"),
-	Color("b3005fff"),
-	Color("ffffffff")
+	Color("ffc050ff"), # RARITY.COMMON
+	Color("29b6ccff"), # RARITY.UNCOMMON
+	Color("c24fc2ff"), # RARITY.EPIC
+	Color("b3005fff"), # RARITY.LEGENDARY
+	Color("ffffffff")  # RARITY.MYTHIC
 ]
 
+@export var pools : Array[StatShardPool] = [
+	preload("res://res/shardpool/common.tres")   ,  # id: 0
+	preload("res://res/shardpool/attribute.tres"),  # id: 1
+]
+
+@export var pool_weights : Dictionary[int, int] = {
+	0 : 8, #common.tres
+	1 : 1  #attribute.tres
+}
 
 ## Full pick pipeline: rarity → shard → modulate.
 ## Zeroes out the chosen shard in the pool so it can't be picked again.
@@ -66,13 +75,13 @@ func pick_shard(weighted_pool: Dictionary[StatShard, int], rarity: Modulate.RARI
 
 
 ## Picks a modulate from the shard's own modulate table.
-func pick_modulate(shard: StatShard, rarity : Modulate.RARITY) -> Modulate:
+func pick_modulate(shard : StatShard, rarity : Modulate.RARITY) -> Modulate:
 	var mod : Modulate = shard.get_random_modulate(rarity)
 	_T.say(name + ": Picked Modulate from " + str(shard) + ": " + str(mod), Color.NAVAJO_WHITE, true)
 	return mod
 
 ## Returns the luck-adjusted weight table for all rarity tiers.
-func get_rarity_weights(pool : StatShardPool, luck: int) -> Dictionary[Modulate.RARITY, float]:
+func get_rarity_weights(pool : StatShardPool, luck : float) -> Dictionary[Modulate.RARITY, float]:
 	return {
 		Modulate.RARITY.COMMON    : maxf(pool.common_weight    - luck * 0.5,        0),
 		Modulate.RARITY.UNCOMMON  : maxf(pool.uncommon_weight  - luck * 0.25,  1),
@@ -81,7 +90,7 @@ func get_rarity_weights(pool : StatShardPool, luck: int) -> Dictionary[Modulate.
 		Modulate.RARITY.MYTHIC    : maxf(pool.mythic_weight    + luck * 0.01, 0),
 	}
 	
-func _shard_has_rarity(shard: StatShard, rarity: Modulate.RARITY) -> bool:
+func _shard_has_rarity(shard : StatShard, rarity : Modulate.RARITY) -> bool:
 	var lut : Array[Array] = [
 		shard.common_modulates,
 		shard.uncommon_modulates,

@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_p7rvb"]
 
+[sub_resource type="Gradient" id="Gradient_p7rvb"]
+offsets = PackedFloat32Array(0, 0.60871214, 0.8208333, 1)
+colors = PackedColorArray(0.93, 0.88, 1, 1, 0.6752799, 0.5704, 0.92, 1, 0.21249992, 0, 0.51, 1, 0, 0.003921569, 0.1254902, 1)
+
 [resource]
 script = ExtResource("1_p7rvb")
 maps = Array[String](["ether/map1"])
 map_fallback = "ether"
-color_hue_range = Vector2(0.66, 0.7)
-color_saturation_range = Vector2(0.2, 0.4)
-color_value_range = Vector2(1, 1)
-color_alpha_range = Vector2(0.75, 1)
+color_ranges = SubResource("Gradient_p7rvb")
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

@@ -7,14 +7,13 @@ const WEIGHT_MULTIPLIER : int = 20
 @export var pool_name         : String = "Common Shard Pool"
 @export var pool_crystal_color: Color  = Color.WHITE
 
-@export var common_weight    : float = 10.0
-@export var uncommon_weight  : float = 4.0
-@export var epic_weight      : float = 1.5
-@export var legendary_weight : float = 0.5
+@export var common_weight    : float = 3.0
+@export var uncommon_weight  : float = 2.0
+@export var epic_weight      : float = 1.0
+@export var legendary_weight : float = 0.3
 @export var mythic_weight    : float = 0.01
 
 @export var shards            : Array[StatShard] = []
-
 
 ## Builds and returns a weighted shard table ready for random selection.
 func build_pool() -> Dictionary[StatShard, int]:

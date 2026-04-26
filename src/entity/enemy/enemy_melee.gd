@@ -31,7 +31,6 @@ func essence_component_fractured(amount : int, i_time : float) -> void:
 	enemy.handle_fracture(amount, i_time, movement_component)
 
 func _physics_process(delta : float) -> void:
-	agent.debug_enabled = _G.debug_mode
 	
 	# Cache frequently used values
 	target_pos = _G.player.target.get_pos_multiplied(0.5 + enemy.random_factor)

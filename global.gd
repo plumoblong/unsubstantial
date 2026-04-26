@@ -113,6 +113,7 @@ func _ready() -> void:
 	seed(int(Time.get_unix_time_from_system()))
 	version_label.text = VERSION.to_upper()
 	
+	
 	_setup_discord_rpc()
 
 func _setup_discord_rpc() -> void:
@@ -138,7 +139,7 @@ func change_discord_rpc(update_timestamp : bool = true, details : String = "Chap
 	
 func _process(delta : float) -> void:
 	time += delta
-	
+	version_label.global_position = _R.get_top_right(true, -1, 1) - Vector2i(version_label.size.x, 0.0)
 	if _last_low_quality != config.video.low:
 		_cached_viewport.scaling_3d_scale = 0.5 if config.video.low else 1.0
 		_last_low_quality = config.video.low

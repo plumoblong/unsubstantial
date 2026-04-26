@@ -10,10 +10,9 @@ class_name MapOptions
 }
 
 func _func_godot_build_complete() -> void:
-	
 	_G.game.current_map.set_data(func_godot_properties)
 	$Info.text = "map_name: \"" + func_godot_properties["map_name"] + "\"" 
 	$Info.text = "chapter_id: " + str(func_godot_properties["chapter_id"])
 
 func _process(_delta: float) -> void:
-	visible = _G.show_fps
+	visible = _T.debug_flags[1]

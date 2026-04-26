@@ -4,15 +4,6 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_s0w6h"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_8up4n"]
 
-[sub_resource type="Resource" id="Resource_8up4n"]
-script = ExtResource("1_s0w6h")
-stat_name = "Shot Range"
-statistic = "life_time"
-bullet_set = true
-operator = 2
-value = 1.1
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_1gme3"]
 script = ExtResource("1_s0w6h")
 stat_name = "Shot Range"
@@ -20,7 +11,7 @@ statistic = "life_time"
 bullet_set = true
 operator = 2
 value = 1.75
-rarity = 4
+rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_2do88"]
@@ -47,7 +38,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_8up4n")
 stat_name = "Shot Range"
 image = ExtResource("1_8up4n")
-common_modulates = Array[ExtResource("1_s0w6h")]([SubResource("Resource_8up4n")])
+weight = 0.5
 uncommon_modulates = Array[ExtResource("1_s0w6h")]([SubResource("Resource_cnkst")])
 rare_modulates = Array[ExtResource("1_s0w6h")]([SubResource("Resource_2do88")])
 legendary_modulates = Array[ExtResource("1_s0w6h")]([SubResource("Resource_1gme3")])

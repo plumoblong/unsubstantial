@@ -2,90 +2,113 @@ extends Node3D
 class_name EnemySpawner
 
 @export var func_godot_properties : Dictionary = {
-	"one_shot" = 1,
-	"counted_enemy" = 1,
-	"distance_to_spawn" = 25.0,
-	"enemy" = "enemy",
-	"spawn_delay" = 0.0,
-	"override_spawn_condition" = 0,
+	"one_shot"                = 1,
+	"counted_enemy"           = 1,
+	"distance_to_spawn"       = 25.0,
+	"enemy"                   = "enemy",
+	"spawn_delay"             = 0.0,
+	"override_spawn_condition"= 0,
 }
 
-const SPAWN_ANIM : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP : int = 12
-const ENEMY_PATH_PREFIX : String = "res://prefab/entity/enemy/"
-const ENEMY_PATH_SUFFIX : String = ".tscn"
+const SPAWN_ANIM        : PackedScene = preload("res://prefab/animation/spawning.tscn")
+const ENEMY_CAP         : int         = 12
+const ENEMY_PATH_PREFIX : String      = "res://prefab/entity/enemy/"
+const ENEMY_PATH_SUFFIX : String      = ".tscn"
 
-@onready var light : Node = $light
+@onready var light   : Node      = $light
 @onready var raycast : RayCast3D = $RayCast3D
 
-var spawned : bool = false
+var spawned           : bool  = false
 var distance_to_spawn : float = 30.0
-var enemy_res : PackedScene
-var is_one_shot : bool
-var is_counted_enemy : bool
-var spawn_delay : float
-var enemy_name : String
+var enemy_res         : PackedScene
+var is_one_shot       : bool
+var is_counted_enemy  : bool
+var spawn_delay       : float
+var enemy_name        : String
+
 
 func _func_godot_build_complete() -> void:
-	if func_godot_properties["distance_to_spawn"] == 30.0:
-		distance_to_spawn = randf_range(25.0, 35.0)
-	else:
-		distance_to_spawn = func_godot_properties["distance_to_spawn"]
-	
-	light.omni_range = distance_to_spawn
-	
-	# Cache properties
-	is_one_shot = func_godot_properties["one_shot"]
-	is_counted_enemy = func_godot_properties["counted_enemy"]
-	spawn_delay = func_godot_properties["spawn_delay"] if func_godot_properties["spawn_delay"] != 0.0 else randf_range(0.0, 0.75)
-	enemy_name = func_godot_properties["enemy"]
-	
-	# Preload enemy resource
-	enemy_res = load(ENEMY_PATH_PREFIX + enemy_name + ENEMY_PATH_SUFFIX)
+	distance_to_spawn = (
+		randf_range(25.0, 35.0)
+		if func_godot_properties["distance_to_spawn"] == 30.0
+		else func_godot_properties["distance_to_spawn"]
+	)
 
-func spawn() -> void:
-	if spawned: return
-	if _G.game.enemies.get_child_count() >= ENEMY_CAP: return
-	if raycast.is_colliding(): return
-	
+	light.omni_range = distance_to_spawn
+
+	is_one_shot       = func_godot_properties["one_shot"]
+	is_counted_enemy  = func_godot_properties["counted_enemy"]
+	spawn_delay       = func_godot_properties["spawn_delay"]
+	enemy_name        = func_godot_properties["enemy"]
+	enemy_res         = load(ENEMY_PATH_PREFIX + enemy_name + ENEMY_PATH_SUFFIX)
+
+
+func _physics_process(_delta: float) -> void:
+	if func_godot_properties["override_spawn_condition"]:
+		return
+
+	var distance_to_player : float  = global_position.distance_to(_G.player.global_position)
+	var player_pos         : Vector3 = (
+		global_position.direction_to(_G.player.global_position)
+		* (distance_to_player - 1.0)
+		* Vector3(-1.0, 1.0, -1.0)
+	)
+
+	if distance_to_player < distance_to_spawn:
+		raycast.target_position = player_pos
+		_request_spawn()
+
+
+func _exit_tree() -> void:
+	_G.game.spawner.cancel(self)
+
+func can_spawn() -> bool:
+	return (
+		not spawned
+		and _G.game.enemies.get_child_count() < ENEMY_CAP
+		and not raycast.is_colliding()
+	)
+
+## Performs the actual spawn. Only called by SpawnCoordinator.
+func do_spawn() -> void:
+	spawned = true
+
 	if spawn_delay > 0.0:
 		await get_tree().create_timer(spawn_delay).timeout
-	
-	create_anim()
-	
+
+	_create_anim()
+
 	if enemy_res == null:
-		_T.say("MAP_ERROR: ent_spawn at position " + _G.vector_to_string(position, " ", 0.01) + 
-			" has an invalid enemy parameter. \n(" + enemy_name + 
-			" not found in entity/enemy asset directory)\nCheck ent_spawn description in your map editor for valid enemies!", Color.RED)
-		spawned = true
+		_T.say(
+			"MAP_ERROR: ent_spawn at %s has invalid enemy '%s'.\nCheck ent_spawn description in your map editor!" 
+			% [_G.vector_to_string(position, " ", 0.01), enemy_name],
+			Color.RED
+		)
 		return
-	
+
 	var enemy : Node = enemy_res.instantiate()
-	
+
 	if is_counted_enemy:
 		_G.game.enemies.add_child(enemy)
 	else:
 		_G.game.add_child(enemy)
-	
+
 	if enemy.has_node("ChaseComponent"):
 		enemy.get_node("ChaseComponent").start_position = global_position + Vector3(0.0, 0.5, 0.0)
-	
+
 	enemy.global_position = global_position + Vector3(0.0, 0.51, 0.0)
-	
+
 	if is_one_shot:
+		await get_tree().create_timer(1.0).timeout
 		queue_free()
-	else:
-		spawned = true
 
-func _physics_process(_delta : float) -> void:
-	if func_godot_properties["override_spawn_condition"]: return
-	var distance_to_player : float = global_position.distance_to(_G.player.global_position)
-	
-	if distance_to_player < distance_to_spawn:
-		raycast.target_position = global_position.direction_to(_G.player.global_position) * (distance_to_player - 1.0) * Vector3(-1.0, 1.0, -1.0)
-		spawn()
+func _request_spawn() -> void:
+	if not can_spawn():
+		return
+	if _G.game.spawner.request(self):
+		do_spawn()
 
-func create_anim() -> void:
+func _create_anim() -> void:
 	var anim : Node = SPAWN_ANIM.instantiate()
 	_G.game.add_child(anim)
 	anim.global_position = global_position + Vector3(0.0, 0.55, 0.0)

@@ -26,7 +26,6 @@ func _physics_process(delta : float) -> void:
 	agent.debug_enabled = _G.debug_mode
 	if global_position.y <= _G.game.chapter.current.y_boundary:
 		essence_component.die()
-	$"3DBar".from_value = essence_component.ratio
 	#$Label3D.text = str(snappedf(float(essence_component.essence) / float(essence_component.start_essence) * 100, 1)) + "%"
 	#$Label3D.text = str(essence_component.essence)
 	movement_component.on_floor = is_on_floor()

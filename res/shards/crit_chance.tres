@@ -15,6 +15,7 @@ script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
 value = 25.0
+rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_vp0pg"]
@@ -22,6 +23,7 @@ script = ExtResource("1_xaaji")
 stat_name = "Crit Chance"
 statistic = "crit_chance"
 value = 50.0
+rarity = 4
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_efkl8"]
@@ -45,7 +47,6 @@ script = ExtResource("2_vyk3q")
 stat_name = "Crit Chance"
 image = ExtResource("1_vyk3q")
 weight = 0.5
-shop_cost = 20
 common_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_vyk3q")])
 uncommon_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_spu2w")])
 rare_modulates = Array[ExtResource("1_xaaji")]([SubResource("Resource_efkl8")])

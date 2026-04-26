@@ -65,7 +65,6 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_v2jpd")
 stat_name = "Damage"
 image = ExtResource("1_v2jpd")
-shop_cost = 50
 common_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_v2jpd"), SubResource("Resource_m1m7g")])
 uncommon_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_4rmbp"), SubResource("Resource_beagb")])
 rare_modulates = Array[ExtResource("1_xe6bi")]([SubResource("Resource_bqqxf"), SubResource("Resource_kh3nr")])

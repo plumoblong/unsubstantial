@@ -31,7 +31,6 @@ func essence_component_fractured(amount : int, i_time : float) -> void:
 	enemy.handle_fracture(amount, i_time, movement_component)
 
 func _physics_process(delta : float) -> void:
-	agent.debug_enabled = _G.debug_mode
 	
 	# Cache frequently used values
 	player_can_control = _G.player.can_control

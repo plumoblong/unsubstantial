@@ -14,16 +14,16 @@ class_name PlayerMoveComponent
 
 var air_cap : float = 0.85 # dont know what this does lol
 var air_accel : float = 48.0 # how fast the player changes direction in air
-var air_move_speed : float = 6.0 # how much the camera needs to move every frame to gain / maintain speed the bigger it is the easier it is to speed up 
-var jump_velocity : float = 7.8
+var air_move_speed : float = 6.7 # how much the camera needs to move every frame to gain / maintain speed the bigger it is the easier it is to speed up 
+var jump_velocity : float = 8.0
 
 #ground
 var ground_cap : float = 2.2 # caps the walking speed by multiplying ground_cap by walk_speed (e.g. 20.0 * 2.4 = 48 m/s)
 var fall_speed : float = 19.0
 var walk_speed : float = 18.5
 
-var ground_accel : float = 14.0
-var ground_decel : float = 7.0
+var ground_accel : float = 8.0
+var ground_decel : float = 8.0
 var ground_friction : float = 3.5
 
 var slope_fall_speed : float = 500.0

@@ -25,7 +25,9 @@ class_name Chapter
 @export var ambience_streams : Array[AudioStream]
 @export var ambience_position : Vector3 = Vector3(100.0, 10.0, 100.0)
 
-@export var color_hue_range : Vector2 = Vector2(0.0, 1.0)
-@export var color_saturation_range : Vector2 = Vector2(0.5, 1.0)
-@export var color_value_range : Vector2 = Vector2(0.6, 1.0)
-@export var color_alpha_range : Vector2 = Vector2(1.0, 1.0)
+@export var color_ranges : Gradient
+
+#@export var color_hue_range : Vector2 = Vector2(0.0, 1.0)
+#@export var color_saturation_range : Vector2 = Vector2(0.5, 1.0)
+#@export var color_value_range : Vector2 = Vector2(0.6, 1.0)
+#@export var color_alpha_range : Vector2 = Vector2(1.0, 1.0)

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bkqg70cb7gxl7" path="res://prefab/entity/player.tscn" id="3_2026n"]
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
+[ext_resource type="Script" uid="uid://coarcnj103e3e" path="res://src/component/spawn_coordinator.gd" id="6_i6gbm"]
 [ext_resource type="Resource" uid="uid://c7vt6mx0osl47" path="res://res/chapter/palace.tres" id="8_ve786"]
 [ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="11_i6gbm"]
 [ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="12_ux4dc"]
@@ -25,8 +26,6 @@ shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
 
 [node name="Game" type="Node3D" unique_id=449548246]
-process_priority = 2
-process_physics_priority = 2
 script = ExtResource("1_uu38s")
 
 [node name="Environment" type="WorldEnvironment" parent="." unique_id=764388140]
@@ -46,6 +45,9 @@ bus = &"Music"
 
 [node name="ShardPicker" type="Node" parent="." unique_id=485459492]
 script = ExtResource("16_0lu6w")
+
+[node name="SpawnCoordinator" type="Node" parent="." unique_id=1346018652]
+script = ExtResource("6_i6gbm")
 
 [node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
 script = ExtResource("33_d218c")
@@ -78,13 +80,14 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="AnimFix" unique_id=1724005951]
 material = SubResource("ShaderMaterial_i6gbm")
-offset_left = 1.0
-offset_top = 144.0
-offset_right = 120.0
+offset_left = 333.0
+offset_top = 35.0
+offset_right = 480.0
 offset_bottom = 270.0
 theme_override_fonts/font = ExtResource("13_ve786")
 theme_override_font_sizes/font_size = 8
 text = "gfdf"
+autowrap_mode = 2
 uppercase = true
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimFix" unique_id=429422837]
@@ -96,4 +99,10 @@ centered = false
 wait_time = 20.0
 ignore_time_scale = true
 
+[node name="SpawnTimer" type="Timer" parent="." unique_id=359701317]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="spawn_timer_timeout"]

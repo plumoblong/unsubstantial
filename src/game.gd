@@ -15,9 +15,13 @@ var current_map : Map
 @onready var difficulty_label : Label = $AnimFix/Label
 @onready var world_env : WorldEnvironment = $Environment
 @onready var shard_picker : ShardPickerComponent = $ShardPicker
+@onready var spawn_timer : Timer = $SpawnTimer
+@onready var spawner : SpawnCoordinator = $SpawnCoordinator
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
+
+const SPAWN_COOLDOWN : float = 0.5
 
 var next_level : String
 var time_pause : bool = false
@@ -46,6 +50,8 @@ var enemies_killed : int = 0
 
 signal level_changing
 signal map_built
+
+#var spawn_queue : Array[EnemySpawner]
 
 func _ready() -> void:
 	_G.game = self
@@ -83,16 +89,17 @@ func _process(_delta : float) -> void:
 	_update_pause_state()
 	_update_player_control()
 	anim_fix_color.size = _R.get_screen_size()
-	difficulty_label.visible = _G.show_fps
-	if Engine.get_physics_frames() % 5 == 0:
-		$AnimFix/Sprite2D.modulate = get_chapter_color()
+	
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
 	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.1) * difficulty_bonus)
+	
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
-	$AnimFix/Sprite2D.visible = _G.show_fps
+	difficulty_label.visible = _T.debug_flags[4]
+	$AnimFix/Sprite2D.visible = _T.debug_flags[4]
+	$AnimFix/Sprite2D.modulate = get_chapter_color() if Engine.get_physics_frames() % 30 == 0 else $AnimFix/Sprite2D.modulate
 
 func set_env(id : int) -> void:
 	world_env.set_environment(chapter.environments[id])
@@ -122,12 +129,15 @@ func _update_pause_state() -> void:
 	if pause_node.visible:
 		_G.time_scale[0] = 0.01
 		enemies.process_mode = Node.PROCESS_MODE_DISABLED
+		_G.player.camera.process_mode = Node.PROCESS_MODE_DISABLED
 		if Input.is_action_just_pressed("f2"):
 			pause_screen.visible = not pause_screen.visible
+
 	else:
 		_G.time_scale[0] = 1.0 * time_scale
 		enemies.process_mode = Node.PROCESS_MODE_INHERIT
-
+		_G.player.camera.process_mode = Node.PROCESS_MODE_INHERIT
+		
 func _update_player_control() -> void:
 	_G.player.can_control = not pause_node.visible and not ending_level and _G.player.essence_component.alive and not in_any_menu
 
@@ -283,13 +293,11 @@ func switch_chapters() -> void:
 		chapter.available_maps.clear()
 	chapter.current = next_chapter
  
-func get_chapter_color() -> Color:
-	var h : float = randf_range(chapter.current.color_hue_range.x, chapter.current.color_hue_range.y)
-	var s : float = randf_range(chapter.current.color_saturation_range.x, chapter.current.color_saturation_range.y)
-	var v : float = randf_range(chapter.current.color_value_range.x, chapter.current.color_value_range.y)
-	var a : float = randf_range(chapter.current.color_alpha_range.x, chapter.current.color_alpha_range.y)
-	
-	return Color.from_hsv(h, s, v, a)
+func get_chapter_color(sample_override : float = -1.0) -> Color:
+	var color : Color = Color(1.0, 0.0, 1.0, 0.5)
+	if not chapter.current.color_ranges == null:
+		color = chapter.current.color_ranges.sample(randf_range(0.0, 1.0) if sample_override < 0 else sample_override)
+	return color
  
 func update_rpc(update_timestamp : bool = false) -> void:
 	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)

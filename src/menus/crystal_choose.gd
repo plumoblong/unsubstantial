@@ -32,9 +32,9 @@ func end_choose() -> void:
 func _process(_delta: float) -> void:
 	if not _G.game.in_any_menu:
 		return
-	$Text2.text         = description_text
-	$Text2/Shadow.text  = description_text
-	$Text2/Shadow2.text = description_text
+	$Description/Text2.text         = description_text
+	$Description/Text2/Shadow.text  = description_text
+	$Description/Text2/Shadow2.text = description_text
 	_update_positions()
 
 
@@ -69,7 +69,5 @@ func _calculate_spacing(amount: int, crystal_width: float) -> float:
 
 func _update_positions() -> void:
 	var screen := _R.get_screen_size()
-	$Text.size         = Vector2(screen.x, screen.y / 4.0)
-	$Text/Shadow.size  = $Text.size
-	$Text/Shadow2.size = $Text.size
+	$Description.global_position = _R.get_bottom_center()
 	$Crystals.position = _R.get_center()

@@ -385,7 +385,6 @@ movement_component = NodePath("../PlayerMovement")
 [node name="ItemStats" type="Node" parent="." unique_id=405505347]
 script = ExtResource("9_m21cj")
 bullet = ExtResource("11_62pul")
-enabled = null
 
 [node name="DashComponent" type="Node" parent="." unique_id=1322946939]
 script = ExtResource("6_4p10s")
@@ -499,7 +498,7 @@ bus = &"SFX1"
 
 [node name="JumpBufferTimer" type="Timer" parent="." unique_id=621087226]
 process_callback = 0
-wait_time = 0.02
+wait_time = 0.05
 one_shot = true
 ignore_time_scale = true
 

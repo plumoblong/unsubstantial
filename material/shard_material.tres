@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dmfog66asyrmt"]
+
+[ext_resource type="Texture2D" uid="uid://c2qcbr6hinxw8" path="res://images/item/shard_quality_big.png" id="1_y2p82"]
+
+[resource]
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_y2p82")
+texture_filter = 0
+billboard_mode = 1

@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://1g5k6hjkl8sb"]
 
+[ext_resource type="Script" uid="uid://12amga8k0ulu" path="res://src/component/ground_enemy_nav.gd" id="1_58ied"]
+
 [node name="GroundEnemyNav" type="NavigationAgent3D" unique_id=1759187115]
-path_metadata_flags = 0
+path_metadata_flags = 2
+debug_enabled = true
+debug_use_custom = true
 debug_path_custom_point_size = 1.0
+script = ExtResource("1_58ied")

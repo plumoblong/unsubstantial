@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bc84j7gueqtii"]
+
+[ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="1_o447v"]
+
+[resource]
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_o447v")
+texture_filter = 0
+billboard_mode = 1

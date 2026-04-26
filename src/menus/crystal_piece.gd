@@ -68,5 +68,5 @@ func _update_positions() -> void:
 	var coeff := _R.get_aspect_coefficient()
 	$Glow2.scale  = Vector2(2.5, 2.5) * coeff
 	$Sprite.scale = Vector2.ONE * coeff
-	$Bound.size   = Vector2i(96, 192) * coeff
-	$Bound.position = -$Bound.size / 3
+	$Bound.size   = Vector2i(64, 128) * coeff
+	$Bound.position = Vector2(0.0, 0.0) - $Bound.size / 2

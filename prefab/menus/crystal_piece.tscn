@@ -129,13 +129,13 @@ scale = Vector2(2.5, 2.5)
 texture = SubResource("GradientTexture2D_h2gp0")
 
 [node name="Bound" type="ColorRect" parent="." unique_id=737609975]
-offset_left = -30.0
+offset_left = -29.0
 offset_top = -58.0
-offset_right = 27.0
+offset_right = 28.0
 offset_bottom = 58.0
 focus_mode = 1
 mouse_default_cursor_shape = 2
-color = Color(0.97, 0, 0.01616642, 0)
+color = Color(1, 0, 0.016666412, 0)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=375915920]
 use_parent_material = true

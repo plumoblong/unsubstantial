@@ -23,8 +23,21 @@ var _is_console_active : bool = false
 
 var _c_print_to_chat : bool = false
 
+# debug stuff
+
+var debug_flags : Array[bool] = [
+	true,  # console debug info
+	false, # enemy paths
+	false, # player movement information
+	false, # bullet trajectories
+	false, # show animfix info ;]
+]
+
 func start() -> void:
 	# Start with console hidden offscreen
+	process_mode = Node.PROCESS_MODE_DISABLED
+	if not (_G.config.tux or OS.has_feature("debug")): return
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if console_panel:
 		console_panel.position.y = SLIDE_OFFSET
@@ -84,7 +97,6 @@ func toggle_console() -> void:
 		hide_console()
 
 func _process(_delta: float) -> void:
-	if not visible: return
 	$ConsolePanel/Output.size.x = _R.get_screen_size().x - 4
 	$ConsolePanel/Output.size.y = _R.get_screen_size().y - 64
 	$ConsolePanel/ColorRect.size.y = _R.get_screen_size().y - 48
@@ -189,9 +201,20 @@ func execute_command(cmd: String, args: Array) -> void:
 			if not OS.has_feature("debug"):
 				say("This is not a debug build!", Color.RED)
 			else: 
-				_G.debug_mode = not _G.debug_mode
-				var state = "enabled" if _G.debug_mode else "disabled"
-				say("Debug mode " + state, Color.YELLOW)
+				var flag = int(args[0]) if args.size() > 0 else -1
+				if flag == -1:
+					say(
+						"0 - Console debug info. Enabled:" + str(debug_flags[0]) +
+						"\n1 - Visible enemy paths. Enabled: " + str(debug_flags[1]) +
+						"\n2 - Player movement info. Enabled: " + str(debug_flags[2]) +
+						"\n3 - Bullet trajectories. Enabled: " + str(debug_flags[3]) +
+						"\n4 - Game info. Enabled:" + str(debug_flags[4])
+					)
+				else:
+					debug_flags[flag] = not debug_flags[flag]
+					say("Debug flag " + str(flag) + ": " + str(debug_flags[flag]))
+					say(str(debug_flags))
+				
 		"reload":
 			get_tree().reload_current_scene()
 			say("Scene Reloaded.", Color.YELLOW)
@@ -220,9 +243,11 @@ func execute_command(cmd: String, args: Array) -> void:
 			var show_debug = int(args[0]) if args.size() > 0 else 0
 			moveinf(show_debug)
 		"map":
+			_validate_game_and_run_command(cmd, args)
 			var map_name = args[0] if args.size() > 0 else "ether"
 			map(map_name)
 		"map_custom":
+			_validate_game_and_run_command(cmd, args)
 			var map_name = args[0] if args.size() > 0 else "template"
 			map_custom(map_name)
 		"set_pmvar":
@@ -254,11 +279,10 @@ func execute_command(cmd: String, args: Array) -> void:
 			say("Unknown command: " + cmd, Color.RED)
 			say("Type 'help' for a list of commands.")
 
-func say(log : Variant, color : Color = Color.WHITE, debug_only : bool = false) -> void:
-	print("TUX: ", log)
-	if not _G.debug_mode and debug_only: 
-		return
+func say(log : Variant, color : Color = Color.WHITE, debug_flag : int = -1) -> void:
+	if not debug_flag == -1 and not debug_flags[debug_flag]: return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
+	print("TUX: [color=",hex,"]", log)
 	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n\n"
 	if not _validate_game(): return
 	if not _c_print_to_chat: return
@@ -276,7 +300,7 @@ func help(page : int = -1) -> void:
 	match page:
 		0:
 			say("=== Global Commands ===")
-			say(" debug - Toggles debug info")
+			say(" debug <flag>- Toggles debug flag")
 			say(" reload - Reloads the current scene")
 			say(" say <text> - Outputs text to console")
 			say(" timescale <float> - Sets time scale (default: 1.0)")
@@ -319,15 +343,6 @@ func scene(scene_path : String = "") -> void:
 func timescale(scale : float = 1.0) -> void:
 	_G.time_scale[1] = scale
 	say("Time scale set to " + str(scale), Color.GREEN)
-
-func debug() -> void:
-	if not OS.has_feature("debug"):
-		say("This is not a debug build!", Color.RED)
-		return
-	
-	_G.debug_mode = not _G.debug_mode
-	var state = "enabled" if _G.debug_mode else "disabled"
-	say("Debug mode " + state, Color.YELLOW)
 
 func hitbox() -> void:
 	get_tree().debug_collisions_hint = not get_tree().debug_collisions_hint
@@ -372,14 +387,10 @@ func fullbright() -> void:
 	say("Fullbright toggled", Color.YELLOW)
 
 func map(path : String = "ether") -> void:
-	if not _validate_game():
-		return
 	_G.game.change_map_autobuild("res://maps/" + path + ".map")
 	say("Loading map: " + path, Color.GREEN)
 
 func map_custom(path : String = "template") -> void:
-	if not _validate_game():
-		return
 	_G.game.change_map_autobuild("user://custom_maps/" + path + ".map")
 	say("Loading custom map: " + path, Color.GREEN)
 
@@ -437,8 +448,12 @@ func _validate_player() -> bool:
 		say("Player object not found. Must be in game.", Color.RED)
 		return false
 	return true
-
 func _validate_game() -> bool:
 	if _G.game == null or not _G.game.is_inside_tree():
 		return false
+	return true
+
+func _validate_game_and_run_command(cmd : String, args: Array) -> bool:
+	if _G.game == null or not _G.game.is_inside_tree():
+		get_tree().change_scene_to_file("res://scene/game.tscn")
 	return true

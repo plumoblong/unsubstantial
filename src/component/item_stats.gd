@@ -15,7 +15,7 @@ var choices : int = 2
 
 var damage : int = 50
 var damage_mult : float = 1.0
-var dash_damage_mult : float = 1.25
+var dash_damage_mult : float = 1.5
 var bullet_damage_mult : float = 1.0
 
 var knockback : float = 1.0

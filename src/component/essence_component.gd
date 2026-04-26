@@ -1,8 +1,8 @@
 extends Component
 class_name EssenceComponent
 
-@export var start_essence : int = 500
-@export var max_essence : int = 750
+@export var start_essence : int = 300
+@export var max_essence : int = 300
 @export var die_threshold : int = 10
 @export var set_max_essence_on_ready : bool = true
 
@@ -20,6 +20,8 @@ signal died(combo : bool)
 
 var damage_mult : float = 1.0
 
+var last_frame_max_essence : int = 300
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if set_max_essence_on_ready:
@@ -33,11 +35,14 @@ func add_iframes(time : float = 0.2):
 
 func update() -> void:
 	if not enabled: return
+	if max_essence != last_frame_max_essence:
+		essence = max_essence
 	if essence <= die_threshold:
 		die()
 		
 	essence = clampi(essence, 0, max_essence)
 	ratio = float(essence) / float(max_essence)
+	last_frame_max_essence = max_essence
 
 func fracture(amount : int, combo : bool = false, i_time : float = 0.2) -> void:
 	if get_parent() is Player:

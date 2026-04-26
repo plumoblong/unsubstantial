@@ -60,6 +60,7 @@ func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 	damage *= _G.game.enemy_multiplier
 	esc.essence *= _G.game.enemy_multiplier
 	esc.max_essence *= _G.game.enemy_multiplier
+	
 	#get_parent().scale *= clamp(get_difficulty_factor(0.05), 1.0, 1.5)
 	
 func handle_fracture(amount : int, i_time : float, mov : MovementComponent) -> void:

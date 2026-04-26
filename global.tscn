@@ -61,12 +61,15 @@ theme_override_font_sizes/font_size = 8
 text = "2137 FPS"
 
 [node name="Version" type="Label" parent="." unique_id=133672967]
-visible = false
 modulate = Color(1, 1, 1, 0.180392)
-offset_left = 437.0
-offset_top = 1.0
-offset_right = 480.0
-offset_bottom = 6.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 464.0
+offset_bottom = -265.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(1, 0)
 theme_override_font_sizes/font_size = 8
 text = "0.95"
 horizontal_alignment = 2

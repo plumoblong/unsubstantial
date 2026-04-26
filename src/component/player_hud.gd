@@ -83,7 +83,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	interaction_tooltip.text = interact_tooltip
 	interaction_description.text = interact_description
 	
-	debug_panel.visible = _G.debug_mode
+	debug_panel.visible = _T.debug_flags[2]
 	movement_label2.visible = show_movement_var
 	
 	if Engine.get_physics_frames() % 3 == 0:

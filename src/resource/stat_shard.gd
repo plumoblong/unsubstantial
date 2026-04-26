@@ -9,7 +9,7 @@ class_name StatShard
 @export var shop_cost  : int     = 25
 ## shop_cost * rarity
 @export var shop_rarity_price_multipliers : Array[float] = [
-	1.0, 2.0, 3.0, 6.0, 12.0
+	1.0, 2.0, 3.0, 6.0, 10.0
 ]
 ## Modulate → base weight. Rarity filtering and luck scaling are handled
 ## by ShardPickerComponent, not here.

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bnnlgmccbdmv2"]
+
+[ext_resource type="Script" uid="uid://tf3eohxyp6de" path="res://src/entity/shard_collectable.gd" id="1_vme67"]
+[ext_resource type="Script" uid="uid://5ocjh4l18ly4" path="res://src/class/interaction.gd" id="2_d11nx"]
+[ext_resource type="Material" uid="uid://dmfog66asyrmt" path="res://material/shard_material.tres" id="3_etl2f"]
+[ext_resource type="Texture2D" uid="uid://c2qcbr6hinxw8" path="res://images/item/shard_quality_big.png" id="4_4bupx"]
+[ext_resource type="Material" uid="uid://bc84j7gueqtii" path="res://material/stat_material.tres" id="5_6oixu"]
+[ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="6_v3kpo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hcoo3"]
+radius = 0.75
+
+[node name="Collectable" type="CharacterBody3D" unique_id=1840728580 node_paths=PackedStringArray("interaction")]
+collision_layer = 4356
+collision_mask = 4356
+script = ExtResource("1_vme67")
+interaction = NodePath("Interaction")
+
+[node name="Hitbox" type="CollisionShape3D" parent="." unique_id=502433708]
+shape = SubResource("SphereShape3D_hcoo3")
+
+[node name="Interaction" type="Area3D" parent="." unique_id=1588304782]
+script = ExtResource("2_d11nx")
+metadata/_custom_type_script = "uid://5ocjh4l18ly4"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction" unique_id=441615562]
+shape = SubResource("SphereShape3D_hcoo3")
+
+[node name="Shard" type="Sprite3D" parent="." unique_id=1788383231]
+material_override = ExtResource("3_etl2f")
+pixel_size = 0.04
+texture = ExtResource("4_4bupx")
+hframes = 5
+
+[node name="Stat" type="Sprite3D" parent="." unique_id=365638308]
+material_override = ExtResource("5_6oixu")
+pixel_size = 0.04
+texture = ExtResource("6_v3kpo")
