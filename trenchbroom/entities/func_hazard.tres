@@ -14,7 +14,7 @@ classname = "func_hazard"
 description = "Hurts an EssenceComponent entity when standing on it"
 class_properties = Dictionary[String, Variant]({
 "cooldown": 20,
-"damage": 50,
+"damage": 25,
 "die_reason": "You succumbed to the poison."
 })
 node_class = "StaticBody3D"

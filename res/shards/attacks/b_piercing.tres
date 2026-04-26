@@ -4,19 +4,12 @@
 [ext_resource type="Script" uid="uid://cg8iee4n6k7bi" path="res://src/resource/modulate.gd" id="1_0631i"]
 [ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_8imyw"]
 
-[sub_resource type="Resource" id="Resource_8imyw"]
-script = ExtResource("1_0631i")
-stat_name = "Shot Piercing"
-statistic = "pierces"
-bullet_set = true
-metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
-
 [sub_resource type="Resource" id="Resource_r01j2"]
 script = ExtResource("1_0631i")
 stat_name = "Shot Piercing"
 statistic = "pierces"
 bullet_set = true
-value = 5.0
+value = 3.0
 rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -34,7 +27,7 @@ script = ExtResource("1_0631i")
 stat_name = "Shot Piercing"
 statistic = "pierces"
 bullet_set = true
-value = 3.0
+value = 2.0
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -43,7 +36,6 @@ script = ExtResource("1_0631i")
 stat_name = "Shot Piercing"
 statistic = "pierces"
 bullet_set = true
-value = 2.0
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
@@ -52,7 +44,6 @@ script = ExtResource("2_8imyw")
 stat_name = "Shot Piercing"
 image = ExtResource("1_8imyw")
 weight = 0.5
-common_modulates = Array[ExtResource("1_0631i")]([SubResource("Resource_8imyw")])
 uncommon_modulates = Array[ExtResource("1_0631i")]([SubResource("Resource_cwg4k")])
 rare_modulates = Array[ExtResource("1_0631i")]([SubResource("Resource_g2po1")])
 legendary_modulates = Array[ExtResource("1_0631i")]([SubResource("Resource_r01j2")])

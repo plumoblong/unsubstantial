@@ -9,8 +9,8 @@ class_name PlayerHUD
 @onready var info_crystal : RichTextLabel = $Info/CrystalIcon/Crystal
 @onready var info : Node2D = $Info
 @onready var eye : AnimatedSprite2D = $Eye
-@onready var interaction_tooltip : Control = $InteractionTooltip
-@onready var interaction_description : RichTextLabel = $InteractionTooltip/Description
+@onready var interaction_tooltip : Control = $InteractionOffset/InteractionTooltip
+@onready var interaction_description : RichTextLabel = $InteractionOffset/InteractionTooltip/Description
 @onready var debug_panel : Node2D = $Debug
 @onready var hitmarker_sfx : AudioStreamPlayer = $HitmarkerSFX
 
@@ -76,8 +76,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
 	
-	var money : int = player.money
-	info_crystal.text = str(money) + "soul"
+	info_crystal.text = str(int(round(player.money))) + "soul"
 		
 	interaction_tooltip.visible = player.can_interact
 	interaction_tooltip.text = interact_tooltip
@@ -101,9 +100,7 @@ func update(viewbob : Vector2, spd : float) -> void:
 
 func _update_positions() -> void:
 	movement_info.position = _R.get_center()
-	interaction_tooltip.position = _R.get_bottom_left(true, 0, 159)
-	interaction_tooltip.size.x = _R.get_screen_size().x
-	interaction_description.size.x = _R.get_screen_size().x
+	$InteractionOffset.position = _R.get_bottom_center()
 	crosshair.position = _R.get_center()
 	info.position = _R.get_bottom_left(false, 4, 4)
 	eye.position = _R.get_top_center(false, 16)

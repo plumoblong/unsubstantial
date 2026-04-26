@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_idgru"]
 
 [sub_resource type="Gradient" id="Gradient_qyxw0"]
-offsets = PackedFloat32Array(0, 0.41477272, 1)
-colors = PackedColorArray(0, 1, 0.5333333, 1, 0.24627699, 0.014892042, 0.99305034, 1, 1, 0, 0.4000001, 1)
+offsets = PackedFloat32Array(0, 0.36532626, 1)
+colors = PackedColorArray(0, 1, 0.5333333, 1, 0.41827485, 0.009899991, 0.99, 1, 1, 0, 0.4000001, 1)
 
 [resource]
 script = ExtResource("1_idgru")

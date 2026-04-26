@@ -5,6 +5,8 @@
 [resource]
 blend_mode = 1
 shading_mode = 0
+disable_fog = true
+albedo_color = Color(0.71484375, 0.71484375, 0.71484375, 1)
 albedo_texture = ExtResource("1_o447v")
 texture_filter = 0
 billboard_mode = 1

@@ -6,15 +6,15 @@ uniform float amount : hint_range(0.0, 1.0, 0.01) = 1.0;
 uniform float alpha : hint_range(0.0, 1.0, 0.01) = 1.0;
 //uniform float alpha : hint_range(0.0, 1.0) = 1;
 uniform bool grayscale = false;
+uniform bool ethereal = false;
 
 void fragment(){
 
 	vec4 color = vec4(texture(SCREEN_TEXTURE, SCREEN_UV).rgb, texture(TEXTURE, UV).a);
 	if (grayscale) {
-		float cmax = max(color.b, max(color.r, color.b));
-		float cmin = min(color.b, min(color.g, color.b));
-		float delta = cmax - cmin;
-		COLOR = vec4(cmax > 0.0 ? color.rgb * ((1.0 - cmax) / cmax) : vec3(1.0 - cmax), 1.0) * modulate;
+		COLOR = vec4(alpha - (color.rrr  * vec3(amount)),  color.a)  * modulate;
+	} else if (ethereal) {
+		COLOR = vec4(alpha - (color.rbg  * vec3(amount)),  color.a)  * modulate;
 	} else {
 		COLOR = vec4(alpha - (color.rgb  * vec3(amount)),  color.a)  * modulate;
 	}

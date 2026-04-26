@@ -7,4 +7,5 @@ shader = ExtResource("1_4wa8u")
 shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.999999977648
 shader_parameter/alpha = 0.999999977648
-shader_parameter/grayscale = true
+shader_parameter/grayscale = false
+shader_parameter/ethereal = true

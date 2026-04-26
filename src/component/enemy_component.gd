@@ -39,6 +39,8 @@ var ent_amount : int
 var random_factor : float = 0.0
 var time_spawned : float 
 
+var light_color : Color = Color.MAGENTA
+
 func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 	esc.enabled = false
 	if spawn_ent_on_death: 
@@ -49,7 +51,8 @@ func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 		var rand_scale = randf_range(1.0, randomize_scale) if randomize_scale > 1.0 else randf_range(randomize_scale, 1.0)
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
-	color = _G.game.get_chapter_color()
+	color = _G.game.get_chapter_color(random_factor)
+	light_color = Color.from_hsv(color.h, color.s, 1.0, 1.0)
 	pulse(Color(1.25, 1.25, 1.25, 0.0), chase.concious_gain_time * 0.75, chase.concious_gain_time * 0.5, Color(1.25, 1.25, 1.25, 1.0), Tween.TRANS_SINE)
 	esc.max_essence = essence
 	esc.essence = essence
@@ -116,4 +119,4 @@ func pulse(pulse_color : Color = Color.WHITE, sprite_time : float = 0.25, light_
 	sprite.modulate = pulse_color * mult_color
 	light.light_color = pulse_color * mult_color
 	_G.tween(sprite, "modulate", color, sprite_time, Tween.TRANS_CIRC, Tween.EASE_IN)
-	_G.tween(light, "light_color", color, light_time, Tween.TRANS_CIRC, Tween.EASE_IN)
+	_G.tween(light, "light_color", light_color, light_time, Tween.TRANS_CIRC, Tween.EASE_IN)

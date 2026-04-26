@@ -174,279 +174,359 @@
 {
 "classname" "ent_spawn"
 "origin" "1192 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 22
 {
 "classname" "ent_spawn"
 "origin" "1320 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 23
 {
 "classname" "ent_spawn"
 "origin" "1448 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 24
 {
 "classname" "ent_spawn"
 "origin" "1576 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 25
 {
 "classname" "ent_spawn"
 "origin" "1704 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 26
 {
 "classname" "ent_spawn"
 "origin" "1832 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 27
 {
 "classname" "ent_spawn"
 "origin" "1960 328 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 28
 {
 "classname" "ent_spawn"
 "origin" "1960 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 29
 {
 "classname" "ent_spawn"
 "origin" "1832 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 30
 {
 "classname" "ent_spawn"
 "origin" "1704 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 31
 {
 "classname" "ent_spawn"
 "origin" "1576 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 32
 {
 "classname" "ent_spawn"
 "origin" "1448 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 33
 {
 "classname" "ent_spawn"
 "origin" "1320 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 34
 {
 "classname" "ent_spawn"
 "origin" "1192 232 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 35
 {
 "classname" "ent_spawn"
 "origin" "1192 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 36
 {
 "classname" "ent_spawn"
 "origin" "1320 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 37
 {
 "classname" "ent_spawn"
 "origin" "1448 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 38
 {
 "classname" "ent_spawn"
 "origin" "1576 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 39
 {
 "classname" "ent_spawn"
 "origin" "1704 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 40
 {
 "classname" "ent_spawn"
 "origin" "1832 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 41
 {
 "classname" "ent_spawn"
 "origin" "1960 40 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 42
 {
 "classname" "ent_spawn"
 "origin" "1192 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 43
 {
 "classname" "ent_spawn"
 "origin" "1320 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 44
 {
 "classname" "ent_spawn"
 "origin" "1448 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 45
 {
 "classname" "ent_spawn"
 "origin" "1576 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 46
 {
 "classname" "ent_spawn"
 "origin" "1704 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 47
 {
 "classname" "ent_spawn"
 "origin" "1832 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 48
 {
 "classname" "ent_spawn"
 "origin" "1960 136 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 49
 {
 "classname" "ent_spawn"
 "origin" "1192 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 50
 {
 "classname" "ent_spawn"
 "origin" "1320 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 51
 {
 "classname" "ent_spawn"
 "origin" "1448 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 52
 {
 "classname" "ent_spawn"
 "origin" "1576 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 53
 {
 "classname" "ent_spawn"
 "origin" "1704 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 54
 {
 "classname" "ent_spawn"
 "origin" "1832 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 55
 {
 "classname" "ent_spawn"
 "origin" "1960 -344 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 56
 {
 "classname" "ent_spawn"
 "origin" "1192 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 57
 {
 "classname" "ent_spawn"
 "origin" "1320 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 58
 {
 "classname" "ent_spawn"
 "origin" "1448 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 59
 {
 "classname" "ent_spawn"
 "origin" "1576 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 60
 {
 "classname" "ent_spawn"
 "origin" "1704 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 61
 {
 "classname" "ent_spawn"
 "origin" "1832 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 62
 {
 "classname" "ent_spawn"
 "origin" "1960 -248 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 63
 {
 "classname" "ent_spawn"
 "origin" "1960 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 64
 {
 "classname" "ent_spawn"
 "origin" "1832 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 65
 {
 "classname" "ent_spawn"
 "origin" "1704 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 66
 {
 "classname" "ent_spawn"
 "origin" "1576 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 67
 {
 "classname" "ent_spawn"
 "origin" "1448 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 68
 {
 "classname" "ent_spawn"
 "origin" "1320 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 69
 {
 "classname" "ent_spawn"
 "origin" "1192 -152 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 70
 {
 "classname" "ent_spawn"
 "origin" "1192 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 71
 {
 "classname" "ent_spawn"
 "origin" "1320 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 72
 {
 "classname" "ent_spawn"
 "origin" "1448 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 73
 {
 "classname" "ent_spawn"
 "origin" "1576 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 74
 {
 "classname" "ent_spawn"
 "origin" "1704 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 75
 {
 "classname" "ent_spawn"
 "origin" "1832 -56 296"
+"enemy" "enemy;enemy_melee;"
 }
 // entity 76
 {
 "classname" "ent_spawn"
 "origin" "1960 -56 296"
+"enemy" "enemy;enemy_melee;"
+}
+// entity 77
+{
+"classname" "special_room"
+"origin" "2240 0 280"
+"angle" "180"
+"allow_shrine" "1"
+"maps" "shop1"
+}
+// entity 78
+{
+"classname" "special_room"
+"origin" "2240 -384 280"
+"angle" "180"
+"allow_shrine" "1"
+"maps" "shop1"
+}
+// entity 79
+{
+"classname" "special_room"
+"origin" "2240 384 280"
+"angle" "180"
+"allow_shrine" "1"
+"maps" "shop1"
 }

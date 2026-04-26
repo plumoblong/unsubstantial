@@ -112,13 +112,12 @@ func _ready() -> void:
 	
 	seed(int(Time.get_unix_time_from_system()))
 	version_label.text = VERSION.to_upper()
-	
-	
+
 	_setup_discord_rpc()
 
 func _setup_discord_rpc() -> void:
 	if OS.has_feature("web"): return
-	#DiscordRPC.app_id = 1316162745384702043
+	DiscordRPC.app_id = 1316162745384702043
 	
 func _setup_audio_buses() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(config.sound.master))
@@ -128,14 +127,14 @@ func _setup_audio_buses() -> void:
 	
 func change_discord_rpc(update_timestamp : bool = true, details : String = "Chapter 1 Stage 2", state = "5 Shards", small_image : String = "chapter_icon0", small_image_text : String = "The Ether", large_image : String = "poison", large_image_text : String = "plumoblong.github.io", ) -> void:
 	if OS.has_feature("web"): return
-	#DiscordRPC.details = details
-	#DiscordRPC.state = state
-	#DiscordRPC.large_image = large_image
-	#DiscordRPC.large_image_text = large_image_text
-	#DiscordRPC.small_image = small_image
-	#DiscordRPC.small_image_text = small_image_text
-	#if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
-	#DiscordRPC.refresh()
+	DiscordRPC.details = details
+	DiscordRPC.state = state
+	DiscordRPC.large_image = large_image
+	DiscordRPC.large_image_text = large_image_text
+	DiscordRPC.small_image = small_image
+	DiscordRPC.small_image_text = small_image_text
+	if update_timestamp: DiscordRPC.start_timestamp = int(Time.get_unix_time_from_system())
+	DiscordRPC.refresh()
 	
 func _process(delta : float) -> void:
 	time += delta

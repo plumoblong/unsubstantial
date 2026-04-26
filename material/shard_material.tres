@@ -5,6 +5,7 @@
 [resource]
 blend_mode = 1
 shading_mode = 0
+disable_fog = true
 albedo_texture = ExtResource("1_y2p82")
 texture_filter = 0
 billboard_mode = 1

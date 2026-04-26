@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://cand4vu2yx82d"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_wi20g"]
+[ext_resource type="PackedScene" uid="uid://bnnlgmccbdmv2" path="res://prefab/entity/shard_collectible.tscn" id="2_wi20g"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_7c4dk"]
+
+[resource]
+script = ExtResource("3_7c4dk")
+scene_file = ExtResource("2_wi20g")
+classname = "collectable_shard"
+description = "3D Stat collectable the player can pickup/buy "
+class_properties = Dictionary[String, Variant]({
+"free": false,
+"pool_id": -1,
+"price_override": 0.0,
+"rarity_override": -1
+})
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.5166664, 0, 1, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

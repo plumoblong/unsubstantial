@@ -23,6 +23,8 @@ class_name Player
 @onready var dash_query : Area3D = $DashQuery
 @onready var dash_query_hitbox : CollisionShape3D = $DashQuery/Hitbox
 
+@onready var interaction_query : Area3D = $Head/InteractionQuery
+
 var score : int = 0
 var color : Color = Color.WHITE
 var has_key : bool = false
@@ -39,7 +41,7 @@ var fullbright : bool = false
 var _mouse_sensitivity : float = 0.005
 var _last_low_quality : bool = false
 
-var money : int = 0
+var money : float = 0.0
 
 func _enter_tree() -> void:
 	can_control = true

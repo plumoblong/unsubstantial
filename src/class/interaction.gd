@@ -9,26 +9,33 @@ class_name Interaction
 
 var can_interact : bool = false
 signal interacted
+signal hooked
+signal unhooked
 
 func _process(_delta : float) -> void:
-	if can_interact and enabled:
-		if Input.is_action_pressed("interact"):
-			interacted.emit()
-			if one_shot:
-				enabled = false
-		
-	monitoring = enabled
-
+	if not enabled: 
+		return
+	if Input.is_action_pressed("interact") and can_interact:
+		interacted.emit()
+		if one_shot:
+			_G.player.hud.interact_tooltip = ""
+			_G.player.hud.interact_description = ""
+			enabled = false
+			
 func area_entered(area : Area3D) -> void:
-	if area.get_parent() == _G.player:
-		_G.player.can_interact = true
-		can_interact = true
-		_G.player.hud.interact_tooltip = interaction_tooltip
-		_G.player.hud.interact_description = description_tooltip
-
+	if area.name != "InteractionQuery" or not enabled: return
+	_G.player.can_interact = true
+	can_interact = true
+	_G.player.hud.interact_tooltip = interaction_tooltip
+	_G.player.hud.interact_description = description_tooltip
+	hooked.emit()
+	print(name, can_interact, enabled)
+	
 func area_exited(area : Area3D) -> void:
-	if area.get_parent() == _G.player:
-		_G.player.can_interact = false
-		can_interact = false
-		_G.player.hud.interact_tooltip = ""
-		_G.player.hud.interact_description = ""
+	if area.name != "InteractionQuery" or not enabled: return
+	_G.player.can_interact = false
+	can_interact = false
+	_G.player.hud.interact_tooltip = ""
+	_G.player.hud.interact_description = ""
+	unhooked.emit()
+	print(name, can_interact, enabled)

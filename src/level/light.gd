@@ -8,6 +8,7 @@ class_name Light
 func _func_godot_build_complete() -> void:
 	omni_range = func_godot_properties["range"]
 	light_energy = func_godot_properties["energy"]
-	#light_color = func_godot_properties["color"]
+	light_color = _G.game.get_chapter_color(randf_range(0.0, 0.25))
+	$Light.modulate = light_color
 	$Light.visible = bool(func_godot_properties["mesh_visible"])
 	#$Light.modulate = func_godot_properties.color

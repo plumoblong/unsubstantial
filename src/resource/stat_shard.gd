@@ -6,10 +6,10 @@ class_name StatShard
 
 @export_category("Pool Info")
 @export var weight     : float   = 1.0
-@export var shop_cost  : int     = 25
-## shop_cost * rarity
+@export var shop_cost  : int     = 15
+## shop_cost * rarity when shard_collectable isnt free and has no price override
 @export var shop_rarity_price_multipliers : Array[float] = [
-	1.0, 2.0, 3.0, 6.0, 10.0
+	1.0, 2.0, 3.0, 5.0, 10.0
 ]
 ## Modulate → base weight. Rarity filtering and luck scaling are handled
 ## by ShardPickerComponent, not here.
@@ -31,4 +31,4 @@ func get_random_modulate(rarity : Modulate.RARITY) -> Modulate:
 	return m
 	
 func get_price(rarity : Modulate.RARITY) -> float:
-	return shop_cost * shop_rarity_price_multipliers[Modulate.RARITY]
+	return shop_cost * shop_rarity_price_multipliers[rarity]

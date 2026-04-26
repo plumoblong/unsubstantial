@@ -9,11 +9,14 @@
 [ext_resource type="Resource" uid="uid://dq02355lwewa1" path="res://res/shards/attacks/b_life_time.tres" id="7_2x53x"]
 [ext_resource type="Resource" uid="uid://ce2yqwcrh1c1g" path="res://res/shards/attacks/b_bouncy.tres" id="8_6ly0d"]
 [ext_resource type="Resource" uid="uid://bi6qiss0cpeat" path="res://res/shards/attacks/b_piercing.tres" id="9_a1d47"]
+[ext_resource type="Resource" uid="uid://k5svjg7yxksv" path="res://res/shards/choices.tres" id="10_pjo7l"]
 
 [resource]
 script = ExtResource("1_6u8at")
 pool_id = 1
 pool_name = "Attribute Shard Pool"
 pool_crystal_color = Color(0.57720196, 1, 0.98260826, 1)
-shards = Array[ExtResource("2_pjo7l")]([ExtResource("3_cwcqm"), ExtResource("4_ypvhi"), ExtResource("5_jtik3"), ExtResource("6_vec4i"), ExtResource("7_2x53x"), ExtResource("8_6ly0d"), ExtResource("9_a1d47")])
+common_weight = 2.0
+epic_weight = 0.75
+shards = Array[ExtResource("2_pjo7l")]([ExtResource("3_cwcqm"), ExtResource("4_ypvhi"), ExtResource("5_jtik3"), ExtResource("6_vec4i"), ExtResource("7_2x53x"), ExtResource("8_6ly0d"), ExtResource("9_a1d47"), ExtResource("10_pjo7l")])
 metadata/_custom_type_script = "uid://bgbbtgjetypx6"

@@ -31,6 +31,7 @@ var debug_flags : Array[bool] = [
 	false, # player movement information
 	false, # bullet trajectories
 	false, # show animfix info ;]
+	false, # free shards
 ]
 
 func start() -> void:
@@ -208,12 +209,12 @@ func execute_command(cmd: String, args: Array) -> void:
 						"\n1 - Visible enemy paths. Enabled: " + str(debug_flags[1]) +
 						"\n2 - Player movement info. Enabled: " + str(debug_flags[2]) +
 						"\n3 - Bullet trajectories. Enabled: " + str(debug_flags[3]) +
-						"\n4 - Game info. Enabled:" + str(debug_flags[4])
+						"\n4 - Game info. Enabled:" + str(debug_flags[4]) + 
+						"\n5 - Free shop items. Enabled: " + str(debug_flags[4])
 					)
 				else:
 					debug_flags[flag] = not debug_flags[flag]
 					say("Debug flag " + str(flag) + ": " + str(debug_flags[flag]))
-					say(str(debug_flags))
 				
 		"reload":
 			get_tree().reload_current_scene()

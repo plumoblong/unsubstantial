@@ -1,43 +1,9 @@
 [gd_scene format=3 uid="uid://cv7q6vgmketme"]
 
 [ext_resource type="Script" uid="uid://cjpkuqotw15ut" path="res://src/entity/enemy_spawner.gd" id="1_nmctl"]
-[ext_resource type="Texture2D" uid="uid://e8jsiuiprxdd" path="res://images/entity/spawning.png" id="2_8ighv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2slqb"]
-atlas = ExtResource("2_8ighv")
-region = Rect2(240, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kou2v"]
-atlas = ExtResource("2_8ighv")
-region = Rect2(288, 0, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_gtv6v"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2slqb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kou2v")
-}],
-"loop": true,
-"name": &"default",
-"speed": 3.0
-}]
 
 [node name="EnemySpawner" type="Node3D" unique_id=741114850]
 script = ExtResource("1_nmctl")
-
-[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=815739422]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-ignore_occlusion_culling = true
-pixel_size = 0.06
-billboard = 1
-double_sided = false
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_gtv6v")
-autoplay = "default"
-frame_progress = 0.81461686
 
 [node name="light" type="OmniLight3D" parent="." unique_id=1374870958]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)

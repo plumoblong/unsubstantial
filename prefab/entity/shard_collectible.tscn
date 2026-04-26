@@ -6,9 +6,212 @@
 [ext_resource type="Texture2D" uid="uid://c2qcbr6hinxw8" path="res://images/item/shard_quality_big.png" id="4_4bupx"]
 [ext_resource type="Material" uid="uid://bc84j7gueqtii" path="res://material/stat_material.tres" id="5_6oixu"]
 [ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="6_v3kpo"]
+[ext_resource type="Texture2D" uid="uid://c2ar5rwtyqfb4" path="res://images/ui/hud_infoicon.png" id="7_4bupx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hcoo3"]
 radius = 0.75
+
+[sub_resource type="Animation" id="Animation_etl2f"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shard_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.502, 0.502, 0.502, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:stat_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.788, 0.788, 0.788, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Price:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_v3kpo"]
+resource_name = "disapear"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shard_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:stat_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0.7882353, 0.7882353, 0.7882353, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Stat:offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [4.0, 12.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Price:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4bupx"]
+resource_name = "in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shard_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.03333333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.502, 0.502, 0.502, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 4.0]
+}
+
+[sub_resource type="Animation" id="Animation_6oixu"]
+resource_name = "out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:shard_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.502, 0.502, 0.502, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stat:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [4.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6oixu"]
+_data = {
+&"RESET": SubResource("Animation_etl2f"),
+&"disapear": SubResource("Animation_v3kpo"),
+&"in": SubResource("Animation_4bupx"),
+&"out": SubResource("Animation_6oixu")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tou1b"]
+atlas = ExtResource("7_4bupx")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hqjk"]
+atlas = ExtResource("7_4bupx")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnrqq"]
+atlas = ExtResource("7_4bupx")
+region = Rect2(24, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl8fn"]
+atlas = ExtResource("7_4bupx")
+region = Rect2(36, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6oixu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tou1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hqjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnrqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vl8fn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Collectable" type="CharacterBody3D" unique_id=1840728580 node_paths=PackedStringArray("interaction")]
 collision_layer = 4356
@@ -20,7 +223,10 @@ interaction = NodePath("Interaction")
 shape = SubResource("SphereShape3D_hcoo3")
 
 [node name="Interaction" type="Area3D" parent="." unique_id=1588304782]
+collision_layer = 520
+collision_mask = 520
 script = ExtResource("2_d11nx")
+one_shot = false
 metadata/_custom_type_script = "uid://5ocjh4l18ly4"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction" unique_id=441615562]
@@ -28,11 +234,41 @@ shape = SubResource("SphereShape3D_hcoo3")
 
 [node name="Shard" type="Sprite3D" parent="." unique_id=1788383231]
 material_override = ExtResource("3_etl2f")
-pixel_size = 0.04
+pixel_size = 0.055
 texture = ExtResource("4_4bupx")
 hframes = 5
 
 [node name="Stat" type="Sprite3D" parent="." unique_id=365638308]
 material_override = ExtResource("5_6oixu")
-pixel_size = 0.04
+pixel_size = 0.055
 texture = ExtResource("6_v3kpo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1197149210]
+libraries/ = SubResource("AnimationLibrary_6oixu")
+speed_scale = 4.0
+
+[node name="Price" type="Node3D" parent="." unique_id=1329050873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="SoulIcon" type="AnimatedSprite3D" parent="Price" unique_id=678747977]
+offset = Vector2(-8, 0)
+pixel_size = 0.055
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_6oixu")
+frame_progress = 0.2907753
+
+[node name="Label3D" type="Label3D" parent="Price" unique_id=409583952]
+pixel_size = 0.055
+billboard = 1
+texture_filter = 0
+text = "500"
+font_size = 8
+outline_size = 0
+horizontal_alignment = 0
+
+[connection signal="area_entered" from="Interaction" to="Interaction" method="area_entered"]
+[connection signal="area_exited" from="Interaction" to="Interaction" method="area_exited"]
+[connection signal="hooked" from="Interaction" to="." method="hooked"]
+[connection signal="interacted" from="Interaction" to="." method="interacted"]
+[connection signal="unhooked" from="Interaction" to="." method="unhooked"]

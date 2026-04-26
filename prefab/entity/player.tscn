@@ -195,15 +195,15 @@ _data = {
 &"viewbob": SubResource("Animation_lr1bw")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8t5r2"]
+radius = 0.1
+height = 3.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_yih3o"]
 radius = 0.36707488
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uadq4"]
 radius = 1.25
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8t5r2"]
-radius = 0.15
-height = 1.5
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uadq4"]
 viewport_path = NodePath("Head/SubViewport")
@@ -351,6 +351,16 @@ shoot_component = NodePath("../../ShootComponent")
 no_depth_test = true
 auto_rotate = false
 
+[node name="InteractionQuery" type="Area3D" parent="Head" unique_id=1236938087]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 1.7484598e-07, 0, -1.7484598e-07, 0.99999994, 0, 0, 0)
+collision_layer = 520
+collision_mask = 520
+
+[node name="Hitbox" type="CollisionShape3D" parent="Head/InteractionQuery" unique_id=587793018]
+transform = Transform3D(1, 0, 0, 0, -4.3711395e-08, 0.99999994, 0, -0.99999994, -4.3711395e-08, 0, 0, -1.5)
+shape = SubResource("CapsuleShape3D_8t5r2")
+debug_fill = false
+
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1572910204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48258, 0)
 light_energy = 0.7
@@ -416,17 +426,6 @@ parry = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("SphereShape3D_uadq4")
 debug_color = Color(1, 0, 0, 1)
-
-[node name="InteractionQuery" type="Area3D" parent="." unique_id=1236938087]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00144917, 1, -0.00112629)
-collision_layer = 8
-collision_mask = 8
-
-[node name="Hitbox" type="CollisionShape3D" parent="InteractionQuery" unique_id=587793018]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.479403, -1.26424)
-shape = SubResource("CapsuleShape3D_8t5r2")
-debug_color = Color(1, 0, 0.866667, 0)
-debug_fill = false
 
 [node name="MotionBlur" type="TextureRect" parent="." unique_id=333387838]
 modulate = Color(1, 1, 1, 0.49803922)

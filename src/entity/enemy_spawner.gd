@@ -2,12 +2,12 @@ extends Node3D
 class_name EnemySpawner
 
 @export var func_godot_properties : Dictionary = {
-	"one_shot"                = 1,
-	"counted_enemy"           = 1,
-	"distance_to_spawn"       = 25.0,
-	"enemy"                   = "enemy",
-	"spawn_delay"             = 0.0,
-	"override_spawn_condition"= 0,
+	"one_shot"                : 1,
+	"counted_enemy"           : 1,
+	"distance_to_spawn"       : 25.0,
+	"enemy"                   : "enemy;",
+	"spawn_delay"             : 0.0,
+	"override_spawn_condition": 0,
 }
 
 const SPAWN_ANIM        : PackedScene = preload("res://prefab/animation/spawning.tscn")
@@ -26,6 +26,13 @@ var is_counted_enemy  : bool
 var spawn_delay       : float
 var enemy_name        : String
 
+func _parse_enemy_list() -> Array[String]:
+	var result: Array[String] = []
+	for entry : String in func_godot_properties["enemy"].split(";"):
+		var trimmed : String = entry.strip_edges().trim_suffix(":")
+		if not trimmed.is_empty():
+			result.append(ENEMY_PATH_PREFIX + trimmed + ENEMY_PATH_SUFFIX)
+	return result
 
 func _func_godot_build_complete() -> void:
 	distance_to_spawn = (
@@ -34,14 +41,12 @@ func _func_godot_build_complete() -> void:
 		else func_godot_properties["distance_to_spawn"]
 	)
 
-	light.omni_range = distance_to_spawn
-
+	light.omni_range  = distance_to_spawn
 	is_one_shot       = func_godot_properties["one_shot"]
 	is_counted_enemy  = func_godot_properties["counted_enemy"]
 	spawn_delay       = func_godot_properties["spawn_delay"]
-	enemy_name        = func_godot_properties["enemy"]
-	enemy_res         = load(ENEMY_PATH_PREFIX + enemy_name + ENEMY_PATH_SUFFIX)
-
+	enemy_res         = load(_parse_enemy_list().pick_random())
+	
 
 func _physics_process(_delta: float) -> void:
 	if func_godot_properties["override_spawn_condition"]:
@@ -72,7 +77,7 @@ func can_spawn() -> bool:
 ## Performs the actual spawn. Only called by SpawnCoordinator.
 func do_spawn() -> void:
 	spawned = true
-
+	
 	if spawn_delay > 0.0:
 		await get_tree().create_timer(spawn_delay).timeout
 

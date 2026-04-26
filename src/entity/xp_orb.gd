@@ -24,7 +24,7 @@ func body_entered(body : Player) -> void:
 		body.get_node("XPPickupSFX").pitch_scale = randf_range(0.85, 1.15)
 		body.get_node("XPPickupSFX").play()
 	else:
-		body.money += heal_amount * body.stats.money_mult
+		body.money += heal_amount * body.stats.money_mult * _G.game.difficulty_bonus
 		queue_free.call_deferred()
 		body.get_node("CoinPickupSFX").pitch_scale = randf_range(0.75, 1.00) + clampf(body.money * 0.001, 0.0, 0.5)
 		body.get_node("CoinPickupSFX").play()
