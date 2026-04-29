@@ -75,9 +75,24 @@ visual_bullet = NodePath("../Node3D/VisualBullet")
 [node name="EnemyComponent" type="Node" parent="." unique_id=759804664 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("9_02b0y")
 hit_sfx = NodePath("../HitSFX")
+use_difficulty_factor = null
+essence = null
+essence_death_threshold = null
 damage = 75.0
 on_hit_velocity_loss = 0.65
 xp_payout = 2
+xp_radius = null
+randomize_scale = null
+spawn_ent_on_death = null
+ent_paths = null
+ent_spawn_radius = null
+ent_spawn_y_offset = null
+ent_max = null
+ent_min = null
+ent_count_as_enemy = null
+ent_spawn_offset = null
+ghost_decay_time = null
+enabled = null
 metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
 [node name="Query" type="Area3D" parent="." unique_id=1388838966]

@@ -212,7 +212,7 @@ func dash_component_dashed() -> void:
 		dash_query.crit = false
 		dash_query.damage = base_damage
 	
-	start_immunity(0.3)
+	start_immunity(0.5)
 	dash_sfx.pitch_scale = randf_range(0.9, 1.1)
 	dash_sfx.play()
 	
@@ -224,7 +224,7 @@ func essence_component_gained(amount : int) -> void:
 	
 	#_G.create_ui_popup("+" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position)
 
-func essence_component_fractured(amount : int, _crit : bool) -> void:
+func essence_component_fractured(amount : int, i_time : float, combo : bool) -> void:
 	var time := clampf(amount / float(essence_component.max_essence), 0.25, 1.25)
 	_G.flare_screen(Color(1.0, 0.0, 0.0, 0.7), Color.TRANSPARENT, time)
 	

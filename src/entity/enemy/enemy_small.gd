@@ -24,9 +24,9 @@ func _ready() -> void:
 func essence_component_died(combo : bool) -> void:
 	enemy.handle_death()
 
-func essence_component_fractured(amount : int, i_time : float) -> void:
-	enemy.handle_fracture(amount, i_time, movement_component)
-
+func essence_component_fractured(amount : int, i_time : float, combo : bool) -> void:
+	enemy.handle_fracture(amount, i_time, combo, movement_component)
+	
 func _physics_process(delta : float) -> void:
 	
 	# Cache frequently used values

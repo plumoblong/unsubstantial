@@ -15,7 +15,7 @@ func initialize(m : Modulate, texture : Texture) -> void:
 	bg_sprite.frame = mod.rarity
 	stat_sprite.texture = texture
 	description = "[b]" + mod.get_description() + "[/b]\n"\
-	+ _G.game.shard_picker.get_stat_change_text(mod, false)
+	+ _G.game.shard_picker.get_stat_snapshot_text(mod)
 
 func bound_mouse_entered() -> void:
 	inventory_node.current_description = description

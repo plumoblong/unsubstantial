@@ -15,7 +15,7 @@ var ratio : float = 1.0
 var immortal : bool = false
 
 signal gained(amount : int)
-signal fractured(amount : int, i_time : float)
+signal fractured(amount : int, i_time : float, combo : bool)
 signal died(combo : bool)
 
 var damage_mult : float = 1.0
@@ -55,7 +55,7 @@ func fracture(amount : int, combo : bool = false, i_time : float = 0.2) -> void:
 			add_iframes(i_time)
 		else:
 			die()
-		fractured.emit(a, combo)
+		fractured.emit(a, i_time, combo)
 
 func gain(amount : int) -> void:
 	if not enabled: return

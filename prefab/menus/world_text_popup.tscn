@@ -14,23 +14,15 @@ font = ExtResource("2_yjjx4")
 font_size = 8
 
 [sub_resource type="Curve" id="Curve_xcbu5"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.9713236, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.964636, 0.0, 0, 0]
+bake_resolution = 16
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09191178, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.964636, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_yjjx4"]
-radius = 0.1
-
-[node name="WorldTextPopup" type="CharacterBody3D" unique_id=1613733294]
-collision_layer = 4352
-collision_mask = 4352
-floor_stop_on_slope = false
+[node name="WorldTextPopup" type="Node3D" unique_id=769030791]
 script = ExtResource("1_nhtt3")
 normal_set = SubResource("LabelSettings_es2mf")
 big_set = SubResource("LabelSettings_kvxj5")
 alpha_curve = SubResource("Curve_xcbu5")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1605323935]
-shape = SubResource("SphereShape3D_yjjx4")
 
 [node name="WorldTo2D" type="Node2D" parent="." unique_id=1657617682]
 script = ExtResource("2_xcbu5")

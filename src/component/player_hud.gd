@@ -29,6 +29,7 @@ var hitmarker_alpha : float = 0.0
 
 var hand_hidden : bool = false
 var hand_offset : int = 0
+var money : float = 0.0
 
 var crosshair_tween_active : bool = false
 var show_movement_info : bool = false
@@ -49,6 +50,7 @@ var player_essence : EssenceComponent
 var player_movement : PlayerMoveComponent
 var player_stats : ItemStats
 var player_dash : DashComponent
+
 
 # Cached strings to reduce allocations
 const BOLD_START : String = "[b]"
@@ -76,7 +78,9 @@ func update(viewbob : Vector2, spd : float) -> void:
 	
 	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
 	
-	info_crystal.text = str(int(round(player.money))) + "soul"
+	
+	money = lerpf(money, player.money, 0.2)
+	info_crystal.text = str(int(round(money))) + "soul"
 		
 	interaction_tooltip.visible = player.can_interact
 	interaction_tooltip.text = interact_tooltip
@@ -104,6 +108,7 @@ func _update_positions() -> void:
 	crosshair.position = _R.get_center()
 	info.position = _R.get_bottom_left(false, 4, 4)
 	eye.position = _R.get_top_center(false, 16)
+	hitmarker.position = _R.get_center()
 	
 func hitmark() -> void:
 	if last_hitmarker_tween:

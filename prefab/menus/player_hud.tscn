@@ -311,7 +311,7 @@ texture = ExtResource("5_s826l")
 
 [node name="Hitmarker" type="Sprite2D" parent="." unique_id=2079977172]
 material = SubResource("ShaderMaterial_vl8fn")
-position = Vector2(241, 135)
+position = Vector2(240, 135)
 texture = ExtResource("6_2ogxy")
 
 [node name="HitmarkerSFX" type="AudioStreamPlayer" parent="." unique_id=1709177967]

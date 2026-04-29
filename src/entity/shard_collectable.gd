@@ -75,7 +75,7 @@ func _func_godot_build_complete() -> void:
 func _process(_delta: float) -> void:
 	shard_sprite.material_override.albedo_color = _G.game.shard_picker.RARITY_COLOR[current_rarity] * shard_color
 	stat_sprite.material_override.albedo_color = stat_color
-	interaction.description_tooltip = _G.game.shard_picker.get_stat_change_text(current_modulate, true)
+	interaction.description_tooltip = _G.game.shard_picker.get_stat_preview_text(current_modulate)
 
 func hooked() -> void:
 	anim.play("in")

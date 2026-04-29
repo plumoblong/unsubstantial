@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 [sub_resource type="Resource" id="Resource_m1m7g"]
 script = ExtResource("1_xe6bi")
 operator = 2
-value = 1.1
+value = 1.05
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_wd373"]
@@ -37,27 +37,27 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_bqqxf"]
 script = ExtResource("1_xe6bi")
-value = 35.0
+value = 20.0
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_kh3nr"]
 script = ExtResource("1_xe6bi")
 operator = 2
-value = 1.3
+value = 1.2
 rarity = 2
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_4rmbp"]
 script = ExtResource("1_xe6bi")
-value = 15.0
+value = 10.0
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_beagb"]
 script = ExtResource("1_xe6bi")
 operator = 2
-value = 1.2
+value = 1.1
 rarity = 1
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 

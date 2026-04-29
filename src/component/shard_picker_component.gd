@@ -27,10 +27,10 @@ const RARITY_COLOR : Array[Color] = [
 ## zeroes out the chosen shard in the pool so it can't be picked again.
 func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = Modulate.RARITY.UNCOMMON) -> Array:
 	
-	var shard   : StatShard       = pick_shard(weighted_pool, rarity)
+	var shard   : StatShard       = pick_shard(weighted_pool, rarity, _G.player)
 	var modulate: Modulate        = pick_modulate(shard, rarity)
 	
-	return [shard, modulate]
+	return [shard.duplicate(), modulate.duplicate()]
 
 
 ## Rolls a rarity tier based on luck-adjusted weights.
@@ -50,12 +50,13 @@ func pick_rarity(pool : StatShardPool, luck: int) -> Modulate.RARITY:
 ## Picks a shard from the pool that matches the given rarity.
 ## Falls back to any available shard if none match.
 ## Zeroes out the chosen shard so it won't be picked again.
-func pick_shard(weighted_pool: Dictionary[StatShard, int], rarity: Modulate.RARITY) -> StatShard:
+func pick_shard(weighted_pool: Dictionary[StatShard, int], rarity: Modulate.RARITY, stat_owner: Object = null) -> StatShard:
 	var eligible_pool : Dictionary[StatShard, int] = {}
- 
+
 	for shard: StatShard in weighted_pool:
 		if weighted_pool[shard] > 0 and _shard_has_rarity(shard, rarity):
-			eligible_pool[shard] = weighted_pool[shard]
+			if stat_owner == null or not shard.is_excluded(stat_owner):
+				eligible_pool[shard] = weighted_pool[shard]
  
 	if eligible_pool.is_empty():
 		_T.say(
@@ -101,8 +102,19 @@ func _shard_has_rarity(shard : StatShard, rarity : Modulate.RARITY) -> bool:
 	]
 	return not lut[rarity].is_empty()
 
-func get_stat_change_text(m : Modulate, pre_append : bool = false) -> String:
-	var stat = m._get_target().get(m.statistic)
-	var value1 = stat if pre_append else m.pre_append_value
-	var value2 = m._get_modified_value(stat) if pre_append else m.post_append_value
-	return str(snappedf(value1, 0.01)) + " -> " + str(snappedf(value2, 0.01))
+## Live preview: current stat → what it will be after picking up.
+## Used by ShardCollectable before the modulate is appended.
+func get_stat_preview_text(m: Modulate) -> String:
+	var target  : Object  = m._get_target()
+	var current : Variant = target.get(m.statistic)
+	var after   : Variant = m._get_modified_value(current)
+	return str(snappedf(float(current), 0.01)) + " -> " + str(snappedf(float(after), 0.01))
+
+## Frozen snapshot: what the stat was before and after this modulate was appended.
+## Used by ShardIcon after pickup — values never change.
+func get_stat_snapshot_text(m: Modulate) -> String:
+	if not m.stat_appended:
+		push_warning("get_stat_snapshot_text called before append() on %s" % m.stat_name)
+		return "?"
+	return str(snappedf(float(m.pre_append_value), 0.01)) + " -> " + str(snappedf(float(m.post_append_value), 0.01))
+	

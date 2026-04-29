@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 
 	$Rarity.frame              = chosen_modulate.rarity + (int(_G.config.ui_dark_mode) * 5)
 	info.text                  = chosen_modulate.get_description()
-	description                = _G.game.shard_picker.get_stat_change_text(chosen_modulate, true)
+	description                = _G.game.shard_picker.get_stat_preview_text(chosen_modulate)
 	$Info/Shadow.text          = info.text
 	$Info/Shadow2.text         = info.text
 	stat_icon.use_parent_material = _G.config.ui_dark_mode

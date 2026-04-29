@@ -36,7 +36,7 @@ var level_time : float = 0
 var actual_stage : int = 0
 var chapter_stage : int = 0
 ## last stage before looping back to the CHAPTER_DEFAULT_STAGE stage
-const CHAPTER_MAX_STAGE : int = 7
+const CHAPTER_MAX_STAGE : int = 5
 const CHAPTER_DEFAULT_STAGE : int = 1
 
 var music_volume : float = 1.0
@@ -225,9 +225,8 @@ func create_decal(pos : Vector3, life_time : float = 10.0, color : Color = Color
 	dec.damage = damage
 	add_child.call_deferred(dec)
 
-func create_popup_text(pos : Vector3, text : String = "kupsztal", init_velocity : Vector3 = Vector3.UP, big : bool = false, bounciness : float = 0.5) -> void:
+func create_popup_text(pos : Vector3, text : String = "kupsztal", big : bool = false, bounciness : float = 0.5) -> void:
 	var popup : WorldTextPopup = WORLDTEXT_SCENE.instantiate()
-	popup.initial_force = init_velocity
 	popup.big = big
 	popup.bounciness = bounciness
 	popup.text = text
