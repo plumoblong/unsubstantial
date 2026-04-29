@@ -11,6 +11,7 @@
 radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h0xjc"]
+radius = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nhh02"]
 
@@ -257,6 +258,14 @@ collision_mask = 524
 shape = SubResource("SphereShape3D_h0xjc")
 debug_color = Color(0, 1, 0.75391, 0.25098)
 
+[node name="BodySeeker" type="Area3D" parent="." unique_id=966206368]
+collision_layer = 4358
+collision_mask = 4358
+
+[node name="Hitbox" type="CollisionShape3D" parent="BodySeeker" unique_id=1918294916]
+shape = SubResource("SphereShape3D_h0xjc")
+debug_color = Color(0, 1, 0.75391, 0.25098)
+
 [node name="ParrySeeker" type="Area3D" parent="." unique_id=821998680]
 collision_layer = 524
 collision_mask = 524
@@ -322,9 +331,9 @@ collision_mask = 255
 hit_from_inside = true
 
 [connection signal="area_entered" from="." to="." method="area_entered"]
-[connection signal="body_entered" from="." to="." method="body_entered"]
 [connection signal="body_entered" from="Seeker" to="." method="seeker_body_entered"]
 [connection signal="body_exited" from="Seeker" to="." method="seeker_body_exited"]
+[connection signal="body_entered" from="BodySeeker" to="." method="body_entered"]
 [connection signal="area_entered" from="ParrySeeker" to="." method="parry_seeker_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="timer_timeout"]

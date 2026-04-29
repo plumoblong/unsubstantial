@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://bc84j7gueqtii" path="res://material/stat_material.tres" id="5_6oixu"]
 [ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="6_v3kpo"]
 [ext_resource type="Texture2D" uid="uid://c2ar5rwtyqfb4" path="res://images/ui/hud_infoicon.png" id="7_4bupx"]
+[ext_resource type="Script" uid="uid://bfc3g762g10ou" path="res://src/menus/world_to_2d.gd" id="7_6oixu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hcoo3"]
 radius = 0.75
@@ -177,6 +178,10 @@ _data = {
 &"out": SubResource("Animation_6oixu")
 }
 
+[sub_resource type="Gradient" id="Gradient_v3kpo"]
+offsets = PackedFloat32Array(0.30007586, 1)
+colors = PackedColorArray(1, 1, 1, 0.99203336, 1, 1, 1, 0)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_tou1b"]
 atlas = ExtResource("7_4bupx")
 region = Rect2(0, 12, 12, 12)
@@ -193,7 +198,7 @@ region = Rect2(24, 12, 12, 12)
 atlas = ExtResource("7_4bupx")
 region = Rect2(36, 12, 12, 12)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6oixu"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_0q38s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -227,6 +232,7 @@ collision_layer = 520
 collision_mask = 520
 script = ExtResource("2_d11nx")
 one_shot = false
+press_once_instead_of_hold = true
 metadata/_custom_type_script = "uid://5ocjh4l18ly4"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interaction" unique_id=441615562]
@@ -247,25 +253,30 @@ texture = ExtResource("6_v3kpo")
 libraries/ = SubResource("AnimationLibrary_6oixu")
 speed_scale = 4.0
 
-[node name="Price" type="Node3D" parent="." unique_id=1329050873]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+[node name="Price" type="Node2D" parent="." unique_id=1012858024]
+script = ExtResource("7_6oixu")
+distance_gradient = SubResource("Gradient_v3kpo")
+distance_mult = 16.0
+parent_position_offset = Vector3(0, 0.9, 0)
+metadata/_custom_type_script = "uid://bfc3g762g10ou"
 
-[node name="SoulIcon" type="AnimatedSprite3D" parent="Price" unique_id=678747977]
-offset = Vector2(-8, 0)
-pixel_size = 0.055
-billboard = 1
-texture_filter = 0
-sprite_frames = SubResource("SpriteFrames_6oixu")
-frame_progress = 0.2907753
+[node name="SoulIcon" type="AnimatedSprite2D" parent="Price" unique_id=1691282643]
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_0q38s")
+autoplay = "default"
+centered = false
+offset = Vector2(-12, -6)
 
-[node name="Label3D" type="Label3D" parent="Price" unique_id=409583952]
-pixel_size = 0.055
-billboard = 1
-texture_filter = 0
-text = "500"
-font_size = 8
-outline_size = 0
-horizontal_alignment = 0
+[node name="Text" type="Label" parent="Price" unique_id=824886154]
+use_parent_material = true
+offset_top = -2.0
+offset_right = 20.0
+offset_bottom = 3.0
+theme_override_font_sizes/font_size = 8
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
 [connection signal="area_entered" from="Interaction" to="Interaction" method="area_entered"]
 [connection signal="area_exited" from="Interaction" to="Interaction" method="area_exited"]

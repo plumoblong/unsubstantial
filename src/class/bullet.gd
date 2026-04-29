@@ -68,6 +68,8 @@ func _setup_speed() -> void:
 	_base_speed = speed
 
 func _setup_visuals() -> void:
+	if get_parent() is Player:
+		light.hide()
 	if config.sprite_override:
 		sprite.texture = config.sprite_override
 	
@@ -215,7 +217,7 @@ func _spawn_split_bullets() -> void:
 	var base_dir: Vector3 = direction if direction != Vector3.ZERO else -transform.basis.z
 	
 	for i in config.split_count:
-		var bullet: Node3D = _G.game.BULLET_SCENE.instantiate()
+		var bullet : Bullet = _G.game.BULLET_SCENE.instantiate()
 		
 		var t: float = 0.5 if config.split_count == 1 else float(i) / float(config.split_count - 1)
 		var angle_offset: float = deg_to_rad(lerp(-config.split_spread_angle * 0.5, config.split_spread_angle * 0.5, t))
@@ -227,6 +229,7 @@ func _spawn_split_bullets() -> void:
 		bullet.crit = crit
 		bullet.parent = parent
 		bullet.global_position = global_position
+		bullet.damage = damage * config.split_size_mult
 		
 		split_config.init_speed = speed * config.split_speed_mult
 		

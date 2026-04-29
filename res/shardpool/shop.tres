@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StatShardPool" format=3 uid="uid://kyh8htrs05ll"]
+
+[ext_resource type="Script" uid="uid://bgbbtgjetypx6" path="res://src/resource/shard_pool.gd" id="1_uuk10"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_n70lm"]
+[ext_resource type="Resource" uid="uid://csryy21ph85ds" path="res://res/shards/healing.tres" id="3_b7l3p"]
+[ext_resource type="Resource" uid="uid://bi8emdgpnb8fv" path="res://res/shards/attacks/b_amount.tres" id="4_4rrbu"]
+[ext_resource type="Resource" uid="uid://ii0b00jw5rrn" path="res://res/shards/movement_speed.tres" id="4_lvplt"]
+[ext_resource type="Resource" uid="uid://b1g8nonl2j5a0" path="res://res/shards/attacks/b_homing.tres" id="5_iis0i"]
+[ext_resource type="Resource" uid="uid://y1w007jqpju1" path="res://res/shards/damage.tres" id="6_uuk10"]
+[ext_resource type="Resource" uid="uid://7ulcyju0ei4q" path="res://res/shards/defense.tres" id="7_n70lm"]
+
+[resource]
+script = ExtResource("1_uuk10")
+pool_id = 2
+pool_name = "Shop Shard Pool"
+pool_crystal_color = Color(1, 0.47134775, 0.7937168, 1)
+uncommon_weight = 1.0
+epic_weight = 0.5
+legendary_weight = 0.125
+mythic_weight = 0.005
+shards = Array[ExtResource("2_n70lm")]([ExtResource("3_b7l3p"), ExtResource("4_lvplt"), ExtResource("4_4rrbu"), ExtResource("6_uuk10"), ExtResource("7_n70lm"), ExtResource("5_iis0i")])
+metadata/_custom_type_script = "uid://bgbbtgjetypx6"

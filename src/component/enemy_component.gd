@@ -70,6 +70,8 @@ func handle_fracture(amount : int, i_time : float, mov : MovementComponent) -> v
 	if mov is MovementComponent:
 		mov.vel *= on_hit_velocity_loss
 	pulse(Color.WHITE, 0.25, i_time * 10.0)
+	var random_popup_vel : Vector3 = Vector3 (randf_range(-0.5, 0.5), randf_range(0.5, 1.0), randf_range(-0.5, 0.5))
+	_G.game.create_popup_text(get_parent().global_position, "-" + str(amount), random_popup_vel)
 	hit_sfx.pitch_scale = randf_range(0.9, 1.15)
 	hit_sfx.play()
 	#_G.game.wait()

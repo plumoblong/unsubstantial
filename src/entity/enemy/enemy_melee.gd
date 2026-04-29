@@ -57,9 +57,8 @@ func _physics_process(delta : float) -> void:
 	velocity = movement_component.vel * float(_G.player.can_control)
 	if _G.player.can_control and chase_component.attacking:
 		if dash_component.can_dash and not dash_component.dashing:
-			if chase_component.target_distance > 4.0:
-				dash_component.dash(movement_component, global_position.direction_to(target_pos))
-				shoot_sfx.play()
+			dash_component.dash(movement_component, global_position.direction_to(target_pos))
+			shoot_sfx.play()
 	move_and_slide()
 
 func query_area_entered(area : Area3D) -> void:

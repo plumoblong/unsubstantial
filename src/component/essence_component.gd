@@ -48,14 +48,14 @@ func fracture(amount : int, combo : bool = false, i_time : float = 0.2) -> void:
 	if get_parent() is Player:
 		if not enabled or get_parent().god_mode: return
 	if alive:
+		var a : int = int(float(amount) * 10.0/defense * damage_mult)
 		if essence > amount:
-			var a : int = int(float(amount) * 10.0/defense * damage_mult)
 			essence -= a
 			times_fractured += 1
-			fractured.emit(a, combo)
 			add_iframes(i_time)
 		else:
 			die()
+		fractured.emit(a, combo)
 
 func gain(amount : int) -> void:
 	if not enabled: return

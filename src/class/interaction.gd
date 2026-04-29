@@ -7,15 +7,20 @@ class_name Interaction
 @export var interaction_tooltip : String = ""
 @export var description_tooltip : String = ""
 
+@export var press_once_instead_of_hold : bool = false
+
 var can_interact : bool = false
 signal interacted
 signal hooked
 signal unhooked
 
+var interact_action : bool
+	
 func _process(_delta : float) -> void:
 	if not enabled: 
 		return
-	if Input.is_action_pressed("interact") and can_interact:
+	var interact_action : bool = Input.is_action_just_pressed("interact") if press_once_instead_of_hold else Input.is_action_pressed("interact")
+	if interact_action and can_interact:
 		interacted.emit()
 		if one_shot:
 			_G.player.hud.interact_tooltip = ""

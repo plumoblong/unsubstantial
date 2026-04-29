@@ -19,9 +19,9 @@ var current_price : int = 0
 @onready var stat_sprite : Sprite3D = get_node("Stat")
 @onready var anim : AnimationPlayer = get_node("AnimationPlayer")
 
-@onready var price : Node3D = get_node("Price")
-@onready var price_label : Label3D = get_node("Price/Label3D")
-@onready var soul_icon : AnimatedSprite3D = get_node("Price/SoulIcon")
+@onready var price : Node2D = get_node("Price")
+@onready var price_label : Label = get_node("Price/Text")
+@onready var soul_icon : AnimatedSprite2D = get_node("Price/SoulIcon")
 
 const SHARD_MAT : StandardMaterial3D = preload("res://material/shard_material.tres")
 const STAT_MAT : StandardMaterial3D = preload("res://material/stat_material.tres")
@@ -90,7 +90,7 @@ func interacted() -> void:
 			_G.player.stats.add_stat(current_modulate, current_stat.image)
 			anim.play("disapear")
 			interaction.enabled = false
-			price.hide()
+			price.active = false
 			_G.player.hud.interact_tooltip = ""
 			_G.player.hud.interact_description = ""
 		else:

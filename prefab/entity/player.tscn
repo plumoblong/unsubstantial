@@ -350,6 +350,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99999976, -1.4210855e-14, 0, 1.4210855e-14
 shoot_component = NodePath("../../ShootComponent")
 no_depth_test = true
 auto_rotate = false
+dont_scale_bullet = true
 
 [node name="InteractionQuery" type="Area3D" parent="Head" unique_id=1236938087]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 1.7484598e-07, 0, -1.7484598e-07, 0.99999994, 0, 0, 0)

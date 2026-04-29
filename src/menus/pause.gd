@@ -44,7 +44,7 @@ func _process(_delta : float) -> void:
 	if _G.game.in_ether:
 		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + ETHER_SUFFIX
 	else:
-		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + CHAPTER_PREFIX + str(current_chapter.id) + STAGE_PREFIX + str(_G.game.stage)
+		chapter_info.text = BOLD_START + current_chapter.chapter_name + BOLD_END + current_chapter.description + CHAPTER_PREFIX + str(current_chapter.id) + STAGE_PREFIX + str(_G.game.chapter_stage)
 	
 	restart_button.disabled = _G.game.in_ether
 	_update_positions()

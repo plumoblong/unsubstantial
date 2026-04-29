@@ -1,24 +1,32 @@
 [gd_scene format=3 uid="uid://dhqtqegr5a6ko"]
 
 [ext_resource type="Script" uid="uid://dk3w4jc4falw5" path="res://src/prop/gate_info.gd" id="1_whucu"]
-[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="2_hoa3s"]
+[ext_resource type="Material" uid="uid://0gsbnjffxggx" path="res://material/ui_invert.tres" id="1_x3fj6"]
+[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="3_x3fj6"]
+[ext_resource type="Texture2D" uid="uid://dw8ypa3eth0wm" path="res://images/ui/door_icon.png" id="4_1d7kd"]
 
-[node name="GateInfo" type="Node3D" unique_id=475121744]
+[node name="GateInfo" type="Node2D" unique_id=733056669]
+material = ExtResource("1_x3fj6")
 script = ExtResource("1_whucu")
+metadata/_custom_type_script = "uid://bfc3g762g10ou"
 
-[node name="Text" type="Label3D" parent="." unique_id=191284926]
-ignore_occlusion_culling = true
-pixel_size = 1.0
-billboard = 1
-double_sided = false
-no_depth_test = true
-alpha_cut = 2
-texture_filter = 0
-text = "8"
-font = ExtResource("2_hoa3s")
-font_size = 6
-outline_size = 0
+[node name="Text" type="Label" parent="." unique_id=1069565073]
+use_parent_material = true
+clip_contents = true
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 11.0
+theme_override_fonts/font = ExtResource("3_x3fj6")
+theme_override_font_sizes/font_size = 8
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=743361983]
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="visible_on_screen_notifier_3d_screen_exited"]
+[node name="Door" type="Sprite2D" parent="." unique_id=86162753]
+use_parent_material = true
+texture = ExtResource("4_1d7kd")
+centered = false
+offset = Vector2(-8, 4)
+hframes = 2

@@ -201,24 +201,28 @@
 "classname" "collectable_shard"
 "origin" "24 96 28"
 "free" "0"
+"pool_id" "2"
 }
 // entity 10
 {
 "classname" "collectable_shard"
 "origin" "-16 40 28"
 "free" "0"
+"pool_id" "2"
 }
 // entity 11
 {
 "classname" "collectable_shard"
 "origin" "24 -96 28"
 "free" "0"
+"pool_id" "2"
 }
 // entity 12
 {
 "classname" "collectable_shard"
 "origin" "-16 -40 28"
 "free" "0"
+"pool_id" "2"
 }
 // entity 13
 {

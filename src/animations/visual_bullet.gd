@@ -5,6 +5,7 @@ class_name VisualBullet
 @export var no_depth_test : bool = false
 @export var auto_rotate : bool = true
 @export var reset_time_offset_mult  : float = 0.5
+@export var dont_scale_bullet : bool = false
 
 @export_category("animation only")
 @export var scale_mult : Vector3 = Vector3.ONE
@@ -19,8 +20,11 @@ var _config : BulletSettings
 
 @onready var sprite : Sprite3D = get_node("Sprite")
 @onready var animation : AnimationPlayer = get_node("AnimationPlayer")
+@onready var reset_timer : Timer = get_node("ResetTimer")
 
 const BOUNCINESS_SPEED : float = 4.0
+
+var anim_speed : float = 1.0
 
 func _ready() -> void:
 	show_anim()
@@ -31,15 +35,18 @@ func setup(config : BulletSettings) -> void:
 
 func _setup_animation() -> void:
 	if not _config: return
-	animation.speed_scale  = reset_time_offset_mult / (_config.fire_rate * _config.fire_rate_mult) * 2.0
+	animation.speed_scale  = (_config.fire_rate * _config.fire_rate_mult) * 2.0
+	sprite.no_depth_test = no_depth_test
 
 func _update_animation(delta : float) -> void:
 	if not _config: return
+	anim_speed = (_config.fire_rate * _config.fire_rate_mult) * reset_time_offset_mult
+	reset_timer.wait_time = anim_speed
 	var bounciness : float = min(0.5 + _config.bounciness, 2.0) * 6.0
 	var b_speed : float = BOUNCINESS_SPEED * _config.life_time * 1.5
 	_bounciness.x = _G.sine_movement(b_speed, bounciness, delta, b_speed * bounciness)
 	_bounciness.y = _G.sine_movement(b_speed, bounciness, delta)
-	sprite.scale = (scale_mult * _bullet_size_mult) + Vector3(_bounciness.x, _bounciness.y, 1.0)
+	sprite.scale = ((scale_mult * _bullet_size_mult) if not dont_scale_bullet else Vector3.ONE * scale_mult) + Vector3(_bounciness.x, _bounciness.y, 1.0)
 	sprite.global_position = lerp(sprite.global_position, global_position, _config.init_speed * 1.25 * delta)
 	_update_scale()
 	_update_rotation_to_velocity()
@@ -73,8 +80,7 @@ func _physics_process(delta: float) -> void:
 func shooted() -> void:
 	if not _config: return
 	hide_anim()
-	await get_tree().create_timer(reset_time_offset_mult / (_config.fire_rate * _config.fire_rate_mult)).timeout
-	reset()
+	reset_timer.start((_config.fire_rate * _config.fire_rate_mult) * reset_time_offset_mult)
 	
 func reset() -> void:
 	if not _config: return

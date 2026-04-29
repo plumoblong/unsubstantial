@@ -70,7 +70,7 @@ func update() -> void:
 	bullet.fire_rate = bullet_atkspd / actual_atkspd
 	bullet.knockback = 2.0 * knockback
 	bullet.spread_angle = bullet.shots * 5
-	bullet.inaccuracy = (actual_atkspd - 1.0) * 0.1
+	bullet.inaccuracy = (actual_atkspd - 1.0) * 0.025
 	
 	p.shoot_component.config = bullet
 	p.shoot_component.crit_chance = actual_crit

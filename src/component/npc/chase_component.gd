@@ -6,6 +6,7 @@ var start_position : Vector3
 @export var movehelper : EntMoveHelper
 @export var agro_distance : float = 20.0
 @export var attack_distance : float = 10.0
+@export var min_attack_distance : float = 1.0
 @export var min_distance : float = 5.0
 @export var y_distance : float = 3.0
 @export var update_rate : int = 4
@@ -33,7 +34,7 @@ func update(target_position : Vector3, movement_component : MovementComponent, a
 	target_distance = parent_pos.distance_to(target_position)
 	target_direction = parent_pos.direction_to(target_position)
 	
-	attacking = concious and target_distance < attack_distance
+	attacking = concious and (target_distance <= attack_distance and target_distance > min_attack_distance)
 	
 	if movehelper:
 		movehelper.look_at(target_position)

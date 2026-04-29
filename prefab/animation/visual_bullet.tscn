@@ -57,3 +57,9 @@ texture = ExtResource("1_sg24x")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=504626010]
 libraries/ = SubResource("AnimationLibrary_rje1s")
+
+[node name="ResetTimer" type="Timer" parent="." unique_id=1417396535]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="ResetTimer" to="." method="reset"]

@@ -24,6 +24,7 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
+shader_parameter/ethereal = false
 
 [node name="Game" type="Node3D" unique_id=449548246]
 script = ExtResource("1_uu38s")

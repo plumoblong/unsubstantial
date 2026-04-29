@@ -18,18 +18,18 @@ enum RARITY {
 
 ## Difficulty multipliers applied when this modulate is appended.
 const RARITY_DIFFICULTY : Dictionary = {
-	RARITY.COMMON    : 1.005,
-	RARITY.UNCOMMON  : 1.010,
-	RARITY.EPIC      : 1.015,
-	RARITY.LEGENDARY : 1.020,
-	RARITY.MYTHIC    : 1.100,
+	RARITY.COMMON    : 1.001,
+	RARITY.UNCOMMON  : 1.002,
+	RARITY.EPIC      : 1.005,
+	RARITY.LEGENDARY : 1.01,
+	RARITY.MYTHIC    : 1.05,
 }
 
 ## Display name shown in the UI (e.g. "Damage", "Fire Rate").
 @export var stat_name     : String = "Damage"
-## The actual property name on ItemStats or its bullet sub-object.
+## The actual property name on ItemStats or its bullet resource.
 @export var statistic     : String = "damage"
-## If true, reads/writes from stats_component.bullet instead of stats_component.
+## If true, reads and writes from stats_component.bullet instead of stats_component.
 @export var bullet_set    : bool   = false
 
 @export var operator      : OP

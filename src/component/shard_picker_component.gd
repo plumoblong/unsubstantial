@@ -15,6 +15,7 @@ const RARITY_COLOR : Array[Color] = [
 @export var pools : Array[StatShardPool] = [
 	preload("res://res/shardpool/common.tres")   ,  # id: 0
 	preload("res://res/shardpool/attribute.tres"),  # id: 1
+	preload("res://res/shardpool/shop.tres"),       # id: 2
 ]
 
 @export var pool_weights : Dictionary[int, int] = {
@@ -22,8 +23,8 @@ const RARITY_COLOR : Array[Color] = [
 	1 : 1  #attribute.tres
 }
 
-## Full pick pipeline: rarity → shard → modulate.
-## Zeroes out the chosen shard in the pool so it can't be picked again.
+## full picking pipeline: rarity → shard → modulate.
+## zeroes out the chosen shard in the pool so it can't be picked again.
 func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = Modulate.RARITY.UNCOMMON) -> Array:
 	
 	var shard   : StatShard       = pick_shard(weighted_pool, rarity)

@@ -20,33 +20,49 @@ var current_map : Map
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
+const GHOST_SCENE : PackedScene = preload("res://prefab/entity/ghost.tscn")
+const XPORB_SCENE : PackedScene = preload("res://prefab/entity/xp_orb.tscn")
+const WORLDTEXT_SCENE : PackedScene = preload("res://prefab/menus/world_text_popup.tscn")
 
 const SPAWN_COOLDOWN : float = 0.5
 
 var next_level : String
 var time_pause : bool = false
+
 var current_level : String = ""
 var current_map_path : String = ""
 var level_time : float = 0
-var stage : int = 0
+
 var actual_stage : int = 0
+var chapter_stage : int = 0
+## last stage before looping back to the CHAPTER_DEFAULT_STAGE stage
+const CHAPTER_MAX_STAGE : int = 7
+const CHAPTER_DEFAULT_STAGE : int = 1
+
 var music_volume : float = 1.0
+var music : bool = false
+
 var exit_pos : Vector3 = Vector3.ZERO
 var enemies_disabled : bool = false
 var in_ether : bool = true
+
 var time_scale : float = 1.0
+
 var leveled_up : bool = false
+
 var in_any_menu : bool = false
 var ending_level : bool = false
-var music : bool = false
+
 var all_gates_visible : bool = false
 var all_gates_open : bool = false
+
 var pursuer_spawned : bool = false
 var enemy_count : int = 0
 var enemy_spawner_count : int = 0
+var enemies_killed : int = 0
+
 var enemy_multiplier : float = 1.0
 var difficulty_bonus : float = 1.0
-var enemies_killed : int = 0
 
 signal level_changing
 signal map_built
@@ -93,7 +109,7 @@ func _process(_delta : float) -> void:
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.1) * difficulty_bonus)
+	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus)
 	
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
@@ -190,8 +206,7 @@ func unmute_music(time : float = 1.0) -> void:
 	_G.tween(music_player, "volume_db", linear_to_db(1.0), time, 0, 0)
 
 func create_ghost(pos : Vector3, texture : Texture2D, pixel_size : float = 0.03, frames : Array[int] = [0, 1, 1], time : float = 1.5) -> void:
-	var gres : PackedScene = load("res://prefab/entity/ghost.tscn")
-	var ghost : Ghost = gres.instantiate()
+	var ghost : Ghost = GHOST_SCENE.instantiate()
 	ghost.lifetime = time
 	ghost.global_position = pos
 	ghost.sprite = texture
@@ -210,14 +225,18 @@ func create_decal(pos : Vector3, life_time : float = 10.0, color : Color = Color
 	dec.damage = damage
 	add_child.call_deferred(dec)
 
-func create_popup_text(pos : Vector3, text : String = "kupsztal", color : Color = Color.WHITE, crit : bool = false) -> void:
-	return
+func create_popup_text(pos : Vector3, text : String = "kupsztal", init_velocity : Vector3 = Vector3.UP, big : bool = false, bounciness : float = 0.5) -> void:
+	var popup : WorldTextPopup = WORLDTEXT_SCENE.instantiate()
+	popup.initial_force = init_velocity
+	popup.big = big
+	popup.bounciness = bounciness
+	popup.text = text
+	popup.global_position = pos
+	add_child(popup)
 
 func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.0) -> void:
-	var res : PackedScene = load("res://prefab/entity/xp_orb.tscn")
-	
 	for i in range(amount):
-		var obj : Node3D = res.instantiate()
+		var obj : Node3D = XPORB_SCENE.instantiate()
 		if get_tree() != null:
 			await get_tree().create_timer(0.025).timeout
 		
@@ -244,8 +263,9 @@ func end_level(loop : bool = false) -> void:
 	await get_tree().create_timer(0.75).timeout
 	
 	
-	stage += 1
+	#stage += 1
 	actual_stage += 1
+	chapter_stage += 1
 	switch_chapters()
 	
 	_clear_enemies()
@@ -288,7 +308,10 @@ func timer_timeout() -> void:
 	_G.player.camera.screenshot()
 
 func switch_chapters() -> void:
-	var next_chapter : Chapter = chapter.get_chapter_for_stage(actual_stage)
+	if chapter_stage > CHAPTER_MAX_STAGE:
+		chapter_stage = CHAPTER_DEFAULT_STAGE
+	
+	var next_chapter : Chapter = chapter.get_chapter_for_stage(chapter_stage)
 	if next_chapter != chapter.current:
 		chapter.available_maps.clear()
 	chapter.current = next_chapter
@@ -300,7 +323,7 @@ func get_chapter_color(sample_override : float = -1.0) -> Color:
 	return color
  
 func update_rpc(update_timestamp : bool = false) -> void:
-	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(stage)
+	var rpc_details : String = "Chapter " + str(chapter.current.id) + " Stage " + str(chapter_stage)
 	var rpc_state : String = current_map_path
 	var rpc_small_img : String = "chapter_icon" + str(chapter.current.id)
 	var rpc_small_img_text : String = chapter.current.chapter_name

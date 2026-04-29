@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c5ly3vfa27gs2"]
+
+[ext_resource type="Script" uid="uid://bfc3g762g10ou" path="res://src/menus/world_to_2d.gd" id="1_bpy12"]
+
+[node name="WorldTo2D" type="Node2D" unique_id=2016178930]
+script = ExtResource("1_bpy12")
