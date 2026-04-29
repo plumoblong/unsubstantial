@@ -14,6 +14,7 @@ class_name StatShard
 
 @export_group("Stat Exclusion")
 @export var exclusion_enabled  : bool  = false
+@export var exclusion_bullet_config : bool = false # reads/writes from bulletconfig resource
 @export var exclusion_stat     : String = ""        # e.g. "health", "speed"
 @export var exclusion_min      : float = 0.0       # exclude if stat < this
 @export var exclusion_max      : float = INF        # exclude if stat > this
@@ -27,13 +28,10 @@ class_name StatShard
 @export var legendary_modulates : Array[Modulate]
 @export var mythical_modulates : Array[Modulate]
 
-func is_excluded(stat_owner: Object) -> bool:
+func is_excluded() -> bool:
 	if not exclusion_enabled or exclusion_stat.is_empty():
 		return false
-	if not stat_owner.get(exclusion_stat) != null:
-		_T.say("StatShard: exclusion_stat '%s' not found on %s" % [exclusion_stat, stat_owner])
-		return false
-	var value: float = float(stat_owner.get(exclusion_stat))
+	var value: float = float(_G.player.stats.get(exclusion_stat) if not exclusion_bullet_config else _G.player.stats.bullet.get(exclusion_stat))
 	return value < exclusion_min or value > exclusion_max
 
 func get_random_modulate(rarity : Modulate.RARITY) -> Modulate:

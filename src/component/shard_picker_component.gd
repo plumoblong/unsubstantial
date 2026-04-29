@@ -27,7 +27,7 @@ const RARITY_COLOR : Array[Color] = [
 ## zeroes out the chosen shard in the pool so it can't be picked again.
 func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = Modulate.RARITY.UNCOMMON) -> Array:
 	
-	var shard   : StatShard       = pick_shard(weighted_pool, rarity, _G.player)
+	var shard   : StatShard       = pick_shard(weighted_pool, rarity)
 	var modulate: Modulate        = pick_modulate(shard, rarity)
 	
 	return [shard.duplicate(), modulate.duplicate()]
@@ -55,7 +55,7 @@ func pick_shard(weighted_pool: Dictionary[StatShard, int], rarity: Modulate.RARI
 
 	for shard: StatShard in weighted_pool:
 		if weighted_pool[shard] > 0 and _shard_has_rarity(shard, rarity):
-			if stat_owner == null or not shard.is_excluded(stat_owner):
+			if stat_owner == null or not shard.is_excluded():
 				eligible_pool[shard] = weighted_pool[shard]
  
 	if eligible_pool.is_empty():

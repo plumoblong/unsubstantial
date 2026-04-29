@@ -52,7 +52,7 @@ func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
 	random_factor = randf_range(0.00, 1.00)
 	color = _G.game.get_chapter_color(random_factor)
-	light_color = Color.from_hsv(color.h, color.s, 1.0, 1.0)
+	light_color = Color.from_hsv(color.h, color.s, max(color.v, 0.7), 1.0)
 	pulse(Color(1.25, 1.25, 1.25, 0.0), chase.concious_gain_time * 0.75, chase.concious_gain_time * 0.5, Color(1.25, 1.25, 1.25, 1.0), Tween.TRANS_SINE)
 	esc.max_essence = essence
 	esc.essence = essence
