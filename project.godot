@@ -326,6 +326,7 @@ jolt_physics_3d/simulation/areas_detect_static_bodies=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+rendering_device/driver.windows="d3d12"
 renderer/rendering_method.mobile="forward_plus"
 driver/threads/thread_model=2
 textures/vram_compression/compress_with_gpu=false

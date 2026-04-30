@@ -17,14 +17,13 @@ var current_map : Map
 @onready var shard_picker : ShardPickerComponent = $ShardPicker
 @onready var spawn_timer : Timer = $SpawnTimer
 @onready var spawner : SpawnCoordinator = $SpawnCoordinator
+@onready var nav_scheduler : NavSchedulerComponent = $NavScheduler
 
 const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
 const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
 const GHOST_SCENE : PackedScene = preload("res://prefab/entity/ghost.tscn")
 const XPORB_SCENE : PackedScene = preload("res://prefab/entity/xp_orb.tscn")
 const WORLDTEXT_SCENE : PackedScene = preload("res://prefab/menus/world_text_popup.tscn")
-
-const SPAWN_COOLDOWN : float = 0.5
 
 var next_level : String
 var time_pause : bool = false

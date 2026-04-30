@@ -12,7 +12,8 @@ func _func_godot_build_complete() -> void:
 	if func_godot_properties["power"] != -4664.0:
 		speed = func_godot_properties["power"]
 		
-func body_entered(body : CharacterBody3D) -> void:
+func body_entered(body : Node3D) -> void:
+	if body is not CharacterBody3D: return
 	if body.has_node("DashComponent"):
 		if not body.get_node("DashComponent").can_dash or not body.get_node("DashComponent").can_reset:
 			body.get_node("DashComponent").allow_dash(false)

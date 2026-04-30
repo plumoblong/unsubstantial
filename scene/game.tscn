@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://t41ot1nhnt07" path="res://prefab/menus/crystal_choose.tscn" id="4_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://dovrexvfpfqjp" path="res://prefab/menus/pause.tscn" id="6_hgp5e"]
 [ext_resource type="Script" uid="uid://coarcnj103e3e" path="res://src/component/spawn_coordinator.gd" id="6_i6gbm"]
+[ext_resource type="Script" uid="uid://d37osp1bj8pae" path="res://src/component/nav_scheduler.gd" id="7_ux4dc"]
 [ext_resource type="Resource" uid="uid://c7vt6mx0osl47" path="res://res/chapter/palace.tres" id="8_ve786"]
 [ext_resource type="Environment" uid="uid://dw7lwf2t20oyb" path="res://res/env/ether.tres" id="11_i6gbm"]
 [ext_resource type="Environment" uid="uid://dspdyqrgm5xt3" path="res://res/env/palace.tres" id="12_ux4dc"]
@@ -49,6 +50,10 @@ script = ExtResource("16_0lu6w")
 
 [node name="SpawnCoordinator" type="Node" parent="." unique_id=1346018652]
 script = ExtResource("6_i6gbm")
+
+[node name="NavScheduler" type="Node" parent="." unique_id=658085209]
+script = ExtResource("7_ux4dc")
+metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
 [node name="ChapterManager" type="Node" parent="." unique_id=2133132846]
 script = ExtResource("33_d218c")
