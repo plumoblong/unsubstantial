@@ -49,7 +49,7 @@ func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 	time_spawned = _G.time
 	if randomize_scale != 1.0:
 		var rand_scale = randf_range(1.0, randomize_scale) if randomize_scale > 1.0 else randf_range(randomize_scale, 1.0)
-		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale)
+		get_parent().scale = Vector3(rand_scale, rand_scale, rand_scale) 
 	random_factor = randf_range(0.00, 1.00)
 	color = _G.game.get_chapter_color(random_factor)
 	light_color = Color.from_hsv(color.h, color.s, max(color.v, 0.7), 1.0)
@@ -69,7 +69,7 @@ func setup(esc : EssenceComponent, chase : ChaseComponent) -> void:
 func handle_fracture(amount : int, i_time : float, combo : bool, mov : MovementComponent) -> void:
 	if mov is MovementComponent:
 		mov.vel *= on_hit_velocity_loss
-	pulse(Color.WHITE, 0.25, i_time * 10.0)
+	pulse(Color.WHITE, 0.25, 0.2)
 	_G.game.create_popup_text(get_parent().global_position, "-" + str(amount), combo)
 	hit_sfx.pitch_scale = randf_range(0.9, 1.15)
 	hit_sfx.play()

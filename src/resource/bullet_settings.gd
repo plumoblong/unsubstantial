@@ -21,7 +21,7 @@ class_name BulletSettings
 @export var pierces : int = 0
 @export var homing : float = 0.0
 @export var homing_on_player : bool = false
-#@export var homing_interlpolation : float = 0.75
+#@export var homing_interlpolation : float = 0.75	
 @export var bounciness : float = 0.0
 @export var spectral : bool = false
 @export var stun : float = 0.1
@@ -48,7 +48,7 @@ class_name BulletSettings
 ## Spread angle (degrees) of the split bullets around the original direction.
 @export var split_spread_angle : float = 180.0
 ## Speed multiplier applied to each split bullet. Values < 1.0 make them slower.
-@export var split_speed_mult : float = 0.5
+@export var split_speed_mult : float = 0.75
 ## Size multiplier applied to each split bullet. Values < 1.0 make them smaller.
 @export var split_size_mult : float = 0.5
 

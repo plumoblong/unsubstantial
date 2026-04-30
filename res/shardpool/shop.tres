@@ -8,15 +8,12 @@
 [ext_resource type="Resource" uid="uid://b1g8nonl2j5a0" path="res://res/shards/attacks/b_homing.tres" id="5_iis0i"]
 [ext_resource type="Resource" uid="uid://y1w007jqpju1" path="res://res/shards/damage.tres" id="6_uuk10"]
 [ext_resource type="Resource" uid="uid://7ulcyju0ei4q" path="res://res/shards/defense.tres" id="7_n70lm"]
+[ext_resource type="Resource" uid="uid://bylh04gjw1055" path="res://res/shards/attacks/b_split_count.tres" id="9_lvplt"]
 
 [resource]
 script = ExtResource("1_uuk10")
 pool_id = 2
 pool_name = "Shop Shard Pool"
 pool_crystal_color = Color(1, 0.47134775, 0.7937168, 1)
-uncommon_weight = 1.0
-epic_weight = 0.5
-legendary_weight = 0.125
-mythic_weight = 0.005
-shards = Array[ExtResource("2_n70lm")]([ExtResource("3_b7l3p"), ExtResource("4_lvplt"), ExtResource("4_4rrbu"), ExtResource("6_uuk10"), ExtResource("7_n70lm"), ExtResource("5_iis0i")])
+shards = Array[ExtResource("2_n70lm")]([ExtResource("3_b7l3p"), ExtResource("4_lvplt"), ExtResource("4_4rrbu"), ExtResource("6_uuk10"), ExtResource("7_n70lm"), ExtResource("5_iis0i"), ExtResource("9_lvplt")])
 metadata/_custom_type_script = "uid://bgbbtgjetypx6"
