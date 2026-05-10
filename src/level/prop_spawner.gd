@@ -1,7 +1,7 @@
 extends Node3D
 class_name PropSpawner
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"scale" = Vector3(1,1,1), "prop_name" = ""
 }
 

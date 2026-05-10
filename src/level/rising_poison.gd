@@ -1,7 +1,7 @@
 extends Node3D
 class_name RisingPoison
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"end_y" : 100.0, "speed" : 0.5
 }
 

@@ -6,6 +6,9 @@ class_name ShardCollectable
 	"pool_id"         : -1,
 	"price_override"  : 0.0,
 	"free"            : true,
+	"use_physics"     : true,
+	"discount"        : false,
+	"random_discount" : false,
 }
 
 var current_pool : StatShardPool
@@ -13,7 +16,7 @@ var current_rarity : Modulate.RARITY
 var current_stat : StatShard
 var current_modulate : Modulate
 
-var current_price : int = 0
+var current_price : float = 0.0
 
 @onready var shard_sprite : Sprite3D = get_node("Shard")
 @onready var stat_sprite : Sprite3D = get_node("Stat")
@@ -26,36 +29,25 @@ var current_price : int = 0
 const SHARD_MAT : StandardMaterial3D = preload("res://material/shard_material.tres")
 const STAT_MAT : StandardMaterial3D = preload("res://material/stat_material.tres")
 
+@export var auto_pick : bool = true
 @export var shard_color : Color = Color(0.502, 0.502, 0.502, 1.0)
 @export var stat_color : Color = Color(0.788, 0.788, 0.788, 1.0)
 
-func _setup_stat() -> void:
-	# pool setup
-	if func_godot_properties["pool_id"] > -1:
-		current_pool = _G.game.shard_picker.pools[func_godot_properties["pool_id"]]
-	else:
-		var chp : int = _G.choose_from_chance(_G.game.shard_picker.pool_weights)
-		current_pool = _G.game.shard_picker.pools[chp]
+func setup_stat(pool_dict, rarity) -> void:
+
+	var stat : Array = _G.game.shard_picker.pick(pool_dict, rarity)
 	
-	# rarity setup
-	if func_godot_properties["rarity_override"] > -1:
-		current_rarity = func_godot_properties["rarity_override"]
-	else:
-		current_rarity = _G.game.shard_picker.pick_rarity(current_pool, _G.player.stats.luck)
-	
-	var pool_dict : Dictionary[StatShard, int] = current_pool.build_pool()
-	var stat : Array = _G.game.shard_picker.pick(pool_dict, current_rarity)
+	if func_godot_properties["random_discount"]:
+		func_godot_properties["discount"] = bool([0, 0, 0, 0, 0, 0, 0, 0, 0, 1].pick_random())
 	
 	current_stat = stat[0]
 	current_modulate = stat[1]
-	current_price = func_godot_properties["price_override"] if func_godot_properties["price_override"] != 0.0 else (0.0 if func_godot_properties["free"] else stat[0].get_price(current_rarity))
+	current_price = func_godot_properties["price_override"] if func_godot_properties["price_override"] != 0.0 else (0.0 if func_godot_properties["free"] else stat[0].get_price(current_rarity)) * (1.0 - (0.5 * float(func_godot_properties["discount"])))
 	
 	interaction.interaction_tooltip = "Buy " + current_modulate.get_description() + " for " + str(current_price) + " soul" if current_price > 0.0 else "Get " + current_modulate.get_description()
 	
-	price.visible = current_price > 0.0
-	price_label.text = str(current_price)
-
-func _setup_visuals() -> void:
+	
+func setup_visuals(stat : StatShard, rarity : Modulate.RARITY) -> void:
 	var shard_mat : StandardMaterial3D = SHARD_MAT.duplicate()
 	var stat_mat : StandardMaterial3D = STAT_MAT.duplicate()
 	
@@ -67,16 +59,42 @@ func _setup_visuals() -> void:
 	#stat_mat.albedo_color = COLOR_MULT
 	stat_sprite.material_override = stat_mat 
 	soul_icon.play("default")
+	if current_price > 0.0 and not func_godot_properties["free"]: 
+		price.active = false
+	else:
+		price.active = true
 
+func setup() -> void:
+	if auto_pick:
+		if func_godot_properties["pool_id"] > -1:
+			current_pool = _G.game.shard_picker.pools[func_godot_properties["pool_id"]]
+		else:
+			var chp : int = _G.choose_from_chance(_G.game.shard_picker.pool_weights)
+			current_pool = _G.game.shard_picker.pools[chp]
+		
+		# rarity setup
+		if func_godot_properties["rarity_override"] > -1:
+			current_rarity = func_godot_properties["rarity_override"]
+		else:
+			current_rarity = _G.game.shard_picker.pick_rarity(current_pool, _G.player.stats.luck)
+		setup_stat(current_pool.build_pool(), current_rarity)
+		setup_visuals(current_stat, current_rarity)
+		
 func _func_godot_build_complete() -> void:
-	_setup_stat()
-	_setup_visuals()
+	setup()
 	
 func _process(_delta: float) -> void:
+	price_label.text = str(int(current_price))
 	shard_sprite.material_override.albedo_color = _G.game.shard_picker.RARITY_COLOR[current_rarity] * shard_color
 	stat_sprite.material_override.albedo_color = stat_color
 	interaction.description_tooltip = _G.game.shard_picker.get_stat_preview_text(current_modulate)
 
+func _physics_process(delta: float) -> void:
+	if not func_godot_properties["use_physics"]: return
+	if not is_on_floor(): velocity.y -= 18.0 * delta
+	else: velocity.y = 0.0
+	move_and_slide()
+	
 func hooked() -> void:
 	anim.play("in")
 
@@ -97,6 +115,7 @@ func interacted() -> void:
 			return
 	else:
 		_G.player.stats.add_stat(current_modulate, current_stat.image)
+		price.active = false
 		anim.play("disapear")
 		interaction.enabled = false
 		_G.player.hud.interact_tooltip = ""

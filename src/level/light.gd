@@ -1,7 +1,7 @@
 extends OmniLight3D
 class_name Light
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"range" = 18.0, "energy" = 0.75, "mesh_visible" = 1
 }
 

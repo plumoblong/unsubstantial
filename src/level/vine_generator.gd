@@ -1,7 +1,7 @@
 extends Node3D
 class_name VineGenerator
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"radius" = 15.0,
 	"flip" = 0
 }

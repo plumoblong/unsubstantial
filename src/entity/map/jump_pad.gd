@@ -2,7 +2,7 @@
 extends Area3D
 class_name JumpPad
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"power" = -4664.0
 }
 

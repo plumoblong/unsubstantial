@@ -8,6 +8,7 @@ class_name EnemySmall
 @onready var knockback_component : KnockbackComponent = $KnockbackComponent
 @onready var agent : NavigationAgent3D = $GroundEnemyNav
 @onready var query : Area3D = $Query
+@onready var query_hitbox : CollisionShape3D = $Query/Hitbox
 @onready var light : OmniLight3D = $OmniLight3D
 @onready var hit_sfx : AudioStreamPlayer3D = $HitSFX
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
@@ -25,4 +26,5 @@ func _physics_process(delta : float) -> void:
 	
 	if chase_component.attacking and is_on_floor():
 		movement_component.jump()
-	chase_component.update(_G.player.global_position, movement_component, agent)
+	query_hitbox.disabled = not is_on_floor()
+	chase_component.update(_G.player.target.get_pos_multiplied(3.0), movement_component, agent)

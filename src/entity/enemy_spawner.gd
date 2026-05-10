@@ -1,7 +1,7 @@
 extends Node3D
 class_name EnemySpawner
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"one_shot"                : 1,
 	"counted_enemy"           : 1,
 	"distance_to_spawn"       : 25.0,

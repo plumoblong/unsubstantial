@@ -6,10 +6,9 @@ class_name StatShard
 
 @export_category("Pool Info")
 @export var weight     : float   = 1.0
-@export var shop_cost  : int     = 25
 ## shop_cost * rarity when shard_collectable isnt free and has no price override
-@export var shop_rarity_price_multipliers : Array[float] = [
-	1.0, 2.0, 4.0, 6.0, 8.0
+@export var shop_prices : Array[float] = [
+	20.0, 50.0, 75.0, 100,0, 200.0
 ]
 
 @export_group("Stat Exclusion")
@@ -45,4 +44,4 @@ func get_random_modulate(rarity : Modulate.RARITY) -> Modulate:
 	return m
 	
 func get_price(rarity : Modulate.RARITY) -> float:
-	return shop_cost * shop_rarity_price_multipliers[rarity]
+	return shop_prices[rarity]

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" format=3 uid="uid://dik52fgqn8wyg"]
+
+[ext_resource type="Script" uid="uid://d1nwwgcrner8b" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class_display_descriptor.gd" id="1_1sgtt"]
+[ext_resource type="PackedScene" uid="uid://bgm1q60ipefc8" path="res://prefab/level/collectable_table.tscn" id="2_1sgtt"]
+[ext_resource type="Script" uid="uid://cxsqwtsqd8w33" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="3_r8qd1"]
+
+[resource]
+script = ExtResource("3_r8qd1")
+scene_file = ExtResource("2_1sgtt")
+classname = "collectable_table"
+description = "Spawnd multiple collectable_shard classes with a specified curvature and row width."
+class_properties = {
+"allow_discount": false,
+"choices_bonus": true,
+"collectables": 2,
+"distance_to_spawn": 15.0,
+"free": true,
+"only_one": false,
+"pool_id": -1,
+"random_rarities": false,
+"rarity_override": -1,
+"spawn_curvature": 0.0,
+"spawn_width": 1.0,
+"use_physics": true
+}
+meta_properties = Dictionary[String, Variant]({
+"color": Color(0.5166664, 0, 1, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+})

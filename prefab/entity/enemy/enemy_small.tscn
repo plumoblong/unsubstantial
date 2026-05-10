@@ -43,12 +43,13 @@ shape = SubResource("CapsuleShape3D_c3pg5")
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1455241462 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_o8h2q")
 movement_component = NodePath("../MovementComponent")
+multiplier = 3.5
 
 [node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_k6xin")
 movehelper = NodePath("../MoveBackHelper")
 agro_distance = 15.0
-attack_distance = 5.0
+attack_distance = 8.0
 min_distance = 0.5
 y_distance = 12.0
 
@@ -56,8 +57,8 @@ y_distance = 12.0
 script = ExtResource("4_0dpl7")
 speed = 28.0
 speed_up = 16.0
-speed_mult_after_jump = 1.1
-jump_speed = 4.0
+speed_mult_after_jump = 2.0
+jump_speed = 11.0
 
 [node name="EssenceComponent" type="Node" parent="." unique_id=1109450702]
 script = ExtResource("5_b3h2g")

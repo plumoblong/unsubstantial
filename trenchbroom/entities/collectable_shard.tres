@@ -10,10 +10,13 @@ scene_file = ExtResource("2_wi20g")
 classname = "collectable_shard"
 description = "3D Stat collectable the player can pickup/buy "
 class_properties = Dictionary[String, Variant]({
-"free": false,
+"discount": false,
+"free": true,
 "pool_id": -1,
 "price_override": 0.0,
-"rarity_override": -1
+"random_discount": false,
+"rarity_override": -1,
+"use_physics": false
 })
 meta_properties = Dictionary[String, Variant]({
 "color": Color(0.5166664, 0, 1, 1),

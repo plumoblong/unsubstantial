@@ -169,7 +169,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.0333333, 1.4),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [0.0001, 0.06]
+"values": [0.0001, 0.09]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -193,7 +193,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.2, 1.06667),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [0.0001, 0.11]
+"values": [0.0001, 0.16499999999999998]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -257,8 +257,8 @@ texture = ExtResource("3_i2tay")
 
 [node name="Ripple2" type="Sprite3D" parent="." unique_id=343840407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-modulate = Color(1, 1, 1, 0)
-pixel_size = 0.11
+modulate = Color(1, 1, 1, 0.10196102)
+pixel_size = 0.0001
 axis = 1
 texture_filter = 0
 texture = ExtResource("3_i2tay")

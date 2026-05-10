@@ -15,7 +15,7 @@ var _bullet_size_mult : float = 1.0
 
 const SIZE_CLAMP_MIN : float = 34.0
 const SIZE_CLAMP_MAX : float = 1000.0
-
+const SMOOTHNESS : float = 1.2
 var _config : BulletSettings
 
 @onready var sprite : Sprite3D = get_node("Sprite")
@@ -47,7 +47,7 @@ func _update_animation(delta : float) -> void:
 	_bounciness.x = _G.sine_movement(b_speed, bounciness, delta, b_speed * bounciness)
 	_bounciness.y = _G.sine_movement(b_speed, bounciness, delta)
 	sprite.scale = ((scale_mult * _bullet_size_mult) if not dont_scale_bullet else Vector3.ONE * scale_mult) + Vector3(_bounciness.x, _bounciness.y, 1.0)
-	sprite.global_position = lerp(sprite.global_position, global_position, _config.init_speed * 1.25 * delta)
+	sprite.global_position = lerp(sprite.global_position, global_position, _config.init_speed * SMOOTHNESS * delta)
 	_update_scale()
 	_update_rotation_to_velocity()
 	sprite.visible = bool(ceili(scale_mult.x))

@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="11_wlgmv"]
 [ext_resource type="PackedScene" uid="uid://b6mvsyko7mqr3" path="res://prefab/animation/visual_bullet.tscn" id="12_jq1by"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="13_wlgmv"]
+[ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="15_wlgmv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
 radius = 2.0
@@ -44,7 +45,7 @@ phases = Dictionary[String, int]({
 })
 phase_times = Dictionary[String, float]({
 "dash": 7.0,
-"nothing": 1.5,
+"nothing": 1.0,
 "shoot": 5.0,
 "stomp": 3.0
 })
@@ -103,6 +104,7 @@ metadata/_custom_type_script = "uid://baw7jrp64qlgb"
 script = ExtResource("11_jq1by")
 speed = 20.0
 speed_up = 3.0
+jump_boost = 1.25
 metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
 
 [node name="ChaseComponent" type="Node" parent="." unique_id=2146846342 node_paths=PackedStringArray("movehelper")]
@@ -117,17 +119,19 @@ concious_gain_time = 2.0
 [node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("hit_sfx")]
 script = ExtResource("7_72ee0")
 hit_sfx = NodePath("../HitSFX")
-essence = 2000.0
+use_difficulty_factor = false
+essence = 2500.0
 essence_death_threshold = 50.0
-on_hit_velocity_loss = 0.1
+damage = 75.0
 xp_payout = 25
 xp_radius = 5.0
 randomize_scale = 1.0
+pitch = 0.6
 spawn_ent_on_death = true
 ent_paths = Array[String](["res://prefab/entity/enemy/enemy.tscn", "res://prefab/entity/enemy/enemy_melee.tscn", "res://prefab/entity/enemy/guardian.tscn"])
 ent_spawn_radius = 5.0
-ent_max = 4
-ent_min = 3
+ent_max = 6
+ent_min = 5
 ent_count_as_enemy = false
 ent_spawn_offset = Vector3(0, 1, 0)
 metadata/_custom_type_script = "uid://tlvl68soe85"
@@ -163,6 +167,16 @@ shape = SubResource("CapsuleShape3D_gbp8n")
 process_callback = 0
 wait_time = 10.0
 
+[node name="Label" type="Label" parent="." unique_id=738887968]
+offset_left = 65.0
+offset_top = 201.0
+offset_right = 105.0
+offset_bottom = 211.0
+theme_override_fonts/font = ExtResource("15_wlgmv")
+theme_override_font_sizes/font_size = 6
+text = "asdasd"
+
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
+[connection signal="just_landed" from="MovementComponent" to="." method="movement_just_landed"]
 [connection signal="area_entered" from="Query" to="." method="query_area_entered"]

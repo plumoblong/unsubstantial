@@ -1,7 +1,7 @@
 extends Interaction
 class_name UnstableCrystal
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"pool_id" : -1
 }
 

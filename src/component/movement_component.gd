@@ -8,7 +8,9 @@ class_name MovementComponent
 @export var floor_friction : float = 0.1
 @export var air_friction : float = 0.05
 @export var fall_speed : float = 16.0
-@export var jump_speed : float = 6.0
+@export var fall_speed_mult : float = 1.5
+@export var jump_speed : float = 8.0
+@export var jump_boost : float = 1.0
 
 var can_jump : bool = false
 var friction : float = 0.0
@@ -30,6 +32,8 @@ var speed_threshold : float
 var friction_double : float
 var friction_half : float
 
+var _was_on_floor : bool = false
+
 # Cached parent reference
 var _parent : CharacterBody3D
 
@@ -45,20 +49,30 @@ func _update_cached_values() -> void:
 
 func update(delta : float, on_ceiling : bool = false) -> void:
 	if not enabled: return
-	if _knockback_velocity.length_squared() > 0.0001: # Optimized: use length_squared to avoid sqrt
+	
+	var on_floor := _parent.is_on_floor()
+	
+	if _knockback_velocity.length_squared() > 0.0001:
 		vel += _knockback_velocity
 		_knockback_velocity = _knockback_velocity.lerp(Vector3.ZERO, _knockback_decay * delta)
 	else:
 		_knockback_velocity = Vector3.ZERO
-	if not _parent.is_on_floor():
-		vel.y -= fall_speed * delta
+	
+	if not on_floor:
+		if vel.y > 0.0:
+			vel.y -= fall_speed * delta
+		else:
+			vel.y -= fall_speed * fall_speed_mult * delta
 		friction = air_friction
 		can_jump = false
 	else:
 		friction = floor_friction
-		if not is_using_force:
-			vel.y = 0.0
 		can_jump = true
+		if not _was_on_floor:
+			just_landed.emit()
+	
+	_was_on_floor = on_floor
+
 	var has_direction : bool = direction.length_squared() > 0.0001 # Optimized check
 	if has_direction:
 		if _parent.is_on_floor():
@@ -77,8 +91,8 @@ func update(delta : float, on_ceiling : bool = false) -> void:
 		vel.z = lerpf(vel.z, 0.0, friction)
 		moving = lerpf(moving, 0.0, friction_half)
 	
-	if on_ceiling:
-		vel.y = fall_speed
+	#if on_ceiling:
+		#vel.y = fall_speed
 
 func update_flying(delta : float) -> void:
 	if not enabled: return
@@ -98,27 +112,18 @@ func update_flying(delta : float) -> void:
 		vel.y = lerpf(vel.y, 0.0, air_friction)
 
 func jump(amount : float = 0.0) -> void:
-	print(can_jump, enabled)
 	if not enabled or not can_jump: return
 	can_jump = false
 	var amt : float = jump_speed if amount == 0.0 else amount
-	if _parent.is_on_floor():
-		var floor_normal : Vector3 = _parent.get_floor_normal()
-		var jump_direction : Vector3 = floor_normal.normalized()
-		vel += jump_direction * amt
-		var horizontal_influence : float = 1.0 - floor_normal.dot(Vector3.UP)
-		if horizontal_influence > 0.1:
-			var slope_push : Vector3 = Vector3(floor_normal.x, 0, floor_normal.z).normalized()
-			vel += slope_push * amt * 0.3 * horizontal_influence
-	else:
-		vel.y = amt
-	print("yes i try to jump", can_jump)
+	vel.x *= jump_boost
+	vel.y += amt
+	vel.z *= jump_boost
 	jumped.emit()
 
 func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:
 	if not enabled or not _parent: return
 	var knockback_dir : Vector3 = direction.normalized()
-	const Y_MULT : Vector3 = Vector3(1.0, 0.25, 1.0)
+	const Y_MULT : Vector3 = Vector3(1.0, 0.1, 1.0)
 	if _parent.is_on_floor() and lift_off_ground:
 		var up_influence : float = 0.5
 		knockback_dir = (knockback_dir + Vector3.UP * up_influence).normalized()

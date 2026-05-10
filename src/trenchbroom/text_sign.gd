@@ -1,7 +1,7 @@
 extends Label3D
 class_name TextSign
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"text": "Lorem Ipsum", "scale" : 1.0
 }
 

@@ -302,7 +302,7 @@ func choose_from_chance(values : Dictionary):
 		var weight := maxi(values[key], 1)
 		for i in weight:
 			weighted_list.append(key)
-	return weighted_list.pick_random()
+	return weighted_list[randi() % weighted_list.size()]
 
 func get_achievement(a : achievement, count_to_save : bool = true) -> void:
 	if save.achieved.has(a):

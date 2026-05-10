@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://bqplpgkv6cist"]
+
+[ext_resource type="Script" uid="uid://cc8m2v4l0oexo" path="res://src/entity/damage_ring.gd" id="1_ehyne"]
+[ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="2_2xw7p"]
+[ext_resource type="Texture2D" uid="uid://vckl47rias08" path="res://images/effects/glow_circle_alt.png" id="3_ehyne"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ehyne"]
+height = 0.1
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_2xw7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ripple:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9999998, 0.9999998, 0.9999998)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:hitbox_radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_tsm4c"]
+resource_name = "explode"
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ripple:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Ripple:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.9999998, 0.9999998, 0.9999998)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area3D/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:hitbox_radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81thx"]
+_data = {
+&"RESET": SubResource("Animation_2xw7p"),
+&"explode": SubResource("Animation_tsm4c")
+}
+
+[node name="DamageRing" type="Node3D" unique_id=58583084]
+transform = Transform3D(2.005, 0, 0, 0, 2.005, 0, 0, 0, 2.005, 0, 0, 0)
+script = ExtResource("1_ehyne")
+
+[node name="Ripple" type="Sprite3D" parent="." unique_id=402881304]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0)
+pixel_size = 0.062
+axis = 1
+texture_filter = 0
+texture = ExtResource("3_ehyne")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1498739414]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+collision_layer = 4367
+collision_mask = 4367
+script = ExtResource("2_2xw7p")
+damage = 50
+knockback_from_parent_pos = false
+die_reason = "you got sliced."
+metadata/_custom_type_script = "uid://dqg5sl3316gba"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1578742926]
+shape = SubResource("CylinderShape3D_ehyne")
+
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=373507658]
+libraries/ = SubResource("AnimationLibrary_81thx")
+
+[connection signal="animation_finished" from="Animation" to="." method="animation_tree_animation_finished"]

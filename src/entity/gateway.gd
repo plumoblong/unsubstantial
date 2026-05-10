@@ -4,7 +4,7 @@ extends Area3D
 
 var entered : bool = false
 
-@export var func_godot_properties : Dictionary = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"animation" = 1, "loop" = 0, "finish" = 0
 }
 

@@ -123,7 +123,7 @@ func _update_movement(delta: float) -> void:
 	velocity = world_velocity + _calculate_steering() * speed
 	position += velocity * delta
 	raycast.target_position = velocity
-	_G.create_3d_placeholder(position, Color.WHITE, 0.1)
+	#_G.create_3d_placeholder(position, Color.WHITE, 0.1)
 
 func _calculate_steering() -> Vector3:
 	if config.homing_on_player: return _seek_player()
@@ -213,27 +213,35 @@ func _spawn_split_bullets() -> void:
 	var split_config: BulletSettings = config.duplicate(true)
 	split_config.split_count = 0
 	split_config.size_mult *= config.split_size_mult
+	# Set speed ONCE before the loop — it's constant for all children
+	split_config.init_speed = speed * config.split_speed_mult
 	
 	var base_dir: Vector3 = direction if direction != Vector3.ZERO else -transform.basis.z
+	var half_spread: float = deg_to_rad(config.split_spread_angle * 0.5)
+	var count: int = config.split_count
+	var spawn_pos: Vector3 = global_position
+	var game_node: Node = _G.game
 	
-	for i in config.split_count:
-		var bullet : Bullet = _G.game.BULLET_SCENE.instantiate()
+	# Pre-instantiate all bullets before touching the scene tree
+	var bullets: Array = []
+	for i in count:
+		var bullet: Bullet = game_node.BULLET_SCENE.instantiate()
 		
-		var t: float = 0.5 if config.split_count == 1 else float(i) / float(config.split_count - 1)
-		var angle_offset: float = deg_to_rad(lerp(-config.split_spread_angle * 0.5, config.split_spread_angle * 0.5, t))
-		
-		var split_dir: Vector3 = base_dir.rotated(Vector3.UP, angle_offset).normalized()
+		var t: float = 0.5 if count == 1 else float(i) / float(count - 1)
+		var angle_offset: float = lerp(-half_spread, half_spread, t)
 		
 		bullet.config = split_config
-		bullet.direction = split_dir
+		bullet.direction = base_dir.rotated(Vector3.UP, angle_offset).normalized()
 		bullet.crit = crit
 		bullet.parent = parent
-		bullet.global_position = global_position
-		bullet.damage = damage * config.split_size_mult
+		bullet.global_position = spawn_pos
 		
-		split_config.init_speed = speed * config.split_speed_mult
-		
-		get_tree().current_scene.add_child(bullet)
+		bullets.append(bullet)
+	
+	# Add all children in one batch
+	for bullet in bullets:
+		game_node.add_child(bullet)
+
 
 func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 	if not config.destroy_object_enabled or scene == null:

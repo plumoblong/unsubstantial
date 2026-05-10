@@ -7,7 +7,7 @@ const WEIGHT_MULTIPLIER : int = 4
 @export var pool_name         : String = "Common Shard Pool"
 @export var pool_crystal_color: Color  = Color.WHITE
 
-@export var common_weight    : float = 3.0
+@export var common_weight    : float = 4.0
 @export var uncommon_weight  : float = 2.0
 @export var epic_weight      : float = 1.0
 @export var legendary_weight : float = 0.25

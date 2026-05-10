@@ -25,13 +25,12 @@ const RARITY_COLOR : Array[Color] = [
 
 ## full picking pipeline: rarity → shard → modulate.
 ## zeroes out the chosen shard in the pool so it can't be picked again.
-func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = Modulate.RARITY.UNCOMMON) -> Array:
-	
-	var shard   : StatShard       = pick_shard(weighted_pool, rarity)
-	var modulate: Modulate        = pick_modulate(shard, rarity)
+func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = -1, rarity_pool : StatShardPool = pools[0]) -> Array:
+	var chosen_rarity = rarity if not rarity < 0 or rarity_pool == null else pick_rarity(rarity_pool, _G.player.stats.luck)
+	var shard   : StatShard       = pick_shard(weighted_pool, chosen_rarity)
+	var modulate: Modulate        = pick_modulate(shard, chosen_rarity)
 	
 	return [shard.duplicate(), modulate.duplicate()]
-
 
 ## Rolls a rarity tier based on luck-adjusted weights.
 func pick_rarity(pool : StatShardPool, luck: int) -> Modulate.RARITY:
@@ -44,7 +43,7 @@ func pick_rarity(pool : StatShardPool, luck: int) -> Modulate.RARITY:
 		if roll <= 0.0:
 			return rarity
 
-	return Modulate.RARITY.COMMON
+	return Modulate.RARITY.UNCOMMON
 
 
 ## Picks a shard from the pool that matches the given rarity.

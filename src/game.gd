@@ -24,6 +24,8 @@ const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
 const GHOST_SCENE : PackedScene = preload("res://prefab/entity/ghost.tscn")
 const XPORB_SCENE : PackedScene = preload("res://prefab/entity/xp_orb.tscn")
 const WORLDTEXT_SCENE : PackedScene = preload("res://prefab/menus/world_text_popup.tscn")
+const SHARD_COLLECTABLE_SCENE : PackedScene = preload("res://prefab/entity/shard_collectible.tscn")
+const EXPLOSION_RING_SCENE : PackedScene = preload("res://prefab/entity/damage_ring.tscn")
 
 var next_level : String
 var time_pause : bool = false
@@ -108,7 +110,7 @@ func _process(_delta : float) -> void:
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.15) * difficulty_bonus)
+	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.1) * difficulty_bonus)
 	
 	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
@@ -204,6 +206,8 @@ func mute_music(time : float = 1.0) -> void:
 func unmute_music(time : float = 1.0) -> void:
 	_G.tween(music_player, "volume_db", linear_to_db(1.0), time, 0, 0)
 
+# creation scripts
+
 func create_ghost(pos : Vector3, texture : Texture2D, pixel_size : float = 0.03, frames : Array[int] = [0, 1, 1], time : float = 1.5) -> void:
 	var ghost : Ghost = GHOST_SCENE.instantiate()
 	ghost.lifetime = time
@@ -232,8 +236,9 @@ func create_popup_text(pos : Vector3, text : String = "kupsztal", big : bool = f
 	popup.global_position = pos
 	add_child(popup)
 
-func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.0) -> void:
+func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.0, overheal : bool = true) -> void:
 	for i in range(amount):
+		if _G.player.essence_component.ratio >= 1.0 and not overheal: break 
 		var obj : Node3D = XPORB_SCENE.instantiate()
 		if get_tree() != null:
 			await get_tree().create_timer(0.025).timeout
@@ -245,6 +250,32 @@ func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.
 			randf_range(-spawn_radius * 0.5, spawn_radius * 0.5)
 		)
 		obj.global_position = pos + offset
+
+func create_shard_collectable(pos : Vector3, shard : Dictionary = { "rarity_override" : -1, "pool_id" : -1, "price_override" : 0.0, "free" : true, "use_physics" : false, "discount" : false, "random_discount" : true, }) -> ShardCollectable:
+	var properties : Dictionary = {
+	"rarity_override" : shard["rarity_override"],
+	"pool_id"         : shard["pool_id"],
+	"price_override"  : shard["price_override"],
+	"free"            : shard["free"],
+	"use_physics"     : shard["use_physics"],
+	"discount"        : shard["discount"],
+	"random_discount" : shard["random_discount"], }
+	
+	var sh : ShardCollectable = SHARD_COLLECTABLE_SCENE.instantiate()
+	sh.auto_pick = false
+	sh.func_godot_properties = properties
+	sh.global_position = pos
+	
+	add_child(sh)
+	sh.setup.call_deferred()
+	return sh
+	
+func create_exposilon_ring(pos : Vector3, radius : float = 2.0, speed : float = 1.0) -> void:
+	var er : DamageRing = EXPLOSION_RING_SCENE.instantiate()
+	er.speed = speed
+	er.radius = radius
+	er.global_position = pos
+	add_child.call_deferred(er)
 
 func end_level(loop : bool = false) -> void:
 	if ending_level:

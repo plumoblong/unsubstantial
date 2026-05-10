@@ -3,7 +3,7 @@ class_name SpecialRoom
 
 var builder : FuncGodotMap
 
-@export var func_godot_properties : Dictionary[String, String] = {
+@export var func_godot_properties : Dictionary[String, Variant] = {
 	"maps" : "treasure1;treasure2;"
 }
 

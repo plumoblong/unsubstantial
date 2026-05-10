@@ -49,3 +49,24 @@ func update(target_position : Vector3, movement_component : MovementComponent, a
 	
 	movement_component.direction = agent_position if enabled else Vector3.ZERO
 	
+func jump_to(target_position : Vector3, movement_component : MovementComponent, jump_height : float = 4.0) -> void:
+	var from : Vector3 = parent.global_position
+	var gravity : float = movement_component.fall_speed
+
+	# Time to reach apex, then fall to target
+	var height_diff : float = target_position.y - from.y
+	var time_up : float = sqrt(2.0 * jump_height / gravity)
+	var time_down : float = sqrt(2.0 * max(jump_height - height_diff, 0.001) / (gravity * movement_component.fall_speed_mult))
+	var total_time : float = time_up + time_down
+
+	# Horizontal velocity needed to cover XZ distance in that time
+	var horizontal_diff : Vector3 = Vector3(target_position.x - from.x, 0.0, target_position.z - from.z)
+	var horizontal_vel : Vector3 = horizontal_diff / total_time
+
+	# Vertical velocity to reach apex
+	var vertical_vel : float = gravity * time_up
+
+	movement_component.can_jump = true
+	movement_component.vel.x = horizontal_vel.x
+	movement_component.vel.z = horizontal_vel.z
+	movement_component.jump(vertical_vel)
