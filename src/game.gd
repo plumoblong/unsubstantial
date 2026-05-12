@@ -303,9 +303,14 @@ func end_level(loop : bool = false) -> void:
 func _clear_enemies() -> void:
 	for n in enemies.get_children():
 		n.queue_free()
+		
+func is_boss_stage() -> bool:
+	return chapter.current.boss_stage != chapter.current.stage_start \
+		and not chapter.current.boss_maps.is_empty() \
+		and chapter_stage == chapter.current.boss_stage
 
 func _load_next_map() -> void:
-	var m : String = chapter.get_map()
+	var m : String = chapter.get_boss_map() if is_boss_stage() else chapter.get_map()
 	change_map_autobuild(m)
 	
 	var ambience_pos := chapter.current.ambience_position
@@ -317,6 +322,7 @@ func _load_next_map() -> void:
 	if chapter.current.ambience_streams.is_empty(): return
 	ambience_player.stream = chapter.current.ambience_streams.pick_random()
 	ambience_player.play()
+
 
 func wait(time : float = 0.05) -> void:
 	time_scale = 0.0

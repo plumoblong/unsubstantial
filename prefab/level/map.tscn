@@ -1965,14 +1965,14 @@ func_godot_properties = Dictionary[String, Variant]({
 
 [node name="entity_32_level_end" parent="Builder" unique_id=880059450 instance=ExtResource("12_8y6jl")]
 transform = Transform3D(1.3907092e-07, 0, 1, 0, 1, 0, -1, 0, 1.3907092e-07, 189, 8, -234)
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "angle": "270",
 "classname": "level_end",
 "enabled": true,
 "finish": "0",
 "loop": "0",
 "origin": "-3744 3024 128"
-})
+}
 
 [node name="entity_33_light" parent="Builder" unique_id=2066941786 instance=ExtResource("10_751ow")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 17.5, 0)
@@ -2905,13 +2905,13 @@ shape = SubResource("ConcavePolygonShape3D_bnwug")
 
 [node name="entity_103_map_opt" parent="Builder" unique_id=10408186 instance=ExtResource("15_qoklu")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.25, 4.25)
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "bake_navmesh": 1,
 "chapter_id": 1,
 "classname": "map_opt",
 "map_name": "Palace Map A",
 "origin": "68 0 52"
-})
+}
 
 [node name="entity_104_ent_gate" type="StaticBody3D" parent="Builder" unique_id=1770191499]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5, 36.5, -150)
@@ -2947,12 +2947,12 @@ shape = SubResource("ConvexPolygonShape3D_3w46m")
 
 [node name="entity_106_level_end" parent="Builder" unique_id=214044428 instance=ExtResource("12_8y6jl")]
 transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 4, 1, 19)
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "angle": "180",
 "classname": "level_end",
 "enabled": false,
 "origin": "304 64 16"
-})
+}
 
 [node name="entity_107_misc_prop" parent="Builder" unique_id=797198574 instance=ExtResource("18_8swp8")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.5, -13.5, -266)
@@ -2977,12 +2977,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -19, -271.5)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("19_4p26o")
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "classname": "func_hazard",
 "cooldown": 20,
 "damage": 25,
 "die_reason": "You succumbed to the poison."
-})
+}
 
 [node name="entity_109_mesh_instance" type="MeshInstance3D" parent="Builder/entity_109_func_hazard" unique_id=135394011]
 mesh = SubResource("ArrayMesh_6gaag")
@@ -3315,12 +3315,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 10.5, -173)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("19_4p26o")
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "classname": "func_hazard",
 "cooldown": 20,
 "damage": 25,
 "die_reason": "You succumbed to the poison."
-})
+}
 
 [node name="entity_139_mesh_instance" type="MeshInstance3D" parent="Builder/entity_139_func_hazard" unique_id=400411116]
 mesh = SubResource("ArrayMesh_qsvo2")
@@ -3336,12 +3336,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 92, 10.5, -147)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("19_4p26o")
-func_godot_properties = Dictionary[String, Variant]({
+func_godot_properties = {
 "classname": "func_hazard",
 "cooldown": 20,
 "damage": 25,
 "die_reason": "You succumbed to the poison."
-})
+}
 
 [node name="entity_140_mesh_instance" type="MeshInstance3D" parent="Builder/entity_140_func_hazard" unique_id=1532967522]
 mesh = SubResource("ArrayMesh_lahlc")

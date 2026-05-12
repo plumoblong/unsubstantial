@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://drsgtq0153ncq"
+path="res://.godot/imported/boss1.9.map-5eb3777fb52e0d7373fc841cac865984.tres"
+
+[deps]
+
+source_file="res://maps/chapter1/autosave/boss1.9.map"
+dest_files=["res://.godot/imported/boss1.9.map-5eb3777fb52e0d7373fc841cac865984.tres"]
+
+[params]
+

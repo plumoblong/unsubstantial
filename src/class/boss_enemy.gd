@@ -12,12 +12,13 @@ var healthbar : BossBar
 
 @export var phases : Dictionary[String, int]
 @export var phase_times : Dictionary[String, float]
+@export var phase_time_mult : float = 1.0
 var current_phase : String
 
 const HB_FILE = preload("res://prefab/menus/bossbar.tscn")
 
 signal boss_defeated
-signal phase_changed
+signal phase_changed(current : String)
 
 func boss_setup() -> void:
 	
@@ -35,9 +36,12 @@ func boss_setup() -> void:
 
 func _change_phase() -> void:
 	current_phase = _G.choose_from_chance(phases)
-	timer.start(phase_times[current_phase])
+	timer.start(phase_times[current_phase] * phase_time_mult)
 	_T.say(name + " has changed phase to " + current_phase)
-	phase_changed.emit()
+	phase_changed.emit(current_phase)
 
 func _boss_defeated() -> void:
 	boss_defeated.emit()
+	
+func get_random_position(pos : Vector3, radius : float = 1.0) -> Vector3:
+	return position + Vector3(randf_range(-radius, radius), 1.0, randf_range(-radius, radius))

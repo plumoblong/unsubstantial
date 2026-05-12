@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StatShardPool" format=3 uid="uid://bi81v34effxw6"]
+
+[ext_resource type="Script" uid="uid://bgbbtgjetypx6" path="res://src/resource/shard_pool.gd" id="1_gsa6q"]
+[ext_resource type="Script" uid="uid://yu3n1cklhslt" path="res://src/resource/stat_shard.gd" id="2_ih6i3"]
+[ext_resource type="Resource" uid="uid://7h76bp2anp6m" path="res://res/shards/attack_speed.tres" id="3_ceth4"]
+[ext_resource type="Resource" uid="uid://bpyggo0dbjeo2" path="res://res/shards/luck.tres" id="4_rykk7"]
+[ext_resource type="Resource" uid="uid://7ulcyju0ei4q" path="res://res/shards/defense.tres" id="6_8jrdc"]
+[ext_resource type="Resource" uid="uid://csryy21ph85ds" path="res://res/shards/healing.tres" id="7_bel1h"]
+[ext_resource type="Resource" uid="uid://6odjskauo8qw" path="res://res/shards/crit_chance.tres" id="9_bl8cf"]
+[ext_resource type="Resource" uid="uid://y1w007jqpju1" path="res://res/shards/damage.tres" id="9_hv536"]
+[ext_resource type="Resource" uid="uid://bi8emdgpnb8fv" path="res://res/shards/attacks/b_amount.tres" id="12_beelc"]
+
+[resource]
+script = ExtResource("1_gsa6q")
+pool_id = 3
+pool_name = "Boss Shard Pool"
+pool_crystal_color = Color(1, 0.31470323, 0.4780355, 1)
+common_weight = 0.0
+uncommon_weight = 0.0
+epic_weight = 3.0
+legendary_weight = 2.0
+mythic_weight = 0.5
+shards = Array[ExtResource("2_ih6i3")]([ExtResource("3_ceth4"), ExtResource("4_rykk7"), ExtResource("6_8jrdc"), ExtResource("7_bel1h"), ExtResource("9_bl8cf"), ExtResource("12_beelc"), ExtResource("9_hv536")])
+metadata/_custom_type_script = "uid://bgbbtgjetypx6"

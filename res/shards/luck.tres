@@ -65,7 +65,6 @@ script = ExtResource("2_0pnmv")
 stat_name = "Luck"
 image = ExtResource("1_0pnmv")
 weight = 0.5
-shop_cost = 50
 common_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_0pnmv")])
 uncommon_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_iypp7")])
 rare_modulates = Array[ExtResource("1_vjut8")]([SubResource("Resource_5hyrw")])

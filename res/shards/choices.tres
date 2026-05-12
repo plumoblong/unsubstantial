@@ -26,7 +26,6 @@ script = ExtResource("2_2o1r5")
 stat_name = "More Choices"
 image = ExtResource("1_2o1r5")
 weight = 0.25
-shop_cost = 100
 exclusion_enabled = true
 exclusion_stat = "choices"
 exclusion_max = 5.0

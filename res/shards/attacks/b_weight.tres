@@ -56,7 +56,6 @@ metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 script = ExtResource("2_5wqml")
 stat_name = "Shot Weight"
 image = ExtResource("1_5wqml")
-shop_cost = 20
 exclusion_enabled = true
 exclusion_bullet_config = true
 exclusion_stat = "fall_speed"

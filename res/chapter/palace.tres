@@ -2,10 +2,7 @@
 
 [ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="1_bd46r"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_idgru"]
-
-[sub_resource type="Gradient" id="Gradient_qyxw0"]
-offsets = PackedFloat32Array(0, 0.36532626, 1)
-colors = PackedColorArray(0, 1, 0.5333333, 1, 0.41827485, 0.009899991, 0.99, 1, 1, 0, 0.4000001, 1)
+[ext_resource type="Gradient" uid="uid://bgo1q3olqkqve" path="res://res/colors/palace.tres" id="2_2f5f7"]
 
 [resource]
 script = ExtResource("1_idgru")
@@ -18,5 +15,5 @@ map_fallback = "chapter1/map1"
 boss_stage = 5
 boss_maps = Array[String](["chapter1/boss1"])
 ambience_streams = Array[AudioStream]([ExtResource("1_bd46r")])
-color_ranges = SubResource("Gradient_qyxw0")
+color_ranges = ExtResource("2_2f5f7")
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

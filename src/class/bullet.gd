@@ -37,8 +37,18 @@ const HOMING_ACTIVATE_TIME : float = 0.1
 const HOMING_REACH_DISTANCE : float = 0.2
 const HOMING_INTERPOLATION : float = 0.35
 
+@onready var body_hitbox : CollisionShape3D = get_node("BodySeeker/Hitbox")
+@onready var parry_hitbox : CollisionShape3D = get_node("ParrySeeker/Hitbox")
+@onready var seek_hitbox : CollisionShape3D = get_node("Seeker/Hitbox")
+
+func _setup_hitboxes() -> void:
+	body_hitbox.shape  = body_hitbox.shape.duplicate()
+	parry_hitbox.shape = parry_hitbox.shape.duplicate()
+	seek_hitbox.shape  = seek_hitbox.shape.duplicate()
+
 func _ready() -> void:
 	pierces_left = config.pierces
+	_setup_hitboxes()
 	_setup_damage()
 	_setup_speed()
 	_setup_visuals()
@@ -255,16 +265,17 @@ func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 func body_entered(body: Node3D) -> void:
 	if body is StaticBody3D:
 		handle_destroy()
+	else: return
 
 func seeker_body_entered(body: Node3D) -> void:
-	if body is not CharacterBody3D or config.homing_on_player: return
-	if body in target_blacklist: return
-	if target == null and body != get_parent():
-		target = body
-		
-		target_blacklist.append(target)
-		_T.say( "[ " + name + " ]: " + str(body) + " added to target_blacklist.", Color.WHITE, false)
-		_T.say("[ " + name + " ].target_blacklist: " + str(target_blacklist), Color.WHITE, false)
+	if body in target_blacklist and config.homing_on_player: return
+	if body is CharacterBody3D:
+		if target == null and body != get_parent():
+			target = body
+			
+			target_blacklist.append(target)
+			_T.say( "[ " + name + " ]: " + str(body) + " added to target_blacklist.", Color.WHITE, false)
+			_T.say("[ " + name + " ].target_blacklist: " + str(target_blacklist), Color.WHITE, false)
 	
 
 func seeker_body_exited(body: Node3D) -> void:

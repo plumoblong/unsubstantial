@@ -13,23 +13,39 @@ class_name BossFather
 
 @onready var query : Area3D = $Query
 
-var y_boundary : float
-
 # father only
+@onready var spawner1 : EnemySpawner = $EnemySpawner
+@onready var spawner2 : EnemySpawner = $EnemySpawner2
 @onready var crown: Sprite3D = $Crown
 const DISTANCE_TO_CLOSE : float = 10.0
 
-const KNOCK_DEFAULT : float = 0.75
-const KNOCK_STOMP : float = 0.25
+const KNOCK_DEFAULT : float = 0.5
+const KNOCK_STOMP : float = 0.0
 
 const DEFENSE_DEFAULT : float = 12.0
-const DEFENSE_STOMP : float = 16.0
+const DEFENSE_STOMP : float = 10.0
+
+const JUMP_DISTANCE : float = 32.0
+
+const ENEMY_SPAWN_POSITIONS : Array[Vector3] = [
+	Vector3(-4.0, 1.0, -4.0),
+	Vector3(4.0, 1.0, -4.0),
+	Vector3(-4.0, 1.0, 4.0),
+	Vector3(4.0, 1.0, 4.0),
+]
 
 var close_to_player : bool = false
+var _can_spawn : bool = true
+var _can_shoot : bool = false
+
+var _center : Vector3
 
 func _ready() -> void:
 	enemy.setup(essence_component, chase_component, query, knockback_component, movement_component)
 	shoot_component.config.damage = enemy.damage
+	spawner1._func_godot_build_complete()
+	spawner2._func_godot_build_complete()
+	_center = global_position
 	boss_setup()
 
 func _physics_process(delta : float) -> void:
@@ -40,26 +56,29 @@ func _physics_process(delta : float) -> void:
 	close_to_player = global_position.distance_to(_G.player.global_position) < DISTANCE_TO_CLOSE
 	healthbar.update($Sprite3D.modulate)
 	
-	$Label.text = str(velocity) + "\nphase:" + current_phase
+	$Label.text = str(velocity) + "\nphase: " + current_phase + "\nfirerate: " + str(shoot_component.config.fire_rate) + "\nflags: shoot: " + str(_can_shoot) + " spawn: " + str(_can_spawn)
+	
+	phase_time_mult = clamp(essence_component.ratio, 0.4, 1.0)
+	shoot_component.config.fire_rate = 0.8 + (essence_component.ratio * 0.8)
 	
 	match current_phase:
 		"shoot":
 			if chase_component.attacking and _G.player.can_control:
-				enemy.shoot_to_player(shoot_component, 1.8, 0.5)
+				if _can_shoot: enemy.shoot_to_player(shoot_component, 1.8, 0.5)
 			chase_component.attack_distance = 30.0
-			#chase_component.enabled = true
+			chase_component.enabled = true
 			essence_component.defense = DEFENSE_DEFAULT
 			knockback_component.multiplier = KNOCK_DEFAULT
-		_:
-			#chase_component.enabled = false
+		"stomp":
+			chase_component.enabled = true
 			movement_component.jump()
 			#movement_component.direction = get_random_player_position(5.0)
 			essence_component.defense = DEFENSE_STOMP
 			knockback_component.multiplier = KNOCK_STOMP
-		#_:
-			#chase_component.enabled = false
-			#essence_component.defense = DEFENSE_STOMP
-			#knockback_component.multiplier = KNOCK_STOMP
+		"spawn":
+			chase_component.enabled = false
+			essence_component.defense = DEFENSE_DEFAULT
+			knockback_component.multiplier = KNOCK_DEFAULT
 			
 	chase_component.update(_G.player.target.get_pos_multiplied(2.0), movement_component, agent)
 	
@@ -67,12 +86,28 @@ func _exit_tree() -> void:
 	enemy.cleanup()
 	
 func movement_just_landed() -> void:
-	if current_phase != "shoot":
-		_G.game.create_exposilon_ring(global_position + (Vector3.UP * 0.5), 20.0, 0.75)
-		var dir : Vector3 = global_position.direction_to(get_random_player_position(15.0)) * 25.0
+	if current_phase == "stomp":
+		_G.game.create_exposilon_ring(global_position + (Vector3.UP * 0.5), 16.0, 1.0)
+		var distance : float = JUMP_DISTANCE * 0.2 if close_to_player else JUMP_DISTANCE
+		var dir : Vector3 = global_position.direction_to(get_random_position(_center, 10.0)) * distance
 		movement_component.vel.x += dir.x
 		movement_component.vel.z += dir.z
 
-func get_random_player_position(radius : float = 1.0) -> Vector3:
-	var position : Vector3 = _G.player.global_position + Vector3(randf_range(-radius, radius), 1.0, randf_range(-radius, radius))
-	return position
+func on_phase_changed(current: String) -> void:
+	if current == "spawn":
+		_can_shoot = false
+		spawner1.position = ENEMY_SPAWN_POSITIONS.pick_random()
+		spawner2.position = ENEMY_SPAWN_POSITIONS.pick_random()
+		if not _can_spawn: 
+			return
+			spawner1.do_spawn()
+			spawner2.do_spawn()
+		_can_spawn = false
+	elif current == "shoot":
+		_can_spawn = true
+		if not _can_shoot: 
+			await get_tree().create_timer(0.5).timeout
+			_can_shoot = true
+	else:
+		_can_spawn = true
+		_can_shoot = false

@@ -116,8 +116,9 @@ func jump(amount : float = 0.0) -> void:
 	can_jump = false
 	var amt : float = jump_speed if amount == 0.0 else amount
 	vel.x *= jump_boost
-	vel.y += amt
 	vel.z *= jump_boost
+	vel.y += amt
+	
 	jumped.emit()
 
 func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:

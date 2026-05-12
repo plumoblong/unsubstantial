@@ -47,3 +47,11 @@ func get_chapter_for_stage(stage: int) -> Chapter:
 		else:
 			break
 	return result
+	
+func get_boss_map() -> String:
+	if current.boss_maps.is_empty():
+		return MAP_PREFIX + current.map_fallback + MAP_SUFFIX
+	var index : int = randi() % current.boss_maps.size()
+	var chosen : String = current.boss_maps[index]
+	_T.say(MAP_PREFIX + chosen + MAP_SUFFIX)
+	return MAP_PREFIX + chosen + MAP_SUFFIX

@@ -317,8 +317,12 @@ world/map_use_async_iterations=false
 
 [physics]
 
+3d/run_on_separate_thread=true
 3d/physics_engine="Jolt Physics"
-jolt_physics_3d/simulation/velocity_steps=5
+jolt_physics_3d/simulation/velocity_steps=4
+jolt_physics_3d/simulation/position_steps=4
+jolt_physics_3d/simulation/use_enhanced_internal_edge_removal=false
+jolt_physics_3d/simulation/allow_sleep=false
 common/physics_interpolation=true
 common/enable_object_picking=false
 jolt_physics_3d/simulation/areas_detect_static_bodies=true

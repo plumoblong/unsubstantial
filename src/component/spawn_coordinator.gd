@@ -8,6 +8,9 @@ const SPAWN_COOLDOWN : float = 0.5
 var _queue       : Array[EnemySpawner] = []
 var _on_cooldown : bool = false
 
+const ENEMY_FALLBACK : PackedScene = preload("res://prefab/debug/sprite_placeholder.tscn")
+const ENEMY_PATH_PREFIX : String      = "res://prefab/entity/enemy/"
+const ENEMY_PATH_SUFFIX : String      = ".tscn"
 
 ## Called by a spawner when it wants to spawn.
 ## Returns true if the spawner should proceed immediately, false if queued.
@@ -49,3 +52,20 @@ func _flush_queue() -> void:
 			_start_cooldown()
 			next.do_spawn()
 			return
+
+func get_enemy(list : String = "") -> PackedScene:
+	var enemies : Array[String] = _parse_enemy_list(list)
+	var enemy : int = randi() % enemies.size()
+	var res : PackedScene = load(enemies[enemy])
+	if res == null:
+		_T.say("Couldnt find enemy: " + enemies[enemy] + " in list: " + list + " " + str(res), Color.RED)
+		return ENEMY_FALLBACK
+	return res
+	
+func _parse_enemy_list(list : String) -> Array[String]:
+	var result: Array[String] = []
+	for entry : String in list.split(";"):
+		var trimmed : String = entry.strip_edges().trim_suffix(":")
+		if not trimmed.is_empty():
+			result.append(ENEMY_PATH_PREFIX + trimmed + ENEMY_PATH_SUFFIX)
+	return result

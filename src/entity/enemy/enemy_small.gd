@@ -26,5 +26,5 @@ func _physics_process(delta : float) -> void:
 	
 	if chase_component.attacking and is_on_floor():
 		movement_component.jump()
-	query_hitbox.disabled = not is_on_floor()
-	chase_component.update(_G.player.target.get_pos_multiplied(3.0), movement_component, agent)
+	#query_hitbox.disabled = not is_on_floor()
+	chase_component.update(_G.player.target.get_pos_multiplied(2.5), movement_component, agent)

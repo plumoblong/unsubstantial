@@ -13,6 +13,9 @@ radius = 0.3
 [sub_resource type="SphereShape3D" id="SphereShape3D_h0xjc"]
 radius = 0.1
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_nanj5"]
+radius = 0.1
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_nhh02"]
 
 [sub_resource type="Gradient" id="Gradient_vqshh"]
@@ -263,7 +266,7 @@ collision_layer = 4358
 collision_mask = 4358
 
 [node name="Hitbox" type="CollisionShape3D" parent="BodySeeker" unique_id=1918294916]
-shape = SubResource("SphereShape3D_h0xjc")
+shape = SubResource("SphereShape3D_nanj5")
 debug_color = Color(0, 1, 0.75391, 0.25098)
 
 [node name="ParrySeeker" type="Area3D" parent="." unique_id=821998680]

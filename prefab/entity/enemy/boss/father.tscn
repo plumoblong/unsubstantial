@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b6mvsyko7mqr3" path="res://prefab/animation/visual_bullet.tscn" id="12_jq1by"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="13_wlgmv"]
 [ext_resource type="FontFile" uid="uid://byr1oqgssxbbs" path="res://font/minecraft-five.ttf" id="15_wlgmv"]
+[ext_resource type="PackedScene" uid="uid://cv7q6vgmketme" path="res://prefab/entity/level/enemy_spawner.tscn" id="16_jq1by"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nx0w2"]
 radius = 2.0
@@ -38,16 +39,14 @@ script = ExtResource("1_gmp5e")
 healthbar_name = "Father"
 healthbar_description = "Royal Guard"
 phases = Dictionary[String, int]({
-"dash": 8,
-"nothing": 4,
-"shoot": 8,
-"stomp": 2
+"shoot": 3,
+"spawn": 3,
+"stomp": 3
 })
 phase_times = Dictionary[String, float]({
-"dash": 7.0,
-"nothing": 1.0,
-"shoot": 5.0,
-"stomp": 3.0
+"shoot": 6.0,
+"spawn": 1.0,
+"stomp": 4.5
 })
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=901221696]
@@ -116,22 +115,22 @@ min_distance = 16.0
 update_rate = 2
 concious_gain_time = 2.0
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("hit_sfx", "nav_agent")]
 script = ExtResource("7_72ee0")
 hit_sfx = NodePath("../HitSFX")
-use_difficulty_factor = false
-essence = 2500.0
+nav_agent = NodePath("../GroundEnemyNav")
+essence = 3000.0
 essence_death_threshold = 50.0
 damage = 75.0
-xp_payout = 25
+xp_payout = 50
 xp_radius = 5.0
 randomize_scale = 1.0
 pitch = 0.6
 spawn_ent_on_death = true
-ent_paths = Array[String](["res://prefab/entity/enemy/enemy.tscn", "res://prefab/entity/enemy/enemy_melee.tscn", "res://prefab/entity/enemy/guardian.tscn"])
+ent_paths = Array[String](["res://prefab/entity/enemy/enemy.tscn", "res://prefab/entity/enemy/enemy_melee.tscn", "res://prefab/entity/enemy/enemy_small.tscn"])
 ent_spawn_radius = 5.0
 ent_max = 6
-ent_min = 5
+ent_min = 4
 ent_count_as_enemy = false
 ent_spawn_offset = Vector3(0, 1, 0)
 metadata/_custom_type_script = "uid://tlvl68soe85"
@@ -176,6 +175,29 @@ theme_override_fonts/font = ExtResource("15_wlgmv")
 theme_override_font_sizes/font_size = 6
 text = "asdasd"
 
+[node name="EnemySpawner" parent="." unique_id=741114850 instance=ExtResource("16_jq1by")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -4)
+func_godot_properties = Dictionary[String, Variant]({
+"counted_enemy": 0,
+"distance_to_spawn": 25.0,
+"enemy": "enemy;enemy_melee;enemy_small",
+"one_shot": 0,
+"override_spawn_condition": 1,
+"spawn_delay": 0.0
+})
+
+[node name="EnemySpawner2" parent="." unique_id=1837754349 instance=ExtResource("16_jq1by")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -4)
+func_godot_properties = Dictionary[String, Variant]({
+"counted_enemy": 0,
+"distance_to_spawn": 25.0,
+"enemy": "enemy;enemy_melee;enemy_small",
+"one_shot": 0,
+"override_spawn_condition": 1,
+"spawn_delay": 0.0
+})
+
+[connection signal="phase_changed" from="." to="." method="on_phase_changed"]
 [connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
 [connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
 [connection signal="just_landed" from="MovementComponent" to="." method="movement_just_landed"]

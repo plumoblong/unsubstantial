@@ -12,27 +12,25 @@ class_name EnemySpawner
 
 const SPAWN_ANIM        : PackedScene = preload("res://prefab/animation/spawning.tscn")
 const ENEMY_CAP         : int         = 12
-const ENEMY_PATH_PREFIX : String      = "res://prefab/entity/enemy/"
-const ENEMY_PATH_SUFFIX : String      = ".tscn"
+
 
 @onready var light   : Node      = $light
 @onready var raycast : RayCast3D = $RayCast3D
 
 var spawned           : bool  = false
 var distance_to_spawn : float = 30.0
-var enemy_res         : PackedScene
 var is_one_shot       : bool
 var is_counted_enemy  : bool
 var spawn_delay       : float
 var enemy_name        : String
 
-func _parse_enemy_list() -> Array[String]:
-	var result: Array[String] = []
-	for entry : String in func_godot_properties["enemy"].split(";"):
-		var trimmed : String = entry.strip_edges().trim_suffix(":")
-		if not trimmed.is_empty():
-			result.append(ENEMY_PATH_PREFIX + trimmed + ENEMY_PATH_SUFFIX)
-	return result
+#func _parse_enemy_list() -> Array[String]:
+	#var result: Array[String] = []
+	#for entry : String in func_godot_properties["enemy"].split(";"):
+		#var trimmed : String = entry.strip_edges().trim_suffix(":")
+		#if not trimmed.is_empty():
+			#result.append(ENEMY_PATH_PREFIX + trimmed + ENEMY_PATH_SUFFIX)
+	#return result
 
 func _func_godot_build_complete() -> void:
 	distance_to_spawn = (
@@ -45,7 +43,6 @@ func _func_godot_build_complete() -> void:
 	is_one_shot       = func_godot_properties["one_shot"]
 	is_counted_enemy  = func_godot_properties["counted_enemy"]
 	spawn_delay       = func_godot_properties["spawn_delay"]
-	enemy_res         = load(_parse_enemy_list().pick_random())
 	
 
 func _physics_process(_delta: float) -> void:
@@ -62,7 +59,6 @@ func _physics_process(_delta: float) -> void:
 	if distance_to_player < distance_to_spawn:
 		raycast.target_position = player_pos
 		_request_spawn()
-
 
 func _exit_tree() -> void:
 	_G.game.spawner.cancel(self)
@@ -82,14 +78,16 @@ func do_spawn() -> void:
 		await get_tree().create_timer(spawn_delay).timeout
 
 	_create_anim()
+	
+	var enemy_res : PackedScene = _G.game.spawner.get_enemy(func_godot_properties["enemy"])
 
-	if enemy_res == null:
-		_T.say(
-			"MAP_ERROR: ent_spawn at %s has invalid enemy '%s'.\nCheck ent_spawn description in your map editor!" 
-			% [_G.vector_to_string(position, " ", 0.01), enemy_name],
-			Color.RED
-		)
-		return
+	#if enemy_res == null:
+		#_T.say(
+			#"MAP_ERROR: ent_spawn at %s has invalid enemy '%s'.\nCheck ent_spawn description in your map editor!" 
+			#% [_G.vector_to_string(position, " ", 0.01), enemy_name],
+			#Color.RED
+		#)
+		#return
 
 	var enemy : Node = enemy_res.instantiate()
 

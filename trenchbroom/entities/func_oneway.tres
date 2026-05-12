@@ -10,6 +10,13 @@ collision_layer = 7
 collision_mask = 7
 script_class = ExtResource("2_n886d")
 classname = "func_oneway"
-description = "Enables collision if the player is above the brush"
+description = "Enables collision if the player's x, y or z coordinate is bigger / smaller (dictated by the \"negative\" property) than the brush's center"
+class_properties = Dictionary[String, Variant]({
+"check_x": false,
+"check_y": true,
+"check_z": false,
+"margin": 1.0,
+"negative": false
+})
 node_class = "StaticBody3D"
 metadata/_custom_type_script = "uid://5cow84q03m6a"

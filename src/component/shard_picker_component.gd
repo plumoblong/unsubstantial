@@ -14,13 +14,14 @@ const RARITY_COLOR : Array[Color] = [
 
 @export var pools : Array[StatShardPool] = [
 	preload("res://res/shardpool/common.tres")   ,  # id: 0
-	preload("res://res/shardpool/attribute.tres"),  # id: 1
+	preload("res://res/shardpool/attribute.tres"),  # id: 1, bullet stuff
 	preload("res://res/shardpool/shop.tres"),       # id: 2
+	preload("res://res/shardpool/boss.tres"),       # id: 3
 ]
 
 @export var pool_weights : Dictionary[int, int] = {
-	0 : 8, #common.tres
-	1 : 1  #attribute.tres
+	0 : 7, #common.tres
+	1 : 1, #attribute.tres
 }
 
 ## full picking pipeline: rarity → shard → modulate.
