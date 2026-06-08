@@ -24,17 +24,19 @@ const RARITY_COLOR : Array[Color] = [
 	1 : 1, #attribute.tres
 }
 
+const FALLBACK_SHARD : StatShard = preload("res://res/shards/max_esc.tres")
+
 ## full picking pipeline: rarity → shard → modulate.
 ## zeroes out the chosen shard in the pool so it can't be picked again.
 func pick(weighted_pool: Dictionary[StatShard, int], rarity : Modulate.RARITY = -1, rarity_pool : StatShardPool = pools[0]) -> Array:
 	var chosen_rarity = rarity if not rarity < 0 or rarity_pool == null else pick_rarity(rarity_pool, _G.player.stats.luck)
 	var shard   : StatShard       = pick_shard(weighted_pool, chosen_rarity)
 	var modulate: Modulate        = pick_modulate(shard, chosen_rarity)
-	
+
 	return [shard.duplicate(), modulate.duplicate()]
 
 ## Rolls a rarity tier based on luck-adjusted weights.
-func pick_rarity(pool : StatShardPool, luck: int) -> Modulate.RARITY:
+func pick_rarity(pool : StatShardPool, luck : float) -> Modulate.RARITY:
 	var weights : Dictionary[Modulate.RARITY, float] = get_rarity_weights(pool, luck)
 	var total   : float = weights.values().reduce(func(a, b): return a + b, 0.0)
 	var roll    : float = randf() * total
@@ -85,9 +87,9 @@ func pick_modulate(shard : StatShard, rarity : Modulate.RARITY) -> Modulate:
 ## Returns the luck-adjusted weight table for all rarity tiers.
 func get_rarity_weights(pool : StatShardPool, luck : float) -> Dictionary[Modulate.RARITY, float]:
 	return {
-		Modulate.RARITY.COMMON    : maxf(pool.common_weight    - luck * 0.5,        0),
-		Modulate.RARITY.UNCOMMON  : maxf(pool.uncommon_weight  - luck * 0.25,  1),
-		Modulate.RARITY.EPIC      : maxf(pool.epic_weight      + luck * 0.25,  0),
+		Modulate.RARITY.COMMON    : maxf(pool.common_weight    - luck * 0.5,  0),
+		Modulate.RARITY.UNCOMMON  : maxf(pool.uncommon_weight  - luck * 0.25, 0),
+		Modulate.RARITY.EPIC      : pool.epic_weight,
 		Modulate.RARITY.LEGENDARY : maxf(pool.legendary_weight + luck * 0.10, 0),
 		Modulate.RARITY.MYTHIC    : maxf(pool.mythic_weight    + luck * 0.01, 0),
 	}

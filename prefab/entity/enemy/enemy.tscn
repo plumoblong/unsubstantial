@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="6_qqoev"]
 [ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="8_6l2v4"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="9_02b0y"]
-[ext_resource type="Texture2D" uid="uid://emc2l5m25kfk" path="res://images/entity/human.png" id="9_po238"]
+[ext_resource type="PackedScene" uid="uid://cly3s314negwx" path="res://prefab/entity/animated_human.tscn" id="10_suopw"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="12_b5v5k"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="13_x2dfq"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_mxx8l"]
@@ -20,6 +20,7 @@
 
 [sub_resource type="Resource" id="Resource_necmj"]
 script = ExtResource("8_6l2v4")
+fire_rate = 1.25
 inaccuracy = 0.05
 init_speed = 32.0
 life_time = 1.2
@@ -36,6 +37,7 @@ script = ExtResource("1_mxx8l")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=879000962]
 light_color = Color(1, 0, 0, 1)
+light_energy = 0.7
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 15.0
@@ -65,15 +67,20 @@ floor_friction = 0.08
 
 [node name="EssenceComponent" type="Node" parent="." unique_id=414711968]
 script = ExtResource("5_ksaek")
-set_max_essence_on_ready = false
 
 [node name="ShootComponent" type="Node" parent="." unique_id=1813057205 node_paths=PackedStringArray("visual_bullet")]
 script = ExtResource("6_qqoev")
 config = SubResource("Resource_necmj")
 visual_bullet = NodePath("../Node3D/VisualBullet")
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=759804664 node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=759804664 node_paths=PackedStringArray("sprite", "esc", "chase", "movement", "knock", "query", "hit_sfx")]
 script = ExtResource("9_02b0y")
+sprite = NodePath("../Sprite3D")
+esc = NodePath("../EssenceComponent")
+chase = NodePath("../ChaseComponent")
+movement = NodePath("../MovementComponent")
+knock = NodePath("../KnockbackComponent")
+query = NodePath("../Query")
 hit_sfx = NodePath("../HitSFX")
 damage = 75.0
 on_hit_velocity_loss = 0.65
@@ -87,12 +94,7 @@ collision_mask = 6
 [node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=1484331154]
 shape = SubResource("CapsuleShape3D_od4yj")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=677825419]
-modulate = Color(0.73, 0.219, 0.219, 1)
-pixel_size = 0.03
-billboard = 1
-texture_filter = 0
-texture = ExtResource("9_po238")
+[node name="Sprite3D" parent="." unique_id=1577492174 instance=ExtResource("10_suopw")]
 
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=749359047]
 stream = ExtResource("12_b5v5k")

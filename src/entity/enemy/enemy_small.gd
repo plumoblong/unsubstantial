@@ -14,9 +14,10 @@ class_name EnemySmall
 @onready var shoot_sfx : AudioStreamPlayer3D = $ShootSFX
 
 func _ready() -> void:
-	enemy.setup(essence_component, chase_component, query, knockback_component, movement_component)
+	enemy.setup()
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 0.4)
 	query.damage = enemy.damage
+	movement_component.jump_speed = randf_range(8.0, 10.0)
 
 func _exit_tree() -> void:
 	enemy.cleanup()

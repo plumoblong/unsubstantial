@@ -56,9 +56,12 @@ const PERCENT_SUFFIX : String = "%"
 var screen : int = 0
 var screen_size : Vector2i
 
+var _cached_postprocess : Material
+
 func _ready() -> void:
 	screen_size = DisplayServer.screen_get_size()
 	# Initialize values
+	_cached_postprocess = _G.shader_rect.material
 	s1_fullscreen.button_pressed = _G.config.fullscreen
 	s1_viewbob.button_pressed = _G.config.view_bob
 	s1_fov.value = _G.config.fov
@@ -123,11 +126,8 @@ func _update_audio_screen() -> void:
 	_G.config.sound.master = s2_volume.value
 	_G.config.sound.sfx = s2_sfx.value
 	_G.config.sound.music = s2_music.value
-
-	AudioServer.set_bus_volume_db(0, linear_to_db(_G.config.sound.master))
-	AudioServer.set_bus_volume_db(1, linear_to_db(_G.config.sound.music))
-	AudioServer.set_bus_volume_db(2, linear_to_db(_G.config.sound.sfx))
-	AudioServer.set_bus_volume_db(3, linear_to_db(_G.config.sound.sfx))
+	
+	_G.update_audio_buses()
 
 func _update_controls_screen() -> void:
 	header.text = HEADER_CONTROLS
@@ -141,7 +141,7 @@ func _update_graphics_screen() -> void:
 	_G.config.video.low = s4_lowmode.button_pressed
 	_G.config.video.v_sync = s4_vsync.button_pressed
 	_G.config.ui_dark_mode = s4_ui_darkmode.button_pressed
-	_G.config.video.exposure = s4_exposure.value
+	#_G.config.video.exposure = s4_exposure.value
 	_G.config.video.motion_blur = s4_motion_blur.button_pressed
 
 func fullscreen_pressed() -> void:
@@ -160,6 +160,7 @@ func res_gui_input(event : InputEvent) -> void:
 				_G.config.resolution += 1
 			MOUSE_BUTTON_RIGHT:
 				_G.config.resolution -= 1
+		_G.update_window_size()
 
 func other_pressed() -> void:
 	screen = 3
@@ -181,3 +182,7 @@ func _update_positions() -> void:
 	screen2.position = _R.get_center()
 	screen3.position = _R.get_center()
 	screen4.position = _R.get_center()
+
+
+func exposure_value_changed(value: float) -> void:
+	_cached_postprocess.set_shader_parameter("gamma", value)

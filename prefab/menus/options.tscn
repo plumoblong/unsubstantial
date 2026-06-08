@@ -361,6 +361,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Screen1/Fullscreen" to="." method="fullscreen_pressed"]
 [connection signal="gui_input" from="Screen1/Res" to="." method="res_gui_input"]
 [connection signal="toggled" from="Screen4/Vsync" to="." method="vsync_toggled"]
+[connection signal="value_changed" from="Screen4/Exposure" to="." method="exposure_value_changed"]
 
 [editable path="Node2D/GeneralButton"]
 [editable path="Node2D/GRAPHICS"]

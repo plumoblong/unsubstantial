@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://c6ax8lrpcq8td" path="res://sfx/ambient/drone2lp.wav" id="1_bd46r"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_idgru"]
 [ext_resource type="Gradient" uid="uid://bgo1q3olqkqve" path="res://res/colors/palace.tres" id="2_2f5f7"]
+[ext_resource type="AudioStream" uid="uid://dft0wmxafvs5p" path="res://res/music/palace_playlist.tres" id="3_lygvx"]
 
 [resource]
 script = ExtResource("1_idgru")
@@ -11,6 +12,7 @@ description = "One of Many"
 id = 1
 stage_start = 1
 maps = Array[String](["chapter1/map4", "chapter1/map3", "chapter1/map2", "chapter1/map1"])
+music = ExtResource("3_lygvx")
 map_fallback = "chapter1/map1"
 boss_stage = 5
 boss_maps = Array[String](["chapter1/boss1"])

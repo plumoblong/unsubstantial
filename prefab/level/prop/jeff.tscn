@@ -1,10 +1,26 @@
 [gd_scene format=3 uid="uid://dirp7mb2hal2y"]
 
 [ext_resource type="Texture2D" uid="uid://cy6d26u5cc7ov" path="res://images/entity/jeff.png" id="1_hxmfa"]
+[ext_resource type="AudioStream" uid="uid://bhve5nlq5kfff" path="res://music/shop.ogg" id="2_ncrnx"]
 
 [node name="Jeff" type="Sprite3D" unique_id=584759435]
 pixel_size = 0.03
 billboard = 2
 double_sided = false
 texture_filter = 0
+texture = ExtResource("1_hxmfa")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=861992480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 5)
+stream = ExtResource("2_ncrnx")
+max_db = 0.0
+autoplay = true
+max_distance = 30.0
+panning_strength = 0.1
+bus = &"Music"
+attenuation_filter_db = -4.0
+
+[node name="Sprite3D" type="Sprite3D" parent="AudioStreamPlayer3D" unique_id=1412537070]
+visible = false
+billboard = 1
 texture = ExtResource("1_hxmfa")

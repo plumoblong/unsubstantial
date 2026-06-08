@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://ceqq4k0pcjyou"]
+
+[ext_resource type="AudioStream" uid="uid://samctduexn6j" path="res://music/beta.ogg" id="1_wvq6a"]
+[ext_resource type="AudioStream" uid="uid://dft0wmxafvs5p" path="res://res/music/palace_playlist.tres" id="2_p1q4t"]
+
+[resource]
+clip_count = 2
+clip_0/name = &"menu"
+clip_0/stream = ExtResource("1_wvq6a")
+clip_0/auto_advance = 0
+clip_1/name = &"palace"
+clip_1/stream = ExtResource("2_p1q4t")
+clip_1/auto_advance = 0
+initial_clip = 1

@@ -4,12 +4,11 @@ class_name CollectableTable
 @export var func_godot_properties : Dictionary[String, Variant] = {
 	"collectables"      : 2,
 	"choices_bonus"     : true,
-	"only_one"          : false,
+	"max_picks"         : 0,
 	"free"              : true,
 	"distance_to_spawn" : 15.0,
 	"spawn_width"       : 1.0,
 	"spawn_curvature"   : 0.0,
-	"use_physics"     : true,
 	"allow_discount"    : false,
 	"rarity_override"   : -1,
 	"pool_id"           : -1,
@@ -17,6 +16,7 @@ class_name CollectableTable
 }
 
 var current_pool : StatShardPool
+var current_built_pool : Dictionary[StatShard, int]
 var current_rarity : Modulate.RARITY
 
 const DISTANCE_BETWEEN_COLLECTABLE : float = 2.5
@@ -26,22 +26,20 @@ const CURVATURE_DISTANCE_MULT : float = 3.0
 
 var spawned : bool = false
 
+var shards : Array[ShardCollectable] = []
+var amount_picked : int = 0
+
 func _spawn() -> void: 
 	if ray.is_colliding() and not spawned: return
-	var shard_config : Dictionary = { "rarity_override" : -1, 
-	"pool_id" : -1, 
-	"price_override" : 0.0, 
-	"free" : func_godot_properties["pool_id"], 
-	"use_physics" : func_godot_properties["use_physics"], 
-	"discount" : false, 
-	"random_discount" : func_godot_properties["allow_discount"], }
-	
+
 	if func_godot_properties["pool_id"] > -1:
 		current_pool = _G.game.shard_picker.pools[func_godot_properties["pool_id"]]
 	else:
 		var chp : int = _G.choose_from_chance(_G.game.shard_picker.pool_weights)
 		current_pool = _G.game.shard_picker.pools[chp]
-		
+	
+	current_built_pool = current_pool.build_pool()
+	
 	if func_godot_properties["rarity_override"] > -1:
 		current_rarity = func_godot_properties["rarity_override"]
 	else:
@@ -49,24 +47,29 @@ func _spawn() -> void:
 	
 	for i in range(func_godot_properties["collectables"]):
 		var pos : Vector3 = _get_collectable_position(i)
+		var shard_config : Dictionary = { "rarity_override" : -1, 
+			"pool_id" : func_godot_properties["pool_id"], 
+			"price_override" : 0.0, 
+			"free" : func_godot_properties["free"], 
+			"discount" : false, 
+			"random_discount" : func_godot_properties["allow_discount"], 
+		}
 		var shard : ShardCollectable = _G.game.create_shard_collectable(pos, shard_config)
+		shards.append(shard)
+	
+	for shard : ShardCollectable in shards:
+		var rarity : Modulate.RARITY = current_rarity
+		if func_godot_properties["random_rarities"]:
+			rarity = _G.game.shard_picker.pick_rarity(current_pool, _G.player.stats.luck)
+		shard.setup_stat(current_built_pool, rarity, current_pool)
+		shard.setup_visuals(shard.current_stat, rarity)
 		
-		shard.setup_stat(current_pool.build_pool(), current_rarity)
-		shard.setup_visuals(shard.current_stat, current_rarity)
 	spawned = true
 
 func _physics_process(_delta: float) -> void:
-	if spawned: return
-	var distance_to_player : float  = global_position.distance_to(_G.player.global_position)
-	var player_pos         : Vector3 = (
-		global_position.direction_to(_G.player.global_position)
-		* (distance_to_player - 1.0)
-		* Vector3(-1.0, 1.0, -1.0)
-	)
 
-	if distance_to_player < func_godot_properties["distance_to_spawn"]:
-		ray.target_position = player_pos
-		_spawn()
+	_update_picking()
+	_update_spawning()
 
 func _get_collectable_position(index: int) -> Vector3:
 	var count: int = func_godot_properties["collectables"]
@@ -92,3 +95,22 @@ func _get_collectable_position(index: int) -> Vector3:
 	var arc_pos: Vector3 = Vector3(sin(angle), 0.0, -(cos(angle) - cos(start_angle))) * radius
 	
 	return global_position + row_pos.lerp(arc_pos, curvature)
+
+func _update_spawning() -> void:
+	if spawned: return
+	var distance_to_player : float  = global_position.distance_to(_G.player.global_position)
+	var player_pos         : Vector3 = (
+		global_position.direction_to(_G.player.global_position)
+		* (distance_to_player - 1.0)
+		* Vector3(-1.0, 1.0, -1.0)
+	)
+
+	if distance_to_player < func_godot_properties["distance_to_spawn"]:
+		ray.target_position = player_pos
+		_spawn()
+		
+func _update_picking() -> void:
+	if func_godot_properties["max_picks"] < 1: return
+	if amount_picked >= func_godot_properties["max_picks"]:
+		for shard in shards:
+			shard.disapear()

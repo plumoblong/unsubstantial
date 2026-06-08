@@ -41,10 +41,14 @@ offset_right = 478.0
 offset_bottom = 209.0
 focus_mode = 2
 theme_override_constants/line_separation = 1
+theme_override_constants/paragraph_separation = 1
 theme_override_fonts/normal_font = ExtResource("2_csl18")
 theme_override_font_sizes/normal_font_size = 6
 bbcode_enabled = true
-text = "[color=00ff00]TUX Loaded![/color]"
+text = "[color=00ff00]TUX Loaded![/color]
+bruh
+bruh
+bruh"
 scroll_following = true
 vertical_alignment = 2
 selection_enabled = true

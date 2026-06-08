@@ -26,12 +26,13 @@ var _c_print_to_chat : bool = false
 # debug stuff
 
 var debug_flags : Array[bool] = [
-	true,  # console debug info
-	false, # enemy paths
-	false, # player movement information
-	false, # bullet trajectories
-	false, # show animfix info ;]
-	false, # free shards
+	true,  # 0 console debug info
+	false, # 1 enemy paths
+	false, # 2 player movement information
+	false, # 3 bullet trajectories
+	false, # 4 show animfix info ;]
+	false, # 5 free shards
+	false, # 6 player stats info
 ]
 
 func start() -> void:
@@ -271,6 +272,8 @@ func execute_command(cmd: String, args: Array) -> void:
 		"viewscale":
 			var scale : float = float(args[0]) if args.size() > 0 else 1.0
 			get_tree().root.content_scale_factor = scale
+		"clear":
+			output.text = ""
 		"spawn_enemy":
 			var enemy : String = "res://prefab/entity/enemy/" + str(args[0] + ".tscn")
 			
@@ -283,8 +286,8 @@ func execute_command(cmd: String, args: Array) -> void:
 func say(log : Variant, color : Color = Color.WHITE, debug_flag : int = -1) -> void:
 	if not debug_flag == -1 and not debug_flags[debug_flag]: return
 	var hex : String = "#%02x%02x%02x" % [color.r8, color.g8, color.b8]
-	print("TUX: [color=",hex,"]", log)
-	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n\n"
+	print(log)
+	output.text = output.text + "[color=" + hex + "]" + str(log) + "[/color]\n"
 	if not _validate_game(): return
 	if not _c_print_to_chat: return
 	_G.game.chat.add_message("TUX: " + str(log))
@@ -306,6 +309,7 @@ func help(page : int = -1) -> void:
 			say(" say <text> - Outputs text to console")
 			say(" timescale <float> - Sets time scale (default: 1.0)")
 			say(" scene <path> - Changes the scene")
+			say(" viewscale <float> - Sets the resolution scale (default: 1.0, smaller number = smaller pixels)")
 		1:
 			say("=== Game Commands ===")
 			say(" hitbox - Shows/hides hitbox shapes")

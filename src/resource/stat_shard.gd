@@ -8,7 +8,7 @@ class_name StatShard
 @export var weight     : float   = 1.0
 ## shop_cost * rarity when shard_collectable isnt free and has no price override
 @export var shop_prices : Array[float] = [
-	20.0, 50.0, 75.0, 100,0, 200.0
+	30.0, 50.0, 100.0, 150,0, 300.0
 ]
 
 @export_group("Stat Exclusion")
@@ -32,16 +32,25 @@ func is_excluded() -> bool:
 		return false
 	var value: float = float(_G.player.stats.get(exclusion_stat) if not exclusion_bullet_config else _G.player.stats.bullet.get(exclusion_stat))
 	return value < exclusion_min or value > exclusion_max
-
-func get_random_modulate(rarity : Modulate.RARITY) -> Modulate:
-	var lut : Array[Array] = [
+	
+func get_random_modulate(rarity: Modulate.RARITY) -> Modulate:
+	var lut: Array[Array] = [
 		common_modulates, uncommon_modulates, rare_modulates, legendary_modulates, mythical_modulates
 	]
+
+	if not lut[rarity].is_empty():
+		return lut[rarity].pick_random()
+
+	var available: Array[int] = []
+	for r in range(lut.size()):
+		if not lut[r].is_empty():
+			available.append(r)
+
+	if available.is_empty():
+		_T.say("StatShard" + stat_name + " no modulates in any rarity tier.", Color.RED, 0)
+		return null
 	
-	var m_array : Array[Modulate] = lut[rarity]
-	var m : Modulate = m_array.pick_random()
-	
-	return m
+	return lut[available.pick_random()].pick_random()
 	
 func get_price(rarity : Modulate.RARITY) -> float:
 	return shop_prices[rarity]

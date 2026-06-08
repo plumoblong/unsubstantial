@@ -25,6 +25,7 @@ func _func_godot_build_complete() -> void:
 	_pick_map()
 	_T.say(builder.local_map_file)
 	if _can_build:
+		navigation_mesh.clear()
 		builder.build() 
 		bake_navigation_mesh()
 		

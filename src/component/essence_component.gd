@@ -4,7 +4,7 @@ class_name EssenceComponent
 @export var start_essence : int = 300
 @export var max_essence : int = 300
 @export var die_threshold : int = 10
-@export var set_max_essence_on_ready : bool = true
+@export var set_max_essence_on_ready : bool = false
 
 var essence : int
 var heal_multiplier : float = 1.0

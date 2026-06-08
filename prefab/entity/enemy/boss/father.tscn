@@ -39,9 +39,9 @@ script = ExtResource("1_gmp5e")
 healthbar_name = "Father"
 healthbar_description = "Royal Guard"
 phases = Dictionary[String, int]({
-"shoot": 3,
-"spawn": 3,
-"stomp": 3
+"shoot": 2,
+"spawn": 1,
+"stomp": 2
 })
 phase_times = Dictionary[String, float]({
 "shoot": 6.0,
@@ -112,14 +112,20 @@ movehelper = NodePath("../MoveBackHelper")
 agro_distance = 100.0
 attack_distance = 100.0
 min_distance = 16.0
-update_rate = 2
 concious_gain_time = 2.0
+entropy = 0.1
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("hit_sfx", "nav_agent")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=592160326 node_paths=PackedStringArray("sprite", "esc", "chase", "movement", "knock", "query", "hit_sfx", "nav_agent")]
 script = ExtResource("7_72ee0")
+sprite = NodePath("../Sprite3D")
+esc = NodePath("../EssenceComponent")
+chase = NodePath("../ChaseComponent")
+movement = NodePath("../MovementComponent")
+knock = NodePath("../KnockbackComponent")
+query = NodePath("../Query")
 hit_sfx = NodePath("../HitSFX")
 nav_agent = NodePath("../GroundEnemyNav")
-essence = 3000.0
+essence = 2000.0
 essence_death_threshold = 50.0
 damage = 75.0
 xp_payout = 50
@@ -167,6 +173,7 @@ process_callback = 0
 wait_time = 10.0
 
 [node name="Label" type="Label" parent="." unique_id=738887968]
+visible = false
 offset_left = 65.0
 offset_top = 201.0
 offset_right = 105.0
@@ -180,7 +187,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -4)
 func_godot_properties = Dictionary[String, Variant]({
 "counted_enemy": 0,
 "distance_to_spawn": 25.0,
-"enemy": "enemy;enemy_melee;enemy_small",
+"enemy": "enemy;guardian",
 "one_shot": 0,
 "override_spawn_condition": 1,
 "spawn_delay": 0.0
@@ -191,7 +198,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -4)
 func_godot_properties = Dictionary[String, Variant]({
 "counted_enemy": 0,
 "distance_to_spawn": 25.0,
-"enemy": "enemy;enemy_melee;enemy_small",
+"enemy": "enemy;enemy_triple",
 "one_shot": 0,
 "override_spawn_condition": 1,
 "spawn_delay": 0.0

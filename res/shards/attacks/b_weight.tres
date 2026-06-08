@@ -20,7 +20,7 @@ statistic = "fall_speed"
 bullet_set = true
 operator = 2
 value = 1.5
-rarity = 2
+rarity = 3
 metadata/_custom_type_script = "uid://cg8iee4n6k7bi"
 
 [sub_resource type="Resource" id="Resource_nwf23"]

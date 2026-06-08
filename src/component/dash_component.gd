@@ -34,7 +34,7 @@ func allow_dash(check_if_reset : bool = true) -> void:
 	can_dash_now.emit()
 	can_reset = false
 
-func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
+func dash(mc : Component, direction : Vector3 = Vector3.ZERO, power_mult : float = 1.0) -> void:
 	if not enabled or not can_dash: return
 	
 	if delay > 0.0:
@@ -52,11 +52,11 @@ func dash(mc : Component, direction : Vector3 = Vector3.ZERO) -> void:
 	elif mc is PlayerMoveComponent:
 		_dash_player_component(mc)
 
-func _dash_movement_component(mc : MovementComponent, direction : Vector3) -> void:
+func _dash_movement_component(mc : MovementComponent, direction : Vector3, power_mult : float = 1.0) -> void:
 	dashing = true
 	await tree.create_timer(delay).timeout
 	mc.vel = Vector3.ZERO
-	knock_component.knock(parent.global_position - direction, dash_speed)
+	knock_component.knock(parent.global_position - direction, dash_speed * power_mult)
 	mc.vel *= end_velocity_multiplier
 	just_dashed = false
 	await tree.create_timer(dash_time - delay).timeout

@@ -2,10 +2,12 @@
 
 [ext_resource type="Gradient" uid="uid://pnd7u1pydfvb" path="res://res/colors/ether.tres" id="1_np8ci"]
 [ext_resource type="Script" uid="uid://ck53yfvsd4nfo" path="res://src/resource/chapter.gd" id="1_p7rvb"]
+[ext_resource type="AudioStream" uid="uid://m8bocn1yx6q0" path="res://music/ether.ogg" id="2_auwgg"]
 
 [resource]
 script = ExtResource("1_p7rvb")
 maps = Array[String](["ether/map1"])
+music = ExtResource("2_auwgg")
 map_fallback = "ether"
 color_ranges = ExtResource("1_np8ci")
 metadata/_custom_type_script = "uid://ck53yfvsd4nfo"

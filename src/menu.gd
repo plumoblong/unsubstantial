@@ -7,12 +7,15 @@ var selected : int = 0
 var all_visible : bool = true
 @export var songs : Dictionary[AudioStreamOggVorbis, int]
 
+const MENU_MUSIC : AudioStream = preload("res://music/beta.ogg")
+
 func _ready() -> void:
+	_S.change_song(MENU_MUSIC)
+	_S.fade_song(1.0, 1.5)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_G.get_achievement(_G.achievement.START)
-	$Theme.stream = _G.choose_from_chance(songs)
-	$Theme.play()
 	_G.change_discord_rpc(true, "In Main Menu", "", "", "")
+	
 func _process(delta : float) -> void:
 	if Input.is_action_just_pressed("f2"):
 		all_visible = not all_visible
@@ -37,6 +40,7 @@ func _update_positions() -> void:
 
 func _on_start_pressed() -> void:
 	_G.starting_level = ""
+	_S.fade_song(0.0, 0.5)
 	_G.change_scene("res://scene/game.tscn")
 
 func exit_pressed() -> void:

@@ -10,15 +10,14 @@ class_name EnemySpawner
 	"override_spawn_condition": 0,
 }
 
-const SPAWN_ANIM        : PackedScene = preload("res://prefab/animation/spawning.tscn")
-const ENEMY_CAP         : int         = 12
 
+const ENEMY_CAP      : int       = 12
 
 @onready var light   : Node      = $light
 @onready var raycast : RayCast3D = $RayCast3D
 
-var spawned           : bool  = false
-var distance_to_spawn : float = 30.0
+var spawned           : bool     = false
+var distance_to_spawn : float    = 30.0
 var is_one_shot       : bool
 var is_counted_enemy  : bool
 var spawn_delay       : float
@@ -77,7 +76,7 @@ func do_spawn() -> void:
 	if spawn_delay > 0.0:
 		await get_tree().create_timer(spawn_delay).timeout
 
-	_create_anim()
+	
 	
 	var enemy_res : PackedScene = _G.game.spawner.get_enemy(func_godot_properties["enemy"])
 
@@ -90,7 +89,9 @@ func do_spawn() -> void:
 		#return
 
 	var enemy : Node = enemy_res.instantiate()
-
+	
+	_G.game.create_spawn_anim(global_position + Vector3(0.0, 0.55, 0.0), true, 1.0)
+	
 	if is_counted_enemy:
 		_G.game.enemies.add_child(enemy)
 	else:
@@ -110,8 +111,3 @@ func _request_spawn() -> void:
 		return
 	if _G.game.spawner.request(self):
 		do_spawn()
-
-func _create_anim() -> void:
-	var anim : Node = SPAWN_ANIM.instantiate()
-	_G.game.add_child(anim)
-	anim.global_position = global_position + Vector3(0.0, 0.55, 0.0)

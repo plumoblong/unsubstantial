@@ -13,7 +13,7 @@ class_name PlayerCamera
 @export var viewbob_y : float = 0.0
 
 var viewbob_amount : float = 1.0
-@export var tilt_amount : float = 9.0
+@export var tilt_amount : float = 15.0
 @export var multiplier : float = 1.0
 @export var motion_blur_offset : float = 1.25
 
@@ -22,7 +22,7 @@ var ss_count : int = 0
 var bob_offset : float = 0.0
 var height_offset : float = 0.0
 
-const TILT_LERP : float = 0.08
+const TILT_LERP : float = 0.05
 
 func _ready() -> void:
 	anim.play("viewbob")
@@ -44,10 +44,11 @@ func _ready() -> void:
 
 func update(t : float) -> void:
 	#h_offset = viewbob_x * viewbob_amount
-	#anim.speed_scale = player.velocity.length() / player.stats.speed
+	
 	fov_offsets.z = viewbob_amount * 15.0 * multiplier
 	fov = _G.config.fov + fov_offsets.x + fov_offsets.y + fov_offsets.z * viewbob_amount
 	if _G.config.view_bob:
+		anim.speed_scale = viewbob_amount
 		bob_offset = viewbob_y * viewbob_amount * multiplier
 		height_offset = lerpf(height_offset, (player.velocity.y / 4.2), 0.1)
 		head.position.y = head_base_height+clampf(height_offset * 0.5, -1.0, 0.0) + bob_offset

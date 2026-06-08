@@ -2,7 +2,7 @@ extends Node3D
 class_name PlayerTarget
 
 @export var target_distance : float = 1.0
-@export var smoothing : float = 0.25
+@export var smoothing : float = 0.1
 
 var offset : Vector3 = Vector3.ZERO
 

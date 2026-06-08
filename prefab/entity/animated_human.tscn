@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cly3s314negwx"]
+
+[ext_resource type="Texture2D" uid="uid://emc2l5m25kfk" path="res://images/entity/human.png" id="1_r1r70"]
+[ext_resource type="Script" uid="uid://bmk4vlytno2qg" path="res://src/entity/animated_human.gd" id="2_kn72x"]
+
+[sub_resource type="Animation" id="Animation_n2ju2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kn72x"]
+resource_name = "falling"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.06666666),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_ecu3j"]
+resource_name = "stop"
+length = 0.001
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_02yae"]
+resource_name = "walking"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yimxq"]
+_data = {
+&"RESET": SubResource("Animation_n2ju2"),
+&"falling": SubResource("Animation_kn72x"),
+&"stop": SubResource("Animation_ecu3j"),
+&"walking": SubResource("Animation_02yae")
+}
+
+[node name="Sprite3D" type="Sprite3D" unique_id=1577492174]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_r1r70")
+hframes = 5
+script = ExtResource("2_kn72x")
+
+[node name="Anim" type="AnimationPlayer" parent="." unique_id=2006979422]
+libraries/ = SubResource("AnimationLibrary_yimxq")

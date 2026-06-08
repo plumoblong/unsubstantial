@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://b6i64wcu3lg1"
+path="res://.godot/imported/shop2.1.map-a5d25e00023e569a30f6dc760662095d.tres"
+
+[deps]
+
+source_file="res://maps/special/autosave/shop2.1.map"
+dest_files=["res://.godot/imported/shop2.1.map-a5d25e00023e569a30f6dc760662095d.tres"]
+
+[params]
+

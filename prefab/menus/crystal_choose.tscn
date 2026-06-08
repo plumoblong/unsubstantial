@@ -17,45 +17,6 @@ script = ExtResource("1_153j7")
 [node name="Crystals" type="Node2D" parent="." unique_id=1888808479]
 position = Vector2(240, 135)
 
-[node name="Text" type="Label" parent="." unique_id=670891074]
-material = SubResource("CanvasItemMaterial_q61hg")
-offset_right = 480.0
-offset_bottom = 61.0
-theme_override_fonts/font = ExtResource("4_t7sn6")
-theme_override_font_sizes/font_size = 16
-text = "Choose wisely..."
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_group_ = true
-
-[node name="Shadow" type="Label" parent="Text" unique_id=1091418098]
-modulate = Color(0.48299408, 0.48299408, 0.48299408, 1)
-material = SubResource("CanvasItemMaterial_q61hg")
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 481.0
-offset_bottom = 62.0
-theme_override_fonts/font = ExtResource("4_t7sn6")
-theme_override_font_sizes/font_size = 16
-text = "Choose wisely..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Shadow2" type="Label" parent="Text" unique_id=303370962]
-modulate = Color(0.25341398, 0.25341398, 0.25341398, 1)
-material = SubResource("CanvasItemMaterial_q61hg")
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 482.0
-offset_bottom = 63.0
-theme_override_fonts/font = ExtResource("4_t7sn6")
-theme_override_font_sizes/font_size = 16
-text = "Choose wisely..."
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Description" type="Node2D" parent="." unique_id=1628209290]
 
 [node name="Text2" type="Label" parent="Description" unique_id=1520803319]
@@ -96,6 +57,48 @@ offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("5_t7sn6")
 theme_override_font_sizes/font_size = 8
 text = ". . ."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Header" type="Node2D" parent="." unique_id=1111863220]
+
+[node name="Text" type="Label" parent="Header" unique_id=670891074]
+material = SubResource("CanvasItemMaterial_q61hg")
+offset_left = -240.0
+offset_right = 240.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("4_t7sn6")
+theme_override_font_sizes/font_size = 16
+text = "Choose wisely..."
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="Label" parent="Header/Text" unique_id=1091418098]
+modulate = Color(0.48299408, 0.48299408, 0.48299408, 1)
+material = SubResource("CanvasItemMaterial_q61hg")
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 481.0
+offset_bottom = 62.0
+theme_override_fonts/font = ExtResource("4_t7sn6")
+theme_override_font_sizes/font_size = 16
+text = "Choose wisely..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shadow2" type="Label" parent="Header/Text" unique_id=303370962]
+modulate = Color(0.25341398, 0.25341398, 0.25341398, 1)
+material = SubResource("CanvasItemMaterial_q61hg")
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 482.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("4_t7sn6")
+theme_override_font_sizes/font_size = 16
+text = "Choose wisely..."
 horizontal_alignment = 1
 vertical_alignment = 1
 

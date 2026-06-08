@@ -8,7 +8,7 @@
 centered = false
 offset = Vector2(-16, -132)
 pixel_size = 0.06
-billboard = 2
+billboard = 1
 double_sided = false
 texture_filter = 0
 texture = ExtResource("1_lycgd")
@@ -33,6 +33,10 @@ texture_filter = 0
 texture = ExtResource("3_efj5g")
 hframes = 3
 
+[node name="Ray2" type="RayCast3D" parent="Grass/Grass1" unique_id=780174594]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+target_position = Vector3(0, 1, 0)
+
 [node name="Grass2" type="Sprite3D" parent="Grass" unique_id=1406498359]
 visibility_range_end = 40.0
 visibility_range_end_margin = 30.0
@@ -46,6 +50,10 @@ double_sided = false
 texture_filter = 0
 texture = ExtResource("3_efj5g")
 hframes = 3
+
+[node name="Ray3" type="RayCast3D" parent="Grass/Grass2" unique_id=1252537693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+target_position = Vector3(0, 1, 0)
 
 [node name="Grass3" type="Sprite3D" parent="Grass" unique_id=977666197]
 visibility_range_end = 40.0
@@ -61,8 +69,15 @@ texture_filter = 0
 texture = ExtResource("3_efj5g")
 hframes = 3
 
+[node name="Ray4" type="RayCast3D" parent="Grass/Grass3" unique_id=643742698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+target_position = Vector3(0, 1, 0)
+
 [node name="Light" type="OmniLight3D" parent="." unique_id=2001409199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.185246, 0)
 light_energy = 1.5
 light_volumetric_fog_energy = 3.0
 omni_range = 10.0
+
+[node name="Ray1" type="RayCast3D" parent="." unique_id=442959902]
+target_position = Vector3(0, 1, 0)

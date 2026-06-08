@@ -26,8 +26,9 @@ class_name Player
 @onready var interaction_query : Area3D = $Head/InteractionQuery
 
 var score : int = 0
+var combo : int = 0
 var color : Color = Color.WHITE
-var has_key : bool = false
+#var has_key : bool = false
 var immune : bool = false
 var a : float = 0.0
 var generating_creep : bool = false
@@ -68,11 +69,11 @@ func death_anim() -> void:
 	hud.hide()
 	shoot_component.visual_bullet.hide()
 
-func _process(_delta : float) -> void:
+func _process(delta : float) -> void:
 	
 	_update_input_mode()
 	_update_camera_settings()
-	_update_hud()
+	_update_hud(delta)
 	_handle_debug_input()
 
 func _update_input_mode() -> void:
@@ -98,11 +99,11 @@ func _update_camera_settings() -> void:
 		_last_low_quality = _G.config.video.low
 	mblur.size = _R.get_screen_size()
 	camera.mbcam.get_parent().size = _R.get_screen_size()
-func _update_hud() -> void:
+func _update_hud(delta : float) -> void:
 	if hud_eye.animation == "open":
 		hud_eye.show()
 	if hud.visible:
-		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving)
+		hud.update(Vector2(camera.viewbob_x, camera.viewbob_y), movement_component.moving, delta)
 		
 func _handle_debug_input() -> void:
 	if Input.is_action_just_pressed("f4") and not Input.is_key_pressed(KEY_ALT):
@@ -127,9 +128,6 @@ func _physics_process(delta : float) -> void:
 	
 	dash_query_hitbox.disabled = not dash_component.dashing
 	
-	if has_key:
-		_G.game.all_gates_open = true
-	
 	update_motionblur.call_deferred()
 
 func _process_player_movement(delta : float) -> void:
@@ -143,7 +141,7 @@ func _process_player_movement(delta : float) -> void:
 		essence_component.die()
 	
 	moving_forward = movement_component.input_dir.y < 0
-	fast_particle.emitting = velocity.length() >= movement_component.walk_speed * 1.55
+	fast_particle.emitting = velocity.length() >= movement_component.walk_speed * 1.55 and essence_component.alive
 
 func _process_player_actions() -> void:
 	var bullet_spawn_pos : Vector3 = shoot_component.visual_bullet.sprite.global_position
@@ -180,17 +178,19 @@ func query_area_entered(area : Area3D) -> void:
 func shooted() -> void:
 	#hud.hide_hand(stats.bullet_atkspd / stats.actual_atkspd * 0.25)
 	#await get_tree().create_timer(shoot_component.shoot_delay * stats.bullet_atkspd / stats.actual_atkspd).timeout
-	shoot_sfx.pitch_scale = randf_range(1.80, 2.20) - (stats.bullet_atkspd / stats.actual_atkspd)
+	shoot_sfx.pitch_scale = randf_range(1.80, 2.20) - (stats.BULLET_ATKSPD / stats.actual_atkspd)
 	shoot_sfx.play()
 
 func _on_essence_component_died(_combo : bool) -> void:
 	if player_death_anim.played:
 		return
-	
+	shoot_component.enabled = false
 	camera.mbcam.get_parent().render_target_update_mode = SubViewport.UPDATE_DISABLED
 	death_anim()
 	_G.tween(mblur, "modulate", Color(1.0, 1.0, 1.0, 0.0))
 	await get_tree().create_timer(2.0).timeout
+	_S.fade_song(0.0, 0.75)
+	_S.change_pitch(0.0, 0.75)
 	_G.change_scene("res://scene/gameover.tscn", Color.BLACK, 0.75, 1.0, false)
 
 func dash_component_dashed() -> void:
@@ -216,7 +216,7 @@ func dash_component_dashed() -> void:
 	dash_sfx.pitch_scale = randf_range(0.9, 1.1)
 	dash_sfx.play()
 	
-	await get_tree().create_timer(0.4 * stats.dash_atkspd / (1 + stats.attack_speed)).timeout
+	await get_tree().create_timer(0.4 * stats.DASH_ATKSPD / (1 + stats.attack_speed)).timeout
 	_G.tween(camera, "multiplier", 1.0, 0.2)
 func essence_component_gained(amount : int) -> void:
 	if not hud.visible:
@@ -236,7 +236,7 @@ func essence_component_fractured(amount : int, i_time : float, combo : bool) -> 
 		
 		#if hud.visible:
 			#_G.create_ui_popup("-" + str(amount), $HUD/Info/EssenceIcon/Essence.global_position - Vector2(12.0, 0.0), Vector2.UP, Color.RED)
-		
+		combo = 0
 		_G.current_run.hits_taken += 1
 		dash_component.can_reset = true
 		movement_component.speed_bonus *= 0.5
@@ -262,3 +262,9 @@ func update_motionblur() -> void:
 	camera.mbcam.global_rotation.x = lerpf(camera.mbcam.global_rotation.x, camera.global_rotation.x, SMOOTHING)
 	camera.mbcam.global_rotation.y = lerp_angle(camera.mbcam.global_rotation.y, camera.global_rotation.y, SMOOTHING)
 	camera.mbcam.global_position = lerp(camera.mbcam.global_position, camera.global_position, SMOOTHING)
+
+
+func dash_query_body_entered(body: Node3D) -> void:
+	if body is CharacterBody3D:
+		velocity.x *= 0.1
+		velocity.z *= 0.1

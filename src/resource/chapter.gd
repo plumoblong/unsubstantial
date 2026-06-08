@@ -12,7 +12,7 @@ class_name Chapter
 
 @export var maps : Array[String]
 
-
+@export var music : AudioStream
 
 @export var map_fallback : String
 #@export var remove_maps_from_pool : bool = true

@@ -14,7 +14,7 @@ class_name EnemyGuard
 @onready var query : Area3D = $Query
 
 func _ready() -> void:
-	enemy.setup(essence_component, chase_component, query, knockback_component, movement_component)
+	enemy.setup()
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 2.0)
 	#shoot_component.config.fire_rate = randf_range(1.15, 1.3)
 	shoot_component.config.damage = enemy.damage

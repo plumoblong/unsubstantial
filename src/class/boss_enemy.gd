@@ -40,8 +40,7 @@ func _change_phase() -> void:
 	_T.say(name + " has changed phase to " + current_phase)
 	phase_changed.emit(current_phase)
 
-func _boss_defeated() -> void:
+func _boss_defeated(_combo : bool) -> void:
+	_G.game.bosses_killed += 1
 	boss_defeated.emit()
 	
-func get_random_position(pos : Vector3, radius : float = 1.0) -> Vector3:
-	return position + Vector3(randf_range(-radius, radius), 1.0, randf_range(-radius, radius))

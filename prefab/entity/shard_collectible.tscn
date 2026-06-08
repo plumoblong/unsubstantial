@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ceg648gs1s0ov" path="res://images/item/shard/damage.png" id="6_v3kpo"]
 [ext_resource type="Texture2D" uid="uid://c2ar5rwtyqfb4" path="res://images/ui/hud_infoicon.png" id="7_4bupx"]
 [ext_resource type="Script" uid="uid://bfc3g762g10ou" path="res://src/menus/world_to_2d.gd" id="7_6oixu"]
+[ext_resource type="Texture2D" uid="uid://cxppnv15o0y5b" path="res://images/ui/discount.png" id="9_v3kpo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6oixu"]
 radius = 1.0
@@ -234,7 +235,6 @@ libraries/ = SubResource("AnimationLibrary_6oixu")
 speed_scale = 6.0
 
 [node name="Price" type="Node2D" parent="." unique_id=1012858024]
-visible = false
 script = ExtResource("7_6oixu")
 distance_gradient = SubResource("Gradient_v3kpo")
 distance_mult = 16.0
@@ -259,8 +259,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
+[node name="Discount" type="Node2D" parent="." unique_id=1924602131]
+script = ExtResource("7_6oixu")
+distance_gradient = SubResource("Gradient_v3kpo")
+distance_mult = 8.0
+parent_position_offset = Vector3(0, -0.9, 0)
+metadata/_custom_type_script = "uid://bfc3g762g10ou"
+
+[node name="Sprite2D" type="Sprite2D" parent="Discount" unique_id=1348598551]
+use_parent_material = true
+texture = ExtResource("9_v3kpo")
+
 [connection signal="area_entered" from="Interaction" to="Interaction" method="area_entered"]
 [connection signal="area_exited" from="Interaction" to="Interaction" method="area_exited"]
 [connection signal="hooked" from="Interaction" to="." method="hooked"]
 [connection signal="interacted" from="Interaction" to="." method="interacted"]
 [connection signal="unhooked" from="Interaction" to="." method="unhooked"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_player_animation_finished"]

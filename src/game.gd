@@ -19,13 +19,14 @@ var current_map : Map
 @onready var spawner : SpawnCoordinator = $SpawnCoordinator
 @onready var nav_scheduler : NavSchedulerComponent = $NavScheduler
 
-const MAP_SCENE : PackedScene = preload("res://prefab/level/map.tscn")
-const BULLET_SCENE : PackedScene = preload("res://prefab/entity/bullet.tscn")
-const GHOST_SCENE : PackedScene = preload("res://prefab/entity/ghost.tscn")
-const XPORB_SCENE : PackedScene = preload("res://prefab/entity/xp_orb.tscn")
-const WORLDTEXT_SCENE : PackedScene = preload("res://prefab/menus/world_text_popup.tscn")
-const SHARD_COLLECTABLE_SCENE : PackedScene = preload("res://prefab/entity/shard_collectible.tscn")
-const EXPLOSION_RING_SCENE : PackedScene = preload("res://prefab/entity/damage_ring.tscn")
+const MAP_SCENE                  : PackedScene = preload("res://prefab/level/map.tscn")
+const BULLET_SCENE               : PackedScene = preload("res://prefab/entity/bullet.tscn")
+const GHOST_SCENE                : PackedScene = preload("res://prefab/entity/ghost.tscn")
+const XPORB_SCENE                : PackedScene = preload("res://prefab/entity/xp_orb.tscn")
+const WORLDTEXT_SCENE            : PackedScene = preload("res://prefab/menus/world_text_popup.tscn")
+const SHARD_COLLECTABLE_SCENE    : PackedScene = preload("res://prefab/entity/shard_collectible.tscn")
+const EXPLOSION_RING_SCENE       : PackedScene = preload("res://prefab/entity/damage_ring.tscn")
+const SPAWN_ANIM_SCENE           : PackedScene = preload("res://prefab/animation/spawning.tscn")
 
 var next_level : String
 var time_pause : bool = false
@@ -61,12 +62,15 @@ var pursuer_spawned : bool = false
 var enemy_count : int = 0
 var enemy_spawner_count : int = 0
 var enemies_killed : int = 0
+var bosses_killed : int = 0
 
 var enemy_multiplier : float = 1.0
 var difficulty_bonus : float = 1.0
 
 signal level_changing
 signal map_built
+
+var nav_mesh : NavigationMesh
 
 #var spawn_queue : Array[EnemySpawner]
 
@@ -81,11 +85,10 @@ func _ready() -> void:
 
 func _reset_run_stats() -> void:
 	_G.current_run.kills = 0
+	_G.current_run.boss_kills = 0
 	_G.current_run.hits_taken = 0
 	_G.current_run.crystals_collected = 0
-	_G.current_run.times_bought = 0
 	_G.current_run.times_looped = 0
-	_G.current_run.bosses_slained = 0
 
 func _initialize_seed() -> void:
 	if _G.run_seed == 0:
@@ -98,8 +101,9 @@ func _setup_starting_level() -> void:
 		_load_next_map()
 	else:
 		change_map(_G.starting_level)
+	_S.fade_song(1.0, 1.5)
+	_S.change_pitch(1.0, 1.0)
 	
-
 func _process(_delta : float) -> void:
 	_update_game_state()
 	_handle_input()
@@ -110,9 +114,9 @@ func _process(_delta : float) -> void:
 
 func _update_game_state() -> void:
 	enemy_count = enemies.get_child_count() + enemy_spawner_count
-	enemy_multiplier = max(1.0, (1.0 + 0.1 * (actual_stage - 1) ** 1.1) * difficulty_bonus)
+	enemy_multiplier = max(1.0, (1.0 + 0.1 * (((bosses_killed * 3) + 1) + actual_stage - 2) ** 1.05) * difficulty_bonus)
 	
-	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
+	difficulty_label.text = "Difficulty: " + str(enemy_multiplier) + "\nEnemy Count: " + str(enemy_count) + " / " + str(EnemySpawner.ENEMY_CAP) + "\nSpawn Cooldown: " + str(spawner.current_cooldown) + "\n\nActual Stage: " + str(actual_stage) + "\n\nCurrent Chapter: " + str(chapter.current) + "\nChapter Base Maps: " +  str(chapter.current.maps) + "\nChapter Aviable Maps: " + str(chapter.available_maps)
 	in_ether = chapter.current == chapter.all[0]
 	difficulty_label.visible = _T.debug_flags[4]
 	$AnimFix/Sprite2D.visible = _T.debug_flags[4]
@@ -243,7 +247,7 @@ func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.
 		if get_tree() != null:
 			await get_tree().create_timer(0.025).timeout
 		
-		add_child(obj)
+		current_map.add_child(obj)
 		var offset := Vector3(
 			randf_range(-spawn_radius * 0.5, spawn_radius * 0.5),
 			randf_range(-spawn_radius * 0.5, spawn_radius * 0.5),
@@ -251,13 +255,12 @@ func create_xporb(pos : Vector3, amount : float = 1.0, spawn_radius : float = 1.
 		)
 		obj.global_position = pos + offset
 
-func create_shard_collectable(pos : Vector3, shard : Dictionary = { "rarity_override" : -1, "pool_id" : -1, "price_override" : 0.0, "free" : true, "use_physics" : false, "discount" : false, "random_discount" : true, }) -> ShardCollectable:
+func create_shard_collectable(pos : Vector3, shard : Dictionary = { "rarity_override" : -1, "pool_id" : -1, "price_override" : 0.0, "free" : true, "discount" : false, "random_discount" : true, }) -> ShardCollectable:
 	var properties : Dictionary = {
 	"rarity_override" : shard["rarity_override"],
 	"pool_id"         : shard["pool_id"],
 	"price_override"  : shard["price_override"],
 	"free"            : shard["free"],
-	"use_physics"     : shard["use_physics"],
 	"discount"        : shard["discount"],
 	"random_discount" : shard["random_discount"], }
 	
@@ -266,10 +269,17 @@ func create_shard_collectable(pos : Vector3, shard : Dictionary = { "rarity_over
 	sh.func_godot_properties = properties
 	sh.global_position = pos
 	
-	add_child(sh)
+	current_map.add_child(sh)
 	sh.setup.call_deferred()
 	return sh
-	
+
+func create_spawn_anim(pos : Vector3, use_sound : bool = true, size : float = 1.0) -> void:
+	var anim : Node = SPAWN_ANIM_SCENE.instantiate()
+	anim.global_position = pos
+	anim.use_sound = use_sound
+	anim.pixel_size = 0.05 * size
+	add_child.call_deferred(anim)
+
 func create_exposilon_ring(pos : Vector3, radius : float = 2.0, speed : float = 1.0) -> void:
 	var er : DamageRing = EXPLOSION_RING_SCENE.instantiate()
 	er.speed = speed
@@ -280,7 +290,7 @@ func create_exposilon_ring(pos : Vector3, radius : float = 2.0, speed : float = 
 func end_level(loop : bool = false) -> void:
 	if ending_level:
 		return
-	
+	_S.fade_song(0.0, 0.6)
 	ending_level = true
 	ambience_player.stop()
 	level_changing.emit()
@@ -288,17 +298,16 @@ func end_level(loop : bool = false) -> void:
 	anim_fix_color.color = _G.get_color_darkmode(true, 0.0)
 	
 	_G.tween(anim_fix_color, "color", _G.get_color_darkmode(true, 1.0), 0.5)
-
+	
 	await get_tree().create_timer(0.75).timeout
-	
-	
-	#stage += 1
+	_S.fade_song(1.0, 1.4)
 	actual_stage += 1
 	chapter_stage += 1
 	switch_chapters()
 	
 	_clear_enemies()
 	_load_next_map()
+	
 
 func _clear_enemies() -> void:
 	for n in enemies.get_children():
@@ -312,17 +321,18 @@ func is_boss_stage() -> bool:
 func _load_next_map() -> void:
 	var m : String = chapter.get_boss_map() if is_boss_stage() else chapter.get_map()
 	change_map_autobuild(m)
-	
+	_S.change_song(chapter.current.music)
 	var ambience_pos := chapter.current.ambience_position
 	ambience_player.global_position = Vector3(
 		randf_range(-ambience_pos.x, ambience_pos.x),
 		randf_range(-ambience_pos.y, ambience_pos.y),
 		randf_range(-ambience_pos.z, ambience_pos.z)
 	)
+	
 	if chapter.current.ambience_streams.is_empty(): return
 	ambience_player.stream = chapter.current.ambience_streams.pick_random()
 	ambience_player.play()
-
+	
 
 func wait(time : float = 0.05) -> void:
 	time_scale = 0.0

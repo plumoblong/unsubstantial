@@ -7,8 +7,8 @@ class_name MovementComponent
 @export var speed_mult_after_jump : float = 1.0
 @export var floor_friction : float = 0.1
 @export var air_friction : float = 0.05
-@export var fall_speed : float = 16.0
-@export var fall_speed_mult : float = 1.5
+@export var fall_speed : float = 18.0
+@export var fall_speed_mult : float = 1.25
 @export var jump_speed : float = 8.0
 @export var jump_boost : float = 1.0
 
@@ -19,6 +19,7 @@ var vel : Vector3
 var moving : float = 0.0
 var actual_speed : float = 0.0
 var is_using_force : bool = false
+var can_fly : bool = true
 
 # Knockback
 var _knockback_velocity : Vector3 = Vector3.ZERO
@@ -98,11 +99,13 @@ func update_flying(delta : float) -> void:
 	if not enabled: return
 	
 	var has_direction : bool = direction.length_squared() > 0.0001
-	var target_moving : float = 1.0 if has_direction else 0.0
+	var flying : bool = has_direction and can_fly
+	
+	var target_moving : float = 1.0 if flying else 0.0
 	
 	moving = lerpf(moving, target_moving, air_friction)
 	
-	if has_direction:
+	if flying:
 		vel.x = lerpf(vel.x, direction.x * speed, air_friction)
 		vel.z = lerpf(vel.z, direction.z * speed, air_friction)
 		vel.y = lerpf(vel.y, direction.y * speed, air_friction)
@@ -121,12 +124,12 @@ func jump(amount : float = 0.0) -> void:
 	
 	jumped.emit()
 
-func apply_knockback(direction: Vector3, power: float, lift_off_ground: bool = true) -> void:
+func apply_knockback(dir: Vector3, power: float, lift_off_ground: bool = true) -> void:
 	if not enabled or not _parent: return
-	var knockback_dir : Vector3 = direction.normalized()
-	const Y_MULT : Vector3 = Vector3(1.0, 0.1, 1.0)
+	var knockback_dir : Vector3 = dir.normalized()
+	const Y_MULT : Vector3 = Vector3(1.0, 0.25, 1.0)
 	if _parent.is_on_floor() and lift_off_ground:
-		var up_influence : float = 0.5
-		knockback_dir = (knockback_dir + Vector3.UP * up_influence).normalized()
-	_knockback_velocity = knockback_dir * power * Y_MULT
+	#	var up_influence : float = 0.05
+		knockback_dir = (knockback_dir ).normalized()
+	_knockback_velocity = knockback_dir * Vector3(power, 1.0, power)
 	can_jump = false

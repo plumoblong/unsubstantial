@@ -26,6 +26,7 @@ alpha_curve = SubResource("Curve_xcbu5")
 
 [node name="WorldTo2D" type="Node2D" parent="." unique_id=1657617682]
 script = ExtResource("2_xcbu5")
+use_invert_shader = false
 metadata/_custom_type_script = "uid://bfc3g762g10ou"
 
 [node name="Text" type="Label" parent="WorldTo2D" unique_id=497804577]

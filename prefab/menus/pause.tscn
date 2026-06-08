@@ -123,27 +123,27 @@ visible = false
 position = Vector2(240, 135)
 
 [node name="RestartConfirm" type="Node2D" parent="Node2D" unique_id=1381063349]
-visible = false
 use_parent_material = true
 
 [node name="Name" type="RichTextLabel" parent="Node2D/RestartConfirm" unique_id=1322966350]
 material = SubResource("ShaderMaterial_4gl7j")
 clip_contents = false
-offset_top = 100.0
-offset_right = 480.0
-offset_bottom = 110.0
+offset_left = -239.0
+offset_top = -55.0
+offset_right = 241.0
+offset_bottom = -45.0
 theme_override_fonts/normal_font = ExtResource("10_gq4f7")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "Do you really want to restart your run?"
 horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="RestYes" parent="Node2D/RestartConfirm" unique_id=1161609179 instance=ExtResource("3_35y48")]
 use_parent_material = true
-offset_top = 132.0
-offset_right = 480.0
-offset_bottom = 145.0
+offset_left = -239.0
+offset_top = -23.0
+offset_right = 241.0
+offset_bottom = -10.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "Yes!"
@@ -151,9 +151,10 @@ alignment = 1
 
 [node name="RestNo" parent="Node2D/RestartConfirm" unique_id=1974264354 instance=ExtResource("3_35y48")]
 use_parent_material = true
-offset_top = 148.0
-offset_right = 480.0
-offset_bottom = 161.0
+offset_left = -239.0
+offset_top = -7.0
+offset_right = 241.0
+offset_bottom = 6.0
 theme_override_fonts/font = ExtResource("6_uuqui")
 theme_override_font_sizes/font_size = 6
 text = "No!"
@@ -165,7 +166,7 @@ alignment = 1
 [connection signal="pressed" from="Node2D/Main/Options" to="Node2D" method="options_pressed"]
 [connection signal="pressed" from="Node2D/Main/Exit" to="Node2D" method="exit_pressed"]
 [connection signal="pressed" from="Node2D/RestartConfirm/RestYes" to="Node2D" method="rest_yes_pressed"]
-[connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_yes_pressed"]
+[connection signal="pressed" from="Node2D/RestartConfirm/RestNo" to="Node2D" method="rest_no_pressed"]
 
 [editable path="Node2D/Main/Continue"]
 [editable path="Node2D/Main/Statistics"]

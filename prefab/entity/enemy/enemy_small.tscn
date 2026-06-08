@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="5_b3h2g"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_dwdt7"]
 [ext_resource type="Texture2D" uid="uid://btnjop7peo7e0" path="res://images/entity/human_small.png" id="8_ienij"]
+[ext_resource type="PackedScene" uid="uid://cly3s314negwx" path="res://prefab/entity/animated_human.tscn" id="9_ssy7o"]
 [ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="9_w77qk"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="12_w8fs2"]
 [ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="13_ienij"]
@@ -15,12 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="14_kgpnm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c3pg5"]
-radius = 0.36816406
-height = 1.1933594
+radius = 0.4008789
+height = 1.0012207
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_od4yj"]
-radius = 0.6503906
-height = 1.6452148
+[sub_resource type="SphereShape3D" id="SphereShape3D_o8h2q"]
+radius = 0.71503097
 
 [node name="EnemySmall" type="CharacterBody3D" unique_id=664851699]
 collision_layer = 4
@@ -37,13 +37,12 @@ omni_range = 10.0
 [node name="GroundEnemyNav" parent="." unique_id=1759187115 instance=ExtResource("2_ienij")]
 
 [node name="Hitbox" type="CollisionShape3D" parent="." unique_id=650559289]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09667969, 0)
 shape = SubResource("CapsuleShape3D_c3pg5")
 
 [node name="KnockbackComponent" type="Node" parent="." unique_id=1455241462 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_o8h2q")
 movement_component = NodePath("../MovementComponent")
-multiplier = 3.5
+multiplier = 1.5
 
 [node name="ChaseComponent" type="Node" parent="." unique_id=1591653533 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_k6xin")
@@ -58,14 +57,21 @@ script = ExtResource("4_0dpl7")
 speed = 28.0
 speed_up = 16.0
 speed_mult_after_jump = 2.0
-jump_speed = 11.0
+floor_friction = 0.2
+air_friction = 0.1
+jump_speed = 9.0
 
 [node name="EssenceComponent" type="Node" parent="." unique_id=1109450702]
 script = ExtResource("5_b3h2g")
-set_max_essence_on_ready = false
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=539105117 node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=539105117 node_paths=PackedStringArray("sprite", "esc", "chase", "movement", "knock", "query", "hit_sfx")]
 script = ExtResource("9_w77qk")
+sprite = NodePath("../Sprite3D")
+esc = NodePath("../EssenceComponent")
+chase = NodePath("../ChaseComponent")
+movement = NodePath("../MovementComponent")
+knock = NodePath("../KnockbackComponent")
+query = NodePath("../Query")
 hit_sfx = NodePath("../HitSFX")
 essence_death_threshold = 25.0
 on_hit_velocity_loss = 1.0
@@ -78,18 +84,13 @@ metadata/_custom_type_script = "uid://bj27qbealqfcr"
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("7_dwdt7")
+knockback_strength = 5.0
 die_reason = "You got humbled."
 
 [node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=1580192065]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22260737, 0)
-shape = SubResource("CapsuleShape3D_od4yj")
+shape = SubResource("SphereShape3D_o8h2q")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=788217579]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07499996, 0)
-modulate = Color(0.73, 0.219, 0.219, 1)
-pixel_size = 0.04
-billboard = 1
-texture_filter = 0
+[node name="Sprite3D" parent="." unique_id=1577492174 instance=ExtResource("9_ssy7o")]
 texture = ExtResource("8_ienij")
 
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=472752322]

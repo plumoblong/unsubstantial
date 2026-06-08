@@ -24,10 +24,8 @@ func on_open() -> void:
 	_known_stats = _G.player.stats.added_stats.duplicate()
 	create_shard_grid()
 
-
 func on_close() -> void:
 	_add_new_shards()
-
 
 func _add_new_shards() -> void:
 	var known_count : int = _known_stats.size()
@@ -85,18 +83,27 @@ func delete_shard_grid() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
 		on_close()
+		
+	if Input.is_action_just_pressed("left"):
+		arrow_left_pressed()
+	elif Input.is_action_just_pressed("right"):
+		arrow_right_pressed()
+		
 	description.text = current_description
 	empty_info.visible = _G.player.stats.added_stats.size() == 0
 	description.visible = _G.player.stats.added_stats.size() != 0
 	
-	aviable_pages =  icon_holder.get_child_count() / 15
+	aviable_pages =  (icon_holder.get_child_count() / 16)
 	arrow_left.visible = current_page != 0
 	arrow_right.visible = current_page != aviable_pages
 	icon_holder.position.x = lerpf(icon_holder.position.x, _R.get_top_left(true).x - (480.0 * current_page), 0.05)
 	icon_holder.position.y = _R.get_top_left(true).y - 24
 	$Label.text = str(current_page) + " " + str(aviable_pages)
+	
 func arrow_right_pressed() -> void:
+	if current_page >= aviable_pages: return
 	current_page += 1
 
 func arrow_left_pressed() -> void:
+	if current_page <= 0: return
 	current_page -= 1

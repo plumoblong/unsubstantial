@@ -1,7 +1,7 @@
 extends Node
 class_name Global
 
-const VERSION : String = "0.96 indev 8"
+const VERSION : String = "0.96 dev8"
 const CONFIG_VERSION : int = 1
 
 enum achievement {
@@ -42,6 +42,7 @@ var current_run : Dictionary = {
 	die_reason = "You got shot.",
 	score = 0,
 	kills = 0,
+	boss_kills = 0,
 	hits_taken = 0,
 	crystals_collected = 0,
 	items_collected = {
@@ -53,7 +54,6 @@ var current_run : Dictionary = {
 		times_bought = 0,
 	},
 	times_looped = 0,
-	bosses_slained = 0,
 }
 
 var save : Dictionary = {
@@ -96,19 +96,12 @@ var _tweens: Dictionary[Object, Dictionary] = {}  # Object -> Dictionary (proper
 
 var _cached_window: Window
 var _cached_viewport: Viewport
-var _cached_shader_material: ShaderMaterial
 var _last_fullscreen_state: bool = true
 var _last_low_quality: bool = false
 
 func _ready() -> void:
 	_cached_window = get_window()
 	_cached_viewport = get_viewport()
-	_cached_shader_material = shader_rect.material
-	
-	if config.fullscreen:
-		_cached_window.mode = Window.MODE_FULLSCREEN
-	else:
-		_cached_window.mode = Window.MODE_WINDOWED
 	
 	seed(int(Time.get_unix_time_from_system()))
 	version_label.text = VERSION.to_upper()
@@ -119,7 +112,7 @@ func _setup_discord_rpc() -> void:
 	if OS.has_feature("web"): return
 	DiscordRPC.app_id = 1316162745384702043
 	
-func _setup_audio_buses() -> void:
+func update_audio_buses() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(config.sound.master))
 	AudioServer.set_bus_volume_db(1, linear_to_db(config.sound.music))
 	AudioServer.set_bus_volume_db(2, linear_to_db(config.sound.sfx))
@@ -143,13 +136,12 @@ func _process(delta : float) -> void:
 		_cached_viewport.scaling_3d_scale = 0.5 if config.video.low else 1.0
 		_last_low_quality = config.video.low
 	
-	_cached_shader_material.set_shader_parameter("gamma", config.video.exposure)
-	
 	_handle_input()
 	_update_ui(delta)
-	_update_window_size()
-	shader_rect.size = _R.get_screen_size()
-	flare_rect.size = _R.get_screen_size()
+	
+	var screen_size = _R.get_screen_size()
+	shader_rect.size = screen_size
+	flare_rect.size = screen_size
 	Engine.time_scale = time_scale[0] * time_scale[1]
 
 func _handle_input() -> void:
@@ -166,10 +158,10 @@ func _update_ui(delta : float = 0.0) -> void:
 	
 	if show_fps:
 		if Engine.get_physics_frames() % 30 == 0:
-			fps_label.text = str(int(1/delta) * Engine.time_scale) + " FPS\n" + str(float(delta * 1000.0)) + "ms\nRES: " + str(_R.get_screen_size()) + "\nW: " + str(_cached_window.size) + "\nASP: " + str(_R.get_screen_aspect())
+			fps_label.text = str(Engine.get_frames_per_second()) + " FPS\n" + str(float(delta * 1000.0)) + "ms\nRES: " + str(_R.get_screen_size()) + "\nW: " + str(_cached_window.size) + "\nASP: " + str(_R.get_screen_aspect())
 		
-func _update_window_size() -> void:
-	if config.fullscreen or Engine.is_embedded_in_editor(): return
+func update_window_size() -> void:
+	if _cached_window.mode != Window.MODE_WINDOWED  or Engine.is_embedded_in_editor(): return
 	var screen_size := DisplayServer.screen_get_size(0)
 	var clean_res := Vector2i(snappedi(screen_size.x, 480), snappedi(screen_size.x, 270))
 	var min_size := Vector2i(480, 270)
@@ -182,7 +174,7 @@ func _update_window_size() -> void:
 	config.resolution = clampi(config.resolution, 1, clean_res.x / 480.0)
 		
 func get_resolution() -> float:
-	if not config.fullscreen: 
+	if _cached_window.mode != Window.MODE_WINDOWED: 
 		return config.resolution
 	else:
 		return DisplayServer.screen_get_size(DisplayServer.window_get_current_screen()).x / 432.0

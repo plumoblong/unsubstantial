@@ -55,7 +55,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0.0550269, 0.0550269, 0.055026
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_1dabs"]
 gradient = SubResource("Gradient_k0qtg")
-width = 128
+width = 512
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dn2ag"]
 shader = ExtResource("5_vjbpi")

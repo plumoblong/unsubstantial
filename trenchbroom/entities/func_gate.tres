@@ -11,6 +11,8 @@ script_class = ExtResource("2_ahj1q")
 classname = "ent_gate"
 description = "Upon defeating the specified amount of enemies, disables the collision of object."
 class_properties = Dictionary[String, Variant]({
+"boss_kills_required": 0,
+"info": true,
 "kills_required": 3
 })
 node_class = "StaticBody3D"

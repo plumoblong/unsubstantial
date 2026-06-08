@@ -42,9 +42,6 @@ visible = false
 [node name="Pause" parent="." unique_id=1492571051 instance=ExtResource("6_hgp5e")]
 layer = 2
 
-[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2010867329]
-bus = &"Music"
-
 [node name="ShardPicker" type="Node" parent="." unique_id=485459492]
 script = ExtResource("16_0lu6w")
 

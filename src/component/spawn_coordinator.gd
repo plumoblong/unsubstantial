@@ -4,11 +4,15 @@ class_name SpawnCoordinator
 
 ## Global cooldown between any two spawns across all spawners.
 const SPAWN_COOLDOWN : float = 0.5
+const SPAWN_COOLDOWN_MAX : float = 2.0
+const ENEMIES_MAX_COOLDOWN : int = 3
 
 var _queue       : Array[EnemySpawner] = []
 var _on_cooldown : bool = false
 
-const ENEMY_FALLBACK : PackedScene = preload("res://prefab/debug/sprite_placeholder.tscn")
+var current_cooldown : float = SPAWN_COOLDOWN
+
+const ENEMY_FALLBACK : PackedScene    = preload("res://prefab/debug/sprite_placeholder.tscn")
 const ENEMY_PATH_PREFIX : String      = "res://prefab/entity/enemy/"
 const ENEMY_PATH_SUFFIX : String      = ".tscn"
 
@@ -28,12 +32,12 @@ func request(spawner: EnemySpawner) -> bool:
 func cancel(spawner: EnemySpawner) -> void:
 	_queue.erase(spawner)
 
-
 # ── private ──────────────────────────────────────────────────────────────────
 
 func _start_cooldown() -> void:
 	_on_cooldown = true
-	get_tree().create_timer(SPAWN_COOLDOWN).timeout.connect(_on_cooldown_expired)
+	current_cooldown = SPAWN_COOLDOWN_MAX if _G.game.enemy_count > ENEMIES_MAX_COOLDOWN else SPAWN_COOLDOWN
+	get_tree().create_timer(current_cooldown).timeout.connect(_on_cooldown_expired)
 
 
 func _on_cooldown_expired() -> void:

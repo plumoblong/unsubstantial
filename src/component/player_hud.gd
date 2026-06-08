@@ -13,6 +13,9 @@ class_name PlayerHUD
 @onready var interaction_description : RichTextLabel = $InteractionOffset/InteractionTooltip/Description
 @onready var debug_panel : Node2D = $Debug
 @onready var hitmarker_sfx : AudioStreamPlayer = $HitmarkerSFX
+@onready var vignette : TextureRect = $Vignette
+@onready var debug : Node2D = $Debug
+@onready var debug_text : Label = $Debug/Text
 
 # Movement info nodes
 @onready var movement_label : Label = $MovementInfo/Label
@@ -60,6 +63,8 @@ const ESC_SUFFIX : String = "esc"
 const SHARD_SINGULAR : String = "soul"
 const SHARDS_PLURAL : String = "souls"
 
+var alert_color : Color
+
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	player = get_parent()
@@ -69,18 +74,22 @@ func _ready() -> void:
 	player_stats = player.stats
 	player_dash = player.dash_component
 
-func update(viewbob : Vector2, spd : float) -> void:
+func update(viewbob : Vector2, spd : float, delta : float) -> void:
 	if player == null: return
 	hitmarker.material.set_shader_parameter("alpha", hitmarker_alpha)
 	movement_info.visible = show_movement_info
 	score_lerp = lerpf(score_lerp, float(_G.current_run.score), 0.1)
 	info_score.text = BOLD_START + str(int(round(score_lerp))) + BOLD_END + PTS_SUFFIX
 	
-	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
 	
+	
+	info_essence.text = BOLD_START + str(player_essence.essence) + BOLD_END + "/" + str(player_essence.max_essence) + ESC_SUFFIX
+
+	alert_color = Color.from_hsv(0.0, 0.0, (float(_G.game.enemy_count) / float(EnemySpawner.ENEMY_CAP)) * 0.4)
+	vignette.modulate = lerp(vignette.modulate, alert_color, 8.0 * delta)
 	
 	money = lerpf(money, player.money, 0.2)
-	info_crystal.text = str(int(round(money))) + "soul"
+	info_crystal.text = str(int(floor(money))) + "soul"
 		
 	interaction_tooltip.visible = player.can_interact
 	interaction_tooltip.text = interact_tooltip
@@ -101,9 +110,13 @@ func update(viewbob : Vector2, spd : float) -> void:
 	movement_keys[4].visible = Input.is_action_pressed("jump")
 	
 	_update_positions()
-
+	debug.visible = _T.debug_flags[6]
+	if not _T.debug_flags[6]: return
+	debug_text.text = "base luck: " + str(player.stats.luck) + "\nactual luck: " + str(player.stats.actual_luck) + "\nluck bonus: " + str(player.stats.luck_bonus)
+		
 func _update_positions() -> void:
 	movement_info.position = _R.get_center()
+	vignette.size	 = _R.get_screen_size()
 	$InteractionOffset.position = _R.get_bottom_center()
 	crosshair.position = _R.get_center()
 	info.position = _R.get_bottom_left(false, 4, 4)

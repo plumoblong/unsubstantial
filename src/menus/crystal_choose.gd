@@ -46,7 +46,7 @@ func _spawn_crystals(amount: int, weighted_pool: Dictionary[StatShard, int], sta
 	var total_width     := amount * crystal_width + (amount - 1) * crystal_spacing
 	var start_x         := -(total_width / 2.0) + (crystal_width / 2.0)
 	
-	var rarity : Modulate.RARITY = _G.game.shard_picker.pick_rarity(stat_pool, _G.player.stats.luck)
+	var rarity : Modulate.RARITY = _G.game.shard_picker.pick_rarity(stat_pool, _G.player.stats.actual_luck)
 	
 	for i in amount:
 		var piece  : CrystalPiece = CRYSTAL_PIECE_SCENE.instantiate()
@@ -69,5 +69,6 @@ func _calculate_spacing(amount: int, crystal_width: float) -> float:
 
 func _update_positions() -> void:
 	var screen := _R.get_screen_size()
+	$Header.global_position = _R.get_top_center()
 	$Description.global_position = _R.get_bottom_center()
 	$Crystals.position = _R.get_center()

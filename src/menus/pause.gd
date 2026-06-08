@@ -77,3 +77,4 @@ func _update_positions() -> void:
 	background.size = _R.get_screen_size()
 	main_screen.position = _R.get_center()
 	statistics_screen.position = _R.get_center()
+	restart_confirm_screen.position = _R.get_center()

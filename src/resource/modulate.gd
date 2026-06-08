@@ -18,11 +18,11 @@ enum RARITY {
 
 ## Difficulty multipliers applied when this modulate is appended.
 const RARITY_DIFFICULTY : Dictionary = {
-	RARITY.COMMON    : 1.001,
-	RARITY.UNCOMMON  : 1.002,
-	RARITY.EPIC      : 1.005,
-	RARITY.LEGENDARY : 1.01,
-	RARITY.MYTHIC    : 1.05,
+	RARITY.COMMON    : 1.005,
+	RARITY.UNCOMMON  : 1.01,
+	RARITY.EPIC      : 1.025,
+	RARITY.LEGENDARY : 1.05,
+	RARITY.MYTHIC    : 1.1,
 }
 
 ## Display name shown in the UI (e.g. "Damage", "Fire Rate").

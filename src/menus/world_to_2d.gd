@@ -3,6 +3,7 @@ class_name WorldTo2D
 
 @export var distance_gradient : Gradient
 @export var distance_mult : float = 4.0
+@export var distance_no_vertical : bool = false
 @export var interpolation : float = 1.0
 
 @export var edge_margin : float = 32.0
@@ -10,10 +11,17 @@ class_name WorldTo2D
 @export var clamp_offset : float = 16.0
 
 @export var parent_position_offset : Vector3 = Vector3.ZERO
+@export var use_invert_shader : bool = true
 
 var active : bool = true
 
 var in_view : bool
+
+const INVERT_SHADER : ShaderMaterial = preload("res://material/ui_invert.tres")
+
+func _ready() -> void:
+	if not use_invert_shader: return
+	material = INVERT_SHADER.duplicate()
 
 func _world_to_screen(world_pos: Vector3) -> Vector2:
 	var screen_pos: Vector2 = _G.player.camera.unproject_position(world_pos)
@@ -36,11 +44,17 @@ func _get_3d_pos() -> Vector3:
 	return get_parent().global_position + parent_position_offset
 
 func _update_distance() -> void:
-	var distance_to_cam : float = _get_3d_pos().distance_to(_G.player.camera.global_position) / distance_mult
-	var sampled_color : Color = distance_gradient.sample(distance_to_cam) if distance_gradient != null else Color.WHITE
-	modulate = sampled_color
+	if Engine.get_physics_frames() % 2 == 0:
+		var base_pos : Vector3 = _get_3d_pos() * Vector3(1.0, float(not distance_no_vertical), 1.0)
+		var distance_to_cam : float = (base_pos.distance_to(_G.player.camera.global_position  * Vector3(1.0, float(not distance_no_vertical), 1.0))) / distance_mult
+		var sampled_color : Color = distance_gradient.sample(distance_to_cam) if distance_gradient != null else Color.WHITE
+		if use_invert_shader:
+			if material is ShaderMaterial:
+				material.set_shader_parameter("modulate", Color(sampled_color.r, sampled_color.g, sampled_color.b))
+				material.set_shader_parameter("alpha",    sampled_color.a)
+		else:
+			modulate = sampled_color
 	
 func _process(_delta: float) -> void:
-
 	_update_distance()
 	global_position = lerp(global_position, _world_to_screen(_get_3d_pos()), interpolation)

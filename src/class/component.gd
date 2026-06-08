@@ -1,4 +1,4 @@
-@icon("res://images/entity/human.png")
+@icon("res://icon.svg")
 extends Node
 class_name Component
 

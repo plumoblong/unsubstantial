@@ -44,15 +44,17 @@ func _ready() -> void:
 				_T.say("Save File loaded", Color.GREEN)
 			#print(typeof(current_line))
 	if _G.config.fullscreen:
-		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		get_window().mode = Window.MODE_FULLSCREEN
 	else:
+		
 		get_window().mode = Window.MODE_WINDOWED
 	if _G.config.video.v_sync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	set_binds()
-	_G._setup_audio_buses()
+	_G.update_audio_buses()
+	_G.update_window_size()
 	await get_tree().create_timer(0.25).timeout
 	start()
 	_T.start()

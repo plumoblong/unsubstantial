@@ -11,6 +11,12 @@ const FALLBACK_POOL : int = 0
 
 var pool : StatShardPool
 
+
+const INTERACTION_PREFIX : String = "The "
+const INTERACTION_SUFFIX : String = " Crystal"
+const DESC_PREFIX : String = "It holds "
+const DESC_SUFFIX : String = " shards."
+
 func _func_godot_build_complete() -> void:
 	anim.play("idle")
 	if func_godot_properties["pool_id"] > -1:
@@ -21,6 +27,8 @@ func _func_godot_build_complete() -> void:
 	$Crystal.modulate  = pool.pool_crystal_color
 	$Light.light_color = pool.pool_crystal_color
 	$Crystal.play("new_animation")
+	interaction_tooltip = INTERACTION_PREFIX + pool.pool_name + INTERACTION_SUFFIX
+	description_tooltip = DESC_PREFIX + str(_G.player.stats.choices) + DESC_SUFFIX
 
 func on_interacted() -> void:
 	anim.play("shatter")

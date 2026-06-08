@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamPlaylist" format=3 uid="uid://dft0wmxafvs5p"]
+
+[ext_resource type="AudioStream" uid="uid://b63r1rlpp03" path="res://music/game/P_stuck_in_time.ogg" id="1_dopdv"]
+[ext_resource type="AudioStream" uid="uid://swhp8v4gorgg" path="res://music/game/A_vine_gen.ogg" id="2_hsgcr"]
+[ext_resource type="AudioStream" uid="uid://pj6p4nno8tae" path="res://music/game/S_oxymoron_wip.ogg" id="3_bkw57"]
+
+[resource]
+shuffle = true
+fade_time = 1.0
+stream_count = 3
+stream_0 = ExtResource("1_dopdv")
+stream_1 = ExtResource("2_hsgcr")
+stream_2 = ExtResource("3_bkw57")

@@ -9,37 +9,40 @@ class_name Bullet
 @onready var impact_particles: GPUParticles3D = $Impact
 @onready var static_sfx: AudioStreamPlayer3D = $StaticSFX
 @onready var impact_sfx: AudioStreamPlayer3D = $ImpactSFX
+@onready var _lifetime_timer: Timer = $Timer
+
+@onready var body_hitbox: CollisionShape3D = get_node("BodySeeker/Hitbox")
+@onready var parry_hitbox: CollisionShape3D = get_node("ParrySeeker/Hitbox")
+@onready var seek_hitbox: CollisionShape3D = get_node("Seeker/Hitbox")
 
 @export var config: BulletSettings
 
-var direction : Vector3
-var velocity : Vector3
-var world_velocity : Vector3
-var speed : float
-var pierces_left : int
+var direction: Vector3
+var velocity: Vector3
+var world_velocity: Vector3
+var speed: float
+var pierces_left: int
 
-var active : bool = true
-var disable_seek : bool = true
-var can_attack_parent : bool = false
+var active: bool = true
+var disable_seek: bool = true
+var can_attack_parent: bool = false
 
-var target : Node3D
-var target_blacklist : Array[Node3D]
-const BLACKLIST_LIMIT : int = 5
+var target: Node3D
+var target_blacklist: Array[Node3D]
+const BLACKLIST_LIMIT: int = 5
 
-# Cached base speed after _setup_speed(), used as the anchor for acceleration math.
-var _base_speed : float
-const BASE_SIZE : float = 0.5
-const SIZE_CLAMP_MIN : float = 34.0
-const SIZE_CLAMP_MAX : float = 1000.0
-const SIZE_DIVISOR : float = 400.0
-const PIERCE_HITBOX_ACTIVATE_TIME : float = 0.06
-const HOMING_ACTIVATE_TIME : float = 0.1
-const HOMING_REACH_DISTANCE : float = 0.2
-const HOMING_INTERPOLATION : float = 0.35
+var _base_speed: float
+var _fallback_dir: Vector3
+var _last_can_control: bool = false
 
-@onready var body_hitbox : CollisionShape3D = get_node("BodySeeker/Hitbox")
-@onready var parry_hitbox : CollisionShape3D = get_node("ParrySeeker/Hitbox")
-@onready var seek_hitbox : CollisionShape3D = get_node("Seeker/Hitbox")
+const BASE_SIZE: float = 0.5
+const SIZE_CLAMP_MIN: float = 34.0
+const SIZE_CLAMP_MAX: float = 1000.0
+const SIZE_DIVISOR: float = 400.0
+const PIERCE_HITBOX_ACTIVATE_TIME: float = 0.06
+const HOMING_ACTIVATE_TIME: float = 0.1
+const HOMING_REACH_DISTANCE: float = 0.2
+const HOMING_INTERPOLATION: float = 0.35
 
 func _setup_hitboxes() -> void:
 	body_hitbox.shape  = body_hitbox.shape.duplicate()
@@ -56,16 +59,23 @@ func _ready() -> void:
 	_setup_audio()
 	_setup_scale()
 	_start_lifetime()
+	_fallback_dir = direction if direction != Vector3.ZERO else -transform.basis.z
 	await get_tree().create_timer(stun_time).timeout
 	disable_seek = false
 
 func _physics_process(delta: float) -> void:
-	static_sfx.volume_linear = float(_G.player.can_control)
-	if not active or not _G.player.can_control:
+	var can_control: bool = _G.player.can_control
+	if not active or not can_control:
+		if _last_can_control != can_control:
+			static_sfx.volume_linear = 0.0
+			_last_can_control = can_control
 		return
+	if not _last_can_control:
+		static_sfx.volume_linear = 1.0
+		_last_can_control = true
 	_update_speed_from_lifetime()
 	_update_movement(delta)
-	
+
 func _setup_damage() -> void:
 	damage = config.damage * (2.0 if crit else 1.0)
 	knockback_strength = config.knockback
@@ -82,10 +92,10 @@ func _setup_visuals() -> void:
 		light.hide()
 	if config.sprite_override:
 		sprite.texture = config.sprite_override
-	
+
 	light.light_color = config.color
 	sprite.modulate = config.color
-	
+
 	if config.color != Color.WHITE:
 		var material: ParticleProcessMaterial = particles.process_material.duplicate(true)
 		material.color = config.color
@@ -93,11 +103,11 @@ func _setup_visuals() -> void:
 
 func _setup_homing() -> void:
 	if config.homing > 0.0:
-		$Seeker/Hitbox.shape.radius = config.homing * 2.5
+		seek_hitbox.shape.radius = config.homing * 2.5
 	elif config.homing_on_player:
 		target = _G.player.target
 	else:
-		$Seeker/Hitbox.disabled = true
+		seek_hitbox.disabled = true
 
 func _setup_audio() -> void:
 	static_sfx.play()
@@ -107,25 +117,19 @@ func _setup_scale() -> void:
 	sprite.pixel_size = 0.02
 	var clamped_damage: float = clampf(damage, SIZE_CLAMP_MIN, SIZE_CLAMP_MAX)
 	var size: float = BASE_SIZE + clampf(clamped_damage / SIZE_DIVISOR, 0.0, 3.0)
-	
+
 	collision_shape.shape.radius = clampf(size * 0.5, 0.1, 2.0)
 	scale = Vector3.ONE * size * config.size_mult
 	config.bounciness = clampf(config.bounciness, 0.0, 1.75)
 
 func _start_lifetime() -> void:
-	$Timer.start(config.life_time)
+	_lifetime_timer.start(config.life_time)
 	collision_shape.disabled = false
 
-# Recalculates speed each frame based on how far through the bullet's lifetime we are.
-# At t=0 (just spawned): speed = _base_speed
-# At t=1 (about to expire): speed = _base_speed * config.acceleration
-# acceleration == 0.0 means constant speed (lerp target is also _base_speed * 1.0,
-# but we special-case it to skip the math entirely).
 func _update_speed_from_lifetime() -> void:
 	if config.acceleration == 0.0:
 		return
-	var timer: Timer = $Timer
-	var lifetime_progress: float = 1.0 - (timer.time_left / config.life_time)
+	var lifetime_progress: float = 1.0 - (_lifetime_timer.time_left / config.life_time)
 	speed = maxf(2.0, lerp(_base_speed, _base_speed * config.acceleration, lifetime_progress))
 
 func _update_movement(delta: float) -> void:
@@ -133,41 +137,41 @@ func _update_movement(delta: float) -> void:
 	velocity = world_velocity + _calculate_steering() * speed
 	position += velocity * delta
 	raycast.target_position = velocity
-	#_G.create_3d_placeholder(position, Color.WHITE, 0.1)
 
 func _calculate_steering() -> Vector3:
 	if config.homing_on_player: return _seek_player()
-	if target and not disable_seek: 
-		return _seek_target()
-	return direction if direction != Vector3.ZERO else -transform.basis.z
+	if target and not disable_seek: return _seek_target()
+	return _fallback_dir
 
 func _seek_target() -> Vector3:
-	if global_position.distance_to(target.global_position) < HOMING_REACH_DISTANCE:
+	var self_pos: Vector3 = global_position
+	var target_pos: Vector3 = target.global_position
+	if self_pos.distance_to(target_pos) < HOMING_REACH_DISTANCE:
 		target = null
-		return direction if direction != Vector3.ZERO else -transform.basis.z
-	var desired: Vector3 = (target.global_position - global_position).normalized() * speed
+		return _fallback_dir
+	var desired: Vector3 = (target_pos - self_pos).normalized() * speed
 	return lerp(velocity, desired, HOMING_INTERPOLATION).normalized()
 
 func _seek_player() -> Vector3:
+	var self_pos: Vector3 = global_position
 	var player_head: Vector3 = _G.player.global_position + Vector3(0.0, 1.1, 0.0)
-	if global_position.distance_to(player_head) < HOMING_REACH_DISTANCE:
+	if self_pos.distance_to(player_head) < HOMING_REACH_DISTANCE:
 		config.homing_on_player = false
-		return direction if direction != Vector3.ZERO else -transform.basis.z
-	var desired: Vector3 = (player_head - global_position).normalized() * speed
+		return _fallback_dir
+	var desired: Vector3 = (player_head - self_pos).normalized() * speed
 	return lerp(velocity, desired, HOMING_INTERPOLATION).normalized()
-
 
 func imma_bounce() -> void:
 	if not raycast.is_colliding():
 		direction = -direction
 		speed *= config.bounciness
-		world_velocity.y *= 0.5
+		world_velocity.y *= 0.0
 	else:
 		var normal: Vector3 = raycast.get_collision_normal()
 		direction = _reflect_vector(direction, normal)
-		world_velocity = _reflect_vector(world_velocity, normal)
+		world_velocity.y *= 0.0
 		speed *= config.bounciness
-	
+	_fallback_dir = direction if direction != Vector3.ZERO else -transform.basis.z
 	impact_particles.emitting = true
 
 func _reflect_vector(vector: Vector3, normal: Vector3) -> Vector3:
@@ -181,14 +185,12 @@ func hit() -> void:
 		if config.bounciness > 0.0:
 			imma_bounce()
 	else:
-		
 		despawn()
 
 func _handle_pierce() -> void:
 	destroy_object_init(config.destroy_object, config.destroy_object_properties)
 	disable_seek = true
 	pierces_left -= 1
-	#collision_shape.disabled = true
 	target = null
 	await get_tree().create_timer(PIERCE_HITBOX_ACTIVATE_TIME).timeout
 	disable_seek = false
@@ -199,7 +201,7 @@ func handle_destroy() -> void:
 		imma_bounce()
 	else:
 		despawn()
-	
+	impact_sfx.pitch_scale = randf_range(1.3, 1.5)
 	impact_sfx.play()
 
 func despawn(destroy: bool = true) -> void:
@@ -210,53 +212,49 @@ func despawn(destroy: bool = true) -> void:
 	particles.emitting = false
 	impact_particles.emitting = true
 	$AnimationPlayer.play("despawn")
-	
+
 	if destroy:
 		destroy_object_init(config.destroy_object, config.destroy_object_properties)
-	
+
 	_spawn_split_bullets()
 
 func _spawn_split_bullets() -> void:
 	if config.split_count <= 0:
 		return
-	
+
 	var split_config: BulletSettings = config.duplicate(true)
 	split_config.split_count = 0
 	split_config.size_mult *= config.split_size_mult
-	# Set speed ONCE before the loop — it's constant for all children
 	split_config.init_speed = speed * config.split_speed_mult
-	
-	var base_dir: Vector3 = direction if direction != Vector3.ZERO else -transform.basis.z
+
+	var base_dir: Vector3 = _fallback_dir
 	var half_spread: float = deg_to_rad(config.split_spread_angle * 0.5)
 	var count: int = config.split_count
 	var spawn_pos: Vector3 = global_position
 	var game_node: Node = _G.game
-	
-	# Pre-instantiate all bullets before touching the scene tree
+
 	var bullets: Array = []
 	for i in count:
 		var bullet: Bullet = game_node.BULLET_SCENE.instantiate()
-		
+
 		var t: float = 0.5 if count == 1 else float(i) / float(count - 1)
 		var angle_offset: float = lerp(-half_spread, half_spread, t)
-		
+
 		bullet.config = split_config
 		bullet.direction = base_dir.rotated(Vector3.UP, angle_offset).normalized()
 		bullet.crit = crit
 		bullet.parent = parent
 		bullet.global_position = spawn_pos
-		
+
 		bullets.append(bullet)
-	
-	# Add all children in one batch
+
 	for bullet in bullets:
 		game_node.add_child(bullet)
-
 
 func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 	if not config.destroy_object_enabled or scene == null:
 		return
-	
+
 	var instance = scene.instantiate()
 	for property in properties:
 		instance.set(property, properties[property])
@@ -265,30 +263,26 @@ func destroy_object_init(scene: PackedScene, properties: Dictionary) -> void:
 func body_entered(body: Node3D) -> void:
 	if body is StaticBody3D:
 		handle_destroy()
-	else: return
 
 func seeker_body_entered(body: Node3D) -> void:
-	if body in target_blacklist and config.homing_on_player: return
+	if config.homing_on_player: return
 	if body is CharacterBody3D:
 		if target == null and body != get_parent():
 			target = body
-			
-			target_blacklist.append(target)
-			_T.say( "[ " + name + " ]: " + str(body) + " added to target_blacklist.", Color.WHITE, false)
+			#target_blacklist.append(target)
+			_T.say("[ " + name + " ]: " + str(body) + " added to target_blacklist.", Color.WHITE, false)
 			_T.say("[ " + name + " ].target_blacklist: " + str(target_blacklist), Color.WHITE, false)
-	
 
 func seeker_body_exited(body: Node3D) -> void:
-	if body in target_blacklist and target == body:
-		target_blacklist.pop_back()
+	if target == body:
+		#target_blacklist.pop_back()
 		target = null
-		_T.say( "[ " + name + " ]: " + str(body) + " removed from target_blacklist.", Color.WHITE, false)
-	speed *= 1.1
+		_T.say("[ " + name + " ]: " + str(body) + " removed from target_blacklist.", Color.WHITE, false)
+	#speed *= 1.1
 
 func parry_seeker_area_entered(area: Area3D) -> void:
 	if area is not Hazard or not area.parry:
 		return
-	
 	imma_bounce()
 	impact_sfx.play()
 	parent = area.get_parent()

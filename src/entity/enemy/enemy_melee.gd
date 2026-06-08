@@ -18,7 +18,7 @@ class_name EnemyMelee
 var _target_pos : Vector3
 
 func _ready() -> void:
-	enemy.setup(essence_component, chase_component, query, knockback_component, movement_component)
+	enemy.setup()
 	knockback_component.knock(Vector3(randf_range(-1.0, 1.0), 0.5, randf_range(-1.0, 1.0)), 1.0)
 	dash_query.damage = enemy.damage
 

@@ -20,7 +20,11 @@ func _ready() -> void:
 func shoot(direction: Vector3 = Vector3.ZERO, origin: Vector3 = Vector3.ZERO) -> void:
 	if not enabled or not can_shoot: return
 	if origin == Vector3.ZERO:
-		origin = parent.global_position
+		if visual_bullet:
+			origin = visual_bullet.global_position
+		else:
+			origin = parent.global_position
+	
 	
 	reset()
 	shooted.emit()

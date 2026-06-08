@@ -235,6 +235,18 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dl77j"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_vl8fn"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.075, 0.925, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2jf25"]
+gradient = SubResource("Gradient_vl8fn")
+
 [node name="HUD" type="Node2D" unique_id=1189780673]
 material = ExtResource("1_vl8fn")
 script = ExtResource("2_j5rt0")
@@ -302,7 +314,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Debug" type="Node2D" parent="." unique_id=217866802]
-position = Vector2(2, 21)
+position = Vector2(448, 185)
+
+[node name="Text" type="Label" parent="Debug" unique_id=1088608165]
+offset_left = -123.0
+offset_top = -149.0
+theme_override_font_sizes/font_size = 8
+text = "base luck: 1.0
+actual luck: 1.0
+luck bonus: 1.0"
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3
+uppercase = true
 
 [node name="Crosshair" type="Sprite2D" parent="." unique_id=1881976011]
 use_parent_material = true
@@ -422,5 +446,14 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="Vignette" type="TextureRect" parent="." unique_id=1859667972]
+visible = false
+modulate = Color(0.49609375, 0.49609375, 0.49609375, 1)
+material = SubResource("CanvasItemMaterial_dl77j")
+offset_right = 480.0
+offset_bottom = 270.0
+texture = SubResource("GradientTexture1D_2jf25")
+expand_mode = 1
 
 [connection signal="animation_finished" from="Eye" to="." method="eye_animation_finished"]

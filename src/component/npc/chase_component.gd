@@ -9,8 +9,11 @@ var start_position : Vector3
 @export var min_attack_distance : float = 1.0
 @export var min_distance : float = 5.0
 @export var y_distance : float = 3.0
-@export var update_rate : int = 4
+
 @export var concious_gain_time : float = 0.5
+@export var entropy : float = 0.35
+
+@export var flying_target_delay : float = 0.6
 
 var target_distance : float
 var target_direction : Vector3
@@ -22,14 +25,22 @@ var attacking : bool
 # Cached references
 var parent : Node3D
 
+var _flying_target_position : Vector3
+
 func _ready() -> void:
 	parent = get_parent()
 	start_position = parent.global_position
+	_setup_entropy()
 	await get_tree().create_timer(concious_gain_time).timeout
 	concious = true
+	
+func _setup_entropy() -> void:
+	min_distance = min_distance * randf_range(1.0, 1.0 + (entropy * 2.0))
+	attack_distance = attack_distance * randf_range(1.0, 1.0 + (entropy * 2.0))
+	agro_distance = agro_distance * randf_range(1.0, 1.0 + entropy)
 
 func update(target_position : Vector3, movement_component : MovementComponent, agent : NavigationAgent3D) -> void:
-	if Engine.get_physics_frames() % update_rate == 0 or _G.game.enemies_disabled: return
+	#if Engine.get_physics_frames() % update_rate == 0 or _G.game.enemies_disabled: return
 	var parent_pos : Vector3 = parent.global_position
 	target_distance = parent_pos.distance_to(target_position)
 	target_direction = parent_pos.direction_to(target_position)
@@ -49,24 +60,17 @@ func update(target_position : Vector3, movement_component : MovementComponent, a
 	
 	movement_component.direction = agent_position if enabled else Vector3.ZERO
 	
-func jump_to(target_position : Vector3, movement_component : MovementComponent, jump_height : float = 4.0) -> void:
-	var from : Vector3 = parent.global_position
-	var gravity : float = movement_component.fall_speed
+func get_random_position(pos : Vector3, radius : float = 1.0) -> Vector3:
+	return pos + Vector3(randf_range(-radius, radius), 1.0, randf_range(-radius, radius))
 
-	# Time to reach apex, then fall to target
-	var height_diff : float = target_position.y - from.y
-	var time_up : float = sqrt(2.0 * jump_height / gravity)
-	var time_down : float = sqrt(2.0 * max(jump_height - height_diff, 0.001) / (gravity * movement_component.fall_speed_mult))
-	var total_time : float = time_up + time_down
-
-	# Horizontal velocity needed to cover XZ distance in that time
-	var horizontal_diff : Vector3 = Vector3(target_position.x - from.x, 0.0, target_position.z - from.z)
-	var horizontal_vel : Vector3 = horizontal_diff / total_time
-
-	# Vertical velocity to reach apex
-	var vertical_vel : float = gravity * time_up
-
-	movement_component.can_jump = true
-	movement_component.vel.x = horizontal_vel.x
-	movement_component.vel.z = horizontal_vel.z
-	movement_component.jump(vertical_vel)
+func update_flying(target_position : Vector3, movement_component : MovementComponent) -> void:
+	
+	var parent_pos : Vector3 = parent.global_position
+	target_distance = parent_pos.distance_to(target_position)
+	target_direction = parent_pos.direction_to(target_position)
+	
+	attacking = concious and (target_distance <= attack_distance and target_distance > min_attack_distance)
+		
+	agent_position = parent_pos.direction_to(target_position)
+	
+	movement_component.direction = agent_position if enabled else Vector3.ZERO

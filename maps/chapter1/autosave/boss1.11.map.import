@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bubkein5vrkl2"
+path="res://.godot/imported/boss1.11.map-168c065cc40210d8cc610f786b86e98c.tres"
+
+[deps]
+
+source_file="res://maps/chapter1/autosave/boss1.11.map"
+dest_files=["res://.godot/imported/boss1.11.map-168c065cc40210d8cc610f786b86e98c.tres"]
+
+[params]
+

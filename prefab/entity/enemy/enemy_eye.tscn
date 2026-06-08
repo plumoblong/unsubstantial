@@ -2,12 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://0sw3trmkeidd" path="res://images/entity/eye.png" id="1_f3cx6"]
 [ext_resource type="Script" uid="uid://doie0nodwdv0h" path="res://src/entity/enemy_eye.gd" id="1_s32u2"]
+[ext_resource type="Script" uid="uid://tlvl68soe85" path="res://src/component/enemy_component.gd" id="2_pdbu1"]
 [ext_resource type="Script" uid="uid://baw7jrp64qlgb" path="res://src/component/knockback_component.gd" id="3_76rbu"]
+[ext_resource type="Script" uid="uid://c2dfui3oddg1r" path="res://src/component/npc/chase_component.gd" id="3_bh7lg"]
 [ext_resource type="Script" uid="uid://b3htw0ehvw1xh" path="res://src/component/movement_component.gd" id="3_jf0cs"]
 [ext_resource type="Script" uid="uid://dvrmix7xqorev" path="res://src/component/essence_component.gd" id="4_eagth"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="6_0ftp6"]
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="6_aifo0"]
-[ext_resource type="FontFile" uid="uid://deuvx1gp7xh55" path="res://font/PressStart2P.ttf" id="7_76rbu"]
+[ext_resource type="Script" uid="uid://cdmydxnqmgmva" path="res://src/component/npc/flying_chase_component.gd" id="7_ofbmy"]
+[ext_resource type="Script" uid="uid://dtqit2g6rb6yy" path="res://src/component/shoot_component.gd" id="10_h435s"]
+[ext_resource type="Script" uid="uid://0l4omg7gk8m8" path="res://src/resource/bullet_settings.gd" id="11_bh7lg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s32u2"]
 radius = 0.6
@@ -15,11 +19,53 @@ radius = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_76rbu"]
 radius = 0.6
 
-[node name="EnemyEye" type="CharacterBody3D" unique_id=1640755446 groups=["Enemy"]]
+[sub_resource type="Resource" id="Resource_ofbmy"]
+script = ExtResource("11_bh7lg")
+damage = 50
+fire_rate = 2.0
+inaccuracy = 0.06
+init_speed = 24.0
+fall_speed = 0.2
+metadata/_custom_type_script = "uid://0l4omg7gk8m8"
+
+[node name="EnemyEye" type="CharacterBody3D" unique_id=1640755446]
 collision_layer = 8
 collision_mask = 8
 motion_mode = 1
 script = ExtResource("1_s32u2")
+
+[node name="EnemyComponent" type="Node" parent="." unique_id=173671533 node_paths=PackedStringArray("sprite", "colored_sprite", "esc", "chase", "movement", "knock", "query", "hit_sfx")]
+script = ExtResource("2_pdbu1")
+sprite = NodePath("../Sprite3D")
+colored_sprite = NodePath("../Pupil")
+esc = NodePath("../EssenceComponent")
+chase = NodePath("../ChaseComponent")
+movement = NodePath("../MovementComponent")
+knock = NodePath("../KnockbackComponent")
+query = NodePath("../Query")
+hit_sfx = NodePath("../HitSFX")
+is_flying = true
+essence = 75.0
+damage = 50.0
+xp_payout = 1
+xp_radius = 0.5
+randomize_scale = 1.3
+pitch = 2.0
+metadata/_custom_type_script = "uid://tlvl68soe85"
+
+[node name="ChaseComponent" type="Node" parent="." unique_id=1315200911]
+script = ExtResource("3_bh7lg")
+attack_distance = 2.0
+metadata/_custom_type_script = "uid://c2dfui3oddg1r"
+
+[node name="Pupil" type="Sprite3D" parent="." unique_id=1540277064]
+modulate = Color(0.899639, 0.899639, 0.899639, 1)
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_f3cx6")
+hframes = 2
+frame = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=644515102]
 modulate = Color(0.899639, 0.899639, 0.899639, 1)
@@ -27,29 +73,17 @@ pixel_size = 0.05
 billboard = 1
 texture_filter = 0
 texture = ExtResource("1_f3cx6")
+hframes = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=620264601]
 shape = SubResource("SphereShape3D_s32u2")
+disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1163809080]
 light_energy = 0.5
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 10.0
-
-[node name="KnockbackComponent" type="Node" parent="." unique_id=1511008547 node_paths=PackedStringArray("movement_component")]
-script = ExtResource("3_76rbu")
-movement_component = NodePath("../MovementComponent")
-metadata/_custom_type_script = "uid://baw7jrp64qlgb"
-
-[node name="MovementComponent" type="Node" parent="." unique_id=2133379741]
-script = ExtResource("3_jf0cs")
-metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
-
-[node name="EssenceComponent" type="Node" parent="." unique_id=85001978]
-script = ExtResource("4_eagth")
-set_max_essence_on_ready = false
-metadata/_custom_type_script = "uid://dvrmix7xqorev"
 
 [node name="Query" type="Area3D" parent="." unique_id=1328090585]
 collision_layer = 262
@@ -68,26 +102,34 @@ metadata/_custom_type_script = "uid://dqg5sl3316gba"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hazard" unique_id=1326138821]
 shape = SubResource("SphereShape3D_s32u2")
+disabled = true
 
 [node name="HitSFX" type="AudioStreamPlayer3D" parent="." unique_id=357211605]
 stream = ExtResource("6_0ftp6")
 bus = &"SFX1"
 attenuation_filter_cutoff_hz = 20500.0
 
-[node name="Label3D" type="Label3D" parent="." unique_id=500660746]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26864, 0)
-visibility_range_end = 5.0
-visibility_range_end_margin = 5.0
-visibility_range_fade_mode = 1
-pixel_size = 0.011
-billboard = 1
-fixed_size = true
-texture_filter = 0
-text = "500"
-font = ExtResource("7_76rbu")
-font_size = 8
-outline_size = 0
+[node name="FlyingChaseComponent" type="Node" parent="." unique_id=468025607]
+script = ExtResource("7_ofbmy")
+metadata/_custom_type_script = "uid://bj27qbealqfcr"
 
-[connection signal="died" from="EssenceComponent" to="." method="essence_component_died"]
-[connection signal="fractured" from="EssenceComponent" to="." method="essence_component_fractured"]
+[node name="MovementComponent" type="Node" parent="." unique_id=147609195]
+script = ExtResource("3_jf0cs")
+speed = 20.0
+metadata/_custom_type_script = "uid://b3htw0ehvw1xh"
+
+[node name="EssenceComponent" type="Node" parent="." unique_id=1216423022]
+script = ExtResource("4_eagth")
+metadata/_custom_type_script = "uid://dvrmix7xqorev"
+
+[node name="ShootComponent" type="Node" parent="." unique_id=294375040]
+script = ExtResource("10_h435s")
+config = SubResource("Resource_ofbmy")
+metadata/_custom_type_script = "uid://dtqit2g6rb6yy"
+
+[node name="KnockbackComponent" type="Node" parent="." unique_id=1212383460 node_paths=PackedStringArray("movement_component")]
+script = ExtResource("3_76rbu")
+movement_component = NodePath("../MovementComponent")
+metadata/_custom_type_script = "uid://baw7jrp64qlgb"
+
 [connection signal="area_entered" from="Query" to="." method="query_area_entered"]

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dqg5sl3316gba" path="res://src/class/hazard.gd" id="7_ei8lu"]
 [ext_resource type="Texture2D" uid="uid://c6dbbnkdnhup6" path="res://images/entity/buffed.png" id="8_ei8lu"]
 [ext_resource type="AudioStream" uid="uid://bgcbf6ucfr20n" path="res://sfx/shoot.wav" id="10_guxfu"]
+[ext_resource type="PackedScene" uid="uid://cly3s314negwx" path="res://prefab/entity/animated_human.tscn" id="10_srf1s"]
 [ext_resource type="AudioStream" uid="uid://bos0tcb8d0swg" path="res://sfx/hit.wav" id="11_15kmb"]
 [ext_resource type="PackedScene" uid="uid://dhb015xkpbwkt" path="res://prefab/entity/map_hazard_cast.tscn" id="13_0s5mw"]
 [ext_resource type="PackedScene" uid="uid://2qvy2ah2sdna" path="res://prefab/entity/move_back_helper.tscn" id="14_a7qjk"]
@@ -31,7 +32,7 @@ script = ExtResource("1_0s5mw")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1444135213]
 light_color = Color(1, 0, 0, 1)
-light_energy = 1.5
+light_energy = 0.5
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 omni_range = 15.0
@@ -44,6 +45,7 @@ shape = SubResource("CapsuleShape3D_c3pg5")
 [node name="KnockbackComponent" type="Node" parent="." unique_id=249060113 node_paths=PackedStringArray("movement_component")]
 script = ExtResource("2_ei8lu")
 movement_component = NodePath("../MovementComponent")
+multiplier = 2.5
 
 [node name="ChaseComponent" type="Node" parent="." unique_id=349184039 node_paths=PackedStringArray("movehelper")]
 script = ExtResource("3_olih5")
@@ -56,7 +58,7 @@ concious_gain_time = 1.5
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1193077039]
 script = ExtResource("4_5hjl1")
-speed = 25.0
+speed = 18.0
 speed_up = 25.0
 air_friction = 0.1
 
@@ -72,13 +74,19 @@ end_velocity_multiplier = 0.75
 knock_component = NodePath("../KnockbackComponent")
 metadata/_custom_type_script = "uid://c3klywbeud1cv"
 
-[node name="EnemyComponent" type="Node" parent="." unique_id=2097189607 node_paths=PackedStringArray("hit_sfx")]
+[node name="EnemyComponent" type="Node" parent="." unique_id=2097189607 node_paths=PackedStringArray("sprite", "esc", "chase", "movement", "knock", "query", "hit_sfx")]
 script = ExtResource("7_awu5q")
+sprite = NodePath("../Sprite3D")
+esc = NodePath("../EssenceComponent")
+chase = NodePath("../ChaseComponent")
+movement = NodePath("../MovementComponent")
+knock = NodePath("../KnockbackComponent")
+query = NodePath("../Query")
 hit_sfx = NodePath("../HitSFX")
 essence = 150.0
 essence_death_threshold = 20.0
 damage = 75.0
-on_hit_velocity_loss = 0.75
+on_hit_velocity_loss = 0.25
 xp_payout = 5
 metadata/_custom_type_script = "uid://tlvl68soe85"
 
@@ -101,11 +109,7 @@ collision_mask = 6
 [node name="Hitbox" type="CollisionShape3D" parent="Query" unique_id=1634229637]
 shape = SubResource("CapsuleShape3D_od4yj")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=191323312]
-modulate = Color(0.73, 0.219, 0.219, 1)
-pixel_size = 0.03
-billboard = 1
-texture_filter = 0
+[node name="Sprite3D" parent="." unique_id=1577492174 instance=ExtResource("10_srf1s")]
 texture = ExtResource("8_ei8lu")
 
 [node name="ShootSFX" type="AudioStreamPlayer3D" parent="." unique_id=659560959]

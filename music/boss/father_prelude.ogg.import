@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/father_prelude.ogg-d2641e5027e786b6486481a069
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0

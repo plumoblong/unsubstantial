@@ -16,7 +16,7 @@ func _physics_process(delta : float) -> void:
 	if _G.player.can_control:
 		global_position += direction * speed * delta
 
-func body_entered(body : Player) -> void:
+func body_entered(body : Node3D) -> void:
 	if body is not Player: return
 	if body.essence_component.ratio < 1.0:
 		body.essence_component.gain(10.0 * heal_amount * body.essence_component.heal_multiplier)

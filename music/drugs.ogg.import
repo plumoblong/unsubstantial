@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/drugs.ogg-6bbb453b163917e716adf2e1689909fb.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0

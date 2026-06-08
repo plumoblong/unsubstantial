@@ -8,7 +8,6 @@
 [ext_resource type="Shader" uid="uid://bkrnx5286rys7" path="res://src/shader/shadow.gdshader" id="6_nhcqt"]
 [ext_resource type="PackedScene" uid="uid://bigdrrkje4e26" path="res://prefab/text_button.tscn" id="7_xh8cw"]
 [ext_resource type="Texture2D" uid="uid://5q40an056ilp" path="res://images/ui/gameover.png" id="9_1dylg"]
-[ext_resource type="AudioStream" uid="uid://dwd0xrf7ctua" path="res://music/game_over.ogg" id="9_4q3rl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cmvwl"]
 shader = ExtResource("6_nhcqt")
@@ -125,11 +124,6 @@ texture = ExtResource("9_1dylg")
 modulate = Color(0, 0, 0, 0.164706)
 position = Vector2(2, 3)
 texture = ExtResource("9_1dylg")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="." unique_id=1521809251]
-stream = ExtResource("9_4q3rl")
-autoplay = true
-bus = &"Music"
 
 [connection signal="pressed" from="Node2D/Restart" to="." method="button_pressed"]
 [connection signal="pressed" from="Node2D/Menu" to="." method="menu_pressed"]
