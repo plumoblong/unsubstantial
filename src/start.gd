@@ -46,7 +46,6 @@ func _ready() -> void:
 	if _G.config.fullscreen:
 		get_window().mode = Window.MODE_FULLSCREEN
 	else:
-		
 		get_window().mode = Window.MODE_WINDOWED
 	if _G.config.video.v_sync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_MAILBOX)
@@ -54,13 +53,14 @@ func _ready() -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	set_binds()
 	_G.update_audio_buses()
-	_G.update_window_size()
+	
 	await get_tree().create_timer(0.25).timeout
 	start()
 	_T.start()
 
 func start() -> void:
-	get_window().title = "unsubstantial " + _G.VERSION + ": " + generate_splash()
+	_G.update_window_size()
+	get_window().title = "unsubstantial " + _G.VERSION
 	$ColorRect.color = Color(0.0, 0.0, 0.0, 0.0)
 	$AnimatedSprite2D.play("default")
 	$AudioStreamPlayer.play()
@@ -78,4 +78,3 @@ func set_binds() -> void:
 
 func _process(delta: float) -> void:
 	position = _R.get_center()
-	

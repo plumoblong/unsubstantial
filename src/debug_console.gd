@@ -38,7 +38,7 @@ var debug_flags : Array[bool] = [
 func start() -> void:
 	# Start with console hidden offscreen
 	process_mode = Node.PROCESS_MODE_DISABLED
-	if not (_G.config.tux or OS.has_feature("debug")): return
+	#if not (_G.config.tux or OS.has_feature("debug")): return
 	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if console_panel:
@@ -62,8 +62,9 @@ func start() -> void:
 			while i + 1 < user_args.size() and not user_args[i + 1].begins_with("--"):
 				i += 1
 				args.append(user_args[i])
-			say("Auto-executing: " + cmd + " " + " ".join(args), Color.GRAY)
-			execute_command(cmd, args)
+			if cmd != "scene": 
+				say("Auto-executing: " + cmd + " " + " ".join(args), Color.GRAY)
+				execute_command(cmd, args)
 		i += 1
 
 func _input(event: InputEvent) -> void:

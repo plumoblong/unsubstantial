@@ -12,6 +12,7 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.499999988824
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
+shader_parameter/ethereal = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a30yq"]
 shader = ExtResource("3_gt3w2")
@@ -19,6 +20,7 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 0.52
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
+shader_parameter/ethereal = false
 
 [node name="Node2D" type="Node2D" unique_id=997623029]
 script = ExtResource("1_usf1d")

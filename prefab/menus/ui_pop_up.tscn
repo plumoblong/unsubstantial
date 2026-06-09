@@ -10,6 +10,7 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 shader_parameter/amount = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
+shader_parameter/ethereal = false
 
 [node name="UIPopUp" type="Label" unique_id=941425843]
 material = SubResource("ShaderMaterial_7cybk")

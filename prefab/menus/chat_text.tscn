@@ -10,6 +10,7 @@ shader_parameter/modulate = Color(1, 0.447388, 0.447388, 1)
 shader_parameter/amount = 0.7
 shader_parameter/alpha = 1.0
 shader_parameter/grayscale = false
+shader_parameter/ethereal = false
 
 [node name="ChatText" type="Label" unique_id=657953405]
 texture_filter = 1

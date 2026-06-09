@@ -69,7 +69,7 @@ var player : Player
 var game : Game
 
 var time : float = 0.0
-var starting_level : String = "res://maps/chapter1/boss1.map"
+var starting_level : String = ""
 
 var CONFIG_PATH : String = "user://config_v" + str(CONFIG_VERSION) + ".json" 
 var SAVE_PATH : String = "user://save.json" 
